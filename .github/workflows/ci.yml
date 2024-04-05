@@ -1,0 +1,54 @@
+name: CI
+
+on:
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  run-tests:
+    name: 'Run tests'
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'corretto'
+          cache: maven
+
+      - name: Run tests
+        run: mvn test
+        env:
+          ACCESS_OPTIONS: |
+            baseURL=${{ secrets.BASE_URL }};
+            userEmail=${{ secrets.USER_EMAIL }};
+            userPassword=${{ secrets.USER_PASSWORD }}
+          BROWSER_OPTIONS: |
+            browserType=chromium;
+            screenSizeWidth=1920;
+            screenSizeHeight=1080;
+            headlessMode=true;
+            slowMoMode=0;
+            tracingMode=true;
+            videoMode=true
+          CI_RUN: true
+
+      - name: Create test report
+        uses: dorny/test-reporter@v1
+        with:
+          name: Test Execution Report
+          path: target/surefire-reports/TEST-*.xml
+          reporter: java-junit
+
+      - name: Attach artifacts on failure
+        uses: actions/upload-artifact@v4
+        if: failure()
+        with:
+          name: Artifacts
+          path: |
+            target/testTracing/
+            target/video/
