@@ -40,103 +40,26 @@ public class ProjectProperties {
             }
         }
     }
-    private static String baseURL;
-    private static String userEmail;
-    private static String userPassword;
-    private static String browserType;
-    private static boolean headlessMode;
-    private static double slowMoMode;
-    private static int screenSizeWidth;
-    private static int screenSizeHeight;
-    private static boolean tracingMode;
-    private static boolean videoMode;
-
-    public static String getRunProperty(String propertyName) {
-        if (properties.getProperty(propertyName) != null && !properties.getProperty(propertyName).isEmpty()) {
-            return properties.getProperty(propertyName);
-        } else {
-            System.out.println("ERROR OCCURRED: \"" + propertyName + "\" property value is empty or does not exist.");
-            System.exit(1);
-            return null;
-        }
-    }
-    public static void parseProperties() {
-        try {
-        baseURL = getRunProperty("baseURL");
-        userEmail = getRunProperty("userEmail");
-        userPassword = getRunProperty("userPassword");
-        browserType = getRunProperty("browserType");
-        headlessMode = Boolean.parseBoolean(getRunProperty("headlessMode"));
-        slowMoMode = Double.parseDouble(getRunProperty("slowMoMode"));
-        screenSizeWidth = Integer.parseInt(getRunProperty("screenSizeWidth"));
-        screenSizeHeight = Integer.parseInt(getRunProperty("screenSizeHeight"));
-        tracingMode = Boolean.parseBoolean(getRunProperty("tracingMode"));
-        videoMode = Boolean.parseBoolean(getRunProperty("videoMode"));
-        } catch (Exception e) {
-            System.out.println("ERROR: " + e.getMessage());
-        }
-    }
 
     static {
         initProperties();
-        parseProperties();
     }
 
-//    public static <T> T getRunProperty(String propertyName) {
-//        try {
-//            Field field = ProjectProperties.class.getDeclaredField(propertyName);
-//            field.setAccessible(true);
-//            Object value = field.get(null); // null, так как поле статическое
-//            if (value != null) {
-//                return (T) value;
-//            } else {
-//                System.out.println("ERROR: Property value for \"" + propertyName + "\" is null.");
-//                return null;
-//            }
-//        } catch (NoSuchFieldException | IllegalAccessException e) {
-//            System.out.println("ERROR: " + e.getMessage());
-//            return null;
-//        }
-//    }
-
-    public static String getBaseURL() {
-        return baseURL;
+    public static void verifyPropertiesValues() {
+        for (String value : properties.stringPropertyNames()) {
+            if (properties.getProperty(value) == null || properties.getProperty(value).trim().isEmpty()) {
+                System.out.println("ERROR OCCURRED: \"" + value + "\" property value is empty or null.");
+                System.exit(1);
+            }
+        }
     }
 
-    public static String getUserEmail() {
-        return userEmail;
-    }
-
-    public static String getUserPassword() {
-        return userPassword;
-    }
-
-    public static String getBrowserType() {
-        return browserType;
-    }
-
-    public static boolean getHeadlessMode() {
-        return headlessMode;
-    }
-
-    public static double getSlowMoMode() {
-        return slowMoMode;
-    }
-
-    public static int getScreenSizeWidth() {
-        return screenSizeWidth;
-    }
-
-    public static int getScreenSizeHeight() {
-        return screenSizeHeight;
-    }
-
-    public static boolean getTracingMode() {
-        return tracingMode;
-    }
-
-    public static boolean getVideoMode() {
-        return videoMode;
+    public static String getPropertyValue(String propertyName) {
+        if (!properties.containsKey(propertyName)) {
+            System.out.println("ERROR OCCURRED: \"" + propertyName + "\" property does not exist.");
+            System.exit(1);
+        }
+        return properties.getProperty(propertyName).trim();
     }
 
     static boolean isServerRun() {

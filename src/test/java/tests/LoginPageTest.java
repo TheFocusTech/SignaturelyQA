@@ -14,11 +14,11 @@ public class LoginPageTest extends BaseTest {
     public void testLogin() {
 
         HomePage homePage = new LoginPage(getPage())
-                .fillUserEmailField(ProjectProperties.getUserEmail())
-                .fillUserPasswordField(ProjectProperties.getUserPassword())
+                .fillUserEmailField(ProjectProperties.getPropertyValue("userEmail"))
+                .fillUserPasswordField(ProjectProperties.getPropertyValue("userPassword"))
                 .clickLoginButton();
 
-        assertThat(homePage.getPage()).hasURL(ProjectProperties.getBaseURL() + "/sign");
+        assertThat(homePage.getPage()).hasURL(ProjectProperties.getPropertyValue("baseURL") + "/sign");
         assertThat(homePage.getPage()).hasTitle("Signaturely");
     }
 }

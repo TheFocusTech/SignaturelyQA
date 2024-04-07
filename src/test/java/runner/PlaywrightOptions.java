@@ -18,14 +18,15 @@ public class PlaywrightOptions {
 
     public static BrowserType.LaunchOptions browserOptions() {
         return new BrowserType.LaunchOptions()
-                .setHeadless(ProjectProperties.getHeadlessMode())
-                .setSlowMo(ProjectProperties.getSlowMoMode());
+                .setHeadless(Boolean.parseBoolean(ProjectProperties.getPropertyValue("headlessMode")))
+                .setSlowMo(Double.parseDouble(ProjectProperties.getPropertyValue("slowMoMode")));
     }
 
     public static Browser.NewContextOptions contextOptions() {
         return new Browser.NewContextOptions()
-                .setScreenSize(ProjectProperties.getScreenSizeWidth(), ProjectProperties.getScreenSizeHeight())
-                .setBaseURL(ProjectProperties.getBaseURL())
+                .setScreenSize(Integer.parseInt(ProjectProperties.getPropertyValue("screenSizeWidth")),
+                        Integer.parseInt(ProjectProperties.getPropertyValue("screenSizeHeight")))
+                .setBaseURL(ProjectProperties.getPropertyValue("baseURL"))
                 .setRecordVideoDir(Paths.get(videoRunDir))
                 .setRecordVideoSize(1280, 720);
     }
@@ -40,11 +41,11 @@ public class PlaywrightOptions {
     public static Tracing.StopOptions tracingStopOptions(Page page, Method method, ITestResult testResult) {
         Tracing.StopOptions tracingStopOptions = null;
         if (!testResult.isSuccess()) {
-            if (ProjectProperties.getTracingMode()) {
+            if (Boolean.parseBoolean(ProjectProperties.getPropertyValue("tracingMode"))) {
                 tracingStopOptions = new Tracing.StopOptions()
                         .setPath(Paths.get(traceRunDir + BaseUtils.getTestClassMethodNameWithInvocationCount(method, testResult) + ".zip"));
             }
-            if (ProjectProperties.getVideoMode()) {
+            if (Boolean.parseBoolean(ProjectProperties.getPropertyValue("videoMode"))) {
                 page.video().saveAs(Paths.get(videoRunDir + BaseUtils.getTestClassMethodNameWithInvocationCount(method, testResult) + ".webm"));
 
                 page.video().delete();

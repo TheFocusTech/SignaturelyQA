@@ -21,6 +21,7 @@ public abstract class BaseTest {
 
     @BeforeClass
     protected void launchBrowser() {
+        ProjectProperties.verifyPropertiesValues();
         try {
             playwright = Playwright.create();
             if (playwright == null) {
@@ -29,7 +30,8 @@ public abstract class BaseTest {
             }
             browser = BrowserManager.getBrowser(playwright);
         } catch (NullPointerException e) {
-            System.out.println("Error occurred: " + e.getMessage() + "\nRefer to 'launchBrowser' method");
+            e.printStackTrace();
+            System.out.println("Error occurred: " + e.getMessage());
         }
     }
 
@@ -41,33 +43,10 @@ public abstract class BaseTest {
             page = context.newPage();
             page.navigate("/");
         } catch (NullPointerException e) {
-            System.out.println("Error occurred: " + e.getMessage() + "\nRefer to 'createContextAndPage' method");
+            e.printStackTrace();
+            System.out.println("Error occurred: " + e.getMessage());
             System.exit(1);
         }
-//        try {
-//            if (browser != null) {
-//                context = browser.newContext(PlaywrightOptions.contextOptions());
-//            } else {
-//                System.out.println("Error occurred: Browser is null");
-//                System.exit(1);
-//            }
-//            if (context != null) {
-//                context.tracing().start(PlaywrightOptions.tracingStartOptions());
-//                page = context.newPage();
-//            } else {
-//                System.out.println("Error occurred: Context is null");
-//                System.exit(1);
-//            }
-//            if (page != null) {
-//                page.navigate("/");
-//            } else {
-//                System.out.println("Error occurred: Page is null");
-//                System.exit(1);
-//            }
-//        } catch (NullPointerException e) {
-//            System.out.println("Error occurred: Browser is null");
-//            System.exit(1);
-//        }
     }
 
     @AfterMethod(alwaysRun = true)
@@ -76,23 +55,10 @@ public abstract class BaseTest {
             page.close();
             context.close();
         } catch (NullPointerException e) {
-            System.out.println("Error occurred: " + e.getMessage() + "\nRefer to 'closeContext' method");
+            e.printStackTrace();
+            System.out.println("Error occurred: " + e.getMessage());
             System.exit(1);
         }
-
-//        if (page != null) {
-//            page.close();
-//        } else {
-//            System.out.println("Error occurred: Page is null");
-//            System.exit(1);
-//        }
-//        if (context != null) {
-//            context.tracing().stop(PlaywrightOptions.tracingStopOptions(page, method, testResult));
-//            context.close();
-//        } else {
-//            System.out.println("Error occurred: Context is null");
-//            System.exit(1);
-//        }
     }
 
     @AfterClass(alwaysRun = true)
