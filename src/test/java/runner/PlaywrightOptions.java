@@ -1,9 +1,6 @@
 package runner;
 
-import com.microsoft.playwright.Browser;
-import com.microsoft.playwright.BrowserType;
-import com.microsoft.playwright.Page;
-import com.microsoft.playwright.Tracing;
+import com.microsoft.playwright.*;
 import org.testng.ITestResult;
 
 import java.io.IOException;

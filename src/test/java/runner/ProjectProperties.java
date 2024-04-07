@@ -8,12 +8,7 @@ public class ProjectProperties {
 
     private static final String ENV_ACCESS_OPTIONS = "ACCESS_OPTIONS";
     private static final String ENV_BROWSER_OPTIONS = "BROWSER_OPTIONS";
-
     private static Properties properties;
-
-    static {
-        initProperties();
-    }
 
     private static void initProperties() {
         properties = new Properties();
@@ -45,45 +40,103 @@ public class ProjectProperties {
             }
         }
     }
+    private static String baseURL;
+    private static String userEmail;
+    private static String userPassword;
+    private static String browserType;
+    private static boolean headlessMode;
+    private static double slowMoMode;
+    private static int screenSizeWidth;
+    private static int screenSizeHeight;
+    private static boolean tracingMode;
+    private static boolean videoMode;
+
+    public static String getRunProperty(String propertyName) {
+        if (properties.getProperty(propertyName) != null && !properties.getProperty(propertyName).isEmpty()) {
+            return properties.getProperty(propertyName);
+        } else {
+            System.out.println("ERROR OCCURRED: \"" + propertyName + "\" property value is empty or does not exist.");
+            System.exit(1);
+            return null;
+        }
+    }
+    public static void parseProperties() {
+        try {
+        baseURL = getRunProperty("baseURL");
+        userEmail = getRunProperty("userEmail");
+        userPassword = getRunProperty("userPassword");
+        browserType = getRunProperty("browserType");
+        headlessMode = Boolean.parseBoolean(getRunProperty("headlessMode"));
+        slowMoMode = Double.parseDouble(getRunProperty("slowMoMode"));
+        screenSizeWidth = Integer.parseInt(getRunProperty("screenSizeWidth"));
+        screenSizeHeight = Integer.parseInt(getRunProperty("screenSizeHeight"));
+        tracingMode = Boolean.parseBoolean(getRunProperty("tracingMode"));
+        videoMode = Boolean.parseBoolean(getRunProperty("videoMode"));
+        } catch (Exception e) {
+            System.out.println("ERROR: " + e.getMessage());
+        }
+    }
+
+    static {
+        initProperties();
+        parseProperties();
+    }
+
+//    public static <T> T getRunProperty(String propertyName) {
+//        try {
+//            Field field = ProjectProperties.class.getDeclaredField(propertyName);
+//            field.setAccessible(true);
+//            Object value = field.get(null); // null, так как поле статическое
+//            if (value != null) {
+//                return (T) value;
+//            } else {
+//                System.out.println("ERROR: Property value for \"" + propertyName + "\" is null.");
+//                return null;
+//            }
+//        } catch (NoSuchFieldException | IllegalAccessException e) {
+//            System.out.println("ERROR: " + e.getMessage());
+//            return null;
+//        }
+//    }
 
     public static String getBaseURL() {
-        return properties.getProperty("baseURL").trim();
+        return baseURL;
     }
 
     public static String getUserEmail() {
-        return properties.getProperty("userEmail").trim();
+        return userEmail;
     }
 
     public static String getUserPassword() {
-        return properties.getProperty("userPassword").trim();
+        return userPassword;
     }
 
     public static String getBrowserType() {
-        return properties.getProperty("browserType").trim();
+        return browserType;
     }
 
     public static boolean getHeadlessMode() {
-        return Boolean.parseBoolean(properties.getProperty("headlessMode").trim());
+        return headlessMode;
     }
 
     public static double getSlowMoMode() {
-        return Double.parseDouble(properties.getProperty("slowMoMode").trim());
+        return slowMoMode;
     }
 
     public static int getScreenSizeWidth() {
-        return Integer.parseInt(properties.getProperty("screenSizeWidth").trim());
+        return screenSizeWidth;
     }
 
     public static int getScreenSizeHeight() {
-        return Integer.parseInt(properties.getProperty("screenSizeHeight").trim());
+        return screenSizeHeight;
     }
 
     public static boolean getTracingMode() {
-        return Boolean.parseBoolean(properties.getProperty("tracingMode").trim());
+        return tracingMode;
     }
 
     public static boolean getVideoMode() {
-        return Boolean.parseBoolean(properties.getProperty("videoMode").trim());
+        return videoMode;
     }
 
     static boolean isServerRun() {
