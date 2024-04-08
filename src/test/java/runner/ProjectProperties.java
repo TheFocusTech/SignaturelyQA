@@ -47,8 +47,10 @@ public class ProjectProperties {
 
     public static void verifyPropertiesValues() {
         for (String value : properties.stringPropertyNames()) {
-            if (properties.getProperty(value) == null || properties.getProperty(value).trim().isEmpty()) {
-                System.out.println("ERROR OCCURRED: \"" + value + "\" property value is empty or null.");
+            if (properties.getProperty(value) == null
+                    || properties.getProperty(value).trim().isEmpty()
+                    || properties.getProperty(value).trim().equals("null")) {
+                System.out.println("ERROR OCCURRED: \"" + value + "\" property value is invalid");
                 System.exit(1);
             }
         }
