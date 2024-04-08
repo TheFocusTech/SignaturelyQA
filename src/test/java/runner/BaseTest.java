@@ -21,23 +21,45 @@ public abstract class BaseTest {
 
     @BeforeClass
     protected void launchBrowser() {
-        playwright = Playwright.create();
-        browser = BrowserManager.getBrowser(playwright);
+        ProjectProperties.verifyPropertiesValues();
+        try {
+            playwright = Playwright.create();
+            if (playwright == null) {
+                System.out.println("Error occurred: Playwright is null");
+                System.exit(1);
+            }
+            browser = BrowserManager.getBrowser(playwright);
+        } catch (NullPointerException e) {
+            e.printStackTrace();
+            System.out.println("Error occurred: " + e.getMessage());
+        }
     }
 
     @BeforeMethod
     protected void createContextAndPage(Method method, ITestResult testResult) {
-        context = browser.newContext(PlaywrightOptions.contextOptions());
-        context.tracing().start(PlaywrightOptions.tracingStartOptions());
-        page = context.newPage();
-        page.navigate("/");
+        try {
+            context = browser.newContext(PlaywrightOptions.contextOptions());
+            context.tracing().start(PlaywrightOptions.tracingStartOptions());
+            page = context.newPage();
+            page.navigate("/");
+        } catch (NullPointerException e) {
+            e.printStackTrace();
+            System.out.println("Error occurred: " + e.getMessage());
+            System.exit(1);
+        }
     }
 
     @AfterMethod(alwaysRun = true)
     protected void closeContext(Method method, ITestResult testResult) {
-        page.close();
-        context.tracing().stop(PlaywrightOptions.tracingStopOptions(page, method, testResult));
-        context.close();
+        try {
+            page.close();
+            context.tracing().stop(PlaywrightOptions.tracingStopOptions(page, method, testResult));
+            context.close();
+        } catch (NullPointerException e) {
+            e.printStackTrace();
+            System.out.println("Error occurred: " + e.getMessage());
+            System.exit(1);
+        }
     }
 
     @AfterClass(alwaysRun = true)

@@ -8,12 +8,7 @@ public class ProjectProperties {
 
     private static final String ENV_ACCESS_OPTIONS = "ACCESS_OPTIONS";
     private static final String ENV_BROWSER_OPTIONS = "BROWSER_OPTIONS";
-
     private static Properties properties;
-
-    static {
-        initProperties();
-    }
 
     private static void initProperties() {
         properties = new Properties();
@@ -46,44 +41,25 @@ public class ProjectProperties {
         }
     }
 
-    public static String getBaseURL() {
-        return properties.getProperty("baseURL").trim();
+    static {
+        initProperties();
     }
 
-    public static String getUserEmail() {
-        return properties.getProperty("userEmail").trim();
+    public static void verifyPropertiesValues() {
+        for (String value : properties.stringPropertyNames()) {
+            if (properties.getProperty(value) == null || properties.getProperty(value).trim().isEmpty()) {
+                System.out.println("ERROR OCCURRED: \"" + value + "\" property value is invalid");
+                System.exit(1);
+            }
+        }
     }
 
-    public static String getUserPassword() {
-        return properties.getProperty("userPassword").trim();
-    }
-
-    public static String getBrowserType() {
-        return properties.getProperty("browserType").trim();
-    }
-
-    public static boolean getHeadlessMode() {
-        return Boolean.parseBoolean(properties.getProperty("headlessMode").trim());
-    }
-
-    public static double getSlowMoMode() {
-        return Double.parseDouble(properties.getProperty("slowMoMode").trim());
-    }
-
-    public static int getScreenSizeWidth() {
-        return Integer.parseInt(properties.getProperty("screenSizeWidth").trim());
-    }
-
-    public static int getScreenSizeHeight() {
-        return Integer.parseInt(properties.getProperty("screenSizeHeight").trim());
-    }
-
-    public static boolean getTracingMode() {
-        return Boolean.parseBoolean(properties.getProperty("tracingMode").trim());
-    }
-
-    public static boolean getVideoMode() {
-        return Boolean.parseBoolean(properties.getProperty("videoMode").trim());
+    public static String getPropertyValue(String propertyName) {
+        if (!properties.containsKey(propertyName)) {
+            System.out.println("ERROR OCCURRED: \"" + propertyName + "\" property does not exist.");
+            System.exit(1);
+        }
+        return properties.getProperty(propertyName).trim();
     }
 
     static boolean isServerRun() {
