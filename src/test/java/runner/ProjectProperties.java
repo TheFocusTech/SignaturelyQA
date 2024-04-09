@@ -62,6 +62,17 @@ public class ProjectProperties {
         return properties.getProperty(propertyName).trim();
     }
 
+    public static boolean getPropertyValueAsBoolean(String propertyName) {
+        if (getPropertyValue(propertyName).equalsIgnoreCase("true")
+                || getPropertyValue(propertyName).equalsIgnoreCase("false")) {
+            return Boolean.parseBoolean(getPropertyValue(propertyName));
+        } else {
+            System.out.println("ERROR OCCURRED: '" + propertyName + "' property doesn't have correct value. "
+                    + "\nThe default value 'true' for '" + propertyName + "' hase been set");
+            return true;
+        }
+    }
+
     static boolean isServerRun() {
         return System.getenv("CI_RUN") != null;
     }
