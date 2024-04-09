@@ -18,7 +18,7 @@ public class PlaywrightOptions {
 
     public static BrowserType.LaunchOptions browserOptions() {
         return new BrowserType.LaunchOptions()
-                .setHeadless(Boolean.parseBoolean(ProjectProperties.getPropertyValue("headlessMode")))
+                .setHeadless(ProjectProperties.getPropertyValueAsBoolean("headlessMode"))
                 .setSlowMo(Double.parseDouble(ProjectProperties.getPropertyValue("slowMoMode")));
     }
 
@@ -41,11 +41,11 @@ public class PlaywrightOptions {
     public static Tracing.StopOptions tracingStopOptions(Page page, Method method, ITestResult testResult) {
         Tracing.StopOptions tracingStopOptions = null;
         if (!testResult.isSuccess()) {
-            if (Boolean.parseBoolean(ProjectProperties.getPropertyValue("tracingMode"))) {
+            if (ProjectProperties.getPropertyValueAsBoolean("tracingMode")) {
                 tracingStopOptions = new Tracing.StopOptions()
                         .setPath(Paths.get(traceRunDir + BaseUtils.getTestClassMethodNameWithInvocationCount(method, testResult) + ".zip"));
             }
-            if (Boolean.parseBoolean(ProjectProperties.getPropertyValue("videoMode"))) {
+            if (ProjectProperties.getPropertyValueAsBoolean("videoMode")) {
                 page.video().saveAs(Paths.get(videoRunDir + BaseUtils.getTestClassMethodNameWithInvocationCount(method, testResult) + ".webm"));
             }
         }
