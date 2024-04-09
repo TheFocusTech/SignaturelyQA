@@ -47,17 +47,14 @@ public class PlaywrightOptions {
             }
             if (Boolean.parseBoolean(ProjectProperties.getPropertyValue("videoMode"))) {
                 page.video().saveAs(Paths.get(videoRunDir + BaseUtils.getTestClassMethodNameWithInvocationCount(method, testResult) + ".webm"));
-
-                page.video().delete();
             }
-        } else {
-            page.video().delete();
-            try {
-                Files.deleteIfExists(Paths.get(videoRunDir));
-                Files.deleteIfExists(Paths.get(videoDir));
-            } catch (IOException e) {
-                System.out.println("Video folders have not been deleted");
-            }
+        }
+        page.video().delete();
+        try {
+            Files.deleteIfExists(Paths.get(videoRunDir));
+            Files.deleteIfExists(Paths.get(videoDir));
+        } catch (IOException e) {
+            System.out.println("Video folders contain videos and have not been deleted");
         }
         return tracingStopOptions;
     }
