@@ -1,7 +1,5 @@
 # SignaturelyQA
 
-https://staging.d2twwklgqmrfet.amplifyapp.com
-
 **How to start working in this project?**
 
 1. Clone repository to your machine.
