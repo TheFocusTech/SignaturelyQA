@@ -5,6 +5,7 @@ class SignPage {
 
     locators = {
         getSignSidebarLink: () => this.page.getByRole('link', { name: 'Sign', exact: true }),
+        
     }
     
 }
