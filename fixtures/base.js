@@ -6,7 +6,6 @@ import { URL_END_POINTS } from "../testData";
 const EMAIL = process.env.USER_EMAIL;
 const PASSWORD = process.env.USER_PASSWORD;
 const BASE_URL = process.env.URL;
-// const SIGN_URL = process.env.SIGN_URL;
 
 export const test = base.extend({
 
