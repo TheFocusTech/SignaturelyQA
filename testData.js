@@ -1,5 +1,6 @@
 export const URL_END_POINTS = {
-    sign_end_point: '/sign',
+    signEndPoint: '/sign',
+    documentsEndPoint: '/documents'
 };
 export const ACTIVE_COLOR = 'rgb(0, 163, 250)';
 
