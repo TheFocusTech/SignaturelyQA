@@ -7,7 +7,7 @@ const BASE_URL = process.env.URL;
 
 test.describe('SignDocument', () => {
 
-    test.only('TC_04_11_02 | Verify custom signing order', async ({ page }) => {
+    test('TC_04_11_02 | Verify custom signing order', async ({ page }) => {
         const loginPage = new LoginPage(page);
 
         await page.goto('/');
@@ -38,6 +38,42 @@ test.describe('SignDocument', () => {
         await page.locator('div.form__field .form__input').last().fill('a@a.com');
 
         await page.locator('div.uiCheckbox').click();
+
+        await expect(page.locator('span.signers__item-order-position').first()).toBeVisible();
+        await expect(page.locator('span.signers__item-order-position').last()).toBeVisible();
+
+    })
+    test.only('TC_04_11_03', async ({ page }) => {
+        const loginPage = new LoginPage(page);
+
+        await page.goto('/');
+        await loginPage.fillEmailAddressInputField(EMAIL);
+        await loginPage.fillPasswordInputField(PASSWORD);
+        const signPage = await loginPage.clickLoginAndGoSignPage();
+
+        const fileInput = page.locator('input[type="file"]');
+        await fileInput.setInputFiles('testDocuments/picture.jpg');
+
+
+        await page.waitForFunction(selector => {
+        const button = document.querySelector(selector);
+        if (!button) return false;
+        return !button.disabled && button.getAttribute('aria-disabled') !== 'true';
+        }, 'div.wizardSignForm-createButton button');
+        await page.getByRole('button', { name: 'Prepare Document', exact: true }).click();
+
+        await page.getByLabel('radio-button__label', {name: 'Send for Signature', exact: true }).click();
+        await page.getByRole('button', { name: 'Add signer', exact: true }).click();
+
+        await page.getByRole('placeholder', { name: 'Name', exact: true }).fill('John2');
+        await page.getByRole('placeholder', { name: 'Email', exact: true }).fill('a@a.com');
+
+        await page.getByRole('button', { name: 'Add signer', exact: true }).click();
+
+        await page.getByRole('placeholder', { name: 'Name', exact: true }).fill('John');
+        await page.getByRole('placeholder', { name: 'Email', exact: true }).fill('a@a.com');
+
+        await page.getByRole('button', { name: 'Continue', exact: true }).click();
 
         await expect(page.locator('span.signers__item-order-position').first()).toBeVisible();
         await expect(page.locator('span.signers__item-order-position').last()).toBeVisible();
