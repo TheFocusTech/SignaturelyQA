@@ -5,7 +5,7 @@ const EMAIL = process.env.USER_EMAIL;
 const PASSWORD = process.env.USER_PASSWORD;
 const BASE_URL = process.env.URL;
 
-test.describe('Autorization', () => {
+test.describe('Authorization', () => {
 
     test('TC_02_05_01 | Verify successful login and the user directed to the sign page', async ({ page }) => {
         const loginPage = new LoginPage(page);
