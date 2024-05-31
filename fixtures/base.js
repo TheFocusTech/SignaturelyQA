@@ -1,0 +1,22 @@
+import { test as base } from '@playwright/test';
+import LoginPage from '../page_objects/loginPage';
+
+const EMAIL = process.env.USER_EMAIL;
+const PASSWORD = process.env.USER_PASSWORD;
+
+export const test = base.extend({
+
+    loginBusinessUser: [
+        async ({ page }, use) => {
+            const loginPage = new LoginPage(page);
+
+            await page.goto('/');
+            await loginPage.fillEmailAddressInputField(EMAIL);
+            await loginPage.fillPasswordInputField(PASSWORD);
+            await loginPage.clickLoginAndGoSignPage();                   
+
+            await use("");
+        }, 
+        { scope: "test" },
+    ]
+});
