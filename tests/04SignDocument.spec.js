@@ -1,83 +1,36 @@
-import { test, expect } from "@playwright/test";
-import LoginPage from "../page_objects/loginPage";
+import { expect } from "@playwright/test";
+import {test,loginBusinessUser} from "../fixtures/base.js";
 import SignPage from "../page_objects/signPage";
 const EMAIL = process.env.USER_EMAIL;
 const PASSWORD = process.env.USER_PASSWORD;
 const BASE_URL = process.env.URL;
+import {CHOOSE_SIGNERS_FIELDS} from '../testData.js';
 
 test.describe('SignDocument', () => {
 
-    test('TC_04_11_02 | Verify custom signing order', async ({ page }) => {
-        const loginPage = new LoginPage(page);
+    test('TC_04_11_02 | Verify custom signing order', async ({page,loginBusinessUser}) => {
+        const signPage = new SignPage(page);
+        signPage.clickUploadFileBtn('testDocuments/picture.jpg');
 
-        await page.goto('/');
-        await loginPage.fillEmailAddressInputField(EMAIL);
-        await loginPage.fillPasswordInputField(PASSWORD);
-        const signPage = await loginPage.clickLoginAndGoSignPage();
+        await signPage.locators.getPrepareDocumentBtn().waitFor({state: 'visible'});
+        signPage.clickPrepareDocumentBtn();
 
-        const fileInput = page.locator('input[type="file"]');
-        await fileInput.setInputFiles('testDocuments/picture.jpg');
+        await signPage.clickSendForSignatureRadioBtn();
+        await signPage.clickAddSignerBtn();
 
+        await signPage.fillChooseSignersNameField(CHOOSE_SIGNERS_FIELDS.name1);
+        await signPage.fillChooseSignersEmailField(CHOOSE_SIGNERS_FIELDS.email1);
 
-        await page.waitForFunction(selector => {
-        const button = document.querySelector(selector);
-        if (!button) return false;
-        return !button.disabled && button.getAttribute('aria-disabled') !== 'true';
-        }, 'div.wizardSignForm-createButton button');
-        await page.locator('div.wizardSignForm-createButton button').click();
+        await signPage.clickAddSignerBtn();
 
-        await page.locator('div.radio-button__wrapper ').last().click();
-        await page.locator('form.wizardSignForm__form p:nth-child(2)').first().click();
+        await signPage.fillChooseSignersNameField(CHOOSE_SIGNERS_FIELDS.name2);
+        await signPage.fillChooseSignersEmailField(CHOOSE_SIGNERS_FIELDS.email2);
 
-        await page.locator('div.form__field .form__input').first().fill('John2');
-        await page.locator('div.form__field .form__input').last().fill('a@a.com');
+        await signPage.clickCustomSigningOrderCheckbox();
 
-        await page.locator('form.wizardSignForm__form p:nth-child(2)').first().click();
+        await expect(signPage.locators.getCustomSigningOrderPositionNumberOne()).toBeVisible();
+        await expect(signPage.locators.getCustomSigningOrderPositionNumberTwo()).toBeVisible();
 
-        await page.locator('div.form__field .form__input').first().fill('John');
-        await page.locator('div.form__field .form__input').last().fill('a@a.com');
-
-        await page.locator('div.uiCheckbox').click();
-
-        await expect(page.locator('span.signers__item-order-position').first()).toBeVisible();
-        await expect(page.locator('span.signers__item-order-position').last()).toBeVisible();
-
+        await signPage.clickCancelBtnAndDeleteDocument();
     })
-    test.only('TC_04_11_03', async ({ page }) => {
-        const loginPage = new LoginPage(page);
-
-        await page.goto('/');
-        await loginPage.fillEmailAddressInputField(EMAIL);
-        await loginPage.fillPasswordInputField(PASSWORD);
-        const signPage = await loginPage.clickLoginAndGoSignPage();
-
-        const fileInput = page.locator('input[type="file"]');
-        await fileInput.setInputFiles('testDocuments/picture.jpg');
-
-
-        await page.waitForFunction(selector => {
-        const button = document.querySelector(selector);
-        if (!button) return false;
-        return !button.disabled && button.getAttribute('aria-disabled') !== 'true';
-        }, 'div.wizardSignForm-createButton button');
-        await page.getByRole('button', { name: 'Prepare Document', exact: true }).click();
-
-        await page.getByLabel('radio-button__label', {name: 'Send for Signature', exact: true }).click();
-        await page.getByRole('button', { name: 'Add signer', exact: true }).click();
-
-        await page.getByRole('placeholder', { name: 'Name', exact: true }).fill('John2');
-        await page.getByRole('placeholder', { name: 'Email', exact: true }).fill('a@a.com');
-
-        await page.getByRole('button', { name: 'Add signer', exact: true }).click();
-
-        await page.getByRole('placeholder', { name: 'Name', exact: true }).fill('John');
-        await page.getByRole('placeholder', { name: 'Email', exact: true }).fill('a@a.com');
-
-        await page.getByRole('button', { name: 'Continue', exact: true }).click();
-
-        await expect(page.locator('span.signers__item-order-position').first()).toBeVisible();
-        await expect(page.locator('span.signers__item-order-position').last()).toBeVisible();
-
-    })
-
 })
