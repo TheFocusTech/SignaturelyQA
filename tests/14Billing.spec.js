@@ -21,5 +21,6 @@ test.describe('Billing', () => {
         await settingsBillingPlanPage.clickRenewBusinessPlanBtn();
         await expect(settingsBillingPlanPage.locators.getToasterPopup()).toHaveText('Plan has been renew');
         await expect(settingsBillingPlanPage.locators.getCurrentPlanBtn()).toBeVisible();
+        await settingsBillingPlanPage.clickSignSidebarLinkAndGoSignPage();
     })
 })

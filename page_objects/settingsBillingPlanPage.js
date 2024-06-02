@@ -1,3 +1,5 @@
+import SignPage from "./signPage";
+
 class SettingsBillingPlanPage {
     constructor(page){
         this.page = page;
@@ -5,6 +7,7 @@ class SettingsBillingPlanPage {
 
     locators = {        
         getPersonalPlanSelectBtn: () => this.page.getByText('Select', { exact: true }),
+        getSignSidebarLink: () => this.page.getByRole('link', { name: 'Sign', exact: true }),
         getDowngradeBtn: () => this.page.getByRole('button', {name: 'Downgrade'}),
         getToasterPopup: () => this.page.getByRole('alert'),
         getToasterCloseSuccessBtn: () => this.page.locator('[type = "success"]'),
@@ -31,6 +34,11 @@ class SettingsBillingPlanPage {
         await this.locators.getToasterCloseSuccessBtn().click();
 
         return this;
+    }
+    async clickSignSidebarLinkAndGoSignPage(){
+        await this.locators.getSignSidebarLink().click();
+
+        return new SignPage(this.page);
     }
    
 }
