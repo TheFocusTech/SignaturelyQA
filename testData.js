@@ -10,5 +10,3 @@ export const CHOOSE_SIGNERS_FIELDS = {
     name2: 'John Doe2',
     email2: '5kXUw@example.com'
 }
-
-

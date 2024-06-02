@@ -1,5 +1,4 @@
 import DocumentsPage from "./documentsPage";
-import TemplatesActivePage from "./templatesActivePage";
 
 class SignPage {
     constructor(page){
@@ -11,7 +10,7 @@ class SignPage {
         getDocumentsSidebarLink: () => this.page.getByRole('link', {name: 'Documents', exact: true}),
         getUploadFileBtn: () => this.page.getByRole('button', {name: 'Upload File'}),
         getFileInputField: () => this.page.locator('input[type = "file"]'),
-        getTemplateDropdown: () => this.page.getByText('Templates', {exact: true}),
+        getDocumentsDropdown: () => this.page.getByText('Documents', {exact: true}),
         getPrepareDocumentBtn: () => this.page.locator('div.wizardSignForm-createButton button'),
         getSendForSignatureRadioBtn: () => this.page.locator('div.radio-button__wrapper ').last(),
         getAddSignerBtn: () => this.page.locator('form.wizardSignForm__form p:nth-child(2)').first(),
@@ -29,49 +28,58 @@ class SignPage {
         return new DocumentsPage(this.page);
     }
 
-    async clickTemplateDropdownAndGoTemplatesActivePage() { 
-        await this.locators.getTemplateDropdown().click();
+    async clickDocumentsDropdownAndGoDocumentsPage() { 
+        await this.locators.getDocumentsDropdown().click();
 
-        return new TemplatesActivePage(this.page);
+        return new DocumentsPage(this.page);
     }
+
     clickUploadFileBtn(file) {
         this.locators.getFileInputField().setInputFiles(file);
 
         return this;
     }
+
     clickPrepareDocumentBtn() {
         this.locators.getPrepareDocumentBtn().click();
 
         return this;
     }
+
     async clickSignSidebarLinkAndGoSignPage() {
         await this.locators.getSignSidebarLink().click();
     }
+
     async clickSendForSignatureRadioBtn() {
         await this.locators.getSendForSignatureRadioBtn().click();
 
         return this;
     }
+
     async clickAddSignerBtn() {
         await this.locators.getAddSignerBtn().click();
 
         return this;
     }
+
     async fillChooseSignersNameField(name) {
         await this.locators.getChooseSignersNameField().fill(name);
 
         return this;
     }
+
     async fillChooseSignersEmailField(email) {
         await this.locators.getChooseSignersEmailField().fill(email);
 
         return this;
     }
+
     async clickCustomSigningOrderCheckbox() {
         await this.locators.getCustomSigningOrderCheckbox().click();
 
         return this;
     }
+    
     async clickCancelBtnAndDeleteDocument() {
         await this.locators.getCancelBtn().click();
 
