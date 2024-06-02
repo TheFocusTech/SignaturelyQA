@@ -16,6 +16,5 @@ class SignPage {
 
         return new DocumentsPage(this.page);
     }
-
 }
 export default SignPage;
