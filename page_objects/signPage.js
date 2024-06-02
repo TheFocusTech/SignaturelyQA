@@ -1,4 +1,6 @@
 import DocumentsPage from "./documentsPage";
+import TemplatesActivePage from "./templatesActivePage";
+
 class SignPage {
     constructor(page){
         this.page = page;
@@ -9,6 +11,7 @@ class SignPage {
         getDocumentsSidebarLink: () => this.page.getByRole('link', {name: 'Documents', exact: true}),
         getUploadFileBtn: () => this.page.getByRole('button', {name: 'Upload File'}),
         getFileInputField: () => this.page.locator('input[type = "file"]'),
+        getTemplateDropdown: () => this.page.getByText('Templates', {exact: true}),
         getPrepareDocumentBtn: () => this.page.locator('div.wizardSignForm-createButton button'),
         getSendForSignatureRadioBtn: () => this.page.locator('div.radio-button__wrapper ').last(),
         getAddSignerBtn: () => this.page.locator('form.wizardSignForm__form p:nth-child(2)').first(),
@@ -24,6 +27,12 @@ class SignPage {
         await this.locators.getDocumentsSidebarLink().click();
 
         return new DocumentsPage(this.page);
+    }
+
+    async clickTemplateDropdownAndGoTemplatesActivePage() { 
+        await this.locators.getTemplateDropdown().click();
+
+        return new TemplatesActivePage(this.page);
     }
     clickUploadFileBtn(file) {
         this.locators.getFileInputField().setInputFiles(file);
