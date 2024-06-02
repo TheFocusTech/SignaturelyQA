@@ -1,6 +1,7 @@
 import { expect } from '@playwright/test';
 import { test, loginBusinessUser } from "../fixtures/base.js";
 import SignPage from "../page_objects/signPage";
+import {TOASTER_MESSAGE} from '../testData.js';
 
 test.describe('Billing', () => {
 
@@ -14,12 +15,12 @@ test.describe('Billing', () => {
         await settingsBillingPlanPage.clickPersonalPlanSelectBtn();
         await settingsBillingPlanPage.clickDowngradeBtn();
 
-        await expect(settingsBillingPlanPage.locators.getToasterPopup()).toHaveText('Plan has been successfully changed.');        
+        await expect(settingsBillingPlanPage.locators.getToasterPopup()).toHaveText(TOASTER_MESSAGE.planSuccessChange);        
         await expect(settingsBillingPlanPage.locators.getRenewBusinessPlanBtn()).toBeVisible();
         
         await settingsBillingPlanPage.clickToasterCloseSuccessBtn();
         await settingsBillingPlanPage.clickRenewBusinessPlanBtn();
-        await expect(settingsBillingPlanPage.locators.getToasterPopup()).toHaveText('Plan has been renew');
+        await expect(settingsBillingPlanPage.locators.getToasterPopup()).toHaveText(TOASTER_MESSAGE.planRenew);
         await expect(settingsBillingPlanPage.locators.getCurrentPlanBtn()).toBeVisible();
         await settingsBillingPlanPage.clickSignSidebarLinkAndGoSignPage();
     })

@@ -9,6 +9,12 @@ export const CHOOSE_SIGNERS_FIELDS = {
     email1: '5kXUw@example.com',
     name2: 'John Doe2',
     email2: '5kXUw@example.com'
+};
+export const TOASTER_MESSAGE ={
+    planSuccessChange: 'Plan has been successfully changed.',
+    planRenew: 'Plan has been renew'
 }
+
+
 
 
