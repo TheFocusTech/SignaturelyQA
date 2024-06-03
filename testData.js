@@ -12,7 +12,8 @@ export const CHOOSE_SIGNERS_FIELDS = {
 };
 export const TOASTER_MESSAGE ={
     planSuccessChange: 'Plan has been successfully changed.',
-    planRenew: 'Plan has been renew'
-}
+    planRenew: 'Plan has been renew',
+    folderDeleted: 'Folder deleted successfully.'
+};
 
 

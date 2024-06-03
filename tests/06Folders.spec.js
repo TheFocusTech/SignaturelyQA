@@ -1,6 +1,8 @@
 import { expect } from "@playwright/test"
 import {test, loginBusinessUser, createNewFolder} from "../fixtures/base.js";
 import SignPage from "../page_objects/signPage";
+import { TOASTER_MESSAGE } from "../testData.js";
+
 
 test.describe('Folders', () => {
 
@@ -9,16 +11,17 @@ test.describe('Folders', () => {
 
         const documentsPage = await signPage.clickDocumentsDropdownAndGoDocumentsPage();
 
-        await documentsPage.locators.getToaster().waitFor({ state: 'visible' });
-        await documentsPage.locators.getToaster().waitFor({ state: 'hidden' });
-
         await documentsPage.clickOptionsBtn();
         await documentsPage.clickDeleteBtn();
         await documentsPage.clickYesDeleteBtn();
         await documentsPage.locators.getToaster().waitFor({ state: 'visible' });
 
-        await expect(documentsPage.locators.getToaster()).toHaveText('Folder deleted successfully.');
+        await expect(documentsPage.locators.getToaster()).toHaveText(TOASTER_MESSAGE.folderDeleted);
 
-        await documentsPage.clickSignaturelyLogoAndGoSignPage();
+        const documentsTrashPage = await documentsPage.clickTrashSidebarLinkAndGoDocumentsTrashPage();
+
+        await documentsTrashPage.clickEmptyTrashBtn();
+        await documentsTrashPage.clickConfirmEmptyTrashBtn();
+        await documentsTrashPage.clickSignSidebarLinkAndGoSignPage();
     })
 })
