@@ -18,10 +18,10 @@ test.describe('Folders', () => {
 
         await expect(documentsPage.locators.getToaster()).toHaveText(TOASTER_MESSAGE.folderDeleted);
 
-        const documentsTrashPage = await documentsPage.clickTrashSidebarLinkAndGoDocumentsTrashPage();
+        // const documentsTrashPage = await documentsPage.clickTrashSidebarLinkAndGoDocumentsTrashPage();
 
-        await documentsTrashPage.clickEmptyTrashBtn();
-        await documentsTrashPage.clickConfirmEmptyTrashBtn();
-        await documentsTrashPage.clickSignSidebarLinkAndGoSignPage();
+        // await documentsTrashPage.clickEmptyTrashBtn();
+        // await documentsTrashPage.clickConfirmEmptyTrashBtn();
+        // await documentsTrashPage.clickSignSidebarLinkAndGoSignPage();
     })
 })

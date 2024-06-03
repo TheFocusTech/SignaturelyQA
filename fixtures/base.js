@@ -13,55 +13,59 @@ export const test = base.extend({
     cleanDocuments: [
         async ({ request }, use) => {
             const getSignInResponse = await request.post(API_BASE_URL + API_URL_END_POINTS.signInEndPoint, {
+                headers: {
+                    'accept': '*/*',
+                    'Content-Type': 'application/json', 
+                }, 
                 data: {
-                    email: EMAIL,
-                    password: PASSWORD
-                }
-            });
-            expect(getSignInResponse.status()).toEqual(201);
-
-            const getDocumentRresponse = await request.get(API_BASE_URL + API_URL_END_POINTS.getDocumentsEndPoint);
-            const numberOfDocuments = (await getDocumentRresponse.json()).itemCount;
-
-            if (numberOfDocuments != 0) {
-                const documentDataArray = (await getDocumentRresponse.json()).items;
-                const entityIdArray = [];
-                documentDataArray.map(el => {
-                    entityIdArray.push(el.entityId)
-                });
-
-                await request.delete(API_BASE_URL + API_URL_END_POINTS.deleteDocumentsEndPoint, {
-                    data: {
-                        entityIds: entityIdArray,
-                    }
-                });
-                expect(numberOfDocuments).not.toBeTruthy;
-
-                await request.delete(API_BASE_URL + API_URL_END_POINTS.emptyTrash, {
-                    data: {
-                        entityIds: entityIdArray,
-                    }
-                });
+                email: EMAIL,
+                password: PASSWORD
             }
+            });
+expect(getSignInResponse.status()).toEqual(201);
 
-            await use("");
+const getDocumentRresponse = await request.get(API_BASE_URL + API_URL_END_POINTS.getDocumentsEndPoint);
+const numberOfDocuments = (await getDocumentRresponse.json()).itemCount;
+
+if (numberOfDocuments != 0) {
+    const documentDataArray = (await getDocumentRresponse.json()).items;
+    const entityIdArray = [];
+    documentDataArray.map(el => {
+        entityIdArray.push(el.entityId)
+    });
+
+    await request.delete(API_BASE_URL + API_URL_END_POINTS.deleteDocumentsEndPoint, {
+        data: {
+            entityIds: entityIdArray,
+        }
+    });
+    expect(numberOfDocuments).not.toBeTruthy;
+
+    await request.delete(API_BASE_URL + API_URL_END_POINTS.emptyTrash, {
+        data: {
+            entityIds: entityIdArray,
+        }
+    });
+}
+
+await use("");
         },
-        { scope: "test", auto: true },
+{ scope: "test", auto: true },
     ],
 
-    loginBusinessUser: [
-        async ({ page, cleanDocuments }, use) => {
-            const loginPage = new LoginPage(page);
+loginBusinessUser: [
+    async ({ page, cleanDocuments }, use) => {
+        const loginPage = new LoginPage(page);
 
-            await page.goto("/");
-            await loginPage.fillEmailAddressInputField(EMAIL);
-            await loginPage.fillPasswordInputField(PASSWORD);
-            await loginPage.clickLoginAndGoSignPage();
+        await page.goto("/");
+        await loginPage.fillEmailAddressInputField(EMAIL);
+        await loginPage.fillPasswordInputField(PASSWORD);
+        await loginPage.clickLoginAndGoSignPage();
 
-            await use("");
-        },
-        { scope: "test", auto: true },
-    ],
+        await use("");
+    },
+    { scope: "test", auto: true },
+],
 
     createNewFolder: [
         async ({ page }, use) => {
