@@ -1,6 +1,8 @@
 import { expect } from '@playwright/test';
 import { test as base } from '@playwright/test';
 import LoginPage from '../page_objects/loginPage';
+import SignPage from '../page_objects/signPage';
+import TemplatesActivePage from '../page_objects/templatesActivePage';
 import { API_URL_END_POINTS } from '../APIData.js'
 
 const EMAIL = process.env.USER_EMAIL;
@@ -59,5 +61,21 @@ export const test = base.extend({
             await use("");
         },
         { scope: "test", auto: true },
+    ],
+
+    createNewFolder: [
+        async ({ page }, use) => {
+            const templatesActivePage = new TemplatesActivePage(page);
+            const signPage = new SignPage(page);
+            
+            await signPage.clickTemplateDropdownAndGoTemplatesActivePage();  
+            await templatesActivePage.clickCreateFolderBtn();
+            await templatesActivePage.fillNewFolderNameInputField();
+            await templatesActivePage.clickCreateBtn();
+
+            await use("");
+        }, 
+                { scope: "test" },
+
     ]
 });
