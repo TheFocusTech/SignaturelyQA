@@ -55,6 +55,12 @@ class SettingAPIPage {
         return this;
     }
 
+    async getToasterText() {
+        const text =  await this.locators.getToaster().innerText();
+
+        return text;
+    }
+
     async removeAPIKeys() {
         const buttons = await this.locators.getOptionDropdown().all();
 
