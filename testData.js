@@ -12,7 +12,8 @@ export const CHOOSE_SIGNERS_FIELDS = {
 };
 export const TOASTER_MESSAGE ={
     planSuccessChange: 'Plan has been successfully changed.',
-    planRenew: 'Plan has been renew'
+    planRenew: 'Plan has been renew',
+    folderDeleted: 'Folder deleted successfully.'
 };
-export const EMPTY_DOCUMENTS_HEADER = "You don't have any documents yet.";
-export const EMPTY_TRASH_HEADER = "You don't have any deleted documents yet.";
+
+
