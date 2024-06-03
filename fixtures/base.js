@@ -12,12 +12,13 @@ export const test = base.extend({
 
     cleanDocuments: [
         async ({ request }, use) => {
-            await request.post(API_BASE_URL + API_URL_END_POINTS.signInEndPoint, {
+            const getSignInResponse = await request.post(API_BASE_URL + API_URL_END_POINTS.signInEndPoint, {
                 data: {
                     email: EMAIL,
                     password: PASSWORD
                 }
             });
+            expect(getSignInResponse.status()).toEqual(201);
 
             const getDocumentRresponse = await request.get(API_BASE_URL + API_URL_END_POINTS.getDocumentsEndPoint);
             const numberOfDocuments = (await getDocumentRresponse.json()).itemCount;
