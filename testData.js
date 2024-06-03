@@ -13,8 +13,9 @@ export const CHOOSE_SIGNERS_FIELDS = {
 export const TOASTER_MESSAGE ={
     planSuccessChange: 'Plan has been successfully changed.',
     planRenew: 'Plan has been renew',
+    folderDeleted: 'Folder deleted successfully.',
     copyApiKey: 'API key successfully copied to clipboard',
     deleteApiKey: 'API key successfully deleted',
-}
+};
 export const API_KEY_NAME = 'Test Api Key';
 export const NO_API_KEY_MESSAGE = 'You don\'t have any API keys yet.'
