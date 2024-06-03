@@ -1,4 +1,5 @@
 import DocumentsPage from "./documentsPage";
+import SettingsCompanyPage from "./settingsCompanyPage";
 
 class SignPage {
     constructor(page){
@@ -7,6 +8,7 @@ class SignPage {
 
     locators = {
         getSignSidebarLink: () => this.page.getByRole('link', { name: 'Sign', exact: true }),
+        getSettingsSidebarLink: () => this.page.getByRole('link', {name: 'Settings', exact: true}),
         getDocumentsSidebarLink: () => this.page.getByRole('link', {name: 'Documents', exact: true}),
         getUploadFileBtn: () => this.page.getByRole('button', {name: 'Upload File'}),
         getFileInputField: () => this.page.locator('input[type = "file"]'),
@@ -27,7 +29,11 @@ class SignPage {
 
         return new DocumentsPage(this.page);
     }
+    async clickSettingsSidebarLinkAndGoSettingsCompanyPage(){
+        await this.locators.getSettingsSidebarLink().click();
 
+        return new SettingsCompanyPage(this.page);
+    }
     async clickDocumentsDropdownAndGoDocumentsPage() { 
         await this.locators.getDocumentsDropdown().click();
 
@@ -85,5 +91,6 @@ class SignPage {
 
         return new SignPage(this.page);
     }
+    
 }
 export default SignPage;
