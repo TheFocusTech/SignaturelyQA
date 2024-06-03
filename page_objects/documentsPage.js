@@ -17,6 +17,7 @@ class DocumentsPage {
         getYesDeleteBtn: () => this.page.getByRole('button', {name: 'Yes, Delete'}),
         getEmptyTableHeader: () => this.page.locator('.empty-table__header'),
         getTrashSidebarLink: () => this.page.getByRole('link', {name: 'Trash'}),
+        getDocumentStatusAwaiting: () => this.page.locator('.documents__documentStatus-text').first(),
     }
 
     async clickSignSidebarLinkAndGoSignPage() {

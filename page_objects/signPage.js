@@ -1,3 +1,4 @@
+import { MODULE_WINDOW_BUTTON, MODULE_WINDOW_TEXT,  BUTTON_TEXT, PLACEHOLDER, TEMPLATE_DOCUMENT_TITLE } from "../testData";
 import DocumentsPage from "./documentsPage";
 import TemplatesActivePage from "./templatesActivePage";
 
@@ -21,6 +22,13 @@ class SignPage {
         getCustomSigningOrderPositionNumberOne: () => this.page.locator('span.signers__item-order-position').first(),
         getCustomSigningOrderPositionNumberTwo: () => this.page.locator('span.signers__item-order-position').last(),
         getCancelBtn: () => this.page.locator('.interactModal__header-send button.interactModal__header-cancelButton'),
+        getChooseATemplateArrow: () => this.page.locator('.uiSelect__select-arrow'),
+        getSelectTemplateForOne: () => this.page.getByText(TEMPLATE_DOCUMENT_TITLE.templateForOne),
+        getNameInputField: () => this.page.getByPlaceholder(PLACEHOLDER.name),
+        getSendTheDocumentButton: () => this.page.getByRole('button', { name: BUTTON_TEXT.sendTheDocument }),
+        getSendForSignatureButton: () => this.page.locator('button[type="submit"] p.button__text'),
+        getModalWindowText: () => this.page.getByText(MODULE_WINDOW_TEXT.saveACopy).waitFor(),
+        getBackToDocumentsButton: () => this.page.getByRole('button', {name: MODULE_WINDOW_BUTTON.backToDocuments}),  
     }
 
     async clickDocumentsSidebarLinkAndGoDocumentsPage() {
@@ -75,7 +83,50 @@ class SignPage {
     async clickCancelBtnAndDeleteDocument() {
         await this.locators.getCancelBtn().click();
 
-        return new SignPage(this.page);
+        return this;
+    }
+
+    async clickChooseATemplateArrow() {
+        await this.locators.getChooseATemplateArrow().click();
+
+        return this;
+    }
+
+    async clickSelectTemplateForOne() {
+        await this.locators.getSelectTemplateForOne().scrollIntoViewIfNeeded()
+        await this.locators.getSelectTemplateForOne().click();
+
+        return this;
+    }
+
+    async clickNameInputField() {
+        await this.locators.getNameInputField().click();
+        
+        return this;
+    }
+
+    async fillNameInputField(signersName) {
+        await this.locators.getNameInputField().fill(signersName);
+     
+        return this;
+    }
+
+    async clickSendTheDocumentButton() {
+        await this.locators.getSendTheDocumentButton().click();
+
+        return this;
+    }
+
+    async clickSendForSignatureButton() {
+        await this.locators.getSendForSignatureButton().click();
+
+        return this;
+    }
+
+    async clickBackToDocumentsButton() {
+        await this.locators.getBackToDocumentsButton().click();
+
+        return new DocumentsPage(this.page);
     }
 }
 export default SignPage;

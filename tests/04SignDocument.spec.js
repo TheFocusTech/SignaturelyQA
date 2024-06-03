@@ -5,6 +5,7 @@ const EMAIL = process.env.USER_EMAIL;
 const PASSWORD = process.env.USER_PASSWORD;
 const BASE_URL = process.env.URL;
 import {CHOOSE_SIGNERS_FIELDS} from '../testData.js';
+import path from 'path';
 
 test.describe('SignDocument', () => {
 
@@ -13,7 +14,7 @@ test.describe('SignDocument', () => {
         signPage.clickUploadFileBtn('testDocuments/picture.jpg');
 
         await signPage.locators.getPrepareDocumentBtn().waitFor({state: 'visible'});
-        signPage.clickPrepareDocumentBtn();
+        await signPage.clickPrepareDocumentBtn();
 
         await signPage.clickSendForSignatureRadioBtn();
         await signPage.clickAddSignerBtn();

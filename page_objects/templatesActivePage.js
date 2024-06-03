@@ -1,4 +1,7 @@
-import { FILL_FOLDER_NAME } from '../testData';
+import { URL_END_POINTS, BUTTON_TEXT, FILL_FOLDER_NAME, PLACEHOLDER } from '../testData';
+import SignPage from './signPage';
+import TemplateCreatePage from './templatesCreatePage';
+
 
 class TemplatesActivePage {
     constructor(page){
@@ -13,6 +16,9 @@ class TemplatesActivePage {
         getToaster: () => this.page.locator('.Toastify__toast-body'),
         getDeleteBtn: () => this.page.getByRole('button', {name: 'Delete'}),
         getYesDeteleBtn: () => this.page.getByRole('button', {name: 'Yes, Delete'}),
+        getCreateTemplateButton: () => this.page.getByRole('button', { name: BUTTON_TEXT.createTemplate }),
+        getSignSidebarLink: () => this.page.getByRole('link', { name: 'Sign', exact: true }),
+
     }
 
     async clickCreateFolderBtn() {
@@ -50,5 +56,17 @@ class TemplatesActivePage {
 
         return this;
     }
+
+    async clickCreateTemplateButton() {
+        await this.locators.getCreateTemplateButton().click(); 
+
+        return new TemplateCreatePage(this.page);
+    }
+    async clickSignSidebarLinkAndGoSignPage() {
+        await this.locators.getSignSidebarLink().click();
+
+        return new SignPage(this.page);
+    }
+
 }
 export default TemplatesActivePage;
