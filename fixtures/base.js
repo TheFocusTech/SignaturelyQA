@@ -11,12 +11,11 @@ const PASSWORD = process.env.USER_PASSWORD;
 const BASE_URL = process.env.URL;
 
 export const test = base.extend({
-
     loginBusinessUser: [
         async ({ page }, use) => {
             const loginPage = new LoginPage(page);
 
-            await page.goto('/');
+            await page.goto("/");
             await loginPage.fillEmailAddressInputField(EMAIL);
             await loginPage.fillPasswordInputField(PASSWORD);
             await loginPage.clickLoginAndGoSignPage();
@@ -28,7 +27,6 @@ export const test = base.extend({
 
     createNewFolder: [
         async ({ page }, use) => {
-            const templatesActivePage = new TemplatesActivePage(page);
             const signPage = new SignPage(page);
             
             await signPage.clickTemplateDropdownAndGoTemplatesActivePage();  
@@ -67,5 +65,5 @@ export const test = base.extend({
             await use("");
         },
         { scope: "test" },
-    ]
+    ],
 });
