@@ -15,5 +15,7 @@ export const TOASTER_MESSAGE ={
     planRenew: 'Plan has been renew',
     folderDeleted: 'Folder deleted successfully.'
 };
+export const EMPTY_DOCUMENTS_HEADER = "You don't have any documents yet.";
+export const EMPTY_TRASH_HEADER = "You don't have any deleted documents yet.";
 
 
