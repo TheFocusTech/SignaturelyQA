@@ -20,8 +20,7 @@ test.describe('Create API key', () => {
         await createAPIKeyModal.clickCopyAPIButton();
 
         await settingsAPIPage.locators.getToaster().waitFor({ state: 'visible' });
-        const text = await settingsAPIPage.getToasterText();
-        await expect(text).toMatch(TOASTER_MESSAGE.copyApiKey);
+        await expect(settingsAPIPage.locators.getToaster()).toHaveText(TOASTER_MESSAGE.copyApiKey);
 
         let clipboardApiKeyValue = await createAPIKeyModal.getAPIKeyValueText();
         await createAPIKeyModal.clickCloseDialogButton();

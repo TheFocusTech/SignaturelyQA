@@ -56,9 +56,9 @@ class SettingAPIPage {
     }
 
     async getToasterText() {
-        const text =  await this.locators.getToaster().innerText();
+        const toasterMessageText =  await this.locators.getToaster().innerText();
 
-        return text;
+        return toasterMessageText;
     }
 
     async removeAPIKeys() {
