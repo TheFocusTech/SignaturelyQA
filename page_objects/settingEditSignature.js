@@ -12,6 +12,12 @@ class SettingEditSignature {
       getSignSidebarLink: () => this.page.getByRole('link', { name: 'Sign', exact: true }),
     }
 
+    async clickBurgerMenuSignature() {
+      await this.locators.getBurgerMenuSignature().click();
+
+      return this;
+    }
+    
     async clickDeleteDropItem() {
       await this.locators.getDeleteDropItem().click();
 
