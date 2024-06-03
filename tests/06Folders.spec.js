@@ -24,4 +24,29 @@ test.describe('Folders', () => {
         await documentsTrashPage.clickConfirmEmptyTrashBtn();
         await documentsTrashPage.clickSignSidebarLinkAndGoSignPage();
     })
+    test('TC_06_23_01 | Rename folder', async ({ page, loginBusinessUser, createNewFolder }) => {
+        const signPage = new SignPage(page); 
+
+        const documentsPage = await signPage.clickDocumentsDropdownAndGoDocumentsPage();
+
+        await documentsPage.clickOptionsBtn();
+        await documentsPage.clickRenameBtn();
+        await page.waitForTimeout(3000);
+        await documentsPage.fillRenameInputField();
+        await documentsPage.pressEnterRenameInputFielder();
+
+        await expect(documentsPage.locators.getToaster()).toHaveText(TOASTER_MESSAGE.folderRename);
+
+        await documentsPage.clickOptionsBtn();
+        await documentsPage.clickDeleteBtn();
+        await documentsPage.clickYesDeleteBtn();
+
+        const documentsTrashPage = await documentsPage.clickTrashSidebarLinkAndGoDocumentsTrashPage();
+        await documentsTrashPage.clickEmptyTrashBtn();
+        await documentsTrashPage.clickConfirmEmptyTrashBtn();
+        await documentsTrashPage.clickSignSidebarLinkAndGoSignPage();
+
+
+
+    })
 })
