@@ -14,6 +14,7 @@ export const TOASTER_MESSAGE ={
     planSuccessChange: 'Plan has been successfully changed.',
     planRenew: 'Plan has been renew',
     copyApiKey: 'API key successfully copied to clipboard',
-    deleteApiKey: 'You don\'t have any API keys yet.',
+    deleteApiKey: 'API key successfully deleted',
 }
 export const API_KEY_NAME = 'Test Api Key';
+export const NO_API_KEY_MESSAGE = 'You don\'t have any API keys yet.'

@@ -1,7 +1,7 @@
 import { expect } from '@playwright/test';
 import { test, loginBusinessUser } from "../fixtures/base.js";
 import {
-    API_KEY_NAME,
+    API_KEY_NAME, NO_API_KEY_MESSAGE,
     TOASTER_MESSAGE,
 } from '../testData.js';
 import SignPage from "../page_objects/signPage";
@@ -33,7 +33,7 @@ test.describe('Create API key', () => {
         await settingsAPIPage.removeAPIKeys();
 
         await settingsAPIPage.locators.getCreateAPIKeyButtonInTable().waitFor({ state: 'visible' });
-        await expect(settingsAPIPage.locators.getEmptyAPiKeysHeader()).toHaveText(TOASTER_MESSAGE.deleteApiKey)
+        await expect(settingsAPIPage.locators.getEmptyAPiKeysHeader()).toHaveText(NO_API_KEY_MESSAGE)
 
         await settingsAPIPage.clickSignSidebarLinkAndGoSignPage();
     });
