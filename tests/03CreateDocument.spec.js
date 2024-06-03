@@ -12,7 +12,7 @@ const EMAIL = process.env.USER_EMAIL;
 const PASSWORD = process.env.USER_PASSWORD;
 const BASE_URL = process.env.URL;
 
-test.describe.only('Create Document', () => {
+test.describe('Create Document', () => {
 
     test('TC_03_08_01 | Verify that the "Send document" button will send the document from the template to the user (me) for signature', async ({ page,loginBusinessUser,createTemplateForOne}) => {
 
