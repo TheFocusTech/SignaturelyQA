@@ -15,5 +15,9 @@ export const TOASTER_MESSAGE ={
     planRenew: 'Plan has been renew',
     folderDeleted: 'Folder deleted successfully.'
 };
+export const DATA_SIGNER = {
+    fullName: 'May Li',
+    initials: 'ML'
+};
 
 
