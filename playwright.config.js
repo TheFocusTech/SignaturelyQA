@@ -38,16 +38,19 @@ module.exports = defineConfig({
     {
       name: 'chromium',
       use: { ...devices['Desktop Chrome'] },
+      permissions: ['clipboard-read', 'clipboard-write'],
     },
 
     {
       name: 'firefox',
       use: { ...devices['Desktop Firefox'] },
+      permissions: ['clipboard-read', 'clipboard-write'],
     },
 
     {
       name: 'webkit',
       use: { ...devices['Desktop Safari'] },
+      permissions: ['clipboard-read', 'clipboard-write'],
     },
 
     /* Test against mobile viewports. */
