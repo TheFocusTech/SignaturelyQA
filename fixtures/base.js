@@ -85,7 +85,6 @@ export const test = base.extend({
             await templatesCreatePage.clickCreateBtn();
             await templatesCreatePage.clickBackToTemplatesBtn();
 
-
             await use("");
 
         },
@@ -94,8 +93,7 @@ export const test = base.extend({
 
     deleteSignature: [
         async ({ page }, use) =>{
-            await use("");
-
+           
             const signPage = new SignPage(page);
             await signPage.clickDropDownUser();
 
