@@ -84,9 +84,13 @@ export const test = base.extend({
 
             await templatesCreatePage.clickCreateBtn();
             await templatesCreatePage.clickBackToTemplatesBtn();
-            
+
 
             await use("");
+
+        },
+        { scope: "test" },
+    ],
 
     deleteSignature: [
         async ({ page }, use) =>{
@@ -101,7 +105,10 @@ export const test = base.extend({
             await editSignature.clickButtonDelete();
             await editSignature.clickSignSidebarLinkAndGoSignPage();
 
+            await use("");
+
         },
         { scope: "test" },
     ],
-});
+ })
+
