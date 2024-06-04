@@ -7,15 +7,15 @@ class SettingEditSignature {
 
     locators = {
       getCreateSignatureBtn: () => this.page.getByRole('button', {name: 'Create Signature'}),
-      getFullNameInput: () => this.page.locator('.form__input').first(),
-      getInitialsInput:() => this.page.locator('.form__input').nth(1),
-      getCheckboxAgree: () => this.page.locator('.uiCheckbox__inner.uiCheckbox--unChecked'),
+      getFullNameInput: () => this.page.locator('div').filter({ hasText: /^Full Name \*$/ }).getByRole('textbox'),
+      getInitialsInput:() => this.page.locator('div').filter({ hasText: /^Initials \*$/ }).getByRole('textbox'),
+      getCheckboxAgree: () => this.page.getByRole('contentinfo').locator('div').nth(2),
       getCardSignatureLast: () => this.page.locator('.settingsSignature__item').last(),
       getBurgerMenuSignatureLast: () => this.page.locator('.settingsSignature__dropDown-trigger').last(),
-      getDeleteDropItem: () => this.page.locator('.settingsSignature__dropDown-item--delete'),
+      getDeleteDropItem: () => this.page.getByText('Delete'),
       getDeleteBtn: () => this.page.getByRole('button', {name: 'Delete'}),
       getSignSidebarLink: () => this.page.getByRole('link', { name: 'Sign', exact: true }),
-      getToastCloseBtn: () => this.page.locator('[type="success"]'),
+      getToastCloseBtn: () => this.page.locator('[type="success"]').first(),
     }
 
     async clickCreateSignatureBtn() {
