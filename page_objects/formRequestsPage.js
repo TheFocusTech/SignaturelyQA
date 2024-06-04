@@ -7,7 +7,7 @@ class FormRequestsPage {
   }
 
     locators = {
-        getFormsLink: () => this.page.getByRole('link', { name: 'Forms' }),
+        getFormsLink: () => this.page.getByRole('link', { name: 'Forms',  exact: true}),
         getCreatFormBtn: () => this.page.getByRole('button', { name: 'Create Form', exect: true }).first(),
         getOptionsDropdown: () => this.page.locator('.documents__optionsDropdownTrigger').filter({ hasText: 'Options' }).first(),
         getEditDropdownAndGoFormRequestsEditPage: () => this.page.locator('.documents__dropdownOption').filter({ hasText: 'Edit' }),

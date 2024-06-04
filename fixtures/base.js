@@ -1,7 +1,7 @@
 import { test as base } from "@playwright/test";
 import LoginPage from "../page_objects/loginPage";
 import SignPage from "../page_objects/signPage";
-import FormRequestsPage from "../page_objects/formRequestsCreatePage.js";
+import FormRequestsPage from "../page_objects/formRequestsPage.js";
 import { FORM_NAME, OPTIONAL_MESSAGE_TEXT } from '../testData.js'
 
 
