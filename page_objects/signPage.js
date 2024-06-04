@@ -1,4 +1,5 @@
 import DocumentsPage from "./documentsPage";
+import SettingEditSignature from "./settingEditSignature";
 import SettingsCompanyPage from "./settingsCompanyPage";
 import TemplatesActivePage from "./templatesActivePage";
 import TemplatesCreatePage from "./templatesCreatePage";
@@ -25,6 +26,8 @@ class SignPage {
         getCustomSigningOrderPositionNumberTwo: () => this.page.locator('span.signers__item-order-position').last(),
         getCancelBtn: () => this.page.locator('.interactModal__header-send button.interactModal__header-cancelButton'),
         getTemplatesSidebarLink: () => this.page.getByRole('link', { name: 'Templates' }),
+        getDropDownUser: () => this.page.locator('.dropDownUser__wrapper'),
+        getEditSignatureDropItem: () => this.page.getByRole('banner').getByRole('link', { name: 'Edit Signature' }),
 
     }
 
@@ -98,8 +101,22 @@ class SignPage {
 
     async clickTemplatesSidebarLink() {
         await this.locators.getTemplatesSidebarLink().click();
+      
         return new TemplatesActivePage(this.page);
-      }
+    }
+
+   
+    async clickDropDownUser() {
+        await this.locators.getDropDownUser().click();
+
+        return this;
+    }
+
+    async clickEditSignatureAndGoEditSignaturePage() {
+        await this.locators.getEditSignatureDropItem().click();
+
+        return new SettingEditSignature(this.page);
+    }
 
 }
 export default SignPage;

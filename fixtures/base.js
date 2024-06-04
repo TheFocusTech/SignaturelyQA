@@ -39,6 +39,7 @@ export const test = base.extend({
         { scope: "test" },
     ],
 
+
     createTemplate: [
         async ({ page }, use) => {
             const signPage = new SignPage(page);
@@ -86,6 +87,20 @@ export const test = base.extend({
             
 
             await use("");
+
+    deleteSignature: [
+        async ({ page }, use) =>{
+            await use("");
+
+            const signPage = new SignPage(page);
+            await signPage.clickDropDownUser();
+
+            const editSignature = await signPage.clickEditSignatureAndGoEditSignaturePage();
+            await editSignature.clickBurgerMenuSignature();
+            await editSignature.clickDeleteDropItem();
+            await editSignature.clickButtonDelete();
+            await editSignature.clickSignSidebarLinkAndGoSignPage();
+
         },
         { scope: "test" },
     ],

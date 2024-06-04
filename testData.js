@@ -30,6 +30,11 @@ export const CREATE_TEMPLATE = {
 }
 
 
-
 export const API_KEY_NAME = 'Test Api Key';
 export const NO_API_KEY_MESSAGE = 'You don\'t have any API keys yet.';
+
+export const DATA_SIGNER = {
+    fullName: 'May Li',
+    initials: 'ML'
+};
+
