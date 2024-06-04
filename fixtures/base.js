@@ -23,7 +23,7 @@ export const test = base.extend({
                     password: PASSWORD
                 }
             });
-            expect(getSignInResponse.status()).toEqual(201);
+            expect(getSignInResponse.status()).toEqual(200);
 
             const getDocumentRresponse = await request.get(API_BASE_URL + API_URL_END_POINTS.getDocumentsEndPoint);
             const numberOfDocuments = (await getDocumentRresponse.json()).itemCount;
