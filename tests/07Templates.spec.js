@@ -10,7 +10,7 @@ test.describe('Templates', () => {
 
 		const templatesActivePage = new TemplatesActivePage(page);
 
-        await templatesActivePage.locators.getToaster().waitFor({ state: 'visible' });
+		await templatesActivePage.locators.getToaster().waitFor({ state: 'visible' });
 		await expect(templatesActivePage.locators.getToaster()).toHaveText(TOASTER_MESSAGE.teplateSaved);
 		await expect(page).toHaveURL(BASE_URL + URL_END_POINTS.templates_active_end_point);
 
@@ -18,8 +18,8 @@ test.describe('Templates', () => {
 		await templatesActivePage.clickDeleteBtn();
 		await templatesActivePage.clickDeleteYesBtn();
 
-        const signPage =  await templatesActivePage.clickSignSidebarLink();
-        await expect(page).toHaveURL(BASE_URL + URL_END_POINTS.signEndPoint);
+		const signPage = await templatesActivePage.clickSignSidebarLink();
+		await expect(page).toHaveURL(BASE_URL + URL_END_POINTS.signEndPoint);
 
 	});
 })

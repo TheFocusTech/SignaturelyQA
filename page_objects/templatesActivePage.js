@@ -27,7 +27,6 @@ class TemplatesActivePage {
 
     async clickSelectOptionsBtn() {
         await this.locators.getSelectOptionsBtn().click();
-
         return this;
     }
 

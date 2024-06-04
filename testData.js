@@ -22,5 +22,14 @@ export const TOASTER_MESSAGE = {
     folderCreated: 'Folder created!'
 
 };
+
+export const CREATE_TEMPLATE = {
+    nameField: 'Rental contract',
+    optionalMessage: 'USA',
+    nameRole: 'Boss',
+}
+
+
+
 export const API_KEY_NAME = 'Test Api Key';
 export const NO_API_KEY_MESSAGE = 'You don\'t have any API keys yet.';

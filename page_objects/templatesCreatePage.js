@@ -1,4 +1,5 @@
 import TemplatesActivePage from "./templatesActivePage";
+import {CREATE_TEMPLATE} from "../testData"
 
 class TemplatesCreatePage {
 	constructor(page){
@@ -19,19 +20,19 @@ class TemplatesCreatePage {
 	}
 
 	async fillTemplateNameField() {
-	  await this.locators.getTemplateNameField().fill('Rental contract');
+	  await this.locators.getTemplateNameField().fill(CREATE_TEMPLATE.nameField);
 
 	  return this;
 	}
 
 	async fillOptionalMessageField() {
-		await this.locators.getOptionalMessageField().fill('USA');
+		await this.locators.getOptionalMessageField().fill(CREATE_TEMPLATE.optionalMessage);
 
 		return this;
 	 }
 
 	 async fillCreateTemplateRolesField() {
-		await this.locators.getCreateTemplateRolesField().fill('Boss');
+		await this.locators.getCreateTemplateRolesField().fill(CREATE_TEMPLATE.nameRole);
 
 		return this;
 	 }
@@ -62,6 +63,7 @@ class TemplatesCreatePage {
 
      clickUploadFileBtn(file) {
         this.locators.getFileInputField().setInputFiles(file);
+
         return this;
     }
 
