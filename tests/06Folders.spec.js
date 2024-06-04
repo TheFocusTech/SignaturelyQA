@@ -11,7 +11,7 @@ test.describe('Folders', () => {
 
         const documentsPage = await signPage.clickDocumentsDropdownAndGoDocumentsPage();
         await documentsPage.clickCreateFolderBtn();
-        await documentsPage.fillNewFolderNameInputField();
+        await documentsPage.locators.getNewFolderNameInputField().fill('New Folder')
         await documentsPage.clickCreateBtn();
 
         await expect(documentsPage.locators.getToaster()).toHaveText(TOASTER_MESSAGE.folderCreated);
