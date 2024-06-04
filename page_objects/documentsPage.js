@@ -26,6 +26,8 @@ class DocumentsPage {
         getDeleteBtn: () => this.page.getByRole('button', {name: 'Delete'}),
         getYesDeteleBtn: () => this.page.getByRole('button', {name: 'Yes, Delete'}),
         getSignaturelyLogo: () => this.page.locator('a>img'),
+        getRenameBtn: () => this.page.getByRole('button', {name: 'Rename'}),
+        getRenameInputField: () => this.page.locator('input.form__input--hidden'),
     }
 
     async clickSignSidebarLinkAndGoSignPage() {
@@ -104,6 +106,24 @@ class DocumentsPage {
         await this.locators.getSignaturelyLogo().click();
 
         return new SignPage(this.page);
+    }
+
+    async clickRenameBtn() {
+        await this.locators.getRenameBtn().click();
+
+        return this.page;
+    }
+
+    async fillRenameInputField(folderName) {
+        await this.locators.getRenameInputField().fill(folderName);
+
+        return this.page;
+    }
+
+    async pressEnterRenameInputFielder() {
+        await this.locators.getRenameInputField().press('Enter');
+
+        return this.page;
     }
 }
 
