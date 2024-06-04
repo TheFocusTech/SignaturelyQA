@@ -9,7 +9,7 @@ class TemplatesActivePage {
     locators = {
         getCreateTemplateLink: () => this.page.getByRole('link', { name: 'Create Template' }),
 
-        getSelectOptionsBtn: () => this.page.getByRole('button', { name: 'Options' }),
+        getSelectOptionsBtn: () => this.page.getByRole('button', { name: 'Options' }).first(),
         getDeleteBtn: () => this.page.getByRole('button', { name: 'Delete' }),
         getDeleteYesBtn: () => this.page.getByRole('button', { name: 'Yes, Delete' }),
         getToaster: () => this.page.locator('div').filter({ hasText: 'Document successfully saved!' }).nth(3),
