@@ -34,7 +34,6 @@ test('create signature', async ({page, loginBusinessUser, deleteSignature}) => {
 });
 
 test('create and delete signature', async ({page, loginBusinessUser}) => {
-  // test.setTimeout(35000)
   const signPage = new SignPage(page);
   await signPage.clickDropDownUser();
   const editSignature = await signPage.clickEditSignatureAndGoEditSignaturePage();
