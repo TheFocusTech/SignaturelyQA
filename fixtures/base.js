@@ -23,7 +23,7 @@ export const test = base.extend({
                     password: PASSWORD
                 }
             });
-            expect(getSignInResponse.status()).toEqual(200);
+            expect(getSignInResponse.status()).toEqual(201);
 
             const getDocumentRresponse = await request.get(API_BASE_URL + API_URL_END_POINTS.getDocumentsEndPoint);
             const numberOfDocuments = (await getDocumentRresponse.json()).itemCount;
@@ -51,7 +51,7 @@ export const test = base.extend({
 
             await use("");
         },
-        { scope: "test", auto: true },
+        { scope: "test" },
     ],
 
     loginBusinessUser: [
@@ -66,18 +66,18 @@ export const test = base.extend({
             const documentsTrashPage = await documentsPage.clickTrashSidebarLinkAndGoDocumentsTrashPage();
             const numberItemsInTrash = await documentsTrashPage.locators.getResultsNumber().innerText();
 
-            if (numberItemsInTrash != 0) {
+            if (numberItemsInTrash > 0) {
                 await documentsTrashPage.clickEmptyTrashBtn();
                 await documentsTrashPage.clickConfirmEmptyTrashBtn();
             }
-
+            await documentsTrashPage.locators.getEmptyTableHeader().waitFor();
             expect(await documentsTrashPage.locators.getEmptyTableHeader()).toHaveText(EMPTY_TRASH_HEADER);
 
             await documentsTrashPage.clickSignSidebarLinkAndGoSignPage();
 
             await use("");
         },
-        { scope: "test", auto: true },
+        { scope: "test" },
     ],
 
     createNewFolder: [

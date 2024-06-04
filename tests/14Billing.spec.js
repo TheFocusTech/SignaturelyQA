@@ -5,7 +5,7 @@ import {TOASTER_MESSAGE} from '../testData.js';
 
 test.describe('Billing', () => {
 
-    test('TC_14_57_02 | Verify the ability to successfully downgrade subscription', async ({page}) => {
+    test('TC_14_57_02 | Verify the ability to successfully downgrade subscription', async ({page, loginBusinessUser}) => {
         const signPage = new SignPage(page);
 
         const settingsCompanyPage = await signPage.clickSettingsSidebarLinkAndGoSettingsCompanyPage();

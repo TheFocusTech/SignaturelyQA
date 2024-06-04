@@ -17,7 +17,7 @@ test('Check login fixture', async ({ page, loginBusinessUser }) => {
     await expect(page).toHaveURL(BASE_URL + URL_END_POINTS.signEndPoint);
 });
 
-test('Check clean documents fixture', async ({ page }) => {
+test('Check clean documents fixture', async ({ page, loginBusinessUser }) => {
     const signPage = new SignPage(page);
 
     const documentsPage = await signPage.clickDocumentsSidebarLinkAndGoDocumentsPage();
