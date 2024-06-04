@@ -6,7 +6,7 @@ import SignPage from '../page_objects/signPage.js';
 
 const BASE_URL = process.env.URL;
 
-test.skip('Navigate to login page', async ({ page }) => {
+test('Navigate to login page', async ({ page }) => {
     await page.goto('/');
 
     await expect(page).toHaveTitle('Log In | Signaturely');
