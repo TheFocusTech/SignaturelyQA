@@ -13,7 +13,7 @@ test.describe('SignDocument', () => {
         signPage.clickUploadFileBtn('testDocuments/picture.jpg');
 
         await signPage.locators.getPrepareDocumentBtn().waitFor({state: 'visible'});
-        signPage.clickPrepareDocumentBtn();
+        await signPage.clickPrepareDocumentBtn();
 
         await signPage.clickSendForSignatureRadioBtn();
         await signPage.clickAddSignerBtn();
