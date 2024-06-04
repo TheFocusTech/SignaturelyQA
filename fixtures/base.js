@@ -3,11 +3,12 @@ import { test as base } from "@playwright/test";
 import LoginPage from "../page_objects/loginPage";
 import SignPage from "../page_objects/signPage";
 import { API_URL_END_POINTS } from '../apiData.js';
-import { EMPTY_TRASH_HEADER } from '../testData.js';
+import { EMPTY_TRASH_HEADER, URL_END_POINTS } from '../testData.js';
 
 const EMAIL = process.env.USER_EMAIL;
 const PASSWORD = process.env.USER_PASSWORD;
 const API_BASE_URL = process.env.API_URL;
+const BASE_URL = process.env.URL;
 
 export const test = base.extend({
 
@@ -62,9 +63,13 @@ export const test = base.extend({
             await loginPage.fillEmailAddressInputField(EMAIL);
             await loginPage.fillPasswordInputField(PASSWORD);
             const signPage = await loginPage.clickLoginAndGoSignPage();
+            // await expect(page).toHaveURL(BASE_URL + URL_END_POINTS.signEndPoint);
             const documentsPage = await signPage.clickDocumentsSidebarLinkAndGoDocumentsPage();
             const documentsTrashPage = await documentsPage.clickTrashSidebarLinkAndGoDocumentsTrashPage();
+            expect(page).toHaveURL(BASE_URL + URL_END_POINTS.documentTrashEndPoint)
+            await documentsTrashPage.locators.getResultsNumber().waitFor();
             const numberItemsInTrash = await documentsTrashPage.locators.getResultsNumber().innerText();
+            console.log(numberItemsInTrash);
 
             if (numberItemsInTrash > 0) {
                 await documentsTrashPage.clickEmptyTrashBtn();
@@ -93,6 +98,22 @@ export const test = base.extend({
             await documentsPage.locators.getToaster().waitFor({ state: "hidden" });
 
             await use("");
+        },
+        { scope: "test" },
+    ],
+
+    deleteSignature: [
+        async ({ page }, use) =>{
+            await use("");
+
+            const signPage = new SignPage(page);
+            await signPage.clickDropDownUser();
+
+            const editSignature = await signPage.clickEditSignatureAndGoEditSignaturePage();
+            await editSignature.clickBurgerMenuSignature();
+            await editSignature.clickDeleteDropItem();
+            await editSignature.clickButtonDelete();
+            await editSignature.clickSignSidebarLinkAndGoSignPage();
         },
         { scope: "test" },
     ],

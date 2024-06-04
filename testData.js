@@ -1,6 +1,7 @@
 export const URL_END_POINTS = {
     signEndPoint: '/sign',
-    documentsEndPoint: '/documents'
+    documentsEndPoint: '/documents',
+    documentTrashEndPoint: '/documents/trash',
 };
 export const ACTIVE_COLOR = 'rgb(0, 163, 250)';
 export const FILL_FOLDER_NAME = 'Folder 1';
@@ -16,10 +17,14 @@ export const TOASTER_MESSAGE ={
     folderDeleted: 'Folder deleted successfully.',
     copyApiKey: 'API key successfully copied to clipboard',
     deleteApiKey: 'API key successfully deleted',
+    folderCreated: 'Folder created!'
 };
 export const API_KEY_NAME = 'Test Api Key';
-export const NO_API_KEY_MESSAGE = 'You don\'t have any API keys yet.'
-export const EMPTY_DOCUMENTS_HEADER = "You don't have any documents yet.";
+export const NO_API_KEY_MESSAGE = 'You don\'t have any API keys yet.';
+export const DATA_SIGNER = {
+    fullName: 'May Li',
+    initials: 'ML'
+};export const EMPTY_DOCUMENTS_HEADER = "You don't have any documents yet.";
 export const EMPTY_TRASH_HEADER = "You don't have any deleted documents yet.";
 
 
