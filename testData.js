@@ -18,8 +18,14 @@ export const TOASTER_MESSAGE ={
     folderDeleted: 'Folder deleted successfully.',
     copyApiKey: 'API key successfully copied to clipboard',
     deleteApiKey: 'API key successfully deleted',
+    folderCreated: 'Folder created!'
 };
 export const API_KEY_NAME = 'Test Api Key';
+export const NO_API_KEY_MESSAGE = 'You don\'t have any API keys yet.';
+export const DATA_SIGNER = {
+    fullName: 'May Li',
+    initials: 'ML'
+};
 export const NO_API_KEY_MESSAGE = 'You don\'t have any API keys yet.'
 
 export const SIGNERS_NAME = 'signersName'
