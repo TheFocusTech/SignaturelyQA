@@ -15,8 +15,8 @@ test.describe('Documents (Types)', () => {
         const documentsPage = await signPage.clickDocumentsSidebarLinkAndGoDocumentsPage();
         await documentsPage.waitForFDocumentNameToBeVisible(UPLOAD_FILE_NAME);
         await documentsPage.waitForFDocumentNameToBeVisible(FILL_FOLDER_NAME);
-        const NUMBER = await documentsPage.getNumberOfDocument(UPLOAD_FILE_NAME);
-        await documentsPage.clickOptionsButton(NUMBER);
+        const NUMBER_OF_DOCUMENT = await documentsPage.getNumberOfDocument(UPLOAD_FILE_NAME);
+        await documentsPage.clickOptionsButton(NUMBER_OF_DOCUMENT);
         await documentsPage.clickMoveToFolderOption();
         await documentsPage.selectFolderToMoveTo(FILL_FOLDER_NAME);
         await documentsPage.clickMoveToFolderButton();
