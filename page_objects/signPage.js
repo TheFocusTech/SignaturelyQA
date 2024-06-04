@@ -24,7 +24,7 @@ class SignPage {
         getCustomSigningOrderPositionNumberTwo: () => this.page.locator('span.signers__item-order-position').last(),
         getCancelBtn: () => this.page.locator('.interactModal__header-send button.interactModal__header-cancelButton'),
         getDropDownUser: () => this.page.locator('.dropDownUser__wrapper'),
-        getEditSignatureDropItem: () => this.page.getByRole('link', {name: 'Edit Signature'}),
+        getEditSignatureDropItem: () => this.page.getByRole('banner').getByRole('link', { name: 'Edit Signature' }),
     }
 
     async clickDocumentsSidebarLinkAndGoDocumentsPage() {
