@@ -6,7 +6,7 @@ const BASE_URL = process.env.URL;
 
 test.describe('Templates', () => {
 
-	test('TC_07_29_01 | Verify that user can edit template', async ({ page, loginBusinessUser, createTemplate }) => {
+	test('TC_07_29_01 | Verify that user can create template', async ({ page, loginBusinessUser, createTemplate }) => {
 
 		const templatesActivePage = new TemplatesActivePage(page);
 
