@@ -91,6 +91,18 @@ class SignPage {
 
         return new SignPage(this.page);
     }
+
+    async waitForPrepareDocumentBtnIsActive() {
+        while (true)
+        {
+            if (await this.locators.getPrepareDocumentBtn().isEnabled())
+            {
+                break;
+            }
+            await this.page.waitForTimeout(100);
+        }
+        return this;
+    }
     
 }
 export default SignPage;

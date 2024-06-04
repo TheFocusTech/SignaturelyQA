@@ -16,6 +16,9 @@ export const TOASTER_MESSAGE ={
     folderDeleted: 'Folder deleted successfully.',
     copyApiKey: 'API key successfully copied to clipboard',
     deleteApiKey: 'API key successfully deleted',
+    fileMovedToFolder: 'Files successfully moved!',
 };
 export const API_KEY_NAME = 'Test Api Key';
-export const NO_API_KEY_MESSAGE = 'You don\'t have any API keys yet.'
+export const NO_API_KEY_MESSAGE = 'You don\'t have any API keys yet.';
+export const UPLOAD_FILE_PATH = 'testDocuments/picture.jpg';
+export const UPLOAD_FILE_NAME = 'picture.jpg';

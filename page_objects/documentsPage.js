@@ -26,6 +26,14 @@ class DocumentsPage {
         getDeleteBtn: () => this.page.getByRole('button', {name: 'Delete'}),
         getYesDeteleBtn: () => this.page.getByRole('button', {name: 'Yes, Delete'}),
         getSignaturelyLogo: () => this.page.locator('a>img'),
+        getListOfAllDocumentsInTable: () => this.page.locator(".table__column.table__column--text--document.truncated").allInnerTexts(),
+        getOptionsButton: () => this.page.getByRole("button", { name: "Options" }),
+        getMoveToFolderDropdownOption: () => this.page.getByRole("button", { name: "Move to" }),
+        getNameOfFolderToMoveTo: (folderName) => this.page.getByRole("dialog").locator(".moveToFolderModal__item").filter({ hasText: `${folderName}` }),
+        getMoveToFolderButton: () => this.page.getByRole("button", { name: "Move to folder" }),
+        getTableControlsPath: () => this.page.locator(".tableControls__path").allInnerTexts(),
+        getDocumentTitle: (name) => this.page.locator('.documents__list-item').filter({ hasText: name }),
+        getRootItemOfTableControlsPath: () => this.page.locator('.tableControls__path--item').first(),
     }
 
     async clickSignSidebarLinkAndGoSignPage() {
@@ -105,6 +113,56 @@ class DocumentsPage {
 
         return new SignPage(this.page);
     }
+
+    async getNumberOfDocument(documentName) {
+        const listOfDocuments = await this.locators.getListOfAllDocumentsInTable()
+        const number = await listOfDocuments.indexOf(documentName);
+
+        return number;
+    }
+
+    async clickOptionsButton(number) {
+        await this.locators.getOptionsButton().nth(number).click();
+
+        return this;
+    }
+
+    async clickMoveToFolderOption() {
+        await this.locators.getMoveToFolderDropdownOption().click();
+
+        return this;
+    }
+
+    async selectFolderToMoveTo(folderName) {
+        await this.locators.getNameOfFolderToMoveTo(folderName).click();
+
+        return this;
+    }
+
+    async clickMoveToFolderButton() {
+        await this.locators.getMoveToFolderButton().click();
+
+        return this;
+    }
+
+    async openFolder(folderName) {
+        await this.locators.getDocumentTitle(folderName).dblclick();
+
+        return this;
+    }
+
+    async waitForFDocumentNameToBeVisible(name) {
+        await this.locators.getDocumentTitle(name).waitFor({ state: 'visible' });
+
+        return this;
+    }
+
+    async goToRootPathItem() {
+        await this.locators.getRootItemOfTableControlsPath().click();
+
+        return this;
+    }
+
 }
 
 export default DocumentsPage;
