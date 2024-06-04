@@ -1,5 +1,7 @@
 import DocumentsPage from "./documentsPage";
 import SettingsCompanyPage from "./settingsCompanyPage";
+import TemplatesActivePage from "./templatesActivePage";
+import TemplatesCreatePage from "./templatesCreatePage";
 
 class SignPage {
     constructor(page){
@@ -22,6 +24,8 @@ class SignPage {
         getCustomSigningOrderPositionNumberOne: () => this.page.locator('span.signers__item-order-position').first(),
         getCustomSigningOrderPositionNumberTwo: () => this.page.locator('span.signers__item-order-position').last(),
         getCancelBtn: () => this.page.locator('.interactModal__header-send button.interactModal__header-cancelButton'),
+        getTemplatesSidebarLink: () => this.page.getByRole('link', { name: 'Templates' }),
+
     }
 
     async clickDocumentsSidebarLinkAndGoDocumentsPage() {
@@ -34,7 +38,7 @@ class SignPage {
 
         return new SettingsCompanyPage(this.page);
     }
-    async clickDocumentsDropdownAndGoDocumentsPage() { 
+    async clickDocumentsDropdownAndGoDocumentsPage() {
         await this.locators.getDocumentsDropdown().click();
 
         return new DocumentsPage(this.page);
@@ -85,12 +89,17 @@ class SignPage {
 
         return this;
     }
-    
+
     async clickCancelBtnAndDeleteDocument() {
         await this.locators.getCancelBtn().click();
 
         return new SignPage(this.page);
     }
-    
+
+    async clickTemplatesSidebarLink() {
+        await this.locators.getTemplatesSidebarLink().click();
+        return new TemplatesActivePage(this.page);
+      }
+
 }
 export default SignPage;
