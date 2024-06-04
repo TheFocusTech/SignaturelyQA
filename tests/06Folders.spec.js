@@ -1,7 +1,7 @@
 import { expect } from "@playwright/test"
 import {test, loginBusinessUser, createNewFolder} from "../fixtures/base.js";
 import SignPage from "../page_objects/signPage";
-import { TOASTER_MESSAGE } from "../testData.js";
+import { TOASTER_MESSAGE, FILL_RENAME_FOLDER_NAME } from "../testData.js";
 
 
 test.describe('Folders', () => {
@@ -41,6 +41,27 @@ test.describe('Folders', () => {
 
         const documentsTrashPage = await documentsPage.clickTrashSidebarLinkAndGoDocumentsTrashPage();
 
+        await documentsTrashPage.clickEmptyTrashBtn();
+        await documentsTrashPage.clickConfirmEmptyTrashBtn();
+        await documentsTrashPage.clickSignSidebarLinkAndGoSignPage();
+    })
+    test('TC_06_23_01 | Rename folder', async ({ page, loginBusinessUser, createNewFolder }) => {
+        const signPage = new SignPage(page); 
+
+        const documentsPage = await signPage.clickDocumentsDropdownAndGoDocumentsPage();
+
+        await documentsPage.clickOptionsBtn();
+        await documentsPage.clickRenameBtn();
+        await documentsPage.fillRenameInputField(FILL_RENAME_FOLDER_NAME)
+        await documentsPage.pressEnterRenameInputFielder();
+
+        await expect(documentsPage.locators.getToaster()).toHaveText(TOASTER_MESSAGE.folderRename);
+
+        await documentsPage.clickOptionsBtn();
+        await documentsPage.clickDeleteBtn();
+        await documentsPage.clickYesDeleteBtn();
+
+        const documentsTrashPage = await documentsPage.clickTrashSidebarLinkAndGoDocumentsTrashPage();
         await documentsTrashPage.clickEmptyTrashBtn();
         await documentsTrashPage.clickConfirmEmptyTrashBtn();
         await documentsTrashPage.clickSignSidebarLinkAndGoSignPage();

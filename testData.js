@@ -19,6 +19,7 @@ export const TOASTER_MESSAGE = {
     copyApiKey: 'API key successfully copied to clipboard',
     deleteApiKey: 'API key successfully deleted',
     teplateSaved: 'Document successfully saved!',
+    folderRename: 'Folder successfully updated!',
     folderCreated: 'Folder created!'
 
 };
@@ -37,4 +38,7 @@ export const DATA_SIGNER = {
     fullName: 'May Li',
     initials: 'ML'
 };
+
+export const FILL_RENAME_FOLDER_NAME = 'FielderTest';
+
 
