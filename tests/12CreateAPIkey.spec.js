@@ -8,7 +8,7 @@ import SignPage from "../page_objects/signPage";
 
 test.describe('Create API key', () => {
 
-    test('TC_12_48_01_01 | Verify User can copy API key created by the "Create API" button on the right.', async ({ page, loginBusinessUser }) => {
+    test('TC_12_48_01_01 | Verify User can copy API key created by the "Create API" button on the right.', async ({ page }) => {
         const signPage = new SignPage(page);
 
         const settingsCompanyPage = await signPage.clickSettingsSidebarLinkAndGoSettingsCompanyPage();

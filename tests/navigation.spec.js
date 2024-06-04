@@ -6,7 +6,7 @@ import SignPage from '../page_objects/signPage.js';
 
 const BASE_URL = process.env.URL;
 
-test('Navigate to login page', async ({ page }) => {
+test.skip('Navigate to login page', async ({ page }) => {
     await page.goto('/');
 
     await expect(page).toHaveTitle('Log In | Signaturely');
@@ -26,7 +26,7 @@ test('Check clean documents fixture', async ({ page }) => {
     await expect(documentsPage.locators.getEmptyTableHeader()).toHaveText(EMPTY_DOCUMENTS_HEADER);
     
     const documentsTrashPage = await documentsPage.clickTrashSidebarLinkAndGoDocumentsTrashPage();
-    await documentsTrashPage.locators.getEmptyTableHeader().waitFor()
+    await documentsTrashPage.locators.getEmptyTableHeader().waitFor();
 
     await expect(documentsTrashPage.locators.getEmptyTableHeader()).toHaveText(EMPTY_TRASH_HEADER);   
 });

@@ -6,7 +6,7 @@ import { TOASTER_MESSAGE } from "../testData.js";
 
 test.describe('Folders', () => {
 
-    test('TC_06_24_01 | Verify the business user can delete folder', async ({ page, loginBusinessUser, createNewFolder }) => {
+    test('TC_06_24_01 | Verify the business user can delete folder', async ({ page, createNewFolder }) => {
         const signPage = new SignPage(page); 
 
         const documentsPage = await signPage.clickDocumentsDropdownAndGoDocumentsPage();
