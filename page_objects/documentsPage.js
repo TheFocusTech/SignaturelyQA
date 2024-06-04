@@ -1,6 +1,6 @@
 import SignPage from "./signPage";
 import DocumentsTrashPage from "./documentsTrashPage";
-import { FILL_FOLDER_NAME,FILL_RENAME_FOLDER_NAME} from '../testData';
+import { FILL_FOLDER_NAME } from '../testData';
 
 class DocumentsPage {
     constructor(page) {
@@ -114,8 +114,8 @@ class DocumentsPage {
         return this.page;
     }
 
-    async fillRenameInputField() {
-        await this.locators.getRenameInputField().fill(FILL_RENAME_FOLDER_NAME);
+    async fillRenameInputField(folderName) {
+        await this.locators.getRenameInputField().fill(folderName);
 
         return this.page;
     }

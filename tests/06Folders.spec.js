@@ -1,7 +1,7 @@
 import { expect } from "@playwright/test"
 import {test, loginBusinessUser, createNewFolder} from "../fixtures/base.js";
 import SignPage from "../page_objects/signPage";
-import { TOASTER_MESSAGE } from "../testData.js";
+import { TOASTER_MESSAGE, FILL_RENAME_FOLDER_NAME } from "../testData.js";
 
 
 test.describe('Folders', () => {
@@ -31,8 +31,7 @@ test.describe('Folders', () => {
 
         await documentsPage.clickOptionsBtn();
         await documentsPage.clickRenameBtn();
-        await page.waitForTimeout(3000);
-        await documentsPage.fillRenameInputField();
+        await documentsPage.fillRenameInputField(FILL_RENAME_FOLDER_NAME)
         await documentsPage.pressEnterRenameInputFielder();
 
         await expect(documentsPage.locators.getToaster()).toHaveText(TOASTER_MESSAGE.folderRename);
@@ -45,8 +44,5 @@ test.describe('Folders', () => {
         await documentsTrashPage.clickEmptyTrashBtn();
         await documentsTrashPage.clickConfirmEmptyTrashBtn();
         await documentsTrashPage.clickSignSidebarLinkAndGoSignPage();
-
-
-
     })
 })
