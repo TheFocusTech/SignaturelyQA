@@ -26,4 +26,9 @@ export const DATA_SIGNER = {
     initials: 'ML'
 };
 export const FILL_RENAME_FOLDER_NAME = 'FielderTest';
+export const FORM_NAME = 'Test Form 1'
+export const OPTIONAL_MESSAGE_TEXT = 'Message 1'
+export const FORM_NAME_EDIT = 'Form is edit D'
+export const OPTIONAL_MESSAGE_TEXT_EDIT = 'Form edited'
+
 
