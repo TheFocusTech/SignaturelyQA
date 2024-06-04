@@ -1,5 +1,6 @@
 import SignPage from "./signPage";
 import DocumentsTrashPage from "./documentsTrashPage";
+import DocumentsAwaitingPage from "./documentsAwaitingPage";
 
 class DocumentsPage {
     constructor(page) {
@@ -17,6 +18,8 @@ class DocumentsPage {
         getYesDeleteBtn: () => this.page.getByRole('button', {name: 'Yes, Delete'}),
         getEmptyTableHeader: () => this.page.locator('.empty-table__header'),
         getTrashSidebarLink: () => this.page.getByRole('link', {name: 'Trash'}),
+        getAwaitingSignatureLink: () => this.page.getByRole('link', { name: 'Awaiting Signature' })
+
     }
 
     async clickSignSidebarLinkAndGoSignPage() {
@@ -53,6 +56,12 @@ class DocumentsPage {
         await this.locators.getTrashSidebarLink().click();
 
         return new DocumentsTrashPage(this.page);
+    }
+
+    async clickAwaitingSignatureLinkGoDocumentsAwaitingPage() {
+        await this.locators.getAwaitingSignatureLink().click();
+
+        return new DocumentsAwaitingPage(this.page);
     }
 
 }

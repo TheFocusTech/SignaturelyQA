@@ -21,6 +21,13 @@ class SignPage {
         getCustomSigningOrderPositionNumberOne: () => this.page.locator('span.signers__item-order-position').first(),
         getCustomSigningOrderPositionNumberTwo: () => this.page.locator('span.signers__item-order-position').last(),
         getCancelBtn: () => this.page.locator('.interactModal__header-send button.interactModal__header-cancelButton'),
+        getContinueBtn: () => this.page.getByRole('button', {name: 'Continue'}),
+        getSignModal: () => this.page.locator('//ul[@class="interactModal__fieldBar-fieldList"]/li[1]'),
+        getSignPlace: () => this.page.locator('(//canvas[@class="react-pdf__Page__canvas"])[1]'),
+        getSaveBtn: () => this.page.getByRole('button', {name: 'Save'}),
+        getSendForSignatureBtn: () =>this.page.getByRole('button', {name: 'Send for Signature'}),
+        getBackToDocumentsBtn: () =>this.page.getByRole('button', {name: 'Back to Documents'}),
+        
     }
 
     async clickDocumentsSidebarLinkAndGoDocumentsPage() {
@@ -76,6 +83,40 @@ class SignPage {
         await this.locators.getCancelBtn().click();
 
         return new SignPage(this.page);
+    }
+    async clickContinueBtn() {
+        await this.locators.getContinueBtn().click();
+
+        return this;
+    }
+
+    async clickSignModal() {
+        await this.locators.getSignModal().click();
+
+        return this;
+    }
+
+    async clickSignPlace() {
+        await this.locators.getSignPlace().click();
+
+        return this;
+    }
+
+    async clickSaveBtn() {
+        await this.locators.getSaveBtn().click();
+
+        return this;
+    }
+    async clickSendForSignatureBtn() {
+        await this.locators.getSendForSignatureBtn().click();
+
+        return this;
+    }
+    async clickBackToDocumentsBtnGoDocumentsPage() {
+        await this.locators.getBackToDocumentsBtn().hover();
+        await this.locators.getBackToDocumentsBtn().click();
+
+        return new DocumentsPage(this.page);
     }
 }
 export default SignPage;
