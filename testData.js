@@ -10,7 +10,7 @@ export const CHOOSE_SIGNERS_FIELDS = {
     name1: 'John Doe',
     email1: '5kXUw@example.com',
     name2: 'John Doe2',
-    email2: '5kXUw@example.com'
+    email2: '5kXUw@example.com',
 };
 export const TOASTER_MESSAGE = {
     planSuccessChange: 'Plan has been successfully changed.',
@@ -18,7 +18,7 @@ export const TOASTER_MESSAGE = {
     folderDeleted: 'Folder deleted successfully.',
     copyApiKey: 'API key successfully copied to clipboard',
     deleteApiKey: 'API key successfully deleted',
-    teplateSaved: 'Document successfully saved!'
+    teplateSaved: 'Document successfully saved!',
 };
 export const API_KEY_NAME = 'Test Api Key';
-export const NO_API_KEY_MESSAGE = 'You don\'t have any API keys yet.'
+export const NO_API_KEY_MESSAGE = 'You don\'t have any API keys yet.';
