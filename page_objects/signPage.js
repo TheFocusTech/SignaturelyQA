@@ -1,4 +1,5 @@
 import DocumentsPage from "./documentsPage";
+import SettingEditSignature from "./settingEditSignature";
 import SettingsCompanyPage from "./settingsCompanyPage";
 
 class SignPage {
@@ -22,6 +23,8 @@ class SignPage {
         getCustomSigningOrderPositionNumberOne: () => this.page.locator('span.signers__item-order-position').first(),
         getCustomSigningOrderPositionNumberTwo: () => this.page.locator('span.signers__item-order-position').last(),
         getCancelBtn: () => this.page.locator('.interactModal__header-send button.interactModal__header-cancelButton'),
+        getDropDownUser: () => this.page.locator('.dropDownUser__wrapper'),
+        getEditSignatureDropItem: () => this.page.getByRole('banner').getByRole('link', { name: 'Edit Signature' }),
     }
 
     async clickDocumentsSidebarLinkAndGoDocumentsPage() {
@@ -104,5 +107,16 @@ class SignPage {
         return this;
     }
     
+    async clickDropDownUser() {
+        await this.locators.getDropDownUser().click();
+
+        return this;
+    }
+
+    async clickEditSignatureAndGoEditSignaturePage() {
+        await this.locators.getEditSignatureDropItem().click();
+
+        return new SettingEditSignature(this.page);
+    }
 }
 export default SignPage;
