@@ -10,6 +10,21 @@ export const CHOOSE_SIGNERS_FIELDS = {
     email1: '5kXUw@example.com',
     name2: 'John Doe2',
     email2: '5kXUw@example.com'
-}
-
+};
+export const TOASTER_MESSAGE ={
+    planSuccessChange: 'Plan has been successfully changed.',
+    planRenew: 'Plan has been renew',
+    folderDeleted: 'Folder deleted successfully.',
+    copyApiKey: 'API key successfully copied to clipboard',
+    deleteApiKey: 'API key successfully deleted',
+    folderRename: 'Folder successfully updated!',
+    folderCreated: 'Folder created!'
+};
+export const API_KEY_NAME = 'Test Api Key';
+export const NO_API_KEY_MESSAGE = 'You don\'t have any API keys yet.';
+export const DATA_SIGNER = {
+    fullName: 'May Li',
+    initials: 'ML'
+};
+export const FILL_RENAME_FOLDER_NAME = 'FielderTest';
 
