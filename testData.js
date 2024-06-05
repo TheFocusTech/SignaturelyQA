@@ -3,6 +3,8 @@ export const URL_END_POINTS = {
     documentsEndPoint: '/documents',
     templates_active_end_point: '/templates/active',
     templates_create_end_point: '/templates/create',
+    templates_active_end_point: '/templates/active',
+    templates_create_end_point: '/templates/create',
     documentTrashEndPoint: '/documents/trash',
 
 };

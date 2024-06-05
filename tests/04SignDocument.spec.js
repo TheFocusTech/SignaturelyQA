@@ -8,7 +8,6 @@ import {CHOOSE_SIGNERS_FIELDS} from '../testData.js';
 
 
 test.describe('SignDocument', () => {
-
     test('TC_04_11_02 | Verify custom signing order', async ({page,loginBusinessUser}) => {
         const signPage = new SignPage(page);
         await signPage.clickUploadFileBtn('testDocuments/picture.jpg');
@@ -37,4 +36,9 @@ test.describe('SignDocument', () => {
     });
 });
 
-       // await signPage.clickCancelBtnAndDeleteDocument();
+
+
+
+
+
+
