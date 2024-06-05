@@ -15,7 +15,6 @@ class SignPage {
         getDocumentsSidebarLink: () => this.page.getByRole('link', {name: 'Documents', exact: true}),
         getUploadFileBtn: () => this.page.getByRole('button', {name: 'Upload File'}),
         getFileInputField: () => this.page.locator('input[type = "file"]'),
-        getDocumentsDropdown: () => this.page.getByText('Documents', {exact: true}),
         getPrepareDocumentBtn: () => this.page.locator('div.wizardSignForm-createButton button'),
         getSendForSignatureRadioBtn: () => this.page.locator('div.radio-button__wrapper ').last(),
         getAddSignerBtn: () => this.page.locator('form.wizardSignForm__form p:nth-child(2)').first(),
@@ -36,16 +35,19 @@ class SignPage {
 
         return new DocumentsPage(this.page);
     }
+    
     async clickSettingsSidebarLinkAndGoSettingsCompanyPage(){
         await this.locators.getSettingsSidebarLink().click();
 
         return new SettingsCompanyPage(this.page);
     }
+
     async clickDocumentsDropdownAndGoDocumentsPage() {
         await this.locators.getDocumentsDropdown().click();
 
         return new DocumentsPage(this.page);
     }
+
 
     clickUploadFileBtn(file) {
         this.locators.getFileInputField().setInputFiles(file);
