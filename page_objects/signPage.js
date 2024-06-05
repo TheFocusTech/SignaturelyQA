@@ -38,14 +38,14 @@ class SignPage {
         return new SettingsCompanyPage(this.page);
     }
 
-    clickUploadFileBtn(file) {
-        this.locators.getFileInputField().setInputFiles(file);
+    async clickUploadFileBtn(file) {
+        await this.locators.getFileInputField().setInputFiles(file);
 
         return this;
     }
 
-    clickPrepareDocumentBtn() {
-        this.locators.getPrepareDocumentBtn().click();
+    async clickPrepareDocumentBtn() {
+        await this.locators.getPrepareDocumentBtn().click();
 
         return this;
     }
