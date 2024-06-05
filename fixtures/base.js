@@ -68,8 +68,7 @@ export const test = base.extend({
             const documentsTrashPage = await documentsPage.clickTrashSidebarLinkAndGoDocumentsTrashPage();
             expect(page).toHaveURL(BASE_URL + URL_END_POINTS.documentTrashEndPoint)
             await documentsTrashPage.locators.getResultsNumber().waitFor();
-            const numberItemsInTrash = await documentsTrashPage.locators.getResultsNumber().innerText();
-            console.log(numberItemsInTrash);
+            const numberItemsInTrash = await documentsTrashPage.locators.getResultsNumber().innerText();            
 
             if (numberItemsInTrash > 0) {
                 await documentsTrashPage.clickEmptyTrashBtn();
