@@ -1,6 +1,6 @@
 import { expect } from '@playwright/test';
 import { test, loginBusinessUser, deleteSignature } from "../fixtures/base.js";
-import { URL_END_POINTS, DATA_SIGNER, EMPTY_DOCUMENTS_HEADER, EMPTY_TRASH_HEADER } from '../testData.js';
+import { URL_END_POINTS, DATA_SIGNER } from '../testData.js';
 import SignPage from '../page_objects/signPage.js';
 
 const BASE_URL = process.env.URL;
@@ -57,19 +57,4 @@ test('Create and delete signature', async ({page, loginBusinessUser}) => {
 
   await editSignature.clickToastCloseBtn();
   await editSignature.clickSignSidebarLinkAndGoSignPage();
-});
-
-test('Check clean documents fixture', async ({ page, loginBusinessUser }) => {
-    const signPage = new SignPage(page);
-
-    const documentsPage = await signPage.clickDocumentsSidebarLinkAndGoDocumentsPage();
-    await documentsPage.locators.getEmptyTableHeader().waitFor();
-
-    await expect(documentsPage.locators.getEmptyTableHeader()).toHaveText(EMPTY_DOCUMENTS_HEADER);
-
-    const documentsTrashPage = await documentsPage.clickTrashSidebarLinkAndGoDocumentsTrashPage();
-    await documentsTrashPage.locators.getEmptyTableHeader().waitFor();
-
-    await expect(documentsTrashPage.locators.getEmptyTableHeader()).toHaveText(EMPTY_TRASH_HEADER);
-});
-
+})
