@@ -61,7 +61,7 @@ test('Create and delete signature', async ({page, loginBusinessUser}) => {
 
 test('Testing function clickCanvas() in SingPage', async ({page, loginBusinessUser}) => {
   let add = '3131'
-  const EMAIL = process.env.PREFIX_EMAIL + add + DOMEN_EMAIL;
+  const EMAIL = 'jg@fg.rf';
 
   const signPage = new SignPage(page);
   signPage.clickUploadFileBtn('testDocuments/picture.jpg');
