@@ -10,10 +10,10 @@ test.describe('SignDocument', () => {
 
     test('TC_04_11_02 | Verify custom signing order', async ({page,loginBusinessUser}) => {
         const signPage = new SignPage(page);
-        signPage.clickUploadFileBtn('testDocuments/picture.jpg');
+        await signPage.clickUploadFileBtn('testDocuments/picture.jpg');
 
         await signPage.locators.getPrepareDocumentBtn().waitFor({state: 'visible'});
-        signPage.clickPrepareDocumentBtn();
+        await signPage.clickPrepareDocumentBtn();
 
         await signPage.clickSendForSignatureRadioBtn();
         await signPage.clickAddSignerBtn();
