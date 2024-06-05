@@ -1,6 +1,7 @@
 export const URL_END_POINTS = {
     signEndPoint: '/sign',
-    documentsEndPoint: '/documents'
+    documentsEndPoint: '/documents',
+    documentTrashEndPoint: '/documents/trash',
 };
 export const ACTIVE_COLOR = 'rgb(0, 163, 250)';
 export const FILL_FOLDER_NAME = 'Folder 1';
@@ -26,4 +27,6 @@ export const DATA_SIGNER = {
     initials: 'ML'
 };
 export const FILL_RENAME_FOLDER_NAME = 'FielderTest';
+export const EMPTY_DOCUMENTS_HEADER = "You don't have any documents yet.";
+export const EMPTY_TRASH_HEADER = "You don't have any deleted documents yet.";
 
