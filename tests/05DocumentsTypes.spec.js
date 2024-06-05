@@ -21,7 +21,7 @@ test.describe('Documents (Types)', () => {
         await documentsPage.selectFolderToMoveTo(FILL_FOLDER_NAME);
         await documentsPage.clickMoveToFolderButton();
 
-        await expect(await documentsPage.locators.getToaster()).toHaveText(TOASTER_MESSAGE.fileMovedToFolder);
+        await expect(await documentsPage.locators.getToast()).toHaveText(TOASTER_MESSAGE.fileMovedToFolder);
         
         await documentsPage.openFolder(FILL_FOLDER_NAME);
         const ALL_DOC_NAMES_OF_TABLE_CONTROLS_PATH = await documentsPage.locators.getTableControlsPath();
