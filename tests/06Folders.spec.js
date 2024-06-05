@@ -9,12 +9,12 @@ test.describe('Folders', () => {
     test('TC_06_22_01 | Verify the business user can create folder', async ({ page , loginBusinessUser}) => {
         const signPage = new SignPage(page); 
 
-        const documentsPage = await signPage.clickDocumentsDropdownAndGoDocumentsPage();
+        const documentsPage = await signPage.clickDocumentsSidebarLinkAndGoDocumentsPage();
         await documentsPage.clickCreateFolderBtn();
         await documentsPage.locators.getNewFolderNameInputField().fill('New Folder')
         await documentsPage.clickCreateBtn();
 
-        await expect(documentsPage.locators.getToaster()).toHaveText(TOASTER_MESSAGE.folderCreated);
+        await expect(documentsPage.locators.getToast()).toHaveText(TOASTER_MESSAGE.folderCreated);
 
         // await documentsPage.clickOptionsBtn();
         // await documentsPage.clickDeleteBtn();
@@ -30,14 +30,14 @@ test.describe('Folders', () => {
     test('TC_06_24_01 | Verify the business user can delete folder', async ({ page, loginBusinessUser, createNewFolder }) => {
         const signPage = new SignPage(page); 
 
-        const documentsPage = await signPage.clickDocumentsDropdownAndGoDocumentsPage();
+        const documentsPage = await signPage.clickDocumentsSidebarLinkAndGoDocumentsPage();
 
         await documentsPage.clickOptionsBtn();
         await documentsPage.clickDeleteBtn();
         await documentsPage.clickYesDeleteBtn();
-        await documentsPage.locators.getToaster().waitFor({ state: 'visible' });
+        await documentsPage.locators.getToast().waitFor({ state: 'visible' });
 
-        await expect(documentsPage.locators.getToaster()).toHaveText(TOASTER_MESSAGE.folderDeleted);
+        await expect(documentsPage.locators.getToast()).toHaveText(TOASTER_MESSAGE.folderDeleted);
 
         // const documentsTrashPage = await documentsPage.clickTrashSidebarLinkAndGoDocumentsTrashPage();
 
@@ -48,14 +48,14 @@ test.describe('Folders', () => {
     test('TC_06_23_01 | Rename folder', async ({ page, loginBusinessUser, createNewFolder }) => {
         const signPage = new SignPage(page); 
 
-        const documentsPage = await signPage.clickDocumentsDropdownAndGoDocumentsPage();
+        const documentsPage = await signPage.clickDocumentsSidebarLinkAndGoDocumentsPage();
 
         await documentsPage.clickOptionsBtn();
         await documentsPage.clickRenameBtn();
         await documentsPage.fillRenameInputField(FILL_RENAME_FOLDER_NAME)
         await documentsPage.pressEnterRenameInputFielder();
 
-        await expect(documentsPage.locators.getToaster()).toHaveText(TOASTER_MESSAGE.folderRename);
+        await expect(documentsPage.locators.getToast()).toHaveText(TOASTER_MESSAGE.folderRename);
 
         // await documentsPage.clickOptionsBtn();
         // await documentsPage.clickDeleteBtn();
