@@ -35,7 +35,7 @@ class SignPage {
 
         return new DocumentsPage(this.page);
     }
-    
+
     async clickSettingsSidebarLinkAndGoSettingsCompanyPage(){
         await this.locators.getSettingsSidebarLink().click();
 
@@ -50,8 +50,8 @@ class SignPage {
     }
 
 
-    clickUploadFileBtn(file) {
-        this.locators.getFileInputField().setInputFiles(file);
+    // clickUploadFileBtn(file) {
+    //     this.locators.getFileInputField().setInputFiles(file);
 
     async clickUploadFileBtn(file) {
         await this.locators.getFileInputField().setInputFiles(file);
@@ -108,11 +108,11 @@ class SignPage {
 
     async clickTemplatesSidebarLink() {
         await this.locators.getTemplatesSidebarLink().click();
-      
+
         return new TemplatesActivePage(this.page);
     }
 
-   
+
     async clickDropDownUser() {
         await this.locators.getDropDownUser().click();
 
@@ -126,4 +126,5 @@ class SignPage {
     }
 
 }
-export default SignPage;
+
+export default SignPage

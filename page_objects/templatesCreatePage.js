@@ -13,7 +13,7 @@ class TemplatesCreatePage {
 		 getFillTemplateBtn: () => this.page.getByRole('button', { name: 'Fill Template' }),
 		 getSignBtn: () => this.page.getByRole('complementary').getByText('Sign'),
 		 getCreateBtn: () => this.page.getByRole('button', { name: 'Create' }),
-		 getBackToTemplatesBtn: () => this.page.getByRole('button', { name: 'Back to Templates' }),
+		 getBackToTemplatesBtn: () => this.page.locator('.successSendModal__button'),
 		 getPrepareForSigningHeader: () => this.page.getByRole('heading', { name: 'Prepare for Signing' }),
          getFileInputField: () => this.page.locator('input[type = "file"]'),
 
