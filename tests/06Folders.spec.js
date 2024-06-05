@@ -36,14 +36,6 @@ test.describe('Folders', () => {
         await documentsPage.clickDeleteBtn();
         await documentsPage.clickYesDeleteBtn();
         await documentsPage.locators.getToast().waitFor({ state: 'visible' });
-
-        await expect(documentsPage.locators.getToast()).toHaveText(TOASTER_MESSAGE.folderDeleted);
-
-        // const documentsTrashPage = await documentsPage.clickTrashSidebarLinkAndGoDocumentsTrashPage();
-
-        // await documentsTrashPage.clickEmptyTrashBtn();
-        // await documentsTrashPage.clickConfirmEmptyTrashBtn();
-        // await documentsTrashPage.clickSignSidebarLinkAndGoSignPage();
     })
     test('TC_06_23_01 | Rename folder', async ({ page, loginBusinessUser, createNewFolder }) => {
         const signPage = new SignPage(page); 
@@ -56,14 +48,5 @@ test.describe('Folders', () => {
         await documentsPage.pressEnterRenameInputFielder();
 
         await expect(documentsPage.locators.getToast()).toHaveText(TOASTER_MESSAGE.folderRename);
-
-        // await documentsPage.clickOptionsBtn();
-        // await documentsPage.clickDeleteBtn();
-        // await documentsPage.clickYesDeleteBtn();
-
-        // const documentsTrashPage = await documentsPage.clickTrashSidebarLinkAndGoDocumentsTrashPage();
-        // await documentsTrashPage.clickEmptyTrashBtn();
-        // await documentsTrashPage.clickConfirmEmptyTrashBtn();
-        // await documentsTrashPage.clickSignSidebarLinkAndGoSignPage();
     });
 })

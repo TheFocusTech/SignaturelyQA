@@ -67,7 +67,7 @@ export const test = base.extend({
             const documentsPage = await signPage.clickDocumentsSidebarLinkAndGoDocumentsPage();
             const documentsTrashPage = await documentsPage.clickTrashSidebarLinkAndGoDocumentsTrashPage();
             expect(page).toHaveURL(BASE_URL + URL_END_POINTS.documentTrashEndPoint)
-            await documentsTrashPage.locators.getResultsNumber().waitFor();
+            await documentsTrashPage.locators.getResultsNumber({ timeout: 15 * 1000 });
             const numberItemsInTrash = await documentsTrashPage.locators.getResultsNumber().innerText();            
 
             if (numberItemsInTrash > 0) {

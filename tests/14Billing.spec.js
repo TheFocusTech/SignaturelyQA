@@ -22,6 +22,5 @@ test.describe('Billing', () => {
         await settingsBillingPlanPage.clickRenewBusinessPlanBtn();
         await expect(settingsBillingPlanPage.locators.getToasterPopup()).toHaveText(TOASTER_MESSAGE.planRenew);
         await expect(settingsBillingPlanPage.locators.getCurrentPlanBtn()).toBeVisible();
-        // await settingsBillingPlanPage.clickSignSidebarLinkAndGoSignPage();
     })
 })
