@@ -17,7 +17,8 @@ export const TOASTER_MESSAGE ={
     copyApiKey: 'API key successfully copied to clipboard',
     deleteApiKey: 'API key successfully deleted',
     folderRename: 'Folder successfully updated!',
-    folderCreated: 'Folder created!'
+    folderCreated: 'Folder created!',
+    profileUpdated: 'Profile information updated.'
 };
 export const API_KEY_NAME = 'Test Api Key';
 export const NO_API_KEY_MESSAGE = 'You don\'t have any API keys yet.';
@@ -26,4 +27,8 @@ export const DATA_SIGNER = {
     initials: 'ML'
 };
 export const FILL_RENAME_FOLDER_NAME = 'FielderTest';
+export const ADMIN_CREDENTIALS = {
+    email: process.env.ADMIN_EMAIL,
+    password: process.env.ADMIN_PASSWORD
+};
 
