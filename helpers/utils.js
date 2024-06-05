@@ -9,7 +9,7 @@ export async function clickCanvas(page, canvasLocator, excludedAreas = []) {
   const canvas = await canvasLocator;
   const boundingBox = await canvas.boundingBox();
 
-  const elementAfterClick = await page.locator('.fieldDropDown').nth(excludedAreas.length);
+  const elementAfterClick = await page.locator('.fieldDropDown').nth(excludedAreas.length + 1);
   
   if (await elementAfterClick.boundingBox()) { 
     const elementBoundingRect = await elementAfterClick.boundingBox();
