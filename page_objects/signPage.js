@@ -42,6 +42,7 @@ class SignPage {
         return new SettingsCompanyPage(this.page);
     }
 
+
     async clickDocumentsDropdownAndGoDocumentsPage() {
         await this.locators.getDocumentsDropdown().click();
 
@@ -52,11 +53,15 @@ class SignPage {
     clickUploadFileBtn(file) {
         this.locators.getFileInputField().setInputFiles(file);
 
+    async clickUploadFileBtn(file) {
+        await this.locators.getFileInputField().setInputFiles(file);
+
+
         return this;
     }
 
-    clickPrepareDocumentBtn() {
-        this.locators.getPrepareDocumentBtn().click();
+    async clickPrepareDocumentBtn() {
+        await this.locators.getPrepareDocumentBtn().click();
 
         return this;
     }
