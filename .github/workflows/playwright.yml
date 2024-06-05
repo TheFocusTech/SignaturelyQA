@@ -21,6 +21,7 @@ jobs:
         URL: ${{ secrets.URL}}
         USER_EMAIL: ${{ secrets.USER_EMAIL }}
         USER_PASSWORD: ${{ secrets.USER_PASSWORD }}
+        API_URL: ${{ secrets.API_URL }}
         CI_RUN: true
     - uses: actions/upload-artifact@v4
       if: always()
