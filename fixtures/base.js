@@ -74,7 +74,7 @@ export const test = base.extend({
                 await documentsTrashPage.clickEmptyTrashBtn();
                 await documentsTrashPage.clickConfirmEmptyTrashBtn();
             }
-            await documentsTrashPage.locators.getEmptyTableHeader().waitFor();
+            await documentsTrashPage.locators.getEmptyTableHeader({ timeout: 15 * 1000 });
             expect(await documentsTrashPage.locators.getEmptyTableHeader()).toHaveText(EMPTY_TRASH_HEADER);
 
             await documentsTrashPage.clickSignSidebarLinkAndGoSignPage();
