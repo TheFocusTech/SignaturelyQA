@@ -26,4 +26,4 @@ export const DATA_SIGNER = {
     initials: 'ML'
 };
 export const FILL_RENAME_FOLDER_NAME = 'FielderTest';
-
+export const DOMEN_EMAIL = '@gmail.com';

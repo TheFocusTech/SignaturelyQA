@@ -1,6 +1,6 @@
 import { expect } from '@playwright/test';
 import { test, loginBusinessUser, deleteSignature } from "../fixtures/base.js";
-import { URL_END_POINTS, DATA_SIGNER } from '../testData.js';
+import { URL_END_POINTS, DATA_SIGNER, CHOOSE_SIGNERS_FIELDS, DOMEN_EMAIL } from '../testData.js';
 import SignPage from '../page_objects/signPage.js';
 
 const BASE_URL = process.env.URL;
@@ -57,4 +57,43 @@ test('Create and delete signature', async ({page, loginBusinessUser}) => {
 
   await editSignature.clickToastCloseBtn();
   await editSignature.clickSignSidebarLinkAndGoSignPage();
+});
+
+test('Testing function clickCanvas() in SingPage', async ({page, loginBusinessUser}) => {
+  let add = '3131'
+  const EMAIL = process.env.PREFIX_EMAIL + add + DOMEN_EMAIL;
+
+  const signPage = new SignPage(page);
+  signPage.clickUploadFileBtn('testDocuments/picture.jpg');
+  await signPage.locators.getPrepareDocumentBtn().waitFor({state: 'visible'});
+  signPage.clickPrepareDocumentBtn();
+
+  await signPage.clickSignAndSendForSignature();
+  await signPage.clickAddSignerSingAndSendBtn();
+  await signPage.fillAddedSignersNameField(CHOOSE_SIGNERS_FIELDS.name2);
+  await signPage.fillAddedSignersEmailField(EMAIL);
+  await signPage.clickContinueBtn();
+
+  await signPage.locators.getSignFieldsItem().waitFor();
+  await signPage.clickSignFieldsItem();
+  await signPage.doCanvasClicks();
+  await signPage.doCanvasClicks();
+  await signPage.clickInitialFieldsItem();
+  await signPage.doCanvasClicks();
+  await signPage.doCanvasClicks();
+
+  await expect (await signPage.locators.getFieldsOnPage()).toHaveCount(5);
+
+  signPage.clearExcludedAreas();
+  await signPage.clickCancelBtnAndDeleteDocument();
+
+  const documentsPage = await signPage.clickDocumentsSidebarLinkAndGoDocumentsPage();
+  await documentsPage.clickOptionsButton();
+  await documentsPage.clickDeleteBtn();
+  await documentsPage.clickYesDeleteBtn();
+
+  const documentsTrashPage = await documentsPage.clickTrashSidebarLinkAndGoDocumentsTrashPage();
+  await documentsTrashPage.clickEmptyTrashBtn();
+  await documentsTrashPage.clickEmptyTrashBtn();
+  await documentsTrashPage.clickSignSidebarLinkAndGoSignPage();
 })

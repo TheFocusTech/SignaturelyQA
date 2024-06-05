@@ -27,6 +27,7 @@ class DocumentsPage {
         getYesDeteleBtn: () => this.page.getByRole('button', {name: 'Yes, Delete'}),
         getRenameBtn: () => this.page.getByRole('button', {name: 'Rename'}),
         getRenameInputField: () => this.page.locator('input.form__input--hidden'),
+        getOptionsButton: () => this.page.getByRole('button', {name: 'Options'}),
     }
 
     async clickSignSidebarLinkAndGoSignPage() {
@@ -117,6 +118,11 @@ class DocumentsPage {
         await this.locators.getRenameInputField().press('Enter');
 
         return this.page;
+    }
+    async clickOptionsButton() {
+        await this.locators.getOptionsButton().click();
+
+        return this;
     }
 }
 

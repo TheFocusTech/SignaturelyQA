@@ -1,10 +1,12 @@
 import DocumentsPage from "./documentsPage";
 import SettingEditSignature from "./settingEditSignature";
 import SettingsCompanyPage from "./settingsCompanyPage";
+import { clickCanvas } from "../helpers/utils";
 
 class SignPage {
     constructor(page){
         this.page = page;
+        this.excludedAreas = [];
     }
 
     locators = {
@@ -24,6 +26,15 @@ class SignPage {
         getCancelBtn: () => this.page.locator('.interactModal__header-send button.interactModal__header-cancelButton'),
         getDropDownUser: () => this.page.locator('.dropDownUser__wrapper'),
         getEditSignatureDropItem: () => this.page.getByRole('banner').getByRole('link', { name: 'Edit Signature' }),
+        getAddSignerSingAndSendBtn: () => this.page.getByRole('complementary').locator('div').filter({ hasText: 'Add signer' }).nth(4),
+        getAddedSignersNameField: () => this.page.getByRole('textbox', {name: 'Name'}),
+        getAddedSignersEmailField: () => this.page.getByRole('textbox', {name: 'Email'}),
+        getSignAndSendForSignature: () => this.page.locator('div').getByText('Sign & Send for Signature', { exact: true }),
+        getContinueBtn: () => this.page.getByRole('button', {name: 'Continue'}),
+        getSignFieldsItem: () => this.page.locator('li').getByText('Sign'),
+        getInitialFieldsItem: () => this.page.locator('li').getByText('Initial'),
+        getCanvas: () => this.page.locator('canvas').first(),
+        getFieldsOnPage: () => this.page.locator('.fieldDropDown'),
     }
 
     async clickDocumentsSidebarLinkAndGoDocumentsPage() {
@@ -100,6 +111,61 @@ class SignPage {
         await this.locators.getEditSignatureDropItem().click();
 
         return new SettingEditSignature(this.page);
+    }
+
+    async clickAddSignerSingAndSendBtn() {
+        await this.locators.getAddSignerSingAndSendBtn().click();
+
+        return this;
+    }
+
+    async fillAddedSignersNameField(name) {
+        await this.locators.getAddedSignersNameField().fill(name);
+
+        return this;
+    }
+
+    async fillAddedSignersEmailField(email) {
+        await this.locators.getAddedSignersEmailField().fill(email);
+
+        return this;
+    }
+
+    async clickSignAndSendForSignature() {
+        await this.locators.getSignAndSendForSignature().click();
+
+        return this;
+    }
+
+    async clickContinueBtn() {
+        await this.locators.getContinueBtn().click();
+
+        return this;
+    }
+
+    async clickSignFieldsItem() {
+        await this.locators.getSignFieldsItem().click();
+
+        return this;
+    }
+
+    async clickInitialFieldsItem() {
+        await this.locators.getInitialFieldsItem().click();
+
+        return this;
+    }
+
+    async doCanvasClicks() {
+        const canvasLocator = await this.locators.getCanvas();
+        await clickCanvas(this.page, canvasLocator, this.excludedAreas);
+
+        return this;
+    }
+
+    clearExcludedAreas() {
+        this.excludedAreas = [];
+
+        return this;
     }
 }
 export default SignPage;
