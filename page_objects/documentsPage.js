@@ -22,10 +22,9 @@ class DocumentsPage {
         getNewFolderNameInputField: () => this.page.getByPlaceholder('New Folder Name'),
         getCreateBtn: () => this.page.getByRole('button', {name: 'Create'}),
         getOptionsBtn: () => this.page.locator('.documents__optionsDropdown').first(),
-        getToaster: () => this.page.locator('.Toastify__toast-body'),
+        getToast: () => this.page.locator('.Toastify__toast-body'),
         getDeleteBtn: () => this.page.getByRole('button', {name: 'Delete'}),
         getYesDeteleBtn: () => this.page.getByRole('button', {name: 'Yes, Delete'}),
-        getSignaturelyLogo: () => this.page.locator('a>img'),
         getRenameBtn: () => this.page.getByRole('button', {name: 'Rename'}),
         getRenameInputField: () => this.page.locator('input.form__input--hidden'),
         getListOfAllDocumentsInTable: () => this.page.locator(".table__column.table__column--text--document.truncated").allInnerTexts(),
@@ -108,12 +107,6 @@ class DocumentsPage {
         await this.locators.getYesDeteleBtn().click();
 
         return this;
-    }
-
-    async clickSignaturelyLogoAndGoSignPage() {
-        await this.locators.getSignaturelyLogo().click();
-
-        return new SignPage(this.page);
     }
 
     async clickRenameBtn() {
