@@ -61,7 +61,7 @@ export const test = base.extend({
 
             await templatesCreatePage.clickSignBtn();
 
-            const signatureElement = page.locator('.documentPage .react-pdf__Page__canvas').last();
+            const signatureElement = page.locator('.documentPage .react-pdf__Page__canvas').last()
             await signatureElement.waitFor({ state: 'visible' });
 
             const documentTargetArea = page.locator('.documentPage .react-pdf__Page__canvas');
@@ -93,7 +93,7 @@ export const test = base.extend({
 
     deleteSignature: [
         async ({ page }, use) =>{
-           
+
             const signPage = new SignPage(page);
             await signPage.clickDropDownUser();
 
