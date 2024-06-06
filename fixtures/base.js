@@ -2,8 +2,7 @@ import { expect } from '@playwright/test';
 import { test as base } from "@playwright/test";
 import LoginPage from "../page_objects/loginPage";
 import SignPage from "../page_objects/signPage";
-import { API_URL_END_POINTS } from '../apiData.js';
-import { EMPTY_TRASH_HEADER, URL_END_POINTS } from '../testData.js';
+import { API_URL_END_POINTS } from "../apiData.js";
 const API_BASE_URL = process.env.API_URL;
 const BASE_URL = process.env.URL;
 

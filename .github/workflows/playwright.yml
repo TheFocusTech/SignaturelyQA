@@ -30,10 +30,7 @@ jobs:
         DB_USER: ${{ secrets.DB_USER }}
         DB_NAME: ${{ secrets.DB_NAME }}
         EMAIL_PREFIX: ${{ secrets.EMAIL_PREFIX }}
-        EMAIL_DOMAIN: ${{ secrets.EMAIL_DOMAIN }}
-        API_URL: ${{ secrets.API_URL }}
-        ADMIN_EMAIL: ${{ secrets.ADMIN_EMAIL }}
-        ADMIN_PASSWORD: ${{ secrets.ADMIN_PASSWORD }}
+        EMAIL_DOMAIN: ${{ secrets.EMAIL_DOMAIN }}       
         CI_RUN: true
     - uses: actions/upload-artifact@v4
       if: always()
