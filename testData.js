@@ -26,6 +26,9 @@ export const DATA_SIGNER = {
     fullName: 'May Li',
     initials: 'ML'
 };
+export const FILL_RENAME_FOLDER_NAME = 'FielderTest';
+export const EMPTY_DOCUMENTS_HEADER = "You don't have any documents yet.";
+export const EMPTY_TRASH_HEADER = "You don't have any deleted documents yet.";
 export const FULL_NAME_INITIALS_FIELDS = {
     name: 'James Smith',
     initials: 'JS'
