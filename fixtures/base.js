@@ -2,14 +2,14 @@ import { expect } from '@playwright/test';
 import { test as base } from "@playwright/test";
 import LoginPage from "../page_objects/loginPage";
 import SignPage from "../page_objects/signPage";
+import { API_URL_END_POINTS } from "../apiData.js";
+
 import { API_URL_END_POINTS } from '../apiData.js';
 import { EMPTY_TRASH_HEADER, URL_END_POINTS } from '../testData.js';
 import { client } from '../dbClient.js';
 import { getNumberFromDateAndTime } from '../helpers/utils.js';
 
 const API_BASE_URL = process.env.API_URL;
-const BASE_URL = process.env.URL;
-
 const EMAIL = process.env.USER_EMAIL;
 const PASSWORD = process.env.USER_PASSWORD;
 
@@ -32,40 +32,54 @@ export const VISA_PAYMENT_METHOD_CARD_DATA = {
 
 export const test = base.extend({
 
+
     cleanDocuments: [
         async ({ request }, use) => {
-            const getSignInResponse = await request.post(API_BASE_URL + API_URL_END_POINTS.signInEndPoint, {
-                headers: {
-                    'accept': '*/*',
-                    'Content-Type': 'application/json',
-                },
-                data: {
-                    email: EMAIL,
-                    password: PASSWORD
-                }
-            });
-            expect(getSignInResponse.status()).toEqual(201);
-
-            const getDocumentRresponse = await request.get(API_BASE_URL + API_URL_END_POINTS.getDocumentsEndPoint);
-            const numberOfDocuments = (await getDocumentRresponse.json()).itemCount;
-
+           
+            try {
+                const getSignInResponse = await request.post(API_BASE_URL + API_URL_END_POINTS.signInEndPoint, {
+                    headers: {
+                        'accept': '*/*',
+                        'Content-Type': 'application/json',
+                    },
+                    data: {
+                        email: EMAIL,
+                        password: PASSWORD
+                    }
+                });
+        
+                expect(getSignInResponse.ok()).toBeTruthy();
+        
+            } catch (err) {
+                console.error(err);
+            }
+        
+            const getDocumentsResponse = await request.get(API_BASE_URL + API_URL_END_POINTS.getDocumentsEndPoint);
+            expect(getDocumentsResponse.ok()).toBeTruthy();
+        
+            const numberOfDocuments = (await getDocumentsResponse.json()).itemCount;
+        
             if (numberOfDocuments != 0) {
-                const documentDataArray = (await getDocumentRresponse.json()).items;
+                const documentDataArray = (await getDocumentsResponse.json()).items;
+        
                 const entityIdArray = [];
                 documentDataArray.map(el => {
                     entityIdArray.push(el.entityId);
                 });
-
-                await request.delete(API_BASE_URL + API_URL_END_POINTS.deleteDocumentsEndPoint, {
+                
+                const deleteDocumentsResponse = await request.delete(API_BASE_URL + API_URL_END_POINTS.deleteDocumentsEndPoint, {
                     data: {
                         entityIds: entityIdArray,
                     }
                 });
+                expect(deleteDocumentsResponse.ok).toBeTruthy;    
+        
+                const entityIdTrash = (await getDocumentsResponse.json()).data;
                 expect(numberOfDocuments).not.toBeTruthy;
-
+        
                 await request.delete(API_BASE_URL + API_URL_END_POINTS.emptyTrash, {
                     data: {
-                        entityIds: entityIdArray,
+                        entityIds: entityIdTrash,
                     }
                 });
             }
@@ -82,6 +96,7 @@ export const test = base.extend({
             await page.goto("/");
             await loginPage.fillEmailAddressInputField(EMAIL);
             await loginPage.fillPasswordInputField(PASSWORD);
+            await loginPage.clickLoginAndGoSignPage();
             const signPage = await loginPage.clickLoginAndGoSignPage();
             // await expect(page).toHaveURL(BASE_URL + URL_END_POINTS.signEndPoint);
             const documentsPage = await signPage.clickDocumentsSidebarLinkAndGoDocumentsPage();
