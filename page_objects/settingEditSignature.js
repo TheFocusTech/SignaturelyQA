@@ -88,6 +88,5 @@ class SettingEditSignature {
     }
   }
 
-
 }
 export default SettingEditSignature;
