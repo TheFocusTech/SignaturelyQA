@@ -8,8 +8,15 @@ import { API_URL_END_POINTS } from '../apiData.js';
 import { EMPTY_TRASH_HEADER, URL_END_POINTS } from '../testData.js';
 const API_BASE_URL = process.env.API_URL;
 const BASE_URL = process.env.URL;
+
 // import { API_URL_END_POINTS } from "../apiData.js";
 // const API_BASE_URL = process.env.API_URL;
+
+
+// import { API_URL_END_POINTS } from "../apiData.js";
+
+// const API_BASE_URL = process.env.API_URL;
+
 
 const EMAIL = process.env.USER_EMAIL;
 const PASSWORD = process.env.USER_PASSWORD;
