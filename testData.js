@@ -27,7 +27,6 @@ export const DATA_SIGNER = {
 };
 export const FILL_RENAME_FOLDER_NAME = 'FielderTest';
 export const EMPTY_DOCUMENTS_HEADER = "You don't have any documents yet.";
-export const EMPTY_TRASH_HEADER = "You don't have any deleted documents yet.";
 export const FORM_NAME = 'Test Form 1'
 export const OPTIONAL_MESSAGE_TEXT = 'Message 1'
 export const FORM_NAME_EDIT = 'Form is edit D'
