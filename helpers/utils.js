@@ -1,4 +1,4 @@
-export function getNumberFromDateAndTime() {
+export function generateNumberForNewUser() {
     let dt = new Date();
     const year = dt.getFullYear().toString().slice(-2);
     const month = (dt.getMonth() + 1).toString().padStart(2, "0");

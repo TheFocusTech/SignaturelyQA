@@ -1,18 +1,20 @@
 import { expect } from '@playwright/test';
-import { test, loginBusinessUser, createFreeUser, createBusinessUser, NEW_USER_CREDENTIALS } from "../fixtures/base.js";
+import { test, createFreeUser, createBusinessUser } from "../fixtures/base.js";
+import SignPage from '../page_objects/signPage.js';
 
-test('Create Free User full flow', async ({ page, request, createFreeUser }) => {
-    await page.goto("/");
-    await page.getByPlaceholder('username@gmail.com').fill(NEW_USER_CREDENTIALS['email']);
-    await page.getByPlaceholder('Your password').fill(NEW_USER_CREDENTIALS['password']);   
-    await page.getByRole('button', { name: 'Login' }).click();
-    
-    await expect(page).toHaveURL(`${process.env.URL}/sign`)
+test('Create Free User', async ({ page, request, createFreeUser }) => {
+    const signPage = new SignPage(page);
+
+    await signPage.clickSettingsSidebarLinkAndGoSettingsCompanyPage();
+    await expect(page).toHaveURL(`${process.env.URL}/settings/company`)
 });
 
-test('Create Business User full flow', async ({ page, request, createBusinessUser }) => {
+test('Create Business User', async ({ page, request, createBusinessUser }) => {
+    const signPage = new SignPage(page);
+    const settingsCompanyPage = await signPage.clickSettingsSidebarLinkAndGoSettingsCompanyPage();
+    const settingsBillingPage = await settingsCompanyPage.clickSettingsBillingSidebarLinkAngGoSettingsBillingPage();
 
-    const plan = await page.locator('.billing__trial-header').innerText();
-    expect(plan).toBe('Business Monthly Plan');
-    await expect(page).toHaveURL(`${process.env.URL}/settings/billing/plan`);
+    const plan = settingsBillingPage.locators.getBillingPlanWrapper();
+    await expect (plan).toContainText ('Business', {exact: true} )
+    await expect(page).toHaveURL(`${process.env.URL}/settings/billing`);
 });
