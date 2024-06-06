@@ -3,16 +3,19 @@ import { test as base } from "@playwright/test";
 import LoginPage from "../page_objects/loginPage";
 import SignPage from "../page_objects/signPage";
 import { API_URL_END_POINTS } from "../apiData.js";
+import { URL_END_POINTS } from '../testData.js';
+import SettingEditSignature from '../page_objects/settingEditSignature.js';
 
 const API_BASE_URL = process.env.API_URL;
 const EMAIL = process.env.USER_EMAIL;
 const PASSWORD = process.env.USER_PASSWORD;
+const BASE_URL = process.env.URL;
 
 export const test = base.extend({
 
     cleanDocuments: [
         async ({ request }, use) => {
-           
+            
             try {
                 const getSignInResponse = await request.post(API_BASE_URL + API_URL_END_POINTS.signInEndPoint, {
                     headers: {
@@ -100,15 +103,14 @@ export const test = base.extend({
     deleteSignature: [
         async ({ page }, use) =>{
             await use("");
+            
+            await page.goto(BASE_URL + URL_END_POINTS.editSignatureEndPoint);
+            const editSignature = new SettingEditSignature(page);
+            await editSignature.locators.getCardSignatureLast().waitFor();
+            await editSignature.deleteAllSignatures();
+            await editSignature.locators.getCardSignatureLast().waitFor({ state: 'hidden' });
 
-            const signPage = new SignPage(page);
-            await signPage.clickDropDownUser();
-
-            const editSignature = await signPage.clickEditSignatureAndGoEditSignaturePage();
-            await editSignature.clickBurgerMenuSignature();
-            await editSignature.clickDeleteDropItem();
-            await editSignature.clickButtonDelete();
-            await editSignature.clickSignSidebarLinkAndGoSignPage();
+            expect(editSignature.locators.getCardSignatureLast()).toHaveCount(0);
         },
         { scope: "test" },
     ],

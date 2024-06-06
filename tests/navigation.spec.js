@@ -27,36 +27,6 @@ test('Create signature', async ({ page, loginBusinessUser, deleteSignature }) =>
     await editSignature.clickCreateSignatureBtn();
 
     await expect(editSignature.locators.getCardSignatureLast()).toBeVisible();
-
-    await editSignature.clickToastCloseBtn();
-    await editSignature.clickSignSidebarLinkAndGoSignPage();
-    await page.waitForURL('https://staging.d2twwklgqmrfet.amplifyapp.com/sign');
-});
-
-test('Create and delete signature', async ({ page, loginBusinessUser }) => {
-    const signPage = new SignPage(page);
-    await signPage.clickDropDownUser();
-    const editSignature = await signPage.clickEditSignatureAndGoEditSignaturePage();
-    await editSignature.clickCreateSignatureBtn();
-    await editSignature.fillFullNameInput(DATA_SIGNER.fullName);
-    await editSignature.fillInitialsInput(DATA_SIGNER.initials);
-    await editSignature.clickCheckboxAgree();
-    await editSignature.clickCreateSignatureBtn();
-
-    await expect(editSignature.locators.getCardSignatureLast()).toBeVisible();
-
-    await editSignature.clickToastCloseBtn();
-    await editSignature.clickSignSidebarLinkAndGoSignPage();
-    await page.waitForURL('https://staging.d2twwklgqmrfet.amplifyapp.com/sign');
-
-    await signPage.clickDropDownUser();
-    await signPage.clickEditSignatureAndGoEditSignaturePage();
-    await editSignature.clickBurgerMenuSignature();
-    await editSignature.clickDeleteDropItem();
-    await editSignature.clickButtonDelete();
-
-    await editSignature.clickToastCloseBtn();
-    await editSignature.clickSignSidebarLinkAndGoSignPage();
 });
 
 test('check clean documents fixture', async ({ page, loginBusinessUser}) => {
@@ -72,4 +42,30 @@ test('check clean documents fixture', async ({ page, loginBusinessUser}) => {
     await documentsTrashPage.locators.getEmptyTableHeader().waitFor();
 
     await expect(documentsTrashPage.locators.getEmptyTableHeader()).toHaveText(EMPTY_TRASH_HEADER);
+});
+
+test('Create and delete signature', async ({page, loginBusinessUser}) => {
+    const signPage = new SignPage(page);
+    await signPage.clickDropDownUser();
+    const editSignature = await signPage.clickEditSignatureAndGoEditSignaturePage();
+    await editSignature.clickCreateSignatureBtn();
+    await editSignature.fillFullNameInput(DATA_SIGNER.fullName);
+    await editSignature.fillInitialsInput(DATA_SIGNER.initials);
+    await editSignature.clickCheckboxAgree();
+    await editSignature.clickCreateSignatureBtn();
+
+    await expect(editSignature.locators.getCardSignatureLast()).toBeVisible();
+    
+    await editSignature.clickToastCloseBtn();
+    await editSignature.clickSignSidebarLinkAndGoSignPage();
+
+    await signPage.clickDropDownUser();
+    await signPage.clickEditSignatureAndGoEditSignaturePage();
+
+    await editSignature.locators.getCardSignatureLast().waitFor({ state: 'visible' });
+
+    await editSignature.deleteAllSignatures();
+    await editSignature.locators.getCardSignatureLast().waitFor({ state: 'hidden' });
+
+    expect(editSignature.locators.getCardSignatureLast()).toHaveCount(0);
 });

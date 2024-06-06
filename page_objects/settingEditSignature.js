@@ -16,6 +16,8 @@ class SettingEditSignature {
       getDeleteBtn: () => this.page.getByRole('button', {name: 'Delete'}),
       getSignSidebarLink: () => this.page.getByRole('link', { name: 'Sign', exact: true }),
       getToastCloseBtn: () => this.page.locator('[type="success"]').first(),
+      getCardsSignature: () => this.page.$$('.settingsSignature__item'),
+      getBurgerMenuSignature: () => this.page.locator('.settingsSignature__dropDown-trigger'),
     }
 
     async clickCreateSignatureBtn() {
@@ -42,8 +44,8 @@ class SettingEditSignature {
       return this;
     }
 
-    async clickBurgerMenuSignature() {
-      await this.locators.getBurgerMenuSignatureLast().click();
+    async clickBurgerMenuSignature(i) {
+      await this.locators.getBurgerMenuSignature().nth(i).click();
 
       return this;
     }
@@ -71,6 +73,21 @@ class SettingEditSignature {
 
     return this;
   }
+
+  async deleteAllSignatures() {
+    const cards = await this.locators.getCardsSignature();
+    let cardsCount = await cards.length;
+
+    for (let i = cardsCount- 1; i >= 0; i--) {
+        await this.clickBurgerMenuSignature(i);
+        await this.locators.getDeleteDropItem().click();
+        await this.locators.getDeleteBtn().click();
+        await this.page.waitForTimeout(100);
+
+        cardsCount = (await this.locators.getCardsSignature()).length;
+    }
+  }
+
 
 }
 export default SettingEditSignature;
