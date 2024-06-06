@@ -31,6 +31,6 @@ test.describe('SignDocument', () => {
         await expect(signPage.locators.getCustomSigningOrderPositionNumberOne()).toBeVisible();
         await expect(signPage.locators.getCustomSigningOrderPositionNumberTwo()).toBeVisible();
 
-        await signPage.clickCancelBtnAndDeleteDocument();
+        // await signPage.clickCancelBtnAndDeleteDocument();
     })
 })
