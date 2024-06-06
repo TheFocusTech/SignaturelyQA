@@ -43,3 +43,12 @@ test('check clean documents fixture', async ({ page, loginBusinessUser}) => {
 
     await expect(documentsTrashPage.locators.getEmptyTableHeader()).toHaveText(EMPTY_TRASH_HEADER);
 });
+
+test('Not create signature', async ({ page, loginBusinessUser, deleteSignature }) => {
+    const signPage = new SignPage(page);
+    await signPage.clickDropDownUser();
+    await signPage.clickEditSignatureAndGoEditSignaturePage();
+
+    await expect(page).toHaveURL(BASE_URL + URL_END_POINTS.editSignatureEndPoint);
+
+});
