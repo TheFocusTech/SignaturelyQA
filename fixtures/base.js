@@ -3,8 +3,6 @@ import { test as base } from "@playwright/test";
 import LoginPage from "../page_objects/loginPage";
 import SignPage from "../page_objects/signPage";
 import { API_URL_END_POINTS } from "../apiData.js";
-
-import { API_URL_END_POINTS } from '../apiData.js';
 import { EMPTY_TRASH_HEADER, URL_END_POINTS } from '../testData.js';
 import { client } from '../dbClient.js';
 import { getNumberFromDateAndTime } from '../helpers/utils.js';
