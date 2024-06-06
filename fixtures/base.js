@@ -24,15 +24,31 @@ export const test = base.extend({
         async ({ page }, use) => {
             const signPage = new SignPage(page);
 
-            const documentsPage = await signPage.clickDocumentsDropdownAndGoDocumentsPage();
+            const documentsPage = await signPage.clickDocumentsSidebarLinkAndGoDocumentsPage();
             await documentsPage.clickCreateFolderBtn();
             await documentsPage.fillNewFolderNameInputField();
             await documentsPage.clickCreateBtn();
-            await documentsPage.clickSignaturelyLogoAndGoSignPage();
-            await documentsPage.locators.getToaster().waitFor({ state: "visible" });
-            await documentsPage.locators.getToaster().waitFor({ state: "hidden" });
+            await documentsPage.clickSignSidebarLinkAndGoSignPage();
+            await documentsPage.locators.getToast().waitFor({ state: "visible" });
+            await documentsPage.locators.getToast().waitFor({ state: "hidden" });
 
             await use("");
+        },
+        { scope: "test" },
+    ],
+
+    deleteSignature: [
+        async ({ page }, use) =>{
+            await use("");
+
+            const signPage = new SignPage(page);
+            await signPage.clickDropDownUser();
+
+            const editSignature = await signPage.clickEditSignatureAndGoEditSignaturePage();
+            await editSignature.clickBurgerMenuSignature();
+            await editSignature.clickDeleteDropItem();
+            await editSignature.clickButtonDelete();
+            await editSignature.clickSignSidebarLinkAndGoSignPage();
         },
         { scope: "test" },
     ],
