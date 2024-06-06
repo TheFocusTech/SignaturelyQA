@@ -3,9 +3,8 @@ import { test as base } from "@playwright/test";
 import LoginPage from "../page_objects/loginPage";
 import SignPage from "../page_objects/signPage";
 import { API_URL_END_POINTS } from "../apiData.js";
-const API_BASE_URL = process.env.API_URL;
-const BASE_URL = process.env.URL;
 
+const API_BASE_URL = process.env.API_URL;
 const EMAIL = process.env.USER_EMAIL;
 const PASSWORD = process.env.USER_PASSWORD;
 
