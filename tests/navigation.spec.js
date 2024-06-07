@@ -16,7 +16,7 @@ test('Check login fixture', async ({ page, loginBusinessUser }) => {
     await expect(page).toHaveURL(BASE_URL + URL_END_POINTS.signEndPoint);
 });
 
-test.skip('Create signature', async ({ page, loginBusinessUser, deleteSignature }) => {
+test('Create signature', async ({ page, createBusinessUserAndLogin, deleteSignature }) => {
     const signPage = new SignPage(page);
     await signPage.clickDropDownUser();
     const editSignature = await signPage.clickEditSignatureAndGoEditSignaturePage();
@@ -33,7 +33,7 @@ test.skip('Create signature', async ({ page, loginBusinessUser, deleteSignature 
     await page.waitForURL('https://staging.d2twwklgqmrfet.amplifyapp.com/sign');
 });
 
-test('Create and delete signature', async ({ page, loginBusinessUser }) => {
+test('Create and delete signature', async ({ page, createBusinessUserAndLogin }) => {
     const signPage = new SignPage(page);
     await signPage.clickDropDownUser();
     const editSignature = await signPage.clickEditSignatureAndGoEditSignaturePage();
@@ -59,7 +59,7 @@ test('Create and delete signature', async ({ page, loginBusinessUser }) => {
     await editSignature.clickSignSidebarLinkAndGoSignPage();
 });
 
-test('check clean documents fixture', async ({ page, loginBusinessUser}) => {
+test('check clean documents fixture', async ({ page, createBusinessUserAndLogin}) => {
 
     const signPage = new SignPage(page);
 
