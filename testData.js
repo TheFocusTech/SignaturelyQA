@@ -12,8 +12,16 @@ export const CHOOSE_SIGNERS_FIELDS = {
 };
 export const TOASTER_MESSAGE ={
     planSuccessChange: 'Plan has been successfully changed.',
-    planRenew: 'Plan has been renew'
-}
+    planRenew: 'Plan has been renew',
+    companyInformationSave: 'Company information successfully saved'
+
+};
+export const COMPANY_INFO ={
+    companyName: 'Signaturely',
+    emailFrom: 'sign.js120@gmail.com',
+    emailTo: 'sign.js.test+46@gmail',
+    redirectionPage: 'https://www.youtube.com/'
+};
 
 
 
