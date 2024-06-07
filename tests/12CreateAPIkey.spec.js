@@ -1,5 +1,5 @@
 import { expect } from '@playwright/test';
-import { test } from "../fixtures/base.js";
+import { test, createBusinessUserAndLogin } from "../fixtures/base.js";
 import {
     API_KEY_NAME, NO_API_KEY_MESSAGE,
     TOASTER_MESSAGE,
