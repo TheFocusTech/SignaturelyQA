@@ -1,5 +1,6 @@
 import SettingsBillingPage from "./settingsBillingPage";
 import { COMPANY_INFO } from '../testData';
+import SettingsAPIPage from "./settingsAPIPage";
 
 class SettingsCompanyPage {
     constructor(page){
@@ -16,7 +17,7 @@ class SettingsCompanyPage {
         getCheckboxActivate: () => this.page.getByText('Activate custom redirection page'),
         getSaveBtn: () => this.page.getByRole('button', {name: 'Save', exact: true}),
         getToasterPopup: () => this.page.getByRole('alert'),
-
+        getAPILink: () => this.page.getByRole('link', { name: 'API' }),
     }
    
     async clickSettingsBillingSidebarLinkAngGoSettingsBillingPage() {
@@ -24,6 +25,7 @@ class SettingsCompanyPage {
 
         return new SettingsBillingPage(this.page);
     }
+
     
     async LogoUpLoadFile(file) {
         await this.locators.getSelectLogoUpLoadFile().setInputFiles(file)
@@ -65,6 +67,12 @@ class SettingsCompanyPage {
         await this.locators.getSaveBtn().click()
         
         return this;
+    }
+
+    async clickAPILinkAndGoAPIPage(){
+        await this.locators.getAPILink().click();
+
+        return new SettingsAPIPage(this.page);
     }
 }
 export default SettingsCompanyPage;

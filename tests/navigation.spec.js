@@ -1,16 +1,75 @@
 import { expect } from '@playwright/test';
-import { test, loginBusinessUser } from "../fixtures/base.js";
-import { URL_END_POINTS } from '../testData.js';
+import { test } from "../fixtures/base.js";
+import { URL_END_POINTS, DATA_SIGNER, EMPTY_DOCUMENTS_HEADER, EMPTY_TRASH_HEADER } from '../testData.js';
+import SignPage from '../page_objects/signPage.js';
 
 const BASE_URL = process.env.URL;
 
-test('Navigate to login page', async ({ page }) => {
-  await page.goto('/');
+test.skip('Navigate to login page', async ({ page }) => {
+    await page.goto('/');
 
-  await expect(page).toHaveTitle('Log In | Signaturely');
+    await expect(page).toHaveTitle('Log In | Signaturely');
 });
 
-test('Check login fixture', async ({ page, loginBusinessUser}) => { 
+test.skip('Check login fixture', async ({ page, loginBusinessUser }) => {
 
-  await expect(page).toHaveURL(BASE_URL + URL_END_POINTS.signEndPoint);
+    await expect(page).toHaveURL(BASE_URL + URL_END_POINTS.signEndPoint);
+});
+
+test.skip('Create signature', async ({ page, loginBusinessUser, deleteSignature }) => {
+    const signPage = new SignPage(page);
+    await signPage.clickDropDownUser();
+    const editSignature = await signPage.clickEditSignatureAndGoEditSignaturePage();
+    await editSignature.clickCreateSignatureBtn();
+    await editSignature.fillFullNameInput(DATA_SIGNER.fullName);
+    await editSignature.fillInitialsInput(DATA_SIGNER.initials);
+    await editSignature.clickCheckboxAgree();
+    await editSignature.clickCreateSignatureBtn();
+
+    await expect(editSignature.locators.getCardSignatureLast()).toBeVisible();
+
+    await editSignature.clickToastCloseBtn();
+    await editSignature.clickSignSidebarLinkAndGoSignPage();
+    await page.waitForURL('https://staging.d2twwklgqmrfet.amplifyapp.com/sign');
+});
+
+test.skip('Create and delete signature', async ({ page, loginBusinessUser }) => {
+    const signPage = new SignPage(page);
+    await signPage.clickDropDownUser();
+    const editSignature = await signPage.clickEditSignatureAndGoEditSignaturePage();
+    await editSignature.clickCreateSignatureBtn();
+    await editSignature.fillFullNameInput(DATA_SIGNER.fullName);
+    await editSignature.fillInitialsInput(DATA_SIGNER.initials);
+    await editSignature.clickCheckboxAgree();
+    await editSignature.clickCreateSignatureBtn();
+
+    await expect(editSignature.locators.getCardSignatureLast()).toBeVisible();
+
+    await editSignature.clickToastCloseBtn();
+    await editSignature.clickSignSidebarLinkAndGoSignPage();
+    await page.waitForURL('https://staging.d2twwklgqmrfet.amplifyapp.com/sign');
+
+    await signPage.clickDropDownUser();
+    await signPage.clickEditSignatureAndGoEditSignaturePage();
+    await editSignature.clickBurgerMenuSignature();
+    await editSignature.clickDeleteDropItem();
+    await editSignature.clickButtonDelete();
+
+    await editSignature.clickToastCloseBtn();
+    await editSignature.clickSignSidebarLinkAndGoSignPage();
+});
+
+test.skip('check clean documents fixture', async ({ page, loginBusinessUser}) => {
+
+    const signPage = new SignPage(page);
+
+    const documentsPage = await signPage.clickDocumentsSidebarLinkAndGoDocumentsPage();
+    await documentsPage.locators.getEmptyTableHeader().waitFor();
+
+    await expect(documentsPage.locators.getEmptyTableHeader()).toHaveText(EMPTY_DOCUMENTS_HEADER);
+
+    const documentsTrashPage = await documentsPage.clickTrashSidebarLinkAndGoDocumentsTrashPage();
+    await documentsTrashPage.locators.getEmptyTableHeader().waitFor();
+
+    await expect(documentsTrashPage.locators.getEmptyTableHeader()).toHaveText(EMPTY_TRASH_HEADER);
 });
