@@ -3,6 +3,9 @@ import { test as base } from "@playwright/test";
 import LoginPage from "../page_objects/loginPage";
 import SignPage from "../page_objects/signPage";
 import { API_URL_END_POINTS } from "../apiData.js";
+import { VISA_CARD_DATA } from '../testData.js';
+import { client } from '../dbClient.js';
+import { generateNumberForNewUser } from '../helpers/utils.js';
 import FormRequestsPage from "../page_objects/formRequestsPage.js";
 import { FORM_NAME, OPTIONAL_MESSAGE_TEXT } from '../testData.js'
 
@@ -10,6 +13,16 @@ import { FORM_NAME, OPTIONAL_MESSAGE_TEXT } from '../testData.js'
 const API_BASE_URL = process.env.API_URL;
 const EMAIL = process.env.USER_EMAIL;
 const PASSWORD = process.env.USER_PASSWORD;
+
+export const newUserNumber = generateNumberForNewUser();
+
+export const NEW_USER_CREDENTIALS = {
+    email: `${process.env.EMAIL_PREFIX}${newUserNumber}${process.env.EMAIL_DOMAIN}`,
+    free: true,
+    name: `TestUser${newUserNumber}`,
+    password: `QA_tester${newUserNumber}`,
+    workflowVersion: "a"
+};
 
 export const test = base.extend({
 
@@ -112,6 +125,74 @@ export const test = base.extend({
             await editSignature.clickDeleteDropItem();
             await editSignature.clickButtonDelete();
             await editSignature.clickSignSidebarLinkAndGoSignPage();
+        },
+        { scope: "test" },
+    ],
+
+    createFreeUserAndLogin: [
+        async ({ request, page }, use) => {
+            let response;
+            let attempt = 0;
+
+            while (attempt < 3) {
+                attempt++;
+                response = await request.post(`${process.env.API_URL}/auth/sign_up`, { data: NEW_USER_CREDENTIALS });
+
+                if (response.ok()) {
+                    console.log(`User has been successfully created: #${newUserNumber}`);
+                    break;
+                }
+
+                if (attempt === maxRetries) {
+                    throw new Error(`Failed to proceed User sign up after ${maxRetries} attempts: ${response.status()}`);
+                }
+                console.log(`Attempt ${attempt} failed: ${response.status()}. Retrying...`);
+            }
+
+            await client.connect();
+            const query = `UPDATE public.users  
+                            SET "isEmailConfirmed" = true
+                            WHERE email = '${NEW_USER_CREDENTIALS.email}'`;
+
+            try {
+                await client.query(query);
+                console.log("Email has been successfully confirmed");
+            } catch (err) {
+                console.error(err.message);
+                throw err;
+            } finally {
+                await client.end();
+            }
+            const loginPage = new LoginPage(page);
+
+            await page.goto("/");
+            await loginPage.fillEmailAddressInputField(NEW_USER_CREDENTIALS.email);
+            await loginPage.fillPasswordInputField(NEW_USER_CREDENTIALS.password);
+            await loginPage.clickLoginAndGoSignPage();
+            await use("");
+        },
+        { scope: "test" },
+    ],
+
+    createBusinessUserAndLogin: [
+        async ({ page, request, createFreeUserAndLogin }, use) => {
+
+            await expect(page).toHaveURL(`${process.env.URL}/sign`)
+            const signPage = new SignPage(page);
+            const settingsCompanyPage = await signPage.clickSettingsSidebarLinkAndGoSettingsCompanyPage();
+            let settingsBillingPage = await settingsCompanyPage.clickSettingsBillingSidebarLinkAngGoSettingsBillingPage();
+            const upgradeYourPlanModal = await settingsBillingPage.clickBusinessUpgradeAndGoToUpgradeYourPlanModal();
+            await upgradeYourPlanModal.fillCreditCardData(
+                VISA_CARD_DATA.cardNumber,
+                VISA_CARD_DATA.expirationDate,
+                VISA_CARD_DATA.cvc,
+                VISA_CARD_DATA.fullNameOnCard,
+                VISA_CARD_DATA.zip);
+            const specialOfferUpsellModal = await upgradeYourPlanModal.clickSubscribeButtonAnGoToSpecialOfferUpsellModal();
+            settingsBillingPage = await specialOfferUpsellModal.cancelSpecialOfferAndGoToSettingsBillingPlanPage();
+            settingsBillingPage.clickSignSidebarLinkAndGoSignPage();
+
+            await use("");
         },
         { scope: "test" },
     ],

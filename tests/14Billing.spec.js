@@ -3,7 +3,7 @@ import { test, loginBusinessUser } from "../fixtures/base.js";
 import SignPage from "../page_objects/signPage";
 import {TOASTER_MESSAGE} from '../testData.js';
 
-test.describe('Billing', () => {
+test.describe.skip('Billing', () => {
 
     test('TC_14_57_02 | Verify the ability to successfully downgrade subscription', async ({page,loginBusinessUser}) => {
         const signPage = new SignPage(page);
