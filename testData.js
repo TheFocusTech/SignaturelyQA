@@ -29,6 +29,13 @@ export const DATA_SIGNER = {
 export const FILL_RENAME_FOLDER_NAME = 'FielderTest';
 export const EMPTY_DOCUMENTS_HEADER = "You don't have any documents yet.";
 export const EMPTY_TRASH_HEADER = "You don't have any deleted documents yet.";
+export const VISA_CARD_DATA = {
+    fullNameOnCard: `TestUser`,
+    cardNumber: '4242424242424242',
+    expirationDate: '12 / 27',
+    cvc: '111',
+    zip: '20500'
+};
 export const FULL_NAME_INITIALS_FIELDS = {
     name: 'James Smith',
     initials: 'JS'

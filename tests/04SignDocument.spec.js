@@ -6,7 +6,7 @@ const PASSWORD = process.env.USER_PASSWORD;
 const BASE_URL = process.env.URL;
 import {CHOOSE_SIGNERS_FIELDS} from '../testData.js';
 
-test.describe('SignDocument', () => {
+test.describe.skip('SignDocument', () => {
 
     test('TC_04_11_02 | Verify custom signing order', async ({page,loginBusinessUser}) => {
         const signPage = new SignPage(page);

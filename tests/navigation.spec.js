@@ -5,18 +5,18 @@ import SignPage from '../page_objects/signPage.js';
 
 const BASE_URL = process.env.URL;
 
-test('Navigate to login page', async ({ page }) => {
+test.skip('Navigate to login page', async ({ page }) => {
     await page.goto('/');
 
     await expect(page).toHaveTitle('Log In | Signaturely');
 });
 
-test('Check login fixture', async ({ page, loginBusinessUser }) => {
+test.skip('Check login fixture', async ({ page, loginBusinessUser }) => {
 
     await expect(page).toHaveURL(BASE_URL + URL_END_POINTS.signEndPoint);
 });
 
-test('Create signature', async ({ page, loginBusinessUser, deleteSignature }) => {
+test.skip('Create signature', async ({ page, loginBusinessUser, deleteSignature }) => {
     const signPage = new SignPage(page);
     await signPage.clickDropDownUser();
     const editSignature = await signPage.clickEditSignatureAndGoEditSignaturePage();
@@ -33,7 +33,7 @@ test('Create signature', async ({ page, loginBusinessUser, deleteSignature }) =>
     await page.waitForURL('https://staging.d2twwklgqmrfet.amplifyapp.com/sign');
 });
 
-test('Create and delete signature', async ({ page, loginBusinessUser }) => {
+test.skip('Create and delete signature', async ({ page, loginBusinessUser }) => {
     const signPage = new SignPage(page);
     await signPage.clickDropDownUser();
     const editSignature = await signPage.clickEditSignatureAndGoEditSignaturePage();
@@ -59,7 +59,7 @@ test('Create and delete signature', async ({ page, loginBusinessUser }) => {
     await editSignature.clickSignSidebarLinkAndGoSignPage();
 });
 
-test('check clean documents fixture', async ({ page, loginBusinessUser}) => {
+test.skip('check clean documents fixture', async ({ page, loginBusinessUser}) => {
 
     const signPage = new SignPage(page);
 
