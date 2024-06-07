@@ -4,7 +4,7 @@ import SignPage from "../page_objects/signPage";
 import { TOASTER_MESSAGE, FILL_RENAME_FOLDER_NAME } from "../testData.js";
 
 
-test.describe.skip('Folders', () => {
+test.describe('Folders', () => {
 
     test('TC_06_22_01 | Verify the business user can create folder', async ({ page , loginBusinessUser}) => {
         const signPage = new SignPage(page); 

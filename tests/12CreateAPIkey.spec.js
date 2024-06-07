@@ -6,7 +6,7 @@ import {
 } from '../testData.js';
 import SignPage from "../page_objects/signPage";
 
-test.describe.skip('Create API key', () => {
+test.describe('Create API key', () => {
 
     test('TC_12_48_01_01 | Verify User can copy API key created by the "Create API" button on the right.', async ({ page, loginBusinessUser }) => {
         const signPage = new SignPage(page);
