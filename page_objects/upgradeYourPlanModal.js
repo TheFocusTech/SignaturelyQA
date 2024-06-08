@@ -1,11 +1,15 @@
+import AbstractBaseSet from "./abstractBaseSet.js";
 import SpecialOfferUpsellModal from "./specialOfferUpsellModal.js";
 
-class UpgradeYourPlanModal {
+class UpgradeYourPlanModal extends AbstractBaseSet {
     constructor(page) {
-        this.page = page;
-    }
+        super(page);
+        // this.page = page;
+    // }
 
-    locators = {        
+
+    this.locators = {        
+        ...this.locators,
         getCardNumberField: () => this.page.frameLocator('[title="Secure card number input frame"]').getByLabel('Card Number'),
         getExpirationDateField: () => this.page.frameLocator('[title="Secure expiration date input frame"]').getByLabel('Expiration'),
         getCVCField: () => this.page.frameLocator('[title="Secure CVC input frame"]').getByLabel('CVC'),
@@ -13,6 +17,7 @@ class UpgradeYourPlanModal {
         getZIPField: () => this.page.getByPlaceholder('00000'),
         getSubscribeBtn: () => this.page.getByRole('button', { name: 'Subscribe' })
     }
+}
 
     async fillCreditCardData(cardNumber,expirationDate, cvc, fullNameOnCard, zip) {
         await this.locators.getCardNumberField().pressSequentially(cardNumber);

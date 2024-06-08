@@ -1,12 +1,16 @@
+import AbstractBaseSet from "./abstractBaseSet";
 import CreateAPIKeyModal from "./createAPIKeyModal";
 import SignPage from "./signPage";
+import AbstractSettingsSet from "./abstractSettingsSet.js";
 
-class SettingAPIPage {
+class SettingsAPIPage extends AbstractSettingsSet {
     constructor(page) {
-        this.page = page;
-    }
+        super(page);
+        // this.page = page;
+    // }
 
-    locators = {
+    this.locators = {
+        ...this.locators,
         getCreateAPIKeyButtonAtRight: () => this.page.locator('.team__header-container').getByRole('button', {name: 'Create API key'}),
         getCreateAPIKeyButtonInTable: () => this.page.locator('.documents__empty-table').getByRole('button', {name: 'Create API key'}),
         getBillingDetailsField: () => this.page.getByPlaceholder('Enter billing details here'),
@@ -16,8 +20,9 @@ class SettingAPIPage {
         getYesButton: () => this.page.getByRole('button', {name: 'Yes, Delete'}),
         getToaster: () => this.page.locator('.Toastify__toast-body'),
         getEmptyAPiKeysHeader: () => this.page.locator('.empty-table__header'),
-        getSignSidebarLink: () => this.page.getByRole('link', {name: 'Sign', exact: true}),
+        // getSignSidebarLink: () => this.page.getByRole('link', {name: 'Sign', exact: true}),
     }
+}
 
     async clickCreateAPIKeyButtonAtRight() {
         await this.locators.getCreateAPIKeyButtonAtRight().click();
@@ -76,11 +81,11 @@ class SettingAPIPage {
         return this;
     }
 
-    async clickSignSidebarLinkAndGoSignPage() {
-        await this.locators.getSignSidebarLink().click();
+    // async clickSignSidebarLinkAndGoSignPage() {
+    //     await this.locators.getSignSidebarLink().click();
 
-        return new SignPage(this.page);
-    }
+    //     return new SignPage(this.page);
+    // }
 }
 
-export default SettingAPIPage;
+export default SettingsAPIPage;

@@ -1,17 +1,21 @@
+import AbstractBaseSet from "./abstractBaseSet";
 import SettingsCompanyPage from "./settingsCompanyPage";
 
-class CreateAPIKeyModal {
+class CreateAPIKeyModal extends AbstractBaseSet {
     constructor(page) {
-        this.page = page;
-    }
+        super(page);
+        // this.page = page;
+    // }
 
-    locators = {
+    this.locators = {
+        ...this.locators,
         getAPIKeyNameField: () => this.page.getByPlaceholder('API key name'),
         getCreateAPIButton: () => this.page.getByRole('button', { name: 'Create API' }),
         getCopyAPIButton: () => this.page.getByRole('button', { name: 'Copy API' }),
         getAPIKeyValue: () => this.page.locator('.apiKeyModal__value'),
         getCloseDialogButton: () => this.page.locator('.modal__close-button > div > .injected-svg > path'),
     }
+}
 
     async fillInCreateAPIKeyNameField(keyName) {
         await this.locators.getAPIKeyNameField().fill(keyName);

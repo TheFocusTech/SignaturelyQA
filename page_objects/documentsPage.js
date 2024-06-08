@@ -1,15 +1,18 @@
 import SignPage from "./signPage";
 import DocumentsTrashPage from "./documentsTrashPage";
 import { FILL_FOLDER_NAME } from '../testData';
+import AbstractBaseSet from "./abstractBaseSet";
 
-class DocumentsPage {
+class DocumentsPage extends AbstractBaseSet {
     constructor(page) {
-        this.page = page;
-    }
+        // this.page = page;
+        super(page);
+    // }
 
-    locators = {
+    this.locators = {
+        ...this.locators,
         getResultsNumber: () => this.page.locator('.tableControls__pagingCounter span'),
-        getSignSidebarLink: () => this.page.getByRole('link', { name: 'Sign', exact: true }),
+        // getSignSidebarLink: () => this.page.getByRole('link', { name: 'Sign', exact: true }),
         getTitleCheckbox: () => this.page.locator('.uiCheckbox__inner').first(),
         getDocumentTableIcon: () => this.page.locator('.documents__dropdownOption-icon').first(),
         getSelectOptionsDropdown: () => this.page.getByText('Select options', {exact: true}),
@@ -28,12 +31,13 @@ class DocumentsPage {
         getRenameBtn: () => this.page.getByRole('button', {name: 'Rename'}),
         getRenameInputField: () => this.page.locator('input.form__input--hidden'),
     }
-
-    async clickSignSidebarLinkAndGoSignPage() {
-        await this.locators.getSignSidebarLink().click();
-
-        return new SignPage(this.page);
     }
+    
+    // async clickSignSidebarLinkAndGoSignPage() {
+    //     await this.locators.getSignSidebarLink().click();
+
+    //     return new SignPage(this.page);
+    // }
 
     async clickTitleCheckbox() {
         await this.locators.getTitleCheckbox().click();

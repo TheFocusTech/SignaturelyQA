@@ -6,6 +6,12 @@ import { API_URL_END_POINTS } from "../apiData.js";
 import { VISA_CARD_DATA } from '../testData.js';
 import { client } from '../dbClient.js';
 import { generateNumberForNewUser } from '../helpers/utils.js';
+import AbstractBaseSet from '../page_objects/abstractBaseSet.js';
+import DocumentsPage from "../page_objects/documentsPage.js";
+import SettingsBillingPage from "../page_objects/settingsBillingPage.js";
+import SettingsCompanyPage from "../page_objects/settingsCompanyPage.js";
+import SettingEditSignature from '../page_objects/settingEditSignature.js';
+
 
 const API_BASE_URL = process.env.API_URL;
 const EMAIL = process.env.USER_EMAIL;
@@ -193,4 +199,23 @@ export const test = base.extend({
         },
         { scope: "test" },
     ],
+
+    signPage: async ({ page }, use) => {
+        await use(new SignPage(page));
+    },
+    settingsBillingPage: async ({ page }, use) => {
+        await use(new SettingsBillingPage(page));
+    },
+
+    settingsCompanyPage: async ({ page }, use) => {
+        await use(new SettingsCompanyPage(page));
+    },
+
+    documentsPage: async ({ page }, use) => {
+        await use(new DocumentsPage(page));
+    },
+
+    settingEditSignature: async ({ page }, use) => {
+        await use(new SettingEditSignature(page));
+    }
 });

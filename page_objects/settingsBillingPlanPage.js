@@ -1,19 +1,24 @@
+import AbstractBaseSet from "./abstractBaseSet";
 import SignPage from "./signPage";
+import AbstractSettingsSet from "./abstractSettingsSet.js";
 
-class SettingsBillingPlanPage {
+class SettingsBillingPlanPage extends AbstractSettingsSet {
     constructor(page){
-        this.page = page;
-    }
+        super(page);
+        // this.page = page;
+    // }
 
-    locators = {        
+    this.locators = {
+        ...this.locators,        
         getPersonalPlanSelectBtn: () => this.page.getByText('Select', { exact: true }),
-        getSignSidebarLink: () => this.page.getByRole('link', { name: 'Sign', exact: true }),
+        // getSignSidebarLink: () => this.page.getByRole('link', { name: 'Sign', exact: true }),
         getDowngradeBtn: () => this.page.getByRole('button', {name: 'Downgrade'}),
         getToasterPopup: () => this.page.getByRole('alert'),
         getToasterCloseSuccessBtn: () => this.page.locator('[type = "success"]'),
         getRenewBusinessPlanBtn: () => this.page.getByText('Renew', { exact: true }),
         getCurrentPlanBtn: () => this.page.getByText('Current Plan', { exact: true })
     }
+}
 
     async clickPersonalPlanSelectBtn() {
         await this.locators.getPersonalPlanSelectBtn().click();
@@ -35,11 +40,11 @@ class SettingsBillingPlanPage {
 
         return this;
     }
-    async clickSignSidebarLinkAndGoSignPage(){
-        await this.locators.getSignSidebarLink().click();
+    // async clickSignSidebarLinkAndGoSignPage(){
+    //     await this.locators.getSignSidebarLink().click();
 
-        return new SignPage(this.page);
-    }
+    //     return new SignPage(this.page);
+    // }
    
 }
 export default SettingsBillingPlanPage;

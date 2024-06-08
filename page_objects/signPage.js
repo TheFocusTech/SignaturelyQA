@@ -1,16 +1,19 @@
+import AbstractBaseSet from "./abstractBaseSet";
 import DocumentsPage from "./documentsPage";
 import SettingEditSignature from "./settingEditSignature";
 import SettingsCompanyPage from "./settingsCompanyPage";
 
-class SignPage {
+class SignPage extends AbstractBaseSet {
     constructor(page){
-        this.page = page;
-    }
+        // this.page = page;
+        super(page);
+    // }
 
-    locators = {
-        getSignSidebarLink: () => this.page.getByRole('link', { name: 'Sign', exact: true }),
-        getSettingsSidebarLink: () => this.page.getByRole('link', {name: 'Settings', exact: true}),
-        getDocumentsSidebarLink: () => this.page.getByRole('link', {name: 'Documents', exact: true}),
+    this.locators = {
+        ...this.locators,
+        // getSignSidebarLink: () => this.page.getByRole('link', { name: 'Sign', exact: true }),
+        // getSettingsSidebarLink: () => this.page.getByRole('link', {name: 'Settings', exact: true}),
+        // getDocumentsSidebarLink: () => this.page.getByRole('link', {name: 'Documents', exact: true}),
         getUploadFileBtn: () => this.page.getByRole('button', {name: 'Upload File'}),
         getFileInputField: () => this.page.locator('input[type = "file"]'),
         getPrepareDocumentBtn: () => this.page.locator('div.wizardSignForm-createButton button'),
@@ -22,21 +25,21 @@ class SignPage {
         getCustomSigningOrderPositionNumberOne: () => this.page.locator('span.signers__item-order-position').first(),
         getCustomSigningOrderPositionNumberTwo: () => this.page.locator('span.signers__item-order-position').last(),
         getCancelBtn: () => this.page.locator('.interactModal__header-send button.interactModal__header-cancelButton'),
-        getDropDownUser: () => this.page.locator('.dropDownUser__wrapper'),
-        getEditSignatureDropItem: () => this.page.getByRole('banner').getByRole('link', { name: 'Edit Signature' }),
+        // getDropDownUser: () => this.page.locator('.dropDownUser__wrapper'),
+        // getEditSignatureDropItem: () => this.page.getByRole('banner').getByRole('link', { name: 'Edit Signature' }),
     }
-
-    async clickDocumentsSidebarLinkAndGoDocumentsPage() {
-        await this.locators.getDocumentsSidebarLink().click();
-
-        return new DocumentsPage(this.page);
     }
+    // async clickDocumentsSidebarLinkAndGoDocumentsPage() {
+    //     await this.locators.getDocumentsSidebarLink().click();
+
+    //     return new DocumentsPage(this.page);
+    // }
     
-    async clickSettingsSidebarLinkAndGoSettingsCompanyPage(){
-        await this.locators.getSettingsSidebarLink().click();
+    // async clickSettingsSidebarLinkAndGoSettingsCompanyPage(){
+    //     await this.locators.getSettingsSidebarLink().click();
 
-        return new SettingsCompanyPage(this.page);
-    }
+    //     return new SettingsCompanyPage(this.page);
+    // }
 
     async clickUploadFileBtn(file) {
         await this.locators.getFileInputField().setInputFiles(file);
@@ -50,9 +53,9 @@ class SignPage {
         return this;
     }
 
-    async clickSignSidebarLinkAndGoSignPage() {
-        await this.locators.getSignSidebarLink().click();
-    }
+    // async clickSignSidebarLinkAndGoSignPage() {
+    //     await this.locators.getSignSidebarLink().click();
+    // }
 
     async clickSendForSignatureRadioBtn() {
         await this.locators.getSendForSignatureRadioBtn().click();
@@ -90,16 +93,16 @@ class SignPage {
         return new SignPage(this.page);
     }
     
-    async clickDropDownUser() {
-        await this.locators.getDropDownUser().click();
+    // async clickDropDownUser() {
+    //     await this.locators.getDropDownUser().click();
 
-        return this;
-    }
+    //     return this;
+    // }
 
-    async clickEditSignatureAndGoEditSignaturePage() {
-        await this.locators.getEditSignatureDropItem().click();
+    // async clickEditSignatureAndGoEditSignaturePage() {
+    //     await this.locators.getEditSignatureDropItem().click();
 
-        return new SettingEditSignature(this.page);
-    }
+    //     return new SettingEditSignature(this.page);
+    // }
 }
 export default SignPage;

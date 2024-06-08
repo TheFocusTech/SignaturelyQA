@@ -1,17 +1,22 @@
+import AbstractBaseSet from "./abstractBaseSet";
 import SettingsBillingPlanPage from "./settingsBillingPlanPage";
 import UpgradeYourPlanModal from "./upgradeYourPlanModal";
+import AbstractSettingsSet from "./abstractSettingsSet.js";
 
-class SettingsBillingPage {
+class SettingsBillingPage extends AbstractSettingsSet {
     constructor(page){
-        this.page = page;
-    }
+        super(page);
+        // this.page = page;
+    // }
 
-    locators = {        
+    this.locators = {
+        ...this.locators,        
         getEditPlanBtn: () => this.page.getByText('Edit Plan', { exact: true }),
         getBusinessUpgradeBtn: () => this.page.locator('.billing__table-column').filter({ hasText: 'Business' }).getByRole('button'),
         getBillingPlanWrapper: () => this. page.locator('.billing__plan-wrapper')
     }
-
+    }
+    
     async clickEditPlanBtnAndGoSettingsBillingPlanPage() {
         await this.locators.getEditPlanBtn().click();
 

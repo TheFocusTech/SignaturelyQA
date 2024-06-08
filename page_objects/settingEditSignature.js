@@ -1,11 +1,15 @@
-import SignPage from "./signPage";
+import AbstractBaseSet from "./abstractBaseSet.js";
+import SignPage from "./signPage.js";
+import AbstractSettingsSet from "./abstractSettingsSet.js";
 
-class SettingEditSignature {
+class SettingEditSignature extends AbstractSettingsSet {
     constructor(page){
-        this.page = page;
-    }
+      super(page);
+        // this.page = page;
+    // }
 
-    locators = {
+    this.locators = {
+      ...this.locators,
       getCreateSignatureBtn: () => this.page.getByRole('button', {name: 'Create Signature'}),
       getFullNameInput: () => this.page.locator('div').filter({ hasText: /^Full Name \*$/ }).getByRole('textbox'),
       getInitialsInput:() => this.page.locator('div').filter({ hasText: /^Initials \*$/ }).getByRole('textbox'),
@@ -14,9 +18,10 @@ class SettingEditSignature {
       getBurgerMenuSignatureLast: () => this.page.locator('.settingsSignature__dropDown-trigger').last(),
       getDeleteDropItem: () => this.page.getByText('Delete', { exact: true }),
       getDeleteBtn: () => this.page.getByRole('button', {name: 'Delete'}),
-      getSignSidebarLink: () => this.page.getByRole('link', { name: 'Sign', exact: true }),
+      // getSignSidebarLink: () => this.page.getByRole('link', { name: 'Sign', exact: true }),
       getToastCloseBtn: () => this.page.locator('[type="success"]').first(),
     }
+  }
 
     async clickCreateSignatureBtn() {
       await this.locators.getCreateSignatureBtn().click();
@@ -60,11 +65,11 @@ class SettingEditSignature {
       return this;
     }
 
-    async clickSignSidebarLinkAndGoSignPage() {
-      await this.locators.getSignSidebarLink().click();
+  //   async clickSignSidebarLinkAndGoSignPage() {
+  //     await this.locators.getSignSidebarLink().click();
 
-      return new SignPage(this.page);
-  }
+  //     return new SignPage(this.page);
+  // }
 
   async clickToastCloseBtn() {
     await this.locators.getToastCloseBtn().click();

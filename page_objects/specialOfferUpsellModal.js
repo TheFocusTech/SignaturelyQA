@@ -1,13 +1,17 @@
+import AbstractBaseSet from "./abstractBaseSet";
 import SettingsBillingPlanPage from "./settingsBillingPlanPage";
 
-class SpecialOfferUpsellModal {
+class SpecialOfferUpsellModal extends AbstractBaseSet {
     constructor(page) {
-        this.page = page;
-    }
+        super(page);
+        // this.page = page;
+    // }
 
-    locators = {
+    this.locators = {
+        ...this.locators,
         getNoThanksBtn: () => this.page.locator('.upsellModal__button-cancel'),
     }
+}
 
     async cancelSpecialOfferAndGoToSettingsBillingPlanPage() {
         await this.locators.getNoThanksBtn().waitFor({ state: 'visible' });
