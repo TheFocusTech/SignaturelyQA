@@ -3,7 +3,7 @@ import { test as base } from "@playwright/test";
 import LoginPage from "../page_objects/loginPage";
 import SignPage from "../page_objects/signPage";
 import { API_URL_END_POINTS } from "../apiData.js";
-import { VISA_CARD_DATA } from '../testData.js';
+import { VISA_CARD_DATA, TOASTER_MESSAGE } from '../testData.js';
 import { client } from '../dbClient.js';
 import { generateNumberForNewUser } from '../helpers/utils.js';
 
@@ -25,7 +25,7 @@ export const test = base.extend({
 
     cleanDocuments: [
         async ({ request }, use) => {
-           
+
             try {
                 const getSignInResponse = await request.post(API_BASE_URL + API_URL_END_POINTS.signInEndPoint, {
                     headers: {
@@ -37,36 +37,36 @@ export const test = base.extend({
                         password: PASSWORD
                     }
                 });
-        
+
                 expect(getSignInResponse.ok()).toBeTruthy();
-        
+
             } catch (err) {
                 console.error(err);
             }
-        
+
             const getDocumentsResponse = await request.get(API_BASE_URL + API_URL_END_POINTS.getDocumentsEndPoint);
             expect(getDocumentsResponse.ok()).toBeTruthy();
-        
+
             const numberOfDocuments = (await getDocumentsResponse.json()).itemCount;
-        
+
             if (numberOfDocuments != 0) {
                 const documentDataArray = (await getDocumentsResponse.json()).items;
-        
+
                 const entityIdArray = [];
                 documentDataArray.map(el => {
                     entityIdArray.push(el.entityId);
                 });
-                
+
                 const deleteDocumentsResponse = await request.delete(API_BASE_URL + API_URL_END_POINTS.deleteDocumentsEndPoint, {
                     data: {
                         entityIds: entityIdArray,
                     }
                 });
-                expect(deleteDocumentsResponse.ok).toBeTruthy;    
-        
+                expect(deleteDocumentsResponse.ok).toBeTruthy;
+
                 const entityIdTrash = (await getDocumentsResponse.json()).data;
                 expect(numberOfDocuments).not.toBeTruthy;
-        
+
                 await request.delete(API_BASE_URL + API_URL_END_POINTS.emptyTrash, {
                     data: {
                         entityIds: entityIdTrash,
@@ -130,8 +130,9 @@ export const test = base.extend({
         async ({ request, page }, use) => {
             let response;
             let attempt = 0;
+            let maxRetries = 3;
 
-            while (attempt < 3) {
+            while (attempt < maxRetries) {
                 attempt++;
                 response = await request.post(`${process.env.API_URL}/auth/sign_up`, { data: NEW_USER_CREDENTIALS });
 
@@ -186,8 +187,12 @@ export const test = base.extend({
                 VISA_CARD_DATA.fullNameOnCard,
                 VISA_CARD_DATA.zip);
             const specialOfferUpsellModal = await upgradeYourPlanModal.clickSubscribeButtonAnGoToSpecialOfferUpsellModal();
-            settingsBillingPage = await specialOfferUpsellModal.cancelSpecialOfferAndGoToSettingsBillingPlanPage();
-            settingsBillingPage.clickSignSidebarLinkAndGoSignPage();
+            const settingsBillingPlanPage = await specialOfferUpsellModal.cancelSpecialOfferAndGoToSettingsBillingPlanPage();
+            expect(await settingsBillingPlanPage.locators.getToastBody().isVisible()).toBe(true);
+            await expect(settingsBillingPlanPage.locators.getToastBody()).toHaveText(TOASTER_MESSAGE.planSuccessChange);
+            await settingsBillingPlanPage.waitForToasterHidden();
+            expect(await settingsBillingPlanPage.locators.getToastBody().isHidden()).toBe(true);
+            settingsBillingPlanPage.clickSignSidebarLinkAndGoSignPage();
 
             await use("");
         },
