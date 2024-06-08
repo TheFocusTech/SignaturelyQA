@@ -26,6 +26,7 @@ class UpgradeYourPlanModal {
 
     async clickSubscribeButtonAnGoToSpecialOfferUpsellModal() {
         await this.locators.getSubscribeBtn().click();
+        await this.locators.getSubscribeBtn().isHidden();
 
         return new SpecialOfferUpsellModal (this.page);
     }

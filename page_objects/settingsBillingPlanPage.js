@@ -12,7 +12,8 @@ class SettingsBillingPlanPage {
         getToasterPopup: () => this.page.getByRole('alert'),
         getToasterCloseSuccessBtn: () => this.page.locator('[type = "success"]'),
         getRenewBusinessPlanBtn: () => this.page.getByText('Renew', { exact: true }),
-        getCurrentPlanBtn: () => this.page.getByText('Current Plan', { exact: true })
+        getCurrentPlanBtn: () => this.page.getByText('Current Plan', { exact: true }),
+        getToastBody: () => this.page.locator('.Toastify__toast-body'),
     }
 
     async clickPersonalPlanSelectBtn() {
@@ -40,6 +41,11 @@ class SettingsBillingPlanPage {
 
         return new SignPage(this.page);
     }
+
+    async waitForToasterHidden() {
+        await this.locators.getToastBody().waitFor({ state: 'hidden' });
+    }
+
    
 }
 export default SettingsBillingPlanPage;
