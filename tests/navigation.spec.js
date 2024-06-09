@@ -1,5 +1,5 @@
 import { expect } from '@playwright/test';
-import { test } from "../fixtures/base.js";
+import { test, createBusinessUserAndLogin } from "../fixtures/base.js";
 import { URL_END_POINTS, DATA_SIGNER, EMPTY_DOCUMENTS_HEADER, EMPTY_TRASH_HEADER } from '../testData.js';
 import SignPage from '../page_objects/signPage.js';
 
@@ -16,7 +16,7 @@ test('Check login fixture', async ({ page, loginBusinessUser }) => {
     await expect(page).toHaveURL(BASE_URL + URL_END_POINTS.signEndPoint);
 });
 
-test('Create signature', async ({ page, loginBusinessUser, deleteSignature }) => {
+test('Create signature', async ({ page, createBusinessUserAndLogin, deleteSignature }) => {
     const signPage = new SignPage(page);
     await signPage.clickDropDownUser();
     const editSignature = await signPage.clickEditSignatureAndGoEditSignaturePage();
@@ -33,7 +33,7 @@ test('Create signature', async ({ page, loginBusinessUser, deleteSignature }) =>
     await page.waitForURL('https://staging.d2twwklgqmrfet.amplifyapp.com/sign');
 });
 
-test('Create and delete signature', async ({ page, loginBusinessUser }) => {
+test('Create and delete signature', async ({ page, createBusinessUserAndLogin }) => {
     const signPage = new SignPage(page);
     await signPage.clickDropDownUser();
     const editSignature = await signPage.clickEditSignatureAndGoEditSignaturePage();
@@ -59,7 +59,7 @@ test('Create and delete signature', async ({ page, loginBusinessUser }) => {
     await editSignature.clickSignSidebarLinkAndGoSignPage();
 });
 
-test('check clean documents fixture', async ({ page, loginBusinessUser}) => {
+test('check clean documents fixture', async ({ page, createBusinessUserAndLogin}) => {
 
     const signPage = new SignPage(page);
 

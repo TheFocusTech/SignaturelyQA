@@ -5,11 +5,11 @@
   "main": "index.js",
   "scripts": {
     "test": "npx playwright test",
-		"test:chrome": "npx playwright test --project chromium",
-		"test:firefox": "npx playwright test --project firefox",
-		"test:webkit": "npx playwright test --project webkit",
+    "test:chrome": "npx playwright test --project chromium",
+    "test:firefox": "npx playwright test --project firefox",
+    "test:webkit": "npx playwright test --project webkit",
     "testUI:chrome": "npx playwright test --ui --project chromium"
-	  },
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
@@ -17,5 +17,8 @@
     "@playwright/test": "^1.44.1",
     "@types/node": "^20.12.12",
     "dotenv": "^16.4.5"
+  },
+  "dependencies": {
+    "pg": "^8.12.0"
   }
 }

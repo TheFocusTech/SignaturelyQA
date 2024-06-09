@@ -2,10 +2,17 @@ import { expect } from '@playwright/test';
 import { test as base } from "@playwright/test";
 import LoginPage from "../page_objects/loginPage";
 import SignPage from "../page_objects/signPage";
+
 import TemplatesActivePage from "../page_objects/templatesActivePage";
 import TemplatesCreatePage from "../page_objects/templatesCreatePage";
 import { API_URL_END_POINTS } from '../apiData.js';
 import { EMPTY_TRASH_HEADER, URL_END_POINTS } from '../testData.js';
+import { API_URL_END_POINTS } from "../apiData.js";
+import { VISA_CARD_DATA, TOASTER_MESSAGE } from '../testData.js';
+import { client } from '../dbClient.js';
+import { generateNumberForNewUser } from '../helpers/utils.js';
+
+
 const API_BASE_URL = process.env.API_URL;
 const BASE_URL = process.env.URL;
 
@@ -20,6 +27,16 @@ const BASE_URL = process.env.URL;
 
 const EMAIL = process.env.USER_EMAIL;
 const PASSWORD = process.env.USER_PASSWORD;
+
+export const newUserNumber = generateNumberForNewUser();
+
+export const NEW_USER_CREDENTIALS = {
+    email: `${process.env.EMAIL_PREFIX}${newUserNumber}${process.env.EMAIL_DOMAIN}`,
+    free: true,
+    name: `TestUser${newUserNumber}`,
+    password: `QA_tester${newUserNumber}`,
+    workflowVersion: "a"
+};
 
 export const test = base.extend({
 
@@ -198,5 +215,82 @@ export const test = base.extend({
         },
         { scope: "test" },
     ],
+
  })
+
+
+
+    createFreeUserAndLogin: [
+        async ({ request, page }, use) => {
+            let response;
+            let attempt = 0;
+            let maxRetries = 3;
+
+            while (attempt < maxRetries) {
+                attempt++;
+                response = await request.post(`${process.env.API_URL}/auth/sign_up`, { data: NEW_USER_CREDENTIALS });
+
+                if (response.ok()) {
+                    console.log(`User has been successfully created: #${newUserNumber}`);
+                    break;
+                }
+
+                if (attempt === maxRetries) {
+                    throw new Error(`Failed to proceed User sign up after ${maxRetries} attempts: ${response.status()}`);
+                }
+                console.log(`Attempt ${attempt} failed: ${response.status()}. Retrying...`);
+            }
+
+            await client.connect();
+            const query = `UPDATE public.users  
+                            SET "isEmailConfirmed" = true
+                            WHERE email = '${NEW_USER_CREDENTIALS.email}'`;
+
+            try {
+                await client.query(query);
+                console.log("Email has been successfully confirmed");
+            } catch (err) {
+                console.error(err.message);
+                throw err;
+            } finally {
+                await client.end();
+            }
+            const loginPage = new LoginPage(page);
+
+            await page.goto("/");
+            await loginPage.fillEmailAddressInputField(NEW_USER_CREDENTIALS.email);
+            await loginPage.fillPasswordInputField(NEW_USER_CREDENTIALS.password);
+            await loginPage.clickLoginAndGoSignPage();
+            await use("");
+        },
+        { scope: "test" },
+    ],
+
+    createBusinessUserAndLogin: [
+        async ({ page, request, createFreeUserAndLogin }, use) => {
+
+            await expect(page).toHaveURL(`${process.env.URL}/sign`)
+            const signPage = new SignPage(page);
+            const settingsCompanyPage = await signPage.clickSettingsSidebarLinkAndGoSettingsCompanyPage();
+            let settingsBillingPage = await settingsCompanyPage.clickSettingsBillingSidebarLinkAngGoSettingsBillingPage();
+            const upgradeYourPlanModal = await settingsBillingPage.clickBusinessUpgradeAndGoToUpgradeYourPlanModal();
+            await upgradeYourPlanModal.fillCreditCardData(
+                VISA_CARD_DATA.cardNumber,
+                VISA_CARD_DATA.expirationDate,
+                VISA_CARD_DATA.cvc,
+                VISA_CARD_DATA.fullNameOnCard,
+                VISA_CARD_DATA.zip);
+            const specialOfferUpsellModal = await upgradeYourPlanModal.clickSubscribeButtonAnGoToSpecialOfferUpsellModal();
+            const settingsBillingPlanPage = await specialOfferUpsellModal.cancelSpecialOfferAndGoToSettingsBillingPlanPage();
+            expect(await settingsBillingPlanPage.locators.getToastBody().isVisible()).toBe(true);
+            await expect(settingsBillingPlanPage.locators.getToastBody()).toHaveText(TOASTER_MESSAGE.planSuccessChange);
+            await settingsBillingPlanPage.waitForToasterHidden();
+            expect(await settingsBillingPlanPage.locators.getToastBody().isHidden()).toBe(true);
+            settingsBillingPlanPage.clickSignSidebarLinkAndGoSignPage();
+
+            await use("");
+        },
+        { scope: "test" },
+    ],
+});
 

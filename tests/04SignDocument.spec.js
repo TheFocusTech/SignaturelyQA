@@ -1,5 +1,5 @@
 import { expect } from "@playwright/test";
-import {test,loginBusinessUser} from "../fixtures/base.js";
+import {test, createBusinessUserAndLogin} from "../fixtures/base.js";
 import SignPage from "../page_objects/signPage";
 const EMAIL = process.env.USER_EMAIL;
 const PASSWORD = process.env.USER_PASSWORD;
@@ -7,8 +7,12 @@ const BASE_URL = process.env.URL;
 import {CHOOSE_SIGNERS_FIELDS} from '../testData.js';
 
 
+
 test.describe('SignDocument', () => {
     test('TC_04_11_02 | Verify custom signing order', async ({page,loginBusinessUser}) => {
+
+    test('TC_04_11_02 | Verify custom signing order', async ({page,createBusinessUserAndLogin}) => {
+
         const signPage = new SignPage(page);
         await signPage.clickUploadFileBtn('testDocuments/picture.jpg');
 
