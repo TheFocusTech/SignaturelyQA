@@ -1,4 +1,4 @@
-import { NEW_USER_CREDENTIALS, newUserNumber } from "./apiUtilsForNewUser";
+import { newUserNumber, newUserEmail, newUserPassword } from "./apiUtilsForNewUser";
 import LoginPage from "../page_objects/loginPage";
 import SignPage from "../page_objects/signPage";
 import { VISA_CARD_DATA } from '../testData.js';
@@ -7,8 +7,8 @@ export async function newFreeUserLogin(page) {
     const loginPage = new LoginPage(page);
 
     await page.goto("/");
-    await loginPage.fillEmailAddressInputField(NEW_USER_CREDENTIALS.email);
-    await loginPage.fillPasswordInputField(NEW_USER_CREDENTIALS.password);
+    await loginPage.fillEmailAddressInputField(newUserEmail);
+    await loginPage.fillPasswordInputField(newUserPassword);
     await loginPage.clickLoginAndGoSignPage();
 }
 

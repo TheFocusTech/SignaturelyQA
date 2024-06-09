@@ -1,11 +1,12 @@
-import { client } from '../dbClient.js';
-import { NEW_USER_CREDENTIALS } from "./apiUtilsForNewUser";
+import { createNewClient } from '../dbClient.js';
+import { newUserEmail } from './apiUtilsForNewUser.js';
 
 export async function databaseConfirmNewUserEmail() {
+    const client = createNewClient();
     await client.connect();
     const query = `UPDATE public.users  
                     SET "isEmailConfirmed" = true
-                    WHERE email = '${NEW_USER_CREDENTIALS.email}'`;
+                    WHERE email = '${newUserEmail}'`;
     try {
         await client.query(query);
         console.log("Email has been successfully confirmed");
