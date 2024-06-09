@@ -2,9 +2,10 @@ import { generateNumberForNewUser } from '../helpers/utils.js';
 
 export let newUserEmail;
 export let newUserPassword;
+export let newUserNumber;
 
 export async function api_user_sign_up(request) {
-    const newUserNumber = generateNumberForNewUser();
+    newUserNumber = generateNumberForNewUser();
 
     const NEW_USER_CREDENTIALS = {
         email: `${process.env.EMAIL_PREFIX}${newUserNumber}${process.env.EMAIL_DOMAIN}`,
