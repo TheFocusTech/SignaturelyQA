@@ -1,6 +1,7 @@
 import DocumentsPage from "./documentsPage";
 import SettingEditSignature from "./settingEditSignature";
 import SettingsCompanyPage from "./settingsCompanyPage";
+import SettingsEditSignaturePage from "./settingsEditSignaturePage";
 
 class SignPage {
     constructor(page){
@@ -100,6 +101,12 @@ class SignPage {
         await this.locators.getEditSignatureDropItem().click();
 
         return new SettingEditSignature(this.page);
+    }
+
+    async clickSettingsEditSignatureAndGoSettingsEditSignaturePage() {
+        await this.locators.getEditSignatureDropItem().click();
+
+        return new SettingsEditSignaturePage(this.page);
     }
 }
 export default SignPage;
