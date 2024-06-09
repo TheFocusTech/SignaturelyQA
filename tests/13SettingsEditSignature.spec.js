@@ -12,15 +12,15 @@ test.describe('Settings: Edit signature', () => {
 
         const editSignaturePage = await signPage.clickSettingsSidebarLinkAngGoSettingsEditSignaturePage();
         
-        const createNewSignaturePage = await editSignaturePage.clickCreateSignatureAndGoCreateNewSignaturePage();
+        const createNewSignatureModal = await editSignaturePage.clickCreateSignatureAndGoCreateNewSignaturePage();
 
-        await createNewSignaturePage.fillFullNameInputField(FULL_NAME_INITIALS_FIELDS.name);
-        await createNewSignaturePage.fillInitialsInputField(FULL_NAME_INITIALS_FIELDS.initials);
-        await createNewSignaturePage.clickAgreementCheckbox();
+        await createNewSignatureModal.fillFullNameInputField(FULL_NAME_INITIALS_FIELDS.name);
+        await createNewSignatureModal.fillInitialsInputField(FULL_NAME_INITIALS_FIELDS.initials);
+        await createNewSignatureModal.clickAgreementCheckbox();
 
-        const settingsEditSignaturePage = await createNewSignaturePage.clickCreateSignatureBtn();
+        const settingsEditSignaturePage = await createNewSignatureModal.clickCreateSignatureBtn();
 
-        await expect(settingsEditSignaturePage.locators.getToaster()).toHaveText(TOASTER_MESSAGE.signatureCreated);
+        await expect(settingsEditSignaturePage.locators.getToast()).toHaveText(TOASTER_MESSAGE.signatureCreated);
 
         await settingsEditSignaturePage.clickSignSidebarLinkAndGoSignPage();
     })

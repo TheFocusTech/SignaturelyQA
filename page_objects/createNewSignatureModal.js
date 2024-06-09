@@ -1,14 +1,14 @@
 import SignPage from "./signPage";
 import SettingsEditSignaturePage from "./settingsEditSignaturePage";
 
-class CreateNewSignaturePage {
+class CreateNewSignatureModal {
     constructor(page) {
         this.page = page;
     }
 
     locators = {
-        getFullNameInputField: () => this.page.locator('.form__input').first(),
-        getInitialsInputField: () => this.page.locator('.form__input').last(),
+        getFullNameInputField: () => this.page.locator('div').filter({ hasText: /^Full Name \*$/ }).getByRole('textbox'),
+        getInitialsInputField: () => this.page.locator('div').filter({ hasText: /^Initials \*$/ }).getByRole('textbox'),
         getAgreementCheckbox: () => this.page.locator('.uiCheckbox__inner'),
         getCreateSignatureBtn: () => this.page.getByRole('button', {name: 'Create Signature', exact: true}),
     }
@@ -37,4 +37,4 @@ class CreateNewSignaturePage {
         return new SettingsEditSignaturePage(this.page);
     }
 }
-export default CreateNewSignaturePage;
+export default CreateNewSignatureModal;
