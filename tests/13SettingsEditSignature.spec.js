@@ -15,7 +15,7 @@ test.describe('Settings: Edit signature', () => {
         
         const createNewSignatureModal = await editSignaturePage.clickCreateSignatureAndGoCreateNewSignatureModal();
 
-        await createNewSignatureModal.fillFullNameInputField(FULL_NAME_INITIALS_FIELDS.name);
+        await createNewSignatureModal.fillFullNameInputField(FULL_NAME_INITIALS_FIELDS.fullName);
         await createNewSignatureModal.fillInitialsInputField(FULL_NAME_INITIALS_FIELDS.initials);
         await createNewSignatureModal.clickAgreementCheckbox();
 
