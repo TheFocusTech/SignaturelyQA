@@ -10,7 +10,7 @@ class SettingsCompanyPage {
     locators = {
         getSettingsBillingSidebarLink: () => this.page.getByRole('link', {name: 'Billing', exact: true}).first(),
         getAPILink: () => this.page.getByRole('link', { name: 'API' }),
-        getEditSignatureLink: () => this.page.getByRole('link', {name: 'Edit Signature'}),
+        getEditSignatureLink: () => this.page.getByLabel('Settings').getByRole('link', {name: 'Edit Signature'}),
     }
    
     async clickSettingsBillingSidebarLinkAngGoSettingsBillingPage() {
