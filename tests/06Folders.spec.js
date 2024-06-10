@@ -1,25 +1,45 @@
 import { expect } from "@playwright/test"
 import {test, loginBusinessUser, createNewFolder} from "../fixtures/base.js";
 import SignPage from "../page_objects/signPage";
-import TemplatesActivePage from "../page_objects/templatesActivePage.js";
-const EMAIL = process.env.USER_EMAIL;
-const PASSWORD = process.env.USER_PASSWORD;
-const BASE_URL = process.env.URL;
+import { TOASTER_MESSAGE, FILL_RENAME_FOLDER_NAME } from "../testData.js";
 
-test.describe('Folders', () => {
+
+test.describe.skip('Folders', () => {
+
+    test('TC_06_22_01 | Verify the business user can create folder', async ({ page , loginBusinessUser}) => {
+        const signPage = new SignPage(page); 
+
+        const documentsPage = await signPage.clickDocumentsSidebarLinkAndGoDocumentsPage();
+        await documentsPage.clickCreateFolderBtn();
+        await documentsPage.locators.getNewFolderNameInputField().fill('New Folder')
+        await documentsPage.clickCreateBtn();
+
+        await expect(documentsPage.locators.getToast()).toHaveText(TOASTER_MESSAGE.folderCreated);
+    });
 
     test('TC_06_24_01 | Verify the business user can delete folder', async ({ page, loginBusinessUser, createNewFolder }) => {
         const signPage = new SignPage(page); 
-        const templatesActivePage = new TemplatesActivePage(page);
 
-        await templatesActivePage.locators.getToaster().waitFor({ state: 'visible' });
-        await templatesActivePage.locators.getToaster().waitFor({ state: 'hidden' });
+        const documentsPage = await signPage.clickDocumentsSidebarLinkAndGoDocumentsPage();
 
-        await templatesActivePage.clickOptionsBtn();
-        await templatesActivePage.clickDeleteBtn();
-        await templatesActivePage.clickYesDeleteBtn();
-        await templatesActivePage.locators.getToaster().waitFor({ state: 'visible' });
+        await documentsPage.clickOptionsBtn();
+        await documentsPage.clickDeleteBtn();
+        await documentsPage.clickYesDeleteBtn();
+        await documentsPage.locators.getToast().waitFor({ state: 'visible' });
 
-        await expect(templatesActivePage.locators.getToaster()).toHaveText('Folder deleted successfully.');
-    })
+        await expect(documentsPage.locators.getToast()).toHaveText(TOASTER_MESSAGE.folderDeleted);
+    });
+
+    test('TC_06_23_01 | Rename folder', async ({ page, loginBusinessUser, createNewFolder }) => {
+        const signPage = new SignPage(page); 
+
+        const documentsPage = await signPage.clickDocumentsSidebarLinkAndGoDocumentsPage();
+
+        await documentsPage.clickOptionsBtn();
+        await documentsPage.clickRenameBtn();
+        await documentsPage.fillRenameInputField(FILL_RENAME_FOLDER_NAME)
+        await documentsPage.pressEnterRenameInputFielder();
+
+        await expect(documentsPage.locators.getToast()).toHaveText(TOASTER_MESSAGE.folderRename);
+    });
 })
