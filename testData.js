@@ -22,7 +22,7 @@ export const TOASTER_MESSAGE ={
 };
 export const COMPANY_INFO ={
     companyName: 'companyName',
-    emailFrom: USER_EMAIL,
+    emailFrom: USER_EMAIL+2,
     emailTo: USER_EMAIL+1,
     redirectionPage: 'https://www.youtube.com/'
 };
