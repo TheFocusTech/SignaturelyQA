@@ -10,7 +10,8 @@ test.describe('Settings: Edit signature', () => {
     test('TC_13_51_01 | Verify that user can create Signature.', async ({ page, createBusinessUserAndLogin }) => {
         const signPage = new SignPage(page);
 
-        const editSignaturePage = await signPage.clickSettingsEditSignatureAndGoSettingsEditSignaturePage();
+        const settingsCompanyPage = await signPage.clickSettingsSidebarLinkAndGoSettingsCompanyPage();
+        const editSignaturePage = await settingsCompanyPage.clickEditSignatureLinkAndGoSettingsEditSignaturePage();
         
         const createNewSignatureModal = await editSignaturePage.clickCreateSignatureAndGoCreateNewSignatureModal();
 
