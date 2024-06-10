@@ -4,6 +4,7 @@ export const URL_END_POINTS = {
 };
 export const ACTIVE_COLOR = 'rgb(0, 163, 250)';
 export const FILL_FOLDER_NAME = 'Folder 1';
+export const FILL_SECOND_FOLDER_NAME = 'Folder 2';
 export const CHOOSE_SIGNERS_FIELDS = {
     name1: 'John Doe',
     email1: '5kXUw@example.com',
@@ -17,7 +18,8 @@ export const TOASTER_MESSAGE ={
     copyApiKey: 'API key successfully copied to clipboard',
     deleteApiKey: 'API key successfully deleted',
     folderRename: 'Folder successfully updated!',
-    folderCreated: 'Folder created!'
+    folderCreated: 'Folder created!',
+    folderMoved: 'Files successfully moved!'
 };
 export const API_KEY_NAME = 'Test Api Key';
 export const NO_API_KEY_MESSAGE = 'You don\'t have any API keys yet.';

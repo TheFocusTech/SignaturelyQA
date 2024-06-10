@@ -1,6 +1,6 @@
 import SignPage from "./signPage";
 import DocumentsTrashPage from "./documentsTrashPage";
-import { FILL_FOLDER_NAME } from '../testData';
+import { FILL_FOLDER_NAME, FILL_SECOND_FOLDER_NAME } from '../testData';
 
 class DocumentsPage {
     constructor(page) {
@@ -27,6 +27,10 @@ class DocumentsPage {
         getYesDeteleBtn: () => this.page.getByRole('button', {name: 'Yes, Delete'}),
         getRenameBtn: () => this.page.getByRole('button', {name: 'Rename'}),
         getRenameInputField: () => this.page.locator('input.form__input--hidden'),
+        getToaster: () => this.page.getByRole('alert'),
+        getOptionDropdown: () => this.page.locator('.documents__optionsDropdown').first(),
+        getMoveToBtn: () => this.page.getByRole('button', { name: 'Move to' }),
+        getMoveToFolderBtn: () => this.page.getByRole('button', {name: 'Move to folder'}),
     }
 
     async clickSignSidebarLinkAndGoSignPage() {
@@ -117,6 +121,30 @@ class DocumentsPage {
         await this.locators.getRenameInputField().press('Enter');
 
         return this.page;
+    }
+
+    async clickOptionDropdown() {
+        await this.locators.getOptionDropdown().click();
+
+        return this;
+    }
+
+    async fillSecondFolderNameInputField() {
+        await this.locators.getNewFolderNameInputField().fill(FILL_SECOND_FOLDER_NAME); 
+
+        return this;
+    }
+
+    async clickMoveToBtn() {
+        await this.locators.getMoveToBtn().click();
+
+        return this;
+    }
+
+    async clickMoveToFolderBtn() {
+        await this.locators.getMoveToFolderBtn().click();
+
+        return this;
     }
 }
 

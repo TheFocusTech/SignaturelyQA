@@ -1,5 +1,5 @@
 import { expect } from "@playwright/test"
-import {test, createBusinessUserAndLogin, createNewFolder} from "../fixtures/base.js";
+import {test, createBusinessUserAndLogin, createNewFolder, loginBusinessUser} from "../fixtures/base.js";
 import SignPage from "../page_objects/signPage";
 import { TOASTER_MESSAGE, FILL_RENAME_FOLDER_NAME } from "../testData.js";
 
@@ -41,5 +41,23 @@ test.describe ('Folders', () => {
         await documentsPage.pressEnterRenameInputFielder();
 
         await expect(documentsPage.locators.getToast()).toHaveText(TOASTER_MESSAGE.folderRename);
+    });
+
+    test('TC_06_25_01 | Move folder to folder', async ({ page, loginBusinessUser }) => {
+        const signPage = new SignPage(page); 
+
+        const documentsPage = await signPage.clickDocumentsSidebarLinkAndGoDocumentsPage();
+
+        await documentsPage.clickCreateFolderBtn();
+        await documentsPage.fillNewFolderNameInputField();
+        await documentsPage.clickCreateBtn();
+        await documentsPage.clickCreateFolderBtn();
+        await documentsPage.fillSecondFolderNameInputField();
+        await documentsPage.clickCreateBtn();
+        await expect(documentsPage.locators.getToaster()).toHaveCount(0, { timeout: 20000 });
+        await documentsPage.clickOptionDropdown();
+        await documentsPage.clickMoveToBtn();
+        await documentsPage.clickMoveToFolderBtn();
+        await expect(documentsPage.locators.getToast().getByText(TOASTER_MESSAGE.folderMoved)).toBeVisible();
     });
 })
