@@ -27,7 +27,7 @@ class DocumentsPage {
         getYesDeteleBtn: () => this.page.getByRole('button', {name: 'Yes, Delete'}),
         getRenameBtn: () => this.page.getByRole('button', {name: 'Rename'}),
         getRenameInputField: () => this.page.locator('input.form__input--hidden'),
-        getToaster: () => this.page.getByRole('alert'),
+        getModalToast: () => this.page.getByRole('alert'),
         getOptionDropdown: () => this.page.locator('.documents__optionsDropdown').first(),
         getMoveToBtn: () => this.page.getByRole('button', { name: 'Move to' }),
         getMoveToFolderBtn: () => this.page.getByRole('button', {name: 'Move to folder'}),

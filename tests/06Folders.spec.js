@@ -54,10 +54,10 @@ test.describe ('Folders', () => {
         await documentsPage.clickCreateFolderBtn();
         await documentsPage.fillSecondFolderNameInputField();
         await documentsPage.clickCreateBtn();
-        await expect(documentsPage.locators.getToaster()).toHaveCount(0, { timeout: 20000 });
+        await expect(documentsPage.locators.getModalToast()).toHaveCount(0, { timeout: 20000 });
         await documentsPage.clickOptionDropdown();
         await documentsPage.clickMoveToBtn();
         await documentsPage.clickMoveToFolderBtn();
-        await expect(documentsPage.locators.getToast().getByText(TOASTER_MESSAGE.folderMoved)).toBeVisible();
+        await expect(documentsPage.locators.getModalToast().getByText(TOASTER_MESSAGE.folderMoved)).toBeVisible();
     });
 })
