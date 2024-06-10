@@ -17,9 +17,9 @@ export const TOASTER_MESSAGE ={
 
 };
 export const COMPANY_INFO ={
-    companyName: 'Signaturely',
-    emailFrom: 'sign.js120@gmail.com',
-    emailTo: 'sign.js.test+46@gmail',
+    companyName: 'companyName',
+    emailFrom: USER_EMAIL,
+    emailTo: USER_EMAIL+1,
     redirectionPage: 'https://www.youtube.com/'
 };
 
