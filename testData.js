@@ -22,8 +22,8 @@ export const TOASTER_MESSAGE ={
 };
 export const COMPANY_INFO ={
     companyName: 'companyName',
-    emailFrom: USER_EMAIL+2,
-    emailTo: USER_EMAIL+1,
+    emailFrom: 'fghj@example.com',
+    emailTo: 'sdgho@example.com',
     redirectionPage: 'https://www.youtube.com/'
 };
 export const API_KEY_NAME = 'Test Api Key';
