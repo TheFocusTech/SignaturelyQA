@@ -104,6 +104,7 @@ class SignPage {
     }
 
     async clickSettingsEditSignatureAndGoSettingsEditSignaturePage() {
+        await this.locators.getSettingsSidebarLink().click();
         await this.locators.getEditSignatureDropItem().click();
 
         return new SettingsEditSignaturePage(this.page);
