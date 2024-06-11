@@ -36,4 +36,3 @@ export const VISA_CARD_DATA = {
     cvc: '111',
     zip: '20500'
 };
-
