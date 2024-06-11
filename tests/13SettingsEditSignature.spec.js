@@ -2,7 +2,6 @@ import { expect } from "@playwright/test";
 import { test, createBusinessUserAndLogin } from "../fixtures/base.js";
 import SignPage from "../page_objects/signPage";
 import { FULL_NAME_INITIALS_FIELDS, TOASTER_MESSAGE } from "../testData.js";
-import SettingsEditSignaturePage from "../page_objects/settingsEditSignaturePage.js";
 
 
 test.describe('Settings: Edit signature', () => {
@@ -19,9 +18,10 @@ test.describe('Settings: Edit signature', () => {
         await createNewSignatureModal.fillInitialsInputField(FULL_NAME_INITIALS_FIELDS.initials);
         await createNewSignatureModal.clickAgreementCheckbox();
 
-        const settingsEditSignaturePage = await createNewSignatureModal.clickCreateSignatureBtn();
+        const settingsEditSignaturePage = await createNewSignatureModal.clickCreateSignatureBtnAndGoSettingsEditSignaturePage();
 
         await expect(settingsEditSignaturePage.locators.getToast()).toHaveText(TOASTER_MESSAGE.signatureCreated);
+        await expect(settingsEditSignaturePage.locators.getSavedSignatureArea()).toHaveCount(1);
 
         await settingsEditSignaturePage.clickSignSidebarLinkAndGoSignPage();
     })

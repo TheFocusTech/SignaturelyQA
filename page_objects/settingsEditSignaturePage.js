@@ -8,9 +8,6 @@ class SettingsEditSignaturePage {
 
     locators = {
       getCreateSignatureBtn: () => this.page.getByRole('button', {name: 'Create Signature'}),
-      getFullNameInput: () => this.page.locator('div').filter({ hasText: /^Full Name \*$/ }).getByRole('textbox'),
-      getInitialsInput:() => this.page.locator('div').filter({ hasText: /^Initials \*$/ }).getByRole('textbox'),
-      getCheckboxAgree: () => this.page.getByRole('contentinfo').locator('div').nth(2),
       getCardSignatureLast: () => this.page.locator('.settingsSignature__item').last(),
       getBurgerMenuSignatureLast: () => this.page.locator('.settingsSignature__dropDown-trigger').last(),
       getDeleteDropItem: () => this.page.getByText('Delete', { exact: true }),
@@ -18,28 +15,11 @@ class SettingsEditSignaturePage {
       getSignSidebarLink: () => this.page.getByRole('link', { name: 'Sign', exact: true }),
       getToastCloseBtn: () => this.page.locator('[type="success"]').first(),
       getToast: () => this.page.locator('.Toastify__toast-body'),
+      getSavedSignatureArea: () => this.page.getByText('Saved Signatures', { exact: true }),
     }
 
     async clickCreateSignatureBtn() {
       await this.locators.getCreateSignatureBtn().click();
-
-      return this;
-    }
-
-    async fillFullNameInput(name) {
-      await this.locators.getFullNameInput().fill(name);
-
-      return this;
-    }
-
-    async fillInitialsInput(initials) {
-      await this.locators.getInitialsInput().fill(initials);
-
-      return this;
-    }
-
-    async clickCheckboxAgree() {
-      await this.locators.getCheckboxAgree().click();
 
       return this;
     }

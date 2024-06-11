@@ -1,4 +1,3 @@
-import SignPage from "../page_objects/signPage";
 import SettingsEditSignaturePage from "./settingsEditSignaturePage";
 
 class CreateNewSignatureModal {
@@ -31,7 +30,7 @@ class CreateNewSignatureModal {
         return this;
     }
 
-    async clickCreateSignatureBtn() {
+    async clickCreateSignatureBtnAndGoSettingsEditSignaturePage() {
         await this.locators.getCreateSignatureBtn().click();
 
         return new SettingsEditSignaturePage(this.page);
