@@ -12,7 +12,7 @@ class SettingEditSignature {
       getCheckboxAgree: () => this.page.getByRole('contentinfo').locator('div').nth(2),
       getCardSignatureLast: () => this.page.locator('.settingsSignature__item').last(),
       getBurgerMenuSignatureLast: () => this.page.locator('.settingsSignature__dropDown-trigger').last(),
-      getDeleteDropItem: () => this.page.getByText('Delete'),
+      getDeleteDropItem: () => this.page.getByText('Delete', { exact: true }),
       getDeleteBtn: () => this.page.getByRole('button', {name: 'Delete'}),
       getSignSidebarLink: () => this.page.getByRole('link', { name: 'Sign', exact: true }),
       getToastCloseBtn: () => this.page.locator('[type="success"]').first(),

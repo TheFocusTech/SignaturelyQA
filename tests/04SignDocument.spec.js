@@ -1,5 +1,5 @@
 import { expect } from "@playwright/test";
-import {test,loginBusinessUser} from "../fixtures/base.js";
+import {test, createBusinessUserAndLogin} from "../fixtures/base.js";
 import SignPage from "../page_objects/signPage";
 const EMAIL = process.env.USER_EMAIL;
 const PASSWORD = process.env.USER_PASSWORD;
@@ -8,12 +8,12 @@ import {CHOOSE_SIGNERS_FIELDS} from '../testData.js';
 
 test.describe('SignDocument', () => {
 
-    test('TC_04_11_02 | Verify custom signing order', async ({page,loginBusinessUser}) => {
+    test('TC_04_11_02 | Verify custom signing order', async ({page,createBusinessUserAndLogin}) => {
         const signPage = new SignPage(page);
-        signPage.clickUploadFileBtn('testDocuments/picture.jpg');
+        await signPage.clickUploadFileBtn('testDocuments/picture.jpg');
 
         await signPage.locators.getPrepareDocumentBtn().waitFor({state: 'visible'});
-        signPage.clickPrepareDocumentBtn();
+        await signPage.clickPrepareDocumentBtn();
 
         await signPage.clickSendForSignatureRadioBtn();
         await signPage.clickAddSignerBtn();
@@ -30,7 +30,5 @@ test.describe('SignDocument', () => {
 
         await expect(signPage.locators.getCustomSigningOrderPositionNumberOne()).toBeVisible();
         await expect(signPage.locators.getCustomSigningOrderPositionNumberTwo()).toBeVisible();
-
-        await signPage.clickCancelBtnAndDeleteDocument();
     })
 })
