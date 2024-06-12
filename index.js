@@ -27,10 +27,10 @@ async function loadSavedCredentialsIfExist() {
 /**
  * Serializes credentials to a file compatible with GoogleAuth.fromJSON.
  *
- * @param {OAuth2Client} client The authenticated OAuth2 client.
+ * @param {OAuth2Client} client1 The authenticated OAuth2 client.
  * @return {Promise<void>} A Promise that resolves when the credentials are successfully saved.
  */
-async function saveCredentials(client) {
+async function saveCredentials(client1) {
     const content = await fs.readFile(CREDENTIALS_PATH);
     const keys = JSON.parse(content);
     const key = keys.installed || keys.web;
@@ -38,7 +38,7 @@ async function saveCredentials(client) {
         type: 'authorized_user',
         client_id: key.client_id,
         client_secret: key.client_secret,
-        refresh_token: client.credentials.refresh_token,
+        refresh_token: client1.credentials.refresh_token,
     });
     await fs.writeFile(TOKEN_PATH, payload);
 }
@@ -47,21 +47,21 @@ async function saveCredentials(client) {
  * Load or request or authorization to call APIs. *
  */
 async function authorize() {
-    let client = await loadSavedCredentialsIfExist();
-    if (client) {
-        return client;
+    let client1 = await loadSavedCredentialsIfExist();
+    if (client1) {
+        return client1;
     }
-    client = await authenticate({
+    client1 = await authenticate({
         scopes: SCOPES,
         keyfilePath: CREDENTIALS_PATH,
         additionalParameters: {
             access_type: 'offline'
         }
     });
-    if (client.credentials) {
-        await saveCredentials(client);
+    if (client1.credentials) {
+        await saveCredentials(client1);
     }
-    return client;
+    return client1;
 }
 
 /**
