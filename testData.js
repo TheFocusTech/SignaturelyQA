@@ -1,6 +1,7 @@
 export const URL_END_POINTS = {
     signEndPoint: '/sign',
-    documentsEndPoint: '/documents'
+    documentsEndPoint: '/documents',
+    activateTrialEndPoint: '/activate-trial',
 };
 export const ACTIVE_COLOR = 'rgb(0, 163, 250)';
 export const FILL_FOLDER_NAME = 'Folder 1';
@@ -35,3 +36,5 @@ export const VISA_CARD_DATA = {
     cvc: '111',
     zip: '20500'
 };
+export const START_YOUR_FREE_TRIAL_STATEMENT = "Please add your payment details to start the free trial.";
+export const BILLING_INFORMATION = "Billing Information";
