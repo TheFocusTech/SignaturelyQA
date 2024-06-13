@@ -16,7 +16,8 @@ class FormRequestsEditPage {
         getDateTab: () => this.page.locator('div .interactModal__fieldBar-fieldItem').filter({ hasText: 'Date' }),
         getUploadedDocument: () => this.page.locator('.react-pdf__Page__canvas').first(),
         getCancelBtn: () => this.page.locator('.documentPreview__document-header-button-icon'),
-        getSaveBtnAndGoFormRequestsPage: () => this.page.getByRole('button', { name: 'Save' })
+        getSaveBtnAndGoFormRequestsPage: () => this.page.getByRole('button', { name: 'Save' }),
+        getModulWindowFormSaved: () => this.page.getByRole('heading', { name: "Form Saved"})
 
     }
 

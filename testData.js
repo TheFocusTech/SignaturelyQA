@@ -17,7 +17,9 @@ export const TOASTER_MESSAGE ={
     copyApiKey: 'API key successfully copied to clipboard',
     deleteApiKey: 'API key successfully deleted',
     folderRename: 'Folder successfully updated!',
-    folderCreated: 'Folder created!'
+    folderCreated: 'Folder created!',
+    docSaved: 'Document successfully saved!',
+    formSaved: 'Form saved'
 };
 export const API_KEY_NAME = 'Test Api Key';
 export const NO_API_KEY_MESSAGE = 'You don\'t have any API keys yet.';

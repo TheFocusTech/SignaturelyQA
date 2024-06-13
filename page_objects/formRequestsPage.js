@@ -12,10 +12,11 @@ class FormRequestsPage {
         getOptionsDropdown: () => this.page.locator('.documents__optionsDropdownTrigger').filter({ hasText: 'Options' }).first(),
         getEditDropdownAndGoFormRequestsEditPage: () => this.page.locator('.documents__dropdownOption').filter({ hasText: 'Edit' }),
         getFirstFormTitle: () => this.page.locator('.table__column.table__column--text').nth(1),
+        getDocSavedToasterMessage: () => this.page.locator('.Toastify__toast-body').nth(0),
         getFormSavedToasterMessage: () => this.page.locator('.Toastify__toast-body').nth(1),
         getDeleteBtn: () => this.page.getByRole('button', { name: 'Delete' }),
         getYesDeleteModalWindowBtn: () => this.page.getByRole('button', { name: 'Yes, Delete' }),
-        getCheckBoxOfForm: () => this.page.locator('.uiCheckbox__inner').first(),
+        getCheckBoxOfForm: () => this.page.locator('.uiCheckbox__inner'),
     }  
 
   async clickFormsLink () {
@@ -48,8 +49,8 @@ class FormRequestsPage {
         
     return this;
     }  
-    async clickCheckBoxOfForm() {
-        await this.locators.getCheckBoxOfForm().click();
+    async clickCheckBoxOfForm(i) {
+        await this.locators.getCheckBoxOfForm().nth(i).click();
 
         return this;
     }
