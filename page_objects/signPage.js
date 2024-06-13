@@ -39,6 +39,9 @@ class SignPage {
         getSignNowBtn: () => this.page.getByRole('button', {name: 'Sign Now'}),
         getSignatureCreatedAlert: () => this.page.getByText('Signature created successfully'),
         getSignDocumentBtn: () => this.page.getByRole('button', {name: 'Sign Document'}),
+        getProgressBar: () => this.page.locator('.progress-bar'),
+        getGotItButton: () => this.page.getByRole('button', {name: 'Got it'}),
+
     }
 
     async clickDocumentsSidebarLinkAndGoDocumentsPage() {
@@ -167,6 +170,12 @@ class SignPage {
 
     async clickSignDocumentBtn() {
         await this.locators.getSignDocumentBtn().click();
+
+        return this;
+    }
+
+    async clickGotItButton() {
+        await this.locators.getGotItButton().click();
 
         return this;
     }
