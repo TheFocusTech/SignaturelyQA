@@ -1,14 +1,14 @@
 import { expect } from '@playwright/test';
-import { test, loginBusinessUser } from "../fixtures/base.js";
+import { test, createBusinessUserAndLogin } from "../fixtures/base.js";
 import {
     API_KEY_NAME, NO_API_KEY_MESSAGE,
     TOASTER_MESSAGE,
 } from '../testData.js';
 import SignPage from "../page_objects/signPage";
 
-test.describe.skip('Create API key', () => {
+test.describe('Create API key', () => {
 
-    test('TC_12_48_01_01 | Verify User can copy API key created by the "Create API" button on the right.', async ({ page, loginBusinessUser }) => {
+    test('TC_12_48_01_01 | Verify User can copy API key created by the "Create API" button on the right.', async ({ page, createBusinessUserAndLogin }) => {
         const signPage = new SignPage(page);
 
         const settingsCompanyPage = await signPage.clickSettingsSidebarLinkAndGoSettingsCompanyPage();
