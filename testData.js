@@ -18,7 +18,7 @@ export const TOASTER_MESSAGE ={
     deleteApiKey: 'API key successfully deleted',
     folderRename: 'Folder successfully updated!',
     folderCreated: 'Folder created!',
-    signatureCreated: 'Signature created successfully'
+    signatureCreated: 'Signature created successfully',
     folderCreated: 'Folder created!',
     profileUpdated: 'Profile information updated.'
 };
