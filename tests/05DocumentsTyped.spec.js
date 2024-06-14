@@ -42,4 +42,36 @@ test.describe('DocumentsTyped', () => {
         await expect(documentsPage.locators.getTitleEditAndRessendDocument()).toBeVisible();
     })
 
+    test('TC_05_21_03 | Verify that document_status is  "Draft" ', async ({ page }) => {
+        test.setTimeout(150 * 1000);
+        const signPage = new SignPage(page);
+        
+        await signPage.clickSendForSignatureRadioBtn();
+        await signPage.clickAddSignerBtn();
+
+        await signPage.fillChooseSignersNameField(CHOOSE_SIGNERS_FIELDS.name1);
+        await signPage.fillChooseSignersEmailField(CHOOSE_SIGNERS_FIELDS.email1);
+
+        await signPage.clickContinueBtn();
+        await signPage.clickGotItButton();
+        await signPage.clickSignModal();
+        await signPage.clickSignPlace();
+        await signPage.clickSignModal();
+        await signPage.clickSaveBtn();
+
+        await new Promise(resolve => setTimeout(resolve, 1000));
+
+        await signPage.clickSendForSignatureButton();
+        const documentsPage = await signPage.clickBackToDocumentsBtn();
+        await documentsPage.clickOptionsDropdown();
+        await documentsPage.clickEditAndResendButton();
+        await documentsPage.clickRevertToDraftBtn();
+
+        await documentsPage.clickCancelBtn();
+        await documentsPage.clickDocumentsSidebarLink();
+
+        await expect(documentsPage.locators.getStatusDocumentDraft()).toBeVisible();
+
+    })
+
 })
