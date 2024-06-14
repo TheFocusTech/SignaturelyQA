@@ -1,17 +1,18 @@
+import { title } from "process";
 import DocumentsPage from "./documentsPage";
 import SettingEditSignature from "./settingEditSignature";
 import SettingsCompanyPage from "./settingsCompanyPage";
 
 class SignPage {
-    constructor(page){
+    constructor(page) {
         this.page = page;
     }
 
     locators = {
         getSignSidebarLink: () => this.page.getByRole('link', { name: 'Sign', exact: true }),
-        getSettingsSidebarLink: () => this.page.getByRole('link', {name: 'Settings', exact: true}),
-        getDocumentsSidebarLink: () => this.page.getByRole('link', {name: 'Documents', exact: true}),
-        getUploadFileBtn: () => this.page.getByRole('button', {name: 'Upload File'}),
+        getSettingsSidebarLink: () => this.page.getByRole('link', { name: 'Settings', exact: true }),
+        getDocumentsSidebarLink: () => this.page.getByRole('link', { name: 'Documents', exact: true }),
+        getUploadFileBtn: () => this.page.getByRole('button', { name: 'Upload File' }),
         getFileInputField: () => this.page.locator('input[type = "file"]'),
         getPrepareDocumentBtn: () => this.page.locator('div.wizardSignForm-createButton button'),
         getSendForSignatureRadioBtn: () => this.page.locator('div.radio-button__wrapper ').last(),
@@ -24,6 +25,23 @@ class SignPage {
         getCancelBtn: () => this.page.locator('.interactModal__header-send button.interactModal__header-cancelButton'),
         getDropDownUser: () => this.page.locator('.dropDownUser__wrapper'),
         getEditSignatureDropItem: () => this.page.getByRole('banner').getByRole('link', { name: 'Edit Signature' }),
+        getPrepareForSigningTitle: () => this.page.getByText('Prepare for Signing'),
+        getChooseSignersTitle: () => this.page.getByText('Choose Signers'),
+        getContinueBtn: () => this.page.getByRole('button', { name: 'Continue' }),
+        getSaveBtn: () => this.page.getByRole('button', { name: 'Save' }),
+        getSignModal: () => this.page.locator('//ul[@class="interactModal__fieldBar-fieldList"]/li[1]'),
+        getSignPlace: () => this.page.locator('(//canvas[@class="react-pdf__Page__canvas"])[1]'),
+        getSendForSignatureButton: () => this.page.getByRole('button', { name: 'Send for Signature' }),
+        getBackToDocumentsBtn: () => this.page.getByRole('button', { name: 'Back to Documents  ' }),
+        getDocumentSavedAlert: () => this.page.getByText('Document successfully saved!'),
+        getSaveAcopyDocumentmessage: () => this.page.getByText('Save a copy of your document'),
+        getDocumentCreatedAlert: () => this.page.getByText('Document successfully saved!'),
+        getSignNowBtn: () => this.page.getByRole('button', {name: 'Sign Now'}),
+        getSignatureCreatedAlert: () => this.page.getByText('Signature created successfully'),
+        getSignDocumentBtn: () => this.page.getByRole('button', {name: 'Sign Document'}),
+        getProgressBar: () => this.page.locator('.progress-bar'),
+        getGotItButton: () => this.page.getByRole('button', {name: 'Got it'}),
+
     }
 
     async clickDocumentsSidebarLinkAndGoDocumentsPage() {
@@ -31,8 +49,8 @@ class SignPage {
 
         return new DocumentsPage(this.page);
     }
-    
-    async clickSettingsSidebarLinkAndGoSettingsCompanyPage(){
+
+    async clickSettingsSidebarLinkAndGoSettingsCompanyPage() {
         await this.locators.getSettingsSidebarLink().click();
 
         return new SettingsCompanyPage(this.page);
@@ -55,12 +73,14 @@ class SignPage {
     }
 
     async clickSendForSignatureRadioBtn() {
+        await this.locators.getPrepareForSigningTitle().waitFor({ state: 'attached' });
         await this.locators.getSendForSignatureRadioBtn().click();
 
         return this;
     }
 
     async clickAddSignerBtn() {
+        await this.locators.getChooseSignersTitle().waitFor({ state: 'attached' });
         await this.locators.getAddSignerBtn().click();
 
         return this;
@@ -83,13 +103,13 @@ class SignPage {
 
         return this;
     }
-    
+
     async clickCancelBtnAndDeleteDocument() {
         await this.locators.getCancelBtn().click();
 
         return new SignPage(this.page);
     }
-    
+
     async clickDropDownUser() {
         await this.locators.getDropDownUser().click();
 
@@ -101,5 +121,64 @@ class SignPage {
 
         return new SettingEditSignature(this.page);
     }
+
+    async clickSignModal() {
+        await this.locators.getSaveBtn().waitFor({ state: 'attached' });
+        await this.locators.getSignModal().click();
+
+        return this;
+    }
+    async clickSignPlace() {
+        await this.locators.getSignPlace().click();
+
+        return this;
+    }
+
+    async clickSaveBtn() {
+        await this.locators.getSaveBtn().waitFor({ state: 'attached' });
+        await this.locators.getSaveBtn().click();
+
+        return this;
+    }
+
+    async clickContinueBtn() {
+        await this.locators.getContinueBtn().waitFor({ state: 'attached' });
+        await this.locators.getContinueBtn().click();
+
+        return this;
+    }
+
+    async clickSendForSignatureButton() {
+        await this.locators.getDocumentSavedAlert().waitFor({ state: 'hidden' });
+        await this.locators.getSendForSignatureButton().click();
+
+        return this;
+    }
+    async clickBackToDocumentsBtn() {
+        await this.locators.getSaveAcopyDocumentmessage().waitFor({ status: 'attached' });
+        await new Promise(resolve => setTimeout(resolve, 1000));
+        await this.locators.getBackToDocumentsBtn().click();
+
+        return new DocumentsPage(this.page);
+    }
+
+    async clickSignNowBtn() {
+        await this.locators.getSignNowBtn().click();
+
+        return this;
+    }
+
+    async clickSignDocumentBtn() {
+        await this.locators.getSignDocumentBtn().click();
+
+        return this;
+    }
+
+    async clickGotItButton() {
+        await this.locators.getGotItButton().click();
+
+        return this;
+    }
+
 }
 export default SignPage;
