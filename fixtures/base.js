@@ -7,6 +7,7 @@ import { api_user_sign_up } from '../newUserUtils/apiUtilsForNewUser.js';
 import { databaseConfirmNewUserEmail } from '../newUserUtils/dbUtilsForNewUser.js';
 import { newFreeUserLogin, upgradeFreeUserToBusinessAndLogin } from '../newUserUtils/uiUtilsForNewUser.js';
 import NewSignPage from '../new_pom/pages/sign/signPage.js';
+import PrepareForSignatureModal from '../new_pom/modalWindows/prepareForSignatureModal.js';
 
 const API_BASE_URL = process.env.API_URL;
 const EMAIL = process.env.USER_EMAIL;
@@ -140,5 +141,9 @@ export const test = base.extend({
 
     signPage: async ({ page }, use) => {
         await use(new NewSignPage(page));
+    },
+
+    prepareForSignature: async ({ page }, use) => {
+        await use(new PrepareForSignatureModal(page));
     },
 });

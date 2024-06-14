@@ -1,5 +1,6 @@
 import SideMenuComponent from "../../components/sideMenuComponent";
 import UploadFileOnSignPage from "./UploadFileOnSignPage";
+import PrepareForSignatureModal from "../../modalWindows/prepareForSignatureModal";
 
 export default class NewSignPage {
   constructor(page) {
