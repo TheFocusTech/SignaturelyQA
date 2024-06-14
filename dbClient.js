@@ -1,11 +1,9 @@
 import { Client } from 'pg';
+import { parse } from 'pg-connection-string';
 
 export function createNewClient() {
-    return new Client({
-        host: process.env.DB_HOST,
-        user: process.env.DB_USER,
-        port: '5432',
-        password: process.env.DB_PASSWORD,
-        database: process.env.DB_NAME
-    });
+    const connectionString = process.env.DB_DATA;
+    const config = parse(connectionString);
+
+    return new Client(config);
 }

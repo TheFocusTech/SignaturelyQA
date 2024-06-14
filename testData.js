@@ -18,6 +18,8 @@ export const TOASTER_MESSAGE ={
     deleteApiKey: 'API key successfully deleted',
     folderRename: 'Folder successfully updated!',
     folderCreated: 'Folder created!',
+    signatureCreated: 'Signature created successfully'
+    folderCreated: 'Folder created!',
     profileUpdated: 'Profile information updated.'
 };
 export const API_KEY_NAME = 'Test Api Key';
@@ -35,5 +37,9 @@ export const VISA_CARD_DATA = {
     expirationDate: '12 / 27',
     cvc: '111',
     zip: '20500'
+};
+export const FULL_NAME_INITIALS_FIELDS = {
+    fullName: 'John Smith',
+    initials: 'JS'
 };
 
