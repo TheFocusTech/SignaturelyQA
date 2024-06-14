@@ -1,4 +1,4 @@
-export default class SideMenu {
+export default class SideMenuComponent {
   constructor(page) {
     this.page = page;
     this.signMenu = this.page.getByRole('link', { name: 'Sign', exact: true });

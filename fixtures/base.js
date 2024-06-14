@@ -6,7 +6,7 @@ import { API_URL_END_POINTS } from "../apiData.js";
 import { api_user_sign_up } from '../newUserUtils/apiUtilsForNewUser.js';
 import { databaseConfirmNewUserEmail } from '../newUserUtils/dbUtilsForNewUser.js';
 import { newFreeUserLogin, upgradeFreeUserToBusinessAndLogin } from '../newUserUtils/uiUtilsForNewUser.js';
-import NewSignPage from '../new_pom/sign/signPage.js';
+import NewSignPage from '../new_pom/pages/sign/signPage.js';
 
 const API_BASE_URL = process.env.API_URL;
 const EMAIL = process.env.USER_EMAIL;

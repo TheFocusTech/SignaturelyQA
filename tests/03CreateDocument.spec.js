@@ -1,16 +1,14 @@
 import { expect } from "@playwright/test";
 import { test, createBusinessUserAndLogin, signPage } from "../fixtures/base.js";
-import NewSignPage from "../new_pom/sign/signPage.js";
 
 test.describe('CreateDocument', () => {
 
-  test('TC_03_07_01 | Sign a document', async ({ page, createBusinessUserAndLogin }) => {
+  test('TC_03_07_01 | Sign a document', async ({ signPage, createBusinessUserAndLogin }) => {
 
-    const signPage = new NewSignPage(page);
-    await signPage.sideMenu.clickSignMenu();
-
-    await signPage.uploadFileTab.fileUploader.uploadFile('testDocuments/picture.jpg');
-
+    await signPage.UploadFileOnSignPage.fileUploader.uploadFile('testDocuments/picture.jpg');
+    await signPage.UploadFileOnSignPage.fileUploader.waitForVisibleProgressBar();
+    await signPage.UploadFileOnSignPage.fileUploader.waitForHiddenProgressBar();
+    await signPage.UploadFileOnSignPage.clickPrepareDocumentBtn();
 
   })
 })
