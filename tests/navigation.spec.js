@@ -61,11 +61,11 @@ test('Create and delete signature', async ({ page, createBusinessUserAndLogin })
 
 test('check clean documents fixture', async ({ loginBusinessUser, signPage, documentsPage, documentsTrashPage }) => {
 
-    await signPage.sideMenu.clickDocumentsMenu();
+    await signPage.sideMenu.clickDocuments();
 
     await expect(documentsPage.table.emptyTableHeader).toHaveText(EMPTY_DOCUMENTS_HEADER);
 
-    await documentsPage.documentsSideMenu.clickTrashMenu();
+    await documentsPage.sideMenuDocuments.clickTrash();
 
     await expect(documentsTrashPage.table.emptyTableHeader).toBeVisible();
     await expect(documentsTrashPage.table.emptyTableHeader).toHaveText(EMPTY_TRASH_HEADER);

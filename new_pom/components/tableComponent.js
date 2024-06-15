@@ -5,8 +5,5 @@ export default class TableComponent {
 
         this.emptyTableHeader = this.page.locator('.empty-table__header');
     }
-
-    async getEmptyTableHeaderText() {
-        await this.emptyTableHeader.innerText();
-    }
+    
 }

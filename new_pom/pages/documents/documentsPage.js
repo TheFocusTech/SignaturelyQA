@@ -1,6 +1,6 @@
 import SideMenuComponent from "../../components/sideMenuComponent";
 import TableComponent from "../../components/tableComponent";
-import DocumentsSideMenuComponent from "../../components/documentsSideMenuComponent";
+import SideMenuDocumentsComponent from "../../components/SideMenuDocumentsComponent";
 
 export default class NewDocumentsPage {
     constructor(page) {
@@ -8,7 +8,7 @@ export default class NewDocumentsPage {
 
         this.sideMenu = new SideMenuComponent(this.page);
         this.table = new TableComponent(this.page); 
-        this.documentsSideMenu = new DocumentsSideMenuComponent(this.page);      
+        this.sideMenuDocuments = new SideMenuDocumentsComponent(this.page);      
 
     }
    
