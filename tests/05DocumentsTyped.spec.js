@@ -1,5 +1,7 @@
 import { expect } from "@playwright/test";
 import { test, createBusinessUserAndLogin, signPage, prepareForSignature, finalStep, documentPage } from "../fixtures/base.js";
+import SignPage from "../page_objects/signPage.js"
+import SettingEditSignature from "../page_objects/settingEditSignature.js";
 import { CHOOSE_SIGNERS_FIELDS } from '../testData.js';
 
 test.describe('DocumentsTyped', () => {
@@ -35,5 +37,4 @@ test.describe('DocumentsTyped', () => {
 
         await expect (documentPage.editAndResendTitle).toBeVisible();
 
-    })
 })
