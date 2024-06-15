@@ -8,6 +8,8 @@ import { databaseConfirmNewUserEmail } from '../newUserUtils/dbUtilsForNewUser.j
 import { newFreeUserLogin, upgradeFreeUserToBusinessAndLogin } from '../newUserUtils/uiUtilsForNewUser.js';
 import NewSignPage from '../new_pom/pages/sign/signPage.js';
 import PrepareForSignatureModal from '../new_pom/modalWindows/prepareForSignatureModal.js';
+import NewFinalStepPage from '../new_pom/pages/sign/newFinalStepPage.js';
+import NewDocumentsPage from '../new_pom/pages/documents/newDocumentsPage.js';
 
 const API_BASE_URL = process.env.API_URL;
 const EMAIL = process.env.USER_EMAIL;
@@ -146,4 +148,13 @@ export const test = base.extend({
     prepareForSignature: async ({ page }, use) => {
         await use(new PrepareForSignatureModal(page));
     },
+
+    finalStep: async ({ page }, use) => {
+        await use(new NewFinalStepPage(page));
+    },
+
+    documentPage: async ({ page }, use) => {
+        await use(new NewDocumentsPage(page));
+    },
+
 });
