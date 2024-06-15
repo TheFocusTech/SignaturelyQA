@@ -1,5 +1,5 @@
 import { expect } from '@playwright/test';
-import { test, createBusinessUserAndLogin } from "../fixtures/base.js";
+import { test } from "../fixtures/base.js";
 import { URL_END_POINTS, DATA_SIGNER, EMPTY_DOCUMENTS_HEADER, EMPTY_TRASH_HEADER } from '../testData.js';
 import SignPage from '../page_objects/signPage.js';
 
@@ -59,17 +59,14 @@ test('Create and delete signature', async ({ page, createBusinessUserAndLogin })
     await editSignature.clickSignSidebarLinkAndGoSignPage();
 });
 
-test('check clean documents fixture', async ({ page, createBusinessUserAndLogin}) => {
+test('check clean documents fixture', async ({ loginBusinessUser, signPage, documentsPage, documentsTrashPage }) => {
 
-    const signPage = new SignPage(page);
+    await signPage.sideMenu.clickDocuments();
 
-    const documentsPage = await signPage.clickDocumentsSidebarLinkAndGoDocumentsPage();
-    await documentsPage.locators.getEmptyTableHeader().waitFor();
+    await expect(documentsPage.table.emptyTableHeader).toHaveText(EMPTY_DOCUMENTS_HEADER);
 
-    await expect(documentsPage.locators.getEmptyTableHeader()).toHaveText(EMPTY_DOCUMENTS_HEADER);
+    await documentsPage.sideMenuDocuments.clickTrash();
 
-    const documentsTrashPage = await documentsPage.clickTrashSidebarLinkAndGoDocumentsTrashPage();
-    await documentsTrashPage.locators.getEmptyTableHeader().waitFor();
-
-    await expect(documentsTrashPage.locators.getEmptyTableHeader()).toHaveText(EMPTY_TRASH_HEADER);
+    await expect(documentsTrashPage.table.emptyTableHeader).toBeVisible();
+    await expect(documentsTrashPage.table.emptyTableHeader).toHaveText(EMPTY_TRASH_HEADER);
 });
