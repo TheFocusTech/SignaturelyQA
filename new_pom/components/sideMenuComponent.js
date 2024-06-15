@@ -4,7 +4,6 @@ export default class SideMenuComponent {
 
         this.signMenu = this.page.getByRole('link', { name: 'Sign', exact: true });
         this.documentsMenu = this.page.getByRole('link', { name: 'Documents', exact: true });
-        this.documentsTrashMenu = this.page.getByRole('link', { name: 'Trash' });
 
     }
 
@@ -16,7 +15,5 @@ export default class SideMenuComponent {
         await this.documentsMenu.click();
     }
 
-    async clickDocumentsTrashMenu() {
-        await this.documentsTrashMenu.click();
-    }
+   
 }

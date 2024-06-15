@@ -65,7 +65,7 @@ test('check clean documents fixture', async ({ loginBusinessUser, signPage, docu
 
     await expect(documentsPage.table.emptyTableHeader).toHaveText(EMPTY_DOCUMENTS_HEADER);
 
-    await documentsPage.sideMenu.clickDocumentsTrashMenu();
+    await documentsPage.documentsSideMenu.clickTrashMenu();
 
     await expect(documentsTrashPage.table.emptyTableHeader).toBeVisible();
     await expect(documentsTrashPage.table.emptyTableHeader).toHaveText(EMPTY_TRASH_HEADER);

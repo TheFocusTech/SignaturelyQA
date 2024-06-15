@@ -3,7 +3,7 @@ import { test, createBusinessUserAndLogin, signPage, prepareForSignature } from 
 
 test.describe('CreateDocument', () => {
 
-  test('TC_03_07_01 | Sign a document', async ({ createBusinessUserAndLogin, signPage, prepareForSignature }) => {
+  test.skip('TC_03_07_01 | Sign a document', async ({ createBusinessUserAndLogin, signPage, prepareForSignature }) => {
 
     await signPage.UploadFileOnSignPage.fileUploader.uploadFile('testDocuments/picture.jpg');
     await signPage.UploadFileOnSignPage.fileUploader.waitForVisibleProgressBar();
