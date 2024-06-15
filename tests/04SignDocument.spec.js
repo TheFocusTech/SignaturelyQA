@@ -4,7 +4,7 @@ import { name1, email1 } from "../testData.js";
 
 test.describe('CreateDocument', () => {
 
-  test.only('TC_04_11_02 | Verify custom signing order', async ({ createBusinessUserAndLogin, signPage, prepareForSignature }) => {
+  test('TC_04_11_02 | Verify custom signing order', async ({ createBusinessUserAndLogin, signPage, prepareForSignature }) => {
 
     await signPage.UploadFileOnSignPage.fileUploader.uploadFile('testDocuments/picture.jpg');
     await signPage.UploadFileOnSignPage.fileUploader.waitForVisibleProgressBar();
