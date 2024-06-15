@@ -1,5 +1,3 @@
-import { expect } from '@playwright/test';
-
 import FileUploaderComponent from "../../components/fileUploaderComponent";
 
 export default class UploadFileOnSignPage {
@@ -13,7 +11,7 @@ export default class UploadFileOnSignPage {
   }
 
   async clickPrepareDocumentBtn() {
-    await expect(this.prepareDocumentBtn).toBeVisible();
+    await this.prepareDocumentBtn.waitFor();
     await this.prepareDocumentBtn.click();
   }
 }
