@@ -155,7 +155,5 @@ export const test = base.extend({
 
     documentsTrashPage: async ({ page }, use) => {
         await use(new NewDocumentsTrashPage(page));
-    },
-
-    
+    }, 
 });

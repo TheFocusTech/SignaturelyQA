@@ -1,48 +1,29 @@
 import { expect } from "@playwright/test";
-import { test, createBusinessUserAndLogin, signPage, prepareForSignature } from "../fixtures/base.js";
-import { name1, email1 } from "../testData.js";
+import { test, createBusinessUserAndLogin, signPage, prepareForSignatureModal } from "../fixtures/base.js";
+import { CHOOSE_SIGNERS_FIELDS } from "../testData.js";
 
 test.describe('CreateDocument', () => {
 
-  test('TC_04_11_02 | Verify custom signing order', async ({ createBusinessUserAndLogin, signPage, prepareForSignature }) => {
+  test('TC_04_11_02 | Verify custom signing order', async ({ createBusinessUserAndLogin, signPage, prepareForSignatureModal }) => {
 
-    await signPage.UploadFileOnSignPage.fileUploader.uploadFile('testDocuments/picture.jpg');
-    await signPage.UploadFileOnSignPage.fileUploader.waitForVisibleProgressBar();
-    await signPage.UploadFileOnSignPage.fileUploader.waitForHiddenProgressBar();
-    await signPage.UploadFileOnSignPage.clickPrepareDocumentBtn();
+    await signPage.uploadFile.fileUploader.uploadFile('testDocuments/picture.jpg');
+    await signPage.uploadFile.fileUploader.waitForVisibleProgressBar();
+    await signPage.uploadFile.fileUploader.waitForHiddenProgressBar();
+    await signPage.uploadFile.clickPrepareDocumentBtn();
 
-    await prepareForSignature.clickSignAndSendForSignatureRadioBtn();
-    await prepareForSignature.clickAddOtherSignersBtn();
+    await prepareForSignatureModal.clickSignAndSendForSignatureRadioBtn();
+    
+    await prepareForSignatureModal.clickAddOtherSignersBtn();
+    await prepareForSignatureModal.fillkAddOtherSignersName1Field(CHOOSE_SIGNERS_FIELDS.name1);
+    await prepareForSignatureModal.fillAddOtherSignersEmail1Field(CHOOSE_SIGNERS_FIELDS.email1);
 
-    // await prepareForSignature.fillkAddOtherSignersNameField(name1);
-    // await prepareForSignature.fillAddOtherSignersEmailField(email1);
+    await prepareForSignatureModal.clickAddOtherSignersBtn();
+    await prepareForSignatureModal.fillkAddOtherSignersName2Field(CHOOSE_SIGNERS_FIELDS.name2);
+    await prepareForSignatureModal.fillAddOtherSignersEmail2Field(CHOOSE_SIGNERS_FIELDS.email2);
+
+    await prepareForSignatureModal.clickCustomSigningOrderCheckbox();
+
+    await expect(prepareForSignatureModal.customSigningOrderPositionNumberOne).toBeVisible();
+    await expect(prepareForSignatureModal.customSigningOrderPositionNumberTwo).toBeVisible();
   })
 })
-
-
-// test.describe('SignDocument', () => {
-
-//     test('TC_04_11_02 | Verify custom signing order', async ({page,createBusinessUserAndLogin}) => {
-//         const signPage = new SignPage(page);
-//         await signPage.clickUploadFileBtn('testDocuments/picture.jpg');
-
-//         await signPage.locators.getPrepareDocumentBtn().waitFor({state: 'visible'});
-//         await signPage.clickPrepareDocumentBtn();
-
-//         await signPage.clickSendForSignatureRadioBtn();
-//         await signPage.clickAddSignerBtn();
-
-//         await signPage.fillChooseSignersNameField(CHOOSE_SIGNERS_FIELDS.name1);
-//         await signPage.fillChooseSignersEmailField(CHOOSE_SIGNERS_FIELDS.email1);
-
-//         await signPage.clickAddSignerBtn();
-
-//         await signPage.fillChooseSignersNameField(CHOOSE_SIGNERS_FIELDS.name2);
-//         await signPage.fillChooseSignersEmailField(CHOOSE_SIGNERS_FIELDS.email2);
-
-//         await signPage.clickCustomSigningOrderCheckbox();
-
-//         await expect(signPage.locators.getCustomSigningOrderPositionNumberOne()).toBeVisible();
-//         await expect(signPage.locators.getCustomSigningOrderPositionNumberTwo()).toBeVisible();
-//     })
-// })
