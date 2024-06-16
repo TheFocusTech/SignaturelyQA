@@ -5,9 +5,7 @@ import PrepareForSignatureModal from "../../modalWindows/prepareForSignatureModa
 export default class NewSignPage {
   constructor(page) {
     this.page = page;
-    this.UploadFileOnSignPage = new UploadFileOnSignPage(this.page);
+    this.uploadFile = new UploadFileOnSignPage(this.page);
     this.sideMenu = new SideMenuComponent(this.page);
-
   }
-
 }

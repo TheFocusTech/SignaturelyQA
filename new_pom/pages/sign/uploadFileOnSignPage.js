@@ -11,6 +11,7 @@ export default class UploadFileOnSignPage {
   }
 
   async clickPrepareDocumentBtn() {
+    await this.prepareDocumentBtn.waitFor();
     await this.prepareDocumentBtn.click();
   }
 }

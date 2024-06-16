@@ -1,10 +1,19 @@
 export default class SideMenuComponent {
-  constructor(page) {
-    this.page = page;
-    this.signMenu = this.page.getByRole('link', { name: 'Sign', exact: true });
+    constructor(page) {
+        this.page = page;
 
-  }
-  async clickSignMenu() {
-    await this.signMenu.click();
-  }
+        this.sign = this.page.getByRole('link', { name: 'Sign', exact: true });
+        this.documents = this.page.getByRole('link', { name: 'Documents', exact: true });
+
+    }
+
+    async clickSign() {
+        await this.sign.click();
+    }
+
+    async clickDocuments() {
+        await this.documents.click();
+    }
+
+   
 }
