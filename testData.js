@@ -18,7 +18,8 @@ export const TOASTER_MESSAGE ={
     copyApiKey: 'API key successfully copied to clipboard',
     deleteApiKey: 'API key successfully deleted',
     folderRename: 'Folder successfully updated!',
-    folderCreated: 'Folder created!'
+    folderCreated: 'Folder created!',
+    signatureCreated: 'Signature created successfully'
 };
 export const API_KEY_NAME = 'Test Api Key';
 export const NO_API_KEY_MESSAGE = 'You don\'t have any API keys yet.';
@@ -35,6 +36,10 @@ export const VISA_CARD_DATA = {
     expirationDate: '12 / 27',
     cvc: '111',
     zip: '20500'
+};
+export const FULL_NAME_INITIALS_FIELDS = {
+    fullName: 'John Smith',
+    initials: 'JS'
 };
 export const START_YOUR_FREE_TRIAL_STATEMENT = "Please add your payment details to start the free trial.";
 export const BILLING_INFORMATION = "Billing Information";
