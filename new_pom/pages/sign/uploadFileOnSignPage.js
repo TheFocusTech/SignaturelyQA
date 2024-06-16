@@ -1,4 +1,4 @@
-import FileUploaderComponent from "../../components/fileUploaderComponent";
+import FileUploaderComponent from "../../components/fileUploderComponent";
 
 export default class UploadFileOnSignPage {
   constructor(page) {
@@ -11,7 +11,7 @@ export default class UploadFileOnSignPage {
   }
 
   async clickPrepareDocumentBtn() {
-    await this.prepareDocumentBtn.waitFor();
+    await this.prepareDocumentBtn.waitFor({state: 'visible'});
     await this.prepareDocumentBtn.click();
   }
 }
