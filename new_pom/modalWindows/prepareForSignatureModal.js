@@ -15,13 +15,13 @@ export default class PrepareForSignatureModal {
     this.gotItBtn = this.page.getByRole('button', { name: 'Got it' });
     this.signFieldsItem = this.page.locator('.interactModal__fieldBar-fieldItem-icon').first();
         this.addSignerBtn = this.page.getByText('Add signer', { exact: true });
+        this.sendForSignatureRadioBtn = this.page.getByText('Send for Signature', { exact: true });
+        this.signerNameField = this.page.locator('//input[@placeholder="Name"]');
+        this.signerEmailField = this.page.locator('//input[@placeholder="Email"]');
+        this.signPlaceCanvas = this.page.locator('//div[@class="react-pdf__Page documentPage__inner-pdf_page"]');
+        this.saveBtn = this.page.getByRole('button', { name: 'Save' });
         this.addSignersNameField = this.page.getByRole('textbox', {name: 'Name'});
         this.addSignersEmailField = this.page.getByRole('textbox', {name: 'Email'});    this.sendForSignatureRadioBtn = this.page.getByText('Send for Signature', { exact: true });
-    this.addSignerBtn = this.page.getByText('Add signer', { exact: true });
-    this.signerNameField = this.page.locator('//input[@placeholder="Name"]');
-    this.signerEmailField = this.page.locator('//input[@placeholder="Email"]');
-    this.signPlaceCanvas = this.page.locator('//div[@class="react-pdf__Page documentPage__inner-pdf_page"]');
-    this.saveBtn = this.page.getByRole('button', { name: 'Save' });
 
   }
 
