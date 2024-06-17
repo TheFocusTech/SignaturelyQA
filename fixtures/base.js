@@ -10,6 +10,7 @@ import NewSignPage from '../new_pom/pages/sign/signPage.js';
 import NewDocumentsPage from '../new_pom/pages/documents/documentsPage.js';
 import NewDocumentsTrashPage from '../new_pom/pages/documents/documentsTrashPage.js';
 import PrepareForSignatureModal from '../new_pom/modalWindows/prepareForSignatureModal.js';
+import NewLoginPage from '../new_pom/pages/loginPage.js';
 import NewSettingsCompanyPage from "../new_pom/pages/settings/settingsCompanyPage.js";
 import NewSettingsBillingPage from "../new_pom/pages/settings/settingsBillingPage.js";
 import NewSettingsBillingPlanPage from "../new_pom/pages/settings/settingsBillingPlanPage.js";
@@ -80,12 +81,12 @@ export const test = base.extend({
 
     loginBusinessUser: [
         async ({ page, cleanDocuments }, use) => {
-            const loginPage = new LoginPage(page);
+            const loginPage = new NewLoginPage(page);
 
             await page.goto("/");
-            await loginPage.fillEmailAddressInputField(EMAIL);
-            await loginPage.fillPasswordInputField(PASSWORD);
-            await loginPage.clickLoginAndGoSignPage();
+            await loginPage.fillEmailAddressInput(EMAIL);
+            await loginPage.fillPasswordInput(PASSWORD);
+            await loginPage.clickLogin();
 
             await use("");
         },
