@@ -9,6 +9,7 @@ import NewDocumentsTrashPage from '../new_pom/pages/documents/documentsTrashPage
 import PrepareForSignatureModal from '../new_pom/modalWindows/prepareForSignatureModal.js';
 import NewLoginPage from '../new_pom/pages/loginPage.js';
 import FinalStepModal from '../new_pom/modalWindows/finalStepModal.js';
+import ActivateTrialStripePage from "../new_pom/pages/activateTrialStripePage";
 
 
 export const test = base.extend({    
@@ -69,6 +70,10 @@ export const test = base.extend({
 
     finalStepModal: async ({ page }, use) => {
         await use(new FinalStepModal(page));
+    },
+
+    activateTrialStripePage: async ({ page }, use) => {
+        await use(new ActivateTrialStripePage(page));
     },
 
     
