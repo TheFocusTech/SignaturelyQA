@@ -10,6 +10,11 @@ import PrepareForSignatureModal from '../new_pom/modalWindows/prepareForSignatur
 import NewLoginPage from '../new_pom/pages/loginPage.js';
 import FinalStepModal from '../new_pom/modalWindows/finalStepModal.js';
 import ActivateTrialStripePage from "../new_pom/pages/activateTrialStripePage";
+import NewSettingsCompanyPage from "../new_pom/pages/settings/settingsCompanyPage.js";
+import NewSettingsBillingPage from "../new_pom/pages/settings/settingsBillingPage.js";
+import NewSettingsBillingPlanPage from "../new_pom/pages/settings/settingsBillingPlanPage.js";
+import UpgradeYourPlanModal from "../new_pom/modalWindows/upgradeYourPlanModal";
+import SpecialOneTimeOfferModal from "../new_pom/modalWindows/specialOneTimeOfferModal";
 
 
 export const test = base.extend({    
@@ -76,5 +81,24 @@ export const test = base.extend({
         await use(new ActivateTrialStripePage(page));
     },
 
-    
+    settingsCompanyPage: async ({ page }, use) => {
+        await use(new NewSettingsCompanyPage(page));
+    },
+
+    settingsBillingPage: async ({ page }, use) => {
+        await use(new NewSettingsBillingPage(page));
+    },
+
+    settingsBillingPlanPage: async ({ page }, use) => {
+        await use(new NewSettingsBillingPlanPage(page));
+    },
+
+    upgradeYourPlanModal: async ({ page }, use) => {
+        await use(new UpgradeYourPlanModal(page));
+    },
+
+    specialOneTimeOfferModal: async ({ page }, use) => {
+        await use(new SpecialOneTimeOfferModal(page));
+    },
+
 });
