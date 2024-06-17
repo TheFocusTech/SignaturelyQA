@@ -17,6 +17,7 @@ export default class NewDocumentsPage {
     }  
 
     async clickOptionsBtn() {
+        await this.optionsBtn.waitFor({ status: 'attached' });
         await this.optionsBtn.click();
     }
 
