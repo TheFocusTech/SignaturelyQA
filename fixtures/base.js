@@ -11,6 +11,9 @@ import NewDocumentsPage from '../new_pom/pages/documents/documentsPage.js';
 import NewDocumentsTrashPage from '../new_pom/pages/documents/documentsTrashPage.js';
 import PrepareForSignatureModal from '../new_pom/modalWindows/prepareForSignatureModal.js';
 import NewLoginPage from '../new_pom/pages/loginPage.js';
+import ChooseSignatureModal from '../new_pom/modalWindows/chooseSignatureModal.js';
+import FinelStepPage from '../new_pom/pages/sign/finalStepPage.js';
+import SuccessModal from '../new_pom/modalWindows/successModal.js';
 
 const API_BASE_URL = process.env.API_URL;
 const EMAIL = process.env.USER_EMAIL;
@@ -158,5 +161,16 @@ export const test = base.extend({
         await use(new NewDocumentsTrashPage(page));
     },
 
-    
+    chooseSignatureModal: async ({ page }, use) => {
+        await use(new ChooseSignatureModal(page));
+    },
+
+    finelStepPage: async ({ page }, use) => {
+        await use(new FinelStepPage(page));
+    },
+
+    successModal: async ({ page }, use) => {
+        await use(new SuccessModal(page));
+    },
+
 });

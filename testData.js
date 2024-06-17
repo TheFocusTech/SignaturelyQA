@@ -40,3 +40,9 @@ export const FULL_NAME_INITIALS_FIELDS = {
     fullName: 'John Smith',
     initials: 'JS'
 };
+export const DOCUMENT_TITLE = 'Document';
+export const DOCUMENT_STATUS = {
+    awaiting: 'awaiting',
+    draft: 'draft',
+    completed: 'completed'
+};

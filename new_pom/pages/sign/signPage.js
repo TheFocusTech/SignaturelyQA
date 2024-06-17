@@ -1,5 +1,5 @@
 import SideMenuComponent from "../../components/sideMenuComponent";
-import UploadFileOnSignPage from "../../components/fileUploderComponent";
+import UploadFileOnSignPage from "./uploadFileOnSignPage";
 
 export default class NewSignPage {
   constructor(page) {
