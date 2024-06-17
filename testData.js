@@ -1,6 +1,7 @@
 export const URL_END_POINTS = {
     signEndPoint: '/sign',
-    documentsEndPoint: '/documents'
+    documentsEndPoint: '/documents',
+    settingsBillingPlanEndPoint: '/settings/billing/plan',
 };
 export const ACTIVE_COLOR = 'rgb(0, 163, 250)';
 export const FILL_FOLDER_NAME = 'Folder 1';
@@ -40,3 +41,5 @@ export const FULL_NAME_INITIALS_FIELDS = {
     fullName: 'John Smith',
     initials: 'JS'
 };
+export const PLANS = ["Personal", "Business"];
+export const RANDOM_ANNUALLY_PLAN = (randomPlan) => `${randomPlan} Annually Plan`;

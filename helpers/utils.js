@@ -10,3 +10,7 @@ export function generateNumberForNewUser() {
     const date = `${year}${month}${day}${hh}${mm}${ss}${millis}`
     return date;
 }
+
+export async function getRandomInt(max) {
+    return Math.floor(Math.random() * max);
+}

@@ -10,6 +10,11 @@ import NewSignPage from '../new_pom/pages/sign/signPage.js';
 import NewDocumentsPage from '../new_pom/pages/documents/documentsPage.js';
 import NewDocumentsTrashPage from '../new_pom/pages/documents/documentsTrashPage.js';
 import PrepareForSignatureModal from '../new_pom/modalWindows/prepareForSignatureModal.js';
+import NewSettingsCompanyPage from "../new_pom/pages/settings/settingsCompanyPage.js";
+import NewSettingsBillingPage from "../new_pom/pages/settings/settingsBillingPage.js";
+import NewSettingsBillingPlanPage from "../new_pom/pages/settings/settingsBillingPlanPage.js";
+import UpgradeYourPlanModal from "../new_pom/modalWindows/upgradeYourPlanModal";
+import SpecialOneTimeOfferModal from "../new_pom/modalWindows/specialOneTimeOfferModal";
 
 const API_BASE_URL = process.env.API_URL;
 const EMAIL = process.env.USER_EMAIL;
@@ -157,5 +162,24 @@ export const test = base.extend({
         await use(new NewDocumentsTrashPage(page));
     },
 
-    
+    settingsCompanyPage: async ({ page }, use) => {
+        await use(new NewSettingsCompanyPage(page));
+    },
+
+    settingsBillingPage: async ({ page }, use) => {
+        await use(new NewSettingsBillingPage(page));
+    },
+
+    settingsBillingPlanPage: async ({ page }, use) => {
+        await use(new NewSettingsBillingPlanPage(page));
+    },
+
+    upgradeYourPlanModal: async ({ page }, use) => {
+        await use(new UpgradeYourPlanModal(page));
+    },
+
+    specialOneTimeOfferModal: async ({ page }, use) => {
+        await use(new SpecialOneTimeOfferModal(page));
+    },
+
 });
