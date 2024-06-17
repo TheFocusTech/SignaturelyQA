@@ -1,5 +1,6 @@
 import SideMenuComponent from "../../components/sideMenuComponent";
 import UploadFileOnSignPage from "../../pages/sign/uploadFileOnSignPage";
+import HeaderComponent from "../../components/headerComponent";
 
 export default class NewSignPage {
   constructor(page) {
@@ -7,6 +8,7 @@ export default class NewSignPage {
 
     this.uploadFile = new UploadFileOnSignPage(this.page);
     this.sideMenu = new SideMenuComponent(this.page);
+    this.header = new HeaderComponent(this.page);
 
   }
 
