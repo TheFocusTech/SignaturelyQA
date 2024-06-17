@@ -1,8 +1,4 @@
-import { getRandomInt } from "../../../helpers/utils.js"
-import { PLANS } from "../../../testData.js"
-
 export default class NewSettingsBillingPlanPage {
-    randomPlan;
 
     constructor(page) {
         this.page = page;
@@ -11,17 +7,9 @@ export default class NewSettingsBillingPlanPage {
         this.billingHeader = this.page.locator('.billing__trial-header');
     }
 
-    async getRandomPlan() {
-        const randomIndex = await getRandomInt(PLANS.length);
-        this.randomPlan = PLANS[randomIndex];
-        console.log(`Plan: ${this.randomPlan}`);
-
-        return this.randomPlan;
-    }
-
-    async clickUpgradeButton() {
+    async clickUpgradeButton(plan) {
         await this.billingTableColumnHeader
-            .filter({ hasText: this.randomPlan })
+            .filter({ hasText: plan })
             .getByRole('button', { name: "Upgrade" })
             .click();
     }
