@@ -1,6 +1,6 @@
 import { expect } from "@playwright/test";
 import { test } from "../fixtures/base.js";
-import { DOCUMENT_TITLE, DOCUMENT_STATUS } from "../testData.js";
+import { DOCUMENT_TITLE, DOCUMENT_STATUS, CHOOSE_SIGNERS_FIELDS } from "../testData.js";
 
 test.describe('CreateDocument', () => {
 
@@ -24,8 +24,8 @@ test.describe('CreateDocument', () => {
       await signPage.uploadFile.clickPrepareDocumentBtn();
       await prepareForSignatureModal.clickSignAndSendForSignatureRadioBtn();
       await prepareForSignatureModal.clickAddSignerBtn();
-      await prepareForSignatureModal.fillAddSignersNameField('fghf', 0)
-      await prepareForSignatureModal.fillAddSignersEmailField('vtrf@fgr.gh', 0);
+      await prepareForSignatureModal.fillAddSignersNameField(CHOOSE_SIGNERS_FIELDS.name1, 0)
+      await prepareForSignatureModal.fillAddSignersEmailField(CHOOSE_SIGNERS_FIELDS.email1, 0);
       await prepareForSignatureModal.clickContinueBtn();
       await prepareForSignatureModal.clickGotItBtn();
       await prepareForSignatureModal.clickSignFieldsItem();
