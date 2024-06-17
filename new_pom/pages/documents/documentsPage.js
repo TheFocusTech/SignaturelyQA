@@ -8,9 +8,21 @@ export default class NewDocumentsPage {
 
         this.sideMenu = new SideMenuComponent(this.page);
         this.table = new TableComponent(this.page); 
-        this.sideMenuDocuments = new SideMenuDocumentsComponent(this.page);
+        this.sideMenuDocuments = new SideMenuDocumentsComponent(this.page);      
 
+        this.optionsBtn = this.page.getByText('Options');
+        this.editAndResendBtn = this.page.getByText('Edit & Resend');
+        this.editAndResendTitle = this.page.getByText('Edit & Resend document');
         this.documentStatus = this.page.locator('.documents__documentStatus').first();
+    }  
+
+    async clickOptionsBtn() {
+        await this.optionsBtn.waitFor('visible');
+        await this.optionsBtn.click();
+    }
+
+    async clickEditAndResendBtn() {
+        await this.editAndResendBtn.click();
     }
 
 }

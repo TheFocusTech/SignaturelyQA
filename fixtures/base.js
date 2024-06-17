@@ -1,8 +1,5 @@
-import { expect } from '@playwright/test';
 import { test as base } from "@playwright/test";
-import LoginPage from "../page_objects/loginPage";
 import SignPage from "../page_objects/signPage";
-import { API_URL_END_POINTS } from "../apiData.js";
 import { api_user_sign_up } from '../newUserUtils/apiUtilsForNewUser.js';
 import { databaseConfirmNewUserEmail } from '../newUserUtils/dbUtilsForNewUser.js';
 import { newFreeUserLogin, upgradeFreeUserToBusinessAndLogin } from '../newUserUtils/uiUtilsForNewUser.js';
@@ -10,86 +7,19 @@ import NewSignPage from '../new_pom/pages/sign/signPage.js';
 import NewDocumentsPage from '../new_pom/pages/documents/documentsPage.js';
 import NewDocumentsTrashPage from '../new_pom/pages/documents/documentsTrashPage.js';
 import PrepareForSignatureModal from '../new_pom/modalWindows/prepareForSignatureModal.js';
-import NewLoginPage from '../new_pom/pages/loginPage.js';
+import FinalStepModal from '../new_pom/modalWindows/finalStepModal.js';
+import ActivateTrialStripePage from "../new_pom/pages/activateTrialStripePage";
+import NewSettingsCompanyPage from "../new_pom/pages/settings/settingsCompanyPage.js";
+import NewSettingsBillingPage from "../new_pom/pages/settings/settingsBillingPage.js";
+import NewSettingsBillingPlanPage from "../new_pom/pages/settings/settingsBillingPlanPage.js";
+import UpgradeYourPlanModal from "../new_pom/modalWindows/upgradeYourPlanModal";
+import SpecialOneTimeOfferModal from "../new_pom/modalWindows/specialOneTimeOfferModal";
 import ChooseSignatureModal from '../new_pom/modalWindows/chooseSignatureModal.js';
 import FinelStepPage from '../new_pom/pages/sign/finalStepPage.js';
 import SuccessModal from '../new_pom/modalWindows/successModal.js';
 
-const API_BASE_URL = process.env.API_URL;
-const EMAIL = process.env.USER_EMAIL;
-const PASSWORD = process.env.USER_PASSWORD;
 
-export const test = base.extend({
-
-    cleanDocuments: [
-        async ({ request }, use) => {
-
-            try {
-                const getSignInResponse = await request.post(API_BASE_URL + API_URL_END_POINTS.signInEndPoint, {
-                    headers: {
-                        'accept': '*/*',
-                        'Content-Type': 'application/json',
-                    },
-                    data: {
-                        email: EMAIL,
-                        password: PASSWORD
-                    }
-                });
-
-                expect(getSignInResponse.ok()).toBeTruthy();
-
-            } catch (err) {
-                console.error(err);
-            }
-
-            const getDocumentsResponse = await request.get(API_BASE_URL + API_URL_END_POINTS.getDocumentsEndPoint);
-            expect(getDocumentsResponse.ok()).toBeTruthy();
-
-            const numberOfDocuments = (await getDocumentsResponse.json()).itemCount;
-
-            if (numberOfDocuments != 0) {
-                const documentDataArray = (await getDocumentsResponse.json()).items;
-
-                const entityIdArray = [];
-                documentDataArray.map(el => {
-                    entityIdArray.push(el.entityId);
-                });
-
-                const deleteDocumentsResponse = await request.delete(API_BASE_URL + API_URL_END_POINTS.deleteDocumentsEndPoint, {
-                    data: {
-                        entityIds: entityIdArray,
-                    }
-                });
-                expect(deleteDocumentsResponse.ok).toBeTruthy;
-
-                const entityIdTrash = (await getDocumentsResponse.json()).data;
-                expect(numberOfDocuments).not.toBeTruthy;
-
-                await request.delete(API_BASE_URL + API_URL_END_POINTS.emptyTrash, {
-                    data: {
-                        entityIds: entityIdTrash,
-                    }
-                });
-            }
-
-            await use("");
-        },
-        { scope: "test" },
-    ],
-
-    loginBusinessUser: [
-        async ({ page, cleanDocuments }, use) => {
-            const loginPage = new NewLoginPage(page);
-
-            await page.goto("/");
-            await loginPage.fillEmailAddressInput(EMAIL);
-            await loginPage.fillPasswordInput(PASSWORD);
-            await loginPage.clickLogin();
-
-            await use("");
-        },
-        { scope: "test" },
-    ],
+export const test = base.extend({    
 
     createNewFolder: [
         async ({ page }, use) => {
@@ -104,22 +34,6 @@ export const test = base.extend({
             await documentsPage.locators.getToast().waitFor({ state: "hidden" });
 
             await use("");
-        },
-        { scope: "test" },
-    ],
-
-    deleteSignature: [
-        async ({ page }, use) =>{
-            await use("");
-
-            const signPage = new SignPage(page);
-            await signPage.clickDropDownUser();
-
-            const editSignature = await signPage.clickEditSignatureAndGoEditSignaturePage();
-            await editSignature.clickBurgerMenuSignature();
-            await editSignature.clickDeleteDropItem();
-            await editSignature.clickButtonDelete();
-            await editSignature.clickSignSidebarLinkAndGoSignPage();
         },
         { scope: "test" },
     ],
@@ -159,6 +73,34 @@ export const test = base.extend({
 
     documentsTrashPage: async ({ page }, use) => {
         await use(new NewDocumentsTrashPage(page));
+    },
+
+    finalStepModal: async ({ page }, use) => {
+        await use(new FinalStepModal(page));
+    },
+
+    activateTrialStripePage: async ({ page }, use) => {
+        await use(new ActivateTrialStripePage(page));
+    },
+
+    settingsCompanyPage: async ({ page }, use) => {
+        await use(new NewSettingsCompanyPage(page));
+    },
+
+    settingsBillingPage: async ({ page }, use) => {
+        await use(new NewSettingsBillingPage(page));
+    },
+
+    settingsBillingPlanPage: async ({ page }, use) => {
+        await use(new NewSettingsBillingPlanPage(page));
+    },
+
+    upgradeYourPlanModal: async ({ page }, use) => {
+        await use(new UpgradeYourPlanModal(page));
+    },
+
+    specialOneTimeOfferModal: async ({ page }, use) => {
+        await use(new SpecialOneTimeOfferModal(page));
     },
 
     chooseSignatureModal: async ({ page }, use) => {

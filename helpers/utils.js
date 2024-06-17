@@ -11,6 +11,35 @@ export function generateNumberForNewUser() {
     return date;
 }
 
+export function delay(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+export async function generateNewUserData() {
+    let userNumber = generateNumberForNewUser();
+    process.env.NEW_USER_NUMBER = userNumber;
+    return {
+        email: `${process.env.EMAIL_PREFIX}${userNumber}${process.env.EMAIL_DOMAIN}`,
+        name: `TestUser${userNumber}`,
+        password: `QA_tester${userNumber}`,
+    };
+}
+
+export async function createNewUserThroughApi(request) {
+    const newUserData = await  generateNewUserData();
+    console.log(`Generated new user #${process.env.NEW_USER_NUMBER}`);
+
+    await signUpRequest(request, newUserData);
+
+    return newUserData;
+}
+
+export async function retrieveUserEmailConfirmationLink(request, newUserData) {
+    const auth = await authorize();
+
+    return await getConfirmationLinkFromEmail(auth, newUserData.email);
+}
+
 export async function clickCanvas(page, canvasLocator, excludedAreas = []) {
     await canvasLocator.first().waitFor({ state: 'visible' });
 

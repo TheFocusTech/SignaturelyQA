@@ -1,5 +1,6 @@
-import { test, expect } from "@playwright/test";
-import LoginPage from "../page_objects/loginPage";
+import { expect } from "@playwright/test";
+import { test } from "../fixtures/base";
+import NewLoginPage from "../new_pom/pages/loginPage";
 import { URL_END_POINTS, ACTIVE_COLOR } from "../testData";
 const EMAIL = process.env.USER_EMAIL;
 const PASSWORD = process.env.USER_PASSWORD;
@@ -7,15 +8,15 @@ const BASE_URL = process.env.URL;
 
 test.describe('Authorization', () => {
 
-    test('TC_02_05_01 | Verify successful login and the user directed to the sign page', async ({ page }) => {
-        const loginPage = new LoginPage(page);
+    test('TC_02_05_01 | Verify successful login and the user directed to the sign page', async ({ page, signPage }) => {
+        const loginPage = new NewLoginPage(page);
 
-        await page.goto('/');
-        await loginPage.fillEmailAddressInputField(EMAIL);
-        await loginPage.fillPasswordInputField(PASSWORD);
-        const signPage = await loginPage.clickLoginAndGoSignPage();
+        await page.goto("/");
+        await loginPage.fillEmailAddressInput(EMAIL);
+        await loginPage.fillPasswordInput(PASSWORD);
+        await loginPage.clickLogin();
 
         await expect(page).toHaveURL(BASE_URL + URL_END_POINTS.signEndPoint);
-        await expect(signPage.locators.getSignSidebarLink()).toHaveCSS('color', ACTIVE_COLOR);   
+        await expect(signPage.sideMenu.sign).toHaveCSS('color', ACTIVE_COLOR);    
     })
 })
