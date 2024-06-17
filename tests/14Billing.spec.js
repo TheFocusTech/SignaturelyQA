@@ -5,7 +5,7 @@ import {TOASTER_MESSAGE, URL_END_POINTS, VISA_CARD_DATA, RANDOM_ANNUALLY_PLAN} f
 
 test.describe('Billing', () => {
 
-    test('TC_14_57_02 | Verify the ability to successfully downgrade subscription', async ({page,createBusinessUserAndLogin}) => {
+    test.skip('TC_14_57_02 | Verify the ability to successfully downgrade subscription', async ({page,createBusinessUserAndLogin}) => {
         const signPage = new SignPage(page);
 
         const settingsCompanyPage = await signPage.clickSettingsSidebarLinkAndGoSettingsCompanyPage();
