@@ -20,7 +20,7 @@ test.describe('Authorization', () => {
         if (userName === undefined) {
             await expect(signPage.header.userName).toContainText(CI_USER_NAME);
         } else {
-            await expect(signPage.header.userName).toContainText(process.env.USER_NAME);  
+            await expect(signPage.header.userName).toContainText(userName);  
         }
          
     })
