@@ -40,3 +40,4 @@ export const FULL_NAME_INITIALS_FIELDS = {
     fullName: 'John Smith',
     initials: 'JS'
 };
+export const CI_USER_NAME = 'CI_user';
