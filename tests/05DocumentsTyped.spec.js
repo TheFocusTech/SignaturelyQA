@@ -34,5 +34,39 @@ test.describe('DocumentsType', () => {
     await expect(documentsPage.editAndResendTitle).toBeVisible();
 
   })
+
+  test('TC_05_21_02 | Verify that button "Revert to Draft" is active', async ({ createBusinessUserAndLogin, signPage, prepareForSignatureModal, finalStepModal, documentsPage, page }) => {
+
+    test.setTimeout(250 * 1000);
+    await signPage.uploadFile.fileUploader.uploadFile('testDocuments/picture.jpg');
+    await signPage.uploadFile.clickPrepareDocumentBtn();
+
+    await prepareForSignatureModal.clickSendForSignatureRadioBtn();
+    await prepareForSignatureModal.clickAddSignerBtn();
+    await prepareForSignatureModal.fillSignerNameField(CHOOSE_SIGNERS_FIELDS.name1);
+    await prepareForSignatureModal.fillSignerEmailField(CHOOSE_SIGNERS_FIELDS.email1)
+    await prepareForSignatureModal.clickContinueBtn();
+    await prepareForSignatureModal.clickGotItBtn();
+
+    await prepareForSignatureModal.clickSignFieldsItem();
+    await prepareForSignatureModal.clickSignPlaceCanvas();
+    await prepareForSignatureModal.clickSignFieldsItem();
+    await prepareForSignatureModal.clickSaveBtn();
+
+    await finalStepModal.waitForToastDocumentSavedVisible();
+    await finalStepModal.waitForToastDocumentSavedHidden();
+    await finalStepModal.clickSendForSignatureBtn();
+    await finalStepModal.waitForSuccessSendModalVisible();
+    await finalStepModal.clickBackToDocumentBtn();
+    
+    await documentsPage.clickOptionsBtn();
+    await documentsPage.clickEditAndResendBtn();
+    await documentsPage.clickRevertToDraftBtn();
+
+    await expect(prepareForSignatureModal.prepareForSignerTitle).toBeVisible();
+    await expect(page).toHaveURL(/documents.*edit$/);
+
+   
+  })
 })
 

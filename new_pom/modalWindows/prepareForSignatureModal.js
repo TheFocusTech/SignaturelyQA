@@ -13,6 +13,7 @@ export default class PrepareForSignatureModal {
     this.signerEmailField = this.page.locator('//input[@placeholder="Email"]');
     this.signPlaceCanvas = this.page.locator('//div[@class="react-pdf__Page documentPage__inner-pdf_page"]');
     this.saveBtn = this.page.getByRole('button', { name: 'Save' });
+    this.prepareForSignerTitle = this.page.getByText('Prepare for Signing');
 
   }
 
@@ -55,5 +56,7 @@ export default class PrepareForSignatureModal {
   async clickSaveBtn() {
     await this.saveBtn.click();
   }
+
+  
 
 }

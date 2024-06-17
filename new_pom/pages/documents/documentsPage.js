@@ -12,7 +12,8 @@ export default class NewDocumentsPage {
 
         this.optionsBtn = this.page.getByText('Options');
         this.editAndResendBtn = this.page.getByText('Edit & Resend');
-        this.editAndResendTitle = this.page.getByText('Edit & Resend document')
+        this.editAndResendTitle = this.page.getByText('Edit & Resend document');
+        this.revertToDraftBtn = this.page.getByRole('button', {name:'Revert to Draft'});
 
     }  
 
@@ -23,6 +24,11 @@ export default class NewDocumentsPage {
 
     async clickEditAndResendBtn() {
         await this.editAndResendBtn.click();
+    }
+
+    async clickRevertToDraftBtn() {
+        await this.editAndResendTitle.waitFor('visible');
+        await this.revertToDraftBtn.click();
     }
 
     
