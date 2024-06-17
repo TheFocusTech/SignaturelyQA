@@ -24,7 +24,7 @@ export default class FinalStepModal {
   }
 
   async waitForSuccessSendModalVisible() {
-    await this.successSendModal.waitFor({ status: 'attached' });
+    await this.successSendModal.waitFor('visible');
   }
 
   async clickBackToDocumentBtn() {
