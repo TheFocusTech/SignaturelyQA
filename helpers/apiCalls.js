@@ -5,7 +5,7 @@ export async function signUpRequest(request, newUserData) {
         const response = await request.post(`${process.env.API_URL}${API_URL_END_POINTS.signUpEndPoint}`, {data: newUserData});
         if (response.ok) {
             const data = await response.json();
-            console.log('User has been successfully created ' + JSON.stringify(data));
+            console.log(`User with id #${JSON.stringify(data.userId)} has been successfully created`);
         } else {
             console.error(`Failed to create user: ${response.statusText}`);
         }

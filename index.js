@@ -76,7 +76,7 @@ async function getConfirmationLinkFromEmail(auth, sender) {
 
         console.log('Waiting for email to arrive...');
         await delay(15000);
-        console.log('Fetching emails sent to:', sender);
+        console.log(`Fetching emails sent to ...${sender.slice(12)}`);
 
         const res = await gmail.users.messages.list({
             userId: 'me',
@@ -107,7 +107,7 @@ async function getConfirmationLinkFromEmail(auth, sender) {
         if (!links || links.length === 0) {
             console.log('No confirmation link found in the email body.');
         }
-        console.log('Confirmation link retrieved:', links[0]);
+        console.log(`Confirmation link retrieved: ${links[0].slice(0,40)}...`);
 
         return links[0];
     } catch (error) {

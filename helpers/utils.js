@@ -20,6 +20,7 @@ export function delay(ms) {
 
 export async function generateNewUserData() {
     let userNumber = generateNumberForNewUser();
+    process.env.NEW_USER_NUMBER = userNumber;
     return {
         email: `${process.env.EMAIL_PREFIX}${userNumber}${process.env.EMAIL_DOMAIN}`,
         name: `TestUser${userNumber}`,
@@ -29,7 +30,7 @@ export async function generateNewUserData() {
 
 export async function createNewUserThroughApi(request) {
     const newUserData = await  generateNewUserData();
-    console.log('Generated new user data:', newUserData);
+    console.log(`Generated new user #${process.env.NEW_USER_NUMBER}`);
 
     await signUpRequest(request, newUserData);
 
