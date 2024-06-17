@@ -13,9 +13,6 @@ import PrepareForSignatureModal from '../new_pom/modalWindows/prepareForSignatur
 import NewLoginPage from '../new_pom/pages/loginPage.js';
 import FinalStepModal from '../new_pom/modalWindows/finalStepModal.js';
 
-
-
-
 const API_BASE_URL = process.env.API_URL;
 const EMAIL = process.env.USER_EMAIL;
 const PASSWORD = process.env.USER_PASSWORD;
