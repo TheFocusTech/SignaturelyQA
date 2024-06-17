@@ -9,11 +9,11 @@ export default class PrepareForSignatureModal {
         this.canvas = new CanvasComponent(this.page);
         this.toasts = new ToastsComponent(this.page);
 
-    this.signDocumentRadioBtn = this.page.getByText('Sign a Document', { exact: true });
+        this.signDocumentRadioBtn = this.page.getByText('Sign a Document', { exact: true });
         this.signAndSendForSignatureRadioBtn = this.page.getByText('Sign & Send for Signature', { exact: true });
-    this.continueBtn = this.page.getByRole('button', { name: 'Continue' });
-    this.gotItBtn = this.page.getByRole('button', { name: 'Got it' });
-    this.signFieldsItem = this.page.locator('.interactModal__fieldBar-fieldItem-icon').first();
+        this.continueBtn = this.page.getByRole('button', { name: 'Continue' });
+        this.gotItBtn = this.page.getByRole('button', { name: 'Got it' });
+        this.signFieldsItem = this.page.locator('.interactModal__fieldBar-fieldItem-icon').first();
         this.addSignerBtn = this.page.getByText('Add signer', { exact: true });
         this.sendForSignatureRadioBtn = this.page.getByText('Send for Signature', { exact: true });
         this.signerNameField = this.page.locator('//input[@placeholder="Name"]');
@@ -21,36 +21,54 @@ export default class PrepareForSignatureModal {
         this.signPlaceCanvas = this.page.locator('//div[@class="react-pdf__Page documentPage__inner-pdf_page"]');
         this.saveBtn = this.page.getByRole('button', { name: 'Save' });
         this.addSignersNameField = this.page.getByRole('textbox', {name: 'Name'});
-        this.addSignersEmailField = this.page.getByRole('textbox', {name: 'Email'});    this.sendForSignatureRadioBtn = this.page.getByText('Send for Signature', { exact: true });
+        this.addSignersEmailField = this.page.getByRole('textbox', {name: 'Email'});
 
-  }
+    }
 
-  async clickSignDocumentRadioBtn() {
+    async clickSignDocumentRadioBtn() {
         await this.signDocumentRadioBtn.waitFor({ state: 'visible' });
-    await this.signDocumentRadioBtn.click();
-  }
+        await this.signDocumentRadioBtn.click();
+    }
 
     async clickSignAndSendForSignatureRadioBtn() {
         await this.signAndSendForSignatureRadioBtn.waitFor({ state: 'visible' });
         await this.signAndSendForSignatureRadioBtn.click();
     }
 
-  async clickContinueBtn() {
-    await this.continueBtn.click();
-  }
+    async clickContinueBtn() {
+        await this.continueBtn.click();
+    }
 
-  async clickSignFieldsItem() {
+    async clickSignFieldsItem() {
         await this.signFieldsItem.waitFor({ state: 'visible' });
-    await this.signFieldsItem.click();
-  }
+        await this.signFieldsItem.click();
+    }
 
-  async clickGotItBtn() {
-    await this.gotItBtn.click();
-  }
+    async clickGotItBtn() {
+        await this.gotItBtn.click();
+    }
+    async clickSendForSignatureRadioBtn() {
+        await this.sendForSignatureRadioBtn.click();
+    }
 
     async clickAddSignerBtn() {
-        await this.addSignerBtn.waitFor({ state: 'visible' });
         await this.addSignerBtn.click();
+    }
+
+    async fillSignerNameField(name) {
+        await this.signerNameField.fill(name);
+    }
+
+    async fillSignerEmailField(email) {
+        await this.signerEmailField.fill(email);
+    }
+
+    async clickSignPlaceCanvas() {
+        await this.signPlaceCanvas.click();
+    }
+
+    async clickSaveBtn() {
+        await this.saveBtn.click();
     }
 
     async fillAddSignersNameField(name, i) {
@@ -60,33 +78,5 @@ export default class PrepareForSignatureModal {
     async fillAddSignersEmailField(email, i) {
         await this.addSignersEmailField.nth(i).fill(email);
     }
-
-    async doCanvasClicks() {
-        const canvasLocator = await this.locators.getCanvas();
-        await clickCanvas(this.page, canvasLocator, this.excludedAreas);
-    }
-  async clickSendForSignatureRadioBtn() {
-    await this.sendForSignatureRadioBtn.click();
-  }
-
-  async clickAddSignerBtn() {
-    await this.addSignerBtn.click();
-  }
-
-  async fillSignerNameField(name) {
-    await this.signerNameField.fill(name);
-  }
-
-  async fillSignerEmailField(email) {
-    await this.signerEmailField.fill(email);
-  }
-
-  async clickSignPlaceCanvas() {
-    await this.signPlaceCanvas.click();
-  }
-
-  async clickSaveBtn() {
-    await this.saveBtn.click();
-  }
 
 }

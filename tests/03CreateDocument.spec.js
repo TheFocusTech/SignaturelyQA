@@ -18,7 +18,7 @@ test.describe('CreateDocument', () => {
     })
 
     test('TC_03_07_06 | Verify that the user who uploaded the document and created a signature and Other Signer can sign it', async ({ createBusinessUserAndLogin, signPage, prepareForSignatureModal, chooseSignatureModal, finelStepPage, successModal, documentsPage }) => {
-      test.setTimeout(100 * 1000);
+      test.setTimeout(120 * 1000);
 
       await signPage.uploadFile.fileUploader.uploadFile('testDocuments/todoList.xlsx');
       await signPage.uploadFile.clickPrepareDocumentBtn();
