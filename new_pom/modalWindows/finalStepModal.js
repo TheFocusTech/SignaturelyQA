@@ -30,9 +30,6 @@ export default class FinalStepModal {
   async clickBackToDocumentBtn() {
     await new Promise(resolve => setTimeout(resolve, 1000));
     await this.backToDocumentBtn.click();
-
-    return new NewDocumentsPage(this.page);
-
   }
 
 }
