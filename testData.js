@@ -46,3 +46,4 @@ export const START_YOUR_FREE_TRIAL_STATEMENT = "Please add your payment details 
 export const BILLING_INFORMATION = "Billing Information";
 export const PLANS = ["Personal", "Business"];
 export const RANDOM_ANNUALLY_PLAN = (randomPlan) => `${randomPlan} Annually Plan`;
+export const BUSINESS_MONTHLY_PLAN = "Business Monthly Plan";
