@@ -9,7 +9,7 @@ export default class FileUploaderComponent {
     async uploadFile(file) {
         await this.fileInput.setInputFiles(file);
         await this.progressBar.waitFor({ state: 'visible' });
-        await this.progressBar.waitFor({ state: 'visible' });
+        await this.progressBar.waitFor({ state: 'hidden' });
     }
 
 }

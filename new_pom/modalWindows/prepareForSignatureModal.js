@@ -6,10 +6,10 @@ export default class PrepareForSignatureModal {
         this.signDocumentRadioBtn = this.page.getByText('Sign a Document', { exact: true });
         this.sendForSignatureRadioBtn = this.page.getByText('Send for Signature', { exact: true });
         this.addSignerBtn = this.page.getByText('Add signer', { exact: true });
-        this.signerNameField = this.page.locator('//input[@placeholder="Name"]');
-        this.signerEmailField = this.page.locator('//input[@placeholder="Email"]');
+        this.signerNameField = this.page.getByPlaceholder('Name');
+        this.signerEmailField = this.page.getByPlaceholder('Email');
         this.addRecipientsBtn = this.page.getByText('Recipients', { exact: true });
-        this.recipientEmailField = this.page.locator('//input[@placeholder="test@signaturely.com"]');        
+        this.recipientEmailField = this.page.getByPlaceholder('test@signaturely.com');        
         this.continueBtn = this.page.getByRole('button', { name: 'Continue' });
         this.gotItBtn = this.page.getByRole('button', { name: 'Got it' });
         this.signFieldsItem = this.page.getByRole('complementary').getByText('Sign')
