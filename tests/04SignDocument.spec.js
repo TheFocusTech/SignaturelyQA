@@ -42,8 +42,8 @@ test.describe('SignDocument', () => {
 
         await prepareForSignatureModal.clickSendForSignatureRadioBtn();
         await prepareForSignatureModal.clickAddSignerBtn();
-        await prepareForSignatureModal.fillSignerNameField("Any Name");
-        await prepareForSignatureModal.fillSignerEmailField(process.env.PREFIX_EMAIL + '01' + process.env.EMAIL_DOMAIN);
+        await prepareForSignatureModal.fillSignerNameField("Signer");
+        await prepareForSignatureModal.fillSignerEmailField(process.env.PREFIX_EMAIL + '01' + process.env.EMAIL_DOMAIN, 0);
         await prepareForSignatureModal.clickAddRecipientsBtn();
         await prepareForSignatureModal.fillRecipientEmailField(process.env.PREFIX_EMAIL + '02' + process.env.EMAIL_DOMAIN);
         await prepareForSignatureModal.clickContinueBtn();
