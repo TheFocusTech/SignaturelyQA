@@ -10,6 +10,11 @@ import PrepareForSignatureModal from '../new_pom/modalWindows/prepareForSignatur
 import NewLoginPage from '../new_pom/pages/loginPage.js';
 import FinalStepPage from '../new_pom/pages/sign/finalStepPage.js';
 import ActivateTrialStripePage from "../new_pom/pages/activateTrialStripePage";
+import NewSettingsCompanyPage from "../new_pom/pages/settings/settingsCompanyPage.js";
+import NewSettingsBillingPage from "../new_pom/pages/settings/settingsBillingPage.js";
+import NewSettingsBillingPlanPage from "../new_pom/pages/settings/settingsBillingPlanPage.js";
+import UpgradeYourPlanModal from "../new_pom/modalWindows/upgradeYourPlanModal";
+import SpecialOneTimeOfferModal from "../new_pom/modalWindows/specialOneTimeOfferModal";
 import ToastAlert from "../new_pom/modalWindows/toastAlert.js"
 
 export const test = base.extend({    
@@ -68,20 +73,8 @@ export const test = base.extend({
         await use(new NewDocumentsTrashPage(page));
     },
 
-    finalStepPage: async ({ page }, use) => {
-        await use(new FinalStepPage(page));
-    },
-
     activateTrialStripePage: async ({ page }, use) => {
         await use(new ActivateTrialStripePage(page));
-    },
-
-    successModal: async ({ page }, use) => {
-        await use(new SuccessModal(page));
-    },
-
-    toastAlert: async ({ page }, use) => {
-        await use(new ToastAlert(page));
     },
     
 });

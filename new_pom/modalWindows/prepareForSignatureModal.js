@@ -1,6 +1,7 @@
+
 export default class PrepareForSignatureModal {
-    constructor(page) {
-        this.page = page;
+  constructor(page) {
+    this.page = page;
 
         this.signDocumentRadioBtn = this.page.getByText('Sign a Document', { exact: true });
         this.sendForSignatureRadioBtn = this.page.getByText('Send for Signature', { exact: true });
@@ -12,25 +13,25 @@ export default class PrepareForSignatureModal {
         this.continueBtn = this.page.getByRole('button', { name: 'Continue' });
         this.gotItBtn = this.page.getByRole('button', { name: 'Got it' });
         this.signFieldsItem = this.page.getByRole('complementary').getByText('Sign')
-        this.documentView = this.page.locator('.interactModal__documentView');
+        this.signPlaceCanvas = this.page.locator('.interactModal__documentView');
         this.saveBtn = this.page.getByRole('button', { name: 'Save' });
     }
 
-    async clickSignDocumentRadioBtn() {
-        await this.signDocumentRadioBtn.click();
-    }
+  async clickSignDocumentRadioBtn() {
+    await this.signDocumentRadioBtn.click();
+  }
 
-    async clickContinueBtn() {
-        await this.continueBtn.click();
-    }
+  async clickContinueBtn() {
+    await this.continueBtn.click();
+  }
 
-    async clickSignFieldsItem() {
-        await this.signFieldsItem.click();
-    }
+  async clickSignFieldsItem() {
+    await this.signFieldsItem.click();
+  }
 
-    async clickGotItBtn() {
-        await this.gotItBtn.click();
-    }
+  async clickGotItBtn() {
+    await this.gotItBtn.click();
+  }
 
     async clickSendForSignatureRadioBtn(){
         await this.sendForSignatureRadioBtn.click();
@@ -56,8 +57,8 @@ export default class PrepareForSignatureModal {
         await this.recipientEmailField.fill(email);
     }
 
-    async clickDocumentView(){
-        await this.documentView.click();
+    async clickSignPlaceCanvas() {
+      await this.signPlaceCanvas.click();
     }
 
     async clickSaveBtn() {
