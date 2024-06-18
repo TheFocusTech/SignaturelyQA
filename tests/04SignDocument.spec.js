@@ -12,12 +12,12 @@ test.describe('Sign Document', () => {
     await prepareForSignatureModal.clickSignAndSendForSignatureRadioBtn();
     
     await prepareForSignatureModal.clickAddSignerBtn();
-    await prepareForSignatureModal.fillAddSignersName1Field(CHOOSE_SIGNERS_FIELDS.name1);
-    await prepareForSignatureModal.fillAddSignersEmail1Field(CHOOSE_SIGNERS_FIELDS.email1);
+    await prepareForSignatureModal.fillSignerNameField(CHOOSE_SIGNERS_FIELDS.name1, 0);
+    await prepareForSignatureModal.fillSignerEmailField(CHOOSE_SIGNERS_FIELDS.email1, 0);
 
     await prepareForSignatureModal.clickAddSignerBtn();
-    await prepareForSignatureModal.fillAddSignersName2Field(CHOOSE_SIGNERS_FIELDS.name2);
-    await prepareForSignatureModal.fillAddSignersEmail2Field(CHOOSE_SIGNERS_FIELDS.email2);
+    await prepareForSignatureModal.fillSignerNameField(CHOOSE_SIGNERS_FIELDS.name2, 1);
+    await prepareForSignatureModal.fillSignerEmailField(CHOOSE_SIGNERS_FIELDS.email2, 1);
 
     await prepareForSignatureModal.clickCustomSigningOrderCheckbox();
 

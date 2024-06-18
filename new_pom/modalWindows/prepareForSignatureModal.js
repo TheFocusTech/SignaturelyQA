@@ -21,21 +21,14 @@ export default class PrepareForSignatureModal {
         this.assignedToDropDown = this.page.locator('.uiSelect__select').nth(1);
         this.meNowDropDownItem = this.page.getByText('Me (Now)', { exact: true });
         this.saveBtn = this.page.getByRole('button', { name: 'Save' });
-    
-    this.signDocumentRadioBtn = this.page.getByText('Sign a Document', { exact: true });
-    this.continueBtn = this.page.getByRole('button', { name: 'Continue' });
-    this.gotItBtn = this.page.getByRole('button', { name: 'Got it' });
-    this.signFieldsItem = this.page.locator('.interactModal__fieldBar-fieldItem-icon').first();
-    this.sendForSignatureRadioBtn = this.page.getByText('Send for Signature', { exact: true });
-    this.addSignerBtn = this.page.getByText('Add signer', { exact: true });
-    this.signerNameField = this.page.locator('//input[@placeholder="Name"]');
-    this.signerEmailField = this.page.locator('//input[@placeholder="Email"]');
-    this.signPlaceCanvas = this.page.locator('//div[@class="react-pdf__Page documentPage__inner-pdf_page"]');
-    this.saveBtn = this.page.getByRole('button', { name: 'Save' });
-    this.signAndSendForSignatureRadioBtn = this.page.getByText('Sign & Send for Signature', { exact: true });
-    this.customSigningOrderCheckbox = this.page.locator('.uiCheckbox__inner');
-    this.customSigningOrderPositionNumberOne = this.page.locator('span.signers__item-order-position').first();
-    this.customSigningOrderPositionNumberTwo = this.page.locator('span.signers__item-order-position').last();
+        this.signFieldsItem = this.page.locator('.interactModal__fieldBar-fieldItem-icon').first();
+        this.signerNameField = this.page.locator('//input[@placeholder="Name"]');
+        this.signerEmailField = this.page.locator('//input[@placeholder="Email"]');
+        this.signPlaceCanvas = this.page.locator('//div[@class="react-pdf__Page documentPage__inner-pdf_page"]');
+        this.saveBtn = this.page.getByRole('button', { name: 'Save' });
+        this.customSigningOrderCheckbox = this.page.locator('.uiCheckbox__inner');
+        this.customSigningOrderPositionNumberOne = this.page.locator('span.signers__item-order-position').first();
+        this.customSigningOrderPositionNumberTwo = this.page.locator('span.signers__item-order-position').last();
   }
 
     async clickSignDocumentRadioBtn() {
