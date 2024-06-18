@@ -33,36 +33,36 @@ export default class PrepareForSignatureModal {
     await this.gotItBtn.click();
   }
 
-    async clickSendForSignatureRadioBtn(){
-        await this.sendForSignatureRadioBtn.click();
-    }
+  async clickSendForSignatureRadioBtn(){
+      await this.sendForSignatureRadioBtn.click();
+  }
 
-    async clickAddSignerBtn() {
-        await this.addSignerBtn.click();
-    }
-    
-    async fillSignerNameField(name) {
-        await this.signerNameField.fill(name);
-    }
+  async clickAddSignerBtn() {
+      await this.addSignerBtn.click();
+  }
+  
+  async fillSignerNameField(name) {
+      await this.signerNameField.fill(name);
+  }
 
-    async fillSignerEmailField(email) {
-        await this.signerEmailField.fill(email);
-    }
+  async fillSignerEmailField(email) {
+      await this.signerEmailField.fill(email);
+  }
 
-    async clickAddRecipientsBtn() {
-        await this.addRecipientsBtn.click();
-    }
+  async clickAddRecipientsBtn() {
+      await this.addRecipientsBtn.click();
+  }
 
-    async fillRecipientEmailField(email) {
-        await this.recipientEmailField.fill(email);
-    }
+  async fillRecipientEmailField(email) {
+      await this.recipientEmailField.fill(email);
+  }
 
-    async clickSignPlaceCanvas() {
-      await this.signPlaceCanvas.click();
-    }
+  async clickSignPlaceCanvas() {
+    await this.signPlaceCanvas.click();
+  }
 
-    async clickSaveBtn() {
-        await this.saveBtn.click();
-      }
+  async clickSaveBtn() {
+      await this.saveBtn.click();
+    }
 
 }

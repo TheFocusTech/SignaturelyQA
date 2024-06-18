@@ -1,5 +1,5 @@
 import { expect } from "@playwright/test";
-import { test, createBusinessUserAndLogin, signPage, prepareForSignatureModal } from "../fixtures/base.js";
+import { test, createBusinessUserAndLogin, signPage, prepareForSignatureModal, finalStepPage, documentsPage, toastAlert } from "../fixtures/base.js";
 import SignPage from "../page_objects/signPage";
 import { CHOOSE_SIGNERS_FIELDS, DOCUMENT_STATUS, TOAST_MESSAGE } from '../testData.js';
 

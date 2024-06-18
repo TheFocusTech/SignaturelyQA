@@ -10,12 +10,10 @@ export default class NewDocumentsPage {
         this.table = new TableComponent(this.page); 
         this.sideMenuDocuments = new SideMenuDocumentsComponent(this.page);   
         
-        this.documentStatus = this.page.locator('.documents__documentStatus').first();
-
         this.optionsBtn = this.page.getByText('Options');
         this.editAndResendBtn = this.page.getByText('Edit & Resend');
         this.editAndResendTitle = this.page.getByText('Edit & Resend document')
-
+        this.documentStatus = this.page.locator('.documents__documentStatus').first();
     }  
 
     async clickOptionsBtn() {
