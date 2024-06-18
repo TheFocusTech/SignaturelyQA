@@ -8,6 +8,8 @@ export default class NewSignPage {
 
     this.uploadFile = new UploadFileOnSignPage(this.page);
     this.sideMenu = new SideMenuComponent(this.page);
+
+    this.userHeaderName = this.page.locator('.dropDownUser__trigger-name');
     
   }
 
