@@ -17,15 +17,15 @@ import UpgradeYourPlanModal from "../new_pom/modalWindows/upgradeYourPlanModal";
 import SpecialOneTimeOfferModal from "../new_pom/modalWindows/specialOneTimeOfferModal";
 
 
-import PrepareForSigningModal from '../new_pom/modalWindows/prepareforSigningModal.js';
+// import PrepareForSigningModal from '../new_pom/modalWindows/prepareforSigningModal.js';
 
-import FinalStepModal from '../new_pom/modalWindows/finalStepModal.js';
-import ActivateTrialStripePage from "../new_pom/pages/activateTrialStripePage";
-import NewSettingsCompanyPage from "../new_pom/pages/settings/settingsCompanyPage.js";
-import NewSettingsBillingPage from "../new_pom/pages/settings/settingsBillingPage.js";
-import NewSettingsBillingPlanPage from "../new_pom/pages/settings/settingsBillingPlanPage.js";
-import UpgradeYourPlanModal from "../new_pom/modalWindows/upgradeYourPlanModal";
-import SpecialOneTimeOfferModal from "../new_pom/modalWindows/specialOneTimeOfferModal";
+// import FinalStepModal from '../new_pom/modalWindows/finalStepModal.js';
+// import ActivateTrialStripePage from "../new_pom/pages/activateTrialStripePage";
+// import NewSettingsCompanyPage from "../new_pom/pages/settings/settingsCompanyPage.js";
+// import NewSettingsBillingPage from "../new_pom/pages/settings/settingsBillingPage.js";
+// import NewSettingsBillingPlanPage from "../new_pom/pages/settings/settingsBillingPlanPage.js";
+// import UpgradeYourPlanModal from "../new_pom/modalWindows/upgradeYourPlanModal";
+// import SpecialOneTimeOfferModal from "../new_pom/modalWindows/specialOneTimeOfferModal";
 
 
 
