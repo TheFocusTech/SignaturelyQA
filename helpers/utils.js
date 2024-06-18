@@ -1,3 +1,6 @@
+import { signUpRequest } from "./apiCalls";
+import { authorize, getConfirmationLinkFromEmail } from "../index";
+
 export function generateNumberForNewUser() {
     let dt = new Date();
     const year = dt.getFullYear().toString().slice(-2);

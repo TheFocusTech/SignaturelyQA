@@ -3,7 +3,7 @@ import { test } from "../fixtures/base"
 import { retrieveUserEmailConfirmationLink, createNewUserThroughApi } from "../helpers/utils";
 import { URL_END_POINTS, START_YOUR_FREE_TRIAL_STATEMENT, BILLING_INFORMATION } from "../testData";
 
-test.skip('TC_01_01_02 | Verify that user redirects to the Activate-trial page', async ({page, request, activateTrialStripePage}) => {
+test('TC_01_01_02 | Verify that user redirects to the Activate-trial page', async ({page, request, activateTrialStripePage}) => {
     const newUserData = await createNewUserThroughApi(request);
     const confirmationLink = await retrieveUserEmailConfirmationLink(request, newUserData);
 
