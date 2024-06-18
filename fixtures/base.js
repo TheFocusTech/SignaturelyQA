@@ -8,7 +8,15 @@ import NewDocumentsPage from '../new_pom/pages/documents/documentsPage.js';
 import NewDocumentsTrashPage from '../new_pom/pages/documents/documentsTrashPage.js';
 import PrepareForSignatureModal from '../new_pom/modalWindows/prepareForSignatureModal.js';
 import NewLoginPage from '../new_pom/pages/loginPage.js';
+import FinalStepModal from '../new_pom/modalWindows/finalStepModal.js';
+import ActivateTrialStripePage from "../new_pom/pages/activateTrialStripePage";
+import NewSettingsCompanyPage from "../new_pom/pages/settings/settingsCompanyPage.js";
+import NewSettingsBillingPage from "../new_pom/pages/settings/settingsBillingPage.js";
+import NewSettingsBillingPlanPage from "../new_pom/pages/settings/settingsBillingPlanPage.js";
+import UpgradeYourPlanModal from "../new_pom/modalWindows/upgradeYourPlanModal";
+import SpecialOneTimeOfferModal from "../new_pom/modalWindows/specialOneTimeOfferModal";
 
+<<<<<<< HEAD
 import PrepareForSigningModal from '../new_pom/modalWindows/prepareforSigningModal.js';
 
 import FinalStepModal from '../new_pom/modalWindows/finalStepModal.js';
@@ -22,6 +30,10 @@ import SpecialOneTimeOfferModal from "../new_pom/modalWindows/specialOneTimeOffe
 
 
 export const test = base.extend({
+=======
+
+export const test = base.extend({    
+>>>>>>> b08616299cfce14675b82e8f231b03a37fe535df
 
     createNewFolder: [
         async ({ page }, use) => {
@@ -77,12 +89,15 @@ export const test = base.extend({
         await use(new NewDocumentsTrashPage(page));
     },
 
+<<<<<<< HEAD
 
     prepareForSigningModal: async ({ page }, use) => {
         await use(new PrepareForSigningModal(page));
     },
 
 
+=======
+>>>>>>> b08616299cfce14675b82e8f231b03a37fe535df
     finalStepModal: async ({ page }, use) => {
         await use(new FinalStepModal(page));
     },
@@ -111,5 +126,8 @@ export const test = base.extend({
         await use(new SpecialOneTimeOfferModal(page));
     },
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> b08616299cfce14675b82e8f231b03a37fe535df
 });
