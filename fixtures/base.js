@@ -76,5 +76,29 @@ export const test = base.extend({
     activateTrialStripePage: async ({ page }, use) => {
         await use(new ActivateTrialStripePage(page));
     },
+
+    settingsCompanyPage: async ({ page }, use) => {
+        await use(new NewSettingsCompanyPage(page));
+    },
+
+    settingsBillingPage: async ({ page }, use) => {
+        await use(new NewSettingsBillingPage(page));
+    },
+
+    settingsBillingPlanPage: async ({ page }, use) => {
+        await use(new NewSettingsBillingPlanPage(page));
+    },
+
+    upgradeYourPlanModal: async ({ page }, use) => {
+        await use(new UpgradeYourPlanModal(page));
+    },
+
+    specialOneTimeOfferModal: async ({ page }, use) => {
+        await use(new SpecialOneTimeOfferModal(page));
+    },
+
+    toastAlert: async ({ page }, use) => {
+        await use(new ToastAlert(page));
+    },
     
 });
