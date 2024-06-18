@@ -7,8 +7,6 @@ import { test, createBusinessUserAndLogin, signPage } from "../fixtures/base.js"
 // import PrepareForSigningModal from "../new_pom/modalWindows/prepareforSigningModal.js";
 
 
-
-
 test.describe('Templates', () => {
 
   test('TC_07_27_01 | Verify that user can create a template', async ({ createBusinessUserAndLogin, signPage, prepareForSigningModal}) => {
@@ -25,5 +23,5 @@ test.describe('Templates', () => {
    await prepareForSigningModal.clickcreateBtn();
    await prepareForSigningModal.clickbackToTempatesBtn();
 
-  })
-})
+  });
+});

@@ -1,3 +1,6 @@
+import { signUpRequest } from "./apiCalls";
+import { authorize, getConfirmationLinkFromEmail } from "../index";
+
 export function generateNumberForNewUser() {
     let dt = new Date();
     const year = dt.getFullYear().toString().slice(-2);
@@ -9,4 +12,33 @@ export function generateNumberForNewUser() {
     const millis = dt.getMilliseconds().toString().padStart(3, '0');
     const date = `${year}${month}${day}${hh}${mm}${ss}${millis}`
     return date;
+}
+
+export function delay(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+export async function generateNewUserData() {
+    let userNumber = generateNumberForNewUser();
+    process.env.NEW_USER_NUMBER = userNumber;
+    return {
+        email: `${process.env.EMAIL_PREFIX}${userNumber}${process.env.EMAIL_DOMAIN}`,
+        name: `TestUser${userNumber}`,
+        password: `QA_tester${userNumber}`,
+    };
+}
+
+export async function createNewUserThroughApi(request) {
+    const newUserData = await  generateNewUserData();
+    console.log(`Generated new user #${process.env.NEW_USER_NUMBER}`);
+
+    await signUpRequest(request, newUserData);
+
+    return newUserData;
+}
+
+export async function retrieveUserEmailConfirmationLink(request, newUserData) {
+    const auth = await authorize();
+
+    return await getConfirmationLinkFromEmail(auth, newUserData.email);
 }
