@@ -49,7 +49,7 @@ test.describe('SignDocument', () => {
         await prepareForSignatureModal.clickContinueBtn();
         await prepareForSignatureModal.clickGotItBtn();
         await prepareForSignatureModal.clickSignFieldsItem();
-        await prepareForSignatureModal.clickDocumentView();
+        await prepareForSignatureModal.clickSignPlaceCanvas();
         await prepareForSignatureModal.clickSaveBtn();
 
         await expect(await toastAlert.toast).toBeVisible();
