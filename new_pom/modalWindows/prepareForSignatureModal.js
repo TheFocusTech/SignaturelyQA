@@ -13,7 +13,15 @@ export default class PrepareForSignatureModal {
     this.signerEmailField = this.page.locator('//input[@placeholder="Email"]');
     this.signPlaceCanvas = this.page.locator('//div[@class="react-pdf__Page documentPage__inner-pdf_page"]');
     this.saveBtn = this.page.getByRole('button', { name: 'Save' });
-
+    this.signAndSendForSignatureRadioBtn = this.page.getByText('Sign & Send for Signature', { exact: true });
+    this.addSigner = this.page.getByText('Add signer');
+    this.addSignersName1Field = this.page.getByPlaceholder('Name', { exact: true }).first();
+    this.addSignersEmail1Field = this.page.getByPlaceholder('Email', { exact: true }).first();
+    this.addSignersName2Field = this.page.getByPlaceholder('Name', { exact: true }).nth(1);
+    this.addSignersEmail2Field = this.page.getByPlaceholder('Email', { exact: true }).nth(1);
+    this.customSigningOrderCheckbox = this.page.locator('.uiCheckbox__inner');
+    this.customSigningOrderPositionNumberOne = this.page.locator('span.signers__item-order-position').first();
+    this.customSigningOrderPositionNumberTwo = this.page.locator('span.signers__item-order-position').last();
   }
 
   async clickSignDocumentRadioBtn() {
@@ -56,4 +64,27 @@ export default class PrepareForSignatureModal {
     await this.saveBtn.click();
   }
 
+  async clickSignAndSendForSignatureRadioBtn() {
+    await this.signAndSendForSignatureRadioBtn.click();
+  }
+
+  async fillAddSignersName1Field(name) {
+    await this.addSignersName1Field.fill(name)
+  }
+
+  async fillAddSignersEmail1Field(email) {
+    await this.addSignersEmail1Field.fill(email)
+  }
+
+  async fillAddSignersName2Field(name) {
+    await this.addSignersName2Field.fill(name)
+  }
+
+  async fillAddSignersEmail2Field(email) {
+    await this.addSignersEmail2Field.fill(email)
+  }
+
+  async clickCustomSigningOrderCheckbox() {
+    await this.customSigningOrderCheckbox.click();
+  }
 }
