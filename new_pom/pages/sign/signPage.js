@@ -11,7 +11,7 @@ import NewTemplatesPage from "../documents/templatesPage";
 import UploadFileOnSignPage from "../../pages/sign/uploadFileOnSignPage";
 
 
-import UploadFileOnSignPage from "../../pages/sign/uploadFileOnSignPage";
+// import UploadFileOnSignPage from "../../pages/sign/uploadFileOnSignPage";
 
 
 
