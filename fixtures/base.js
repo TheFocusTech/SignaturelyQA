@@ -16,7 +16,7 @@ import NewSettingsBillingPlanPage from "../new_pom/pages/settings/settingsBillin
 import UpgradeYourPlanModal from "../new_pom/modalWindows/upgradeYourPlanModal";
 import SpecialOneTimeOfferModal from "../new_pom/modalWindows/specialOneTimeOfferModal";
 import ChooseSignatureModal from '../new_pom/modalWindows/chooseSignatureModal.js';
-import FinelStepPage from '../new_pom/pages/sign/finalStepPage.js';
+import FinalStepPage from '../new_pom/pages/sign/finalStepPage.js';
 import SuccessModal from '../new_pom/modalWindows/successModal.js';
 
 
