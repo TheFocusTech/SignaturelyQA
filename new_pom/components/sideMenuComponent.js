@@ -4,6 +4,7 @@ export default class SideMenuComponent {
 
         this.sign = this.page.getByRole('link', { name: 'Sign', exact: true });
         this.documents = this.page.getByRole('link', { name: 'Documents', exact: true });
+        this.templates = this.page.getByRole('link', { name: 'Templates', exact: true });
 
     }
 
@@ -15,5 +16,10 @@ export default class SideMenuComponent {
         await this.documents.click();
     }
 
-   
+    async clickTemplates() {
+        await this.templates.click();
+    }
+
+
+
 }

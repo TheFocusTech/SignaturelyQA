@@ -10,6 +10,7 @@ export default class FileUploaderComponent {
         await this.fileInput.setInputFiles(file);
         await this.progressBar.waitFor('visible');
         await this.progressBar.waitFor('hidden');
+        
     }
 
 }

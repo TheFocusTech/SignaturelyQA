@@ -11,6 +11,7 @@ import NewDocumentsPage from '../new_pom/pages/documents/documentsPage.js';
 import NewDocumentsTrashPage from '../new_pom/pages/documents/documentsTrashPage.js';
 import PrepareForSignatureModal from '../new_pom/modalWindows/prepareForSignatureModal.js';
 import NewLoginPage from '../new_pom/pages/loginPage.js';
+import PrepareForSigningModal from '../new_pom/modalWindows/prepareforSigningModal.js';
 
 const API_BASE_URL = process.env.API_URL;
 const EMAIL = process.env.USER_EMAIL;
@@ -158,5 +159,13 @@ export const test = base.extend({
         await use(new NewDocumentsTrashPage(page));
     },
 
-    
+    prepareForSigningModal: async ({ page }, use) => {
+        await use(new PrepareForSigningModal(page));
+    },
+
+
+
+
+
+
 });

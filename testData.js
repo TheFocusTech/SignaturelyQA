@@ -40,3 +40,9 @@ export const FULL_NAME_INITIALS_FIELDS = {
     fullName: 'John Smith',
     initials: 'JS'
 };
+
+export const CREATE_TEMPLATE = {
+    nameField: 'Rental contract',
+    optionalMessage: 'USA',
+    nameRole: 'Boss',
+}
