@@ -73,6 +73,10 @@ export const test = base.extend({
         await use(new NewDocumentsTrashPage(page));
     },
 
+    finalStepPage: async ({ page }, use) => {
+        await use(new FinalStepPage(page));
+    },
+
     activateTrialStripePage: async ({ page }, use) => {
         await use(new ActivateTrialStripePage(page));
     },
