@@ -1,5 +1,5 @@
 import { expect } from "@playwright/test";
-import { test, createBusinessUserAndLogin, signPage, prepareForSignatureModal, finalStepPage, documentsPage } from "../fixtures/base.js";
+import { test, createBusinessUserAndLogin, signPage, prepareForSignatureModal, finalStepPage, documentsPage, successModal } from "../fixtures/base.js";
 import SignPage from "../page_objects/signPage";
 import { CHOOSE_SIGNERS_FIELDS, DOCUMENT_STATUS, TOAST_MESSAGE } from '../testData.js';
 
@@ -57,8 +57,7 @@ test.describe('SignDocument', () => {
         await finalStepPage.clickSendForSignatureBtn();
         await successModal.clickBackToDocumentsBtn();
 
-        await expect(await documentsPage.documentStatus).toHaveText(DOCUMENT_STATUS.processing);
-        
+        await expect(await documentsPage.documentStatus).toHaveText(DOCUMENT_STATUS.processing);        
     })
 
 })
