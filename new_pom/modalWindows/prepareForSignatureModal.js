@@ -34,27 +34,27 @@ export default class PrepareForSignatureModal {
   }
 
   async clickSendForSignatureRadioBtn(){
-      await this.sendForSignatureRadioBtn.click();
+    await this.sendForSignatureRadioBtn.click();
   }
 
   async clickAddSignerBtn() {
-      await this.addSignerBtn.click();
+    await this.addSignerBtn.click();
   }
   
   async fillSignerNameField(name) {
-      await this.signerNameField.fill(name);
+    await this.signerNameField.fill(name);
   }
 
   async fillSignerEmailField(email) {
-      await this.signerEmailField.fill(email);
+    await this.signerEmailField.fill(email);
   }
 
   async clickAddRecipientsBtn() {
-      await this.addRecipientsBtn.click();
+    await this.addRecipientsBtn.click();
   }
 
   async fillRecipientEmailField(email) {
-      await this.recipientEmailField.fill(email);
+    await this.recipientEmailField.fill(email);
   }
 
   async clickSignPlaceCanvas() {
@@ -62,7 +62,7 @@ export default class PrepareForSignatureModal {
   }
 
   async clickSaveBtn() {
-      await this.saveBtn.click();
-    }
+    await this.saveBtn.click();
+  }
 
 }
