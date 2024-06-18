@@ -107,8 +107,8 @@ export const test = base.extend({
         await use(new ChooseSignatureModal(page));
     },
 
-    finelStepPage: async ({ page }, use) => {
-        await use(new FinelStepPage(page));
+    finalStepPage: async ({ page }, use) => {
+        await use(new FinalStepPage(page));
     },
 
     successModal: async ({ page }, use) => {

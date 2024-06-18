@@ -17,7 +17,7 @@ test.describe('CreateDocument', () => {
 
     })
 
-    test('TC_03_07_06 | Verify that the user who uploaded the document and created a signature and Other Signer can sign it', async ({ createBusinessUserAndLogin, signPage, prepareForSignatureModal, chooseSignatureModal, finelStepPage, successModal, documentsPage }) => {
+    test('TC_03_07_06 | Verify that the user who uploaded the document and created a signature and Other Signer can sign it', async ({ createBusinessUserAndLogin, signPage, prepareForSignatureModal, chooseSignatureModal, finalStepPage, successModal, documentsPage }) => {
       test.setTimeout(120 * 1000);
 
       await signPage.uploadFile.fileUploader.uploadFile('testDocuments/todoList.xlsx');
@@ -37,8 +37,8 @@ test.describe('CreateDocument', () => {
       await chooseSignatureModal.clickSignNowBtn();
       await prepareForSignatureModal.toasts.clickToastFirstCloseBtn();
       await prepareForSignatureModal.buttons.clickSaveBtn();
-      await finelStepPage.fillDocumentTitleField(DOCUMENT_TITLE);
-      await finelStepPage.clickSignDocumentAndSendForSignatureBtn();
+      await finalStepPage.fillDocumentTitleField(DOCUMENT_TITLE);
+      await finalStepPage.clickSignDocumentAndSendForSignatureBtn();
       await successModal.clickBackToDocumentsBtn();
       
       await expect(await documentsPage.documentStatus).toHaveText(DOCUMENT_STATUS.awaiting);

@@ -1,4 +1,4 @@
-export default class FinelStepPage {
+export default class FinalStepPage {
     constructor(page) {
         this.page = page;
 
