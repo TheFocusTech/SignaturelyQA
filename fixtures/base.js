@@ -16,7 +16,7 @@ import NewSettingsBillingPlanPage from "../new_pom/pages/settings/settingsBillin
 import UpgradeYourPlanModal from "../new_pom/modalWindows/upgradeYourPlanModal";
 import SpecialOneTimeOfferModal from "../new_pom/modalWindows/specialOneTimeOfferModal";
 
-<<<<<<< HEAD
+
 import PrepareForSigningModal from '../new_pom/modalWindows/prepareforSigningModal.js';
 
 import FinalStepModal from '../new_pom/modalWindows/finalStepModal.js';
@@ -29,11 +29,11 @@ import SpecialOneTimeOfferModal from "../new_pom/modalWindows/specialOneTimeOffe
 
 
 
-export const test = base.extend({
-=======
+// export const test = base.extend({
 
-export const test = base.extend({    
->>>>>>> b08616299cfce14675b82e8f231b03a37fe535df
+
+export const test = base.extend({
+
 
     createNewFolder: [
         async ({ page }, use) => {
@@ -89,15 +89,15 @@ export const test = base.extend({
         await use(new NewDocumentsTrashPage(page));
     },
 
-<<<<<<< HEAD
+
 
     prepareForSigningModal: async ({ page }, use) => {
         await use(new PrepareForSigningModal(page));
     },
 
 
-=======
->>>>>>> b08616299cfce14675b82e8f231b03a37fe535df
+
+
     finalStepModal: async ({ page }, use) => {
         await use(new FinalStepModal(page));
     },
@@ -126,8 +126,8 @@ export const test = base.extend({
         await use(new SpecialOneTimeOfferModal(page));
     },
 
-<<<<<<< HEAD
 
-=======
->>>>>>> b08616299cfce14675b82e8f231b03a37fe535df
+
+
+
 });
