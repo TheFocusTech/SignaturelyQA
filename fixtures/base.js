@@ -7,7 +7,6 @@ import NewSignPage from '../new_pom/pages/sign/signPage.js';
 import NewDocumentsPage from '../new_pom/pages/documents/documentsPage.js';
 import NewDocumentsTrashPage from '../new_pom/pages/documents/documentsTrashPage.js';
 import PrepareForSignatureModal from '../new_pom/modalWindows/prepareForSignatureModal.js';
-import NewLoginPage from '../new_pom/pages/loginPage.js';
 import FinalStepModal from '../new_pom/modalWindows/finalStepModal.js';
 import ActivateTrialStripePage from "../new_pom/pages/activateTrialStripePage";
 import NewSettingsCompanyPage from "../new_pom/pages/settings/settingsCompanyPage.js";
@@ -15,8 +14,8 @@ import NewSettingsBillingPage from "../new_pom/pages/settings/settingsBillingPag
 import NewSettingsBillingPlanPage from "../new_pom/pages/settings/settingsBillingPlanPage.js";
 import UpgradeYourPlanModal from "../new_pom/modalWindows/upgradeYourPlanModal";
 import SpecialOneTimeOfferModal from "../new_pom/modalWindows/specialOneTimeOfferModal";
-import ChooseSignatureModal from '../new_pom/modalWindows/chooseSignatureModal.js';
-import FinalStepPage from '../new_pom/pages/sign/finalStepPage.js';
+import CreateSignatureModal from "../new_pom/modalWindows/createSignatureModal.js";
+import FinalStepPage from '../new_pom/pages/finalStepPage.js';
 import SuccessModal from '../new_pom/modalWindows/successModal.js';
 
 
@@ -104,8 +103,8 @@ export const test = base.extend({
         await use(new SpecialOneTimeOfferModal(page));
     },
 
-    chooseSignatureModal: async ({ page }, use) => {
-        await use(new ChooseSignatureModal(page));
+    createSignatureModal: async ({ page }, use) => {
+        await use(new CreateSignatureModal(page));
     },
 
     finalStepPage: async ({ page }, use) => {

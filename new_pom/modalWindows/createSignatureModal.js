@@ -1,12 +1,12 @@
-export default class ChooseSignatureModal {
+export default class CreateSignatureModal {
     constructor(page) {
         this.page = page;
 
         this.checkboxAgree = this.page.locator('div').getByText('I agree to sign electronically pursuant to the ');
         this.signNowBtn = this.page.getByRole('button', {name: 'Sign Now'});
-      }
+    }
 
-      async clickCheckboxAgree() {
+    async clickCheckboxAgree() {
         await this.checkboxAgree.waitFor({state: 'visible'});
         await this.checkboxAgree.click();
     }

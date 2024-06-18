@@ -1,28 +1,26 @@
-import ButtonsComponent from "../components/buttonComponent";
-import CanvasComponent from "../components/canvasComponent";
-import ToastsComponent from "../components/toastsComponent";
+import ToastComponent from "../components/toastComponent";
+import { clickCanvas } from "../../helpers/utils.js";
 
 export default class PrepareForSignatureModal {
     constructor(page) {
         this.page = page;
-        this.buttons = new ButtonsComponent(this.page);
-        this.canvas = new CanvasComponent(this.page);
-        this.toasts = new ToastsComponent(this.page);
+        this.excludedAreas = [];
+        
+        this.toast = new ToastComponent(this.page);
 
         this.signDocumentRadioBtn = this.page.getByText('Sign a Document', { exact: true });
         this.signAndSendForSignatureRadioBtn = this.page.getByText('Sign & Send for Signature', { exact: true });
+        this.sendForSignatureRadioBtn = this.page.getByText('Send for Signature', { exact: true });
         this.continueBtn = this.page.getByRole('button', { name: 'Continue' });
         this.gotItBtn = this.page.getByRole('button', { name: 'Got it' });
-        this.signFieldsItem = this.page.locator('.interactModal__fieldBar-fieldItem-icon').first();
+        this.signFieldsItem = this.page.locator('li').getByText('Sign');
         this.addSignerBtn = this.page.getByText('Add signer', { exact: true });
-        this.sendForSignatureRadioBtn = this.page.getByText('Send for Signature', { exact: true });
-        this.signerNameField = this.page.locator('//input[@placeholder="Name"]');
-        this.signerEmailField = this.page.locator('//input[@placeholder="Email"]');
-        this.signPlaceCanvas = this.page.locator('//div[@class="react-pdf__Page documentPage__inner-pdf_page"]');
+        this.signerNameField = this.page.getByPlaceholder('Name');
+        this.signerEmailField = this.page.getByPlaceholder('Email');
+        this.canvas = this.page.locator('canvas');
+        this.assignedToDropDown = this.page.locator('.uiSelect__select').nth(1);
+        this.meNowDropDownItem = this.page.getByText('Me (Now)', { exact: true });
         this.saveBtn = this.page.getByRole('button', { name: 'Save' });
-        this.addSignersNameField = this.page.getByRole('textbox', {name: 'Name'});
-        this.addSignersEmailField = this.page.getByRole('textbox', {name: 'Email'});
-
     }
 
     async clickSignDocumentRadioBtn() {
@@ -33,6 +31,10 @@ export default class PrepareForSignatureModal {
     async clickSignAndSendForSignatureRadioBtn() {
         await this.signAndSendForSignatureRadioBtn.waitFor({ state: 'visible' });
         await this.signAndSendForSignatureRadioBtn.click();
+    }
+
+    async clickSendForSignatureRadioBtn() {
+        await this.sendForSignatureRadioBtn.click();
     }
 
     async clickContinueBtn() {
@@ -47,36 +49,33 @@ export default class PrepareForSignatureModal {
     async clickGotItBtn() {
         await this.gotItBtn.click();
     }
-    async clickSendForSignatureRadioBtn() {
-        await this.sendForSignatureRadioBtn.click();
-    }
 
     async clickAddSignerBtn() {
         await this.addSignerBtn.click();
     }
 
-    async fillSignerNameField(name) {
-        await this.signerNameField.fill(name);
+    async fillSignerNameField(name, i) {
+        await this.signerNameField.nth(i).fill(name);
     }
 
-    async fillSignerEmailField(email) {
-        await this.signerEmailField.fill(email);
+    async fillSignerEmailField(email, i) {
+        await this.signerEmailField.nth(i).fill(email);
     }
 
-    async clickSignPlaceCanvas() {
-        await this.signPlaceCanvas.click();
+    async doCanvasClicks() {
+        await clickCanvas(this.page, this.canvas, this.excludedAreas);
+    }
+
+    async clickAssignedToDropDown() {
+        await this.assignedToDropDown.click();
+    }
+
+    async clickMeNowDropDownItem() {
+        await this.meNowDropDownItem.click();
     }
 
     async clickSaveBtn() {
         await this.saveBtn.click();
-    }
-
-    async fillAddSignersNameField(name, i) {
-        await this.addSignersNameField.nth(i).fill(name);
-    }
-
-    async fillAddSignersEmailField(email, i) {
-        await this.addSignersEmailField.nth(i).fill(email);
     }
 
 }
