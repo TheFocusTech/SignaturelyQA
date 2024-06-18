@@ -2,7 +2,7 @@ import { expect } from '@playwright/test';
 import { test, createBusinessUserAndLogin } from "../fixtures/base.js";
 import {
     API_KEY_NAME, NO_API_KEY_MESSAGE,
-    TOASTER_MESSAGE,
+    TOAST_MESSAGE,
 } from '../testData.js';
 import SignPage from "../page_objects/signPage";
 

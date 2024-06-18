@@ -7,7 +7,6 @@ import NewSignPage from '../new_pom/pages/sign/signPage.js';
 import NewDocumentsPage from '../new_pom/pages/documents/documentsPage.js';
 import NewDocumentsTrashPage from '../new_pom/pages/documents/documentsTrashPage.js';
 import PrepareForSignatureModal from '../new_pom/modalWindows/prepareForSignatureModal.js';
-import FinalStepModal from '../new_pom/modalWindows/finalStepModal.js';
 import ActivateTrialStripePage from "../new_pom/pages/activateTrialStripePage";
 import NewSettingsCompanyPage from "../new_pom/pages/settings/settingsCompanyPage.js";
 import NewSettingsBillingPage from "../new_pom/pages/settings/settingsBillingPage.js";
@@ -74,10 +73,6 @@ export const test = base.extend({
 
     documentsTrashPage: async ({ page }, use) => {
         await use(new NewDocumentsTrashPage(page));
-    },
-
-    finalStepPage: async ({ page }, use) => {
-        await use(new FinalStepPage(page));
     },
 
     activateTrialStripePage: async ({ page }, use) => {

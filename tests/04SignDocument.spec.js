@@ -1,5 +1,5 @@
 import { expect } from "@playwright/test";
-import { test, createBusinessUserAndLogin, signPage, prepareForSignatureModal, finalStepPage, documentsPage, toastAlert } from "../fixtures/base.js";
+import { test, createBusinessUserAndLogin, signPage, prepareForSignatureModal, finalStepPage, documentsPage } from "../fixtures/base.js";
 import SignPage from "../page_objects/signPage";
 import { CHOOSE_SIGNERS_FIELDS, DOCUMENT_STATUS, TOAST_MESSAGE } from '../testData.js';
 
@@ -35,7 +35,7 @@ test.describe('SignDocument', () => {
         prepareForSignatureModal,
         finalStepPage, 
         documentsPage,
-        toastAlert
+        successModal     
     }) => {
         await signPage.uploadFile.fileUploader.uploadFile('testDocuments/todoList.xlsx');
         await signPage.uploadFile.clickPrepareDocumentBtn();
@@ -52,10 +52,10 @@ test.describe('SignDocument', () => {
         await prepareForSignatureModal.clickSignPlaceCanvas();
         await prepareForSignatureModal.clickSaveBtn();
 
-        await expect(await toastAlert.toast).toBeVisible();
+        await expect(await prepareForSignatureModal.toast).toBeVisible();
         
         await finalStepPage.clickSendForSignatureBtn();
-        await finalStepPage.successModal.clickBackToDocumentsBtn();
+        await successModal.clickBackToDocumentsBtn();
 
         await expect(await documentsPage.documentStatus).toHaveText(DOCUMENT_STATUS.processing);
         

@@ -1,7 +1,7 @@
 import { expect } from '@playwright/test';
 import { test } from "../fixtures/base.js";
 import SignPage from "../page_objects/signPage.js";
-import {TOASTER_MESSAGE, VISA_CARD_DATA, RANDOM_ANNUALLY_PLAN, PLANS} from '../testData.js';
+import {TOAST_MESSAGE, VISA_CARD_DATA, RANDOM_ANNUALLY_PLAN, PLANS} from '../testData.js';
 
 test.describe('Billing', () => {
 
@@ -15,12 +15,12 @@ test.describe('Billing', () => {
         await settingsBillingPlanPage.clickPersonalPlanSelectBtn();
         await settingsBillingPlanPage.clickDowngradeBtn();
 
-        await expect(settingsBillingPlanPage.locators.getToasterPopup()).toHaveText(TOASTER_MESSAGE.planSuccessChange);
+        await expect(settingsBillingPlanPage.locators.getToasterPopup()).toHaveText(TOAST_MESSAGE.planSuccessChange);
         await expect(settingsBillingPlanPage.locators.getRenewBusinessPlanBtn()).toBeVisible();
 
         await settingsBillingPlanPage.clickToasterCloseSuccessBtn();
         await settingsBillingPlanPage.clickRenewBusinessPlanBtn();
-        await expect(settingsBillingPlanPage.locators.getToasterPopup()).toHaveText(TOASTER_MESSAGE.planRenew);
+        await expect(settingsBillingPlanPage.locators.getToasterPopup()).toHaveText(TOAST_MESSAGE.planRenew);
         await expect(settingsBillingPlanPage.locators.getCurrentPlanBtn()).toBeVisible();
         await settingsBillingPlanPage.clickSignSidebarLinkAndGoSignPage();
     })
