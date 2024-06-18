@@ -2,7 +2,7 @@ export default class ToastAlert {
   constructor(page) {
     this.page = page;
 
-    this.toast = this.page.getByText('Document successfully saved!');
+    this.toast = this.page.locator("div[role='alert']+div");
   }
 
   async waitForToastVisible() {

@@ -20,7 +20,8 @@ export const TOASTER_MESSAGE ={
     deleteApiKey: 'API key successfully deleted',
     folderRename: 'Folder successfully updated!',
     folderCreated: 'Folder created!',
-    signatureCreated: 'Signature created successfully'
+    signatureCreated: 'Signature created successfully',
+    success: 'Document successfully saved!'
 };
 export const API_KEY_NAME = 'Test Api Key';
 export const NO_API_KEY_MESSAGE = 'You don\'t have any API keys yet.';
@@ -54,7 +55,3 @@ export const DOCUMENT_STATUS = {
     completed: 'completed',
     processing: 'processing',
 };
-
-export const TOAST_MESSAGE = {
-    success: 'Document successfully saved!'
-}
