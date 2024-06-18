@@ -43,3 +43,15 @@ export const FULL_NAME_INITIALS_FIELDS = {
 };
 export const START_YOUR_FREE_TRIAL_STATEMENT = "Please add your payment details to start the free trial.";
 export const BILLING_INFORMATION = "Billing Information";
+
+
+export const DOCUMENT_STATUS = {
+    awaiting: 'awaiting',
+    draft: 'draft',
+    completed: 'completed',
+    processing: 'processing',
+};
+
+export const TOAST_MESSAGE = {
+    success: 'Document successfully saved!'
+}

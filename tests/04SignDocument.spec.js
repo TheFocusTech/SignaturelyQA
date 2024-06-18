@@ -1,10 +1,7 @@
 import { expect } from "@playwright/test";
-import {test, createBusinessUserAndLogin} from "../fixtures/base.js";
+import { test, createBusinessUserAndLogin, signPage, prepareForSignatureModal } from "../fixtures/base.js";
 import SignPage from "../page_objects/signPage";
-const EMAIL = process.env.USER_EMAIL;
-const PASSWORD = process.env.USER_PASSWORD;
-const BASE_URL = process.env.URL;
-import {CHOOSE_SIGNERS_FIELDS} from '../testData.js';
+import { CHOOSE_SIGNERS_FIELDS, DOCUMENT_STATUS, TOAST_MESSAGE } from '../testData.js';
 
 test.describe('SignDocument', () => {
 
@@ -31,4 +28,37 @@ test.describe('SignDocument', () => {
         await expect(signPage.locators.getCustomSigningOrderPositionNumberOne()).toBeVisible();
         await expect(signPage.locators.getCustomSigningOrderPositionNumberTwo()).toBeVisible();
     })
+
+    test('TC_04_14_01 | Verify adding users who can view the document', async ({ 
+        createBusinessUserAndLogin, 
+        signPage, 
+        prepareForSignatureModal,
+        finalStepPage, 
+        documentsPage,
+        toastAlert
+    }) => {
+        await signPage.uploadFile.fileUploader.uploadFile('testDocuments/todoList.xlsx');
+        await signPage.uploadFile.clickPrepareDocumentBtn();
+
+        await prepareForSignatureModal.clickSendForSignatureRadioBtn();
+        await prepareForSignatureModal.clickAddSignerBtn();
+        await prepareForSignatureModal.fillSignerNameField("Any Name");
+        await prepareForSignatureModal.fillSignerEmailField(process.env.PREFIX_EMAIL + '01' + process.env.EMAIL_DOMAIN);
+        await prepareForSignatureModal.clickAddRecipientsBtn();
+        await prepareForSignatureModal.fillRecipientEmailField(process.env.PREFIX_EMAIL + '02' + process.env.EMAIL_DOMAIN);
+        await prepareForSignatureModal.clickContinueBtn();
+        await prepareForSignatureModal.clickGotItBtn();
+        await prepareForSignatureModal.clickSignFieldsItem();
+        await prepareForSignatureModal.clickDocumentView();
+        await prepareForSignatureModal.clickSaveBtn();
+
+        await expect(await toastAlert.toast).toBeVisible();
+        
+        await finalStepPage.clickSendForSignatureBtn();
+        await finalStepPage.successModal.clickBackToDocumentsBtn();
+
+        await expect(await documentsPage.documentStatus).toHaveText(DOCUMENT_STATUS.processing);
+        
+    })
+
 })

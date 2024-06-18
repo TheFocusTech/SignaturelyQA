@@ -8,7 +8,9 @@ import NewDocumentsPage from '../new_pom/pages/documents/documentsPage.js';
 import NewDocumentsTrashPage from '../new_pom/pages/documents/documentsTrashPage.js';
 import PrepareForSignatureModal from '../new_pom/modalWindows/prepareForSignatureModal.js';
 import NewLoginPage from '../new_pom/pages/loginPage.js';
+import FinalStepPage from '../new_pom/pages/sign/finalStepPage.js';
 import ActivateTrialStripePage from "../new_pom/pages/activateTrialStripePage";
+import ToastAlert from "../new_pom/modalWindows/toastAlert.js"
 
 export const test = base.extend({    
 
@@ -66,8 +68,20 @@ export const test = base.extend({
         await use(new NewDocumentsTrashPage(page));
     },
 
+    finalStepPage: async ({ page }, use) => {
+        await use(new FinalStepPage(page));
+    },
+
     activateTrialStripePage: async ({ page }, use) => {
         await use(new ActivateTrialStripePage(page));
+    },
+
+    successModal: async ({ page }, use) => {
+        await use(new SuccessModal(page));
+    },
+
+    toastAlert: async ({ page }, use) => {
+        await use(new ToastAlert(page));
     },
     
 });
