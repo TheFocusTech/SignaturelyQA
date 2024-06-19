@@ -8,8 +8,7 @@ export default class NewDocumentsPage {
 
         this.sideMenu = new SideMenuComponent(this.page);
         this.table = new TableComponent(this.page); 
-        this.sideMenuDocuments = new SideMenuDocumentsComponent(this.page);      
-
-    }  
+        this.sideMenuDocuments = new SideMenuDocumentsComponent(this.page);
+    }
 
 }

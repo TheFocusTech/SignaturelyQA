@@ -39,6 +39,12 @@ export const START_YOUR_FREE_TRIAL_STATEMENT = "Please add your payment details 
 export const BILLING_INFORMATION = "Billing Information";
 export const PLANS = ["Personal", "Business"];
 export const RANDOM_ANNUALLY_PLAN = (randomPlan) => `${randomPlan} Annually Plan`;
+export const DOCUMENT_TITLE = 'Document';
+export const DOCUMENT_STATUS = {
+    awaiting: 'awaiting',
+    draft: 'draft',
+    completed: 'completed'
+};
 export const CARD_DETAILS = {
     VISA: {
         fullNameOnCard: `TestUser`,
