@@ -12,7 +12,7 @@ export const CHOOSE_SIGNERS_FIELDS = {
     name2: 'John Doe2',
     email2: '5kXUw@example.com'
 };
-export const TOASTER_MESSAGE ={
+export const TOASTER_MESSAGE = {
     planSuccessChange: 'Plan has been successfully changed.',
     planRenew: 'Plan has been renew',
     folderDeleted: 'Folder deleted successfully.',
@@ -54,3 +54,7 @@ export const DOCUMENT_STATUS = {
 };
 export const CI_USER_NAME = 'CI_user';
 export const BUSINESS_MONTHLY_PLAN = "Your plan (Billed Monthly)Business";
+export const CANVAS_SIGNATURE_COORDINATES_X = 525;
+export const CANVAS_SIGNATURE_COORDINATES_Y = 245;
+export const EMPTY_STRING = "";
+export const MESSAGE = "Project 1";

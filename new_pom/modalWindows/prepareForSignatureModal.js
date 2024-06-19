@@ -5,7 +5,7 @@ export default class PrepareForSignatureModal {
     constructor(page) {
         this.page = page;
         this.excludedAreas = [];
-        
+
         this.toast = new ToastComponent(this.page);
 
         this.signDocumentRadioBtn = this.page.getByText('Sign a Document', { exact: true });
@@ -76,6 +76,14 @@ export default class PrepareForSignatureModal {
 
     async clickSaveBtn() {
         await this.saveBtn.click();
+    }
+
+    async moveMouse(x, y) {
+        await this.page.mouse.move(x, y);
+    }
+
+    async clickFirstCanvas() {
+        await this.canvas.first().click();
     }
 
 }
