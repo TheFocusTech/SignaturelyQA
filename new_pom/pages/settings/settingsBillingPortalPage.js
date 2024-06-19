@@ -2,8 +2,8 @@ export default class SettingsBillingPortalPage {
     constructor(page) {
         this.page = page;
 
-        this.paymentDefaultMethod = this.page.locator('[class="Box-root Flex-flex Flex-alignItems--center Flex-direction--row"]').filter({hasText: 'Default'});
         this.paymentMethodsList = this.page.locator('[class="Box-root Flex-flex Flex-alignItems--center Flex-direction--row"]');
+        this.paymentDefaultMethod = this.paymentMethodsList.filter({hasText: 'Default'});
         this.moreOptionsButtonList = this.page.getByText('More options');
         this.deleteOptions = this.page.locator('[data-test="menu-contents"]').getByText('Delete');
         this.deletePaymentMethodButtonOnDialog = this.page.locator('.Dialog-footer').getByText('Delete payment method');
