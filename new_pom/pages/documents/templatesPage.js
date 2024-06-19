@@ -4,6 +4,8 @@ import CreateNewTemplateComponent from "../../components/createNewTemplateCompon
 
 
 
+
+
 export default class NewTemplatesPage {
     constructor(page) {
         this.page = page;
