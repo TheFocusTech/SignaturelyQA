@@ -13,8 +13,4 @@ export default class NewSettingsBillingPlanPage {
             .getByRole('button', { name: "Upgrade" })
             .click();
     }
-
-    async getBillingHeaderText() {
-        return this.billingHeader.innerText();
-    }
 }

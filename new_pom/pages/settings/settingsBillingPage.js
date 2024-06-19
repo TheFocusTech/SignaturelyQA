@@ -6,14 +6,10 @@ export default class NewSettingsBillingPage {
 
         this.upgradePlanBtn = this.page.getByRole('button', {name: "Upgrade Plan"});
         this.editPlanBtn = this.page.getByText('Edit Plan', { exact: true });
+        this.billingPlanDescription = this.page.locator('.billing__plan-description');
     }
 
     async clickUpgradePlanButton() {
         await this.upgradePlanBtn.click();
-    }
-
-    async clickEditPlanBtn() {
-        await this.editPlanBtn.click();
-        await this.page.waitForURL(`${process.env.URL}${URL_END_POINTS.settingsBillingPlanEndPoint}`);
     }
 }

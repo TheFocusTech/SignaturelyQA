@@ -53,4 +53,4 @@ export const DOCUMENT_STATUS = {
     completed: 'completed'
 };
 export const CI_USER_NAME = 'CI_user';
-export const BUSINESS_MONTHLY_PLAN = "Business Monthly Plan";
+export const BUSINESS_MONTHLY_PLAN = "Your plan (Billed Monthly)Business";

@@ -27,6 +27,5 @@ test('TC_01_01_03 | Verify that user redirects to the homepage after filling Bil
 
     await signPage.sideMenu.clickSettings();
     await settingsCompanyPage.sideMenuSettings.clickBilling();
-    await settingsBillingPage.clickEditPlanBtn();
-    await expect(settingsBillingPlanPage.billingHeader).toHaveText(BUSINESS_MONTHLY_PLAN);
-})
+    await expect(settingsBillingPage.billingPlanDescription).toHaveText(BUSINESS_MONTHLY_PLAN)
+ })
