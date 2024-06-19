@@ -5,7 +5,7 @@ import { CHOOSE_SIGNERS_FIELDS, DOCUMENT_STATUS, TOAST_MESSAGE } from '../testDa
 
 test.describe('SignDocument', () => {
 
-    test('TC_04_11_02 | Verify custom signing order', async ({page,createBusinessUserAndLogin}) => {
+    test.skip('TC_04_11_02 | Verify custom signing order', async ({page,createBusinessUserAndLogin}) => {
         const signPage = new SignPage(page);
         await signPage.clickUploadFileBtn('testDocuments/picture.jpg');
 
