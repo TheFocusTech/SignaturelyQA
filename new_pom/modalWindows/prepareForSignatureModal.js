@@ -13,7 +13,8 @@ export default class PrepareForSignatureModal {
         this.sendForSignatureRadioBtn = this.page.getByText('Send for Signature', { exact: true });
         this.continueBtn = this.page.getByRole('button', { name: 'Continue' });
         this.gotItBtn = this.page.getByRole('button', { name: 'Got it' });
-        this.signFieldsItem = this.page.locator('li').getByText('Sign');
+        this.fieldsMenu = this.page.locator('aside ul');
+        this.signFieldsItem = this.fieldsMenu.getByText('Sign');
         this.addSignerBtn = this.page.getByText('Add signer', { exact: true });
         this.signerNameField = this.page.getByPlaceholder('Name');
         this.signerEmailField = this.page.getByPlaceholder('Email');
@@ -21,7 +22,9 @@ export default class PrepareForSignatureModal {
         this.assignedToDropDown = this.page.locator('.uiSelect__select').nth(1);
         this.meNowDropDownItem = this.page.getByText('Me (Now)', { exact: true });
         this.saveBtn = this.page.getByRole('button', { name: 'Save' });
-        
+        this.customSigningOrderCheckbox = this.page.locator('.uiCheckbox__inner');
+        this.customSigningOrderPositionNumberOne = this.page.locator('span.signers__item-order-position').first();
+        this.customSigningOrderPositionNumberTwo = this.page.locator('span.signers__item-order-position').last();
 
     }
 
@@ -80,6 +83,8 @@ export default class PrepareForSignatureModal {
         await this.saveBtn.click();
     }
 
-    
-      
+    async clickCustomSigningOrderCheckbox() {
+        await this.customSigningOrderCheckbox.click();
+    }
+
 }
