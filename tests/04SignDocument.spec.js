@@ -4,7 +4,7 @@ import { CHOOSE_SIGNERS_FIELDS } from "../testData.js";
 
 test.describe('Sign Document', () => {
 
-  test.only('TC_04_11_02 | Verify custom signing order', async ({ createBusinessUserAndLogin, signPage, prepareForSignatureModal }) => {
+  test('TC_04_11_02 | Verify custom signing order', async ({ createBusinessUserAndLogin, signPage, prepareForSignatureModal }) => {
 
     await signPage.uploadFile.fileUploader.uploadFile('testDocuments/picture.jpg');
     await signPage.uploadFile.clickPrepareDocumentBtn();
