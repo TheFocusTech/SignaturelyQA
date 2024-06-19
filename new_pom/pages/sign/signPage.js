@@ -1,18 +1,10 @@
 import SideMenuComponent from "../../components/sideMenuComponent";
-
-
 import UploadFileOnSignPage from "../../components/fileUploderComponent";
 import CreateNewTemplateComponent from "../../components/createNewTemplateComponent";
 import SideMenuTemlatesComponent from "../../components/sideMenuTemplatesComponent";
 import NewTemplatesPage from "../documents/templatesPage";
-
-
-
-// import UploadFileOnSignPage from "../../pages/sign/uploadFileOnSignPage";
-
-
-// import UploadFileOnSignPage from "../../pages/sign/uploadFileOnSignPage";
-
+import UploadFileOnSignPage from "../../pages/sign/uploadFileOnSignPage";
+import HeaderComponent from "../../components/headerComponent";
 
 
 export default class NewSignPage {
@@ -28,12 +20,8 @@ export default class NewSignPage {
     this.newTemplatesPage = new NewTemplatesPage(this.page);
 
 
-
-
-
-
-
-
+    this.header = new HeaderComponent(this.page);
+    this.userHeaderName = this.page.locator('.dropDownUser__trigger-name');
 
 
   }

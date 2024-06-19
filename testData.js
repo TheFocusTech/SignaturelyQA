@@ -56,9 +56,12 @@ export const BILLING_INFORMATION = "Billing Information";
 export const PLANS = ["Personal", "Business"];
 export const RANDOM_ANNUALLY_PLAN = (randomPlan) => `${randomPlan} Annually Plan`;
 
-
-// export const START_YOUR_FREE_TRIAL_STATEMENT = "Please add your payment details to start the free trial.";
-// export const BILLING_INFORMATION = "Billing Information";
-// export const PLANS = ["Personal", "Business"];
-// export const RANDOM_ANNUALLY_PLAN = (randomPlan) => `${randomPlan} Annually Plan`;
+export const DOCUMENT_TITLE = 'Document';
+export const DOCUMENT_STATUS = {
+    awaiting: 'awaiting',
+    draft: 'draft',
+    completed: 'completed'
+};
+export const CI_USER_NAME = 'CI_user';
+export const BUSINESS_MONTHLY_PLAN = "Your plan (Billed Monthly)Business";
 
