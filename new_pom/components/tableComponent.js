@@ -7,6 +7,8 @@ export default class TableComponent {
         this.documentStatus = this.page.locator('.documents__documentStatus').first();
         this.optionsBtn = this.page.getByText('Options');
         this.editAndResendBtn = this.page.getByText('Edit & Resend');
+        this.titleEditAndRessendDocument = this.page.getByText('Edit & Resend document');
+
     }
 
     async clickOptionsBtn() {

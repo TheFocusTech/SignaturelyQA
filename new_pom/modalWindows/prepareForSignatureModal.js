@@ -21,6 +21,8 @@ export default class PrepareForSignatureModal {
         this.assignedToDropDown = this.page.locator('.uiSelect__select').nth(1);
         this.meNowDropDownItem = this.page.getByText('Me (Now)', { exact: true });
         this.saveBtn = this.page.getByRole('button', { name: 'Save' });
+        
+
     }
 
     async clickSignDocumentRadioBtn() {
@@ -78,4 +80,6 @@ export default class PrepareForSignatureModal {
         await this.saveBtn.click();
     }
 
+    
+      
 }
