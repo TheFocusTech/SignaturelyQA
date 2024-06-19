@@ -45,6 +45,8 @@ export const DOCUMENT_STATUS = {
     draft: 'draft',
     completed: 'completed'
 };
+
+export const CI_USER_NAME = 'CI_user';
 export const CARD_DETAILS = {
     VISA: {
         fullNameOnCard: `TestUser`,
