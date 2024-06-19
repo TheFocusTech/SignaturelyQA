@@ -46,7 +46,7 @@ test.describe('Billing', () => {
                                                                 settingsCompanyPage,
                                                                 settingsBillingPage,
                                                             }) => {
-        test.setTimeout(150 * 1000);
+        test.setTimeout(100 * 1000);
         await signPage.sideMenu.clickSettings();
         await settingsCompanyPage.horizontalMenu.clickBilling();
         let stripeEnterPaymentDetailsPage = await settingsBillingPage.clickAttachCardButton();

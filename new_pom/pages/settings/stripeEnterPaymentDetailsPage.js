@@ -9,6 +9,7 @@ export default class StripeEnterPaymentDetailsPage {
         this.countryOrRegionOption = this.page.getByLabel('Country or region');
         this.zipFild = this.page.getByPlaceholder('ZIP');
         this.saveCardButton = this.page.getByTestId('hosted-payment-submit-button');
+        this.saveMyInfoCheckbox = this.page.getByRole('checkbox');
         this.successCheckmark = this.page.locator('[class="Icon Icon--md Icon--white"]');
     }
 
@@ -19,8 +20,9 @@ export default class StripeEnterPaymentDetailsPage {
         await this.fullNameOnCardFild.pressSequentially(cardDetails.fullNameOnCard);
         await this.countryOrRegionOption.selectOption(cardDetails.countryOrRegion);
         await this.zipFild.fill(cardDetails.zip);
+        await this.saveMyInfoCheckbox.uncheck();
         await this.saveCardButton.click();
-        await this.successCheckmark.waitFor({ timeout: 50000 });
+        await this.successCheckmark.waitFor({ timeout: 30000 });
         await this.page.close();
     }
 }
