@@ -4,11 +4,18 @@ export default class SpecialOneTimeOfferModal {
 
         this.upsellModal = this.page.locator('.upsellModal');
         this.upsellModalBtn = this.page.getByRole('button', { name: "Yes, upgrade me!" });
+        this.noThanksModalBtn = this.page.locator('.upsellModal__button-cancel');
     }
 
     async clickYesUpgradeMeBtn() {
         await this.upsellModal.waitFor({ state: 'visible' });
         await this.upsellModalBtn.click();
+        await this.upsellModal.waitFor({ state: 'hidden' });
+    }
+
+    async clickNoThanksModalBtn(){
+        await this.upsellModal.waitFor({ state: 'visible' });        
+        await this.noThanksModalBtn.click();
         await this.upsellModal.waitFor({ state: 'hidden' });
     }
 }

@@ -5,6 +5,8 @@ export default class NewSettingsBillingPlanPage {
 
         this.billingTableColumnHeader = this.page.locator('.billing__table-column--header');
         this.billingHeader = this.page.locator('.billing__trial-header');
+        this.selectPersonalPlanButton = this.page.getByText('Select', { exact: true });
+        this.businessPlanActionButton = this.billingTableColumnHeader.last().locator('div').last();
     }
 
     async clickUpgradeButton(plan) {
@@ -13,4 +15,9 @@ export default class NewSettingsBillingPlanPage {
             .getByRole('button', { name: "Upgrade" })
             .click();
     }
+
+    async clickSelectPersonalPlanButton(){
+        await this.selectPersonalPlanButton.click();
+    }
+
 }

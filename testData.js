@@ -52,3 +52,7 @@ export const DOCUMENT_STATUS = {
     draft: 'draft',
     completed: 'completed'
 };
+export const ACTION_BUTTON = 
+{
+    renew: "Renew"
+};
