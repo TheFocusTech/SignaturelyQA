@@ -57,7 +57,7 @@ test.describe('SignDocument', () => {
         await finalStepPage.clickSendForSignatureBtn();
         await successModal.clickBackToDocumentsBtn();
 
-        await expect(await documentsPage.table.documentStatus).toHaveText(DOCUMENT_STATUS.processing);        
+        await expect(await documentsPage.table.documentStatus).toHaveText(DOCUMENT_STATUS.awaiting);        
     })
 
 })
