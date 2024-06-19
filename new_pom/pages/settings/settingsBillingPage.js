@@ -1,5 +1,5 @@
 import StripeEnterPaymentDetailsPage from "./stripeEnterPaymentDetailsPage";
-import SettingBillingPortalPage from "./settingBillingPortalPage";
+import SettingsBillingPortalPage from "./settingsBillingPortalPage";
 
 export default class NewSettingsBillingPage {
     constructor(page) {
@@ -36,6 +36,6 @@ export default class NewSettingsBillingPage {
         const newPage = await pagePromise;
         await newPage.waitForLoadState('load', { timeout: 20 * 1000 });
 
-        return new SettingBillingPortalPage(newPage);
+        return new SettingsBillingPortalPage(newPage);
     }
 }

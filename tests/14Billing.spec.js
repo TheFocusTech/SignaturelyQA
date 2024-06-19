@@ -67,7 +67,7 @@ test.describe('Billing', () => {
 
         await settingBillingPortalPage.deleteAllNotDefaultCards();
 
-        await expect(settingBillingPortalPage.paymenttMethodsList).toHaveCount(1);
-        await expect(settingBillingPortalPage.paymenttMethodsList).toHaveText(CARD_DETAILS.MASTERCARD.displayingOnTheBillingPortalPage);
+        await expect(settingBillingPortalPage.paymentMethodsList).toHaveCount(1);
+        await expect(settingBillingPortalPage.paymentMethodsList).toHaveText(CARD_DETAILS.MASTERCARD.displayingOnTheBillingPortalPage);
     });
 })
