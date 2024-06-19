@@ -8,7 +8,7 @@ export default class SideMenuComponent {
 
         this.templates = this.page.getByRole('link', { name: 'Templates', exact: true });
 
-        this.settings = this.page.locator('.sidebar__wrapper').getByText('Settings');
+       
 
 
     }

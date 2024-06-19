@@ -12,7 +12,7 @@ export default class NewTemplatesPage {
 
         this.sideMenu = new SideMenuComponent(this.page);
         this.sideMenuTemplates = new SideMenuTemlatesComponent(this.page);
-        this.formNewTemplate = new CreateNewTemplateComponent(this.page);
+        this.createNewTemplate = new CreateNewTemplateComponent(this.page);
 
 
     }

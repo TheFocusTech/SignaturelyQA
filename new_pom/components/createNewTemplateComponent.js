@@ -1,5 +1,4 @@
 
-import {CREATE_TEMPLATE} from "../../testData"
 
 export default class CreateNewTemplateComponent {
     constructor(page) {
@@ -15,26 +14,26 @@ export default class CreateNewTemplateComponent {
 
 
 
-    async fillTemplateNameField() {
+    async fillTemplateNameField(name) {
         try {
-          await this.templateNameField.fill(CREATE_TEMPLATE.nameField);
+          await this.templateNameField.fill(name);
         } finally {
 
         }
       }
 
 
-      async fillOptionalMessageField() {
+      async fillOptionalMessageField(message) {
         try {
-          await this.optionalMessageField.fill(CREATE_TEMPLATE.optionalMessage);
+          await this.optionalMessageField.fill(message);
         } finally {
 
         }
       }
 
-      async fillCreateTemplateRolesField() {
+      async fillCreateTemplateRolesField(role) {
         try {
-          await this.createTemplateRolesField.fill(CREATE_TEMPLATE.nameRole);
+          await this.createTemplateRolesField.fill(role);
         } finally {
 
         }
