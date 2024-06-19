@@ -4,7 +4,7 @@ import { CHOOSE_SIGNERS_FIELDS } from "../testData.js";
 
 test.describe('Sign Document', () => {
 
-  test('TC_04_11_02 | Verify custom signing order', async ({ createBusinessUserAndLogin, signPage, prepareForSignatureModal }) => {
+  test.only('TC_04_11_02 | Verify custom signing order', async ({ createBusinessUserAndLogin, signPage, prepareForSignatureModal }) => {
 
     await signPage.uploadFile.fileUploader.uploadFile('testDocuments/picture.jpg');
     await signPage.uploadFile.clickPrepareDocumentBtn();
@@ -13,11 +13,11 @@ test.describe('Sign Document', () => {
     
     await prepareForSignatureModal.clickAddSignerBtn();
     await prepareForSignatureModal.fillSignerNameField(CHOOSE_SIGNERS_FIELDS.name1, 0);
-    await prepareForSignatureModal.fillSignerEmailField(CHOOSE_SIGNERS_FIELDS.email1, 0);
+    await prepareForSignatureModal.fillSignerEmailField(process.env.EMAIL_PREFIX + '01' + process.env.EMAIL_DOMAIN, 0);
 
     await prepareForSignatureModal.clickAddSignerBtn();
     await prepareForSignatureModal.fillSignerNameField(CHOOSE_SIGNERS_FIELDS.name2, 1);
-    await prepareForSignatureModal.fillSignerEmailField(CHOOSE_SIGNERS_FIELDS.email2, 1);
+    await prepareForSignatureModal.fillSignerEmailField(process.env.EMAIL_PREFIX + '02' + process.env.EMAIL_DOMAIN, 1);
 
     await prepareForSignatureModal.clickCustomSigningOrderCheckbox();
 

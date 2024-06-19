@@ -86,11 +86,7 @@ export default class PrepareForSignatureModal {
         await this.saveBtn.click();
     }
 
-  async clickSignAndSendForSignatureRadioBtn() {
-    await this.signAndSendForSignatureRadioBtn.click();
-  }
-
-async clickCustomSigningOrderCheckbox() {
-    await this.customSigningOrderCheckbox.click();
-  }
+    async clickCustomSigningOrderCheckbox() {
+        await this.customSigningOrderCheckbox.click();
+    }
 }
