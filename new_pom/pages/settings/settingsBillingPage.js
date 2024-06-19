@@ -5,6 +5,9 @@ export default class NewSettingsBillingPage {
     constructor(page) {
         this.page = page;
 
+        this.upgradePlanBtn = this.page.getByRole('button', {name: "Upgrade Plan"});
+        this.editPlanBtn = this.page.getByText('Edit Plan', { exact: true });
+        this.billingPlanDescription = this.page.locator('.billing__plan-description');
         this.upgradePlanButton = this.page.getByRole('button', {name: "Upgrade Plan"});
         this.attachCardButton = this.page.getByRole('button', {name: "Attach Card"});
         this.creditCardData = this.page.locator('.creditCard__data');
@@ -12,7 +15,7 @@ export default class NewSettingsBillingPage {
     }
 
     async clickUpgradePlanButton() {
-        await this.upgradePlanButton.click();
+        await this.upgradePlanBtn.click();
     }
 
     async clickAttachCardButton() {
