@@ -14,12 +14,12 @@ class UpgradeYourPlanModal {
         getSubscribeBtn: () => this.page.getByRole('button', { name: 'Subscribe' })
     }
 
-    async fillCreditCardData(cardNumber,expirationDate, cvc, fullNameOnCard, zip) {
-        await this.locators.getCardNumberField().pressSequentially(cardNumber);
-        await this.locators.getExpirationDateField().pressSequentially(expirationDate);
-        await this.locators.getCVCField().pressSequentially(cvc);
-        await this.locators.getFullNameOnCard().pressSequentially(fullNameOnCard);
-        await this.locators.getZIPField().pressSequentially(zip)
+    async fillCreditCardData(cardDetails) {
+        await this.locators.getCardNumberField().pressSequentially(cardDetails.cardNumber);
+        await this.locators.getExpirationDateField().pressSequentially(cardDetails.expirationDate);
+        await this.locators.getCVCField().pressSequentially(cardDetails.cvc);
+        await this.locators.getFullNameOnCard().pressSequentially(cardDetails.fullNameOnCard);
+        await this.locators.getZIPField().pressSequentially(cardDetails.zip)
 
         return this;
     }
