@@ -52,7 +52,7 @@ test.describe('SignDocument', () => {
         await prepareForSignatureModal.doCanvasClicks();
         await prepareForSignatureModal.clickSaveBtn();
 
-        await expect(await prepareForSignatureModal.toast.toast).toBeVisible();
+        await expect(await prepareForSignatureModal.toast.toastAlert).toBeVisible();
         
         await finalStepPage.clickSendForSignatureBtn();
         await successModal.clickBackToDocumentsBtn();
