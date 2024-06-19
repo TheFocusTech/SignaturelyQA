@@ -56,3 +56,5 @@ export const ACTION_BUTTON =
 {
     renew: "Renew"
 };
+
+export const CI_USER_NAME = 'CI_user';
