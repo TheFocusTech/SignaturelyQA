@@ -5,6 +5,7 @@ export default class SideMenuComponent {
         this.sign = this.page.getByRole('link', { name: 'Sign', exact: true });
         this.documents = this.page.getByRole('link', { name: 'Documents', exact: true });
         this.settings = this.page.locator('.sidebar__wrapper').getByText('Settings');
+        this.forms = this.page.getByRole('link', { name: 'Forms', exact: true });
 
     }
 
@@ -18,5 +19,9 @@ export default class SideMenuComponent {
 
     async clickSettings() {
         await this.settings.click();
+    }
+
+    async clickForms() {
+        await this.forms.click();
     }
 }
