@@ -20,7 +20,7 @@ export default class StripeEnterPaymentDetailsPage {
         await this.countryOrRegionOption.selectOption(cardDetails.countryOrRegion);
         await this.zipFild.fill(cardDetails.zip);
         await this.saveCardButton.click();
-        await this.successCheckmark.waitFor({ timeout: 30000 });
+        await this.successCheckmark.waitFor({ timeout: 50000 });
         await this.page.close();
     }
 }
