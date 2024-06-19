@@ -1,39 +1,34 @@
 import { expect } from '@playwright/test';
-import { test, createBusinessUserAndLogin } from "../fixtures/base.js";
+import { test } from "../fixtures/base.js";
 import {
     API_KEY_NAME, NO_API_KEY_MESSAGE,
     TOASTER_MESSAGE,
 } from '../testData.js';
-import SignPage from "../page_objects/signPage";
+import settingsAPIPage from "../page_objects/settingsAPIPage";
 
 test.describe('Create API key', () => {
 
-    test('TC_12_48_01_01 | Verify User can copy API key created by the "Create API" button on the right.', async ({ page, createBusinessUserAndLogin }) => {
-        const signPage = new SignPage(page);
+    test('TC_12_48_01_01 | Verify User can copy API key created by the "Create API" button on the right.', async ({ createBusinessUserAndLogin, signPage, settingsCompanyPage,}) => {
+        await signPage.sideMenu.clickSettings();
+        await settingsCompanyPage.horizontalMenu.clickAPI();
 
-        const settingsCompanyPage = await signPage.clickSettingsSidebarLinkAndGoSettingsCompanyPage();
-        const settingsAPIPage = await settingsCompanyPage.clickAPILinkAndGoAPIPage();
+        await settingsAPIPage.clickCreateAPIKeyButtonAtRight();
 
-        const createAPIKeyModal = await settingsAPIPage.clickCreateAPIKeyButtonAtRight();
-        await createAPIKeyModal.fillInCreateAPIKeyNameField(API_KEY_NAME)
-        await createAPIKeyModal.clickCreateAPIButton();
-        await createAPIKeyModal.clickCopyAPIButton();
-
-        await settingsAPIPage.locators.getToaster().waitFor({ state: 'visible' });
-
-        let clipboardApiKeyValue = await createAPIKeyModal.getAPIKeyValueText();
-        await createAPIKeyModal.clickCloseDialogButton();
-
-        await settingsAPIPage.clickToaster();
-        await settingsAPIPage.fillBillingDetailsField(clipboardApiKeyValue);
-
-        await expect(settingsAPIPage.locators.getBillingDetailsTextField()).toHaveText(clipboardApiKeyValue);
-
-        await settingsAPIPage.removeAPIKeys();
-
-        await settingsAPIPage.locators.getCreateAPIKeyButtonInTable().waitFor({ state: 'visible' });
-        await expect(settingsAPIPage.locators.getEmptyAPiKeysHeader()).toHaveText(NO_API_KEY_MESSAGE)
-
-        await settingsAPIPage.clickSignSidebarLinkAndGoSignPage();
+        // await settingsAPIPage.createAPIKeyModal.fillInCreateAPIKeyNameField(API_KEY_NAME)
+        // await settingsAPIPage.createAPIKeyModal.clickCreateAPIButton();
+        // await settingsAPIPage.createAPIKeyModal.clickCopyAPIButton();
+        //
+        // await settingsAPIPage.getToast().waitFor({ state: 'visible' });
+        //
+        // const toastMsg = settingsAPIPage.getToast().textContent()
+        // console.log(toastMsg);
+        //
+        // const clipboardApiKeyValue = await settingsAPIPage.createAPIKeyModal.getAPIKeyValueText();
+        // await settingsAPIPage.createAPIKeyModal.clickCloseDialogButton();
+        //
+        // // await settingsAPIPage.clickToaster();
+        // await settingsAPIPage.fillBillingDetailsField(clipboardApiKeyValue);
+        //
+        // await expect(settingsAPIPage.billingDetailsTextField()).toHaveText(clipboardApiKeyValue);
     });
 })

@@ -1,5 +1,5 @@
-import CreateAPIKeyModal from "./createAPIKeyModal";
-import SignPage from "./signPage";
+import SignPage from "../new_pom/pages/sign/signPage";
+import NewCreateAPIKeyModal from "../new_pom/modalWindows/createAPIKeyModal";
 
 class SettingAPIPage {
     constructor(page) {
@@ -22,13 +22,13 @@ class SettingAPIPage {
     async clickCreateAPIKeyButtonAtRight() {
         await this.locators.getCreateAPIKeyButtonAtRight().click();
 
-        return new CreateAPIKeyModal(this.page);
+        return new NewCreateAPIKeyModal(this.page);
     }
 
     async clickCreateAPIKeyButtonInTable() {
         await this.locators.getCreateAPIKeyButtonInTable().click();
 
-        return new CreateAPIKeyModal(this.page);
+        return new NewCreateAPIKeyModal(this.page);
     }
 
     async fillBillingDetailsField(text) {
@@ -55,11 +55,6 @@ class SettingAPIPage {
         return this;
     }
 
-    async getToasterText() {
-        const toasterMessageText =  await this.locators.getToaster().innerText();
-
-        return toasterMessageText;
-    }
 
     async removeAPIKeys() {
         const buttons = await this.locators.getOptionDropdown().all();

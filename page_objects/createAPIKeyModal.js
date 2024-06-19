@@ -1,8 +1,11 @@
-import SettingsCompanyPage from "./settingsCompanyPage";
+import NewSettingsCompanyPage from "../new_pom/pages/settings/settingsCompanyPage";
+import NewCreateAPIKeyModal from "../new_pom/modalWindows/createAPIKeyModal";
 
 class CreateAPIKeyModal {
     constructor(page) {
         this.page = page;
+
+        this.createAPIKeyModal =  new NewCreateAPIKeyModal(this.page)
     }
 
     locators = {
@@ -38,7 +41,7 @@ class CreateAPIKeyModal {
     async clickCloseDialogButton() {
         await this.locators.getCloseDialogButton().click();
 
-        return new SettingsCompanyPage(this.page);
+        return new NewSettingsCompanyPage(this.page);
     }
 
 }
