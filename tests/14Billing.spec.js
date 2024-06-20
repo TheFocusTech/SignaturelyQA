@@ -1,7 +1,6 @@
 import { expect } from '@playwright/test';
 import { test } from "../fixtures/base.js";
-import SignPage from "../page_objects/signPage.js";
-import {TOASTER_MESSAGE, CARD_DETAILS, RANDOM_ANNUALLY_PLAN, PLANS, ACTION_BUTTON} from '../testData.js';
+import {CARD_DETAILS, RANDOM_ANNUALLY_PLAN, PLANS, END_PLAN} from '../testData.js';
 
 test.describe('Billing', () => {
 
@@ -12,7 +11,9 @@ test.describe('Billing', () => {
         await settingsBillingPlanPage.clickSelectPersonalPlanButton();
         await downgradeToPersonalPlanModal.clickDowngradeButton();        
         await specialOneTimeOfferModal.clickNoThanksModalBtn();
-        await expect(settingsBillingPlanPage.businessPlanActionButton).toHaveText(ACTION_BUTTON.renew);         
+        await settingsBillingPlanPage.sideMenuSettings.clickBilling();
+
+        await expect(settingsBillingPage.nextInvoiceInfo).toContainText(END_PLAN);           
     })
 
     test.describe('Upsell plan', () => {

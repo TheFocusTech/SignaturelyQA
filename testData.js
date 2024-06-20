@@ -45,11 +45,6 @@ export const DOCUMENT_STATUS = {
     draft: 'draft',
     completed: 'completed'
 };
-export const ACTION_BUTTON = 
-{
-    renew: "Renew"
-};
-
 export const CI_USER_NAME = 'CI_user';
 export const BUSINESS_MONTHLY_PLAN = "Your plan (Billed Monthly)Business";
 export const CARD_DETAILS = {
@@ -82,5 +77,9 @@ export const CARD_DETAILS = {
         zip: '20500',
         displayingOnTheBillingPage: 'Current Card:**** **** **** 555612/27',
         displayingOnTheBillingPortalPage: 'Visa •••• 5556DefaultExpires 12/2027Delete',
-    }
-}
+    }  
+};
+export const END_PLAN = 'Your plan will end on';
+
+
+

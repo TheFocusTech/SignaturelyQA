@@ -3,8 +3,8 @@ export default class SpecialOneTimeOfferModal {
         this.page = page;
 
         this.upsellModal = this.page.locator('.upsellModal');
-        this.upsellModalBtn = this.page.getByRole('button', { name: "Yes, upgrade me!" });
-        this.noThanksModalBtn = this.page.locator('.upsellModal__button-cancel');
+        this.upsellModalBtn = this.page.getByRole('button', { name: "Yes, upgrade me!" });        
+        this.noThanksModalBtn = this.page.getByText("No thanks");
     }
 
     async clickYesUpgradeMeBtn() {

@@ -13,6 +13,7 @@ export default class NewSettingsBillingPage {
         this.creditCardData = this.page.locator('.creditCard__data');
         this.openBillingPortalButton = this.page.getByRole('button', { name: 'Open Billing Portal' });
         this.editPlanButton = this.page.getByRole('button', {name: "Edit Plan"});
+        this.nextInvoiceInfo = this.page.locator('.billing__plan-group--next-invoice');
     }
 
     async clickUpgradePlanButton() {
