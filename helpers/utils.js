@@ -53,7 +53,7 @@ export async function clickCanvas(page, canvasLocator, excludedAreas = []) {
         const canvas = await canvasLocator.nth(i);
         const boundingBox = await canvas.boundingBox();
 
-        if (boundingBox && boundingBox.width > 500) { 
+        if (boundingBox && boundingBox.width > 500) {
             largeCanvases.push(canvas);
         }
     }
@@ -74,10 +74,10 @@ export async function clickCanvas(page, canvasLocator, excludedAreas = []) {
             randomY = boundingBox.y + Math.random() * boundingBox.height;
         } while (
             excludedAreas.some(area =>
-            randomX >= area.left && randomX <= area.left + area.width &&
-            randomY >= area.top && randomY <= area.top + area.height
-        )
-    );
+                randomX >= area.left && randomX <= area.left + area.width &&
+                randomY >= area.top && randomY <= area.top + area.height
+            )
+        );
 
         return { x: randomX, y: randomY };
     };
@@ -92,15 +92,21 @@ export async function clickCanvas(page, canvasLocator, excludedAreas = []) {
     const newIndex = excludedAreas.length + 1;
     const elementAfterClick = page.locator('.fieldDropDown').nth(newIndex);
 
-    if (await elementAfterClick.boundingBox()) {
+    try {
+        await elementAfterClick.waitFor({ state: 'visible', timeout: 5000 });
+
         const elementBoundingRect = await elementAfterClick.boundingBox();
-        const newExcludedArea = {
-            left: elementBoundingRect.x - boundingBox.x,
-            top: elementBoundingRect.y - boundingBox.y,
-            width: elementBoundingRect.width,
-            height: elementBoundingRect.height
-        };
-        excludedAreas.push(newExcludedArea);
+        if (elementBoundingRect) {
+            const newExcludedArea = {
+                left: elementBoundingRect.x - boundingBox.x,
+                top: elementBoundingRect.y - boundingBox.y,
+                width: elementBoundingRect.width,
+                height: elementBoundingRect.height
+            };
+            excludedAreas.push(newExcludedArea);
+        }
+    } catch (error) {
+        console.log('Error occurred while checking the bounding box of the new fieldDropDown element:', error);
     }
 
     return clickPosition;
