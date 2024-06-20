@@ -54,7 +54,6 @@ export const DOCUMENT_STATUS = {
     awaiting: 'awaiting',
     draft: 'draft',
     completed: 'completed',
-    live: 'Live',
 };
 export const CI_USER_NAME = 'CI_user';
 export const BUSINESS_MONTHLY_PLAN = "Your plan (Billed Monthly)Business";
@@ -94,4 +93,7 @@ export const CARD_DETAILS = {
 };
 export const END_PLAN = 'Your plan will end on';
 export const MESSAGE = "Project 1";
+export const TEMPLATES_STATUS = {
+    live: 'Live',
+}
 

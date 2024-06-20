@@ -1,6 +1,6 @@
 import { expect } from "@playwright/test";
 import { test, createBusinessUserAndLogin, signPage } from "../fixtures/base.js";
-import {CREATE_TEMPLATE, DOCUMENT_STATUS} from "../testData.js";
+import {CREATE_TEMPLATE, TEMPLATES_STATUS} from "../testData.js";
 
 test.describe('Templates', () => {
 
@@ -18,7 +18,7 @@ test.describe('Templates', () => {
    await prepareForSignatureModal.clickCreateBtn();
    await prepareForSignatureModal.clickBackToTempatesBtn();
 
-   await expect(await templatePage.table.documentStatus).toHaveText(DOCUMENT_STATUS.live);
+   await expect(await templatePage.table.documentStatus).toHaveText(TEMPLATES_STATUS.live);
 
   });
 });
