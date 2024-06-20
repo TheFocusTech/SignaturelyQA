@@ -1,5 +1,6 @@
 import SideMenuComponent from "../../components/sideMenuComponent";
 import SideMenuTemlatesComponent from "../../components/sideMenuTemplatesComponent";
+import FileUploaderComponent from "../../components/fileUploaderComponent";
 
 export default class NewCreateTemplatePage {
     constructor(page) {
@@ -10,6 +11,7 @@ export default class NewCreateTemplatePage {
         this.optionalMessageField = this.page.getByPlaceholder('Add an optional message for');
         this.createTemplateRolesField = this.page.getByPlaceholder('Role');
         this.fillTemlateBtn = this.page.getByRole('button', { name: 'Fill Template' });
+        this.fileUploader = new FileUploaderComponent(this.page);
 
     }
 
