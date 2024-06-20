@@ -1,7 +1,7 @@
 import SideMenuComponent from "../../components/sideMenuComponent";
 import SideMenuTemlatesComponent from "../../components/sideMenuTemplatesComponent";
 
-export default class NewCreateTemplatePage {
+export default class CreateNewTemplatePage {
     constructor(page) {
         this.page = page;
         this.sideMenu = new SideMenuComponent(this.page);
