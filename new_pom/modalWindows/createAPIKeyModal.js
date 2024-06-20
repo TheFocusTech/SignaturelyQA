@@ -9,7 +9,7 @@ export default class NewCreateAPIKeyModal {
         this.closeAPIModalButton = this.page.locator('.modal__close-button > div > .injected-svg > path');
     }
 
-    async fillInCreateAPIKeyNameInput(keyName) {
+    async fillCreateAPIKeyNameInput(keyName) {
         await this.createAPIKeyNameInput.waitFor();
         await this.createAPIKeyNameInput.fill(keyName);
     }
