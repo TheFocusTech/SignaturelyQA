@@ -20,7 +20,8 @@ export const TOASTER_MESSAGE ={
     deleteApiKey: 'API key successfully deleted',
     folderRename: 'Folder successfully updated!',
     folderCreated: 'Folder created!',
-    signatureCreated: 'Signature created successfully'
+    signatureCreated: 'Signature created successfully',
+    sendReminder: 'Reminder(s) has been sent',
 };
 export const API_KEY_NAME = 'Test Api Key';
 export const NO_API_KEY_MESSAGE = 'You don\'t have any API keys yet.';

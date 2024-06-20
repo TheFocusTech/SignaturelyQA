@@ -18,6 +18,8 @@ import CreateSignatureModal from "../new_pom/modalWindows/createSignatureModal.j
 import FinalStepPage from '../new_pom/pages/finalStepPage.js';
 import SuccessModal from '../new_pom/modalWindows/successModal.js';
 import EditAndResendDocumentModal from "../new_pom/modalWindows/editAndResendDocumentModal.js";
+import NewDocumentsAwaitingPage from "../new_pom/pages/documents/documentsAwaitingPage.js";
+import SendReminderDocumentModal from "../new_pom/modalWindows/sendReminderDocumentModal.js";
 
 
 export const test = base.extend({    
@@ -72,6 +74,10 @@ export const test = base.extend({
         await use(new NewDocumentsPage(page));
     },
 
+    documentsAwaitingPage: async ({ page }, use) => {
+        await use(new NewDocumentsAwaitingPage(page));
+    },
+
     documentsTrashPage: async ({ page }, use) => {
         await use(new NewDocumentsTrashPage(page));
     },
@@ -119,5 +125,9 @@ export const test = base.extend({
     editAndResendDocumentModal: async ({ page }, use) => {
         await use(new EditAndResendDocumentModal(page));
     },
-
+    
+    sendReminderDocumentModal: async ({ page }, use) => {
+        await use(new SendReminderDocumentModal(page));
+    },
+    
 });
