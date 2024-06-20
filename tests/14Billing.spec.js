@@ -1,7 +1,7 @@
 import { expect } from '@playwright/test';
 import { test } from "../fixtures/base.js";
 import SignPage from "../page_objects/signPage.js";
-import {ACTION_BUTTON, VISA_CARD_DATA, RANDOM_ANNUALLY_PLAN, PLANS} from '../testData.js';
+import {TOASTER_MESSAGE, CARD_DETAILS, RANDOM_ANNUALLY_PLAN, PLANS, ACTION_BUTTON} from '../testData.js';
 
 test.describe('Billing', () => {
 
@@ -22,11 +22,42 @@ test.describe('Billing', () => {
                 await settingsCompanyPage.horizontalMenu.clickBilling();
                 await settingsBillingPage.clickUpgradePlanButton();
                 await settingsBillingPlanPage.clickUpgradeButton(plan);
-                await upgradeYourPlanModal.cardDetails.fillData(VISA_CARD_DATA);
+                await upgradeYourPlanModal.cardDetails.fillData(CARD_DETAILS.VISA);
                 await upgradeYourPlanModal.clickSubscribeButton();
                 await specialOneTimeOfferModal.clickYesUpgradeMeBtn();
                 await expect(settingsBillingPlanPage.billingHeader).toContainText(RANDOM_ANNUALLY_PLAN(plan));
         })
        }
     })
+
+    test('TC_14_54_01 | Attach/delete payment card', async ({
+                                                                createFreeUserAndLogin,
+                                                                signPage,
+                                                                settingsCompanyPage,
+                                                                settingsBillingPage,
+                                                            }) => {
+        test.setTimeout(100 * 1000);
+        await signPage.sideMenu.clickSettings();
+        await settingsCompanyPage.horizontalMenu.clickBilling();
+        let stripeEnterPaymentDetailsPage = await settingsBillingPage.clickAttachCardButton();
+        await stripeEnterPaymentDetailsPage.attachCard(CARD_DETAILS.VISA_DEBIT);
+        await settingsBillingPage.reloadPage();
+
+        await expect(settingsBillingPage.creditCardData).toHaveText(CARD_DETAILS.VISA_DEBIT.displayingOnTheBillingPage);
+
+        stripeEnterPaymentDetailsPage = await settingsBillingPage.clickAttachCardButton();
+        await stripeEnterPaymentDetailsPage.attachCard(CARD_DETAILS.MASTERCARD);
+        await settingsBillingPage.reloadPage();
+
+        await expect(settingsBillingPage.creditCardData).toHaveText(CARD_DETAILS.MASTERCARD.displayingOnTheBillingPage);
+
+        const settingBillingPortalPage = await settingsBillingPage.clickOpenBillingPortalButton();
+
+        await expect(settingBillingPortalPage.paymentDefaultMethod).toHaveText(CARD_DETAILS.MASTERCARD.displayingOnTheBillingPortalPage)
+
+        await settingBillingPortalPage.deleteAllNotDefaultCards();
+
+        await expect(settingBillingPortalPage.paymentMethodsList).toHaveCount(1);
+        await expect(settingBillingPortalPage.paymentMethodsList).toHaveText(CARD_DETAILS.MASTERCARD.displayingOnTheBillingPortalPage);
+    });
 })

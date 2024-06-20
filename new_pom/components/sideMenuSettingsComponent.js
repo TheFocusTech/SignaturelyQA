@@ -2,7 +2,8 @@ export default class SideMenuSettingsComponent {
     constructor(page) {
         this.page = page;
 
-        this.billing = this.page.getByRole('link', {name: 'Billing', exact: true}).first()
+        this.menuItems = this.page.locator('.sidebar__item-link-list');
+        this.billing = this.menuItems.getByRole('link', {name: 'Billing'});
     }
 
     async clickBilling() {
