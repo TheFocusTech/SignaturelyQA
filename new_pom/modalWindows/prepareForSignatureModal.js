@@ -82,18 +82,7 @@ export default class PrepareForSignatureModal {
         await this.saveBtn.click();
     }
 
-<<<<<<< HEAD
-    async moveMouse(x, y) {
-        await this.page.mouse.move(x, y);
-    }
-
-    async clickFirstCanvas() {
-        await this.canvas.first().click();
-    }
-
-=======
     async clickCustomSigningOrderCheckbox() {
         await this.customSigningOrderCheckbox.click();
     }
->>>>>>> 197bcf1f2b9f2592ab956635b5136ddfcaf2f4dd
 }

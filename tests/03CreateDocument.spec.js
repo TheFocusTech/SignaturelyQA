@@ -13,8 +13,7 @@ test.describe('CreateDocument', () => {
     await prepareForSignatureModal.clickContinueBtn();
     await prepareForSignatureModal.clickGotItBtn();
     await prepareForSignatureModal.clickSignFieldsItem();
-    await prepareForSignatureModal.moveMouse(CANVAS_SIGNATURE_COORDINATES_X, CANVAS_SIGNATURE_COORDINATES_Y);
-    await prepareForSignatureModal.clickFirstCanvas();
+    await prepareForSignatureModal.doCanvasClicks();
     await createSignatureModal.fillInputSignature(CHOOSE_SIGNERS_FIELDS.name1);
     await createSignatureModal.clickCheckboxAgree();
     await createSignatureModal.clickSignNowBtn();
