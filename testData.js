@@ -81,5 +81,4 @@ export const CARD_DETAILS = {
 }
 export const CANVAS_SIGNATURE_COORDINATES_X = 525;
 export const CANVAS_SIGNATURE_COORDINATES_Y = 245;
-export const EMPTY_STRING = "";
 export const MESSAGE = "Project 1";

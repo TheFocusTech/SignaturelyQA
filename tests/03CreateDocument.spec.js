@@ -15,7 +15,6 @@ test.describe('CreateDocument', () => {
     await prepareForSignatureModal.clickSignFieldsItem();
     await prepareForSignatureModal.moveMouse(CANVAS_SIGNATURE_COORDINATES_X, CANVAS_SIGNATURE_COORDINATES_Y);
     await prepareForSignatureModal.clickFirstCanvas();
-    await createSignatureModal.fillInputSignature(EMPTY_STRING);
     await createSignatureModal.fillInputSignature(CHOOSE_SIGNERS_FIELDS.name1);
     await createSignatureModal.clickCheckboxAgree();
     await createSignatureModal.clickSignNowBtn();
