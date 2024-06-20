@@ -12,7 +12,7 @@ export const CHOOSE_SIGNERS_FIELDS = {
     name2: 'John Doe2',
     email2: '5kXUw@example.com'
 };
-export const TOASTER_MESSAGE ={
+export const TOASTER_MESSAGE = {
     planSuccessChange: 'Plan has been successfully changed.',
     planRenew: 'Plan has been renew',
     folderDeleted: 'Folder deleted successfully.',
@@ -77,9 +77,7 @@ export const CARD_DETAILS = {
         zip: '20500',
         displayingOnTheBillingPage: 'Current Card:**** **** **** 555612/27',
         displayingOnTheBillingPortalPage: 'Visa •••• 5556DefaultExpires 12/2027Delete',
-    }  
+    }
 };
 export const END_PLAN = 'Your plan will end on';
-
-
-
+export const MESSAGE = "Project 1";
