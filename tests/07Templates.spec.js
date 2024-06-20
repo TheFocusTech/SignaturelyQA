@@ -1,10 +1,6 @@
 import { expect } from "@playwright/test";
 import { test, createBusinessUserAndLogin, signPage } from "../fixtures/base.js";
-
 import {CREATE_TEMPLATE} from "../testData.js";
-
-
-
 
 test.describe('Templates', () => {
 
@@ -16,7 +12,7 @@ test.describe('Templates', () => {
    await templatePage.createNewTemplate.fillOptionalMessageField(CREATE_TEMPLATE.optionalMessage);
    await templatePage.createNewTemplate.fillCreateTemplateRolesField(CREATE_TEMPLATE.nameRole);
    await signPage.uploadFile.fileUploader.uploadFile('testDocuments/CSV.csv');
-   await templatePage.createNewTemplate.clickfillTemlateBtn();
+   await templatePage.createNewTemplate.clickFillTemlateBtn();
    await prepareForSignatureModal.clickSignFieldsItem();
    await prepareForSignatureModal.doCanvasClicks();
    await prepareForSignatureModal.clickcreateBtn();

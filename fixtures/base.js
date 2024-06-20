@@ -20,10 +20,6 @@ import SuccessModal from '../new_pom/modalWindows/successModal.js';
 import EditAndResendDocumentModal from "../new_pom/modalWindows/editAndResendDocumentModal.js";
 import NewTemplatesPage from "../new_pom/pages/templates/templatesPage.js";
 
-
-
-
-
 export const test = base.extend({
 
 
