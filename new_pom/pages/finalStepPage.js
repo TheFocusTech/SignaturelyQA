@@ -7,7 +7,11 @@ export default class FinalStepPage {
     this.toastComponent = new ToastComponent(this.page)
     this.documentTitleField = this.page.getByPlaceholder('Enter the title');
     this.signDocumentAndSendForSignatureBtn = this.page.getByRole('button', { name: 'Sign Document and Send for Signature' });
-    this.sendForSignatureBtn = this.page.getByRole('button', { name: 'Send for Signature' });
+    this.sendForSignatureBtn = this.page.getByRole('button', { name: 'Send for Signature' }); 
+    this.documentOptionalMessageField = this.page.getByPlaceholder('Add an optional message for the document signers.');
+    this.signDocumentBtn = this.page.getByRole('button', { name: 'Sign Document' });
+    
+    }
 
   }
 
@@ -20,11 +24,20 @@ export default class FinalStepPage {
     await this.signDocumentAndSendForSignatureBtn.click();
   }
 
+       
   async clickSendForSignatureBtn() {
     await this.toastComponent.waitForToastDocumentSavedVisible();
     await this.toastComponent.waitForToastDocumentSavedHidden();
     await this.sendForSignatureBtn.click();
   }
 
+
+    async fillDocumentOptionalMessageField(message) {
+        await this.documentOptionalMessageField.fill(message);
+    }
+
+    async clickSignDocumentBtn() {
+        await this.signDocumentBtn.click();
+    }
 
 }

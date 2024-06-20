@@ -5,7 +5,7 @@ export default class PrepareForSignatureModal {
     constructor(page) {
         this.page = page;
         this.excludedAreas = [];
-        
+
         this.toast = new ToastComponent(this.page);
 
         this.signDocumentRadioBtn = this.page.getByText('Sign a Document', { exact: true });
