@@ -1,28 +1,19 @@
 import { expect } from '@playwright/test';
 import { test } from "../fixtures/base.js";
-import SignPage from "../page_objects/signPage.js";
-import {TOAST_MESSAGE, CARD_DETAILS, RANDOM_ANNUALLY_PLAN, PLANS} from '../testData.js';
+import {CARD_DETAILS, RANDOM_ANNUALLY_PLAN, PLANS, END_PLAN} from '../testData.js';
 
 test.describe('Billing', () => {
 
-    test.skip('TC_14_57_02 | Verify the ability to successfully downgrade subscription', async ({page,createBusinessUserAndLogin}) => {
-        const signPage = new SignPage(page);
+    test('TC_14_57_02 | Verify the ability to successfully downgrade subscription', async ({createBusinessUserAndLogin, signPage, settingsCompanyPage, settingsBillingPage, settingsBillingPlanPage, downgradeToPersonalPlanModal, specialOneTimeOfferModal}) => {
+        await signPage.sideMenu.clickSettings();
+        await settingsCompanyPage.sideMenuSettings.clickBilling();
+        await settingsBillingPage.clickEditPlanButton();
+        await settingsBillingPlanPage.clickSelectPersonalPlanButton();
+        await downgradeToPersonalPlanModal.clickDowngradeButton();        
+        await specialOneTimeOfferModal.clickNoThanksModalBtn();
+        await settingsBillingPlanPage.sideMenuSettings.clickBilling();
 
-        const settingsCompanyPage = await signPage.clickSettingsSidebarLinkAndGoSettingsCompanyPage();
-        const settingsBillingPage = await settingsCompanyPage.clickSettingsBillingSidebarLinkAngGoSettingsBillingPage();
-        const settingsBillingPlanPage = await settingsBillingPage.clickEditPlanBtnAndGoSettingsBillingPlanPage();
-
-        await settingsBillingPlanPage.clickPersonalPlanSelectBtn();
-        await settingsBillingPlanPage.clickDowngradeBtn();
-
-        await expect(settingsBillingPlanPage.locators.getToasterPopup()).toHaveText(TOAST_MESSAGE.planSuccessChange);
-        await expect(settingsBillingPlanPage.locators.getRenewBusinessPlanBtn()).toBeVisible();
-
-        await settingsBillingPlanPage.clickToasterCloseSuccessBtn();
-        await settingsBillingPlanPage.clickRenewBusinessPlanBtn();
-        await expect(settingsBillingPlanPage.locators.getToasterPopup()).toHaveText(TOAST_MESSAGE.planRenew);
-        await expect(settingsBillingPlanPage.locators.getCurrentPlanBtn()).toBeVisible();
-        await settingsBillingPlanPage.clickSignSidebarLinkAndGoSignPage();
+        await expect(settingsBillingPage.nextInvoiceInfo).toContainText(END_PLAN);           
     })
 
     test.describe('Upsell plan', () => {
