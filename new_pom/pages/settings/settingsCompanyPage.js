@@ -8,7 +8,7 @@ export default class NewSettingsCompanyPage {
         this.horizontalMenu = new SettingsHorizontalMenuComponent(this.page);
         this.sideMenuSettings = new SideMenuSettingsComponent(this.page);
 
-        this.selectLogoUpLoadFile = this.page.locator('input[type="file"]');
+        this.fileInput = this.page.locator('input[type = "file"]');
         this.companyName = this.page.getByPlaceholder('Company Name');
         this.emailClosingSignature = this.page.getByPlaceholder('A brief closing signature for signature request emails.');
         this.fromEmailName = this.page.getByPlaceholder("From' Email Name");
@@ -19,9 +19,9 @@ export default class NewSettingsCompanyPage {
     }
 
     async logoUpLoadFile(file) {
-        await this.selectLogoUpLoadFile().setInputFiles(file);
+        await this.fileInput.setInputFiles(file);
     }
-
+    
     async fillCompanyName() {
         await this.companyName().fill(COMPANY_INFO.companyName);
     }
