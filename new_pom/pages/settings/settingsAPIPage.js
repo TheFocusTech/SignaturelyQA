@@ -1,13 +1,10 @@
-import SettingsHorizontalMenuComponent from "../../components/settingsHorizontalMenuComponent";
-import NewCreateAPIKeyModal from "../../modalWindows/createAPIKeyModal";
+import ToastComponent from "../../components/toastComponent";
 
 export default class NewSettingsAPIPage {
     constructor(page) {
         this.page = page;
 
-        this.horizontalMenu = new SettingsHorizontalMenuComponent(this.page);
-
-        this.createAPIKeyModal =  new NewCreateAPIKeyModal(this.page)
+        this.toast = new ToastComponent(this.page);
 
         this.createAPIKeyButtonAtRight = this.page.locator('.team__header-container').getByRole('button', {name: 'Create API key'});
         this.billingDetailsField = this.page.getByPlaceholder('Enter billing details here');
@@ -15,12 +12,13 @@ export default class NewSettingsAPIPage {
     }
 
     async clickCreateAPIKeyButtonAtRight() {
-        await this.createAPIKeyButtonAtRight().click();
+        await this.createAPIKeyButtonAtRight.waitFor();
+        await this.createAPIKeyButtonAtRight.click();
     }
 
     async fillBillingDetailsField(text) {
-        await this.billingDetailsField().waitFor({state: 'visible'});
-        await this.billingDetailsField().fill(text);
+        await this.billingDetailsField.waitFor();
+        await this.billingDetailsField.fill(text);
     }
 
 }
