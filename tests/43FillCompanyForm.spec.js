@@ -9,8 +9,8 @@ test.describe('Company', () => {
         createBusinessUserAndLogin, signPage, settingsCompanyPage}) => {
         
         await signPage.sideMenu.clickSettings();
-        await settingsCompanyPage.uploadFile.fileUploader.uploadFile('testDocuments/picture.jpg');
-        await settingsCompanyPage.uploadFile.clickSaveBtn();
+        await settingsCompanyPage.LogoUpLoadFile('testDocuments/picture.jpg');
+        await settingsCompanyPage.clickSaveBtn();
         await settingsCompanyPage.fillCompanyName();
         await settingsCompanyPage.fillFromEmail();
         await settingsCompanyPage.fillEmailClosingSignature();
