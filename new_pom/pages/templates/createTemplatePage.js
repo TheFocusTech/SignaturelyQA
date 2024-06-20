@@ -6,9 +6,9 @@ export default class NewCreateTemplatePage {
         this.page = page;
         this.sideMenu = new SideMenuComponent(this.page);
         this.sideMenuTemplates = new SideMenuTemlatesComponent (this.page);
-        this.templateNameField = this.page.locator('.form__input').first();
-        this.optionalMessageField = this.page.locator('.form__input').nth(1);
-        this.createTemplateRolesField = this.page.locator('.form__input').nth(2);
+        this.templateNameField = this.page.getByPlaceholder('A template name to identify');
+        this.optionalMessageField = this.page.getByPlaceholder('Add an optional message for');
+        this.createTemplateRolesField = this.page.getByPlaceholder('Role');
         this.fillTemlateBtn = this.page.getByRole('button', { name: 'Fill Template' });
 
     }
