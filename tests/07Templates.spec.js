@@ -8,11 +8,11 @@ test.describe('Templates', () => {
 
    await signPage.sideMenu.clickTemplates();
    await templatePage.sideMenuTemplates.clickCreateTemplate();
-   await templatePage.createNewTemplate.fillTemplateNameField(CREATE_TEMPLATE.nameField);
-   await templatePage.createNewTemplate.fillOptionalMessageField(CREATE_TEMPLATE.optionalMessage);
-   await templatePage.createNewTemplate.fillCreateTemplateRolesField(CREATE_TEMPLATE.nameRole);
+   await templatePage.createTemplate.fillTemplateNameField(CREATE_TEMPLATE.nameField);
+   await templatePage.createTemplate.fillOptionalMessageField(CREATE_TEMPLATE.optionalMessage);
+   await templatePage.createTemplate.fillCreateTemplateRolesField(CREATE_TEMPLATE.nameRole);
    await signPage.uploadFile.fileUploader.uploadFile('testDocuments/CSV.csv');
-   await templatePage.createNewTemplate.clickFillTemlateBtn();
+   await templatePage.createTemplate.clickFillTemlateBtn();
    await prepareForSignatureModal.clickSignFieldsItem();
    await prepareForSignatureModal.doCanvasClicks();
    await prepareForSignatureModal.clickcreateBtn();
