@@ -77,5 +77,9 @@ export const CARD_DETAILS = {
         zip: '20500',
         displayingOnTheBillingPage: 'Current Card:**** **** **** 555612/27',
         displayingOnTheBillingPortalPage: 'Visa •••• 5556DefaultExpires 12/2027Delete',
-    }
-}
+    }  
+};
+export const END_PLAN = 'Your plan will end on';
+
+
+
