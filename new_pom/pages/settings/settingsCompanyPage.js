@@ -18,8 +18,8 @@ export default class NewSettingsCompanyPage {
         this.saveBtn = this.page.getByRole('button', {name: 'Save', exact: true});
     }
 
-    async LogoUpLoadFile(file) {
-        await thisselectLogoUpLoadFile().setInputFiles(file);
+    async logoUpLoadFile(file) {
+        await this.selectLogoUpLoadFile().setInputFiles(file);
     }
 
     async fillCompanyName() {

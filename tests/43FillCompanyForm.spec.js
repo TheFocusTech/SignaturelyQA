@@ -9,7 +9,7 @@ test.describe('Company', () => {
         createBusinessUserAndLogin, signPage, settingsCompanyPage}) => {
         
         await signPage.sideMenu.clickSettings();
-        await settingsCompanyPage.LogoUpLoadFile('testDocuments/picture.jpg');
+        await settingsCompanyPage.logoUpLoadFile('testDocuments/picture.jpg');
         await settingsCompanyPage.clickSaveBtn();
         await settingsCompanyPage.fillCompanyName();
         await settingsCompanyPage.fillFromEmail();
