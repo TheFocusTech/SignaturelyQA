@@ -6,7 +6,7 @@ export async function newFreeUserLogin(page) {
     const loginPage = new LoginPage(page);
 
     await page.goto("/");
-    await loginPage.fillEmailAddressInputField(process.env.NEW_USER_DATA);
+    await loginPage.fillEmailAddressInputField(process.env.NEW_USER_EMAIL);
     await loginPage.fillPasswordInputField(process.env.NEW_USER_PASSWORD);
     await loginPage.clickLoginAndGoSignPage();
 }
