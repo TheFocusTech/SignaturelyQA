@@ -1,6 +1,6 @@
 import { expect } from "@playwright/test";
 import { test } from "../fixtures/base.js";
-import { DOCUMENT_TITLE, DOCUMENT_STATUS, CHOOSE_SIGNERS_FIELDS, CANVAS_SIGNATURE_COORDINATES_X, CANVAS_SIGNATURE_COORDINATES_Y, EMPTY_STRING, MESSAGE } from "../testData.js";
+import { DOCUMENT_TITLE, DOCUMENT_STATUS, CHOOSE_SIGNERS_FIELDS, MESSAGE } from "../testData.js";
 
 test.describe('CreateDocument', () => {
 
