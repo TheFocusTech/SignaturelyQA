@@ -8,6 +8,7 @@ export default class NewSettingsCompanyPage {
         this.horizontalMenu = new SettingsHorizontalMenuComponent(this.page);
         this.sideMenuSettings = new SideMenuSettingsComponent(this.page);
 
+        this.selectLogoUpLoadFile = this.page.locator('input[type="file"]');
         this.companyName = this.page.getByPlaceholder('Company Name');
         this.emailClosingSignature = this.page.getByPlaceholder('A brief closing signature for signature request emails.');
         this.fromEmailName = this.page.getByPlaceholder("From' Email Name");
@@ -15,6 +16,10 @@ export default class NewSettingsCompanyPage {
         this.checkboxActivate = this.page.getByText('Activate custom redirection page');
         this.toastPopup = this.page.locator('.Toastify__toast-body');
         this.saveBtn = this.page.getByRole('button', {name: 'Save', exact: true});
+    }
+
+    async LogoUpLoadFile(file) {
+        await thisselectLogoUpLoadFile().setInputFiles(file);
     }
 
     async fillCompanyName() {
