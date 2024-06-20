@@ -20,7 +20,8 @@ export const TOASTER_MESSAGE = {
     deleteApiKey: 'API key successfully deleted',
     folderRename: 'Folder successfully updated!',
     folderCreated: 'Folder created!',
-    signatureCreated: 'Signature created successfully'
+    signatureCreated: 'Signature created successfully',
+    companyInformationSave: 'Company information successfully saved',
 };
 export const API_KEY_NAME = 'Test Api Key';
 export const NO_API_KEY_MESSAGE = 'You don\'t have any API keys yet.';
@@ -81,3 +82,9 @@ export const CARD_DETAILS = {
 };
 export const END_PLAN = 'Your plan will end on';
 export const MESSAGE = "Project 1";
+export const COMPANY_INFO ={
+    companyName: 'companyName',
+    emailFrom: 'fg1hj@example.com',
+    emailTo: 'sdg5ho@example.com',
+    redirectionPage: 'https://www.youtube.com/'
+};
