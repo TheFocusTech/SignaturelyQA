@@ -1,34 +1,30 @@
 import { expect } from "@playwright/test";
-import {test, createBusinessUserAndLogin} from "../fixtures/base.js";
-import SignPage from "../page_objects/signPage";
-const EMAIL = process.env.USER_EMAIL;
-const PASSWORD = process.env.USER_PASSWORD;
-const BASE_URL = process.env.URL;
-import {CHOOSE_SIGNERS_FIELDS} from '../testData.js';
+import { test } from "../fixtures/base.js";
+import { CHOOSE_SIGNERS_FIELDS } from "../testData.js";
 
-test.describe('SignDocument', () => {
+test.describe('Sign Document', () => {
 
-    test('TC_04_11_02 | Verify custom signing order', async ({page,createBusinessUserAndLogin}) => {
-        const signPage = new SignPage(page);
-        await signPage.clickUploadFileBtn('testDocuments/picture.jpg');
+  test('TC_04_11_02 | Verify custom signing order', async ({ createBusinessUserAndLogin, signPage, prepareForSignatureModal }) => {
 
-        await signPage.locators.getPrepareDocumentBtn().waitFor({state: 'visible'});
-        await signPage.clickPrepareDocumentBtn();
+    await signPage.uploadFile.fileUploader.uploadFile('testDocuments/picture.jpg');
+    await signPage.uploadFile.clickPrepareDocumentBtn();
 
-        await signPage.clickSendForSignatureRadioBtn();
-        await signPage.clickAddSignerBtn();
+    await prepareForSignatureModal.clickSignAndSendForSignatureRadioBtn();
+    
+    await prepareForSignatureModal.clickAddSignerBtn();
+    await prepareForSignatureModal.fillSignerNameField(CHOOSE_SIGNERS_FIELDS.name1, 0);
+    await prepareForSignatureModal.fillSignerEmailField(process.env.EMAIL_PREFIX + '01' + process.env.EMAIL_DOMAIN, 0);
 
-        await signPage.fillChooseSignersNameField(CHOOSE_SIGNERS_FIELDS.name1);
-        await signPage.fillChooseSignersEmailField(CHOOSE_SIGNERS_FIELDS.email1);
+    await prepareForSignatureModal.clickAddSignerBtn();
+    await prepareForSignatureModal.fillSignerNameField(CHOOSE_SIGNERS_FIELDS.name2, 1);
+    await prepareForSignatureModal.fillSignerEmailField(process.env.EMAIL_PREFIX + '02' + process.env.EMAIL_DOMAIN, 1);
 
-        await signPage.clickAddSignerBtn();
+    await prepareForSignatureModal.clickCustomSigningOrderCheckbox();
 
-        await signPage.fillChooseSignersNameField(CHOOSE_SIGNERS_FIELDS.name2);
-        await signPage.fillChooseSignersEmailField(CHOOSE_SIGNERS_FIELDS.email2);
+    await expect(prepareForSignatureModal.customSigningOrderPositionNumberOne).toBeVisible();
+    await expect(prepareForSignatureModal.customSigningOrderPositionNumberOne).toHaveText("1.");
 
-        await signPage.clickCustomSigningOrderCheckbox();
-
-        await expect(signPage.locators.getCustomSigningOrderPositionNumberOne()).toBeVisible();
-        await expect(signPage.locators.getCustomSigningOrderPositionNumberTwo()).toBeVisible();
-    })
+    await expect(prepareForSignatureModal.customSigningOrderPositionNumberTwo).toBeVisible();
+    await expect(prepareForSignatureModal.customSigningOrderPositionNumberTwo).toHaveText("2.");
+  })
 })

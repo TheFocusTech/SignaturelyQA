@@ -6,10 +6,10 @@ export default class FileUploaderComponent {
         this.progressBar = this.page.locator('.progress-bar');
     }
 
+    
     async uploadFile(file) {
         await this.fileInput.setInputFiles(file);
         await this.progressBar.waitFor({ state: 'visible' });
         await this.progressBar.waitFor({ state: 'hidden' });
     }
-
 }

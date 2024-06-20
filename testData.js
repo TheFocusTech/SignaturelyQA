@@ -78,7 +78,8 @@ export const CARD_DETAILS = {
         displayingOnTheBillingPage: 'Current Card:**** **** **** 555612/27',
         displayingOnTheBillingPortalPage: 'Visa •••• 5556DefaultExpires 12/2027Delete',
     }
-}
+};
+export const END_PLAN = 'Your plan will end on';
 export const CANVAS_SIGNATURE_COORDINATES_X = 525;
 export const CANVAS_SIGNATURE_COORDINATES_Y = 245;
 export const MESSAGE = "Project 1";
