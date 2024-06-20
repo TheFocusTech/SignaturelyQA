@@ -1,10 +1,10 @@
 import { expect } from "@playwright/test";
 import { test, createBusinessUserAndLogin, signPage } from "../fixtures/base.js";
-import {CREATE_TEMPLATE} from "../testData.js";
+import {CREATE_TEMPLATE, DOCUMENT_STATUS} from "../testData.js";
 
 test.describe('Templates', () => {
 
-  test('TC_07_27_01 | Verify that user can create a template', async ({ createBusinessUserAndLogin, signPage, prepareForSignatureModal, templatePage}) => {
+  test('TC_07_27_01 | Verify that user can create a template', async ({ createBusinessUserAndLogin, signPage, prepareForSignatureModal, templatePage, documentsPage}) => {
 
    await signPage.sideMenu.clickTemplates();
    await templatePage.sideMenuTemplates.clickCreateTemplate();
@@ -15,8 +15,10 @@ test.describe('Templates', () => {
    await templatePage.createTemplate.clickFillTemlateBtn();
    await prepareForSignatureModal.clickSignFieldsItem();
    await prepareForSignatureModal.doCanvasClicks();
-   await prepareForSignatureModal.clickcreateBtn();
-   await prepareForSignatureModal.clickbackToTempatesBtn();
+   await prepareForSignatureModal.clickCreateBtn();
+   await prepareForSignatureModal.clickBackToTempatesBtn();
+
+   await expect(await templatePage.table.documentStatus).toHaveText(DOCUMENT_STATUS.live);
 
   });
 });

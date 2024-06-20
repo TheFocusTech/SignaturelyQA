@@ -87,7 +87,7 @@ export default class PrepareForSignatureModal {
     }
 
 
-    async clickcreateBtn() {
+    async clickCreateBtn() {
         try {
             await this.createBtn.click();
 
@@ -96,7 +96,7 @@ export default class PrepareForSignatureModal {
         }
     }
 
-    async clickbackToTempatesBtn() {
+    async clickBackToTempatesBtn() {
         try {
             await this.backToTempatesBtn.click();
 
