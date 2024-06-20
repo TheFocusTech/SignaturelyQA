@@ -23,26 +23,26 @@ export default class NewSettingsCompanyPage {
     }
     
     async fillCompanyName() {
-        await this.companyName().fill(COMPANY_INFO.companyName);
+        await this.companyName.fill(COMPANY_INFO.companyName);
     }
 
     async fillFromEmail() {
-        await this.fromEmailName().fill(COMPANY_INFO.emailFrom);
+        await this.fromEmailName.fill(COMPANY_INFO.emailFrom);
     }
 
     async fillEmailClosingSignatureField() {
-        await this.emailClosingSignature().fill(COMPANY_INFO.emailTo);
+        await this.emailClosingSignature.fill(COMPANY_INFO.emailTo);
     }
 
     async  fillRedirectionPage() {
-        await this.redirectionPage().fill(COMPANY_INFO.redirectionPage);
+        await this.redirectionPage.fill(COMPANY_INFO.redirectionPage);
     }
 
     async checkActivateCheckbox() {
-        await this.checkboxActivate().click();
+        await this.checkboxActivate.click();
     }
 
     async clickSaveBtn() {
-        await this.saveBtn().click();
+        await this.saveBtn.click();
     }
 };
