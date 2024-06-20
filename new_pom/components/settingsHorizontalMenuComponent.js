@@ -3,7 +3,7 @@ export default class SettingsHorizontalMenuComponent {
         this.page = page;
 
         this.billing = this.page.locator('.settingsNav__list').getByRole('link', {name: 'Billing'});
-        this.api = this.page.getByRole('link', { name: 'API' })
+        this.api = this.page.getByRole('link', { name: 'API' });
     }
 
     async clickBilling() {
