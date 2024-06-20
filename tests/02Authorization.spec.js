@@ -1,27 +1,39 @@
-import { expect } from "@playwright/test";
-import { test } from "../fixtures/base";
-import NewLoginPage from "../new_pom/pages/loginPage";
-import { URL_END_POINTS, ACTIVE_COLOR, CI_USER_NAME } from "../testData";
+import {expect} from "@playwright/test";
+import {test} from "../fixtures/base";
+import {URL_END_POINTS, ACTIVE_COLOR} from "../testData";
+import {allure} from "allure-playwright";
+import {Severity} from "allure-js-commons";
 
 test.describe('Authorization', () => {
 
-    test('TC_02_05_01 | Verify successful login and the user directed to the sign page', async ({ page, signPage }) => {
-        const loginPage = new NewLoginPage(page);
+    test('TC_02_05_01 | Verify successful login and the user directed to the sign page', async ({
+                                                                                                    page,
+                                                                                                    loginPage,
+                                                                                                    signPage
+                                                                                                }) => {
+        await allure.description('Objective: To verify the process of logging a user into their account.');
+        await allure.tags('Login');
+        await allure.severity(Severity.CRITICAL);
+        await allure.link(
+            "Documentation",
+            "https://docs.google.com/document/d/1RLC1wMQsmneQg6KNq2Ym8vR3dKk8lbP8E5ayiinTPTk/edit#heading=h.by32e2y2do4w",
+            "TC_02_05_01"
+        );
+        await allure.epic('Authorization');
 
-        await page.goto("/");
+        await test.step('Navigate to the Login page', async () => {
+            await page.goto("/");
+        });
         await loginPage.fillEmailAddressInput(process.env.USER_EMAIL);
         await loginPage.fillPasswordInput(process.env.USER_PASSWORD);
         await loginPage.clickLogin();
 
-        await expect(page).toHaveURL(process.env.URL + URL_END_POINTS.signEndPoint);
-        await expect(signPage.sideMenu.sign).toHaveCSS('color', ACTIVE_COLOR);
-        
-        const userName = process.env.USER_NAME
-        if (userName === undefined) {
-            await expect(signPage.header.userName).toContainText(CI_USER_NAME);
-        } else {
-            await expect(signPage.header.userName).toContainText(userName);  
-        }
-         
+        await test.step('Verify that the user is on the Sign page', async () => {
+            await expect(signPage.page).toHaveURL(process.env.URL + URL_END_POINTS.signEndPoint);
+        });
+        await test.step('Verify that Sign link on side menu has the active color', async () => {
+            await expect(signPage.sideMenu.sign).toHaveCSS('color', ACTIVE_COLOR);
+        });
+        await signPage.header.verifyUserNameForOldUserLogin();
     })
 })

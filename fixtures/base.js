@@ -18,6 +18,7 @@ import CreateSignatureModal from "../new_pom/modalWindows/createSignatureModal.j
 import FinalStepPage from '../new_pom/pages/finalStepPage.js';
 import SuccessModal from '../new_pom/modalWindows/successModal.js';
 import EditAndResendDocumentModal from "../new_pom/modalWindows/editAndResendDocumentModal.js";
+import NewLoginPage from "../new_pom/pages/loginPage";
 
 
 export const test = base.extend({    
@@ -59,6 +60,10 @@ export const test = base.extend({
         },
         { scope: "test" },
     ],
+
+    loginPage: async ({ page }, use) => {
+            await use(new NewLoginPage(page));
+    },
 
     signPage: async ({ page }, use) => {
         await use(new NewSignPage(page));

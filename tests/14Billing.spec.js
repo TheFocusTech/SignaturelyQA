@@ -2,6 +2,8 @@ import { expect } from '@playwright/test';
 import { test } from "../fixtures/base.js";
 import SignPage from "../page_objects/signPage.js";
 import {TOASTER_MESSAGE, CARD_DETAILS, RANDOM_ANNUALLY_PLAN, PLANS} from '../testData.js';
+import {allure} from "allure-playwright";
+import {Severity} from "allure-js-commons";
 
 test.describe('Billing', () => {
 
@@ -46,6 +48,18 @@ test.describe('Billing', () => {
                                                                 settingsCompanyPage,
                                                                 settingsBillingPage,
                                                             }) => {
+        await allure.description('Objective: To verify the functionality of attaching a payment card ' +
+            'through the settings-billing section and deleting a payment card through the Billing Portal.')
+        await allure.tags("Payment Card");
+        await allure.severity(Severity.CRITICAL);
+        await allure.link(
+            "Documentation",
+            "https://docs.google.com/document/d/1RLC1wMQsmneQg6KNq2Ym8vR3dKk8lbP8E5ayiinTPTk/edit#heading=h.khucr6xuqdib",
+            "TC_14_54_01"
+        );
+        await allure.epic("Setting");
+        await allure.feature("Billing");
+
         test.setTimeout(100 * 1000);
         await signPage.sideMenu.clickSettings();
         await settingsCompanyPage.horizontalMenu.clickBilling();
