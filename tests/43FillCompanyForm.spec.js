@@ -1,7 +1,7 @@
 import { expect } from "@playwright/test";
 import SignPage from "../page_objects/signPage";
 import { test } from "../fixtures/base.js";
-import {TOASTER_MESSAGE, COMPANY_INFO} from '../testData.js';
+import {TOASTER_MESSAGE} from '../testData.js';
 
 test.describe('Company', () => {
 
