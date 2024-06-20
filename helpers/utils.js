@@ -10,22 +10,34 @@ export function generateNumberForNewUser() {
     const mm = dt.getMinutes().toString().padStart(2, '0');
     const ss = dt.getSeconds().toString().padStart(2, '0');
     const millis = dt.getMilliseconds().toString().padStart(3, '0');
-    const date = `${year}${month}${day}${hh}${mm}${ss}${millis}`
-    return date;
+
+    return `${year}${month}${day}${hh}${mm}${ss}${millis}`;
 }
 
 export function delay(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
 }
 
-export async function generateNewUserData() {
+export async function generateNewUserData(free = false, workflowVersion = null) {
     let userNumber = generateNumberForNewUser();
     process.env.NEW_USER_NUMBER = userNumber;
-    return {
+    let userData = {
         email: `${process.env.EMAIL_PREFIX}${userNumber}${process.env.EMAIL_DOMAIN}`,
         name: `TestUser${userNumber}`,
         password: `QA_tester${userNumber}`,
     };
+    process.env.NEW_USER_EMAIL = userData.email;
+    process.env.NEW_USER_NAME = userData.name;
+    process.env.NEW_USER_PASSWORD = userData.password;
+
+    if (free) {
+        userData.free = true;
+    }
+    if (workflowVersion) {
+        userData.workflowVersion = workflowVersion;
+    }
+
+    return userData;
 }
 
 export async function createNewUserThroughApi(request) {
@@ -35,6 +47,15 @@ export async function createNewUserThroughApi(request) {
     await signUpRequest(request, newUserData);
 
     return newUserData;
+}
+
+export async function createNewFreeUserThroughApi(request) {
+    const newFreeUserData = await  generateNewUserData(true, "a");
+    console.log(`Generated new Free user #${process.env.NEW_USER_NUMBER}`);
+
+    await signUpRequest(request, newFreeUserData);
+
+    return newFreeUserData;
 }
 
 export async function retrieveUserEmailConfirmationLink(request, newUserData) {

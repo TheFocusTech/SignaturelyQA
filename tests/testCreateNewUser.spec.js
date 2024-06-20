@@ -2,14 +2,14 @@ import { expect } from '@playwright/test';
 import { test, createFreeUserAndLogin, createBusinessUserAndLogin } from "../fixtures/base.js";
 import SignPage from '../page_objects/signPage.js';
 
-test('Create Free User', async ({ page, request, createFreeUserAndLogin }) => {
+test('Create Free User', async ({ page, createFreeUserAndLogin }) => {
     const signPage = new SignPage(page);
 
     await signPage.clickSettingsSidebarLinkAndGoSettingsCompanyPage();
     await expect(page).toHaveURL(`${process.env.URL}/settings/company`)
 });
 
-test('Create Business User', async ({ page, request, createBusinessUserAndLogin }) => {
+test('Create Business User', async ({ page, createBusinessUserAndLogin }) => {
     const signPage = new SignPage(page);
     const settingsCompanyPage = await signPage.clickSettingsSidebarLinkAndGoSettingsCompanyPage();
     const settingsBillingPage = await settingsCompanyPage.clickSettingsBillingSidebarLinkAngGoSettingsBillingPage();
