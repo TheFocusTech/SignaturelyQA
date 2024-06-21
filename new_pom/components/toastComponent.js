@@ -4,6 +4,7 @@ export default class ToastComponent {
 
         this.toastFirstCloseBtn = this.page
             .locator('.Toastify [data-src="/static/media/close-icon.9052da34.svg"]').first();
+        this.toastBody = this.page.locator('.Toastify__toast-body');
 
     }
 
