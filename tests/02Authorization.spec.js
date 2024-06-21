@@ -16,7 +16,7 @@ test.describe('Authorization', () => {
         await allure.severity(Severity.CRITICAL);
         await allure.link(
             "Documentation",
-            "https://docs.google.com/document/d/1RLC1wMQsmneQg6KNq2Ym8vR3dKk8lbP8E5ayiinTPTk/edit#heading=h.by32e2y2do4w",
+            "https://docs.google.com/document/d/1Qce7tKWOwVYtPxgQv_8ae-HUkbAgeOFph0lB_eziY_k/edit#heading=h.by32e2y2do4w",
             "TC_02_05_01"
         );
         await allure.epic('Authorization');
