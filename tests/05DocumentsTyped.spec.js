@@ -28,7 +28,7 @@ test.describe('DocumentsType', () => {
     await documentsPage.table.clickEditAndResendBtn();
 
     await expect(documentsPage.table.titleEditAndRessendDocument).toBeVisible();
-    expect(await documentsPage.table.verifyTitleText()).toBe("Edit & Resend document");
+    expect(await documentsPage.table.getTitleText()).toBe("Edit & Resend document");
 
   })
 })

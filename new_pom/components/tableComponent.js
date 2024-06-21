@@ -20,9 +20,8 @@ export default class TableComponent {
         await this.editAndResendBtn.click();
     }
 
-    async verifyTitleText() {
+    async getTitleText() {
         const actualText = await this.titleEditAndRessendDocument.textContent();
-        console.log(actualText)
         return actualText
     }
 
