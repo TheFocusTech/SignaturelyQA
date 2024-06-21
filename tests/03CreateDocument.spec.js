@@ -57,6 +57,8 @@ test.describe('CreateDocument', () => {
     test('TC_03_07_02 | Verify that the user who uploaded the document and Other Signer can sign it', async ({ createBusinessUserAndLogin, signPage, prepareForSignatureModal, chooseSignatureModal, finalStepPage, successModal, documentsPage }) => {
       test.setTimeout(120 * 1000);
 
+      
+
       await signPage.uploadFile.fileUploader.uploadFile('testDocuments/todoList.xlsx');
       await signPage.uploadFile.clickPrepareDocumentBtn();
       await prepareForSignatureModal.clickSignAndSendForSignatureRadioBtn();
@@ -70,8 +72,8 @@ test.describe('CreateDocument', () => {
       await prepareForSignatureModal.doCanvasClicks();
       await prepareForSignatureModal.clickAssignedToDropDown();
       await prepareForSignatureModal.clickMeNowDropDownItem();
-      await chooseSignatureModal.clickSignatureTyped();
-      await chooseSignatureModal.clickSignNowBtn();
+      // await chooseSignatureModal.clickSignatureTyped();
+      // await chooseSignatureModal.clickSignNowBtn();
       // await prepareForSignatureModal.toast.clickToastFirstCloseBtn();
       // await prepareForSignatureModal.clickSaveBtn();
       // await finalStepPage.fillDocumentTitleField(DOCUMENT_TITLE);

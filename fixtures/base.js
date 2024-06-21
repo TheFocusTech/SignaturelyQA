@@ -22,6 +22,9 @@ import DowngradeToPersonalPlanModal from "../new_pom/modalWindows/downgradeToPer
 import NewSettingsAPIPage from "../new_pom/pages/settings/settingsAPIPage";
 import NewCreateAPIKeyModal from "../new_pom/modalWindows/createAPIKeyModal.js";
 import ChooseSignatureModal from "../new_pom/modalWindows/chooseSignatureModal.js";
+import EditSignatureModal from "../new_pom/modalWindows/editSignatureModal";
+import NewSettingsEditSignaturePage from "../new_pom/pages/settings/settingsEditSignaturePage";
+
 
 export const test = base.extend({    
 
@@ -137,5 +140,13 @@ export const test = base.extend({
 
     chooseSignatureModal: async ({ page }, use) => {
         await use(new ChooseSignatureModal(page));
+    },
+
+    editSignatureModal: async ({ page }, use) => {
+        await use(new EditSignatureModal(page));
+    },
+
+    settingsEditSignaturePage: async ({ page }, use) => {
+        await use(new NewSettingsEditSignaturePage(page));
     },
 });
