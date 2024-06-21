@@ -4,7 +4,7 @@ import { CHOOSE_SIGNERS_FIELDS, TOAST_MESSAGE, DOCUMENT_STATUS } from "../testDa
 
 test.describe('Sign Document', () => {
 
-  test.only('TC_08_32_01 | Verify that user can create form', async ({ createBusinessUserAndLogin, signPage, prepareForSignatureModal, createFormPage, formsPage }) => {
+  test('TC_08_32_01 | Verify that user can create form', async ({ createBusinessUserAndLogin, signPage, prepareForSignatureModal, createFormPage, formsPage }) => {
     test.setTimeout(120 * 1000);
 
     await signPage.sideMenu.clickForms();
