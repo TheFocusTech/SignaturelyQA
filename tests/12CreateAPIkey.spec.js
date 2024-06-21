@@ -12,7 +12,7 @@ test.describe('Create API key', () => {
 
         await settingsAPIPage.clickCreateAPIKeyButtonAtRight();
 
-        await createAPIKeyModal.fillCreateAPIKeyNameInput(API_KEY_NAME);
+        await createAPIKeyModal.fillCreateAPIKeyNameField(API_KEY_NAME);
         await createAPIKeyModal.clickCreateAPIBtn();
         await createAPIKeyModal.clickCopyAPIBtn();
 
@@ -32,7 +32,7 @@ test.describe('Create API key', () => {
 
         await settingsAPIPage.table.clickCreateAPIKeyBtnInTable();
 
-        await createAPIKeyModal.fillCreateAPIKeyNameInput(API_KEY_NAME);
+        await createAPIKeyModal.fillCreateAPIKeyNameField(API_KEY_NAME);
         await createAPIKeyModal.clickCreateAPIBtn();
         await createAPIKeyModal.clickCopyAPIBtn();
 
