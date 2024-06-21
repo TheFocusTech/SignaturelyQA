@@ -1,19 +1,9 @@
-import { generateNumberForNewUser } from '../helpers/utils.js';
-
-export let newUserEmail;
-export let newUserPassword;
-export let newUserNumber;
+import { generateNewUserData } from '../helpers/utils.js';
+import { API_URL_END_POINTS } from '../apiData.js'
 
 export async function api_user_sign_up(request) {
-    newUserNumber = generateNumberForNewUser();
 
-    const NEW_USER_CREDENTIALS = {
-        email: `${process.env.EMAIL_PREFIX}${newUserNumber}${process.env.EMAIL_DOMAIN}`,
-        free: true,
-        name: `TestUser${newUserNumber}`,
-        password: `QA_tester${newUserNumber}`,
-        workflowVersion: "a"
-    };
+    const newUserCredentials = await generateNewUserData(true, "a");
 
     let response;
     let attempt = 0;
@@ -21,12 +11,10 @@ export async function api_user_sign_up(request) {
 
     while (attempt < maxRetries) {
         attempt++;
-        response = await request.post(`${process.env.API_URL}/auth/sign_up`, { data: NEW_USER_CREDENTIALS });
+        response = await request.post(`${process.env.API_URL}${API_URL_END_POINTS.signUpEndPoint}`, { data: newUserCredentials });
 
         if (response.ok()) {
-            console.log(`Free User has been successfully created: #${newUserNumber}`);
-            newUserEmail = NEW_USER_CREDENTIALS.email;
-            newUserPassword = NEW_USER_CREDENTIALS.password;
+            console.log(`Free User has been successfully created: #${process.env.NEW_USER_NUMBER}`);
             break;
         }
 
