@@ -19,9 +19,12 @@ import FinalStepPage from '../new_pom/pages/finalStepPage.js';
 import SuccessModal from '../new_pom/modalWindows/successModal.js';
 import EditAndResendDocumentModal from "../new_pom/modalWindows/editAndResendDocumentModal.js";
 import NewTemplatesPage from "../new_pom/pages/templates/templatesPage.js";
-import DowngradeToPersonalPlanModal from "../new_pom/modalWindows/downgradeToPersonalPlanModal.js"
+import DowngradeToPersonalPlanModal from "../new_pom/modalWindows/downgradeToPersonalPlanModal.js";
+import NewSettingsAPIPage from "../new_pom/pages/settings/settingsAPIPage";
+import NewCreateAPIKeyModal from "../new_pom/modalWindows/createAPIKeyModal.js";
 
 export const test = base.extend({
+
 
 
     createNewFolder: [
@@ -132,5 +135,12 @@ export const test = base.extend({
         await use(new NewTemplatesPage(page));
     },
 
+    settingsAPIPage: async ({ page }, use) => {
+        await use(new NewSettingsAPIPage(page));
+    },
+
+    createAPIKeyModal: async ({ page }, use) => {
+        await use(new NewCreateAPIKeyModal(page));
+    },
 
 });
