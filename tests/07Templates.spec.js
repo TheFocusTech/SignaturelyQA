@@ -4,7 +4,7 @@ import {CREATE_TEMPLATE, TEMPLATES_STATUS} from "../testData.js";
 
 test.describe('Templates', () => {
 
-  test('TC_07_27_01 | Verify that user can create a template', async ({ createBusinessUserAndLogin, signPage, prepareForSignatureModal, templatePage, documentsPage}) => {
+  test('TC_07_27_01 | Verify that user can create a template', async ({ createBusinessUserAndLogin, signPage, prepareForSignatureModal, templatePage}) => {
 
    await signPage.sideMenu.clickTemplates();
    await templatePage.sideMenuTemplates.clickCreateTemplate();
