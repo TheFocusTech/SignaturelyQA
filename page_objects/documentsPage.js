@@ -22,7 +22,7 @@ class DocumentsPage {
         getNewFolderNameInputField: () => this.page.getByPlaceholder('New Folder Name'),
         getCreateBtn: () => this.page.getByRole('button', { name: 'Create' }),
         getOptionsDropdown: () => this.page.getByRole('button', { name: 'Options' }).first(),
-        getOptionsBtn: () => this.page.locator('.documents__optionsDropdown').first(),
+        getoptionsDropdown: () => this.page.locator('.documents__optionsDropdown').first(),
         getToast: () => this.page.locator('.Toastify__toast-body'),
         getDeleteBtn: () => this.page.getByRole('button', { name: 'Delete' }),
         getYesDeteleBtn: () => this.page.getByRole('button', { name: 'Yes, Delete' }),
@@ -93,8 +93,8 @@ class DocumentsPage {
         return this;
     }
 
-    async clickOptionsBtn() {
-        await this.locators.getOptionsBtn().click();
+    async clickOptionsDropdown() {
+        await this.locators.getoptionsDropdown().click();
 
         return this;
     }

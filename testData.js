@@ -81,3 +81,7 @@ export const CARD_DETAILS = {
 };
 export const END_PLAN = 'Your plan will end on';
 export const MESSAGE = "Project 1";
+export const OPTIONAL_MESSAGE = {
+    pdf: "This is pdf document",
+    jpg: "This is jpg document"
+}

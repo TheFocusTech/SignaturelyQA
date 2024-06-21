@@ -29,7 +29,7 @@ test.describe('DocumentsType', () => {
     await finalStepModal.waitForSuccessSendModalVisible();
     await finalStepModal.clickBackToDocumentBtn();
     
-    await documentsPage.clickOptionsBtn();
+    await documentsPage.clickOptionsDropdown();
     await documentsPage.clickEditAndResendBtn();
     await expect(documentsPage.editAndResendTitle).toBeVisible();
 
