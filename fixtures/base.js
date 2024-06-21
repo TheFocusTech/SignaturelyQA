@@ -7,7 +7,6 @@ import NewSignPage from '../new_pom/pages/sign/signPage.js';
 import NewDocumentsPage from '../new_pom/pages/documents/documentsPage.js';
 import NewDocumentsTrashPage from '../new_pom/pages/documents/documentsTrashPage.js';
 import PrepareForSignatureModal from '../new_pom/modalWindows/prepareForSignatureModal.js';
-import FinalStepModal from '../new_pom/modalWindows/finalStepModal.js';
 import ActivateTrialStripePage from "../new_pom/pages/activateTrialStripePage";
 import NewSettingsCompanyPage from "../new_pom/pages/settings/settingsCompanyPage.js";
 import NewSettingsBillingPage from "../new_pom/pages/settings/settingsBillingPage.js";
@@ -20,8 +19,13 @@ import SuccessModal from '../new_pom/modalWindows/successModal.js';
 import EditAndResendDocumentModal from "../new_pom/modalWindows/editAndResendDocumentModal.js";
 import DowngradeToPersonalPlanModal from "../new_pom/modalWindows/downgradeToPersonalPlanModal.js";
 import ShareThisDocumentModal from "../new_pom/modalWindows/shareThisDocumentModal.js"
+import DowngradeToPersonalPlanModal from "../new_pom/modalWindows/downgradeToPersonalPlanModal.js"
+import NewSettingsAPIPage from "../new_pom/pages/settings/settingsAPIPage";
+import NewCreateAPIKeyModal from "../new_pom/modalWindows/createAPIKeyModal.js";
+import NewTemplatesPage from "../new_pom/pages/templates/templatesPage.js";
 
-export const test = base.extend({    
+export const test = base.extend({
+
 
     createNewFolder: [
         async ({ page }, use) => {
@@ -77,10 +81,6 @@ export const test = base.extend({
         await use(new NewDocumentsTrashPage(page));
     },
 
-    finalStepModal: async ({ page }, use) => {
-        await use(new FinalStepModal(page));
-    },
-
     activateTrialStripePage: async ({ page }, use) => {
         await use(new ActivateTrialStripePage(page));
     },
@@ -124,8 +124,21 @@ export const test = base.extend({
     editAndResendDocumentModal: async ({ page }, use) => {
         await use(new EditAndResendDocumentModal(page));
     },
-
+  
     shareThisDocumentModal: async ({ page }, use) => {
         await use(new ShareThisDocumentModal(page));
     },
+
+    templatePage: async ({ page }, use) => {
+        await use(new NewTemplatesPage(page));
+    },
+
+    settingsAPIPage: async ({ page }, use) => {
+        await use(new NewSettingsAPIPage(page));
+    },
+
+    createAPIKeyModal: async ({ page }, use) => {
+        await use(new NewCreateAPIKeyModal(page));
+    },
+
 });

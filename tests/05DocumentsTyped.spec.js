@@ -6,7 +6,7 @@ import FinalStepPage from "../new_pom/pages/finalStepPage.js";
 
 test.describe('DocumentsType', () => {
 
-  test.skip('TC_05_21_01 | Verify that button "Edit&Resend" is active', async ({ createBusinessUserAndLogin, signPage, prepareForSignatureModal, finalStepModal, documentsPage }) => {
+  test.skip('TC_05_21_01 | Verify that button "Edit&Resend" is active', async ({ createBusinessUserAndLogin, signPage, prepareForSignatureModal, documentsPage }) => {
 
     test.setTimeout(250 * 1000);
     await signPage.uploadFile.fileUploader.uploadFile('testDocuments/picture.jpg');

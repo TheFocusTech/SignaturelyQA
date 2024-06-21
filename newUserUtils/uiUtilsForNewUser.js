@@ -1,4 +1,3 @@
-import { newUserNumber, newUserEmail, newUserPassword } from "./apiUtilsForNewUser";
 import LoginPage from "../page_objects/loginPage";
 import SignPage from "../page_objects/signPage";
 import { CARD_DETAILS } from '../testData.js';
@@ -7,8 +6,8 @@ export async function newFreeUserLogin(page) {
     const loginPage = new LoginPage(page);
 
     await page.goto("/");
-    await loginPage.fillEmailAddressInputField(newUserEmail);
-    await loginPage.fillPasswordInputField(newUserPassword);
+    await loginPage.fillEmailAddressInputField(process.env.NEW_USER_EMAIL);
+    await loginPage.fillPasswordInputField(process.env.NEW_USER_PASSWORD);
     await loginPage.clickLoginAndGoSignPage();
 }
 
@@ -23,6 +22,6 @@ export async function upgradeFreeUserToBusinessAndLogin(page) {
     await settingsBillingPlanPage.locators.getToasterPopup().isVisible();
     await settingsBillingPlanPage.waitForToasterHidden();
     await settingsBillingPlanPage.locators.getToasterPopup().isHidden();
-    console.log(`Free User #${newUserNumber} has been successfully upgraded to Bussiness`);
+    console.log(`Free User #${process.env.NEW_USER_NUMBER} has been successfully upgraded to Bussiness`);
     await settingsBillingPlanPage.clickSignSidebarLinkAndGoSignPage();
 }
