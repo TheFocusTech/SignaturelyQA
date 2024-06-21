@@ -51,7 +51,7 @@ test.describe('Sign Document', () => {
         await prepareForSignatureModal.doCanvasClicks();
         await prepareForSignatureModal.clickSaveBtn();
 
-        await expect(await prepareForSignatureModal.toast.toastAlert).toBeVisible();
+        await expect(await prepareForSignatureModal.toast.toastBody).toBeVisible();
         
         await finalStepPage.clickSendForSignatureBtn();
         await successModal.clickBackToDocumentsBtn();
