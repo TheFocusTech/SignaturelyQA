@@ -6,6 +6,11 @@ export default class SideMenuComponent {
         this.documents = this.page.getByRole('link', { name: 'Documents', exact: true });
         this.settings = this.page.locator('.sidebar__wrapper').getByText('Settings');
 
+        this.templates = this.page.getByRole('link', { name: 'Templates', exact: true });
+
+       
+
+
     }
 
     async clickSign() {
@@ -16,7 +21,22 @@ export default class SideMenuComponent {
         await this.documents.click();
     }
 
+
+
+    async clickTemplates() {
+        await this.templates.click();
+    }
+
+
+
+
     async clickSettings() {
         await this.settings.click();
     }
+
+
+    async clickSettings() {
+        await this.settings.click();
+    }
+
 }

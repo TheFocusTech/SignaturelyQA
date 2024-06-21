@@ -21,8 +21,11 @@ import EditAndResendDocumentModal from "../new_pom/modalWindows/editAndResendDoc
 import DowngradeToPersonalPlanModal from "../new_pom/modalWindows/downgradeToPersonalPlanModal.js"
 import NewSettingsAPIPage from "../new_pom/pages/settings/settingsAPIPage";
 import NewCreateAPIKeyModal from "../new_pom/modalWindows/createAPIKeyModal.js";
+import NewTemplatesPage from "../new_pom/pages/templates/templatesPage.js";
 
-export const test = base.extend({    
+
+export const test = base.extend({
+
 
     createNewFolder: [
         async ({ page }, use) => {
@@ -78,6 +81,7 @@ export const test = base.extend({
         await use(new NewDocumentsTrashPage(page));
     },
 
+
     finalStepModal: async ({ page }, use) => {
         await use(new FinalStepModal(page));
     },
@@ -110,6 +114,7 @@ export const test = base.extend({
         await use(new SpecialOneTimeOfferModal(page));
     },
 
+
     createSignatureModal: async ({ page }, use) => {
         await use(new CreateSignatureModal(page));
     },
@@ -126,6 +131,10 @@ export const test = base.extend({
         await use(new EditAndResendDocumentModal(page));
     },
 
+    templatePage: async ({ page }, use) => {
+        await use(new NewTemplatesPage(page));
+    },
+
     settingsAPIPage: async ({ page }, use) => {
         await use(new NewSettingsAPIPage(page));
     },
@@ -133,4 +142,5 @@ export const test = base.extend({
     createAPIKeyModal: async ({ page }, use) => {
         await use(new NewCreateAPIKeyModal(page));
     },
+
 });
