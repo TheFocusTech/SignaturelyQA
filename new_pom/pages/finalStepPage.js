@@ -28,5 +28,6 @@ export default class FinalStepPage {
 
     async clickSendForSignatureBtn() {
         await this.sendForSignatureBtn.click();
-      }
+    }
+
 }
