@@ -1,7 +1,5 @@
-
 import { expect } from "@playwright/test";
 import { test } from "../fixtures/base.js";
-import { CHOOSE_SIGNERS_FIELDS } from '../testData.js';
 
 test.describe('DocumentsType', () => {
 

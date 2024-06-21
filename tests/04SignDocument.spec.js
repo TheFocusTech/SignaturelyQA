@@ -1,6 +1,6 @@
 import { expect } from "@playwright/test";
 import { test } from "../fixtures/base.js";
-import { CHOOSE_SIGNERS_FIELDS, DOCUMENT_STATUS, TOAST_MESSAGE } from '../testData.js';
+import { DOCUMENT_STATUS, TOAST_MESSAGE } from '../testData.js';
 
 test.describe('Sign Document', () => {
 
