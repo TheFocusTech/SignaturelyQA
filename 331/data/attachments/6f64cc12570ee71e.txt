@@ -1,0 +1,6 @@
+Generated new user #240621214339961
+User with id #"aa874604-9281-4a4c-81c9-71ccf2e1ac6c" has been successfully created
+Clicking subscription button: Monthly
+Waiting for email to arrive...
+Fetching emails sent to ...+240621214339961@gmail.com
+Confirmation Code: TOxSOMiRan
