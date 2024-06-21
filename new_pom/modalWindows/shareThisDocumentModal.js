@@ -1,5 +1,3 @@
-import { newUserEmail } from '../../newUserUtils/apiUtilsForNewUser.js';
-
 export default class ShareThisDocumentModal {
     constructor(page) {
         this.page = page;
@@ -14,7 +12,7 @@ export default class ShareThisDocumentModal {
     }
 
     async clickInputEmailField() {
-        await this.inputEmailField.fill(newUserEmail);
+        await this.inputEmailField.fill("nayavak972@egela.com");
     }
 
     async clickShareDocumentBtn() {
