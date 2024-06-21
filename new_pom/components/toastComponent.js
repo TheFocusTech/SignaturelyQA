@@ -10,4 +10,10 @@ export default class ToastComponent {
         await this.toastFirstCloseBtn.click();
     }
 
+    async waitForToastVisible() {
+        await this.toastBody.waitFor('visible');
+      }
+      async waitForToastHidden() {
+        await this.toastBody.waitFor({ state: 'hidden' });
+      }
 }
