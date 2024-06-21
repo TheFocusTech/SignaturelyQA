@@ -21,10 +21,12 @@ import EditAndResendDocumentModal from "../new_pom/modalWindows/editAndResendDoc
 import DowngradeToPersonalPlanModal from "../new_pom/modalWindows/downgradeToPersonalPlanModal.js"
 import NewSettingsAPIPage from "../new_pom/pages/settings/settingsAPIPage";
 import NewCreateAPIKeyModal from "../new_pom/modalWindows/createAPIKeyModal.js";
+import NewTemplatesPage from "../new_pom/pages/templates/templatesPage.js";
+
 import NewLoginPage from "../new_pom/pages/loginPage";
 
 
-export const test = base.extend({    
+export const test = base.extend({
 
     createNewFolder: [
         async ({ page }, use) => {
@@ -130,6 +132,10 @@ export const test = base.extend({
 
     editAndResendDocumentModal: async ({ page }, use) => {
         await use(new EditAndResendDocumentModal(page));
+    },
+
+    templatePage: async ({ page }, use) => {
+        await use(new NewTemplatesPage(page));
     },
 
     settingsAPIPage: async ({ page }, use) => {
