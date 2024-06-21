@@ -22,6 +22,8 @@ import NewSettingsAPIPage from "../new_pom/pages/settings/settingsAPIPage";
 import NewCreateAPIKeyModal from "../new_pom/modalWindows/createAPIKeyModal.js";
 import NewTemplatesPage from "../new_pom/pages/templates/templatesPage.js";
 
+import SignUpPersonalPage from "../new_pom/pages/signUpPersonalPage";
+import ConfirmCodeModal from "../new_pom/modalWindows/confirmCodeModal";
 
 export const test = base.extend({
 
@@ -137,4 +139,12 @@ export const test = base.extend({
         await use(new NewCreateAPIKeyModal(page));
     },
 
+
+    signUpPersonalPage: async ({ page }, use) => {
+        await use(new SignUpPersonalPage(page));
+    },
+
+    confirmCodeModal: async ({ page }, use) => {
+        await use(new ConfirmCodeModal(page));
+    },
 });
