@@ -1,5 +1,5 @@
 import { signUpRequest } from "./apiCalls";
-import { authorize, getConfirmationLinkFromEmail } from "../index";
+import { authorize, getConfirmationLinkFromEmail, getConfirmCodeFromEmail, checkEmailMessageReceived } from "../index.js";
 
 export function generateNumberForNewUser() {
     let dt = new Date();
@@ -62,6 +62,18 @@ export async function retrieveUserEmailConfirmationLink(request, newUserData) {
     const auth = await authorize();
 
     return await getConfirmationLinkFromEmail(auth, newUserData.email);
+}
+
+export async function retrieveUserEmailConfirmCode(request, newUserEmail) {
+    const auth = await authorize();
+
+    return await getConfirmCodeFromEmail(auth, newUserEmail);
+}
+
+export async function retrieveEmailMessage(request, senderName, receiverEmail, subject) {
+    const auth = await authorize();
+
+    return await checkEmailMessageReceived(auth, senderName, receiverEmail, subject);
 }
 
 export async function clickCanvas(page, canvasLocator, excludedAreas = []) {
