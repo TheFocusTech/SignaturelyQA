@@ -3,6 +3,7 @@ export const URL_END_POINTS = {
     documentsEndPoint: '/documents',
     activateTrialEndPoint: '/activate-trial',
     settingsBillingPlanEndPoint: '/settings/billing/plan',
+    signUpPersonalEndPoint: '/signup/personal',
 };
 export const ACTIVE_COLOR = 'rgb(0, 163, 250)';
 export const FILL_FOLDER_NAME = 'Folder 1';
@@ -10,7 +11,9 @@ export const CHOOSE_SIGNERS_FIELDS = {
     name1: 'John Doe',
     email1: '5kXUw@example.com',
     name2: 'John Doe2',
-    email2: '5kXUw@example.com'
+    email2: '5kXUw@example.com',
+    name3: `${process.env.EMAIL_PREFIX}003`,
+    email3: `${process.env.EMAIL_PREFIX}003${process.env.EMAIL_DOMAIN}`
 };
 export const TOAST_MESSAGE ={
     planSuccessChange: 'Plan has been successfully changed.',
@@ -36,8 +39,6 @@ export const FULL_NAME_INITIALS_FIELDS = {
     fullName: 'John Smith',
     initials: 'JS'
 };
-
-
 
 export const CREATE_TEMPLATE = {
     nameField: 'Rental contract',
@@ -99,3 +100,11 @@ export const TEMPLATES_STATUS = {
     live: 'Live',
 }
 
+export const SUBSCRIPTIONS = ["Monthly", "Annually"];
+export const SUBSCRIBE_TO_PERSONAL_PLAN = 'Subscribe to personal Plan';
+export const PLEASE_ENTER_CONFIRMATION_CODE = 'Please enter confirmation code';
+export const PERSONAL_PLAN_DESCRIPTION = (billingPeriod) => `Your plan (Billed ${billingPeriod})Personal`;
+export const EMAIL_SUBJECTS = {
+    reminderToSign: "Reminder, Please sign",
+    signatureRequest: "requested your signature"
+}

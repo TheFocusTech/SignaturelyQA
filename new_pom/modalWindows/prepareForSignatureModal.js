@@ -13,13 +13,13 @@ export default class PrepareForSignatureModal {
         this.sendForSignatureRadioBtn = this.page.getByText('Send for Signature', { exact: true });
         this.continueBtn = this.page.getByRole('button', { name: 'Continue' });
         this.gotItBtn = this.page.getByRole('button', { name: 'Got it' });
-        this.fieldsMenu = this.page.locator('aside ul');
+        this.fieldsMenu = this.page.locator('.interactModal__fieldBar-fieldList');
         this.signFieldsItem = this.fieldsMenu.getByText('Sign');
         this.addSignerBtn = this.page.getByText('Add signer', { exact: true });
         this.signerNameField = this.page.getByPlaceholder('Name');
         this.signerEmailField = this.page.getByPlaceholder('Email');
         this.canvas = this.page.locator('canvas');
-        this.assignedToDropDown = this.page.locator('.uiSelect__select').nth(1);
+        this.assignedToDropDown = this.page.locator('ul .uiSelect__select');
         this.meNowDropDownItem = this.page.getByText('Me (Now)', { exact: true });
         this.saveBtn = this.page.getByRole('button', { name: 'Save' });
         this.signatureElement = this.page.locator('.documentPage .react-pdf__Page__canvas').last();
@@ -54,7 +54,7 @@ export default class PrepareForSignatureModal {
     }
 
     async clickSignFieldsItem() {
-        await this.signFieldsItem.waitFor({ state: 'visible' });
+        await this.signFieldsItem.waitFor();
         await this.signFieldsItem.click();
     }
 
@@ -79,6 +79,7 @@ export default class PrepareForSignatureModal {
     }
 
     async clickAssignedToDropDown() {
+        await this.assignedToDropDown.waitFor();
         await this.assignedToDropDown.click();
     }
 
