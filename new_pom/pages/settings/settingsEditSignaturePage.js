@@ -6,6 +6,10 @@ export default class NewSettingsEditSignaturePage {
 
         this.sideMenuSettings = new SideMenuSettingsComponent(this.page);
         
+        this.createSignatureBtn = this.page.getByRole('button', {name: 'Create Signature'});
+    }
 
+    async clickCreateSignatureBtn() {
+        await this.createSignatureBtn.click();
     }
 }

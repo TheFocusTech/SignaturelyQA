@@ -17,7 +17,6 @@ export default class EditSignatureModal {
     }
 
     async clickCheckboxAgree() {
-        await this.checkboxAgree.waitFor({ state: 'visible' });
         await this.checkboxAgree.click();
     }
 

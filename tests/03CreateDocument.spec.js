@@ -54,11 +54,16 @@ test.describe('CreateDocument', () => {
         await expect(await documentsPage.table.documentStatus).toHaveText(DOCUMENT_STATUS.awaiting);
     });
 
-    test('TC_03_07_02 | Verify that the user who uploaded the document and Other Signer can sign it', async ({ createBusinessUserAndLogin, signPage, settingsCompany, PageprepareForSignatureModal, chooseSignatureModal, finalStepPage, successModal, documentsPage }) => {
+    test('TC_03_07_02 | Verify that the user who uploaded the document and Other Signer can sign it', async ({ createBusinessUserAndLogin, signPage, settingsCompany, settingsEditSignaturePage, editSignatureModal, PageprepareForSignatureModal, chooseSignatureModal, finalStepPage, successModal, documentsPage }) => {
       test.setTimeout(120 * 1000);
 
       await signPage.sideMenu.clickSettings();
-      await settingsCompany.
+      await settingsCompany.sideMenuSettings.clickEditSignature();
+      await settingsEditSignaturePage.clickCreateSignatureBtn();
+      await editSignatureModal.fillFullNameField(DATA_SIGNER.fullName);
+      await editSignatureModal.fillInitialsField(DATA_SIGNER.initials);
+      await editSignatureModal.clickCheckboxAgree();
+      await editSignatureModal.clickCreateSignatureBtn();
 
       await signPage.uploadFile.fileUploader.uploadFile('testDocuments/todoList.xlsx');
       await signPage.uploadFile.clickPrepareDocumentBtn();
@@ -73,8 +78,8 @@ test.describe('CreateDocument', () => {
       await prepareForSignatureModal.doCanvasClicks();
       await prepareForSignatureModal.clickAssignedToDropDown();
       await prepareForSignatureModal.clickMeNowDropDownItem();
-      // await chooseSignatureModal.clickSignatureTyped();
-      // await chooseSignatureModal.clickSignNowBtn();
+      await chooseSignatureModal.clickSignatureTyped();
+      await chooseSignatureModal.clickSignNowBtn();
       // await prepareForSignatureModal.toast.clickToastFirstCloseBtn();
       // await prepareForSignatureModal.clickSaveBtn();
       // await finalStepPage.fillDocumentTitleField(DOCUMENT_TITLE);
