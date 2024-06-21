@@ -13,7 +13,7 @@ import NewSettingsBillingPage from "../new_pom/pages/settings/settingsBillingPag
 import NewSettingsBillingPlanPage from "../new_pom/pages/settings/settingsBillingPlanPage.js";
 import UpgradeYourPlanModal from "../new_pom/modalWindows/upgradeYourPlanModal";
 import SpecialOneTimeOfferModal from "../new_pom/modalWindows/specialOneTimeOfferModal";
-import CreateSignatureModal from "../new_pom/modalWindows/createSignatureModal.js";
+import CreateSignatureOrInitialModal from "../new_pom/modalWindows/createSignatureOrInitialModal.js";
 import FinalStepPage from '../new_pom/pages/finalStepPage.js';
 import SuccessModal from '../new_pom/modalWindows/successModal.js';
 import EditAndResendDocumentModal from "../new_pom/modalWindows/editAndResendDocumentModal.js";
@@ -109,8 +109,8 @@ export const test = base.extend({
     },
 
 
-    createSignatureModal: async ({ page }, use) => {
-        await use(new CreateSignatureModal(page));
+    createSignatureOrInitialModal: async ({ page }, use) => {
+        await use(new CreateSignatureOrInitialModal(page));
     },
 
     finalStepPage: async ({ page }, use) => {

@@ -127,8 +127,17 @@ export async function clickCanvas(page, canvasLocator, excludedAreas = []) {
             excludedAreas.push(newExcludedArea);
         }
     } catch (error) {
-        console.log('Error occurred while checking the bounding box of the new fieldDropDown element:', error);
+        console.log('The new fieldDropDown element will not be found: ', error);
     }
 
     return clickPosition;
+}
+
+export async function generateSignerName(signerOrdinalNumder)  {
+    return process.env.EMAIL_PREFIX + '00' + signerOrdinalNumder;
+}
+
+
+export async function generateSignerOrViewerEmail(signerOrViewerOrdinalNumder)  {
+    return process.env.EMAIL_PREFIX + '00' + signerOrViewerOrdinalNumder + process.env.EMAIL_DOMAIN;
 }

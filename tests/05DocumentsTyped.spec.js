@@ -8,13 +8,17 @@ test.describe('DocumentsType', () => {
   test.skip('TC_05_21_01 | Verify that button "Edit&Resend" is active', async ({ createBusinessUserAndLogin, signPage, prepareForSignatureModal, documentsPage }) => {
 
     test.setTimeout(250 * 1000);
-    await signPage.uploadFile.fileUploader.uploadFile('testDocuments/picture.jpg');
-    await signPage.uploadFile.clickPrepareDocumentBtn();
+
+    const signerName = generateSignerName(1);
+    const signerEmail = generateSignerOrViewerEmail(1);    
+
+    await signPage.uploadFileTab.fileUploader.uploadFile('testDocuments/picture.jpg');
+    await signPage.uploadFileTab.clickPrepareDocumentBtn();
 
     await prepareForSignatureModal.clickSendForSignatureRadioBtn();
     await prepareForSignatureModal.clickAddSignerBtn();
-    await prepareForSignatureModal.fillSignerNameField(CHOOSE_SIGNERS_FIELDS.name1);
-    await prepareForSignatureModal.fillSignerEmailField(CHOOSE_SIGNERS_FIELDS.email1)
+    await prepareForSignatureModal.fillSignerNameField(signerName);
+    await prepareForSignatureModal.fillSignerEmailField(signerEmail);
     await prepareForSignatureModal.clickContinueBtn();
     await prepareForSignatureModal.clickGotItBtn();
 
