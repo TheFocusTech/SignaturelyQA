@@ -20,7 +20,8 @@ export const TOASTER_MESSAGE ={
     deleteApiKey: 'API key successfully deleted',
     folderRename: 'Folder successfully updated!',
     folderCreated: 'Folder created!',
-    signatureCreated: 'Signature created successfully'
+    signatureCreated: 'Signature created successfully',
+    documentSaved: 'Document successfully saved!'
 };
 export const API_KEY_NAME = 'Test Api Key';
 export const NO_API_KEY_MESSAGE = 'You don\'t have any API keys yet.';
@@ -50,7 +51,8 @@ export const DOCUMENT_TITLE = 'Document';
 export const DOCUMENT_STATUS = {
     awaiting: 'awaiting',
     draft: 'draft',
-    completed: 'completed'
+    completed: 'completed',
+    live: 'live'
 };
 export const CI_USER_NAME = 'CI_user';
 export const BUSINESS_MONTHLY_PLAN = "Your plan (Billed Monthly)Business";

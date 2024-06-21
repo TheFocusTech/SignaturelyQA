@@ -18,6 +18,9 @@ import CreateSignatureModal from "../new_pom/modalWindows/createSignatureModal.j
 import FinalStepPage from '../new_pom/pages/finalStepPage.js';
 import SuccessModal from '../new_pom/modalWindows/successModal.js';
 import EditAndResendDocumentModal from "../new_pom/modalWindows/editAndResendDocumentModal.js";
+import FormsPage from "../new_pom/pages/formsPage.js";
+import CreateFormPage from "../new_pom/pages/createFormPage.js";
+import PrepareForSigningModal from "../new_pom/modalWindows/prepareForSigningModal.js";
 
 
 export const test = base.extend({    
@@ -118,6 +121,18 @@ export const test = base.extend({
 
     editAndResendDocumentModal: async ({ page }, use) => {
         await use(new EditAndResendDocumentModal(page));
+    },
+
+    formsPage: async ({ page }, use) => {
+        await use(new FormsPage(page));
+    },
+
+    createFormPage: async ({ page }, use) => {
+        await use(new CreateFormPage(page));
+    },
+
+    prepareForSigningModal: async ({ page }, use) => {
+        await use(new PrepareForSigningModal(page));
     },
 
 });

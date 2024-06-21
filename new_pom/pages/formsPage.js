@@ -1,7 +1,13 @@
+import TableComponent from "../components/tableComponent";
 export default class FormsPage {
     constructor(page) {
         this.page = page;
+        
+        this.table = new TableComponent(this.page);
+        this.createFormBtn = this.page.locator('div').filter({ hasText: /^Create Form$/ }).getByRole('button');
+    }
 
-        this.createFormBtn = this.page.getByRole('button', { name: 'Create Form' });
+    clickCreateFormBtn() {
+        this.createFormBtn.click();
     }
 }
