@@ -22,9 +22,11 @@ import NewTemplatesPage from "../new_pom/pages/templates/templatesPage.js";
 import DowngradeToPersonalPlanModal from "../new_pom/modalWindows/downgradeToPersonalPlanModal.js";
 import NewSettingsAPIPage from "../new_pom/pages/settings/settingsAPIPage";
 import NewCreateAPIKeyModal from "../new_pom/modalWindows/createAPIKeyModal.js";
+import DowngradeToPersonalPlanModal from "../new_pom/modalWindows/downgradeToPersonalPlanModal.js"
+import NewSettingsAPIPage from "../new_pom/pages/settings/settingsAPIPage";
+import NewCreateAPIKeyModal from "../new_pom/modalWindows/createAPIKeyModal.js";
 
 export const test = base.extend({
-
 
 
     createNewFolder: [
