@@ -87,4 +87,12 @@ export default class PrepareForSignatureModal {
     async clickCustomSigningOrderCheckbox() {
         await this.customSigningOrderCheckbox.click();
     }
+    
+    async clickAddRecipientsBtn() {
+        await this.addRecipientsBtn.click();
+    }
+
+    async fillRecipientEmailField(email) {
+        await this.recipientEmailField.fill(email);
+    }
 }
