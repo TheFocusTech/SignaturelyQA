@@ -12,7 +12,7 @@ export const CHOOSE_SIGNERS_FIELDS = {
     name2: 'John Doe2',
     email2: '5kXUw@example.com'
 };
-export const TOASTER_MESSAGE = {
+export const TOAST_MESSAGE ={
     planSuccessChange: 'Plan has been successfully changed.',
     planRenew: 'Plan has been renew',
     folderDeleted: 'Folder deleted successfully.',
@@ -21,6 +21,7 @@ export const TOASTER_MESSAGE = {
     folderRename: 'Folder successfully updated!',
     folderCreated: 'Folder created!',
     signatureCreated: 'Signature created successfully',
+    success: 'Document successfully saved!',
     sendReminder: 'Reminder(s) has been sent',
 };
 export const API_KEY_NAME = 'Test Api Key';
