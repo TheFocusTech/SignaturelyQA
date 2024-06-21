@@ -30,7 +30,7 @@ export default class PrepareForSignatureModal {
         this.customSigningOrderPositionNumberTwo = this.page.locator('span.signers__item-order-position').last();
         this.addRecipientsBtn = this.page.getByText('Recipients', { exact: true });
         this.recipientEmailField = this.page.getByPlaceholder('test@signaturely.com'); 
-        this.nameField = this.page.locator('div.interactModal__fieldBar li ').filter({ hasText: /^Name$/ }).first();
+        this.nameField = this.page.locator('ul.interactModal__fieldBar-fieldList li').filter({ hasText: /^Name$/ }).first();
         this.signField = this.page.locator('ul.interactModal__fieldBar-fieldList li').nth(1);
         this.backToFormsBtn = this.page.getByRole('button', { name: 'Back to Forms' });      
     }
