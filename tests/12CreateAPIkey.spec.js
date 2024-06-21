@@ -1,8 +1,6 @@
 import { expect } from '@playwright/test';
 import { test } from "../fixtures/base.js";
-import {
-    API_KEY_NAME,
-} from '../testData.js';
+import { API_KEY_NAME } from '../testData.js';
 
 test.describe('Create API key', () => {
 

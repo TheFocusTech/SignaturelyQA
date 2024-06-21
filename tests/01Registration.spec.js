@@ -25,7 +25,7 @@ test.describe('Registration', () => {
         await expect(activateTrialStripePage.billingInfoHeader).toHaveText(BILLING_INFORMATION)
     })
 
-    test('TC_01_01_03 | Verify that user redirects to the homepage after filling Billing information', async ({ request, activateTrialStripePage, signPage, settingsCompanyPage, settingsBillingPage }) => {
+    test('TC_01_01_03 | Verify that user redirects to the homepage after filling Billing information', async ({ request, page, activateTrialStripePage, signPage, settingsCompanyPage, settingsBillingPage }) => {
         const newUserData = await createNewUserThroughApi(request);
         const confirmationLink = await retrieveUserEmailConfirmationLink(request, newUserData);
 
