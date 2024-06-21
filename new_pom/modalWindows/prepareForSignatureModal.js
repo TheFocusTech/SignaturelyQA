@@ -22,9 +22,14 @@ export default class PrepareForSignatureModal {
         this.assignedToDropDown = this.page.locator('ul .uiSelect__select');
         this.meNowDropDownItem = this.page.getByText('Me (Now)', { exact: true });
         this.saveBtn = this.page.getByRole('button', { name: 'Save' });
+        this.signatureElement = this.page.locator('.documentPage .react-pdf__Page__canvas').last();
+        this.createBtn = this.page.getByRole('button', { name: 'Create' });
+        this.backToTempatesBtn = this.page.getByRole('button', { name: 'Back to Templates' });
         this.customSigningOrderCheckbox = this.page.locator('.uiCheckbox__inner');
         this.customSigningOrderPositionNumberOne = this.page.locator('span.signers__item-order-position').first();
         this.customSigningOrderPositionNumberTwo = this.page.locator('span.signers__item-order-position').last();
+        this.addRecipientsBtn = this.page.getByText('Recipients', { exact: true });
+        this.recipientEmailField = this.page.getByPlaceholder('test@signaturely.com');       
     }
 
     async clickSignDocumentRadioBtn() {
@@ -83,7 +88,33 @@ export default class PrepareForSignatureModal {
         await this.saveBtn.click();
     }
 
+    async clickCreateBtn() {
+        try {
+            await this.createBtn.click();
+
+        } finally {
+
+        }
+    }
+
+    async clickBackToTempatesBtn() {
+        try {
+            await this.backToTempatesBtn.click();
+
+        } finally {
+
+        }
+    }
+
     async clickCustomSigningOrderCheckbox() {
         await this.customSigningOrderCheckbox.click();
+    }
+    
+    async clickAddRecipientsBtn() {
+        await this.addRecipientsBtn.click();
+    }
+
+    async fillRecipientEmailField(email) {
+        await this.recipientEmailField.fill(email);
     }
 }
