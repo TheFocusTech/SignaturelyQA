@@ -54,10 +54,11 @@ test.describe('CreateDocument', () => {
         await expect(await documentsPage.table.documentStatus).toHaveText(DOCUMENT_STATUS.awaiting);
     });
 
-    test('TC_03_07_02 | Verify that the user who uploaded the document and Other Signer can sign it', async ({ createBusinessUserAndLogin, signPage, prepareForSignatureModal, chooseSignatureModal, finalStepPage, successModal, documentsPage }) => {
+    test('TC_03_07_02 | Verify that the user who uploaded the document and Other Signer can sign it', async ({ createBusinessUserAndLogin, signPage, settingsCompany, PageprepareForSignatureModal, chooseSignatureModal, finalStepPage, successModal, documentsPage }) => {
       test.setTimeout(120 * 1000);
 
-      
+      await signPage.sideMenu.clickSettings();
+      await settingsCompany.
 
       await signPage.uploadFile.fileUploader.uploadFile('testDocuments/todoList.xlsx');
       await signPage.uploadFile.clickPrepareDocumentBtn();
