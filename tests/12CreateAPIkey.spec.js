@@ -13,14 +13,14 @@ test.describe('Create API key', () => {
         await settingsAPIPage.clickCreateAPIKeyButtonAtRight();
 
         await createAPIKeyModal.fillCreateAPIKeyNameInput(API_KEY_NAME);
-        await createAPIKeyModal.clickCreateAPIButton();
-        await createAPIKeyModal.clickCopyAPIButton();
+        await createAPIKeyModal.clickCreateAPIBtn();
+        await createAPIKeyModal.clickCopyAPIBtn();
 
         await settingsAPIPage.toast.toastBody.waitFor();
 
         const clipboardApiKeyValue = await createAPIKeyModal.getAPIKeyValueText();
 
-        await createAPIKeyModal.clickCloseAPIModalButton();
+        await createAPIKeyModal.clickCloseAPIModalBtn();
         await settingsAPIPage.fillBillingDetailsField(clipboardApiKeyValue);
 
         await expect(settingsAPIPage.billingDetailsTextField).toHaveText(clipboardApiKeyValue);
@@ -33,14 +33,14 @@ test.describe('Create API key', () => {
         await settingsAPIPage.table.clickCreateAPIKeyBtnInTable();
 
         await createAPIKeyModal.fillCreateAPIKeyNameInput(API_KEY_NAME);
-        await createAPIKeyModal.clickCreateAPIButton();
-        await createAPIKeyModal.clickCopyAPIButton();
+        await createAPIKeyModal.clickCreateAPIBtn();
+        await createAPIKeyModal.clickCopyAPIBtn();
 
         await settingsAPIPage.toast.toastBody.waitFor();
 
         const clipboardApiKeyValue = await createAPIKeyModal.getAPIKeyValueText();
 
-        await createAPIKeyModal.clickCloseAPIModalButton();
+        await createAPIKeyModal.clickCloseAPIModalBtn();
         await settingsAPIPage.fillBillingDetailsField(clipboardApiKeyValue);
 
         await expect(settingsAPIPage.billingDetailsTextField).toHaveText(clipboardApiKeyValue);

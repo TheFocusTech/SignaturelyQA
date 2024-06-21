@@ -14,11 +14,11 @@ export default class NewCreateAPIKeyModal {
         await this.createAPIKeyNameInput.fill(keyName);
     }
 
-    async clickCreateAPIButton() {
+    async clickCreateAPIBtn() {
         await this.createAPIButton.click();
     }
 
-    async clickCopyAPIButton() {
+    async clickCopyAPIBtn() {
         await this.copyAPIButton.click();
     }
 
@@ -27,7 +27,7 @@ export default class NewCreateAPIKeyModal {
         return await this.APIKeyValue.textContent();
     }
 
-    async clickCloseAPIModalButton() {
+    async clickCloseAPIModalBtn() {
         await this.closeAPIModalButton.click();
     }
 }
