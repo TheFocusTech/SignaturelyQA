@@ -1,5 +1,6 @@
 import SettingsHorizontalMenuComponent from "../../components/settingsHorizontalMenuComponent";
 import SideMenuSettingsComponent from "../../components/sideMenuSettingsComponent";
+import { COMPANY_INFO } from "../../../testData";
 
 export default class NewSettingsCompanyPage {
     constructor(page) {
@@ -30,7 +31,7 @@ export default class NewSettingsCompanyPage {
         await this.fromEmailName.fill(COMPANY_INFO.emailFrom);
     }
 
-    async fillEmailClosingSignatureField() {
+    async fillEmailClosingSignature() {
         await this.emailClosingSignature.fill(COMPANY_INFO.emailTo);
     }
 
