@@ -26,8 +26,11 @@ import ConfirmCodeModal from "../new_pom/modalWindows/confirmCodeModal";
 import ChooseSignatureOrInitialModal from "../new_pom/modalWindows/chooseSignatureOrInitialModal";
 import CreateOrEditSignatureOnSettingModal from "../new_pom/modalWindows/createOrEditSignatureOnSettingModal";
 import NewSettingsEditSignaturePage from "../new_pom/pages/settings/settingsEditSignaturePage";
+import NewLoginPage from "../new_pom/pages/loginPage";
+
 
 export const test = base.extend({
+
 
     createNewFolder: [
         async ({ page }, use) => {
@@ -67,6 +70,10 @@ export const test = base.extend({
         { scope: "test" },
     ],
 
+    loginPage: async ({ page }, use) => {
+            await use(new NewLoginPage(page));
+    },
+
     signPage: async ({ page }, use) => {
         await use(new NewSignPage(page));
     },
@@ -81,6 +88,10 @@ export const test = base.extend({
 
     documentsTrashPage: async ({ page }, use) => {
         await use(new NewDocumentsTrashPage(page));
+    },
+
+    finalStepModal: async ({ page }, use) => {
+        await use(new FinalStepModal(page));
     },
 
     activateTrialStripePage: async ({ page }, use) => {
@@ -111,7 +122,6 @@ export const test = base.extend({
         await use(new SpecialOneTimeOfferModal(page));
     },
 
-
     createSignatureModal: async ({ page }, use) => {
         await use(new CreateSignatureModal(page));
     },
@@ -139,7 +149,7 @@ export const test = base.extend({
     createAPIKeyModal: async ({ page }, use) => {
         await use(new NewCreateAPIKeyModal(page));
     },
-  
+
     signUpPersonalPage: async ({ page }, use) => {
         await use(new SignUpPersonalPage(page));
     },
