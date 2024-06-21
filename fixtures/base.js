@@ -21,6 +21,8 @@ import EditAndResendDocumentModal from "../new_pom/modalWindows/editAndResendDoc
 import DowngradeToPersonalPlanModal from "../new_pom/modalWindows/downgradeToPersonalPlanModal.js"
 import NewSettingsAPIPage from "../new_pom/pages/settings/settingsAPIPage";
 import NewCreateAPIKeyModal from "../new_pom/modalWindows/createAPIKeyModal.js";
+import NewTemplatesPage from "../new_pom/pages/templates/templatesPage.js";
+
 
 export const test = base.extend({
 
