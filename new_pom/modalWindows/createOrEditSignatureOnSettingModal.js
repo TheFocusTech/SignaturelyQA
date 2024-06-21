@@ -1,4 +1,4 @@
-export default class EditSignatureModal {
+export default class CreateOrEditSignatureOnSettingModal {
     constructor(page) {
         this.page = page;
 
@@ -9,7 +9,7 @@ export default class EditSignatureModal {
     }
 
     async fillFullNameField(name) {
-        await this.ifullNameField.fill(name);
+        await this.fullNameField.fill(name);
     }
 
     async fillInitialsField(initial) {

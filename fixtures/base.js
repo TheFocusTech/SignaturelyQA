@@ -21,8 +21,8 @@ import EditAndResendDocumentModal from "../new_pom/modalWindows/editAndResendDoc
 import DowngradeToPersonalPlanModal from "../new_pom/modalWindows/downgradeToPersonalPlanModal.js"
 import NewSettingsAPIPage from "../new_pom/pages/settings/settingsAPIPage";
 import NewCreateAPIKeyModal from "../new_pom/modalWindows/createAPIKeyModal.js";
-import ChooseSignatureModal from "../new_pom/modalWindows/chooseSignatureModal.js";
-import EditSignatureModal from "../new_pom/modalWindows/editSignatureModal";
+import ChooseSignatureOrInitialModal from "../new_pom/modalWindows/chooseSignatureOrInitialModal";
+import CreateOrEditSignatureOnSettingModal from "../new_pom/modalWindows/createOrEditSignatureOnSettingModal";
 import NewSettingsEditSignaturePage from "../new_pom/pages/settings/settingsEditSignaturePage";
 
 
@@ -138,12 +138,12 @@ export const test = base.extend({
         await use(new NewCreateAPIKeyModal(page));
     },
 
-    chooseSignatureModal: async ({ page }, use) => {
-        await use(new ChooseSignatureModal(page));
+    chooseSignatureOrInitialModal: async ({ page }, use) => {
+        await use(new ChooseSignatureOrInitialModal(page));
     },
 
-    editSignatureModal: async ({ page }, use) => {
-        await use(new EditSignatureModal(page));
+    createOrEditSignatureOnSettingModal: async ({ page }, use) => {
+        await use(new CreateOrEditSignatureOnSettingModal(page));
     },
 
     settingsEditSignaturePage: async ({ page }, use) => {
