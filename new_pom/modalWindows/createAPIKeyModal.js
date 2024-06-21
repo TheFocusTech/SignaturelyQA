@@ -3,7 +3,7 @@ export default class NewCreateAPIKeyModal {
         this.page = page;
 
         this.createAPIKeyNameField = this.page.getByPlaceholder('API key name');
-        this.createAPIButton = this.page.getByRole('button', { name: 'Create API' });
+        this.createAPIBtn = this.page.getByRole('button', { name: 'Create API' });
         this.copyAPIBtn = this.page.getByRole('button', { name: 'Copy API' });
         this.APIKeyValue = this.page.locator('.apiKeyModal__value');
         this.closeAPIModalBtn = this.page.locator('.modal__close-button > div > .injected-svg > path');
@@ -15,7 +15,7 @@ export default class NewCreateAPIKeyModal {
     }
 
     async clickCreateAPIBtn() {
-        await this.createAPIButton.click();
+        await this.createAPIBtn.click();
     }
 
     async clickCopyAPIBtn() {

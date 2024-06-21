@@ -13,7 +13,7 @@ export default class NewSettingsAPIPage {
         this.billingDetailsTextField = this.page.locator('.billing__details > form textarea');
     }
 
-    async clickCreateAPIKeyButtonAtRight() {
+    async clickCreateAPIKeyBtnAtRight() {
         await this.createAPIKeyBtnAtRight.waitFor();
         await this.createAPIKeyBtnAtRight.click();
     }
