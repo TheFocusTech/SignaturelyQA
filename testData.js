@@ -3,6 +3,7 @@ export const URL_END_POINTS = {
     documentsEndPoint: '/documents',
     activateTrialEndPoint: '/activate-trial',
     settingsBillingPlanEndPoint: '/settings/billing/plan',
+    signUpPersonalEndPoint: '/signup/personal',
 };
 export const ACTIVE_COLOR = 'rgb(0, 163, 250)';
 export const FILL_FOLDER_NAME = 'Folder 1';
@@ -82,3 +83,11 @@ export const CARD_DETAILS = {
 };
 export const END_PLAN = 'Your plan will end on';
 export const MESSAGE = "Project 1";
+export const SUBSCRIPTIONS = ["Monthly", "Annually"];
+export const SUBSCRIBE_TO_PERSONAL_PLAN = 'Subscribe to personal Plan';
+export const PLEASE_ENTER_CONFIRMATION_CODE = 'Please enter confirmation code';
+export const PERSONAL_PLAN_DESCRIPTION = (billingPeriod) => `Your plan (Billed ${billingPeriod})Personal`;
+export const EMAIL_SUBJECTS = {
+    reminderToSign: "Reminder, Please sign",
+    signatureRequest: "requested your signature"
+}
