@@ -22,7 +22,7 @@ test.describe ('Folders', () => {
 
         const documentsPage = await signPage.clickDocumentsSidebarLinkAndGoDocumentsPage();
 
-        await documentsPage.clickOptionsBtn();
+        await documentsPage.clickOptionsDropdown();
         await documentsPage.clickDeleteBtn();
         await documentsPage.clickYesDeleteBtn();
         await documentsPage.locators.getToast().waitFor({ state: 'visible' });
@@ -35,7 +35,7 @@ test.describe ('Folders', () => {
 
         const documentsPage = await signPage.clickDocumentsSidebarLinkAndGoDocumentsPage();
 
-        await documentsPage.clickOptionsBtn();
+        await documentsPage.clickOptionsDropdown();
         await documentsPage.clickRenameBtn();
         await documentsPage.fillRenameInputField(FILL_RENAME_FOLDER_NAME)
         await documentsPage.pressEnterRenameInputFielder();

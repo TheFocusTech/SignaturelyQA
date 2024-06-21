@@ -1,6 +1,6 @@
 import { expect } from "@playwright/test";
 import { test } from "../fixtures/base.js";
-import { DOCUMENT_TITLE, DOCUMENT_STATUS, CHOOSE_SIGNERS_FIELDS, MESSAGE } from "../testData.js";
+import { DOCUMENT_TITLE, DOCUMENT_STATUS, CHOOSE_SIGNERS_FIELDS, MESSAGE, OPTIONAL_MESSAGE } from "../testData.js";
 
 test.describe('CreateDocument', () => {
 
@@ -53,5 +53,33 @@ test.describe('CreateDocument', () => {
 
         await expect(await documentsPage.table.documentStatus).toHaveText(DOCUMENT_STATUS.awaiting);
     });
+
+    test('TC_03_07_04 | Verify that using "Sign a document" option the User can sign it and get completed document', async ({ 
+        createBusinessUserAndLogin, 
+        signPage, 
+        prepareForSignatureModal, 
+        createSignatureModal, 
+        finalStepPage, 
+        successModal, 
+        documentsPage
+     }) => {
+        test.setTimeout(160 * 1000);
+
+        await signPage.uploadFile.fileUploader.uploadFile('testDocuments/openHouse.pdf');
+        await signPage.uploadFile.clickPrepareDocumentBtn();
+        await prepareForSignatureModal.clickContinueBtn();
+        await prepareForSignatureModal.clickGotItBtn();
+        await prepareForSignatureModal.clickSignFieldsItem();
+        await prepareForSignatureModal.doCanvasClicks();
+        await createSignatureModal.clickCheckboxAgree();
+        await createSignatureModal.clickSignNowBtn();
+        await prepareForSignatureModal.clickSaveBtn();
+        await finalStepPage.fillDocumentTitleField(DOCUMENT_TITLE);
+        await finalStepPage.fillDocumentOptionalMessageField(OPTIONAL_MESSAGE.pdf);
+        await finalStepPage.clickSignDocumentBtn();
+        await successModal.clickBackToDocumentsBtn();
+
+        await expect(await documentsPage.table.documentStatus).toHaveText(DOCUMENT_STATUS.completed);
+    })
 
 })
