@@ -21,12 +21,13 @@ import DowngradeToPersonalPlanModal from "../new_pom/modalWindows/downgradeToPer
 import NewSettingsAPIPage from "../new_pom/pages/settings/settingsAPIPage";
 import NewCreateAPIKeyModal from "../new_pom/modalWindows/createAPIKeyModal.js";
 import NewTemplatesPage from "../new_pom/pages/templates/templatesPage.js";
+import SignUpPersonalPage from "../new_pom/pages/signUpPersonalPage";
+import ConfirmCodeModal from "../new_pom/modalWindows/confirmCodeModal";
 import ChooseSignatureOrInitialModal from "../new_pom/modalWindows/chooseSignatureOrInitialModal";
 import CreateOrEditSignatureOnSettingModal from "../new_pom/modalWindows/createOrEditSignatureOnSettingModal";
 import NewSettingsEditSignaturePage from "../new_pom/pages/settings/settingsEditSignaturePage";
 
 export const test = base.extend({
-
 
     createNewFolder: [
         async ({ page }, use) => {
@@ -137,6 +138,14 @@ export const test = base.extend({
 
     createAPIKeyModal: async ({ page }, use) => {
         await use(new NewCreateAPIKeyModal(page));
+    },
+  
+    signUpPersonalPage: async ({ page }, use) => {
+        await use(new SignUpPersonalPage(page));
+    },
+
+    confirmCodeModal: async ({ page }, use) => {
+        await use(new ConfirmCodeModal(page));
     },
 
     chooseSignatureOrInitialModal: async ({ page }, use) => {
