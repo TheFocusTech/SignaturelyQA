@@ -2,7 +2,6 @@
 import { expect } from "@playwright/test";
 import { test } from "../fixtures/base.js";
 import { CHOOSE_SIGNERS_FIELDS, TOASTER_MESSAGE } from '../testData.js';
-import NewDocumentsAwaitingPage from "../new_pom/pages/documents/documentsAwaitingPage.js";
 
 test.describe('DocumentsType', () => {
 
