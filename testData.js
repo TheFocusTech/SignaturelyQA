@@ -12,7 +12,7 @@ export const CHOOSE_SIGNERS_FIELDS = {
     name2: 'John Doe2',
     email2: '5kXUw@example.com'
 };
-export const TOASTER_MESSAGE = {
+export const TOAST_MESSAGE ={
     planSuccessChange: 'Plan has been successfully changed.',
     planRenew: 'Plan has been renew',
     folderDeleted: 'Folder deleted successfully.',
@@ -20,7 +20,8 @@ export const TOASTER_MESSAGE = {
     deleteApiKey: 'API key successfully deleted',
     folderRename: 'Folder successfully updated!',
     folderCreated: 'Folder created!',
-    signatureCreated: 'Signature created successfully'
+    signatureCreated: 'Signature created successfully',
+    success: 'Document successfully saved!'
 };
 export const API_KEY_NAME = 'Test Api Key';
 export const NO_API_KEY_MESSAGE = 'You don\'t have any API keys yet.';
@@ -35,19 +36,30 @@ export const FULL_NAME_INITIALS_FIELDS = {
     fullName: 'John Smith',
     initials: 'JS'
 };
+
+
+
+export const CREATE_TEMPLATE = {
+    nameField: 'Rental contract',
+    optionalMessage: 'USA',
+    nameRole: 'Boss',
+}
+
 export const START_YOUR_FREE_TRIAL_STATEMENT = "Please add your payment details to start the free trial.";
 export const BILLING_INFORMATION = "Billing Information";
 export const PLANS = ["Personal", "Business"];
 export const RANDOM_ANNUALLY_PLAN = (randomPlan) => `${randomPlan} Annually Plan`;
+
 export const DOCUMENT_TITLE = 'Document';
 export const DOCUMENT_STATUS = {
     awaiting: 'awaiting',
     draft: 'draft',
-    completed: 'completed'
+    completed: 'completed',
 };
 export const CI_USER_NAME = 'CI_user';
 export const BUSINESS_MONTHLY_PLAN = "Your plan (Billed Monthly)Business";
 export const FREE_PLAN_DESCRIPTION = "Your plan (Billed Monthly)Free";
+
 export const CARD_DETAILS = {
     VISA: {
         fullNameOnCard: `TestUser`,
@@ -82,3 +94,7 @@ export const CARD_DETAILS = {
 };
 export const END_PLAN = 'Your plan will end on';
 export const MESSAGE = "Project 1";
+export const TEMPLATES_STATUS = {
+    live: 'Live',
+}
+
