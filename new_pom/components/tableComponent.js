@@ -7,6 +7,7 @@ export default class TableComponent {
         this.documentStatus = this.page.locator('.documents__documentStatus').first();
         this.optionsBtn = this.page.getByText('Options');
         this.editAndResendBtn = this.page.getByText('Edit & Resend');
+        this.optionsShareDropdown = this.page.locator('.documents__dropdownOption').getByText('Share');
     }
 
     async clickOptionsBtn() {
@@ -18,4 +19,7 @@ export default class TableComponent {
         await this.editAndResendBtn.click();
     }
 
+    async clickOptionsShareDropdown() {
+        await this.optionsShareDropdown.click();
+    }
 }

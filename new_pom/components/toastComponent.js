@@ -3,6 +3,7 @@ export default class ToastComponent {
         this.page = page;
 
         this.toastFirstCloseBtn = this.page.locator('.Toastify [data-src="/static/media/close-icon.9052da34.svg"]').first();
+        this.documentToast = this.page.getByRole('alert');
     }
 
     async clickToastFirstCloseBtn() {
