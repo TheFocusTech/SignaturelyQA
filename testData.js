@@ -12,7 +12,7 @@ export const CHOOSE_SIGNERS_FIELDS = {
     name2: 'John Doe2',
     email2: '5kXUw@example.com'
 };
-export const TOASTER_MESSAGE ={
+export const TOAST_MESSAGE ={
     planSuccessChange: 'Plan has been successfully changed.',
     planRenew: 'Plan has been renew',
     folderDeleted: 'Folder deleted successfully.',
@@ -21,7 +21,7 @@ export const TOASTER_MESSAGE ={
     folderRename: 'Folder successfully updated!',
     folderCreated: 'Folder created!',
     signatureCreated: 'Signature created successfully',
-    documentSaved: 'Document successfully saved!'
+    success: 'Document successfully saved!'
 };
 export const API_KEY_NAME = 'Test Api Key';
 export const NO_API_KEY_MESSAGE = 'You don\'t have any API keys yet.';
@@ -32,27 +32,69 @@ export const DATA_SIGNER = {
 export const FILL_RENAME_FOLDER_NAME = 'FielderTest';
 export const EMPTY_DOCUMENTS_HEADER = "You don't have any documents yet.";
 export const EMPTY_TRASH_HEADER = "You don't have any deleted documents yet.";
-export const VISA_CARD_DATA = {
-    fullNameOnCard: `TestUser`,
-    cardNumber: '4242424242424242',
-    expirationDate: '12 / 27',
-    cvc: '111',
-    zip: '20500'
-};
 export const FULL_NAME_INITIALS_FIELDS = {
     fullName: 'John Smith',
     initials: 'JS'
 };
+
+
+
+export const CREATE_TEMPLATE = {
+    nameField: 'Rental contract',
+    optionalMessage: 'USA',
+    nameRole: 'Boss',
+}
+
 export const START_YOUR_FREE_TRIAL_STATEMENT = "Please add your payment details to start the free trial.";
 export const BILLING_INFORMATION = "Billing Information";
 export const PLANS = ["Personal", "Business"];
 export const RANDOM_ANNUALLY_PLAN = (randomPlan) => `${randomPlan} Annually Plan`;
+
 export const DOCUMENT_TITLE = 'Document';
 export const DOCUMENT_STATUS = {
     awaiting: 'awaiting',
     draft: 'draft',
     completed: 'completed',
-    live: 'live'
 };
 export const CI_USER_NAME = 'CI_user';
 export const BUSINESS_MONTHLY_PLAN = "Your plan (Billed Monthly)Business";
+export const FREE_PLAN_DESCRIPTION = "Your plan (Billed Monthly)Free";
+
+export const CARD_DETAILS = {
+    VISA: {
+        fullNameOnCard: `TestUser`,
+        cardNumber: '4242424242424242',
+        expirationDate: '12 / 27',
+        cvc: '111',
+        countryOrRegion: 'US',
+        zip: '20500',
+        displayingOnTheBillingPage: 'Current Card:**** **** **** 424212/27',
+        displayingOnTheBillingPortalPage: 'Visa •••• 4242DefaultExpires 12/2027Delete',
+    },
+    MASTERCARD: {
+        fullNameOnCard: 'Tes Tester',
+        cardNumber: '5555555555554444',
+        expirationDate: '10 / 29',
+        cvc: '321',
+        countryOrRegion: 'US',
+        zip: '20500',
+        displayingOnTheBillingPage: 'Current Card:**** **** **** 444410/29',
+        displayingOnTheBillingPortalPage: 'Mastercard •••• 4444DefaultExpires 10/2029Delete',
+    },
+    VISA_DEBIT: {
+        fullNameOnCard: 'Tes Tester',
+        cardNumber: '4000056655665556',
+        expirationDate: '12 / 27',
+        cvc: '123',
+        countryOrRegion: 'US',
+        zip: '20500',
+        displayingOnTheBillingPage: 'Current Card:**** **** **** 555612/27',
+        displayingOnTheBillingPortalPage: 'Visa •••• 5556DefaultExpires 12/2027Delete',
+    }
+};
+export const END_PLAN = 'Your plan will end on';
+export const MESSAGE = "Project 1";
+export const TEMPLATES_STATUS = {
+    live: 'Live',
+}
+
