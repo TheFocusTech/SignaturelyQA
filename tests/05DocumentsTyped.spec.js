@@ -24,10 +24,12 @@ test.describe('DocumentsType', () => {
 
         await finalStepPage.clickSendForSignatureBtn();
         await successModal.clickBackToDocumentsBtn();
-
         await documentsPage.table.clickOptionsBtn();
         await documentsPage.table.clickEditAndResendBtn();
+
         await expect(documentsPage.table.titleEditAndRessendDocument).toBeVisible();
+        expect(await documentsPage.table.verifyTitleText()).toBe("Edit & Resend document");
+
 
     })
 })
