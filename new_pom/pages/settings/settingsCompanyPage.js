@@ -1,6 +1,6 @@
 import SettingsHorizontalMenuComponent from "../../components/settingsHorizontalMenuComponent";
 import SideMenuSettingsComponent from "../../components/sideMenuSettingsComponent";
-import { COMPANY_INFO } from "../../../testData";
+
 
 export default class NewSettingsCompanyPage {
     constructor(page) {
@@ -23,20 +23,20 @@ export default class NewSettingsCompanyPage {
         await this.fileInput.setInputFiles(file);
     }
     
-    async fillCompanyName() {
-        await this.companyName.fill(COMPANY_INFO.companyName);
+    async fillCompanyName(email) {
+        await this.companyName.fill(email);
     }
 
-    async fillFromEmail() {
-        await this.fromEmailName.fill(COMPANY_INFO.emailFrom);
+    async fillFromEmail(email) {
+        await this.fromEmailName.fill(email);
     }
 
-    async fillEmailClosingSignature() {
-        await this.emailClosingSignature.fill(COMPANY_INFO.emailTo);
+    async fillEmailClosingSignature(email) {
+        await this.emailClosingSignature.fill(email);
     }
 
-    async  fillRedirectionPage() {
-        await this.redirectionPage.fill(COMPANY_INFO.redirectionPage);
+    async  fillRedirectionPage(url) {
+        await this.redirectionPage.fill(url);
     }
 
     async checkActivateCheckbox() {
