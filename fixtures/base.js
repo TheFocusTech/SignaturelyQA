@@ -21,6 +21,7 @@ import EditAndResendDocumentModal from "../new_pom/modalWindows/editAndResendDoc
 import DowngradeToPersonalPlanModal from "../new_pom/modalWindows/downgradeToPersonalPlanModal.js"
 import NewSettingsAPIPage from "../new_pom/pages/settings/settingsAPIPage";
 import NewCreateAPIKeyModal from "../new_pom/modalWindows/createAPIKeyModal.js";
+import ChooseSignatureModal from "../new_pom/modalWindows/chooseSignatureModal.js";
 
 export const test = base.extend({    
 
@@ -132,5 +133,9 @@ export const test = base.extend({
 
     createAPIKeyModal: async ({ page }, use) => {
         await use(new NewCreateAPIKeyModal(page));
+    },
+
+    chooseSignatureModal: async ({ page }, use) => {
+        await use(new ChooseSignatureModal(page));
     },
 });

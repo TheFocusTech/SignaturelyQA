@@ -10,7 +10,9 @@ export const CHOOSE_SIGNERS_FIELDS = {
     name1: 'John Doe',
     email1: '5kXUw@example.com',
     name2: 'John Doe2',
-    email2: '5kXUw@example.com'
+    email2: '5kXUw@example.com',
+    name3: `${process.env.EMAIL_PREFIX}`,
+    email3: `${process.env.EMAIL_PREFIX}01${process.env.EMAIL_DOMAIN}`
 };
 export const TOASTER_MESSAGE = {
     planSuccessChange: 'Plan has been successfully changed.',

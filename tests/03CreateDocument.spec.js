@@ -54,4 +54,31 @@ test.describe('CreateDocument', () => {
         await expect(await documentsPage.table.documentStatus).toHaveText(DOCUMENT_STATUS.awaiting);
     });
 
+    test('TC_03_07_02 | Verify that the user who uploaded the document and Other Signer can sign it', async ({ createBusinessUserAndLogin, signPage, prepareForSignatureModal, chooseSignatureModal, finalStepPage, successModal, documentsPage }) => {
+      test.setTimeout(120 * 1000);
+
+      await signPage.uploadFile.fileUploader.uploadFile('testDocuments/todoList.xlsx');
+      await signPage.uploadFile.clickPrepareDocumentBtn();
+      await prepareForSignatureModal.clickSignAndSendForSignatureRadioBtn();
+      await prepareForSignatureModal.clickAddSignerBtn();
+      await prepareForSignatureModal.fillSignerNameField(CHOOSE_SIGNERS_FIELDS.name3, 0)
+      await prepareForSignatureModal.fillSignerEmailField(CHOOSE_SIGNERS_FIELDS.email3, 0);
+      await prepareForSignatureModal.clickContinueBtn();
+      await prepareForSignatureModal.clickGotItBtn();
+      await prepareForSignatureModal.clickSignFieldsItem();
+      await prepareForSignatureModal.doCanvasClicks();
+      await prepareForSignatureModal.doCanvasClicks();
+      await prepareForSignatureModal.clickAssignedToDropDown();
+      await prepareForSignatureModal.clickMeNowDropDownItem();
+      await chooseSignatureModal.clickSignatureTyped();
+      await chooseSignatureModal.clickSignNowBtn();
+      // await prepareForSignatureModal.toast.clickToastFirstCloseBtn();
+      // await prepareForSignatureModal.clickSaveBtn();
+      // await finalStepPage.fillDocumentTitleField(DOCUMENT_TITLE);
+      // await finalStepPage.clickSignDocumentAndSendForSignatureBtn();
+      // await successModal.clickBackToDocumentsBtn();
+
+      await expect(await documentsPage.table.documentStatus).toHaveText(DOCUMENT_STATUS.awaiting);
+  });
+
 })
