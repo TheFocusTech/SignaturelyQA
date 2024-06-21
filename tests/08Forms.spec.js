@@ -4,7 +4,7 @@ import { CHOOSE_SIGNERS_FIELDS, TOAST_MESSAGE, DOCUMENT_STATUS } from "../testDa
 
 test.describe('Sign Document', () => {
 
-  test('TC_08_32_01 | Verify that user can create form', async ({ createBusinessUserAndLogin, signPage, prepareForSigningModal, createFormPage, formsPage }) => {
+  test('TC_08_32_01 | Verify that user can create form', async ({ createBusinessUserAndLogin, signPage, prepareForSignatureModal, createFormPage, formsPage }) => {
     test.setTimeout(120 * 1000);
 
     await signPage.sideMenu.clickForms();
@@ -15,17 +15,17 @@ test.describe('Sign Document', () => {
     await createFormPage.fileUploader.uploadFile('testDocuments/todoList.xlsx');
     await createFormPage.clickFillTemplateBtn();
 
-    await prepareForSigningModal.clickNameField();
-    await prepareForSigningModal.doCanvasClicks();
+    await prepareForSignatureModal.clickNameField();
+    await prepareForSignatureModal.doCanvasClicks();
     
-    await prepareForSigningModal.clickSignField();
-    await prepareForSigningModal.doCanvasClicks();
+    await prepareForSignatureModal.clickSignField();
+    await prepareForSignatureModal.doCanvasClicks();
 
-    await prepareForSigningModal.clickCreateBtn();
+    await prepareForSignatureModal.clickCreateBtn();
 
-    await expect(prepareForSigningModal.toast.toastBody).toHaveText(TOAST_MESSAGE.success);
+    await expect(prepareForSignatureModal.toast.toastBody).toHaveText(TOAST_MESSAGE.success);
 
-    await prepareForSigningModal.clickBackToFormsBtn();
+    await prepareForSignatureModal.clickBackToFormsBtn();
 
     await expect(await formsPage.table.formStatus).toHaveText(DOCUMENT_STATUS.live);
   })

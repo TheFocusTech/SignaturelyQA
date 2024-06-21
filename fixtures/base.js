@@ -23,7 +23,6 @@ import NewCreateAPIKeyModal from "../new_pom/modalWindows/createAPIKeyModal.js";
 import NewTemplatesPage from "../new_pom/pages/templates/templatesPage.js";
 import FormsPage from "../new_pom/pages/formsPage.js";
 import CreateFormPage from "../new_pom/pages/createFormPage.js";
-import PrepareForSigningModal from "../new_pom/modalWindows/prepareForSigningModal.js";
 
 
 export const test = base.extend({
@@ -146,10 +145,6 @@ export const test = base.extend({
 
     createFormPage: async ({ page }, use) => {
         await use(new CreateFormPage(page));
-    },
-
-    prepareForSigningModal: async ({ page }, use) => {
-        await use(new PrepareForSigningModal(page));
     },
 
 });
