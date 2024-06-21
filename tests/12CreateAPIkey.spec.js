@@ -1,39 +1,26 @@
 import { expect } from '@playwright/test';
-import { test, createBusinessUserAndLogin } from "../fixtures/base.js";
-import {
-    API_KEY_NAME, NO_API_KEY_MESSAGE,
-    TOASTER_MESSAGE,
-} from '../testData.js';
-import SignPage from "../page_objects/signPage";
+import { test } from "../fixtures/base.js";
+import { API_KEY_NAME } from '../testData.js';
 
 test.describe('Create API key', () => {
 
-    test('TC_12_48_01_01 | Verify User can copy API key created by the "Create API" button on the right.', async ({ page, createBusinessUserAndLogin }) => {
-        const signPage = new SignPage(page);
+    test('TC_12_48_01_01 | Verify User can copy API key created by the "Create API" button on the right.', async ({ createBusinessUserAndLogin, signPage, settingsCompanyPage, settingsAPIPage, createAPIKeyModal}) => {
+        await signPage.sideMenu.clickSettings();
+        await settingsCompanyPage.horizontalMenu.clickAPI();
 
-        const settingsCompanyPage = await signPage.clickSettingsSidebarLinkAndGoSettingsCompanyPage();
-        const settingsAPIPage = await settingsCompanyPage.clickAPILinkAndGoAPIPage();
+        await settingsAPIPage.clickCreateAPIKeyButtonAtRight();
 
-        const createAPIKeyModal = await settingsAPIPage.clickCreateAPIKeyButtonAtRight();
-        await createAPIKeyModal.fillInCreateAPIKeyNameField(API_KEY_NAME)
+        await createAPIKeyModal.fillInCreateAPIKeyNameField(API_KEY_NAME);
         await createAPIKeyModal.clickCreateAPIButton();
         await createAPIKeyModal.clickCopyAPIButton();
 
-        await settingsAPIPage.locators.getToaster().waitFor({ state: 'visible' });
+        await settingsAPIPage.toast.toastBody.waitFor();
 
-        let clipboardApiKeyValue = await createAPIKeyModal.getAPIKeyValueText();
-        await createAPIKeyModal.clickCloseDialogButton();
+        const clipboardApiKeyValue = await createAPIKeyModal.getAPIKeyValueText();
 
-        await settingsAPIPage.clickToaster();
+        await createAPIKeyModal.clickCloseAPIModalButton();
         await settingsAPIPage.fillBillingDetailsField(clipboardApiKeyValue);
 
-        await expect(settingsAPIPage.locators.getBillingDetailsTextField()).toHaveText(clipboardApiKeyValue);
-
-        await settingsAPIPage.removeAPIKeys();
-
-        await settingsAPIPage.locators.getCreateAPIKeyButtonInTable().waitFor({ state: 'visible' });
-        await expect(settingsAPIPage.locators.getEmptyAPiKeysHeader()).toHaveText(NO_API_KEY_MESSAGE)
-
-        await settingsAPIPage.clickSignSidebarLinkAndGoSignPage();
+        await expect(settingsAPIPage.billingDetailsTextField).toHaveText(clipboardApiKeyValue);
     });
 })
