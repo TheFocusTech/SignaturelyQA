@@ -7,7 +7,9 @@ export default class TableComponent {
         this.documentStatus = this.page.locator('.documents__documentStatus').first();
         this.optionsBtn = this.page.getByText('Options');
         this.editAndResendBtn = this.page.getByText('Edit & Resend');
+        this.titleEditAndResendDocument = this.page.getByText('Edit & Resend document');
         this.createAPIKeyBtn = this.page.locator('.documents__empty-table').getByRole('button', {name: 'Create API key'});
+
     }
 
     async clickOptionsBtn() {
@@ -19,8 +21,14 @@ export default class TableComponent {
         await this.editAndResendBtn.click();
     }
 
+    async getTitleText() {
+        const actualText = await this.titleEditAndResendDocument.textContent();
+        return actualText
+    }
+
     async clickCreateAPIKeyBtnInTable() {
         await this.createAPIKeyBtn.waitFor();
         await this.createAPIKeyBtn.click();
     }
+
 }

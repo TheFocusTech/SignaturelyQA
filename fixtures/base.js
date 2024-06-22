@@ -31,7 +31,6 @@ import NewLoginPage from "../new_pom/pages/loginPage";
 
 export const test = base.extend({
 
-
     createNewFolder: [
         async ({ page }, use) => {
             const signPage = new SignPage(page);

@@ -30,6 +30,7 @@ export default class PrepareForSignatureModal {
         this.customSigningOrderPositionNumberTwo = this.page.locator('span.signers__item-order-position').last();
         this.addRecipientsBtn = this.page.getByText('Recipients', { exact: true });
         this.recipientEmailField = this.page.getByPlaceholder('test@signaturely.com');       
+
     }
 
     async clickSignDocumentRadioBtn() {
@@ -117,4 +118,5 @@ export default class PrepareForSignatureModal {
     async fillRecipientEmailField(email) {
         await this.recipientEmailField.fill(email);
     }
+
 }
