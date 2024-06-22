@@ -8,8 +8,8 @@ test.describe('DocumentsType', () => {
 
     test.setTimeout(250 * 1000);
 
-    const signerName = generateSignerName(1);
-    const signerEmail = generateSignerOrViewerEmail(1);    
+    const signerName = generateSignerName('001');
+    const signerEmail = generateSignerOrViewerEmail('001');    
 
     await signPage.uploadFileTab.fileUploader.uploadFile('testDocuments/picture.jpg');
     await signPage.uploadFileTab.clickPrepareDocumentBtn();

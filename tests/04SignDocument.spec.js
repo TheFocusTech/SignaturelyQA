@@ -7,10 +7,10 @@ test.describe('Sign Document', () => {
 
     test('TC_04_11_02 | Verify custom signing order', async ({ createBusinessUserAndLogin, signPage, prepareForSignatureModal }) => {
 
-        const signerName1 = generateSignerName(1);
-        const signerName2 = generateSignerName(2);
-        const signerEmail1 = generateSignerOrViewerEmail(1);
-        const signerEmail2 = generateSignerOrViewerEmail(2);        
+        const signerName1 = generateSignerName('001');
+        const signerName2 = generateSignerName('002');
+        const signerEmail1 = generateSignerOrViewerEmail('001');
+        const signerEmail2 = generateSignerOrViewerEmail('002');        
 
         await signPage.uploadFileTab.fileUploader.uploadFile('testDocuments/picture.jpg');
         await signPage.uploadFileTab.clickPrepareDocumentBtn();
@@ -43,10 +43,9 @@ test.describe('Sign Document', () => {
         successModal     
     }) => {
 
-        const signerName = generateSignerName(1);
-        console.log(signerName);
-        const signerEmail = generateSignerOrViewerEmail(1);
-        const viewerEmail = generateSignerOrViewerEmail(2);       
+        const signerName = generateSignerName('001');       
+        const signerEmail = generateSignerOrViewerEmail('001');
+        const viewerEmail = generateSignerOrViewerEmail('002');       
 
         await signPage.uploadFileTab.fileUploader.uploadFile('testDocuments/todoList.xlsx');
         await signPage.uploadFileTab.clickPrepareDocumentBtn();

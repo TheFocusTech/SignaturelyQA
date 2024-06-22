@@ -20,7 +20,7 @@ test.describe("CreateDocument", () => {
 	}) => {
 		test.setTimeout(220 * 1000);
 
-        const signerName = generateSignerName(1);
+        const signerName = generateSignerName('001');
 
         await signPage.uploadFileTab.fileUploader.uploadFile('testDocuments/picture.jpg');
         await signPage.uploadFileTab.clickPrepareDocumentBtn();
@@ -53,8 +53,8 @@ test.describe("CreateDocument", () => {
 	}) => {
 		test.setTimeout(120 * 1000);
 
-        const signerName = generateSignerName(1);
-        const signerEmail = generateSignerOrViewerEmail(1);
+        const signerName = generateSignerName('001');
+        const signerEmail = generateSignerOrViewerEmail('001');
 
         await signPage.uploadFileTab.fileUploader.uploadFile('testDocuments/todoList.xlsx');
         await signPage.uploadFileTab.clickPrepareDocumentBtn();
@@ -94,8 +94,8 @@ test.describe("CreateDocument", () => {
 	}) => {
 		test.setTimeout(160 * 1000);
 
-		const signerName = generateSignerName(1);
-        const signerEmail = generateSignerOrViewerEmail(1);
+		const signerName = generateSignerName('001');
+        const signerEmail = generateSignerOrViewerEmail('001');
 
 		await createSignature(
 			signPage,
