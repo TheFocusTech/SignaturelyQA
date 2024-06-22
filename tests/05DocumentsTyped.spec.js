@@ -17,7 +17,7 @@ test.describe('DocumentsType', () => {
             "https://docs.google.com/document/d/1Qce7tKWOwVYtPxgQv_8ae-HUkbAgeOFph0lB_eziY_k/edit#heading=h.334tqcftqjdb",
             "TC_05_21_01"),
             await allure.epic('Documents');
-            
+                   
         await prepareForSignature(signPage, prepareForSignatureModal);
         await finalStepPage.waitAndClickSendForSignatureBtn();
         await successModal.clickBackToDocumentsBtn();
@@ -33,7 +33,7 @@ test.describe('DocumentsType', () => {
 
         test.setTimeout(250 * 1000);
 
-        await allure.description('Objective: To verify that the document can be returned for editing.');
+      await allure.description('Objective: To verify that the document can be returned for editing.');
         await allure.tags('Edit & Resend, Documents');
         await allure.severity(Severity.CRITICAL);
         await allure.link("Documentation",
