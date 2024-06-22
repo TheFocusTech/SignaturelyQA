@@ -11,8 +11,7 @@ export default class FinalStepPage {
         this.sendForSignatureBtn = this.page.getByRole("button", { name: "Send for Signature" });
         this.documentOptionalMessageField = this.page.getByPlaceholder('Add an optional message for the document signers.');
         this.signDocumentBtn = this.page.getByRole('button', { name: 'Sign Document' });
-        this.sendForSignatureBtn = this.page.getByRole('button', {name: 'Send for Signature'});
-
+        
     }
 
     async fillDocumentTitleField(title) {
