@@ -21,11 +21,17 @@ import DowngradeToPersonalPlanModal from "../new_pom/modalWindows/downgradeToPer
 import NewSettingsAPIPage from "../new_pom/pages/settings/settingsAPIPage";
 import NewCreateAPIKeyModal from "../new_pom/modalWindows/createAPIKeyModal.js";
 import NewTemplatesPage from "../new_pom/pages/templates/templatesPage.js";
+import SignUpPersonalPage from "../new_pom/pages/signUpPersonalPage";
+import ConfirmCodeModal from "../new_pom/modalWindows/confirmCodeModal";
+import ChooseSignatureOrInitialModal from "../new_pom/modalWindows/chooseSignatureOrInitialModal";
+import CreateOrEditSignatureOnSettingModal from "../new_pom/modalWindows/createOrEditSignatureOnSettingModal";
+import NewSettingsEditSignaturePage from "../new_pom/pages/settings/settingsEditSignaturePage";
+import NewLoginPage from "../new_pom/pages/loginPage";
 import NewDocumentsAwaitingPage from "../new_pom/pages/documents/documentsAwaitingPage.js";
 import SendReminderDocumentModal from "../new_pom/modalWindows/sendReminderDocumentModal.js";
 
-export const test = base.extend({
 
+export const test = base.extend({
 
     createNewFolder: [
         async ({ page }, use) => {
@@ -65,6 +71,10 @@ export const test = base.extend({
         { scope: "test" },
     ],
 
+    loginPage: async ({ page }, use) => {
+            await use(new NewLoginPage(page));
+    },
+
     signPage: async ({ page }, use) => {
         await use(new NewSignPage(page));
     },
@@ -83,6 +93,10 @@ export const test = base.extend({
 
     documentsTrashPage: async ({ page }, use) => {
         await use(new NewDocumentsTrashPage(page));
+    },
+
+    finalStepModal: async ({ page }, use) => {
+        await use(new FinalStepModal(page));
     },
 
     activateTrialStripePage: async ({ page }, use) => {
@@ -113,7 +127,6 @@ export const test = base.extend({
         await use(new SpecialOneTimeOfferModal(page));
     },
 
-
     createSignatureModal: async ({ page }, use) => {
         await use(new CreateSignatureModal(page));
     },
@@ -140,6 +153,26 @@ export const test = base.extend({
 
     createAPIKeyModal: async ({ page }, use) => {
         await use(new NewCreateAPIKeyModal(page));
+    },
+
+    signUpPersonalPage: async ({ page }, use) => {
+        await use(new SignUpPersonalPage(page));
+    },
+
+    confirmCodeModal: async ({ page }, use) => {
+        await use(new ConfirmCodeModal(page));
+    },
+
+    chooseSignatureOrInitialModal: async ({ page }, use) => {
+        await use(new ChooseSignatureOrInitialModal(page));
+    },
+
+    createOrEditSignatureOnSettingModal: async ({ page }, use) => {
+        await use(new CreateOrEditSignatureOnSettingModal(page));
+    },
+
+    settingsEditSignaturePage: async ({ page }, use) => {
+        await use(new NewSettingsEditSignaturePage(page));
     },
 
     sendReminderDocumentModal: async ({ page }, use) => {
