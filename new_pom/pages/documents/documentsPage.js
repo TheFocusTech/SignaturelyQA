@@ -2,6 +2,7 @@ import SideMenuComponent from "../../components/sideMenuComponent";
 import TableComponent from "../../components/tableComponent";
 import SideMenuDocumentsComponent from "../../components/sideMenuDocumentsComponent";
 
+
 export default class NewDocumentsPage {
     constructor(page) {
         this.page = page;
