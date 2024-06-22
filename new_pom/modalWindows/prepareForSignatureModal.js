@@ -20,7 +20,7 @@ export default class PrepareForSignatureModal {
         this.signerEmailField = this.page.getByPlaceholder('Email');
         this.canvas = this.page.locator('canvas');
         this.assignedToDropDown = this.page.locator('ul .uiSelect__select');
-        this.meNowDropDownItem = this.page.getByText('Me (Now)', { exact: true });
+        this.itemDropDown = this.page.locator('.uiSelect__search-item');
         this.saveBtn = this.page.getByRole('button', { name: 'Save' });
         this.signatureElement = this.page.locator('.documentPage .react-pdf__Page__canvas').last();
         this.createBtn = this.page.getByRole('button', { name: 'Create' });
@@ -81,8 +81,8 @@ export default class PrepareForSignatureModal {
         await this.assignedToDropDown.click();
     }
 
-    async clickMeNowDropDownItem() {
-        await this.meNowDropDownItem.click();
+    async clickItemDropDown(signerName) {
+        await this.itemDropDown.getByText(signerName).click();
     }
 
     async clickSaveBtn() {

@@ -9,6 +9,7 @@ import ToastComponent from "../../components/toastComponent";
 export default class TemplatesPage {
     constructor(page) {
         this.page = page;
+        
         this.sideMenu = new SideMenuComponent(this.page);
         this.sideMenuTemplates = new SideMenuTemplatesComponent(this.page);
         this.createTemplate = new NewCreateTemplatePage(this.page);
