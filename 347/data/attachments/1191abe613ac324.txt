@@ -1,0 +1,6 @@
+Generated new user #240622155901765
+User with id #"c9d91a3c-c123-42bf-b009-bcd738b07ce9" has been successfully created
+Clicking subscription button: Monthly
+Waiting for email to arrive...
+Fetching emails sent to ...+240622155901765@gmail.com
+Confirmation Code: tEZCrmPtHu
