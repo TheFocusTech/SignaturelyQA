@@ -68,7 +68,7 @@ test.describe("CreateDocument", () => {
         await prepareForSignatureModal.doCanvasClicks();
         await prepareForSignatureModal.doCanvasClicks();
         await prepareForSignatureModal.clickAssignedToDropDown();
-        await prepareForSignatureModal.clickItemDropDown(1);
+        await prepareForSignatureModal.clickItemDropDown(0);
         await createSignatureOrInitialModal.clickCheckboxAgree();
         await createSignatureOrInitialModal.clickSignNowBtn();
         await prepareForSignatureModal.toast.clickToastFirstCloseBtn();
@@ -115,7 +115,7 @@ test.describe("CreateDocument", () => {
 		await prepareForSignatureModal.clickSignFieldsItem();
 		await prepareForSignatureModal.doCanvasClicks();
 		await prepareForSignatureModal.clickAssignedToDropDown();
-		await prepareForSignatureModal.clickItemDropDown(1);
+		await prepareForSignatureModal.clickItemDropDown(0);
 		await chooseSignatureOrInitialModal.clickSignatureTyped();
 		await chooseSignatureOrInitialModal.clickSignNowBtn();
 		await prepareForSignatureModal.clickSignFieldsItem();
