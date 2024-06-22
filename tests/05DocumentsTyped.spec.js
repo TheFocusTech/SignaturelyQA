@@ -20,7 +20,7 @@ test.describe('DocumentsType', () => {
 
     })
 
-    test('TC_05_21_02 | Verify that button "Edit&Resend" is active', async ({ createBusinessUserAndLogin, signPage, prepareForSignatureModal, successModal, finalStepPage, documentsPage }) => {
+    test('TC_05_21_02 | Verify that button "Edit&Resend" is active', async ({ page, createBusinessUserAndLogin, signPage, prepareForSignatureModal, successModal, finalStepPage, documentsPage }) => {
 
         test.setTimeout(250 * 1000);
 
@@ -29,10 +29,11 @@ test.describe('DocumentsType', () => {
         await successModal.clickBackToDocumentsBtn();
         await documentsPage.table.clickOptionsBtn();
         await documentsPage.table.clickEditAndResendBtn();
+        await documentsPage.table.clickRevertToDraftBtn();
 
+        await expect(page).toHaveURL(/documents.*edit$/);
+        expect(await prepareForSignatureModal.getPrepareForSigningTitleText() ).toBe("Prepare for Signing");
 
-
-        
 
     })
 })

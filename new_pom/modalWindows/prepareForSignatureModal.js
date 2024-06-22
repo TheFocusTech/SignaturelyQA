@@ -29,7 +29,8 @@ export default class PrepareForSignatureModal {
         this.customSigningOrderPositionNumberOne = this.page.locator('span.signers__item-order-position').first();
         this.customSigningOrderPositionNumberTwo = this.page.locator('span.signers__item-order-position').last();
         this.addRecipientsBtn = this.page.getByText('Recipients', { exact: true });
-        this.recipientEmailField = this.page.getByPlaceholder('test@signaturely.com');       
+        this.recipientEmailField = this.page.getByPlaceholder('test@signaturely.com'); 
+        this.prepareForSigningTitle = this.page.getByRole('heading', {name: 'Prepare for Signing'});      
 
     }
 
@@ -117,6 +118,11 @@ export default class PrepareForSignatureModal {
 
     async fillRecipientEmailField(email) {
         await this.recipientEmailField.fill(email);
+    }
+
+    async getPrepareForSigningTitleText() {
+        const actualText = await this.prepareForSigningTitle.textContent();
+        return actualText
     }
 
 }
