@@ -4,7 +4,7 @@ import { generateSignerName, generateSignerOrViewerEmail } from "../helpers/util
 
 test.describe('DocumentsType', () => {
 
-  test.skip('TC_05_21_01 | Verify that button "Edit&Resend" is active', async ({ createBusinessUserAndLogin, signPage, prepareForSignatureModal, documentsPage }) => {
+  test('TC_05_21_01 | Verify that button "Edit&Resend" is active', async ({ createBusinessUserAndLogin, signPage, prepareForSignatureModal, successModal, finalStepPage, documentsPage }) => {
 
     test.setTimeout(250 * 1000);
 
@@ -22,19 +22,16 @@ test.describe('DocumentsType', () => {
     await prepareForSignatureModal.clickGotItBtn();
 
     await prepareForSignatureModal.clickSignFieldsItem();
-    await prepareForSignatureModal.clickSignPlaceCanvas();
-    await prepareForSignatureModal.clickSignFieldsItem();
+    await prepareForSignatureModal.doCanvasClicks();
     await prepareForSignatureModal.clickSaveBtn();
 
-    await finalStepModal.waitForToastDocumentSavedVisible();
-    await finalStepModal.waitForToastDocumentSavedHidden();
-    await finalStepModal.clickSendForSignatureBtn();
-    await finalStepModal.waitForSuccessSendModalVisible();
-    await finalStepModal.clickBackToDocumentBtn();
-    
-    await documentsPage.clickOptionsBtn();
-    await documentsPage.clickEditAndResendBtn();
-    await expect(documentsPage.editAndResendTitle).toBeVisible();
+    await finalStepPage.waitAndClickSendForSignatureBtn();
+    await successModal.clickBackToDocumentsBtn();
+    await documentsPage.table.clickOptionsBtn();
+    await documentsPage.table.clickEditAndResendBtn();
+
+    await expect(documentsPage.table.titleEditAndResendDocument).toBeVisible();
+    expect(await documentsPage.table.getTitleText()).toBe("Edit & Resend document");
 
   })
 })
