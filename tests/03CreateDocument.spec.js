@@ -104,8 +104,8 @@ test.describe("CreateDocument", () => {
 			createOrEditSignatureOnSettingModal
 		);
 
-		await signPage.uploadFile.fileUploader.uploadFile("testDocuments/todoList.xlsx");
-		await signPage.uploadFile.clickPrepareDocumentBtn();
+		await signPage.uploadFileTab.fileUploader.uploadFile("testDocuments/todoList.xlsx");
+		await signPage.uploadFileTab.clickPrepareDocumentBtn();
 		await prepareForSignatureModal.clickSignAndSendForSignatureRadioBtn();
 		await prepareForSignatureModal.clickAddSignerBtn();
 		await prepareForSignatureModal.fillSignerNameField(signerName, 0);
