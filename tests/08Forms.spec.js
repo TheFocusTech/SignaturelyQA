@@ -1,7 +1,6 @@
 import { expect } from "@playwright/test";
 import { test } from "../fixtures/base.js";
 import { CHOOSE_SIGNERS_FIELDS, TOAST_MESSAGE, DOCUMENT_STATUS } from "../testData.js";
-import SuccessModal from "../new_pom/modalWindows/successModal.js";
 
 test.describe('Sign Document', () => {
 
