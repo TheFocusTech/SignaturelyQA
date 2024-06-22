@@ -1,5 +1,5 @@
 import { DATA_SIGNER } from "../testData";
-import { CHOOSE_SIGNERS_FIELDS } from '../testData.js';
+import { SIGNERS_DATA } from "../testData.js";
 
 export const createSignature = async (signPage, settingsCompanyPage, settingsEditSignaturePage, createOrEditSignatureOnSettingModal) => {
     await signPage.sideMenu.clickSettings();
@@ -13,12 +13,12 @@ export const createSignature = async (signPage, settingsCompanyPage, settingsEdi
 }
 
 export const prepareForSignature = async ( signPage, prepareForSignatureModal) => {
-    await signPage.uploadFile.fileUploader.uploadFile('testDocuments/picture.jpg');
-    await signPage.uploadFile.clickPrepareDocumentBtn();
+    await signPage.uploadFileTab.fileUploader.uploadFile('testDocuments/picture.jpg');
+    await signPage.uploadFileTab.clickPrepareDocumentBtn();
     await prepareForSignatureModal.clickSendForSignatureRadioBtn();
     await prepareForSignatureModal.clickAddSignerBtn();
-    await prepareForSignatureModal.fillSignerNameField(CHOOSE_SIGNERS_FIELDS.name1, 0)
-    await prepareForSignatureModal.fillSignerEmailField(process.env.PREFIX_EMAIL + '01' + process.env.EMAIL_DOMAIN, 0);
+    await prepareForSignatureModal.fillSignerNameField(SIGNERS_DATA.signerName1, 0)
+    await prepareForSignatureModal.fillSignerEmailField(SIGNERS_DATA.signerEmail1, 0);
     await prepareForSignatureModal.clickContinueBtn();
     await prepareForSignatureModal.clickGotItBtn();
 
