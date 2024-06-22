@@ -4,7 +4,8 @@ import {
 	DOCUMENT_TITLE,
 	DOCUMENT_STATUS,
 	MESSAGE,
-	SIGNERS_DATA
+	SIGNERS_DATA,
+	SIGNER_ME
 } from "../testData.js";
 import { createSignature } from "../helpers/preconditions.js";
 
@@ -63,7 +64,7 @@ test.describe("CreateDocument", () => {
         await prepareForSignatureModal.doCanvasClicks();
         await prepareForSignatureModal.doCanvasClicks();
         await prepareForSignatureModal.clickAssignedToDropDown();
-        await prepareForSignatureModal.clickItemDropDown(SIGNERS_DATA.signerName1);
+        await prepareForSignatureModal.clickItemDropDown(SIGNER_ME);
         await createSignatureOrInitialModal.clickCheckboxAgree();
         await createSignatureOrInitialModal.clickSignNowBtn();
         await prepareForSignatureModal.toast.clickToastFirstCloseBtn();
@@ -107,7 +108,7 @@ test.describe("CreateDocument", () => {
 		await prepareForSignatureModal.clickSignFieldsItem();
 		await prepareForSignatureModal.doCanvasClicks();
 		await prepareForSignatureModal.clickAssignedToDropDown();
-		await prepareForSignatureModal.clickItemDropDown(SIGNERS_DATA.signerName1);
+		await prepareForSignatureModal.clickItemDropDown(SIGNER_ME);
 		await chooseSignatureOrInitialModal.clickSignatureTyped();
 		await chooseSignatureOrInitialModal.clickSignNowBtn();
 		await prepareForSignatureModal.clickSignFieldsItem();
