@@ -1,4 +1,4 @@
-export default class reateSignatureOrInitialModal {
+export default class CreateSignatureOrInitialModal {
     constructor(page) {
         this.page = page;
 
