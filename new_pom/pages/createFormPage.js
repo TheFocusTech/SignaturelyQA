@@ -11,19 +11,11 @@ export default class CreateFormPage {
     }
 
     async fillFormNameField(name) {
-        try {
             await this.formNameField.fill(name);
-        } finally {
-
-        }
     }
 
     async fillOptionalMessageField(message) {
-        try {
             await this.optionalMessageField.fill(message);
-            } finally {
-
-        }
     }
 
     async clickFillTemplateBtn() {

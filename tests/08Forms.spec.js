@@ -1,10 +1,12 @@
 import { expect } from "@playwright/test";
 import { test } from "../fixtures/base.js";
 import { CHOOSE_SIGNERS_FIELDS, TOAST_MESSAGE, DOCUMENT_STATUS } from "../testData.js";
+import SuccessModal from "../new_pom/modalWindows/successModal.js";
 
 test.describe('Sign Document', () => {
 
-  test('TC_08_32_01 | Verify that user can create form', async ({ createBusinessUserAndLogin, signPage, prepareForSignatureModal, createFormPage, formsPage }) => {
+  test.only('TC_08_32_01 | Verify that user can create form', async ({ createBusinessUserAndLogin, signPage, 
+    prepareForSignatureModal, createFormPage, formsPage, successModal }) => {
     test.setTimeout(120 * 1000);
 
     await signPage.sideMenu.clickForms();
@@ -25,8 +27,8 @@ test.describe('Sign Document', () => {
 
     await expect(prepareForSignatureModal.toast.toastBody).toHaveText(TOAST_MESSAGE.success);
 
-    await prepareForSignatureModal.clickBackToFormsBtn();
+    await successModal.clickBackToFormsBtn();
 
-    await expect(await formsPage.table.formStatus).toHaveText(DOCUMENT_STATUS.live);
+    await expect(await formsPage.table.documentStatus).toHaveText(DOCUMENT_STATUS.live);
   })
 }) 
