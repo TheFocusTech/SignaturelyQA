@@ -7,14 +7,7 @@ export const URL_END_POINTS = {
 };
 export const ACTIVE_COLOR = 'rgb(0, 163, 250)';
 export const FILL_FOLDER_NAME = 'Folder 1';
-export const CHOOSE_SIGNERS_FIELDS = {
-    name1: 'John Doe',
-    email1: '5kXUw@example.com',
-    name2: 'John Doe2',
-    email2: '5kXUw@example.com',
-    name3: `${process.env.EMAIL_PREFIX}003`,
-    email3: `${process.env.EMAIL_PREFIX}003${process.env.EMAIL_DOMAIN}`
-};
+
 export const TOAST_MESSAGE ={
     planSuccessChange: 'Plan has been successfully changed.',
     planRenew: 'Plan has been renew',
@@ -56,6 +49,7 @@ export const DOCUMENT_STATUS = {
     awaiting: 'awaiting',
     draft: 'draft',
     completed: 'completed',
+    processing: 'processing',
     live: 'live',
 };
 export const CI_USER_NAME = 'CI_user';
@@ -107,4 +101,14 @@ export const PERSONAL_PLAN_DESCRIPTION = (billingPeriod) => `Your plan (Billed $
 export const EMAIL_SUBJECTS = {
     reminderToSign: "Reminder, Please sign",
     signatureRequest: "requested your signature"
+}
+
+export const SIGNER_ME = 'Me (Now)';
+
+export const SIGNERS_DATA = {
+    signerName1 : `${process.env.NEW_USER_NAME}${'001'}`,  
+    signerEmail1 : `${process.env.EMAIL_PREFIX}${process.env.NEW_USER_NUMBER}${'001'}${process.env.EMAIL_DOMAIN}`,
+    signerName2 : `${process.env.NEW_USER_NAME}${'002'}`,  
+    signerEmail2 : `${process.env.EMAIL_PREFIX}${process.env.NEW_USER_NUMBER}${'002'}${process.env.EMAIL_DOMAIN}`,
+    viewerEmail1 : `${process.env.EMAIL_PREFIX}${process.env.NEW_USER_NUMBER}${'003'}${process.env.EMAIL_DOMAIN}`
 }

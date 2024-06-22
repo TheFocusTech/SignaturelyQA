@@ -1,18 +1,18 @@
 import { expect } from "@playwright/test";
 import { test } from "../fixtures/base.js";
-import { CHOOSE_SIGNERS_FIELDS, TOAST_MESSAGE, DOCUMENT_STATUS } from "../testData.js";
+import { SIGNERS_DATA, TOAST_MESSAGE, DOCUMENT_STATUS } from "../testData.js";
 
 test.describe('Sign Document', () => {
 
-  test('TC_08_32_01 | Verify that user can create form', async ({ createBusinessUserAndLogin, signPage, 
+  test.only('TC_08_32_01 | Verify that user can create form', async ({ createBusinessUserAndLogin, signPage, 
     prepareForSignatureModal, createFormPage, formsPage, successModal }) => {
     test.setTimeout(120 * 1000);
 
     await signPage.sideMenu.clickForms();
 
     await formsPage.clickCreateFormBtn();
-    await createFormPage.fillFormNameField(CHOOSE_SIGNERS_FIELDS.name1);
-    await createFormPage.fillOptionalMessageField(CHOOSE_SIGNERS_FIELDS.email1);
+    await createFormPage.fillFormNameField(SIGNERS_DATA.signerName1);
+    await createFormPage.fillOptionalMessageField(SIGNERS_DATA.viewerEmail1);
     await createFormPage.fileUploader.uploadFile('testDocuments/todoList.xlsx');
     await createFormPage.clickFillTemplateBtn();
 

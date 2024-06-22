@@ -1,20 +1,20 @@
-
 import { expect } from "@playwright/test";
 import { test } from "../fixtures/base.js";
-import { CHOOSE_SIGNERS_FIELDS } from '../testData.js';
+import { SIGNERS_DATA } from "../testData.js";
 
 test.describe('DocumentsType', () => {
 
   test('TC_05_21_01 | Verify that button "Edit&Resend" is active', async ({ createBusinessUserAndLogin, signPage, prepareForSignatureModal, successModal, finalStepPage, documentsPage }) => {
 
     test.setTimeout(250 * 1000);
-    await signPage.uploadFile.fileUploader.uploadFile('testDocuments/picture.jpg');
-    await signPage.uploadFile.clickPrepareDocumentBtn();
+
+    await signPage.uploadFileTab.fileUploader.uploadFile('testDocuments/picture.jpg');
+    await signPage.uploadFileTab.clickPrepareDocumentBtn();
 
     await prepareForSignatureModal.clickSendForSignatureRadioBtn();
     await prepareForSignatureModal.clickAddSignerBtn();
-    await prepareForSignatureModal.fillSignerNameField(CHOOSE_SIGNERS_FIELDS.name1, 0)
-    await prepareForSignatureModal.fillSignerEmailField(process.env.PREFIX_EMAIL + '01' + process.env.EMAIL_DOMAIN, 0);
+    await prepareForSignatureModal.fillSignerNameField(SIGNERS_DATA.signerName1, 0);
+    await prepareForSignatureModal.fillSignerEmailField(SIGNERS_DATA.signerEmail1, 0);
     await prepareForSignatureModal.clickContinueBtn();
     await prepareForSignatureModal.clickGotItBtn();
 
