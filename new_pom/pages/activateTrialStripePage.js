@@ -4,6 +4,7 @@ import {URL_END_POINTS} from "../../testData";
 export default class ActivateTrialStripePage {
     constructor(page) {
         this.page = page;
+        
         this.cardDetails = new CardDetailsComponent(this.page);
 
         this.userHeaderName = this.page.locator('.dropDownUser__trigger-name');

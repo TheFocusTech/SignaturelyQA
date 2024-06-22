@@ -3,6 +3,7 @@ import { test } from "../fixtures/base.js";
 import { prepareForSignature } from "../helpers/preconditions.js";
 import { allure } from "allure-playwright";
 import { Severity } from "allure-js-commons";
+import { SIGNERS_DATA } from "../testData.js";
 
 test.describe('DocumentsType', () => {
 
@@ -13,15 +14,12 @@ test.describe('DocumentsType', () => {
         await allure.description('Objective: To verify that the document can be returned for editing.');
         await allure.tags('Edit & Resend, Documents');
         await allure.severity(Severity.CRITICAL);
-        await allure.link(
-            "Documentation",
+        await allure.link( "Documentation",
             "https://docs.google.com/document/d/1Qce7tKWOwVYtPxgQv_8ae-HUkbAgeOFph0lB_eziY_k/edit#heading=h.334tqcftqjdb",
             "TC_05_21_01"),
 
         await allure.epic('Documents');
-        
-        
-
+            
         await prepareForSignature(signPage, prepareForSignatureModal);
         await finalStepPage.waitAndClickSendForSignatureBtn();
         await successModal.clickBackToDocumentsBtn();
@@ -37,15 +35,23 @@ test.describe('DocumentsType', () => {
 
         test.setTimeout(250 * 1000);
 
-        await allure.description('Objective: To verify that the document can be returned for editing.');
+      await allure.description('Objective: To verify that the document can be returned for editing.');
         await allure.tags('Edit & Resend, Documents');
         await allure.severity(Severity.CRITICAL);
-        await allure.link(
-            "Documentation",
+        await allure.link( "Documentation",
             "https://docs.google.com/document/d/1Qce7tKWOwVYtPxgQv_8ae-HUkbAgeOFph0lB_eziY_k/edit#heading=h.334tqcftqjdb",
             "TC_05_21_02"),
             
         await allure.epic('Documents');
+  
+    await signPage.uploadFileTab.fileUploader.uploadFile('testDocuments/picture.jpg');
+    await signPage.uploadFileTab.clickPrepareDocumentBtn();
+    await prepareForSignatureModal.clickSendForSignatureRadioBtn();
+    await prepareForSignatureModal.clickAddSignerBtn();
+    await prepareForSignatureModal.fillSignerNameField(SIGNERS_DATA.signerName1, 0);
+    await prepareForSignatureModal.fillSignerEmailField(SIGNERS_DATA.signerEmail1, 0);
+    await prepareForSignatureModal.clickContinueBtn();
+    await prepareForSignatureModal.clickGotItBtn();
 
         await prepareForSignature(signPage, prepareForSignatureModal);
         await finalStepPage.waitAndClickSendForSignatureBtn();
