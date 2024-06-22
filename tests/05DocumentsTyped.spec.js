@@ -7,6 +7,8 @@ test.describe('DocumentsType', () => {
 
     test('TC_05_21_01 | Verify that button "Edit&Resend" is active', async ({ createBusinessUserAndLogin, signPage, prepareForSignatureModal, successModal, finalStepPage, documentsPage }) => {
 
+        
+
         test.setTimeout(250 * 1000);
 
         await prepareForSignature(signPage, prepareForSignatureModal);
