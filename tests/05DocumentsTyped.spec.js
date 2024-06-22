@@ -16,9 +16,8 @@ test.describe('DocumentsType', () => {
         await allure.link("Documentation",
             "https://docs.google.com/document/d/1Qce7tKWOwVYtPxgQv_8ae-HUkbAgeOFph0lB_eziY_k/edit#heading=h.334tqcftqjdb",
             "TC_05_21_01"),
-
             await allure.epic('Documents');
-
+            
         await prepareForSignature(signPage, prepareForSignatureModal);
         await finalStepPage.waitAndClickSendForSignatureBtn();
         await successModal.clickBackToDocumentsBtn();
