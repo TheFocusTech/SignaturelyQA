@@ -13,7 +13,7 @@ export default class NewCreateTemplatePage {
         this.templateNameField = this.page.getByPlaceholder('A template name to identify');
         this.optionalMessageField = this.page.getByPlaceholder('Add an optional message for');
         this.createTemplateRolesField = this.page.getByPlaceholder('Role');
-        this.fillTemlateBtn = this.page.getByRole('button', { name: 'Fill Template' });
+        this.fillTemplateBtn = this.page.getByRole('button', { name: 'Fill Template' });
 
     }
 
@@ -30,8 +30,8 @@ export default class NewCreateTemplatePage {
     }
 
     async clickFillTemplateBtn() {
-        await this.fillTemlateBtn.waitFor();
-        await this.fillTemlateBtn.click();
+        await this.fillTemplateBtn.waitFor();
+        await this.fillTemplateBtn.click();
     }
 
 }
