@@ -115,7 +115,7 @@ test.describe("CreateDocument", () => {
 		await prepareForSignatureModal.clickSignFieldsItem();
 		await prepareForSignatureModal.doCanvasClicks();
 		await prepareForSignatureModal.clickAssignedToDropDown();
-		await prepareForSignatureModal.clickMeNowDropDownItem();
+		await prepareForSignatureModal.clickItemDropDown(1);
 		await chooseSignatureOrInitialModal.clickSignatureTyped();
 		await chooseSignatureOrInitialModal.clickSignNowBtn();
 		await prepareForSignatureModal.clickSignFieldsItem();
