@@ -12,7 +12,7 @@ export default class ToastComponent {
     }
 
     async waitForToastCompleted() {
-        await this.toastBody.waitFor("visible");
-        await this.toastBody.waitFor({ state: "hidden" });
+        await this.toastFirstCloseBtn.waitFor("visible");
+        await this.toastFirstCloseBtn.waitFor({ state: "hidden" });
     }
 }
