@@ -13,8 +13,8 @@ test.describe('DocumentsType', () => {
 
     await prepareForSignatureModal.clickSendForSignatureRadioBtn();
     await prepareForSignatureModal.clickAddSignerBtn();
-    await prepareForSignatureModal.fillSignerNameField(SIGNERS_DATA.signerName1);
-    await prepareForSignatureModal.fillSignerEmailField(SIGNERS_DATA.signerEmail1);
+    await prepareForSignatureModal.fillSignerNameField(SIGNERS_DATA.signerName1, 0);
+    await prepareForSignatureModal.fillSignerEmailField(SIGNERS_DATA.signerEmail1, 0);
     await prepareForSignatureModal.clickContinueBtn();
     await prepareForSignatureModal.clickGotItBtn();
 
