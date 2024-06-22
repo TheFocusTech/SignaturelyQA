@@ -101,3 +101,13 @@ export const EMAIL_SUBJECTS = {
     reminderToSign: "Reminder, Please sign",
     signatureRequest: "requested your signature"
 }
+
+export const SIGNER_ME = 'Me (Now)';
+
+export const SIGNERS_DATA = {
+    signerName1 : `${process.env.NEW_USER_NAME}${'001'}`,  
+    signerEmail1 : `${process.env.EMAIL_PREFIX}${process.env.NEW_USER_NUMBER}${'001'}${process.env.EMAIL_DOMAIN}`,
+    signerName2 : `${process.env.NEW_USER_NAME}${'002'}`,  
+    signerEmail2 : `${process.env.EMAIL_PREFIX}${process.env.NEW_USER_NUMBER}${'002'}${process.env.EMAIL_DOMAIN}`,
+    viewerEmail1 : `${process.env.EMAIL_PREFIX}${process.env.NEW_USER_NUMBER}${'003'}${process.env.EMAIL_DOMAIN}`
+}

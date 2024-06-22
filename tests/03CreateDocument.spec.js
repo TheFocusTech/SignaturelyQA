@@ -4,9 +4,9 @@ import {
 	DOCUMENT_TITLE,
 	DOCUMENT_STATUS,
 	MESSAGE,
+	SIGNERS_DATA
 } from "../testData.js";
 import { createSignature } from "../helpers/preconditions.js";
-import { generateSignerName, generateSignerOrViewerEmail } from "../helpers/utils";
 
 test.describe("CreateDocument", () => {
 	test("TC_03_07_01 | Sign a document - verify that user can sign a document themselves", async ({
@@ -20,16 +20,14 @@ test.describe("CreateDocument", () => {
 	}) => {
 		test.setTimeout(220 * 1000);
 
-        const signerName = generateSignerName('001');
-
-        await signPage.uploadFileTab.fileUploader.uploadFile('testDocuments/picture.jpg');
+		await signPage.uploadFileTab.fileUploader.uploadFile('testDocuments/picture.jpg');
         await signPage.uploadFileTab.clickPrepareDocumentBtn();
         await prepareForSignatureModal.clickSignDocumentRadioBtn();
         await prepareForSignatureModal.clickContinueBtn();
         await prepareForSignatureModal.clickGotItBtn();
         await prepareForSignatureModal.clickSignFieldsItem();
         await prepareForSignatureModal.doCanvasClicks();
-        await createSignatureOrInitialModal.fillInputSignature(signerName);
+        await createSignatureOrInitialModal.fillInputSignature(SIGNERS_DATA.signerName1);
         await createSignatureOrInitialModal.clickCheckboxAgree();
         await createSignatureOrInitialModal.clickSignNowBtn();
         await prepareForSignatureModal.toast.clickToastFirstCloseBtn();
@@ -53,22 +51,19 @@ test.describe("CreateDocument", () => {
 	}) => {
 		test.setTimeout(120 * 1000);
 
-        const signerName = generateSignerName('001');
-        const signerEmail = generateSignerOrViewerEmail('001');
-
         await signPage.uploadFileTab.fileUploader.uploadFile('testDocuments/todoList.xlsx');
         await signPage.uploadFileTab.clickPrepareDocumentBtn();
         await prepareForSignatureModal.clickSignAndSendForSignatureRadioBtn();
         await prepareForSignatureModal.clickAddSignerBtn();
-        await prepareForSignatureModal.fillSignerNameField(signerName, 0)
-        await prepareForSignatureModal.fillSignerEmailField(signerEmail, 0);
+        await prepareForSignatureModal.fillSignerNameField(SIGNERS_DATA.signerName1, 0)
+        await prepareForSignatureModal.fillSignerEmailField(SIGNERS_DATA.signerEmail1, 0);
         await prepareForSignatureModal.clickContinueBtn();
         await prepareForSignatureModal.clickGotItBtn();
         await prepareForSignatureModal.clickSignFieldsItem();
         await prepareForSignatureModal.doCanvasClicks();
         await prepareForSignatureModal.doCanvasClicks();
         await prepareForSignatureModal.clickAssignedToDropDown();
-        await prepareForSignatureModal.clickItemDropDown(signerName);
+        await prepareForSignatureModal.clickItemDropDown(SIGNERS_DATA.signerName1);
         await createSignatureOrInitialModal.clickCheckboxAgree();
         await createSignatureOrInitialModal.clickSignNowBtn();
         await prepareForSignatureModal.toast.clickToastFirstCloseBtn();
@@ -92,10 +87,7 @@ test.describe("CreateDocument", () => {
 		successModal,
 		documentsPage,
 	}) => {
-		test.setTimeout(160 * 1000);
-
-		const signerName = generateSignerName('001');
-        const signerEmail = generateSignerOrViewerEmail('001');
+		test.setTimeout(160 * 1000);   
 
 		await createSignature(
 			signPage,
@@ -108,14 +100,14 @@ test.describe("CreateDocument", () => {
 		await signPage.uploadFileTab.clickPrepareDocumentBtn();
 		await prepareForSignatureModal.clickSignAndSendForSignatureRadioBtn();
 		await prepareForSignatureModal.clickAddSignerBtn();
-		await prepareForSignatureModal.fillSignerNameField(signerName, 0);
-		await prepareForSignatureModal.fillSignerEmailField(signerEmail, 0);
+		await prepareForSignatureModal.fillSignerNameField(SIGNERS_DATA.signerName1, 0);
+		await prepareForSignatureModal.fillSignerEmailField(SIGNERS_DATA.signerEmail1, 0);
 		await prepareForSignatureModal.clickContinueBtn();
 		await prepareForSignatureModal.clickGotItBtn();
 		await prepareForSignatureModal.clickSignFieldsItem();
 		await prepareForSignatureModal.doCanvasClicks();
 		await prepareForSignatureModal.clickAssignedToDropDown();
-		await prepareForSignatureModal.clickItemDropDown(signerName);
+		await prepareForSignatureModal.clickItemDropDown(SIGNERS_DATA.signerName1);
 		await chooseSignatureOrInitialModal.clickSignatureTyped();
 		await chooseSignatureOrInitialModal.clickSignNowBtn();
 		await prepareForSignatureModal.clickSignFieldsItem();

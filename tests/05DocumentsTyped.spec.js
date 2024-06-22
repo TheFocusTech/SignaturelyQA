@@ -1,6 +1,6 @@
 import { expect } from "@playwright/test";
 import { test } from "../fixtures/base.js";
-import { generateSignerName, generateSignerOrViewerEmail } from "../helpers/utils";
+import { SIGNERS_DATA } from "../testData.js";
 
 test.describe('DocumentsType', () => {
 
@@ -8,16 +8,13 @@ test.describe('DocumentsType', () => {
 
     test.setTimeout(250 * 1000);
 
-    const signerName = generateSignerName('001');
-    const signerEmail = generateSignerOrViewerEmail('001');    
-
     await signPage.uploadFileTab.fileUploader.uploadFile('testDocuments/picture.jpg');
     await signPage.uploadFileTab.clickPrepareDocumentBtn();
 
     await prepareForSignatureModal.clickSendForSignatureRadioBtn();
     await prepareForSignatureModal.clickAddSignerBtn();
-    await prepareForSignatureModal.fillSignerNameField(signerName);
-    await prepareForSignatureModal.fillSignerEmailField(signerEmail);
+    await prepareForSignatureModal.fillSignerNameField(SIGNERS_DATA.signerName1);
+    await prepareForSignatureModal.fillSignerEmailField(SIGNERS_DATA.signerEmail1);
     await prepareForSignatureModal.clickContinueBtn();
     await prepareForSignatureModal.clickGotItBtn();
 

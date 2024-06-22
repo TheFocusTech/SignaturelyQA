@@ -1,16 +1,10 @@
 import { expect } from "@playwright/test";
 import { test } from "../fixtures/base.js";
-import { DOCUMENT_STATUS } from '../testData.js';
-import { generateSignerName, generateSignerOrViewerEmail } from "../helpers/utils";
+import { DOCUMENT_STATUS, SIGNERS_DATA } from '../testData.js';
 
 test.describe('Sign Document', () => {
 
     test('TC_04_11_02 | Verify custom signing order', async ({ createBusinessUserAndLogin, signPage, prepareForSignatureModal }) => {
-
-        const signerName1 = generateSignerName('001');
-        const signerName2 = generateSignerName('002');
-        const signerEmail1 = generateSignerOrViewerEmail('001');
-        const signerEmail2 = generateSignerOrViewerEmail('002');        
 
         await signPage.uploadFileTab.fileUploader.uploadFile('testDocuments/picture.jpg');
         await signPage.uploadFileTab.clickPrepareDocumentBtn();
@@ -18,12 +12,12 @@ test.describe('Sign Document', () => {
         await prepareForSignatureModal.clickSignAndSendForSignatureRadioBtn();
         
         await prepareForSignatureModal.clickAddSignerBtn();
-        await prepareForSignatureModal.fillSignerNameField(signerName1, 0);
-        await prepareForSignatureModal.fillSignerEmailField(signerEmail1, 0);
+        await prepareForSignatureModal.fillSignerNameField(SIGNERS_DATA.signerName1, 0);
+        await prepareForSignatureModal.fillSignerEmailField(SIGNERS_DATA.signerEmail1, 0);
     
         await prepareForSignatureModal.clickAddSignerBtn();
-        await prepareForSignatureModal.fillSignerNameField(signerName2, 1);
-        await prepareForSignatureModal.fillSignerEmailField(signerEmail2, 1);
+        await prepareForSignatureModal.fillSignerNameField(SIGNERS_DATA.signerName2, 1);
+        await prepareForSignatureModal.fillSignerEmailField(SIGNERS_DATA.signerEmail2, 1);
     
         await prepareForSignatureModal.clickCustomSigningOrderCheckbox();
     
@@ -43,19 +37,15 @@ test.describe('Sign Document', () => {
         successModal     
     }) => {
 
-        const signerName = generateSignerName('001');       
-        const signerEmail = generateSignerOrViewerEmail('001');
-        const viewerEmail = generateSignerOrViewerEmail('002');       
-
         await signPage.uploadFileTab.fileUploader.uploadFile('testDocuments/todoList.xlsx');
         await signPage.uploadFileTab.clickPrepareDocumentBtn();
 
         await prepareForSignatureModal.clickSendForSignatureRadioBtn();
         await prepareForSignatureModal.clickAddSignerBtn();
-        await prepareForSignatureModal.fillSignerNameField(signerName, 0);
-        await prepareForSignatureModal.fillSignerEmailField(signerEmail, 0);
+        await prepareForSignatureModal.fillSignerNameField(SIGNERS_DATA.signerName1, 0);
+        await prepareForSignatureModal.fillSignerEmailField(SIGNERS_DATA.signerEmail1, 0);
         await prepareForSignatureModal.clickAddRecipientsBtn();
-        await prepareForSignatureModal.fillRecipientEmailField(viewerEmail);
+        await prepareForSignatureModal.fillRecipientEmailField(SIGNERS_DATA.viewerEmail1);
         await prepareForSignatureModal.clickContinueBtn();
         await prepareForSignatureModal.clickGotItBtn();
         await prepareForSignatureModal.clickSignFieldsItem();
