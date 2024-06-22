@@ -1,5 +1,5 @@
 
-export default class SideMenuTemlatesComponent {
+export default class SideMenuTemplatesComponent {
     constructor(page) {
         this.page = page;
         this.createTemplate = this.page.getByRole('link', { name: 'Create Template' });

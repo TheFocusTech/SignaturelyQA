@@ -11,11 +11,11 @@ test.describe('Templates', () => {
         await templatePage.createTemplate.fillOptionalMessageField(CREATE_TEMPLATE.optionalMessage);
         await templatePage.createTemplate.fillCreateTemplateRolesField(CREATE_TEMPLATE.nameRole);
         await templatePage.createTemplate.fileUploader.uploadFile('testDocuments/CSV.csv');
-        await templatePage.createTemplate.clickFillTemlateBtn();
+        await templatePage.createTemplate.clickFillTemplateBtn();
         await prepareForSignatureModal.clickSignFieldsItem();
         await prepareForSignatureModal.doCanvasClicks();
         await prepareForSignatureModal.clickCreateBtn();
-        await prepareForSignatureModal.clickBackToTempatesBtn();
+        await prepareForSignatureModal.clickBackToTemplatesBtn();
 
         await expect(await templatePage.table.documentStatus).toHaveText(TEMPLATES_STATUS.live);
 
@@ -28,11 +28,11 @@ test.describe('Templates', () => {
         await templatePage.createTemplate.fillTemplateNameField(CREATE_TEMPLATE.nameField);
         await templatePage.createTemplate.fillCreateTemplateRolesField(CREATE_TEMPLATE.nameRole);
         await templatePage.createTemplate.fileUploader.uploadFile('testDocuments/CSV.csv');
-        await templatePage.createTemplate.clickFillTemlateBtn();
+        await templatePage.createTemplate.clickFillTemplateBtn();
         await prepareForSignatureModal.clickSignFieldsItem();
         await prepareForSignatureModal.doCanvasClicks();
         await prepareForSignatureModal.clickCreateBtn();
-        await prepareForSignatureModal.clickBackToTempatesBtn();
+        await prepareForSignatureModal.clickBackToTemplatesBtn();
         await templatePage.table.clickOptionsBtn();
         await templatePage.table.clickAddToAPIBtn();
         await templatePage.toast.waitForToastCompleted();
