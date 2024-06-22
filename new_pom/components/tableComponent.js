@@ -8,7 +8,8 @@ export default class TableComponent {
         this.optionsBtn = this.page.getByText('Options');
         this.editAndResendBtn = this.page.getByText('Edit & Resend');
         this.titleEditAndResendDocument = this.page.getByText('Edit & Resend document');
-        this.createAPIKeyBtn = this.page.locator('.documents__empty-table').getByRole('button', {name: 'Create API key'});
+        this.createAPIKeyBtn = this.page.locator('.documents__empty-table').getByRole('button', { name: 'Create API key' });
+        this.revertToDraftBtn = this.page.getByRole('button', { name: 'Revert to Draft' });
 
     }
 
@@ -31,4 +32,8 @@ export default class TableComponent {
         await this.createAPIKeyBtn.click();
     }
 
+    async clickRevertToDraftBtn() {
+        await this.revertToDraftBtn.waitFor();
+        await this.revertToDraftBtn.click();
+    }
 }
