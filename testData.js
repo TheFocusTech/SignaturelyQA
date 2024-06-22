@@ -15,7 +15,7 @@ export const CHOOSE_SIGNERS_FIELDS = {
     name3: `${process.env.EMAIL_PREFIX}003`,
     email3: `${process.env.EMAIL_PREFIX}003${process.env.EMAIL_DOMAIN}`
 };
-export const TOAST_MESSAGE ={
+export const TOAST_MESSAGE = {
     planSuccessChange: 'Plan has been successfully changed.',
     planRenew: 'Plan has been renew',
     folderDeleted: 'Folder deleted successfully.',
@@ -97,6 +97,7 @@ export const END_PLAN = 'Your plan will end on';
 export const MESSAGE = "Project 1";
 export const TEMPLATES_STATUS = {
     live: 'Live',
+    api: 'api',
 }
 
 export const SUBSCRIPTIONS = ["Monthly", "Annually"];

@@ -11,8 +11,8 @@ export default class ToastComponent {
         await this.toastFirstCloseBtn.click();
     }
 
-    async waitForToastDocumentSaved() {
-        await this.toastFirstCloseBtn.waitFor("visible");
-        await this.toastFirstCloseBtn.waitFor({ state: "hidden" });
+    async waitForToastCompleted() {
+        await this.toastFirstCloseBtn.waitFor({ state: 'visible' });
+        await this.toastFirstCloseBtn.waitFor({ state: 'hidden' });
     }
 }

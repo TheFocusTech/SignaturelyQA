@@ -27,6 +27,7 @@ import ChooseSignatureOrInitialModal from "../new_pom/modalWindows/chooseSignatu
 import CreateOrEditSignatureOnSettingModal from "../new_pom/modalWindows/createOrEditSignatureOnSettingModal";
 import NewSettingsEditSignaturePage from "../new_pom/pages/settings/settingsEditSignaturePage";
 import NewLoginPage from "../new_pom/pages/loginPage";
+import ApiTemplatesPage from "../new_pom/pages/templates/apiTemplatesPage.js";
 
 
 export const test = base.extend({
@@ -167,5 +168,9 @@ export const test = base.extend({
 
     settingsEditSignaturePage: async ({ page }, use) => {
         await use(new NewSettingsEditSignaturePage(page));
+    },
+
+    apiTemplatesPage: async ({ page }, use) => {
+        await use(new ApiTemplatesPage(page));
     },
 });
