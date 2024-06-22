@@ -22,7 +22,7 @@ test.describe('DocumentsType', () => {
     await prepareForSignatureModal.doCanvasClicks();
     await prepareForSignatureModal.clickSaveBtn();
 
-    await finalStepPage.clickSendForSignatureBtn();
+    await finalStepPage.waitAndClickSendForSignatureBtn();
     await successModal.clickBackToDocumentsBtn();
     await documentsPage.table.clickOptionsBtn();
     await documentsPage.table.clickEditAndResendBtn();

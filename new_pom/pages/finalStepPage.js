@@ -23,7 +23,7 @@ export default class FinalStepPage {
         await this.signDocumentAndSendForSignatureBtn.click();
     }
 
-    async clickSendForSignatureBtn() {
+    async waitAndClickSendForSignatureBtn() {
         await this.toast.waitForToastDocumentSaved();
         await this.sendForSignatureBtn.click();
     }
