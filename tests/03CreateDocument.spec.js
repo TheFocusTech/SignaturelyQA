@@ -6,13 +6,14 @@ import {
 	MESSAGE,
 } from "../testData.js";
 import { createSignature } from "../helpers/preconditions.js";
+import { generateSignerName, generateSignerOrViewerEmail } from "../helpers/utils";
 
 test.describe("CreateDocument", () => {
 	test("TC_03_07_01 | Sign a document - verify that user can sign a document themselves", async ({
 		createBusinessUserAndLogin,
 		signPage,
 		prepareForSignatureModal,
-		createSignatureModal,
+		createSignatureOrInitialModal,
 		finalStepPage,
 		successModal,
 		documentsPage,
@@ -45,7 +46,7 @@ test.describe("CreateDocument", () => {
 		createBusinessUserAndLogin,
 		signPage,
 		prepareForSignatureModal,
-		createSignatureModal,
+		createSignatureOrInitialModal,
 		finalStepPage,
 		successModal,
 		documentsPage,

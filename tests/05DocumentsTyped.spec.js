@@ -1,5 +1,6 @@
 import { expect } from "@playwright/test";
 import { test } from "../fixtures/base.js";
+import { generateSignerName, generateSignerOrViewerEmail } from "../helpers/utils";
 
 test.describe('DocumentsType', () => {
 

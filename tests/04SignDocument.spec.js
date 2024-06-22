@@ -1,6 +1,7 @@
 import { expect } from "@playwright/test";
 import { test } from "../fixtures/base.js";
-import { DOCUMENT_STATUS, TOAST_MESSAGE } from '../testData.js';
+import { DOCUMENT_STATUS } from '../testData.js';
+import { generateSignerName, generateSignerOrViewerEmail } from "../helpers/utils";
 
 test.describe('Sign Document', () => {
 
@@ -43,6 +44,7 @@ test.describe('Sign Document', () => {
     }) => {
 
         const signerName = generateSignerName(1);
+        console.log(signerName);
         const signerEmail = generateSignerOrViewerEmail(1);
         const viewerEmail = generateSignerOrViewerEmail(2);       
 

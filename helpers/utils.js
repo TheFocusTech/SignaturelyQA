@@ -145,11 +145,11 @@ export async function clickCanvas(page, canvasLocator, excludedAreas = []) {
     return clickPosition;
 }
 
-export async function generateSignerName(signerOrdinalNumder)  {
+export function generateSignerName(signerOrdinalNumder)  {
     return process.env.EMAIL_PREFIX + '00' + signerOrdinalNumder;
 }
 
 
-export async function generateSignerOrViewerEmail(signerOrViewerOrdinalNumder)  {
+export function generateSignerOrViewerEmail(signerOrViewerOrdinalNumder)  {
     return process.env.EMAIL_PREFIX + '00' + signerOrViewerOrdinalNumder + process.env.EMAIL_DOMAIN;
 }
