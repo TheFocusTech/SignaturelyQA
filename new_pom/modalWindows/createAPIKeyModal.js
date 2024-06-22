@@ -3,23 +3,23 @@ export default class NewCreateAPIKeyModal {
         this.page = page;
 
         this.createAPIKeyNameField = this.page.getByPlaceholder('API key name');
-        this.createAPIButton = this.page.getByRole('button', { name: 'Create API' });
-        this.copyAPIButton = this.page.getByRole('button', { name: 'Copy API' });
+        this.createAPIBtn = this.page.getByRole('button', { name: 'Create API' });
+        this.copyAPIBtn = this.page.getByRole('button', { name: 'Copy API' });
         this.APIKeyValue = this.page.locator('.apiKeyModal__value');
-        this.closeAPIModalButton = this.page.locator('.modal__close-button > div > .injected-svg > path');
+        this.closeAPIModalBtn = this.page.locator('.modal__close-button > div > .injected-svg > path');
     }
 
-    async fillInCreateAPIKeyNameField(keyName) {
+    async fillCreateAPIKeyNameField(keyName) {
         await this.createAPIKeyNameField.waitFor();
         await this.createAPIKeyNameField.fill(keyName);
     }
 
-    async clickCreateAPIButton() {
-        await this.createAPIButton.click();
+    async clickCreateAPIBtn() {
+        await this.createAPIBtn.click();
     }
 
-    async clickCopyAPIButton() {
-        await this.copyAPIButton.click();
+    async clickCopyAPIBtn() {
+        await this.copyAPIBtn.click();
     }
 
     async getAPIKeyValueText() {
@@ -27,7 +27,7 @@ export default class NewCreateAPIKeyModal {
         return await this.APIKeyValue.textContent();
     }
 
-    async clickCloseAPIModalButton() {
-        await this.closeAPIModalButton.click();
+    async clickCloseAPIModalBtn() {
+        await this.closeAPIModalBtn.click();
     }
 }

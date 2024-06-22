@@ -9,8 +9,9 @@ export default class SuccessModal {
 
     async clickBackToDocumentsBtn() {
       await this.statusDocument.waitFor({state: 'visible'});
+      await new Promise(resolve => setTimeout(resolve, 1000));
       await this.backToDocumentsBtn.click();
-    }
+  }
 
     async clickBackToFormsBtn() {
       await this.backToFormsBtn.click();

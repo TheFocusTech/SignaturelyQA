@@ -33,7 +33,6 @@ import CreateFormPage from "../new_pom/pages/createFormPage.js";
 
 export const test = base.extend({
 
-
     createNewFolder: [
         async ({ page }, use) => {
             const signPage = new SignPage(page);
