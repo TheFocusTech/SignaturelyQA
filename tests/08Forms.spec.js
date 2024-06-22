@@ -5,7 +5,7 @@ import SuccessModal from "../new_pom/modalWindows/successModal.js";
 
 test.describe('Sign Document', () => {
 
-  test.only('TC_08_32_01 | Verify that user can create form', async ({ createBusinessUserAndLogin, signPage, 
+  test('TC_08_32_01 | Verify that user can create form', async ({ createBusinessUserAndLogin, signPage, 
     prepareForSignatureModal, createFormPage, formsPage, successModal }) => {
     test.setTimeout(120 * 1000);
 
