@@ -10,14 +10,15 @@ test.describe('DocumentsType', () => {
        
         test.setTimeout(250 * 1000);
 
-        await allure.description('Objective: To verify the process of logging a user into their account.');
-        await allure.tags('Login');
+        await allure.description('Objective: To verify that the document can be returned for editing.');
+        await allure.tags('Edit & Resend, Documents');
         await allure.severity(Severity.CRITICAL);
-        // await allure.link(
-        //     "Documentation",
-        //     "https://docs.google.com/document/d/1Qce7tKWOwVYtPxgQv_8ae-HUkbAgeOFph0lB_eziY_k/edit#heading=h.by32e2y2do4w",
-        //     "TC_02_05_01"
-        await allure.epic('Authorization');
+        await allure.link(
+            "Documentation",
+            "https://docs.google.com/document/d/1Qce7tKWOwVYtPxgQv_8ae-HUkbAgeOFph0lB_eziY_k/edit#heading=h.334tqcftqjdb",
+            "TC_05_21_01"),
+
+        await allure.epic('Documents');
         
         
 
@@ -32,9 +33,19 @@ test.describe('DocumentsType', () => {
 
     })
 
-    test('TC_05_21_02 | Verify that button "Edit&Resend" is active', async ({ page, createBusinessUserAndLogin, signPage, prepareForSignatureModal, successModal, editAndResendDocumentModal, finalStepPage, documentsPage }) => {
+    test('TC_05_21_02 | Verify that button "Revert to Draft" is active', async ({ page, createBusinessUserAndLogin, signPage, prepareForSignatureModal, successModal, editAndResendDocumentModal, finalStepPage, documentsPage }) => {
 
         test.setTimeout(250 * 1000);
+
+        await allure.description('Objective: To verify that the document can be returned for editing.');
+        await allure.tags('Edit & Resend, Documents');
+        await allure.severity(Severity.CRITICAL);
+        await allure.link(
+            "Documentation",
+            "https://docs.google.com/document/d/1Qce7tKWOwVYtPxgQv_8ae-HUkbAgeOFph0lB_eziY_k/edit#heading=h.334tqcftqjdb",
+            "TC_05_21_02"),
+            
+        await allure.epic('Documents');
 
         await prepareForSignature(signPage, prepareForSignatureModal);
         await finalStepPage.waitAndClickSendForSignatureBtn();
