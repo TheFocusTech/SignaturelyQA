@@ -20,10 +20,11 @@ export function delay(ms) {
 }
 
 export async function generateNewUserData(free = false, workflowVersion = null) {
-    // await test.step('Create new user data', async () => {
+    let userData;
+    await test.step('Create new user data', async () => {
         let userNumber = generateNumberForNewUser();
         process.env.NEW_USER_NUMBER = userNumber;
-        let userData = {
+        userData = {
             email: `${process.env.EMAIL_PREFIX}${userNumber}${process.env.EMAIL_DOMAIN}`,
             name: `TestUser${userNumber}`,
             password: `QA_tester${userNumber}`,
@@ -39,8 +40,8 @@ export async function generateNewUserData(free = false, workflowVersion = null) 
             userData.workflowVersion = workflowVersion;
         }
 
+    });
         return userData;
-    // });
 }
 
 export async function createNewUserThroughApi(request) {
@@ -62,11 +63,13 @@ export async function createNewFreeUserThroughApi(request) {
 }
 
 export async function retrieveUserEmailConfirmationLink(request, newUserData) {
-    // await test.step("Retrieve the confirmation link for the user's email.", async () => {
+    let confirmationLink;
+    await test.step("Retrieve the confirmation link for the user's email.", async () => {
         const auth = await authorize();
+        confirmationLink = await getConfirmationLinkFromEmail(auth, newUserData.email);
 
-        return await getConfirmationLinkFromEmail(auth, newUserData.email);
-    // });
+    });
+        return confirmationLink;
 }
 
 export async function retrieveUserEmailConfirmCode(request, newUserEmail) {

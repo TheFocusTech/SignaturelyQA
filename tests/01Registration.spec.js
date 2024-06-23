@@ -14,7 +14,6 @@ import { generateNewUserData } from "../helpers/utils";
 import { allure } from "allure-playwright";
 import {Severity} from "allure-js-commons";
 
-
 test.describe('Registration', () => {
 
     test('TC_01_01_01 | Verify successful registration of Trial user', async ({page, request, signUpTrialPage, activateTrialStripePage, signPage, settingsCompanyPage, settingsBillingPage}) => {
@@ -27,7 +26,6 @@ test.describe('Registration', () => {
             "TC_01_01_01"
         );
         await allure.epic('Registration');
-
 
         const newUserData = await generateNewUserData();
         await test.step('Navigate to the Trial user registration page', async () => {

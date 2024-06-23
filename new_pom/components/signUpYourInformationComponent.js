@@ -10,19 +10,19 @@ export default class SignUpYourInformationComponent {
     }
 
     async fillNameInputField(name) {
-        await test.step(`Fill in Name with ${name}`, async () => {
+        await test.step('Fill in Name', async () => {
             await this.nameInputField.fill(name);
         });
     }
 
     async fillEmailInputField(email) {
-        await test.step(`Fill in Email with ${email}`, async () => {
+        await test.step('Fill in Email', async () => {
             await this.emailInputField.fill(email);
         });
     }
 
     async fillPasswordInputField(password) {
-        await test.step(`Fill in Password with ${password}`, async () => {
+        await test.step('Fill in Password', async () => {
             await this.passwordInputField.fill(password);
         });
     }
