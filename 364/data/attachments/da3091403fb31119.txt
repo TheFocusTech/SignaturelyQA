@@ -1,0 +1,6 @@
+Generated new user #240623195627989
+User with id #"e2c2b799-1756-41c9-932a-cf06d261ed2f" has been successfully created
+Clicking subscription button: Monthly
+Waiting for email to arrive...
+Fetching emails sent to ...+240623195627989@gmail.com
+Confirmation Code: VsmhG9g6WY
