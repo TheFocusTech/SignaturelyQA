@@ -7,7 +7,7 @@ import NewSignPage from '../new_pom/pages/sign/signPage.js';
 import NewDocumentsPage from '../new_pom/pages/documents/documentsPage.js';
 import NewDocumentsTrashPage from '../new_pom/pages/documents/documentsTrashPage.js';
 import PrepareForSignatureModal from '../new_pom/modalWindows/prepareForSignatureModal.js';
-import ActivateTrialStripePage from "../new_pom/pages/activateTrialStripePage";
+import ActivateTrialStripePage from "../new_pom/pages/signUp/activateTrialStripePage";
 import NewSettingsCompanyPage from "../new_pom/pages/settings/settingsCompanyPage.js";
 import NewSettingsBillingPage from "../new_pom/pages/settings/settingsBillingPage.js";
 import NewSettingsBillingPlanPage from "../new_pom/pages/settings/settingsBillingPlanPage.js";
@@ -29,6 +29,7 @@ import NewSettingsEditSignaturePage from "../new_pom/pages/settings/settingsEdit
 import NewLoginPage from "../new_pom/pages/loginPage";
 import FormsPage from "../new_pom/pages/formsPage.js";
 import CreateFormPage from "../new_pom/pages/createFormPage.js";
+import SignUpTrialPage from "../new_pom/pages/signUp/signUpTrialPage";
 
 
 export const test = base.extend({
@@ -173,6 +174,10 @@ export const test = base.extend({
 
     createFormPage: async ({ page }, use) => {
         await use(new CreateFormPage(page));
+    },
+
+    signUpTrialPage: async ({ page }, use) => {
+        await use(new SignUpTrialPage(page));
     },
 
 });
