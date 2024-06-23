@@ -15,9 +15,9 @@ export default class TableComponent {
         this.controlsPath = this.page.locator('.tableControls__path');
     }
 
-    async clickOptionsBtn() {
-        await this.optionsBtn.waitFor();
-        await this.optionsBtn.click();
+    async clickOptionsBtn(i) {
+        await this.optionsBtn.nth(i).waitFor();
+        await this.optionsBtn.nth(i).click();
     }
 
     async clickEditAndResendBtn() {
@@ -40,11 +40,6 @@ export default class TableComponent {
     }
     async waitForDocumentTitleVisible(name) {
         await this.documentTitle.filter({ hasText: name }).waitFor({ state: 'visible' })
-    }
-
-    async clickNthOptionsBtn(i) {
-        await this.optionsBtn.nth(i).waitFor();
-        await this.optionsBtn.nth(i).click();
     }
 
     async clickMoveToBtn() {

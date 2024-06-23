@@ -33,7 +33,7 @@ test.describe('Templates', () => {
         await prepareForSignatureModal.doCanvasClicks();
         await prepareForSignatureModal.clickCreateBtn();
         await prepareForSignatureModal.clickBackToTemplatesBtn();
-        await templatePage.table.clickOptionsBtn();
+        await templatePage.table.clickOptionsBtn(0);
         await templatePage.table.clickAddToAPIBtn();
         await templatePage.toast.waitForToastCompleted();
         await templatePage.sideMenuTemplates.clickApiTemplates();

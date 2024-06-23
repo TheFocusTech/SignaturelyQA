@@ -118,5 +118,9 @@ export const SIGNERS_DATA = {
 };
 
 export const FOLDER_NAME = 'Folder for documents';
-export const UPLOAD_FILE_PATH = 'testDocuments/picture.jpg';
-export const UPLOAD_FILE_NAME = 'picture.jpg';
+export const UPLOAD_FILE_PATH = {
+    jpgDocument: 'testDocuments/picture.jpg',
+};
+export const UPLOAD_FILE_NAME = {
+    jpgDocument: 'picture.jpg',
+};

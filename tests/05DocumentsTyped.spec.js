@@ -24,7 +24,7 @@ test.describe('DocumentsType', () => {
 
     await finalStepPage.waitAndClickSendForSignatureBtn();
     await successModal.clickBackToDocumentsBtn();
-    await documentsPage.table.clickOptionsBtn();
+    await documentsPage.table.clickOptionsBtn(0);
     await documentsPage.table.clickEditAndResendBtn();
 
     await expect(documentsPage.table.titleEditAndResendDocument).toBeVisible();
@@ -47,9 +47,9 @@ test.describe('DocumentsType', () => {
         await documentsPage.sideMenu.clickSign();
         await documentsPage.toast.waitForToastIsHiddenByText(TOAST_MESSAGE.folderCreated);
         
-        await signPage.uploadFileTab.fileUploader.uploadFile(UPLOAD_FILE_PATH);
+        await signPage.uploadFileTab.fileUploader.uploadFile(UPLOAD_FILE_PATH.jpgDocument);
         await signPage.sideMenu.clickDocuments();
-        await documentsPage.table.clickNthOptionsBtn(1);
+        await documentsPage.table.clickOptionsBtn(1);
         await documentsPage.table.clickMoveToBtn();
         await moveToFolderModal.selectFolder(FOLDER_NAME);
         await moveToFolderModal.clickMoveToFolderBtn();
@@ -57,7 +57,7 @@ test.describe('DocumentsType', () => {
         await expect(documentsPage.toast.toastBody).toHaveText(TOAST_MESSAGE.fileMovedToFolder);
 
         await documentsPage.table.openFolder(FOLDER_NAME);
-        await expect(documentsPage.table.documentTitle).toHaveText(UPLOAD_FILE_NAME);
+        await expect(documentsPage.table.documentTitle).toHaveText(UPLOAD_FILE_NAME.jpgDocument);
     })
 
 })
