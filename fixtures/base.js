@@ -51,10 +51,10 @@ export const test = base.extend({
     ],
 
     createFreeUserAndLogin: [
-        async ({ request, page }, use) => {
+        async ({ request, page, loginPage }, use) => {
             await api_user_sign_up(request);
             await databaseConfirmNewUserEmail();
-            await newFreeUserLogin(page);
+            await newFreeUserLogin({ page, loginPage });
 
             await use("");
         },
@@ -62,9 +62,21 @@ export const test = base.extend({
     ],
 
     createBusinessUserAndLogin: [
-        async ({ page, createFreeUserAndLogin }, use) => {
+        async ({
+            createFreeUserAndLogin,
+            signPage,
+            settingsCompanyPage,
+            upgradeYourPlanModal,
+            settingsBillingPlanPage,
+            specialOneTimeOfferModal }, use) => {
 
-            await upgradeFreeUserToBusinessAndLogin(page);
+            await upgradeFreeUserToBusinessAndLogin({
+                signPage,
+                settingsCompanyPage,
+                upgradeYourPlanModal,
+                settingsBillingPlanPage,
+                specialOneTimeOfferModal
+            });
 
             await use("");
         },
@@ -72,7 +84,7 @@ export const test = base.extend({
     ],
 
     loginPage: async ({ page }, use) => {
-            await use(new NewLoginPage(page));
+        await use(new NewLoginPage(page));
     },
 
     signPage: async ({ page }, use) => {
@@ -111,7 +123,7 @@ export const test = base.extend({
         await use(new UpgradeYourPlanModal(page));
     },
 
-    downgradeToPersonalPlanModal: async ({page}, use) => {
+    downgradeToPersonalPlanModal: async ({ page }, use) => {
         await use(new DowngradeToPersonalPlanModal(page))
     },
 
