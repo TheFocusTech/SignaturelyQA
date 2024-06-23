@@ -1,0 +1,6 @@
+Generated new user #240623202349883
+User with id #"741be0b9-e395-44b5-bbab-103b455c923e" has been successfully created
+Clicking subscription button: Annually
+Waiting for email to arrive...
+Fetching emails sent to ...+240623202349883@gmail.com
+Confirmation Code: FRfaideDTP
