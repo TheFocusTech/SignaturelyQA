@@ -1,20 +1,32 @@
 import { expect } from '@playwright/test';
-import { test, createFreeUserAndLogin, createBusinessUserAndLogin } from "../fixtures/base.js";
-import SignPage from '../page_objects/signPage.js';
+import { test } from "../fixtures/base.js";
+import { URL_END_POINTS } from '../testData.js';
 
-test('Create Free User', async ({ page, createFreeUserAndLogin }) => {
-    const signPage = new SignPage(page);
+test.describe('Out of scope. Tests to maintain New User Creation.', () => {
 
-    await signPage.clickSettingsSidebarLinkAndGoSettingsCompanyPage();
-    await expect(page).toHaveURL(`${process.env.URL}/settings/company`)
-});
+    test('Create Free User', async ({
+        createFreeUserAndLogin,
+        loginPage,
+        signPage,
+        settingsCompanyPage }) => {
 
-test('Create Business User', async ({ page, createBusinessUserAndLogin }) => {
-    const signPage = new SignPage(page);
-    const settingsCompanyPage = await signPage.clickSettingsSidebarLinkAndGoSettingsCompanyPage();
-    const settingsBillingPage = await settingsCompanyPage.clickSettingsBillingSidebarLinkAngGoSettingsBillingPage();
+        await signPage.sideMenu.clickSettings();
+        await expect(settingsCompanyPage.page).toHaveURL(process.env.URL + URL_END_POINTS.settingsCompanyEndPoint)
+    });
 
-    const plan = settingsBillingPage.locators.getBillingPlanWrapper();
-    await expect (plan).toContainText ('Business', {exact: true} )
-    await expect(page).toHaveURL(`${process.env.URL}/settings/billing`);
-});
+    test('Create Business User', async ({
+        createBusinessUserAndLogin,
+        loginPage,
+        signPage,
+        settingsCompanyPage,
+        upgradeYourPlanModal,
+        settingsBillingPlanPage,
+        specialOneTimeOfferModal,
+        settingsBillingPage }) => {
+
+        await signPage.sideMenu.clickSettings();
+        await settingsCompanyPage.sideMenuSettings.clickBilling();
+        await expect(settingsBillingPage.billingPlanWrapper).toContainText('Business')
+        await expect(settingsBillingPlanPage.page).toHaveURL(process.env.URL + URL_END_POINTS.settingsBillingEndPoint);
+    });
+})
