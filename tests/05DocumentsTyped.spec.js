@@ -1,6 +1,7 @@
 import { expect } from "@playwright/test";
 import { test } from "../fixtures/base.js";
 import { SIGNERS_DATA, UPLOAD_FILE_PATH, UPLOAD_FILE_NAME, FOLDER_NAME, TOAST_MESSAGE } from "../testData.js";
+import { createFolder  } from "../helpers/preconditions.js";
 
 test.describe('DocumentsType', () => {
 
@@ -40,12 +41,10 @@ test.describe('DocumentsType', () => {
         createFolderModal }) => {
         test.slow();
 
-        await signPage.sideMenu.clickDocuments();
-        await documentsPage.clickCreateFolderBtn();
-        await createFolderModal.fillNewFolderName(FOLDER_NAME);
-        await createFolderModal.clickCreateBtn();
-        await documentsPage.sideMenu.clickSign();
-        await documentsPage.toast.waitForToastIsHiddenByText(TOAST_MESSAGE.folderCreated);
+        await createFolder(
+            signPage,
+            documentsPage,
+            createFolderModal);
         
         await signPage.uploadFileTab.fileUploader.uploadFile(UPLOAD_FILE_PATH.jpgDocument);
         await signPage.sideMenu.clickDocuments();
