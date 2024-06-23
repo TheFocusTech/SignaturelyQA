@@ -32,24 +32,27 @@ test.describe('DocumentsType', () => {
 
     });
 
-    test('TC_05_18_01 | Verify Move document to folder', async ({ createBusinessUserAndLogin, signPage, documentsPage }) => {
+    test('TC_05_18_01 | Verify Move document to folder', async ({
+        createBusinessUserAndLogin,
+        signPage,
+        documentsPage,
+        moveToFolderModal,
+        createFolderModal }) => {
         test.slow();
 
         await signPage.sideMenu.clickDocuments();
         await documentsPage.clickCreateFolderBtn();
-        await documentsPage.createFolderModal.fillNewFolderName(FOLDER_NAME);
-        await documentsPage.createFolderModal.clickCreateBtn();
+        await createFolderModal.fillNewFolderName(FOLDER_NAME);
+        await createFolderModal.clickCreateBtn();
         await documentsPage.sideMenu.clickSign();
         await documentsPage.toast.waitForToastIsHiddenByText(TOAST_MESSAGE.folderCreated);
         
         await signPage.uploadFileTab.fileUploader.uploadFile(UPLOAD_FILE_PATH);
         await signPage.sideMenu.clickDocuments();
-        await documentsPage.table.waitForDocumentTitleVisible(UPLOAD_FILE_NAME);
-        await documentsPage.table.waitForDocumentTitleVisible(FOLDER_NAME);
         await documentsPage.table.clickNthOptionsBtn(1);
         await documentsPage.table.clickMoveToBtn();
-        await documentsPage.moveToFolderModal.selectFolder(FOLDER_NAME);
-        await documentsPage.moveToFolderModal.clickMoveToFolderBtn();
+        await moveToFolderModal.selectFolder(FOLDER_NAME);
+        await moveToFolderModal.clickMoveToFolderBtn();
 
         await expect(documentsPage.toast.toastBody).toHaveText(TOAST_MESSAGE.fileMovedToFolder);
 
