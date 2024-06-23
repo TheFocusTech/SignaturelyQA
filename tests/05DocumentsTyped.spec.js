@@ -1,6 +1,6 @@
 import { expect } from "@playwright/test";
 import { test } from "../fixtures/base.js";
-import { SIGNERS_DATA } from "../testData.js";
+import { SIGNERS_DATA, UPLOAD_FILE_PATH, UPLOAD_FILE_NAME, FOLDER_NAME, TOAST_MESSAGE } from "../testData.js";
 
 test.describe('DocumentsType', () => {
 
@@ -30,6 +30,31 @@ test.describe('DocumentsType', () => {
     await expect(documentsPage.table.titleEditAndResendDocument).toBeVisible();
     expect(await documentsPage.table.getTitleText()).toBe("Edit & Resend document");
 
-  })
-})
+    });
 
+    test('TC_05_18_01 | Verify Move document to folder', async ({ createBusinessUserAndLogin, signPage, documentsPage }) => {
+        test.slow();
+
+        await signPage.sideMenu.clickDocuments();
+        await documentsPage.clickCreateFolderBtn();
+        await documentsPage.createFolderModal.fillNewFolderName(FOLDER_NAME);
+        await documentsPage.createFolderModal.clickCreateBtn();
+        await documentsPage.sideMenu.clickSign();
+        await documentsPage.toast.waitForToastIsHiddenByText(TOAST_MESSAGE.folderCreated);
+        
+        await signPage.uploadFileTab.fileUploader.uploadFile(UPLOAD_FILE_PATH);
+        await signPage.sideMenu.clickDocuments();
+        await documentsPage.table.waitForDocumentTitleVisible(UPLOAD_FILE_NAME);
+        await documentsPage.table.waitForDocumentTitleVisible(FOLDER_NAME);
+        await documentsPage.table.clickNthOptionsBtn(1);
+        await documentsPage.table.clickMoveToBtn();
+        await documentsPage.moveToFolderModal.selectFolder(FOLDER_NAME);
+        await documentsPage.moveToFolderModal.clickMoveToFolderBtn();
+
+        await expect(documentsPage.toast.toastBody).toHaveText(TOAST_MESSAGE.fileMovedToFolder);
+
+        await documentsPage.table.openFolder(FOLDER_NAME);
+        await expect(documentsPage.table.documentTitle).toHaveText(UPLOAD_FILE_NAME);
+    })
+
+})
