@@ -1,6 +1,6 @@
 import { expect } from "@playwright/test";
 import { test } from "../fixtures/base.js";
-import { prepareForSignature } from "../helpers/preconditions.js";
+import { prepareDocumentAwaiting } from "../helpers/preconditions.js";
 import { allure } from "allure-playwright";
 import { Severity } from "allure-js-commons";
 
@@ -18,9 +18,9 @@ test.describe('DocumentsType', () => {
             "TC_05_21_01"),
             await allure.epic('Documents');
                    
-        await prepareForSignature(signPage, prepareForSignatureModal);
-        await finalStepPage.waitAndClickSendForSignatureBtn();
-        await successModal.clickBackToDocumentsBtn();
+        await prepareDocumentAwaiting(signPage, prepareForSignatureModal, documentsPage, successModal, finalStepPage, );
+
+        await signPage.sideMenu.clickDocuments();
         await documentsPage.table.clickOptionsBtn();
         await documentsPage.table.clickEditAndResendBtn();
 
@@ -42,9 +42,8 @@ test.describe('DocumentsType', () => {
 
             await allure.epic('Documents');
 
-        await prepareForSignature(signPage, prepareForSignatureModal);
-        await finalStepPage.waitAndClickSendForSignatureBtn();
-        await successModal.clickBackToDocumentsBtn();
+        await prepareDocumentAwaiting(signPage, prepareForSignatureModal, documentsPage, successModal,finalStepPage);
+        await signPage.sideMenu.clickDocuments();
         await documentsPage.table.clickOptionsBtn();
         await documentsPage.table.clickEditAndResendBtn();
         await editAndResendDocumentModal.clickRevertToDraftBtn();
