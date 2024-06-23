@@ -12,7 +12,7 @@ export const createSignature = async (signPage, settingsCompanyPage, settingsEdi
     await settingsCompanyPage.sideMenu.clickSign();
 }
 
-export const prepareDocumentAwaiting = async ( signPage, prepareForSignatureModal, documentsPage, successModal,finalStepPage) => {
+export const createDocumentAwaiting = async ( signPage, prepareForSignatureModal, documentsPage, successModal,finalStepPage) => {
     await signPage.uploadFileTab.fileUploader.uploadFile('testDocuments/picture.jpg');
     await signPage.uploadFileTab.clickPrepareDocumentBtn();
     await prepareForSignatureModal.clickSendForSignatureRadioBtn();

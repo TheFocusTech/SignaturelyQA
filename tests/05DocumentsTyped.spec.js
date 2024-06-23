@@ -1,6 +1,6 @@
 import { expect } from "@playwright/test";
 import { test } from "../fixtures/base.js";
-import { prepareDocumentAwaiting } from "../helpers/preconditions.js";
+import { createDocumentAwaiting } from "../helpers/preconditions.js";
 import { allure } from "allure-playwright";
 import { Severity } from "allure-js-commons";
 
@@ -18,7 +18,7 @@ test.describe('DocumentsType', () => {
             "TC_05_21_01"),
             await allure.epic('Documents');
                    
-        await prepareDocumentAwaiting(signPage, prepareForSignatureModal, documentsPage, successModal, finalStepPage, );
+        await createDocumentAwaiting(signPage, prepareForSignatureModal, documentsPage, successModal, finalStepPage, );
 
         await signPage.sideMenu.clickDocuments();
         await documentsPage.table.clickOptionsBtn();
@@ -42,7 +42,7 @@ test.describe('DocumentsType', () => {
 
             await allure.epic('Documents');
 
-        await prepareDocumentAwaiting(signPage, prepareForSignatureModal, documentsPage, successModal,finalStepPage);
+        await createDocumentAwaiting(signPage, prepareForSignatureModal, documentsPage, successModal,finalStepPage);
         await signPage.sideMenu.clickDocuments();
         await documentsPage.table.clickOptionsBtn();
         await documentsPage.table.clickEditAndResendBtn();
