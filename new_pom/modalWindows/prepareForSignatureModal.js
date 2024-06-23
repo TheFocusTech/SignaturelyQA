@@ -32,6 +32,7 @@ export default class PrepareForSignatureModal {
         this.recipientEmailField = this.page.getByPlaceholder('test@signaturely.com'); 
         this.nameFieldItem = this.page.locator('ul.interactModal__fieldBar-fieldList li').filter({ hasText: /^Name$/ }).first();
         this.signFieldItem = this.page.locator('ul.interactModal__fieldBar-fieldList li').nth(1);      
+
     }
 
     async clickSignDocumentRadioBtn() {
@@ -99,7 +100,7 @@ export default class PrepareForSignatureModal {
         }
     }
 
-    async clickBackToTempatesBtn() {
+    async clickBackToTemplatesBtn() {
         try {
             await this.backToTempatesBtn.click();
 
@@ -111,7 +112,7 @@ export default class PrepareForSignatureModal {
     async clickCustomSigningOrderCheckbox() {
         await this.customSigningOrderCheckbox.click();
     }
-    
+
     async clickAddRecipientsBtn() {
         await this.addRecipientsBtn.click();
     }
