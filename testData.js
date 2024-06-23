@@ -4,13 +4,15 @@ export const URL_END_POINTS = {
     activateTrialEndPoint: '/activate-trial',
     settingsBillingPlanEndPoint: '/settings/billing/plan',
     signUpPersonalEndPoint: '/signup/personal',
+    settingsBillingEndPoint: '/settings/billing',
+    settingsCompanyEndPoint: '/settings/company',
     signUpTrialEndPoint: '/signup',
     confirmAccountEndPoint: '/confirm-account',
 };
 export const ACTIVE_COLOR = 'rgb(0, 163, 250)';
 export const FILL_FOLDER_NAME = 'Folder 1';
 
-export const TOAST_MESSAGE ={
+export const TOAST_MESSAGE = {
     planSuccessChange: 'Plan has been successfully changed.',
     planRenew: 'Plan has been renew',
     folderDeleted: 'Folder deleted successfully.',
@@ -89,6 +91,7 @@ export const END_PLAN = 'Your plan will end on';
 export const MESSAGE = "Project 1";
 export const TEMPLATES_STATUS = {
     live: 'Live',
+    api: 'api',
 }
 
 export const SUBSCRIPTIONS = ["Monthly", "Annually"];
@@ -103,9 +106,9 @@ export const EMAIL_SUBJECTS = {
 export const SIGNER_ME = 'Me (Now)';
 
 export const SIGNERS_DATA = {
-    signerName1 : `${process.env.NEW_USER_NAME}${'001'}`,  
-    signerEmail1 : `${process.env.EMAIL_PREFIX}${process.env.NEW_USER_NUMBER}${'001'}${process.env.EMAIL_DOMAIN}`,
-    signerName2 : `${process.env.NEW_USER_NAME}${'002'}`,  
-    signerEmail2 : `${process.env.EMAIL_PREFIX}${process.env.NEW_USER_NUMBER}${'002'}${process.env.EMAIL_DOMAIN}`,
-    viewerEmail1 : `${process.env.EMAIL_PREFIX}${process.env.NEW_USER_NUMBER}${'003'}${process.env.EMAIL_DOMAIN}`
+    signerName1: `${process.env.NEW_USER_NAME}${'001'}`,
+    signerEmail1: `${process.env.EMAIL_PREFIX}${process.env.NEW_USER_NUMBER}${'001'}${process.env.EMAIL_DOMAIN}`,
+    signerName2: `${process.env.NEW_USER_NAME}${'002'}`,
+    signerEmail2: `${process.env.EMAIL_PREFIX}${process.env.NEW_USER_NUMBER}${'002'}${process.env.EMAIL_DOMAIN}`,
+    viewerEmail1: `${process.env.EMAIL_PREFIX}${process.env.NEW_USER_NUMBER}${'003'}${process.env.EMAIL_DOMAIN}`
 }
