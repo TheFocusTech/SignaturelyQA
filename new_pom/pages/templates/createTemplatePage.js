@@ -1,36 +1,37 @@
 import SideMenuComponent from "../../components/sideMenuComponent";
-import SideMenuTemlatesComponent from "../../components/sideMenuTemplatesComponent";
+import SideMenuTemplatesComponent from "../../components/sideMenuTemplatesComponent";
 import FileUploaderComponent from "../../components/fileUploaderComponent";
 
 export default class NewCreateTemplatePage {
+
     constructor(page) {
         this.page = page;
-
         this.sideMenu = new SideMenuComponent(this.page);
-        this.sideMenuTemplates = new SideMenuTemlatesComponent (this.page);
+        this.sideMenuTemplates = new SideMenuTemplatesComponent(this.page);
         this.fileUploader = new FileUploaderComponent(this.page);
 
         this.templateNameField = this.page.getByPlaceholder('A template name to identify');
         this.optionalMessageField = this.page.getByPlaceholder('Add an optional message for');
         this.createTemplateRolesField = this.page.getByPlaceholder('Role');
-        this.fillTemlateBtn = this.page.getByRole('button', { name: 'Fill Template' });
+        this.fillTemplateBtn = this.page.getByRole('button', { name: 'Fill Template' });
+
     }
 
     async fillTemplateNameField(name) {
-      await this.templateNameField.fill(name);
+        await this.templateNameField.fill(name);
     }
 
-      async fillOptionalMessageField(message) {
+    async fillOptionalMessageField(message) {
         await this.optionalMessageField.fill(message);
-      }
-
-      async fillCreateTemplateRolesField(role) {
-        await this.createTemplateRolesField.fill(role);
-      }
-
-      async clickFillTemlateBtn() {
-        await this.fillTemlateBtn.waitFor();
-        await this.fillTemlateBtn.click();
-      }
-
     }
+
+    async fillCreateTemplateRolesField(role) {
+        await this.createTemplateRolesField.fill(role);
+    }
+
+    async clickFillTemplateBtn() {
+        await this.fillTemplateBtn.waitFor();
+        await this.fillTemplateBtn.click();
+    }
+
+}
