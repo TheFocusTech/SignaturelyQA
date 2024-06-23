@@ -31,6 +31,8 @@ export default class PrepareForSignatureModal {
         this.addRecipientsBtn = this.page.getByText('Recipients', { exact: true });
         this.recipientEmailField = this.page.getByPlaceholder('test@signaturely.com'); 
         this.prepareForSigningTitle = this.page.getByRole('heading', {name: 'Prepare for Signing'});      
+        this.nameFieldItem = this.page.locator('ul.interactModal__fieldBar-fieldList li').filter({ hasText: /^Name$/ }).first();
+        this.signFieldItem = this.page.locator('ul.interactModal__fieldBar-fieldList li').nth(1);      
 
     }
 
@@ -123,6 +125,18 @@ export default class PrepareForSignatureModal {
     async getPrepareForSigningTitleText() {
         const actualText = await this.prepareForSigningTitle.textContent();
         return actualText
+    }
+
+    async clickSignFieldItem() {
+        await this.signFieldItem.click();
+    }
+
+    async clickNameFieldItem() {
+        await this.nameFieldItem.click();
+    }
+
+    async clickCreateBtn() {
+        await this.createBtn.click();
     }
 
 }
