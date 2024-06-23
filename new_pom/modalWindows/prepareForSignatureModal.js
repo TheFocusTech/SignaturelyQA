@@ -91,22 +91,8 @@ export default class PrepareForSignatureModal {
         await this.saveBtn.click();
     }
 
-    async clickCreateBtn() {
-        try {
-            await this.createBtn.click();
-
-        } finally {
-
-        }
-    }
-
     async clickBackToTemplatesBtn() {
-        try {
-            await this.backToTempatesBtn.click();
-
-        } finally {
-
-        }
+        await this.backToTempatesBtn.click();
     }
 
     async clickCustomSigningOrderCheckbox() {
