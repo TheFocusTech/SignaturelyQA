@@ -62,7 +62,6 @@ export const test = base.extend({
     createBusinessUserAndLogin: [
         async ({
             createFreeUserAndLogin,
-            loginPage,
             signPage,
             settingsCompanyPage,
             upgradeYourPlanModal,

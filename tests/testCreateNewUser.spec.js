@@ -6,7 +6,6 @@ test.describe('Out of scope. Tests to maintain New User Creation.', () => {
 
     test('Create Free User', async ({
         createFreeUserAndLogin,
-        loginPage,
         signPage,
         settingsCompanyPage }) => {
 
@@ -16,12 +15,9 @@ test.describe('Out of scope. Tests to maintain New User Creation.', () => {
 
     test('Create Business User', async ({
         createBusinessUserAndLogin,
-        loginPage,
         signPage,
         settingsCompanyPage,
-        upgradeYourPlanModal,
         settingsBillingPlanPage,
-        specialOneTimeOfferModal,
         settingsBillingPage }) => {
 
         await signPage.sideMenu.clickSettings();
