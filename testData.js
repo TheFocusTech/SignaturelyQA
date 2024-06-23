@@ -42,6 +42,8 @@ export const CREATE_TEMPLATE = {
     optionalMessage: 'USA',
     nameRole: 'Boss',
 }
+export const PLANS = ["Personal", "Business"];
+export const RANDOM_ANNUALLY_PLAN = (randomPlan) => `${randomPlan} Annually Plan`;
 
 export const DOCUMENT_TITLE = 'Document';
 export const DOCUMENT_STATUS = {
