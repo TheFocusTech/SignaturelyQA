@@ -28,7 +28,8 @@ import CreateOrEditSignatureOnSettingModal from "../new_pom/modalWindows/createO
 import NewSettingsEditSignaturePage from "../new_pom/pages/settings/settingsEditSignaturePage";
 import NewLoginPage from "../new_pom/pages/loginPage";
 import ApiTemplatesPage from "../new_pom/pages/templates/apiTemplatesPage.js";
-
+import FormsPage from "../new_pom/pages/formsPage.js";
+import CreateFormPage from "../new_pom/pages/createFormPage.js";
 
 export const test = base.extend({
 
@@ -50,10 +51,10 @@ export const test = base.extend({
     ],
 
     createFreeUserAndLogin: [
-        async ({ request, page }, use) => {
+        async ({ request, page, loginPage }, use) => {
             await api_user_sign_up(request);
             await databaseConfirmNewUserEmail();
-            await newFreeUserLogin(page);
+            await newFreeUserLogin({ page, loginPage });
 
             await use("");
         },
@@ -61,9 +62,21 @@ export const test = base.extend({
     ],
 
     createBusinessUserAndLogin: [
-        async ({ page, createFreeUserAndLogin }, use) => {
+        async ({
+            createFreeUserAndLogin,
+            signPage,
+            settingsCompanyPage,
+            upgradeYourPlanModal,
+            settingsBillingPlanPage,
+            specialOneTimeOfferModal }, use) => {
 
-            await upgradeFreeUserToBusinessAndLogin(page);
+            await upgradeFreeUserToBusinessAndLogin({
+                signPage,
+                settingsCompanyPage,
+                upgradeYourPlanModal,
+                settingsBillingPlanPage,
+                specialOneTimeOfferModal
+            });
 
             await use("");
         },
@@ -71,7 +84,7 @@ export const test = base.extend({
     ],
 
     loginPage: async ({ page }, use) => {
-            await use(new NewLoginPage(page));
+        await use(new NewLoginPage(page));
     },
 
     signPage: async ({ page }, use) => {
@@ -110,7 +123,7 @@ export const test = base.extend({
         await use(new UpgradeYourPlanModal(page));
     },
 
-    downgradeToPersonalPlanModal: async ({page}, use) => {
+    downgradeToPersonalPlanModal: async ({ page }, use) => {
         await use(new DowngradeToPersonalPlanModal(page))
     },
 
@@ -169,4 +182,14 @@ export const test = base.extend({
     apiTemplatesPage: async ({ page }, use) => {
         await use(new ApiTemplatesPage(page));
     },
+
+    formsPage: async ({ page }, use) => {
+        await use(new FormsPage(page));
+    },
+
+    createFormPage: async ({ page }, use) => {
+        await use(new CreateFormPage(page));
+    },
+
 });
+

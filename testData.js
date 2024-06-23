@@ -4,6 +4,8 @@ export const URL_END_POINTS = {
     activateTrialEndPoint: '/activate-trial',
     settingsBillingPlanEndPoint: '/settings/billing/plan',
     signUpPersonalEndPoint: '/signup/personal',
+    settingsBillingEndPoint: '/settings/billing',
+    settingsCompanyEndPoint: '/settings/company'
 };
 export const ACTIVE_COLOR = 'rgb(0, 163, 250)';
 export const FILL_FOLDER_NAME = 'Folder 1';
@@ -49,7 +51,8 @@ export const DOCUMENT_STATUS = {
     awaiting: 'awaiting',
     draft: 'draft',
     completed: 'completed',
-    processing: 'processing'
+    live: 'live',
+    processing: 'processing',
 };
 export const CI_USER_NAME = 'CI_user';
 export const BUSINESS_MONTHLY_PLAN = "Your plan (Billed Monthly)Business";

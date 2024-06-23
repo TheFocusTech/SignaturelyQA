@@ -29,7 +29,9 @@ export default class PrepareForSignatureModal {
         this.customSigningOrderPositionNumberOne = this.page.locator('span.signers__item-order-position').first();
         this.customSigningOrderPositionNumberTwo = this.page.locator('span.signers__item-order-position').last();
         this.addRecipientsBtn = this.page.getByText('Recipients', { exact: true });
-        this.recipientEmailField = this.page.getByPlaceholder('test@signaturely.com');
+        this.recipientEmailField = this.page.getByPlaceholder('test@signaturely.com'); 
+        this.nameFieldItem = this.page.locator('ul.interactModal__fieldBar-fieldList li').filter({ hasText: /^Name$/ }).first();
+        this.signFieldItem = this.page.locator('ul.interactModal__fieldBar-fieldList li').nth(1);      
 
     }
 
@@ -119,4 +121,15 @@ export default class PrepareForSignatureModal {
         await this.recipientEmailField.fill(email);
     }
 
+    async clickSignFieldItem() {
+        await this.signFieldItem.click();
+    }
+
+    async clickNameFieldItem() {
+        await this.nameFieldItem.click();
+    }
+
+    async clickCreateBtn() {
+        await this.createBtn.click();
+    }
 }
