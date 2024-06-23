@@ -29,6 +29,7 @@ import NewSettingsEditSignaturePage from "../new_pom/pages/settings/settingsEdit
 import NewLoginPage from "../new_pom/pages/loginPage";
 import FormsPage from "../new_pom/pages/formsPage.js";
 import CreateFormPage from "../new_pom/pages/createFormPage.js";
+import SettingsProfilePage from "../new_pom/pages/settings/settingsProfilePage.js";
 
 
 export const test = base.extend({
@@ -187,4 +188,7 @@ export const test = base.extend({
         await use(new CreateFormPage(page));
     },
 
+    settingsProfilePage: async ({ page }, use) => {
+        await use(new SettingsProfilePage(page));
+    },
 });
