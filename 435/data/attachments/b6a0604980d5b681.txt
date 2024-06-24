@@ -1,0 +1,6 @@
+Generated new user #240624230422940
+User with id #"5cd681f5-e92b-420e-b656-87952868f566" has been successfully created
+Clicking subscription button: Annually
+Waiting for email to arrive...
+Fetching emails sent to ...+240624230422940@gmail.com
+Confirmation Code: TRH225AlcO
