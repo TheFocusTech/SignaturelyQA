@@ -1,10 +1,10 @@
 import { expect } from "@playwright/test";
 import { test } from "../fixtures/base.js";
-import { createDocumentAwaiting } from "../helpers/preconditions.js";
+import { createDocumentAwaiting, createFolder } from "../helpers/preconditions.js";
+import { UPLOAD_FILE_PATH, UPLOAD_FILE_NAME, FOLDER_NAME, TOAST_MESSAGE } from "../testData.js";
 import { allure } from "allure-playwright";
 import { Severity } from "allure-js-commons";
-import { SIGNERS_DATA, UPLOAD_FILE_PATH, UPLOAD_FILE_NAME, FOLDER_NAME, TOAST_MESSAGE } from "../testData.js";
-import { createFolder } from "../helpers/preconditions.js";
+
 
 test.describe('DocumentsType', () => {
 
@@ -23,7 +23,7 @@ test.describe('DocumentsType', () => {
         await createDocumentAwaiting(signPage, prepareForSignatureModal, documentsPage, successModal, finalStepPage,);
 
         await signPage.sideMenu.clickDocuments();
-        await documentsPage.table.clickOptionsBtn();
+        await documentsPage.table.clickOptionsButton();
         await documentsPage.table.clickEditAndResendBtn();
 
         await expect(editAndResendDocumentModal.editAndResendTitle).toBeVisible();
@@ -46,39 +46,39 @@ test.describe('DocumentsType', () => {
 
         await createDocumentAwaiting(signPage, prepareForSignatureModal, documentsPage, successModal, finalStepPage);
         await signPage.sideMenu.clickDocuments();
-        await documentsPage.table.clickOptionsBtn();
+        await documentsPage.table.clickOptionsButton();
         await documentsPage.table.clickEditAndResendBtn();
         await editAndResendDocumentModal.clickRevertToDraftBtn();
 
         await expect(page).toHaveURL(/documents.*edit$/);
         expect(await prepareForSignatureModal.getPrepareForSigningTitleText()).toBe("Prepare for Signing");
 
-
     })
-})
 
-test('TC_05_18_01 | Verify Move document to folder', async ({
-    createBusinessUserAndLogin,
-    signPage,
-    documentsPage,
-    moveToFolderModal,
-    createFolderModal }) => {
-    test.slow();
-
-    await createFolder(
+    test('TC_05_18_01 | Verify Move document to folder', async ({
+        createBusinessUserAndLogin,
         signPage,
         documentsPage,
-        createFolderModal);
-    await signPage.uploadFileTab.fileUploader.uploadFile(UPLOAD_FILE_PATH.jpgDocument);
+        moveToFolderModal,
+        createFolderModal }) => {
+        test.slow();
 
-    await signPage.sideMenu.clickDocuments();
-    await documentsPage.table.clickOptionsBtn(1);
-    await documentsPage.table.clickMoveToBtn();
-    await moveToFolderModal.selectFolder(FOLDER_NAME);
-    await moveToFolderModal.clickMoveToFolderBtn();
+        await createFolder(
+            signPage,
+            documentsPage,
+            createFolderModal);
+        await signPage.uploadFileTab.fileUploader.uploadFile(UPLOAD_FILE_PATH.jpgDocument);
 
-    await expect(await documentsPage.toast.toastBody).toHaveText(TOAST_MESSAGE.fileMovedToFolder);
+        await signPage.sideMenu.clickDocuments();
+        await documentsPage.table.clickOptionsBtn(1);
+        await documentsPage.table.clickMoveToBtn();
+        await moveToFolderModal.selectFolder(FOLDER_NAME);
+        await moveToFolderModal.clickMoveToFolderBtn();
 
-    await documentsPage.table.openFolder(FOLDER_NAME);
-    await expect(await documentsPage.table.documentTitle).toHaveText(UPLOAD_FILE_NAME.jpgDocument);
+        await expect(await documentsPage.toast.toastBody).toHaveText(TOAST_MESSAGE.fileMovedToFolder);
+
+        await documentsPage.table.openFolder(FOLDER_NAME);
+        await expect(await documentsPage.table.documentTitle).toHaveText(UPLOAD_FILE_NAME.jpgDocument);
+    })
+
 })

@@ -44,4 +44,8 @@ export default class TableComponent {
     async openFolder(name) {
         await this.documentTitle.filter({ hasText: name }).dblclick();
     }
-}
+        async clickOptionsButton() {
+            await this.optionsBtn.waitFor();
+            await this.optionsBtn.click();
+        }
+    }
