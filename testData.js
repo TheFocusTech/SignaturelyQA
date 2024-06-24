@@ -24,7 +24,8 @@ export const TOAST_MESSAGE ={
     folderRename: 'Folder successfully updated!',
     folderCreated: 'Folder created!',
     signatureCreated: 'Signature created successfully',
-    success: 'Document successfully saved!'
+    success: 'Document successfully saved!',
+    companyInformationSave: 'Company information successfully saved',
 };
 export const API_KEY_NAME = 'Test Api Key';
 export const NO_API_KEY_MESSAGE = 'You don\'t have any API keys yet.';
@@ -106,4 +107,11 @@ export const PERSONAL_PLAN_DESCRIPTION = (billingPeriod) => `Your plan (Billed $
 export const EMAIL_SUBJECTS = {
     reminderToSign: "Reminder, Please sign",
     signatureRequest: "requested your signature"
+}
+
+export const COMPANY_INFO ={
+    companyName: 'companyName',
+    emailFrom: 'fg1hj@example.com',
+    emailTo: 'sdg5ho@example.com',
+    redirectionPage: 'https://www.youtube.com/'
 }
