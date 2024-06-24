@@ -22,3 +22,19 @@ export const createFolder = async (
     await documentsPage.sideMenu.clickSign();
     await documentsPage.toast.waitForToastIsHiddenByText(TOAST_MESSAGE.folderCreated);
 }
+
+export const createForm = async (signPage, 
+    prepareForSignatureModal, createFormPage, formsPage, successModal) => {
+    await signPage.sideMenu.clickForms();
+    await formsPage.clickCreateFormBtn();
+    await createFormPage.fillFormNameField(SIGNERS_DATA.signerName1);
+    await createFormPage.fillOptionalMessageField(SIGNERS_DATA.viewerEmail1);
+    await createFormPage.fileUploader.uploadFile('testDocuments/todoList.xlsx');
+    await createFormPage.clickFillTemplateBtn();
+    await prepareForSignatureModal.clickNameFieldItem();
+    await prepareForSignatureModal.doCanvasClicks();
+    await prepareForSignatureModal.clickSignFieldItem();
+    await prepareForSignatureModal.doCanvasClicks();
+    await prepareForSignatureModal.clickCreateBtn();
+    await successModal.clickBackToFormsBtn();
+}
