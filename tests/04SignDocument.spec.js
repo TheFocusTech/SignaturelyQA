@@ -1,4 +1,5 @@
 import { expect } from '@playwright/test';
+import { test } from "../fixtures/base.js";
 import { description, tag, severity, Severity, link, epic, step } from 'allure-js-commons';
 import { DOCUMENT_STATUS, SIGNERS_DATA, TOAST_MESSAGE } from '../testData.js';
 
