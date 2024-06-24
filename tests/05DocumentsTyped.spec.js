@@ -44,14 +44,14 @@ test.describe('DocumentsType', () => {
         test.slow();
 
         await allure.description('To verify the process of moving a document into a folder.');
-        await allure.tags('Move document to folder');
+        await allure.tags('Move_to_folder');
         await allure.severity(Severity.CRITICAL);
         await allure.link(
             "Documentation",
             "https://docs.google.com/document/d/1Qce7tKWOwVYtPxgQv_8ae-HUkbAgeOFph0lB_eziY_k/edit#heading=h.ylpnl5bdm86k",
             "TC_05_18_01"
         );
-        await allure.epic('Documents (types)');
+        await allure.epic('Documents (typed)');
 
         await createFolder(
             signPage,
