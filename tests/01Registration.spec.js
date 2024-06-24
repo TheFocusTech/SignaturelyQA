@@ -11,40 +11,38 @@ import {
     PLEASE_ENTER_CONFIRMATION_CODE, PERSONAL_PLAN_DESCRIPTION,
 } from "../testData";
 import { generateNewUserData } from "../helpers/utils";
-import { allure } from "allure-playwright";
-import {Severity} from "allure-js-commons";
+import {description, tag, severity, Severity, link, epic, step} from "allure-js-commons";
 
 test.describe('Registration', () => {
 
     test('TC_01_01_01 | Verify successful registration of Trial user', async ({page, request, signUpTrialPage, activateTrialStripePage, signPage, settingsCompanyPage, settingsBillingPage}) => {
-        await allure.description('To verify that a Trial user can successfully register.');
-        await allure.tags('Create Trial user');
-        await allure.severity(Severity.CRITICAL);
-        await allure.link(
-            "Documentation",
+        await description('To verify that a Trial user can successfully register.');
+        await tag('Trial user');
+        await severity(Severity.BLOCKER);
+        await link(
             "https://docs.google.com/document/d/1Qce7tKWOwVYtPxgQv_8ae-HUkbAgeOFph0lB_eziY_k/edit#heading=h.3auuqi4u4l4v",
             "TC_01_01_01"
         );
-        await allure.epic('Registration');
+        await epic('Registration');
 
         const newUserData = await generateNewUserData();
-        await test.step('Navigate to the Trial user registration page', async () => {
+        await step('Navigate to the Trial user registration page', async () => {
             await page.goto(URL_END_POINTS.signUpTrialEndPoint);
         });
         await signUpTrialPage.yourInformation.fillNameInputField(newUserData.name);
         await signUpTrialPage.yourInformation.fillEmailInputField(newUserData.email);
         await signUpTrialPage.yourInformation.fillPasswordInputField(newUserData.password);
         await signUpTrialPage.clickCreateAccountBtn();
-        await test.step('Verify that the user is on the Confirm account page', async () => {
+        await step('Verify that the user is on the Confirm account page', async () => {
             await expect(page).toHaveURL(`${process.env.URL}${URL_END_POINTS.confirmAccountEndPoint}`);
         });
 
         const confirmationLink = await retrieveUserEmailConfirmationLink(request, newUserData);
-        await test.step("Navigate to the confirmation link", async () => {
+        await step("Navigate to the confirmation link", async () => {
             await page.goto(confirmationLink);
         });
         await page.waitForURL(`${process.env.URL}${URL_END_POINTS.activateTrialEndPoint}`);
-        await test.step("Verify that the user's name appears in the header of the page", async () => {
+        await step("Verify that the user's name appears in the header of the page", async () => {
             await expect(activateTrialStripePage.header.userName).toHaveText(newUserData.name);
         });
 
@@ -52,7 +50,7 @@ test.describe('Registration', () => {
         await activateTrialStripePage.clickStartMy7DayFreeTrialBtn();
         await signPage.sideMenu.clickSettings();
         await settingsCompanyPage.sideMenuSettings.clickBilling();
-        await test.step("Verify that the billing plan description is Business Monthly Plan", async () => {
+        await step("Verify that the billing plan description is Business Monthly Plan", async () => {
             await expect(settingsBillingPage.billingPlanDescription).toHaveText(BUSINESS_MONTHLY_PLAN);
         });
     })

@@ -1,6 +1,6 @@
 import { signUpRequest } from "./apiCalls";
 import { authorize, getConfirmationLinkFromEmail, getConfirmCodeFromEmail, checkEmailMessageReceived } from "../index.js";
-import {test} from "../fixtures/base";
+import {step} from "allure-js-commons";
 
 export function generateNumberForNewUser() {
     let dt = new Date();
@@ -21,7 +21,7 @@ export function delay(ms) {
 
 export async function generateNewUserData(free = false, workflowVersion = null) {
     let userData;
-    await test.step('Create new user data', async () => {
+    await step('Create new user data', async () => {
         let userNumber = generateNumberForNewUser();
         process.env.NEW_USER_NUMBER = userNumber;
         userData = {
@@ -64,7 +64,7 @@ export async function createNewFreeUserThroughApi(request) {
 
 export async function retrieveUserEmailConfirmationLink(request, newUserData) {
     let confirmationLink;
-    await test.step("Retrieve the confirmation link for the user's email.", async () => {
+    await step("Retrieve the confirmation link for the user's email.", async () => {
         const auth = await authorize();
         confirmationLink = await getConfirmationLinkFromEmail(auth, newUserData.email);
 

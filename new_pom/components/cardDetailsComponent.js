@@ -1,4 +1,4 @@
-import {test} from "../../fixtures/base";
+import {step} from "allure-js-commons";
 
 export default class CardDetailsComponent {
     constructor(page) {
@@ -12,7 +12,7 @@ export default class CardDetailsComponent {
     }
 
     async fillData(cardDetails) {
-        await test.step("Enter card details", async () => {
+        await step("Enter card details", async () => {
             await this.cardNumberField.fill(cardDetails.cardNumber);
             await this.expirationDateField.fill(cardDetails.expirationDate);
             await this.cvvField.fill(cardDetails.cvc);

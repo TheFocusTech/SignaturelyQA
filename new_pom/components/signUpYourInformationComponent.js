@@ -1,4 +1,4 @@
-import {test} from "../../fixtures/base";
+import {step} from "allure-js-commons";
 
 export default class SignUpYourInformationComponent {
     constructor(page) {
@@ -10,19 +10,19 @@ export default class SignUpYourInformationComponent {
     }
 
     async fillNameInputField(name) {
-        await test.step('Fill in Name', async () => {
+        await step('Fill in Name', async () => {
             await this.nameInputField.fill(name);
         });
     }
 
     async fillEmailInputField(email) {
-        await test.step('Fill in Email', async () => {
+        await step('Fill in Email', async () => {
             await this.emailInputField.fill(email);
         });
     }
 
     async fillPasswordInputField(password) {
-        await test.step('Fill in Password', async () => {
+        await step('Fill in Password', async () => {
             await this.passwordInputField.fill(password);
         });
     }

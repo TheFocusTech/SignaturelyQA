@@ -1,7 +1,7 @@
 import CardDetailsComponent from "../../components/cardDetailsComponent";
 import {URL_END_POINTS} from "../../../testData";
 import HeaderComponent from "../../components/headerComponent";
-import {test} from "../../../fixtures/base";
+import {step} from "allure-js-commons";
 
 export default class ActivateTrialStripePage {
     constructor(page) {
@@ -14,7 +14,7 @@ export default class ActivateTrialStripePage {
     }
 
     async clickStartMy7DayFreeTrialBtn() {
-        await test.step("Click the 'Start My 7-Day Free Trial' button.", async () => {
+        await step("Click the 'Start My 7-Day Free Trial' button.", async () => {
             await this.startMy7DayFreeTrialBtn.click();
             await this.page.waitForURL(`${process.env.URL}${URL_END_POINTS.activateTrialEndPoint}`);
         });

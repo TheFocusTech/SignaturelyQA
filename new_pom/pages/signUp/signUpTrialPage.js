@@ -1,5 +1,5 @@
 import SignUpYourInformationComponent from "../../components/signUpYourInformationComponent";
-import {test} from "../../../fixtures/base";
+import {step} from "allure-js-commons";
 
 export default class SignUpTrialPage {
     constructor(page) {
@@ -11,7 +11,7 @@ export default class SignUpTrialPage {
     }
 
     async clickCreateAccountBtn() {
-        await test.step("Click the button to create an account", async () => {
+        await step("Click the button to create an account", async () => {
             await this.createAccountBtn.click();
             await this.createAccountBtn.isHidden();
         });
