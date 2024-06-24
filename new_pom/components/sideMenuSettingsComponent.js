@@ -1,4 +1,4 @@
-import {test} from "../../fixtures/base";
+import {step} from "allure-js-commons";
 
 export default class SideMenuSettingsComponent {
     constructor(page) {
@@ -11,7 +11,7 @@ export default class SideMenuSettingsComponent {
     }
 
     async clickBilling() {
-        await test.step("Click on the Billing option in the side menu", async () => {
+        await step("Click on the Billing option in the side menu", async () => {
             await this.billing.click();
         });
     }
