@@ -38,7 +38,7 @@ test.describe('Sign Document', () => {
 
     await createForm(signPage, prepareForSignatureModal, createFormPage, formsPage, successModal);
 
-    await formsPage.table.clickOptionsBtn();
+    await formsPage.table.clickOptionsBtn(1);
     await formsPage.table.clickDuplicateBtn();
     await successModal.clickOkBtn();
 
