@@ -15,7 +15,12 @@ export const createSignature = async (signPage, settingsCompanyPage, settingsEdi
 
 }
 
-export const createDocumentAwaiting = async (signPage, prepareForSignatureModal, documentsPage, successModal, finalStepPage) => {
+export const createDocumentAwaiting = async (
+    signPage, 
+    prepareForSignatureModal, 
+    documentsPage, 
+    successModal, 
+    finalStepPage) => {
     await test.step('Document creation in progress with Awaiting status ', async () => {
         await signPage.uploadFileTab.fileUploader.uploadFile('testDocuments/picture.jpg');
         await signPage.uploadFileTab.clickPrepareDocumentBtn();

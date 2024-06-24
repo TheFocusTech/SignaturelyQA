@@ -25,7 +25,9 @@ export default class TableComponent {
     }
 
     async clickEditAndResendBtn() {
-        await this.editAndResendBtn.click();
+        await test.step('Click the "Edit & Resend" button', async () => {
+            await this.editAndResendBtn.click();
+        });
     }
 
     async clickCreateAPIKeyBtnInTable() {
@@ -46,15 +48,17 @@ export default class TableComponent {
             await this.moveToBtn.click();
         });
     }
-   
-    async openFolder(name) { 
+
+    async openFolder(name) {
         await test.step('Open the folder', async () => {
             await this.documentTitle.filter({ hasText: name }).dblclick();
         });
 
     }
-        async clickOptionsButton() {
+    async clickOptionsButton() {
+        await test.step('Click the "Options" button', async () => {
             await this.optionsBtn.waitFor();
             await this.optionsBtn.click();
-        }
+        });
     }
+}

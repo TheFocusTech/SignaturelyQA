@@ -1,14 +1,16 @@
 import { expect } from "@playwright/test";
 import { test } from "../fixtures/base.js";
-import { SIGNERS_DATA, UPLOAD_FILE_PATH, UPLOAD_FILE_NAME, FOLDER_NAME, TOAST_MESSAGE } from "../testData.js";
-import { createFolder } from "../helpers/preconditions.js";
+import { UPLOAD_FILE_PATH, UPLOAD_FILE_NAME, FOLDER_NAME, TOAST_MESSAGE } from "../testData.js";
+import { createFolder, createDocumentAwaiting } from "../helpers/preconditions.js";
 import { allure } from "allure-playwright";
 import { Severity } from "allure-js-commons";
 
 test.describe('DocumentsType', () => {
 
-    test('TC_05_21_01 | Verify that button "Edit&Resend" is active', async ({ createBusinessUserAndLogin, signPage, prepareForSignatureModal, editAndResendDocumentModal, successModal, finalStepPage, documentsPage }) => {
-
+    test('TC_05_21_01 | Verify that button "Edit&Resend" is active', async ({ createBusinessUserAndLogin,
+        signPage, prepareForSignatureModal,
+        editAndResendDocumentModal, successModal,
+        finalStepPage, documentsPage }) => {
         test.setTimeout(250 * 1000);
 
         await allure.description('Objective: To verify that the document can be returned for editing.');
@@ -20,15 +22,21 @@ test.describe('DocumentsType', () => {
             "TC_05_21_01"),
             await allure.epic('Documents');
 
-        await createDocumentAwaiting(signPage, prepareForSignatureModal, documentsPage, successModal, finalStepPage,);
+        await createDocumentAwaiting(
+            signPage, prepareForSignatureModal,
+            documentsPage, successModal, finalStepPage);
 
         await signPage.sideMenu.clickDocuments();
         await documentsPage.table.clickOptionsButton();
         await documentsPage.table.clickEditAndResendBtn();
 
-        await expect(editAndResendDocumentModal.editAndResendTitle).toBeVisible();
-        expect(await editAndResendDocumentModal.getTitleText()).toBe("Edit & Resend document");
-
+        test.step('Verify that modal window Edit & Resend document has opened', async () => {
+            await expect(editAndResendDocumentModal.editAndResendTitle).toBeVisible();
+        });
+        test.step('Verify that the title matches "Edit & Resend document"', async () => {
+            expect(await editAndResendDocumentModal.getTitleText()).toBe("Edit & Resend document");
+        });
+        
     })
 
     test('TC_05_21_02 | Verify that button "Revert to Draft" is active', async ({ page, createBusinessUserAndLogin, signPage, prepareForSignatureModal, successModal, editAndResendDocumentModal, finalStepPage, documentsPage }) => {
@@ -85,7 +93,7 @@ test.describe('DocumentsType', () => {
         await documentsPage.table.clickMoveToBtn();
         await moveToFolderModal.selectFolder(FOLDER_NAME);
         await moveToFolderModal.clickMoveToFolderBtn();
-        
+
         await test.step('Verify the toast message', async () => {
             await expect(await documentsPage.toast.toastBody).toHaveText(TOAST_MESSAGE.fileMovedToFolder);
         });

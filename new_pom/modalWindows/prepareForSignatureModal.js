@@ -57,7 +57,7 @@ export default class PrepareForSignatureModal {
 
     async clickSignFieldsItem() {
         await this.signFieldsItem.waitFor();
-        await this.canvas.waitFor();
+        await this.canvas.first().waitFor({ state: 'visible' });
         await this.signFieldsItem.click();
     }
 
