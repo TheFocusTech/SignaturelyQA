@@ -1,4 +1,4 @@
-import FileUploaderComponent from "../components/fileUploaderComponent";
+import FileUploaderComponent from "../../components/fileUploaderComponent";
 
 export default class EditFormPage {
     constructor(page) {

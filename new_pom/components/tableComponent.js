@@ -1,5 +1,4 @@
 export default class TableComponent {
-
     constructor(page) {
         this.page = page;
 
@@ -15,6 +14,7 @@ export default class TableComponent {
         this.controlsPath = this.page.locator('.tableControls__path');
         this.optionsDropdown = this.page.locator('.documents__optionsDropdownTrigger').filter({ hasText: 'Options' }).first();
         this.editDropdown = this.page.locator('.documents__dropdownOption').filter({ hasText: 'Edit' });
+        this.firstFormTitle = this.page.locator('.table__column.table__column--text').nth(1);
     }
 
     async clickOptionsBtn(i) {
