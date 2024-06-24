@@ -111,9 +111,9 @@ export const EMAIL_SUBJECTS = {
 
 export const COMPANY_INFO ={
     companyName: 'companyName',
-    emailFrom: 'fg1hj@example.com',
-    emailTo: 'sdg5ho@example.com',
-    redirectionPage: 'https://www.youtube.com/'
+    emailFrom:`${process.env.EMAIL_PREFIX}${process.env.NEW_USER_NUMBER}${'001'}${process.env.EMAIL_DOMAIN}`,
+    emailTo: `${process.env.EMAIL_PREFIX}${process.env.NEW_USER_NUMBER}${'002'}${process.env.EMAIL_DOMAIN}`,
+    redirectionPage: 'https://yourcompany.com/'
 }
 
 export const SIGNER_ME = 'Me (Now)';
