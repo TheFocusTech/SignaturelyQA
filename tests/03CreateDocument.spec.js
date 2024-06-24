@@ -60,7 +60,7 @@ test.describe("CreateDocument", () => {
 				"TC_03_07_06"
 		);
 		await epic('Create Document');
-		await tag('Create Document');
+		await tag('Document');
 
         await signPage.uploadFileTab.fileUploader.uploadFile('testDocuments/todoList.xlsx');
         await signPage.uploadFileTab.clickPrepareDocumentBtn();
