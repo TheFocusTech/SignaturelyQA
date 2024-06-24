@@ -13,7 +13,7 @@ import NewSettingsBillingPage from "../new_pom/pages/settings/settingsBillingPag
 import NewSettingsBillingPlanPage from "../new_pom/pages/settings/settingsBillingPlanPage.js";
 import UpgradeYourPlanModal from "../new_pom/modalWindows/upgradeYourPlanModal";
 import SpecialOneTimeOfferModal from "../new_pom/modalWindows/specialOneTimeOfferModal";
-import CreateSignatureModal from "../new_pom/modalWindows/createSignatureModal.js";
+import CreateSignatureOrInitialModal from "../new_pom/modalWindows/createSignatureOrInitialModal.js";
 import FinalStepPage from '../new_pom/pages/finalStepPage.js';
 import SuccessModal from '../new_pom/modalWindows/successModal.js';
 import EditAndResendDocumentModal from "../new_pom/modalWindows/editAndResendDocumentModal.js";
@@ -27,6 +27,13 @@ import ConfirmCodeModal from "../new_pom/modalWindows/confirmCodeModal";
 import ChooseSignatureOrInitialModal from "../new_pom/modalWindows/chooseSignatureOrInitialModal";
 import CreateOrEditSignatureOnSettingModal from "../new_pom/modalWindows/createOrEditSignatureOnSettingModal";
 import NewSettingsEditSignaturePage from "../new_pom/pages/settings/settingsEditSignaturePage";
+import NewLoginPage from "../new_pom/pages/loginPage";
+import ApiTemplatesPage from "../new_pom/pages/templates/apiTemplatesPage.js";
+import FormsPage from "../new_pom/pages/formsPage.js";
+import CreateFormPage from "../new_pom/pages/createFormPage.js";
+import CreateFolderModal from "../new_pom/modalWindows/createFolderModal.js";
+import MoveToFolderModal from "../new_pom/modalWindows/moveToFolderModal.js";
+import SettingsProfilePage from "../new_pom/pages/settings/settingsProfilePage.js";
 
 export const test = base.extend({
 
@@ -48,10 +55,10 @@ export const test = base.extend({
     ],
 
     createFreeUserAndLogin: [
-        async ({ request, page }, use) => {
+        async ({ request, page, loginPage }, use) => {
             await api_user_sign_up(request);
             await databaseConfirmNewUserEmail();
-            await newFreeUserLogin(page);
+            await newFreeUserLogin({ page, loginPage });
 
             await use("");
         },
@@ -59,14 +66,30 @@ export const test = base.extend({
     ],
 
     createBusinessUserAndLogin: [
-        async ({ page, createFreeUserAndLogin }, use) => {
+        async ({
+            createFreeUserAndLogin,
+            signPage,
+            settingsCompanyPage,
+            upgradeYourPlanModal,
+            settingsBillingPlanPage,
+            specialOneTimeOfferModal }, use) => {
 
-            await upgradeFreeUserToBusinessAndLogin(page);
+            await upgradeFreeUserToBusinessAndLogin({
+                signPage,
+                settingsCompanyPage,
+                upgradeYourPlanModal,
+                settingsBillingPlanPage,
+                specialOneTimeOfferModal
+            });
 
             await use("");
         },
         { scope: "test" },
     ],
+
+    loginPage: async ({ page }, use) => {
+        await use(new NewLoginPage(page));
+    },
 
     signPage: async ({ page }, use) => {
         await use(new NewSignPage(page));
@@ -104,7 +127,7 @@ export const test = base.extend({
         await use(new UpgradeYourPlanModal(page));
     },
 
-    downgradeToPersonalPlanModal: async ({page}, use) => {
+    downgradeToPersonalPlanModal: async ({ page }, use) => {
         await use(new DowngradeToPersonalPlanModal(page))
     },
 
@@ -114,6 +137,9 @@ export const test = base.extend({
 
     createSignatureModal: async ({ page }, use) => {
         await use(new CreateSignatureModal(page));
+
+    createSignatureOrInitialModal: async ({ page }, use) => {
+        await use(new CreateSignatureOrInitialModal(page));
     },
 
     finalStepPage: async ({ page }, use) => {
@@ -143,7 +169,7 @@ export const test = base.extend({
     createAPIKeyModal: async ({ page }, use) => {
         await use(new NewCreateAPIKeyModal(page));
     },
-  
+
     signUpPersonalPage: async ({ page }, use) => {
         await use(new SignUpPersonalPage(page));
     },
@@ -163,4 +189,28 @@ export const test = base.extend({
     settingsEditSignaturePage: async ({ page }, use) => {
         await use(new NewSettingsEditSignaturePage(page));
     },
+
+    apiTemplatesPage: async ({ page }, use) => {
+        await use(new ApiTemplatesPage(page));
+    },
+
+    formsPage: async ({ page }, use) => {
+        await use(new FormsPage(page));
+    },
+
+    createFormPage: async ({ page }, use) => {
+        await use(new CreateFormPage(page));
+    },
+
+    moveToFolderModal: async ({ page }, use) => {
+        await use(new MoveToFolderModal(page));
+    },
+
+    createFolderModal: async ({ page }, use) => {
+        await use(new CreateFolderModal(page));
+    },
+    settingsProfilePage: async ({ page }, use) => {
+        await use(new SettingsProfilePage(page));
+    },
 });
+

@@ -1,5 +1,7 @@
 // @ts-check
-const { defineConfig, devices } = require('@playwright/test');
+const {defineConfig, devices} = require('@playwright/test');
+const {testPlanFilter} = require("allure-playwright/testplan");
+import * as os from "os";
 
 /**
  * Read environment variables from file.
@@ -11,72 +13,99 @@ require('dotenv').config();
  * @see https://playwright.dev/docs/test-configuration
  */
 module.exports = defineConfig({
-  testDir: './tests',
-  /* Run tests in files in parallel */
-  fullyParallel: true,
-  /* Fail the build on CI if you accidentally left test.only in the source code. */
-  forbidOnly: !!process.env.CI,
-  /* Retry on CI only */
-  retries: process.env.CI ? 2 : 0,
-  /* Opt out of parallel tests on CI. */
-  workers: process.env.CI ? 1 : undefined,
-  /* Reporter to use. See https://playwright.dev/docs/test-reporters */
-  reporter: 'html',
-  /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
-  timeout:60000,
-  use: {
-    headless: process.env.CI ? true : false,
-    
-    /* Base URL to use in actions like `await page.goto('/')`. */
-    baseURL: process.env.URL,
+    testDir: './tests',
+    /* Run tests in files in parallel */
+    fullyParallel: true,
+    /* Fail the build on CI if you accidentally left test.only in the source code. */
+    forbidOnly: !!process.env.CI,
+    /* Retry on CI only */
+    retries: process.env.CI ? 2 : 0,
+    /* Opt out of parallel tests on CI. */
+    workers: process.env.CI ? 4 : undefined,
+    /* Reporter to use. See https://playwright.dev/docs/test-reporters */
+    // reporter: 'html',
+    grep: testPlanFilter(),
+    reporter: [
+        ["list"],
+        ["html"],
+        [
+            "allure-playwright",
+            {
+                detail: true,
+                suiteTitle: true,
+                categories: [
+                    {
+                        name: "Outdated tests",
+                        messageRegex: ".*FileNotFound.*",
+                    },
+                ],
+                environmentInfo: {
+                    os_platform: os.platform(),
+                    os_release: os.release(),
+                    os_version: os.version(),
+                    node_version: process.version,
+                },
+            },
+        ],
+    ],
+    /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
+    timeout: 60000,
+    use: {
+        headless: process.env.CI ? true : false,
 
-    /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
-    trace: 'on-first-retry',
-  },
+        /* Base URL to use in actions like `await page.goto('/')`. */
+        baseURL: process.env.URL,
 
-  /* Configure projects for major browsers */
-  projects: [
-    {
-      name: 'chromium',
-      use: { ...devices['Desktop Chrome'] },
+        screenshot: 'only-on-failure',
+        video: {
+            mode: 'retain-on-failure',
+            size: process.env.CI ? {width: 800, height: 600} : {width: 1440, height: 900}
+        },
     },
 
-    // {
-    //   name: 'firefox',
-    //   use: { ...devices['Desktop Firefox'] },
-    // },
+    /* Configure projects for major browsers */
+    projects: [
+        {
+            name: 'chromium',
+            use: {...devices['Desktop Chrome']},
+        },
 
-    // {
-    //   name: 'webkit',
-    //   use: { ...devices['Desktop Safari'] },
-    // },
+        // {
+        //   name: 'firefox',
+        //   use: { ...devices['Desktop Firefox'] },
+        // },
 
-    /* Test against mobile viewports. */
-    // {
-    //   name: 'Mobile Chrome',
-    //   use: { ...devices['Pixel 5'] },
-    // },
-    // {
-    //   name: 'Mobile Safari',
-    //   use: { ...devices['iPhone 12'] },
-    // },
+        // {
+        //   name: 'webkit',
+        //   use: { ...devices['Desktop Safari'] },
+        // },
 
-    /* Test against branded browsers. */
-    // {
-    //   name: 'Microsoft Edge',
-    //   use: { ...devices['Desktop Edge'], channel: 'msedge' },
-    // },
-    // {
-    //   name: 'Google Chrome',
-    //   use: { ...devices['Desktop Chrome'], channel: 'chrome' },
-    // },
-  ],
+        /* Test against mobile viewports. */
+        // {
+        //   name: 'Mobile Chrome',
+        //   use: { ...devices['Pixel 5'] },
+        // },
+        // {
+        //   name: 'Mobile Safari',
+        //   use: { ...devices['iPhone 12'] },
+        // },
 
-  /* Run your local dev server before starting the tests */
-  // webServer: {
-  //   command: 'npm run start',
-  //   url: 'http://127.0.0.1:3000',
-  //   reuseExistingServer: !process.env.CI,
-  // },
+        /* Test against branded browsers. */
+        // {
+        //   name: 'Microsoft Edge',
+        //   use: { ...devices['Desktop Edge'], channel: 'msedge' },
+        // },
+        // {
+        //   name: 'Google Chrome',
+        //   use: { ...devices['Desktop Chrome'], channel: 'chrome' },
+        // },
+    ],
+
+    /* Run your local dev server before starting the tests */
+    // webServer: {
+    //   command: 'npm run start',
+    //   url: 'http://127.0.0.1:3000',
+    //   reuseExistingServer: !process.env.CI,
+    // },
 });
 

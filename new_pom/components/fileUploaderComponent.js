@@ -1,3 +1,5 @@
+import { test } from "../../fixtures/base";
+
 export default class FileUploaderComponent {
     constructor(page) {
         this.page = page;
@@ -7,10 +9,12 @@ export default class FileUploaderComponent {
     }
 
     
+    
     async uploadFile(file) {
-        await this.fileInput.setInputFiles(file);
-        await this.progressBar.waitFor({ state: 'visible' });
-        await this.progressBar.waitFor({ state: 'hidden' });
-
+        await test.step('Upload file', async () => {
+            await this.fileInput.setInputFiles(file);
+            await this.progressBar.waitFor({ state: 'visible' });
+            await this.progressBar.waitFor({ state: 'hidden' });
+        });
     }
 }
