@@ -20,7 +20,7 @@ export default class PrepareForSignatureModal {
         this.signerEmailField = this.page.getByPlaceholder('Email');
         this.canvas = this.page.locator('canvas');
         this.assignedToDropDown = this.page.locator('ul .uiSelect__select');
-        this.meNowDropDownItem = this.page.getByText('Me (Now)', { exact: true });
+        this.itemDropDown = this.page.locator('.uiSelect__search-item');
         this.saveBtn = this.page.getByRole('button', { name: 'Save' });
         this.signatureElement = this.page.locator('.documentPage .react-pdf__Page__canvas').last();
         this.createBtn = this.page.getByRole('button', { name: 'Create' });
@@ -29,7 +29,11 @@ export default class PrepareForSignatureModal {
         this.customSigningOrderPositionNumberOne = this.page.locator('span.signers__item-order-position').first();
         this.customSigningOrderPositionNumberTwo = this.page.locator('span.signers__item-order-position').last();
         this.addRecipientsBtn = this.page.getByText('Recipients', { exact: true });
-        this.recipientEmailField = this.page.getByPlaceholder('test@signaturely.com');       
+        this.recipientEmailField = this.page.getByPlaceholder('test@signaturely.com'); 
+        this.nameFieldItem = this.page.locator('ul.interactModal__fieldBar-fieldList li').filter({ hasText: /^Name$/ }).first();
+        this.signFieldItem = this.page.locator('ul.interactModal__fieldBar-fieldList li').nth(1);
+        this.initialFieldsItem = this.fieldsMenu.getByText('Initial');     
+
     }
 
     async clickSignDocumentRadioBtn() {
@@ -80,8 +84,8 @@ export default class PrepareForSignatureModal {
         await this.assignedToDropDown.click();
     }
 
-    async clickMeNowDropDownItem() {
-        await this.meNowDropDownItem.click();
+    async clickItemDropDown(signerName) {
+        await this.itemDropDown.getByText(signerName).click();
     }
 
     async clickSaveBtn() {
@@ -97,7 +101,7 @@ export default class PrepareForSignatureModal {
         }
     }
 
-    async clickBackToTempatesBtn() {
+    async clickBackToTemplatesBtn() {
         try {
             await this.backToTempatesBtn.click();
 
@@ -109,12 +113,28 @@ export default class PrepareForSignatureModal {
     async clickCustomSigningOrderCheckbox() {
         await this.customSigningOrderCheckbox.click();
     }
-    
+
     async clickAddRecipientsBtn() {
         await this.addRecipientsBtn.click();
     }
 
     async fillRecipientEmailField(email) {
         await this.recipientEmailField.fill(email);
+    }
+
+    async clickSignFieldItem() {
+        await this.signFieldItem.click();
+    }
+
+    async clickNameFieldItem() {
+        await this.nameFieldItem.click();
+    }
+
+    async clickCreateBtn() {
+        await this.createBtn.click();
+    }
+
+    async clickInitialFieldsItem() {
+        await this.initialFieldsItem.click();
     }
 }
