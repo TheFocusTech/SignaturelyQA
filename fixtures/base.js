@@ -30,6 +30,8 @@ import NewLoginPage from "../new_pom/pages/loginPage";
 import ApiTemplatesPage from "../new_pom/pages/templates/apiTemplatesPage.js";
 import FormsPage from "../new_pom/pages/formsPage.js";
 import CreateFormPage from "../new_pom/pages/createFormPage.js";
+import CreateFolderModal from "../new_pom/modalWindows/createFolderModal.js";
+import MoveToFolderModal from "../new_pom/modalWindows/moveToFolderModal.js";
 
 export const test = base.extend({
 
@@ -191,5 +193,12 @@ export const test = base.extend({
         await use(new CreateFormPage(page));
     },
 
+    moveToFolderModal: async ({ page }, use) => {
+        await use(new MoveToFolderModal(page));
+    },
+
+    createFolderModal: async ({ page }, use) => {
+        await use(new CreateFolderModal(page));
+    },
 });
 
