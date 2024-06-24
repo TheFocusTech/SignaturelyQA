@@ -1,6 +1,6 @@
-import SideMenuComponent from "../../components/sideMenuComponent";
-import UploadFileOnSignPage from "../../pages/sign/uploadFileOnSignPage";
-import HeaderComponent from "../../components/headerComponent";
+import SideMenuComponent from '../../components/sideMenuComponent';
+import UploadFileOnSignPage from '../../pages/sign/uploadFileOnSignPage';
+import HeaderComponent from '../../components/headerComponent';
 
 
 export default class NewSignPage {
