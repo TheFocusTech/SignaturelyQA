@@ -83,7 +83,7 @@ test.describe("CreateDocument", () => {
         await finalStepPage.clickSignDocumentAndSendForSignatureBtn();
         await successModal.clickBackToDocumentsBtn();
 
-		await test.step('Verify the created document is in the table with the label "AWAITING".', async () => {
+		await step('Verify the created document is in the table with the label "AWAITING".', async () => {
             await expect(await documentsPage.table.documentStatus).toHaveText(DOCUMENT_STATUS.awaiting);
         });
 	});
