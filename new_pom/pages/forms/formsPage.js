@@ -1,5 +1,5 @@
-import TableComponent from "../components/tableComponent";
-import ToastComponent from "../components/toastComponent";
+import TableComponent from "../../components/tableComponent";
+import ToastComponent from "../../components/toastComponent";
 
 export default class FormsPage {
     constructor(page) {
