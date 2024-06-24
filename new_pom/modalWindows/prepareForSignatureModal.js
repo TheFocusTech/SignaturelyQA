@@ -32,7 +32,8 @@ export default class PrepareForSignatureModal {
         this.recipientEmailField = this.page.getByPlaceholder('test@signaturely.com'); 
         this.nameFieldItem = this.page.locator('ul.interactModal__fieldBar-fieldList li').filter({ hasText: /^Name$/ }).first();
         this.signFieldItem = this.page.locator('ul.interactModal__fieldBar-fieldList li').nth(1);
-        this.initialFieldsItem = this.fieldsMenu.getByText('Initial');     
+        this.initialFieldsItem = this.fieldsMenu.getByText('Initial');   
+        this.dateFieldsItem = this.page.locator('div .interactModal__fieldBar-fieldItem').filter({ hasText: 'Date' });
 
     }
 
@@ -136,5 +137,8 @@ export default class PrepareForSignatureModal {
 
     async clickInitialFieldsItem() {
         await this.initialFieldsItem.click();
+    }
+    async clickDateFieldsItem() {
+        await this.dateFieldsItem.click()
     }
 }

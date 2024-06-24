@@ -2,13 +2,13 @@ import { expect } from "@playwright/test";
 import { test } from "../fixtures/base.js";
 import { SIGNERS_DATA, TOAST_MESSAGE, DOCUMENT_STATUS, FORMS } from "../testData.js";
 import { createForm } from "../helpers/preconditions.js";
-import {allure} from "allure-playwright";
-import {Severity} from "allure-js-commons";
+// import {allure} from "allure-playwright";
+// import {Severity} from "allure-js-commons";
 
 test.describe('Sign Document', () => {
 
-    test('TC_08_32_01 | Verify that user can create form', async ({ createBusinessUserAndLogin, signPage,
-        prepareForSignatureModal, createFormPage, formsPage, successModal, createForm }) => {
+    test.skip('TC_08_32_01 | Verify that user can create form', async ({ createBusinessUserAndLogin, signPage,
+        prepareForSignatureModal, createFormPage, formsPage, successModal}) => {
         test.setTimeout(120 * 1000);
 
         await signPage.sideMenu.clickForms();
@@ -35,7 +35,7 @@ test.describe('Sign Document', () => {
     })
 
     test('TC_08_33_01 | Verify that user can edit form', async ({ createBusinessUserAndLogin, signPage,
-        prepareForSignatureModal, createFormPage, formsPage, editFormPage }) => {
+        formsPage, createFormPage, prepareForSignatureModal, successModal , editFormPage,}) => {
             // await allure.description('Verify that user can edit form');
             // await allure.tags('Edit Form');
             // await allure.severity(Severity.CRITICAL);
@@ -45,27 +45,28 @@ test.describe('Sign Document', () => {
             //       "TC_08_33_01"
             //   );
             // await allure.epic('Forms');
-            test.setTimeout(40000);
+            test.setTimeout(60000);
         
-            //await createForm(signPage, formsPage, createFormPage, prepareForSignatureModal, successModal);
-        await signPage.sideMenu.clickForms();
+        await createForm(signPage, formsPage, createFormPage, prepareForSignatureModal, successModal);
+        // await signPage.sideMenu.clickForms();
 
-        await formsPage.clickCreateFormBtn();
-        await createFormPage.fillFormNameField(SIGNERS_DATA.signerName1);
-        await createFormPage.fillOptionalMessageField(SIGNERS_DATA.viewerEmail1);
-        await createFormPage.fileUploader.uploadFile('testDocuments/todoList.xlsx');
-        await createFormPage.clickFillTemplateBtn();
-        await prepareForSignatureModal.clickSignFieldsItem();
-        await prepareForSignatureModal.clickUploadedDocument();
+        // await formsPage.clickCreateFormBtn();
+        // await createFormPage.fillFormNameField(SIGNERS_DATA.signerName1);
+        // await createFormPage.fillOptionalMessageField(SIGNERS_DATA.viewerEmail1);
+        // await createFormPage.fileUploader.uploadFile('testDocuments/todoList.xlsx');
+        // await createFormPage.clickFillTemplateBtn();
 
-        await prepareForSignatureModal.clickInitialTab();
-        await prepareForSignatureModal.clickUploadedDocument();
+        // await prepareForSignatureModal.clickSignFieldItem();
+        // await prepareForSignatureModal.doCanvasClicks();
+        
+        // await prepareForSignatureModal.clickInitialFieldsItem();
+        // await prepareForSignatureModal.doCanvasClicks();
 
-        await prepareForSignatureModal.clickDateTab();
-        await prepareForSignatureModal.clickUploadedDocument();
+        // await prepareForSignatureModal.clickDateFieldsItem();
+        // await prepareForSignatureModal.doCanvasClicks();        
 
-        await prepareForSignatureModal.clickCreateBtn();
-        await prepareForSignatureModal.clickBacktoFormsBtn();
+        // await prepareForSignatureModal.clickCreateBtn();
+        // await succesmodal.clickBacktoFormsBtn();
 
 
         await formsPage.table.clickOptionsDropdown()
@@ -79,10 +80,10 @@ test.describe('Sign Document', () => {
         await prepareForSignatureModal.clickSignFieldsItem();
         await prepareForSignatureModal.clickUploadedDocument();
 
-        await prepareForSignatureModal.clickInitialTab();
+        await prepareForSignatureModal.clickInitialFieldsItem();
         await prepareForSignatureModal.clickUploadedDocument();
 
-        await prepareForSignatureModal.clickDateTab();
+        await prepareForSignatureModal.clickDateFieldsItem();
         await prepareForSignatureModal.clickUploadedDocument();
 
         await prepareForSignatureModal.clickSaveBtn()

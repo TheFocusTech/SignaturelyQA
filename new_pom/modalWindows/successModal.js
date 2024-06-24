@@ -14,7 +14,7 @@ export default class SuccessModal {
   }
 
     async clickBackToFormsBtn() {
-      await this.backToFormsBtn.ick();
+      await this.backToFormsBtn.waitFor();
       await this.backToFormsBtn.click();
     }
 }

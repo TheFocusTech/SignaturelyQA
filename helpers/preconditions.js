@@ -1,4 +1,4 @@
-import { DATA_SIGNER, FOLDER_NAME, TOAST_MESSAGE } from "../testData";
+import { DATA_SIGNER, FOLDER_NAME, TOAST_MESSAGE, SIGNERS_DATA } from "../testData";
 
 export const createSignature = async (signPage, settingsCompanyPage, settingsEditSignaturePage, createOrEditSignatureOnSettingModal) => {
     await signPage.sideMenu.clickSettings();
@@ -23,7 +23,8 @@ export const createFolder = async (
     await documentsPage.toast.waitForToastIsHiddenByText(TOAST_MESSAGE.folderCreated);
 }
 
-export const createForm = async(
+export const createForm = async (
+  
     signPage,
     formsPage,
     createFormPage,
@@ -36,16 +37,16 @@ export const createForm = async(
     await createFormPage.fillOptionalMessageField(SIGNERS_DATA.viewerEmail1);
     await createFormPage.fileUploader.uploadFile('testDocuments/todoList.xlsx');
     await createFormPage.clickFillTemplateBtn();
-    await prepareForSignatureModal.clickSignFieldsItem();
-    await prepareForSignatureModal.clickUploadedDocument();
-
-    await prepareForSignatureModal.clickNameFieldItem();
-    await prepareForSignatureModal.doCanvasClicks();
 
     await prepareForSignatureModal.clickSignFieldItem();
     await prepareForSignatureModal.doCanvasClicks();
+        
+    await prepareForSignatureModal.clickInitialFieldsItem();
+    await prepareForSignatureModal.doCanvasClicks();
+
+    await prepareForSignatureModal.clickDateFieldsItem();
+    await prepareForSignatureModal.doCanvasClicks();
 
     await prepareForSignatureModal.clickCreateBtn();
-  
-    await successModal.clickBackToFormsBtn();
+    await successModal.clickBacktoFormsBtn();
 }
