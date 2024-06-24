@@ -2,7 +2,7 @@ import SettingsHorizontalMenuComponent from "../../components/settingsHorizontal
 import SideMenuComponent from "../../components/sideMenuComponent";
 import SideMenuSettingsComponent from "../../components/sideMenuSettingsComponent";
 import ToastComponent from "../../components/toastComponent";
-import {test} from "../../fixtures/base";
+import {test} from "../../../fixtures/base";
 
 export default class NewSettingsCompanyPage {
     constructor(page) {
