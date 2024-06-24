@@ -88,7 +88,9 @@ export default class PrepareForSignatureModal {
     }
 
     async fillSignerEmailField(email, i) {
-        await this.signerEmailField.nth(i).fill(email);
+        await step('Fill the email address of the signer into the "Email" input field.', async () => {
+            await this.signerEmailField.nth(i).fill(email);
+        });
     }
 
     async doCanvasClicks() {
@@ -111,7 +113,9 @@ export default class PrepareForSignatureModal {
     }
 
     async clickSaveBtn() {
-        await this.saveBtn.click();
+        await step('Click the "Save" button.', async () => {
+            await this.saveBtn.click();
+        });
     }
 
     async clickBackToTemplatesBtn() {
