@@ -1,3 +1,5 @@
+import { test } from "../../fixtures/base";
+
 export default class MoveToFolderModal {
     constructor(page) {
         this.page = page;
@@ -7,10 +9,14 @@ export default class MoveToFolderModal {
     }
 
     async selectFolder(name) {
-        await this.nameOfFolder.filter({ hasText: name }).click();
+        await test.step('Select the folder', async () => {
+            await this.nameOfFolder.filter({ hasText: name }).click();
+        });
     }
 
     async clickMoveToFolderBtn() {
-        await this.moveToFolderBtn.click();
+        await test.step('Click the "Move to folder" button', async () => {
+            await this.moveToFolderBtn.click();
+        });    
     }
 }

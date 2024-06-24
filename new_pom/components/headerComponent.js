@@ -1,4 +1,4 @@
-import {test} from "../../fixtures/base";
+import {step} from "allure-js-commons";
 import {expect} from "@playwright/test";
 import {CI_USER_NAME} from "../../testData";
 
@@ -10,7 +10,7 @@ export default class HeaderComponent {
     }
 
     async verifyUserNameForOldUserLogin() {
-        await test.step('Verify that the User Name is as expected', async () => {
+        await step('Verify that the User Name is as expected', async () => {
             if (process.env.USER_NAME === undefined) {
                 await expect(this.userName).toContainText(CI_USER_NAME);
             } else {
@@ -18,5 +18,5 @@ export default class HeaderComponent {
             }
         });
     }
-    
+
 }
