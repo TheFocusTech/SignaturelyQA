@@ -44,8 +44,10 @@ export default class PrepareForSignatureModal {
     }
 
     async clickSignAndSendForSignatureRadioBtn() {
-        await this.signAndSendForSignatureRadioBtn.waitFor({ state: 'visible' });
-        await this.signAndSendForSignatureRadioBtn.click();
+        await step('Select "Sign and Send for Signature" radio button', async () => {
+            await this.signAndSendForSignatureRadioBtn.waitFor({ state: 'visible' });
+            await this.signAndSendForSignatureRadioBtn.click();
+        });
     }
 
     async clickSendForSignatureRadioBtn() {
@@ -61,10 +63,10 @@ export default class PrepareForSignatureModal {
     }
 
     async clickSignFieldsItem() {
-        await step('Select the "Sign" option from the left side menu', async () => {
+        await step('Click on the "Sign" in "Fields" menu', async () => {
             await this.signFieldsItem.waitFor();
             await this.signFieldsItem.click();
-        });       
+        });
     }
 
     async clickGotItBtn() {
@@ -86,9 +88,7 @@ export default class PrepareForSignatureModal {
     }
 
     async fillSignerEmailField(email, i) {
-        await step('Fill the email address of the signer into the "Email" input field.', async () => {
-            await this.signerEmailField.nth(i).fill(email);
-        });
+        await this.signerEmailField.nth(i).fill(email);
     }
 
     async doCanvasClicks() {
@@ -98,32 +98,24 @@ export default class PrepareForSignatureModal {
     }
 
     async clickAssignedToDropDown() {
-        await this.assignedToDropDown.waitFor();
-        await this.assignedToDropDown.click();
-    }
-
-    async clickItemDropDown(signerName) {
-        await this.itemDropDown.getByText(signerName).click();
-    }
-
-    async clickSaveBtn() {
-        await step('Click the "Save" button', async () => {
-            await this.saveBtn.click();
+        await step('Click on the "Assigned To" dropdown.', async () => {
+            await this.assignedToDropDown.waitFor();
+            await this.assignedToDropDown.click();
         });
     }
 
-    async clickCreateBtn() {
-        try {
-            await this.createBtn.click();
-        } finally {
-        }
+    async clickItemDropDown(signerName) {
+        await step('Select a signer\'s name from the "Assigned To" dropdown.', async () => {
+        await this.itemDropDown.getByText(signerName).click();
+        });
+    }
+
+    async clickSaveBtn() {
+        await this.saveBtn.click();
     }
 
     async clickBackToTemplatesBtn() {
-        try {
-            await this.backToTempatesBtn.click();
-        } finally {
-        }
+        await this.backToTempatesBtn.click();
     }
 
     async clickCustomSigningOrderCheckbox() {
