@@ -31,8 +31,8 @@ module.exports = defineConfig({
         [
             "allure-playwright",
             {
-                detail: true,
-                suiteTitle: true,
+                detail: false,
+                suiteTitle: false,
                 categories: [
                     {
                         name: "Outdated tests",
