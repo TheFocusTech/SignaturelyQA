@@ -1,4 +1,4 @@
-import { DATA_SIGNER, FOLDER_NAME, TOAST_MESSAGE } from "../testData";
+import { DATA_SIGNER, SIGNERS_DATA,FOLDER_NAME, TOAST_MESSAGE } from "../testData";
 
 export const createSignature = async (signPage, settingsCompanyPage, settingsEditSignaturePage, createOrEditSignatureOnSettingModal) => {
     await signPage.sideMenu.clickSettings();
