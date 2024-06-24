@@ -28,8 +28,9 @@ import CreateOrEditSignatureOnSettingModal from "../new_pom/modalWindows/createO
 import NewSettingsEditSignaturePage from "../new_pom/pages/settings/settingsEditSignaturePage";
 import NewLoginPage from "../new_pom/pages/loginPage";
 import ApiTemplatesPage from "../new_pom/pages/templates/apiTemplatesPage.js";
-import FormsPage from "../new_pom/pages/formsPage.js";
-import CreateFormPage from "../new_pom/pages/createFormPage.js";
+import FormsPage from "../new_pom/pages/forms/formsPage.js";
+import CreateFormPage from "../new_pom/pages/forms/createFormPage.js";
+import EditFormPage from "../new_pom/pages/forms/editFormPage.js";
 import CreateFolderModal from "../new_pom/modalWindows/createFolderModal.js";
 import MoveToFolderModal from "../new_pom/modalWindows/moveToFolderModal.js";
 
