@@ -1,3 +1,5 @@
+import { test } from "../../fixtures/base"; 
+
 export default class CreateSignatureOrInitialModal {
     constructor(page) {
         this.page = page;
@@ -8,12 +10,16 @@ export default class CreateSignatureOrInitialModal {
     }
 
     async clickCheckboxAgree() {
-        await this.checkboxAgree.waitFor({ state: 'visible' });
-        await this.checkboxAgree.click();
+        await test.step('Click the "I agree" checkbox for electronic signing.', async () => {
+            await this.checkboxAgree.waitFor({ state: 'visible' });
+            await this.checkboxAgree.click();
+        });
     }
 
     async clickSignNowBtn() {
-        await this.signNowBtn.click();
+        await test.step('Click on the "Sign Now" button.', async () => {
+            await this.signNowBtn.click();
+        });
     }
 
     async fillInputSignature(text) {

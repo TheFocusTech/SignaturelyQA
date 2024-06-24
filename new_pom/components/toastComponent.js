@@ -1,3 +1,5 @@
+import { test } from "../../fixtures/base"; 
+
 export default class ToastComponent {
     constructor(page) {
         this.page = page;
@@ -8,7 +10,9 @@ export default class ToastComponent {
     }
 
     async clickToastFirstCloseBtn() {
-        await this.toastFirstCloseBtn.click();
+        await test.step('Close the toast notification.', async () => {
+            await this.toastFirstCloseBtn.click();
+        });
     }
 
     async waitForToastCompleted() {

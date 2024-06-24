@@ -8,6 +8,8 @@ import {
 	SIGNER_ME
 } from "../testData.js";
 import { createSignature } from "../helpers/preconditions.js";
+import { allure } from "allure-playwright";
+import { Severity } from "allure-js-commons";
 
 test.describe("CreateDocument", () => {
 	test("TC_03_07_01 | Sign a document - verify that user can sign a document themselves", async ({
@@ -41,16 +43,25 @@ test.describe("CreateDocument", () => {
 		await expect(await documentsPage.table.documentStatus).toHaveText(DOCUMENT_STATUS.completed);
 	});
 
-	test("TC_03_07_06 | Verify that the user who uploaded the document and created a signature and Other Signer can sign it", async ({
-		createBusinessUserAndLogin,
+	test("TC_03_07_06 | Verify user can create, sign, and send a document to another signer", async ({
+		createFreeUserAndLogin,
 		signPage,
 		prepareForSignatureModal,
 		createSignatureOrInitialModal,
 		finalStepPage,
 		successModal,
 		documentsPage,
-	}) => {
+		}) => {
 		test.setTimeout(120 * 1000);
+		await allure.description('Objective: To verify the process of creating, signing, and sending a document to another signer.');
+		await allure.tags('Create_Document');
+		await allure.severity(Severity.CRITICAL);
+		await allure.link(
+				"Documentation",
+				"https://docs.google.com/document/d/1Qce7tKWOwVYtPxgQv_8ae-HUkbAgeOFph0lB_eziY_k/edit#heading=h.2np2zmox71j",
+				"TC_03_07_06"
+		);
+		await allure.epic('Create Document');
 
         await signPage.uploadFileTab.fileUploader.uploadFile('testDocuments/todoList.xlsx');
         await signPage.uploadFileTab.clickPrepareDocumentBtn();
@@ -73,7 +84,9 @@ test.describe("CreateDocument", () => {
         await finalStepPage.clickSignDocumentAndSendForSignatureBtn();
         await successModal.clickBackToDocumentsBtn();
 
-		await expect(await documentsPage.table.documentStatus).toHaveText(DOCUMENT_STATUS.awaiting);
+		await test.step('Verify the created document is in the table with the label "AWAITING".', async () => {
+            await expect(await documentsPage.table.documentStatus).toHaveText(DOCUMENT_STATUS.awaiting);
+        });
 	});
 
 	test("TC_03_07_02 | Verify that the user who uploaded the document and Other Signer can sign it", async ({

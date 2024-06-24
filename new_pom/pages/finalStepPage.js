@@ -1,4 +1,5 @@
 import ToastComponent from "../components/toastComponent";
+import { test } from "../../fixtures/base"; 
 
 export default class FinalStepPage {
     constructor(page) {
@@ -15,12 +16,16 @@ export default class FinalStepPage {
     }
 
     async fillDocumentTitleField(title) {
-        await this.documentTitleField.waitFor({ status: "visible" });
-        await this.documentTitleField.fill(title);
+        await test.step('Fill in the document title.', async () => {
+            await this.documentTitleField.waitFor({ status: "visible" });
+            await this.documentTitleField.fill(title);
+        });
     }
 
     async clickSignDocumentAndSendForSignatureBtn() {
-        await this.signDocumentAndSendForSignatureBtn.click();
+        await test.step('Click on the "Sign Document and Send for Signature" button.', async () => {
+            await this.signDocumentAndSendForSignatureBtn.click();
+        });
     }
 
     async waitAndClickSendForSignatureBtn() {
