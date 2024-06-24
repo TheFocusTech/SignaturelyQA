@@ -21,6 +21,7 @@ export const TOAST_MESSAGE = {
     signatureCreated: 'Signature created successfully',
     success: 'Document successfully saved!',
     fileMovedToFolder: 'Files successfully moved!',
+    profileUpdated: 'Profile information updated.',
     editedFormSaved: 'Form saved'
 };
 export const API_KEY_NAME = 'Test Api Key';

@@ -32,6 +32,7 @@ import FormsPage from "../new_pom/pages/forms/formsPage.js";
 import CreateEditFormPage from "../new_pom/pages/forms/createEditFormPage.js";
 import CreateFolderModal from "../new_pom/modalWindows/createFolderModal.js";
 import MoveToFolderModal from "../new_pom/modalWindows/moveToFolderModal.js";
+import SettingsProfilePage from "../new_pom/pages/settings/settingsProfilePage.js";
 
 export const test = base.extend({
 
@@ -199,6 +200,9 @@ export const test = base.extend({
 
     createFolderModal: async ({ page }, use) => {
         await use(new CreateFolderModal(page));
+    },
+    settingsProfilePage: async ({ page }, use) => {
+        await use(new SettingsProfilePage(page));
     },
 });
 
