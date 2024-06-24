@@ -43,7 +43,7 @@ test.describe("CreateDocument", () => {
 	});
 
 	test("TC_03_07_06 | Verify user can create, sign, and send a document to another signer", async ({
-		createFreeUserAndLogin,
+		createBusinessUserAndLogin,
 		signPage,
 		prepareForSignatureModal,
 		createSignatureOrInitialModal,
