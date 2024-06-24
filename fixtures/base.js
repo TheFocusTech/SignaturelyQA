@@ -202,9 +202,11 @@ export const test = base.extend({
     createFolderModal: async ({ page }, use) => {
         await use(new CreateFolderModal(page));
     },
+
     settingsProfilePage: async ({ page }, use) => {
         await use(new SettingsProfilePage(page));
     },
+
     signUpTrialPage: async ({ page }, use) => {
         await use(new SignUpTrialPage(page));
     },
