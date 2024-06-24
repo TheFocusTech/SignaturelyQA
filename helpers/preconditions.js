@@ -1,4 +1,6 @@
+import CreateEditFormPage from "../new_pom/pages/forms/createEditFormPage";
 import { DATA_SIGNER, FOLDER_NAME, TOAST_MESSAGE, SIGNERS_DATA } from "../testData";
+import { expect } from "@playwright/test";
 
 export const createSignature = async (signPage, settingsCompanyPage, settingsEditSignaturePage, createOrEditSignatureOnSettingModal) => {
     await signPage.sideMenu.clickSettings();
@@ -24,19 +26,14 @@ export const createFolder = async (
 }
 
 export const createForm = async (
-  
-    signPage,
-    formsPage,
-    createFormPage,
-    prepareForSignatureModal,
-    successModal) => {
+    signPage, formsPage, createEditFormPage, prepareForSignatureModal, successModal) => {
     await signPage.sideMenu.clickForms();
 
     await formsPage.clickCreateFormBtn();
-    await createFormPage.fillFormNameField(SIGNERS_DATA.signerName1);
-    await createFormPage.fillOptionalMessageField(SIGNERS_DATA.viewerEmail1);
-    await createFormPage.fileUploader.uploadFile('testDocuments/todoList.xlsx');
-    await createFormPage.clickFillTemplateBtn();
+    await createEditFormPage.fillFormNameField(SIGNERS_DATA.signerName1);
+    await createEditFormPage.fillOptionalMessageField(SIGNERS_DATA.viewerEmail1);
+    await createEditFormPage.fileUploader.uploadFile('testDocuments/todoList.xlsx');
+    await createEditFormPage.clickFillTemplateBtn();
 
     await prepareForSignatureModal.clickSignFieldItem();
     await prepareForSignatureModal.doCanvasClicks();
@@ -48,5 +45,6 @@ export const createForm = async (
     await prepareForSignatureModal.doCanvasClicks();
 
     await prepareForSignatureModal.clickCreateBtn();
-    await successModal.clickBacktoFormsBtn();
-}
+    await successModal.clickBackToFormsBtn();
+  
+    }

@@ -29,8 +29,7 @@ import NewSettingsEditSignaturePage from "../new_pom/pages/settings/settingsEdit
 import NewLoginPage from "../new_pom/pages/loginPage";
 import ApiTemplatesPage from "../new_pom/pages/templates/apiTemplatesPage.js";
 import FormsPage from "../new_pom/pages/forms/formsPage.js";
-import CreateFormPage from "../new_pom/pages/forms/createFormPage.js";
-import EditFormPage from "../new_pom/pages/forms/editFormPage.js";
+import CreateEditFormPage from "../new_pom/pages/forms/createEditFormPage.js";
 import CreateFolderModal from "../new_pom/modalWindows/createFolderModal.js";
 import MoveToFolderModal from "../new_pom/modalWindows/moveToFolderModal.js";
 
@@ -190,7 +189,7 @@ export const test = base.extend({
         await use(new FormsPage(page));
     },
 
-    createFormPage: async ({ page }, use) => {
+    createEditFormPage: async ({ page }, use) => {
         await use(new CreateFormPage(page));
     },
 
@@ -201,8 +200,5 @@ export const test = base.extend({
     createFolderModal: async ({ page }, use) => {
         await use(new CreateFolderModal(page));
     },
-    editFormPage: async ({ page }, use) => {
-        await use(new EditFormPage (page))
-    }
 });
 
