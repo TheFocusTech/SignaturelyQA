@@ -15,6 +15,7 @@ export default class TableComponent {
         this.documentTitle = this.page.locator('.documents__list-item .table__column--text--document p');
         this.moveToBtn = this.page.getByRole('button', { name: 'Move to' });
         this.controlsPath = this.page.locator('.tableControls__path');
+        this.optionsShareDropdown = this.page.locator('.documents__dropdownOption').getByText('Share');
     }
 
     async clickOptionsBtn(i) {
@@ -57,4 +58,7 @@ export default class TableComponent {
             await this.documentTitle.filter({ hasText: name }).dblclick();
         });
     }
-}
+    async clickOptionsShareDropdown() {
+            await this.optionsShareDropdown.click();
+        }    
+};

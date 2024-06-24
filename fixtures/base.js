@@ -33,6 +33,7 @@ import CreateFormPage from "../new_pom/pages/createFormPage.js";
 import CreateFolderModal from "../new_pom/modalWindows/createFolderModal.js";
 import MoveToFolderModal from "../new_pom/modalWindows/moveToFolderModal.js";
 import SettingsProfilePage from "../new_pom/pages/settings/settingsProfilePage.js";
+import ShareThisDocumentModal from "../new_pom/modalWindows/shareThisDocumentModal.js";
 
 export const test = base.extend({
 
@@ -204,5 +205,8 @@ export const test = base.extend({
     settingsProfilePage: async ({ page }, use) => {
         await use(new SettingsProfilePage(page));
     },
+    shareThisDocumentModal: async ({ page }, use) => {
+        await use(new ShareThisDocumentModal(page));
+    },    
 });
 
