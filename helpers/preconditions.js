@@ -25,14 +25,6 @@ export const createFolder = async (
             await documentsPage.toast.waitForToastIsHiddenByText(TOAST_MESSAGE.folderCreated);
     })
 };
-    await signPage.sideMenu.clickDocuments();
-    await documentsPage.clickCreateFolderBtn();
-    await createFolderModal.fillNewFolderName(FOLDER_NAME);
-    await createFolderModal.clickCreateBtn();
-    await documentsPage.sideMenu.clickSign();
-    await documentsPage.toast.waitForToastIsHiddenByText(TOAST_MESSAGE.folderCreated);
-}
-
 export const createForm = async (
     signPage, formsPage, createEditFormPage, prepareForSignatureModal, successModal) => {
     await signPage.sideMenu.clickForms();
