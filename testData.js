@@ -5,7 +5,9 @@ export const URL_END_POINTS = {
     settingsBillingPlanEndPoint: '/settings/billing/plan',
     signUpPersonalEndPoint: '/signup/personal',
     settingsBillingEndPoint: '/settings/billing',
-    settingsCompanyEndPoint: '/settings/company'
+    settingsCompanyEndPoint: '/settings/company',
+    signUpTrialEndPoint: '/signup',
+    confirmAccountEndPoint: '/confirm-account',
 };
 export const ACTIVE_COLOR = 'rgb(0, 163, 250)';
 export const FILL_FOLDER_NAME = 'Folder 1';
@@ -42,9 +44,6 @@ export const CREATE_TEMPLATE = {
     optionalMessage: 'USA',
     nameRole: 'Boss',
 }
-
-export const START_YOUR_FREE_TRIAL_STATEMENT = "Please add your payment details to start the free trial.";
-export const BILLING_INFORMATION = "Billing Information";
 export const PLANS = ["Personal", "Business"];
 export const RANDOM_ANNUALLY_PLAN = (randomPlan) => `${randomPlan} Annually Plan`;
 
