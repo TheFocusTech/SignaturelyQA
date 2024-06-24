@@ -1,4 +1,3 @@
-import { DATA_SIGNER, FOLDER_NAME, TOAST_MESSAGE } from "../testData";
 import { test } from "../fixtures/base";
 import { DATA_SIGNER, FOLDER_NAME, TOAST_MESSAGE, SIGNERS_DATA } from "../testData";
 
