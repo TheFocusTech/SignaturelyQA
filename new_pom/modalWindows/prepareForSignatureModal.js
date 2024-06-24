@@ -115,22 +115,8 @@ export default class PrepareForSignatureModal {
         });
     }
 
-    async clickCreateBtn() {
-        try {
-            await this.createBtn.click();
-
-        } finally {
-
-        }
-    }
-
     async clickBackToTemplatesBtn() {
-        try {
-            await this.backToTempatesBtn.click();
-
-        } finally {
-
-        }
+        await this.backToTempatesBtn.click();
     }
 
     async clickCustomSigningOrderCheckbox() {
