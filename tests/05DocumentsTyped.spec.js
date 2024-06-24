@@ -1,7 +1,7 @@
 
 import { expect } from "@playwright/test";
 import { test } from "../fixtures/base.js";
-import { CHOOSE_SIGNERS_FIELDS, TOASTER_MESSAGE } from '../testData.js';
+import { CHOOSE_SIGNERS_FIELDS, TOAST_MESSAGE } from '../testData.js';
 
 test.describe('DocumentsType', () => {
 
@@ -59,7 +59,7 @@ test.describe('DocumentsType', () => {
       await sendReminderDocumentModal.clickSignerCheckbox();
       await sendReminderDocumentModal.clickSendReminderBtn();
 
-      await expect(await documentsAwaitingPage.toast.toastBody).toHaveText(TOASTER_MESSAGE.sendReminder);
+      await expect(await documentsAwaitingPage.toast.toastBody).toHaveText(TOAST_MESSAGE.sendReminder);
 
    })
 
