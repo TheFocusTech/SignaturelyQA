@@ -45,8 +45,8 @@ test.describe('DocumentsType', () => {
             signPage,
             documentsPage,
             createFolderModal);
-        
         await signPage.uploadFileTab.fileUploader.uploadFile(UPLOAD_FILE_PATH.jpgDocument);
+        
         await signPage.sideMenu.clickDocuments();
         await documentsPage.table.clickOptionsBtn(1);
         await documentsPage.table.clickMoveToBtn();
