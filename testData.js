@@ -19,7 +19,8 @@ export const TOAST_MESSAGE = {
     folderRename: 'Folder successfully updated!',
     folderCreated: 'Folder created!',
     signatureCreated: 'Signature created successfully',
-    success: 'Document successfully saved!'
+    success: 'Document successfully saved!',
+    fileMovedToFolder: 'Files successfully moved!'
 };
 export const API_KEY_NAME = 'Test Api Key';
 export const NO_API_KEY_MESSAGE = 'You don\'t have any API keys yet.';
@@ -114,4 +115,12 @@ export const SIGNERS_DATA = {
     signerName2: `${process.env.NEW_USER_NAME}${'002'}`,
     signerEmail2: `${process.env.EMAIL_PREFIX}${process.env.NEW_USER_NUMBER}${'002'}${process.env.EMAIL_DOMAIN}`,
     viewerEmail1: `${process.env.EMAIL_PREFIX}${process.env.NEW_USER_NUMBER}${'003'}${process.env.EMAIL_DOMAIN}`
-}
+};
+
+export const FOLDER_NAME = 'Folder for documents';
+export const UPLOAD_FILE_PATH = {
+    jpgDocument: 'testDocuments/picture.jpg',
+};
+export const UPLOAD_FILE_NAME = {
+    jpgDocument: 'picture.jpg',
+};
