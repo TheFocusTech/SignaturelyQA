@@ -35,6 +35,9 @@ test.describe('Sign Document', () => {
         await prepareForSignatureModal.clickSignFieldItem();
         await prepareForSignatureModal.doCanvasClicks();
 
+        await prepareForSignatureModal.clickDateFieldItem();
+        await prepareForSignatureModal.doCanvasClicks();
+
         await prepareForSignatureModal.clickCreateBtn();
 
         await expect(prepareForSignatureModal.toast.toastBody).toHaveText(TOAST_MESSAGE.success);
@@ -44,7 +47,7 @@ test.describe('Sign Document', () => {
         await expect(await formsPage.table.documentStatus).toHaveText(DOCUMENT_STATUS.live);
   })
 
-  test.only('TC_08_35_01 | Verify that user can duplicate form', async ({ createBusinessUserAndLogin, signPage,  
+  test('TC_08_35_01 | Verify that user can duplicate form', async ({ createBusinessUserAndLogin, signPage,  
     prepareForSignatureModal, createFormPage, formsPage, successModal }) => {
         await description('Verify that user can duplicate form');
         await tag('Duplicate Form');
@@ -60,7 +63,7 @@ test.describe('Sign Document', () => {
     test.setTimeout(120 * 1000);
         await createForm(signPage, prepareForSignatureModal, createFormPage, formsPage, successModal);
 
-        await formsPage.table.clickOptionsBtn(1);
+        await formsPage.table.clickOptionsButton();
         await formsPage.table.clickDuplicateBtn();
         await successModal.clickOkBtn();
 

@@ -25,6 +25,10 @@ export default class TableComponent {
         });
     }
 
+    async clickOptionsButton() {
+        await this.optionsBtn.click();
+    }
+
     async clickEditAndResendBtn() {
         await this.editAndResendBtn.click();
     }
