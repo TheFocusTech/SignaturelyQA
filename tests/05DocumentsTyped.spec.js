@@ -66,15 +66,17 @@ test.describe('DocumentsType', () => {
         await documentsPage.table.clickMoveToBtn();
         await moveToFolderModal.selectFolder(FOLDER_NAME);
         await moveToFolderModal.clickMoveToFolderBtn();
-        
+   
         await test.step('Verify the toast message', async () => {
             await expect(await documentsPage.toast.toastBody).toHaveText(TOAST_MESSAGE.fileMovedToFolder);
         
         await documentsPage.table.openFolder(FOLDER_NAME);
         await test.step('Verify the document is inside the folder', async () => {
             await expect(await documentsPage.table.documentTitle).toHaveText(UPLOAD_FILE_NAME.jpgDocument);
-        });
-    
+            })
+        })
+    });
+
    test('TC_05_17_01 | Share document', async ({createBusinessUserAndLogin, signPage, prepareForSignatureModal, chooseSignatureOrInitialModal, finalStepPage, successModal, documentsPage, shareThisDocumentModal}) => {   
     test.slow();   
     await createCompletedField(signPage, prepareForSignatureModal, chooseSignatureOrInitialModal, finalStepPage, successModal);
@@ -89,5 +91,4 @@ test.describe('DocumentsType', () => {
 
     await expect(documentsPage.toast.documentToast).toHaveClass('Toastify__toast-body');           
   })
-})
 });
