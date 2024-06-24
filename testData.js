@@ -19,7 +19,8 @@ export const TOAST_MESSAGE ={
     folderRename: 'Folder successfully updated!',
     folderCreated: 'Folder created!',
     signatureCreated: 'Signature created successfully',
-    success: 'Document successfully saved!'
+    success: 'Document successfully saved!',
+    duplicated: 'Form successfully duplicated!',
 };
 export const API_KEY_NAME = 'Test Api Key';
 export const NO_API_KEY_MESSAGE = 'You don\'t have any API keys yet.';

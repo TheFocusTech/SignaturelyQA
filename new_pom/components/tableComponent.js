@@ -9,11 +9,12 @@ export default class TableComponent {
         this.editAndResendBtn = this.page.getByText('Edit & Resend');
         this.titleEditAndResendDocument = this.page.getByText('Edit & Resend document');
         this.createAPIKeyBtn = this.page.locator('.documents__empty-table').getByRole('button', {name: 'Create API key'});
+        this.duplicateBtn = this.page.getByText('Duplicate');
 
     }
 
     async clickOptionsBtn() {
-        await this.optionsBtn.waitFor();
+        //await this.optionsBtn.waitFor();
         await this.optionsBtn.click();
     }
 
@@ -29,6 +30,10 @@ export default class TableComponent {
     async clickCreateAPIKeyBtnInTable() {
         await this.createAPIKeyBtn.waitFor();
         await this.createAPIKeyBtn.click();
+    }
+
+    async clickDuplicateBtn() {
+        await this.duplicateBtn.click();
     }
 
 }

@@ -127,8 +127,4 @@ export default class PrepareForSignatureModal {
     async clickNameFieldItem() {
         await this.nameFieldItem.click();
     }
-
-    async clickCreateBtn() {
-        await this.createBtn.click();
-    }
 }
