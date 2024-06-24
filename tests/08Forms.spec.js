@@ -32,7 +32,18 @@ test.describe('Sign Document', () => {
     })
     test('TC_08_33_01 | Verify that user can edit form', async ({ createBusinessUserAndLogin, signPage,
         prepareForSignatureModal, createFormPage, formsPage, successModal }) => {
-        test.setTimeout(120 * 1000);
+            await allure.description('Verify that user can edit form');
+            await allure.tags('Edit Form');
+            await allure.severity(Severity.CRITICAL);
+            await allure.link(
+                  "Forms",
+                  "https://docs.google.com/spreadsheets/d/1v5LuJ23jSg5qcWZPqiSlBuEJnvvdsJ2HrVxC6Ag2vpA/edit?gid=331265622#gid=331265622",
+                  "TC_08_33_01"
+              );
+            await allure.epic('Forms');
+            test.setTimeout(40000);
+        
+            await createForm(signPage, prepareForSignatureModal, createFormPage, formsPage, successModal);
 
         
     })
