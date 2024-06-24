@@ -13,6 +13,7 @@ export default class TableComponent {
         this.documentTitle = this.page.locator('.documents__list-item .table__column--text--document p');
         this.moveToBtn = this.page.getByRole('button', { name: 'Move to' });
         this.controlsPath = this.page.locator('.tableControls__path');
+        this.duplicateBtn = this.page.getByText('Duplicate');
     }
 
     async clickOptionsBtn(i) {
@@ -48,5 +49,9 @@ export default class TableComponent {
 
     async openFolder(name) { 
         await this.documentTitle.filter({ hasText: name }).dblclick();
+    }
+
+    async clickDuplicateBtn() {
+        await this.duplicateBtn.click();
     }
 }
