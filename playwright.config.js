@@ -56,12 +56,10 @@ module.exports = defineConfig({
         /* Base URL to use in actions like `await page.goto('/')`. */
         baseURL: process.env.URL,
 
-        /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
-        trace: 'retain-on-failure',
         screenshot: 'only-on-failure',
         video: {
             mode: 'retain-on-failure',
-            size: {width: 1440, height: 900}
+            size: process.env.CI ? {width: 800, height: 600} : {width: 1440, height: 900}
         },
     },
 
