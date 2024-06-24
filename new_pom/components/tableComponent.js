@@ -1,3 +1,5 @@
+import { test } from "../../fixtures/base";
+
 export default class TableComponent {
 
     constructor(page) {
@@ -16,8 +18,10 @@ export default class TableComponent {
     }
 
     async clickOptionsBtn(i) {
-        await this.optionsBtn.nth(i).waitFor();
-        await this.optionsBtn.nth(i).click();
+        await test.step('Click the "Options" button', async () => {
+            await this.optionsBtn.nth(i).waitFor();
+            await this.optionsBtn.nth(i).click();
+        });
     }
 
     async clickEditAndResendBtn() {
@@ -43,10 +47,14 @@ export default class TableComponent {
     }
 
     async clickMoveToBtn() {
-        await this.moveToBtn.click();
+        await test.step('Click the "Move to" button', async () => {
+            await this.moveToBtn.click();
+        });
     }
 
     async openFolder(name) { 
-        await this.documentTitle.filter({ hasText: name }).dblclick();
+        await test.step('Open the folder', async () => {
+            await this.documentTitle.filter({ hasText: name }).dblclick();
+        });
     }
 }
