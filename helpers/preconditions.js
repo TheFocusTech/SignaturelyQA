@@ -29,11 +29,15 @@ export const createForm = async(
     createFormPage,
     prepareForSignatureModal,
     successModal) => {
+    await signPage.sideMenu.clickForms();
+
     await formsPage.clickCreateFormBtn();
     await createFormPage.fillFormNameField(SIGNERS_DATA.signerName1);
     await createFormPage.fillOptionalMessageField(SIGNERS_DATA.viewerEmail1);
     await createFormPage.fileUploader.uploadFile('testDocuments/todoList.xlsx');
     await createFormPage.clickFillTemplateBtn();
+    await prepareForSignatureModal.clickSignFieldsItem();
+    await prepareForSignatureModal.clickUploadedDocument();
 
     await prepareForSignatureModal.clickNameFieldItem();
     await prepareForSignatureModal.doCanvasClicks();

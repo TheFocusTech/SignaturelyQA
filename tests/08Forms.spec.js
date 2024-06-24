@@ -47,16 +47,35 @@ test.describe('Sign Document', () => {
             // await allure.epic('Forms');
             test.setTimeout(40000);
         
-            await createForm(signPage, formsPage, createFormPage, prepareForSignatureModal, successModal);
-        
+            //await createForm(signPage, formsPage, createFormPage, prepareForSignatureModal, successModal);
+        await signPage.sideMenu.clickForms();
+
+        await formsPage.clickCreateFormBtn();
+        await createFormPage.fillFormNameField(SIGNERS_DATA.signerName1);
+        await createFormPage.fillOptionalMessageField(SIGNERS_DATA.viewerEmail1);
+        await createFormPage.fileUploader.uploadFile('testDocuments/todoList.xlsx');
+        await createFormPage.clickFillTemplateBtn();
+        await prepareForSignatureModal.clickSignFieldsItem();
+        await prepareForSignatureModal.clickUploadedDocument();
+
+        await prepareForSignatureModal.clickInitialTab();
+        await prepareForSignatureModal.clickUploadedDocument();
+
+        await prepareForSignatureModal.clickDateTab();
+        await prepareForSignatureModal.clickUploadedDocument();
+
+        await prepareForSignatureModal.clickCreateBtn();
+        await prepareForSignatureModal.clickBacktoFormsBtn();
+
+
         await formsPage.table.clickOptionsDropdown()
         await formsPage.table.clickEditDropDown()
-        await editFormPage.fillFormNameField(FORMS.form_name_edit)   
-        await editFormPage.fillOptionalMessageField(FORMS.optional_message_text_edit)      
-        await editFormPage.clickCancelBtn() 
+        await editFormPage.fillFormNameField(FORMS.form_name_edit)
+        await editFormPage.fillOptionalMessageField(FORMS.optional_message_text_edit)
+        await editFormPage.clickCancelBtn()
         await editFormPage.fileUploader.uploadFile('testDocuments/todoList.xlsx');
-        await editFormPage.clickFillTemplateBtn()   
-        
+        await editFormPage.clickFillTemplateBtn()
+
         await prepareForSignatureModal.clickSignFieldsItem();
         await prepareForSignatureModal.clickUploadedDocument();
 
@@ -67,11 +86,12 @@ test.describe('Sign Document', () => {
         await prepareForSignatureModal.clickUploadedDocument();
 
         await prepareForSignatureModal.clickSaveBtn()
-    
+
         await expect(formsPage.toast.toastBody).toBeVisible();
         await expect(formsPage.toast.toastBody).nth(0).toHaveText(TOAST_MESSAGE.success);
         await expect(formsPage.toast.toastBody).nth(1).toHaveText(TOAST_MESSAGE.editedFormSaved);
         await expect(formsPage.table.firstFormTitle).toHaveText(FORMS.form_name_edit);
-        
+
     })
 })
+
