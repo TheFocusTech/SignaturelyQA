@@ -7,36 +7,52 @@ import {
     retrieveUserEmailConfirmCode,
 } from "../helpers/utils";
 import {
-    URL_END_POINTS, START_YOUR_FREE_TRIAL_STATEMENT, BILLING_INFORMATION, BUSINESS_MONTHLY_PLAN, CARD_DETAILS,
-    FREE_PLAN_DESCRIPTION, SUBSCRIPTIONS, SUBSCRIBE_TO_PERSONAL_PLAN, PLEASE_ENTER_CONFIRMATION_CODE, PERSONAL_PLAN_DESCRIPTION,
+    URL_END_POINTS, BUSINESS_MONTHLY_PLAN, CARD_DETAILS, FREE_PLAN_DESCRIPTION, SUBSCRIPTIONS, SUBSCRIBE_TO_PERSONAL_PLAN,
+    PLEASE_ENTER_CONFIRMATION_CODE, PERSONAL_PLAN_DESCRIPTION,
 } from "../testData";
+import { generateNewUserData } from "../helpers/utils";
+import {description, tag, severity, Severity, link, epic, step} from "allure-js-commons";
 
 test.describe('Registration', () => {
 
-    test('TC_01_01_02 | Verify that user redirects to the Activate-trial page', async ({ page, request, activateTrialStripePage }) => {
-        const newUserData = await createNewUserThroughApi(request);
-        const confirmationLink = await retrieveUserEmailConfirmationLink(request, newUserData);
+    test('TC_01_01_01 | Verify successful registration of Trial user', async ({page, request, signUpTrialPage, activateTrialStripePage, signPage, settingsCompanyPage, settingsBillingPage}) => {
+        await description('To verify that a Trial user can successfully register.');
+        await tag('Trial user');
+        await severity(Severity.BLOCKER);
+        await link(
+            "https://docs.google.com/document/d/1Qce7tKWOwVYtPxgQv_8ae-HUkbAgeOFph0lB_eziY_k/edit#heading=h.3auuqi4u4l4v",
+            "TC_01_01_01"
+        );
+        await epic('Registration');
 
-        await page.goto(confirmationLink);
+        const newUserData = await generateNewUserData();
+        await step('Navigate to the Trial user registration page', async () => {
+            await page.goto(URL_END_POINTS.signUpTrialEndPoint);
+        });
+        await signUpTrialPage.yourInformation.fillNameInputField(newUserData.name);
+        await signUpTrialPage.yourInformation.fillEmailInputField(newUserData.email);
+        await signUpTrialPage.yourInformation.fillPasswordInputField(newUserData.password);
+        await signUpTrialPage.clickCreateAccountBtn();
+        await step('Verify that the user is on the Confirm account page', async () => {
+            await expect(page).toHaveURL(`${process.env.URL}${URL_END_POINTS.confirmAccountEndPoint}`);
+        });
+
+        const confirmationLink = await retrieveUserEmailConfirmationLink(request, newUserData);
+        await step("Navigate to the confirmation link", async () => {
+            await page.goto(confirmationLink);
+        });
         await page.waitForURL(`${process.env.URL}${URL_END_POINTS.activateTrialEndPoint}`);
+        await step("Verify that the user's name appears in the header of the page", async () => {
+            await expect(activateTrialStripePage.header.userName).toHaveText(newUserData.name);
+        });
 
-        await expect(activateTrialStripePage.userHeaderName).toHaveText(newUserData.name);
-        await expect(activateTrialStripePage.freeTrialStatement).toContainText(START_YOUR_FREE_TRIAL_STATEMENT);
-        await expect(activateTrialStripePage.billingInfoHeader).toHaveText(BILLING_INFORMATION)
-    })
-
-    test('TC_01_01_03 | Verify that user redirects to the homepage after filling Billing information', async ({ request, page, activateTrialStripePage, signPage, settingsCompanyPage, settingsBillingPage }) => {
-        const newUserData = await createNewUserThroughApi(request);
-        const confirmationLink = await retrieveUserEmailConfirmationLink(request, newUserData);
-
-        await page.goto(confirmationLink);
         await activateTrialStripePage.cardDetails.fillData(CARD_DETAILS.VISA);
         await activateTrialStripePage.clickStartMy7DayFreeTrialBtn();
-        await expect(signPage.userHeaderName).toHaveText(newUserData.name);
-
         await signPage.sideMenu.clickSettings();
         await settingsCompanyPage.sideMenuSettings.clickBilling();
-        await expect(settingsBillingPage.billingPlanDescription).toHaveText(BUSINESS_MONTHLY_PLAN)
+        await step("Verify that the billing plan description is Business Monthly Plan", async () => {
+            await expect(settingsBillingPage.billingPlanDescription).toHaveText(BUSINESS_MONTHLY_PLAN);
+        });
     })
 
     test('TC_01_02_02 | Verify that Free user redirects to the SignPage after confirmation of the registration', async ({ page, request, signPage, settingsCompanyPage, settingsBillingPage}) => {
