@@ -191,7 +191,7 @@ export const test = base.extend({
     },
 
     createEditFormPage: async ({ page }, use) => {
-        await use(new CreateFormPage(page));
+        await use(new CreateEditFormPage(page));
     },
 
     moveToFolderModal: async ({ page }, use) => {

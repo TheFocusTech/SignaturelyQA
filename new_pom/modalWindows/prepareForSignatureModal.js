@@ -33,7 +33,7 @@ export default class PrepareForSignatureModal {
         this.nameFieldItem = this.page.locator('ul.interactModal__fieldBar-fieldList li').filter({ hasText: /^Name$/ }).first();
         this.signFieldItem = this.page.locator('ul.interactModal__fieldBar-fieldList li').nth(1);
         this.initialFieldsItem = this.fieldsMenu.getByText('Initial');   
-        this.dateFieldsItem = this.page.locator('div .interactModal__fieldBar-fieldItem').filter({ hasText: 'Date' });
+        this.dateFieldsItem = this.fieldsMenu.getByText('Date');
 
     }
 
@@ -90,6 +90,7 @@ export default class PrepareForSignatureModal {
     }
 
     async clickSaveBtn() {
+        await this.saveBtn.waitFor()
         await this.saveBtn.click();
     }
 

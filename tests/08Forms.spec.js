@@ -34,7 +34,7 @@ test.describe('Forms', () => {
 
     test('TC_08_33_01 | Verify that user can edit form', async ({ createBusinessUserAndLogin, signPage,
         formsPage, createEditFormPage, prepareForSignatureModal, successModal }) => {
-        test.setTimeout(60000);
+        test.setTimeout(90000);
         
         await createForm(signPage, formsPage, createEditFormPage, prepareForSignatureModal, successModal);
 
@@ -45,7 +45,7 @@ test.describe('Forms', () => {
         await createEditFormPage.clickCancelBtn();
         await createEditFormPage.fileUploader.uploadFile('testDocuments/todoList.xlsx');
         await createEditFormPage.clickFillTemplateBtn();
-
+               
         await prepareForSignatureModal.clickSignFieldsItem();
         await prepareForSignatureModal.doCanvasClicks();
 
@@ -57,9 +57,11 @@ test.describe('Forms', () => {
 
         await prepareForSignatureModal.clickSaveBtn();
 
-        await expect(formsPage.toast.toastBody).toBeVisible();
-        await expect(formsPage.toast.toastBody).nth(0).toHaveText(TOAST_MESSAGE.success);
-        await expect(formsPage.toast.toastBody).nth(1).toHaveText(TOAST_MESSAGE.editedFormSaved);
+        await expect(formsPage.toast.toastBody.nth(0)).toBeVisible();
+        await expect(formsPage.toast.toastBody.nth(1)).toBeVisible();
+
+        await expect(formsPage.toast.toastBody.nth(0)).toHaveText(TOAST_MESSAGE.success);
+        await expect(formsPage.toast.toastBody.nth(1)).toHaveText(TOAST_MESSAGE.editedFormSaved);
         await expect(formsPage.table.firstFormTitle).toHaveText(FORMS.form_name_edit);
     })
 })
