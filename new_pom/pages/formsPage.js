@@ -8,7 +8,7 @@ export default class FormsPage {
         this.toast = new ToastComponent(this.page);
 
         this.createFormBtn = this.page.locator('div').filter({ hasText: /^Create Form$/ }).getByRole('button');
-        this.formsList = this.page.locator('div.table__dataRow’);
+        this.formsList = this.page.locator('div.table__dataRow');
     }
 
     
