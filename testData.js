@@ -20,6 +20,7 @@ export const TOAST_MESSAGE = {
     folderCreated: 'Folder created!',
     signatureCreated: 'Signature created successfully',
     success: 'Document successfully saved!',
+    fileMovedToFolder: 'Files successfully moved!',
     profileUpdated: 'Profile information updated.'
 };
 export const API_KEY_NAME = 'Test Api Key';
@@ -115,4 +116,12 @@ export const SIGNERS_DATA = {
     signerName2: `${process.env.NEW_USER_NAME}${'002'}`,
     signerEmail2: `${process.env.EMAIL_PREFIX}${process.env.NEW_USER_NUMBER}${'002'}${process.env.EMAIL_DOMAIN}`,
     viewerEmail1: `${process.env.EMAIL_PREFIX}${process.env.NEW_USER_NUMBER}${'003'}${process.env.EMAIL_DOMAIN}`
-}
+};
+
+export const FOLDER_NAME = 'Folder for documents';
+export const UPLOAD_FILE_PATH = {
+    jpgDocument: 'testDocuments/picture.jpg',
+};
+export const UPLOAD_FILE_NAME = {
+    jpgDocument: 'picture.jpg',
+};

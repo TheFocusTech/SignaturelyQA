@@ -1,4 +1,4 @@
-import { DATA_SIGNER } from "../testData";
+import { DATA_SIGNER, FOLDER_NAME, TOAST_MESSAGE } from "../testData";
 
 export const createSignature = async (signPage, settingsCompanyPage, settingsEditSignaturePage, createOrEditSignatureOnSettingModal) => {
     await signPage.sideMenu.clickSettings();
@@ -9,4 +9,16 @@ export const createSignature = async (signPage, settingsCompanyPage, settingsEdi
     await createOrEditSignatureOnSettingModal.clickCheckboxAgree();
     await createOrEditSignatureOnSettingModal.clickCreateSignatureBtn();
     await settingsCompanyPage.sideMenu.clickSign();
+};
+
+export const createFolder = async (
+    signPage,
+    documentsPage,
+    createFolderModal) => {
+    await signPage.sideMenu.clickDocuments();
+    await documentsPage.clickCreateFolderBtn();
+    await createFolderModal.fillNewFolderName(FOLDER_NAME);
+    await createFolderModal.clickCreateBtn();
+    await documentsPage.sideMenu.clickSign();
+    await documentsPage.toast.waitForToastIsHiddenByText(TOAST_MESSAGE.folderCreated);
 }
