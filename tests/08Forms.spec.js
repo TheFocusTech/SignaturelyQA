@@ -55,7 +55,7 @@ test.describe('Forms', () => {
         await prepareForSignatureModal.clickDateFieldsItem();
         await prepareForSignatureModal.doCanvasClicks();
 
-        await prepareForSignatureModal.clickSaveBtn();
+        await prepareForSignatureModal.clickSaveBtnForm();
 
         await expect(formsPage.toast.toastBody.nth(0)).toBeVisible();
         await expect(formsPage.toast.toastBody.nth(1)).toBeVisible();
