@@ -1,4 +1,5 @@
 import {allure} from "allure-playwright";
+import { test } from "../../fixtures/base";
 
 export default class SideMenuComponent {
     constructor(page) {
@@ -18,7 +19,9 @@ export default class SideMenuComponent {
     }
 
     async clickDocuments() {
-        await this.documents.click();
+        await test.step('Click the "Documents" item on the left SideMenu', async () => {
+            await this.documents.click();
+        });
     }
 
     async clickTemplates() {
