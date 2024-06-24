@@ -1,3 +1,5 @@
+import {test} from "../../../fixtures/base";
+
 export default class StripeEnterPaymentDetailsPage {
     constructor(page) {
         this.page = page;
@@ -13,16 +15,19 @@ export default class StripeEnterPaymentDetailsPage {
         this.successCheckmark = this.page.locator('[class="Icon Icon--md Icon--white"]');
     }
 
-    async attachCard(cardDetails){
-        await this.cardNumberFild.pressSequentially(cardDetails.cardNumber);
-        await this.expirationDateFild.pressSequentially(cardDetails.expirationDate);
-        await this.cvcFild.pressSequentially(cardDetails.cvc);
-        await this.fullNameOnCardFild.pressSequentially(cardDetails.fullNameOnCard);
-        await this.countryOrRegionOption.selectOption(cardDetails.countryOrRegion);
-        await this.zipFild.fill(cardDetails.zip);
-        await this.saveMyInfoCheckbox.uncheck();
-        await this.saveCardButton.click();
-        await this.successCheckmark.waitFor({ timeout: 30000 });
-        await this.page.close();
+    async attachCard(cardDetails) {
+        await test.step('Attach the payment card throw the Stripe service', async () => {
+            await this.cardNumberFild.pressSequentially(cardDetails.cardNumber);
+            await this.expirationDateFild.pressSequentially(cardDetails.expirationDate);
+            await this.cvcFild.pressSequentially(cardDetails.cvc);
+            await this.fullNameOnCardFild.pressSequentially(cardDetails.fullNameOnCard);
+            await this.countryOrRegionOption.selectOption(cardDetails.countryOrRegion);
+            await this.zipFild.fill(cardDetails.zip);
+            await this.saveMyInfoCheckbox.uncheck();
+            await this.saveCardButton.click();
+            await this.successCheckmark.waitFor({timeout: 30000});
+            await this.page.close();
+            // await test.step('Attach the payment card throw the Stripe service: Enter Payment Details', async () => {
+        });
     }
 }

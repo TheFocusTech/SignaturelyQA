@@ -31,14 +31,12 @@ module.exports = defineConfig({
         [
             "allure-playwright",
             {
-                detail: true,
-                suiteTitle: true,
-                categories: [
-                    {
-                        name: "Outdated tests",
-                        messageRegex: ".*FileNotFound.*",
-                    },
-                ],
+                detail: false,
+                suiteTitle: false,
+                categories: {
+                    name: "Outdated tests",
+                    messageRegex: ".*FileNotFound.*",
+                },
                 environmentInfo: {
                     os_platform: os.platform(),
                     os_release: os.release(),

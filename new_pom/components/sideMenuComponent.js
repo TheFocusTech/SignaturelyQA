@@ -1,4 +1,5 @@
-import {allure} from "allure-playwright";
+import {test} from "../../fixtures/base";
+import {step} from "allure-js-commons";
 
 export default class SideMenuComponent {
     constructor(page) {
@@ -12,9 +13,10 @@ export default class SideMenuComponent {
 
     }
 
-    
     async clickSign() {
-        await this.sign.click();
+        await test.step('Click on the Sign in Side Menu', async () => {
+            await this.sign.click();
+        });
     }
 
     async clickDocuments() {
@@ -26,13 +28,9 @@ export default class SideMenuComponent {
     }
 
     async clickSettings() {
-        await allure.step("Click Settings", async () => {
+        await step("Click on the Settings in the Side menu", async () => {
             await this.settings.click();
-        })
-    }
-
-    async clickSettings() {
-        await this.settings.click();
+        });
     }
 
     async clickForms() {

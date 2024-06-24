@@ -1,3 +1,5 @@
+import {test} from "../../../fixtures/base";
+
 export default class SettingsBillingPortalPage {
     constructor(page) {
         this.page = page;
@@ -10,14 +12,16 @@ export default class SettingsBillingPortalPage {
     }
 
     async deleteAllNotDefaultCards() {
-        await this.page.waitForTimeout(2000);
-        let count = await this.moreOptionsButtonList.count();
-        while (count > 0) {
-            await this.moreOptionsButtonList.nth(0).click()
-            await this.deleteOptions.click();
-            await this.deletePaymentMethodButtonOnDialog.click();
-            await this.page.waitForTimeout(1000)
-            count = await this.moreOptionsButtonList.count();
-        }
+        await test.step('Delete all not default cards', async () => {
+            await this.page.waitForTimeout(2000);
+            let count = await this.moreOptionsButtonList.count();
+            while (count > 0) {
+                await this.moreOptionsButtonList.nth(0).click()
+                await this.deleteOptions.click();
+                await this.deletePaymentMethodButtonOnDialog.click();
+                await this.page.waitForTimeout(1000)
+                count = await this.moreOptionsButtonList.count();
+            }
+        });
     }
 }
