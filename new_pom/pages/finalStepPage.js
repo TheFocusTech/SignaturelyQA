@@ -1,5 +1,5 @@
 import ToastComponent from "../components/toastComponent";
-import { test } from "../../fixtures/base"; 
+import {step} from "allure-js-commons";
 
 export default class FinalStepPage {
     constructor(page) {
@@ -16,14 +16,14 @@ export default class FinalStepPage {
     }
 
     async fillDocumentTitleField(title) {
-        await test.step('Fill in the document title.', async () => {
+        await step('Fill in the document title.', async () => {
             await this.documentTitleField.waitFor({ status: "visible" });
             await this.documentTitleField.fill(title);
         });
     }
 
     async clickSignDocumentAndSendForSignatureBtn() {
-        await test.step('Click on the "Sign Document and Send for Signature" button.', async () => {
+        await step('Click on the "Sign Document and Send for Signature" button.', async () => {
             await this.signDocumentAndSendForSignatureBtn.click();
         });
     }

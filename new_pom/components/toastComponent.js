@@ -1,4 +1,4 @@
-import { test } from "../../fixtures/base"; 
+import {step} from "allure-js-commons";
 
 export default class ToastComponent {
     constructor(page) {
@@ -10,7 +10,7 @@ export default class ToastComponent {
     }
 
     async clickToastFirstCloseBtn() {
-        await test.step('Close the toast notification.', async () => {
+        await step('Close the toast notification.', async () => {
             await this.toastFirstCloseBtn.click();
         });
     }

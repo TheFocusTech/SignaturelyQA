@@ -17,7 +17,7 @@ export default class SideMenuComponent {
     }
 
     async clickDocuments() {
-        await test.step('Click the "Documents" item on the left SideMenu', async () => {
+        await step('Click the "Documents" item on the left SideMenu', async () => {
             await this.documents.click();
         });
     }

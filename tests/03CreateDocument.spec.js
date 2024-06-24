@@ -8,8 +8,7 @@ import {
 	SIGNER_ME
 } from "../testData.js";
 import { createSignature } from "../helpers/preconditions.js";
-import { allure } from "allure-playwright";
-import { Severity } from "allure-js-commons";
+import {description, tag, severity, Severity, link, epic, step} from "allure-js-commons";
 
 test.describe("CreateDocument", () => {
 	test("TC_03_07_01 | Sign a document - verify that user can sign a document themselves", async ({
@@ -53,15 +52,15 @@ test.describe("CreateDocument", () => {
 		documentsPage,
 		}) => {
 		test.setTimeout(120 * 1000);
-		await allure.description('Objective: To verify the process of creating, signing, and sending a document to another signer.');
-		await allure.tags('Create_Document');
-		await allure.severity(Severity.CRITICAL);
-		await allure.link(
+		await description('Objective: To verify the process of creating, signing, and sending a document to another signer.');
+		await severity(Severity.CRITICAL);
+		await link(
 				"Documentation",
 				"https://docs.google.com/document/d/1Qce7tKWOwVYtPxgQv_8ae-HUkbAgeOFph0lB_eziY_k/edit#heading=h.2np2zmox71j",
 				"TC_03_07_06"
 		);
-		await allure.epic('Create Document');
+		await epic('Create Document');
+		await tag('Create Document');
 
         await signPage.uploadFileTab.fileUploader.uploadFile('testDocuments/todoList.xlsx');
         await signPage.uploadFileTab.clickPrepareDocumentBtn();

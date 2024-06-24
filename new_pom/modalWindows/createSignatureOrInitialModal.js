@@ -1,4 +1,4 @@
-import { test } from "../../fixtures/base"; 
+import {step} from "allure-js-commons";
 
 export default class CreateSignatureOrInitialModal {
     constructor(page) {
@@ -10,14 +10,14 @@ export default class CreateSignatureOrInitialModal {
     }
 
     async clickCheckboxAgree() {
-        await test.step('Click the "I agree" checkbox for electronic signing.', async () => {
+        await step('Click the "I agree" checkbox for electronic signing.', async () => {
             await this.checkboxAgree.waitFor({ state: 'visible' });
             await this.checkboxAgree.click();
         });
     }
 
     async clickSignNowBtn() {
-        await test.step('Click on the "Sign Now" button.', async () => {
+        await step('Click on the "Sign Now" button.', async () => {
             await this.signNowBtn.click();
         });
     }
