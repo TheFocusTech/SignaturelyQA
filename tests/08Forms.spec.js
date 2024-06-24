@@ -6,14 +6,19 @@ import {description, tag, severity, Severity, link, epic, feature} from "allure-
 
 test.describe('Sign Document', () => {
 
-    test('TC_08_32_01 | Verify that user can create form', async ({ createBusinessUserAndLogin, signPage, 
-    prepareForSignatureModal, createFormPage, formsPage, successModal }) => {
+    test('TC_08_32_01 | Verify that user can create form', async ({ 
+        createBusinessUserAndLogin, 
+        signPage, 
+        prepareForSignatureModal, 
+        createFormPage, 
+        formsPage, 
+        successModal 
+        }) => {
         await description('Verify that user can create form');
         await tag("Create Form");
         await severity(Severity.CRITICAL);
         await link(
-              "Documentation",
-              "https://docs.google.com/spreadsheets/d/1v5LuJ23jSg5qcWZPqiSlBuEJnvvdsJ2HrVxC6Ag2vpA/edit?gid=331265622#gid=331265622&range=A44",
+              "https://docs.google.com/document/d/1Qce7tKWOwVYtPxgQv_8ae-HUkbAgeOFph0lB_eziY_k/edit#heading=h.c5mhxwvn5pxt",
               "TC_08_32_01"
           );
         await epic("Forms");
@@ -47,14 +52,19 @@ test.describe('Sign Document', () => {
         await expect(await formsPage.table.documentStatus).toHaveText(DOCUMENT_STATUS.live);
   })
 
-  test('TC_08_35_01 | Verify that user can duplicate form', async ({ createBusinessUserAndLogin, signPage,  
-    prepareForSignatureModal, createFormPage, formsPage, successModal }) => {
+  test('TC_08_35_01 | Verify that user can duplicate form', async ({ 
+        createBusinessUserAndLogin, 
+        signPage,  
+        prepareForSignatureModal, 
+        createFormPage, 
+        formsPage, 
+        successModal 
+        }) => {
         await description('Verify that user can duplicate form');
         await tag('Duplicate Form');
         await severity(Severity.CRITICAL);
         await link(
-          "Documentation",
-          "https://docs.google.com/spreadsheets/d/1v5LuJ23jSg5qcWZPqiSlBuEJnvvdsJ2HrVxC6Ag2vpA/edit?gid=331265622#gid=331265622&range=A47",
+          "https://docs.google.com/document/d/1Qce7tKWOwVYtPxgQv_8ae-HUkbAgeOFph0lB_eziY_k/edit#heading=h.c5mhxwvn5pxt",
           "TC_08_35_01"
       );
         await epic("Forms");
