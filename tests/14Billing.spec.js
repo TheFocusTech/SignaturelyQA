@@ -1,6 +1,8 @@
 import { expect } from '@playwright/test';
 import { test } from "../fixtures/base.js";
 import {CARD_DETAILS, RANDOM_ANNUALLY_PLAN, PLANS, END_PLAN} from '../testData.js';
+import {allure} from "allure-playwright";
+import {Severity} from "allure-js-commons";
 
 test.describe('Billing', () => {
 
@@ -9,11 +11,11 @@ test.describe('Billing', () => {
         await settingsCompanyPage.sideMenuSettings.clickBilling();
         await settingsBillingPage.clickEditPlanButton();
         await settingsBillingPlanPage.clickSelectPersonalPlanButton();
-        await downgradeToPersonalPlanModal.clickDowngradeButton();        
+        await downgradeToPersonalPlanModal.clickDowngradeButton();
         await specialOneTimeOfferModal.clickNoThanksModalBtn();
         await settingsBillingPlanPage.sideMenuSettings.clickBilling();
 
-        await expect(settingsBillingPage.nextInvoiceInfo).toContainText(END_PLAN);           
+        await expect(settingsBillingPage.nextInvoiceInfo).toContainText(END_PLAN);
     })
 
     test.describe('Upsell plan', () => {
@@ -37,6 +39,18 @@ test.describe('Billing', () => {
                                                                 settingsCompanyPage,
                                                                 settingsBillingPage,
                                                             }) => {
+        await allure.description('Objective: To verify the functionality of attaching a payment card ' +
+            'through the settings-billing section and deleting a payment card through the Billing Portal.')
+        await allure.tags("Payment Card");
+        await allure.severity(Severity.CRITICAL);
+        await allure.link(
+            "Documentation",
+            "https://docs.google.com/document/d/1Qce7tKWOwVYtPxgQv_8ae-HUkbAgeOFph0lB_eziY_k/edit#heading=h.khucr6xuqdib",
+            "TC_14_54_01"
+        );
+        await allure.epic("Setting");
+        await allure.feature("Billing");
+
         test.setTimeout(100 * 1000);
         await signPage.sideMenu.clickSettings();
         await settingsCompanyPage.horizontalMenu.clickBilling();

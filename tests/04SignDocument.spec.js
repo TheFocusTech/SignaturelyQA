@@ -1,23 +1,23 @@
 import { expect } from "@playwright/test";
 import { test } from "../fixtures/base.js";
-import { CHOOSE_SIGNERS_FIELDS, DOCUMENT_STATUS, TOAST_MESSAGE } from '../testData.js';
+import { DOCUMENT_STATUS, SIGNERS_DATA } from '../testData.js';
 
 test.describe('Sign Document', () => {
 
     test('TC_04_11_02 | Verify custom signing order', async ({ createBusinessUserAndLogin, signPage, prepareForSignatureModal }) => {
 
-        await signPage.uploadFile.fileUploader.uploadFile('testDocuments/picture.jpg');
-        await signPage.uploadFile.clickPrepareDocumentBtn();
+        await signPage.uploadFileTab.fileUploader.uploadFile('testDocuments/picture.jpg');
+        await signPage.uploadFileTab.clickPrepareDocumentBtn();
     
         await prepareForSignatureModal.clickSignAndSendForSignatureRadioBtn();
         
         await prepareForSignatureModal.clickAddSignerBtn();
-        await prepareForSignatureModal.fillSignerNameField(CHOOSE_SIGNERS_FIELDS.name1, 0);
-        await prepareForSignatureModal.fillSignerEmailField(process.env.EMAIL_PREFIX + '01' + process.env.EMAIL_DOMAIN, 0);
+        await prepareForSignatureModal.fillSignerNameField(SIGNERS_DATA.signerName1, 0);
+        await prepareForSignatureModal.fillSignerEmailField(SIGNERS_DATA.signerEmail1, 0);
     
         await prepareForSignatureModal.clickAddSignerBtn();
-        await prepareForSignatureModal.fillSignerNameField(CHOOSE_SIGNERS_FIELDS.name2, 1);
-        await prepareForSignatureModal.fillSignerEmailField(process.env.EMAIL_PREFIX + '02' + process.env.EMAIL_DOMAIN, 1);
+        await prepareForSignatureModal.fillSignerNameField(SIGNERS_DATA.signerName2, 1);
+        await prepareForSignatureModal.fillSignerEmailField(SIGNERS_DATA.signerEmail2, 1);
     
         await prepareForSignatureModal.clickCustomSigningOrderCheckbox();
     
@@ -36,15 +36,16 @@ test.describe('Sign Document', () => {
         documentsPage,
         successModal     
     }) => {
-        await signPage.uploadFile.fileUploader.uploadFile('testDocuments/todoList.xlsx');
-        await signPage.uploadFile.clickPrepareDocumentBtn();
+
+        await signPage.uploadFileTab.fileUploader.uploadFile('testDocuments/todoList.xlsx');
+        await signPage.uploadFileTab.clickPrepareDocumentBtn();
 
         await prepareForSignatureModal.clickSendForSignatureRadioBtn();
         await prepareForSignatureModal.clickAddSignerBtn();
-        await prepareForSignatureModal.fillSignerNameField(CHOOSE_SIGNERS_FIELDS.name1, 0);
-        await prepareForSignatureModal.fillSignerEmailField(process.env.EMAIL_PREFIX + '001' + process.env.EMAIL_DOMAIN, 0);
+        await prepareForSignatureModal.fillSignerNameField(SIGNERS_DATA.signerName1, 0);
+        await prepareForSignatureModal.fillSignerEmailField(SIGNERS_DATA.signerEmail1, 0);
         await prepareForSignatureModal.clickAddRecipientsBtn();
-        await prepareForSignatureModal.fillRecipientEmailField(process.env.EMAIL_PREFIX + '002' + process.env.EMAIL_DOMAIN);
+        await prepareForSignatureModal.fillRecipientEmailField(SIGNERS_DATA.viewerEmail1);
         await prepareForSignatureModal.clickContinueBtn();
         await prepareForSignatureModal.clickGotItBtn();
         await prepareForSignatureModal.clickSignFieldsItem();
