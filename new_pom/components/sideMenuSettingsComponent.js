@@ -1,3 +1,5 @@
+import {step} from "allure-js-commons";
+
 export default class SideMenuSettingsComponent {
     constructor(page) {
         this.page = page;
@@ -9,7 +11,9 @@ export default class SideMenuSettingsComponent {
     }
 
     async clickBilling() {
-        await this.billing.click();
+        await step("Click on the Billing option in the side menu", async () => {
+            await this.billing.click();
+        });
     }
 
     async clickEditSignature() {
