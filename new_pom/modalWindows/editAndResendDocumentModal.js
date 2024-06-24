@@ -8,13 +8,18 @@ export default class EditAndResendDocumentModal {
     }
 
     async getTitleText() {
-        const actualText = await this.editAndResendTitle.textContent();
-        return actualText
+        await test.step('Retrieve the text of the heading', async () => {
+            const actualText = await this.editAndResendTitle.textContent();
+            return actualText
+        });
     }
 
     async clickRevertToDraftBtn() {
-        await this.revertToDraftBtn.waitFor();
-        await this.revertToDraftBtn.click();
+        await test.step('Click the "Revert to Draft" button', async () => {
+            await this.revertToDraftBtn.waitFor();
+            await this.revertToDraftBtn.click();
+        });
     }
 
 }
+
