@@ -34,8 +34,7 @@ export default class PrepareForSignatureModal {
         this.nameFieldItem = this.page
             .locator('ul.interactModal__fieldBar-fieldList li')
             .filter({ hasText: /^Name$/ })
-            .first();
-        this.signFieldItem = this.page.locator('ul.interactModal__fieldBar-fieldList li').nth(1);
+            .first();    
         this.initialFieldsItem = this.fieldsMenu.getByText('Initial');
     }
 
@@ -62,8 +61,10 @@ export default class PrepareForSignatureModal {
     }
 
     async clickSignFieldsItem() {
-        await this.signFieldsItem.waitFor();
-        await this.signFieldsItem.click();
+        await step('Select the "Sign" option from the left side menu', async () => {
+            await this.signFieldsItem.waitFor();
+            await this.signFieldsItem.click();
+        });       
     }
 
     async clickGotItBtn() {
@@ -138,12 +139,6 @@ export default class PrepareForSignatureModal {
     async fillRecipientEmailField(email) {
         await step('Fill the email address of the viewer into the input field.', async () => {
             await this.recipientEmailField.fill(email);
-        });
-    }
-
-    async clickSignFieldItem() {
-        await step('Select the "Sign" option from the left side menu', async () => {
-            await this.signFieldItem.click();
         });
     }
 

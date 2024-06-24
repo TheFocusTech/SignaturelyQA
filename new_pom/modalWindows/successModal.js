@@ -10,8 +10,7 @@ export default class SuccessModal {
 
     async clickBackToDocumentsBtn() {
         await step('Click the "Back to Documents" button.', async () => {
-            await this.statusDocument.waitFor({ state: 'visible' });
-            // await new Promise(resolve => setTimeout(resolve, 1000));
+            await this.statusDocument.waitFor({ state: 'visible' });            
             await this.backToDocumentsBtn.click();
         });
     }

@@ -19,7 +19,7 @@ test.describe('Sign Document', () => {
     await prepareForSignatureModal.clickNameFieldItem();
     await prepareForSignatureModal.doCanvasClicks();
     
-    await prepareForSignatureModal.clickSignFieldItem();
+    await prepareForSignatureModal.clickSignFieldsItem();
     await prepareForSignatureModal.doCanvasClicks();
 
     await prepareForSignatureModal.clickCreateBtn();

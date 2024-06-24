@@ -1,6 +1,6 @@
 import { expect } from '@playwright/test';
 import { test } from "../fixtures/base.js";
-import { description, tag, severity, Severity, link, epic, step } from 'allure-js-commons';
+import { description, tags, severity, Severity, link, epic, step } from 'allure-js-commons';
 import { DOCUMENT_STATUS, SIGNERS_DATA, TOAST_MESSAGE } from '../testData.js';
 
 test.describe('Sign Document', () => {
@@ -33,14 +33,14 @@ test.describe('Sign Document', () => {
         prepareForSignatureModal,
         finalStepPage,
         documentsPage,
-        successModal,
+        successModal,        
     }) => {
         await description('To verify the adding viewers / adding users who can view the document.');
-        await tag('Sign', 'Documents');
         await severity(Severity.CRITICAL);
         await link('https://docs.google.com/document/d/1Qce7tKWOwVYtPxgQv_8ae-HUkbAgeOFph0lB_eziY_k/edit#heading=h.ojom1b8sk9ht',
             'TC_04_11_02');
         await epic('Sign document');
+        await tags('Sign', 'Documents');
 
         await signPage.uploadFileTab.fileUploader.uploadFile('testDocuments/todoList.xlsx');
         await signPage.uploadFileTab.clickPrepareDocumentBtn();
@@ -57,9 +57,8 @@ test.describe('Sign Document', () => {
         await prepareForSignatureModal.doCanvasClicks();
         await prepareForSignatureModal.clickSaveBtn();
 
-        await step('Verify that Success Toast Notification is shown', async () => {
-            await expect(await prepareForSignatureModal.toast.toastBody).toBeVisible();
-            expect(await prepareForSignatureModal.toast.toastBody).toHaveText(TOAST_MESSAGE.success);
+        await step('Verify that Success Toast Notification is shown', async () => {            
+            await expect(await prepareForSignatureModal.toast.toastBody).toHaveText(TOAST_MESSAGE.success);
         });
         
         await finalStepPage.clickSendForSignatureBtn();
