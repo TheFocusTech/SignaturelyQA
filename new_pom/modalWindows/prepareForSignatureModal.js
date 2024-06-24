@@ -28,8 +28,6 @@ export default class PrepareForSignatureModal {
         this.customSigningOrderCheckbox = this.page.locator('.uiCheckbox__inner');
         this.customSigningOrderPositionNumberOne = this.page.locator('span.signers__item-order-position').first();
         this.customSigningOrderPositionNumberTwo = this.page.locator('span.signers__item-order-position').last();
-        this.uploadedFileCanvas = this.page.locator('.react-pdf__Page__canvas').first();
-        this.signNowBtn = this.page.getByRole('button', {name: 'Sign Now'});
         this.addRecipientsBtn = this.page.getByText('Recipients', { exact: true });
         this.recipientEmailField = this.page.getByPlaceholder('test@signaturely.com');       
     }
@@ -110,16 +108,8 @@ export default class PrepareForSignatureModal {
 
     async clickCustomSigningOrderCheckbox() {
         await this.customSigningOrderCheckbox.click();
-    }
-  
-    async clickUploadedFileCanvas() {
-        await this.uploadedFileCanvas.click();
-    }
-    
-    async clickSignNowBtn() {
-        await this.signNowBtn.click();
-    }
-    
+    }  
+        
     async clickAddRecipientsBtn() {
         await this.addRecipientsBtn.click();
     }

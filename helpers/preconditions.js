@@ -10,3 +10,19 @@ export const createSignature = async (signPage, settingsCompanyPage, settingsEdi
     await createOrEditSignatureOnSettingModal.clickCreateSignatureBtn();
     await settingsCompanyPage.sideMenu.clickSign();
 }
+export const createCompletedField = async (signPage, prepareForSignatureModal, chooseSignatureOrInitialModal, finalStepPage, successModal) => {
+    await signPage.uploadFileTab.fileUploader.uploadFile('testDocuments/picture.jpg');   
+    await signPage.uploadFileTab.clickPrepareDocumentBtn();   
+
+    await prepareForSignatureModal.clickSignDocumentRadioBtn();
+    await prepareForSignatureModal.clickContinueBtn();
+    await prepareForSignatureModal.clickGotItBtn(); 
+    await prepareForSignatureModal.clickSignFieldsItem();
+    await prepareForSignatureModal.doCanvasClicks();
+    await prepareForSignatureModal.clickCustomSigningOrderCheckbox();   
+    await chooseSignatureOrInitialModal.clickSignNowBtn();
+    // await prepareForSignatureModal.clickSignNowBtn();  
+    await prepareForSignatureModal.clickSaveBtn();
+    await finalStepPage.clickSignDocumentBtn();
+    await successModal.clickBackToDocumentsBtn();
+}

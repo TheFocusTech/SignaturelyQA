@@ -11,8 +11,8 @@ export default class ShareThisDocumentModal {
         await this.textField.click();
     }
 
-    async clickInputEmailField() {
-        await this.inputEmailField.fill("nayavak972@egela.com");
+    async clickInputEmailField(email) {
+        await this.inputEmailField.fill(email);
     }
 
     async clickShareDocumentBtn() {
