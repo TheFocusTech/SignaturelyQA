@@ -133,4 +133,44 @@ test.describe("CreateDocument", () => {
 
 		await expect(await documentsPage.table.documentStatus).toHaveText(DOCUMENT_STATUS.awaiting);
 	});
+
+	test("TC_03_07_05 | Verify that user can sign a document themselves with Initial", async ({
+		createBusinessUserAndLogin,
+		signPage,
+		prepareForSignatureModal,
+		settingsCompanyPage,
+		settingsEditSignaturePage,
+		createOrEditSignatureOnSettingModal,
+		chooseSignatureOrInitialModal,
+		finalStepPage,
+		successModal,
+		documentsPage,
+	
+	}) => {
+		test.setTimeout(220 * 1000);
+
+		await createSignature(
+			signPage, 
+			settingsCompanyPage, 
+			settingsEditSignaturePage, 
+			createOrEditSignatureOnSettingModal
+		);
+
+		await signPage.uploadFileTab.fileUploader.uploadFile('testDocuments/picture.jpg');
+        await signPage.uploadFileTab.clickPrepareDocumentBtn();
+        await prepareForSignatureModal.clickSignDocumentRadioBtn();
+        await prepareForSignatureModal.clickContinueBtn();
+        await prepareForSignatureModal.clickGotItBtn();
+        await prepareForSignatureModal.clickInitialFieldsItem();
+        await prepareForSignatureModal.doCanvasClicks();
+		await chooseSignatureOrInitialModal.clickSignatureTyped();
+		await chooseSignatureOrInitialModal.clickSignNowBtn();
+        await prepareForSignatureModal.clickSaveBtn();
+        await finalStepPage.fillDocumentTitleField(DOCUMENT_TITLE);
+        await finalStepPage.fillDocumentOptionalMessageField(MESSAGE);
+        await finalStepPage.clickSignDocumentBtn();
+        await successModal.clickBackToDocumentsBtn();
+
+		await expect(await documentsPage.table.documentStatus).toHaveText(DOCUMENT_STATUS.completed);
+	});
 });
