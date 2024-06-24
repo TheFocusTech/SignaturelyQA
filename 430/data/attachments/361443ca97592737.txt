@@ -1,0 +1,16 @@
+Error occurred while getting confirmation link: TypeError: Cannot read properties of null (reading '0')
+    at getConfirmationLinkFromEmail (/home/runner/work/SignaturelyQA/SignaturelyQA/index.js:111:58)
+    at processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at retrieveUserEmailConfirmationLink (/home/runner/work/SignaturelyQA/SignaturelyQA/helpers/utils.js:64:12)
+    at /home/runner/work/SignaturelyQA/SignaturelyQA/tests/01Registration.spec.js:18:34
+    at /home/runner/work/SignaturelyQA/SignaturelyQA/node_modules/playwright/lib/worker/workerMain.js:336:9
+    at /home/runner/work/SignaturelyQA/SignaturelyQA/node_modules/playwright/lib/worker/testInfo.js:297:11
+    at TimeoutManager.withRunnable (/home/runner/work/SignaturelyQA/SignaturelyQA/node_modules/playwright/lib/worker/timeoutManager.js:53:14)
+    at TestInfoImpl._runAsStage (/home/runner/work/SignaturelyQA/SignaturelyQA/node_modules/playwright/lib/worker/testInfo.js:295:7)
+    at /home/runner/work/SignaturelyQA/SignaturelyQA/node_modules/playwright/lib/worker/workerMain.js:328:7
+    at /home/runner/work/SignaturelyQA/SignaturelyQA/node_modules/playwright/lib/worker/testInfo.js:297:11
+    at TimeoutManager.withRunnable (/home/runner/work/SignaturelyQA/SignaturelyQA/node_modules/playwright/lib/worker/timeoutManager.js:41:27)
+    at TestInfoImpl._runAsStage (/home/runner/work/SignaturelyQA/SignaturelyQA/node_modules/playwright/lib/worker/testInfo.js:295:7)
+    at WorkerMain._runTest (/home/runner/work/SignaturelyQA/SignaturelyQA/node_modules/playwright/lib/worker/workerMain.js:278:5)
+    at WorkerMain.runTestGroup (/home/runner/work/SignaturelyQA/SignaturelyQA/node_modules/playwright/lib/worker/workerMain.js:202:11)
+    at process.<anonymous> (/home/runner/work/SignaturelyQA/SignaturelyQA/node_modules/playwright/lib/common/process.js:94:22)
