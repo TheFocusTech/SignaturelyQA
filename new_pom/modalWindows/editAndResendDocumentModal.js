@@ -16,7 +16,7 @@ export default class EditAndResendDocumentModal {
 
     async clickRevertToDraftBtn() {
         await test.step('Click the "Revert to Draft" button', async () => {
-            await this.revertToDraftBtn.waitFor();
+            await this.revertToDraftBtn.waitFor({ state: 'visible' });
             await this.revertToDraftBtn.click();
         });
     }
