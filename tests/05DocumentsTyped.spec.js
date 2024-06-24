@@ -15,8 +15,9 @@ test.describe('DocumentsType', () => {
         await allure.description('Objective: To verify that the document can be returned for editing.');
         await allure.tags('Edit & Resend, Documents');
         await allure.severity(Severity.CRITICAL);
-        await allure.link("Documentation",
-            "https://docs.google.com/document/d/1Qce7tKWOwVYtPxgQv_8ae-HUkbAgeOFph0lB_eziY_k/edit#heading=h.334tqcftqjdb",
+        await allure.link(
+            "Documentation",
+            "https://docs.google.com/document/d/1Qce7tKWOwVYtPxgQv_8ae-HUkbAgeOFph0lB_eziY_k/edit#heading=h.a5x7xbzct5pl",
             "TC_05_21_01"),
             await allure.epic('Documents');
 
@@ -38,8 +39,9 @@ test.describe('DocumentsType', () => {
         await allure.description('Objective: To verify that the document can be returned for editing.');
         await allure.tags('Edit & Resend, Documents');
         await allure.severity(Severity.CRITICAL);
-        await allure.link("Documentation",
-            "https://docs.google.com/document/d/1Qce7tKWOwVYtPxgQv_8ae-HUkbAgeOFph0lB_eziY_k/edit#heading=h.334tqcftqjdb",
+        await allure.link(
+            "Documentation",
+            "https://docs.google.com/document/d/1Qce7tKWOwVYtPxgQv_8ae-HUkbAgeOFph0lB_eziY_k/edit#heading=h.r25l83kzqn09",
             "TC_05_21_02"),
 
             await allure.epic('Documents');
