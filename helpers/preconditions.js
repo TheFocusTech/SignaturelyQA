@@ -1,5 +1,7 @@
 
 import { DATA_SIGNER, FOLDER_NAME, TOAST_MESSAGE, SIGNERS_DATA } from "../testData";
+import { test } from "../fixtures/base";
+
 
 export const createSignature = async (signPage, settingsCompanyPage, settingsEditSignaturePage, createOrEditSignatureOnSettingModal) => {
     await signPage.sideMenu.clickSettings();
@@ -13,7 +15,7 @@ export const createSignature = async (signPage, settingsCompanyPage, settingsEdi
 
 }
 
-export const createDocumentAwaiting = async ( signPage, prepareForSignatureModal, documentsPage, successModal,finalStepPage) => {
+export const createDocumentAwaiting = async (signPage, prepareForSignatureModal, documentsPage, successModal, finalStepPage) => {
     await signPage.uploadFileTab.fileUploader.uploadFile('testDocuments/picture.jpg');
     await signPage.uploadFileTab.clickPrepareDocumentBtn();
     await prepareForSignatureModal.clickSendForSignatureRadioBtn();
@@ -30,18 +32,20 @@ export const createDocumentAwaiting = async ( signPage, prepareForSignatureModal
     await successModal.clickBackToDocumentsBtn();
     await documentsPage.sideMenu.clickSign();
 
-  
+
 };
 
 export const createFolder = async (
     signPage,
     documentsPage,
     createFolderModal) => {
-    await signPage.sideMenu.clickDocuments();
-    await documentsPage.clickCreateFolderBtn();
-    await createFolderModal.fillNewFolderName(FOLDER_NAME);
-    await createFolderModal.clickCreateBtn();
-    await documentsPage.sideMenu.clickSign();
-    await documentsPage.toast.waitForToastIsHiddenByText(TOAST_MESSAGE.folderCreated);
 
-}
+    await test.step('Create Folder', async () => {
+        await signPage.sideMenu.clickDocuments();
+        await documentsPage.clickCreateFolderBtn();
+        await createFolderModal.fillNewFolderName(FOLDER_NAME);
+        await createFolderModal.clickCreateBtn();
+        await documentsPage.sideMenu.clickSign();
+        await documentsPage.toast.waitForToastIsHiddenByText(TOAST_MESSAGE.folderCreated);
+    })
+};
