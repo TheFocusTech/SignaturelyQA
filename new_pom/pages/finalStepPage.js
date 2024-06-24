@@ -1,5 +1,5 @@
-import ToastComponent from "../components/toastComponent";
-import {step} from "allure-js-commons";
+import ToastComponent from '../components/toastComponent';
+import {step} from 'allure-js-commons';
 
 export default class FinalStepPage {
     constructor(page) {

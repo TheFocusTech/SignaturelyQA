@@ -1,6 +1,6 @@
-import ToastComponent from "../components/toastComponent";
-import { clickCanvas } from "../../helpers/utils.js";
-import {step} from "allure-js-commons";
+import ToastComponent from '../components/toastComponent';
+import { clickCanvas } from '../../helpers/utils.js';
+import {step} from 'allure-js-commons';
 
 export default class PrepareForSignatureModal {
     constructor(page) {
@@ -43,7 +43,7 @@ export default class PrepareForSignatureModal {
     }
 
     async clickSignAndSendForSignatureRadioBtn() {
-        await step('Select "Sign and Send for Signature" option.', async () => {
+        await step('Select "Sign and Send for Signature" radio button', async () => {
             await this.signAndSendForSignatureRadioBtn.waitFor({ state: 'visible' });
             await this.signAndSendForSignatureRadioBtn.click();
         });
@@ -73,25 +73,25 @@ export default class PrepareForSignatureModal {
     }
 
     async clickAddSignerBtn() {
-        await step('Add a signer.', async () => {
+        await step('Click the "Add signer" button.', async () => {
             await this.addSignerBtn.click();
         });
     }
 
     async fillSignerNameField(name, i) {
-        await step('Fill the signer\'s name field.', async () => {
+        await step('Fill the name of the signer into the "Name" input field.', async () => {
             await this.signerNameField.nth(i).fill(name);
         });
     }
 
     async fillSignerEmailField(email, i) {
-        await step('Fill the signer\'s email field.', async () => {
+        await step('Fill the email address of the signer into the "Email" input field.', async () => {
             await this.signerEmailField.nth(i).fill(email);
     });
     }
 
     async doCanvasClicks() {
-        await step('Click on the document canvas to place the signature fields.', async () => {
+        await step('Click randomly inside the document', async () => {
             await clickCanvas(this.page, this.canvas, this.excludedAreas);
         });
     }

@@ -1,5 +1,5 @@
-import FileUploaderComponent from "../../components/fileUploaderComponent";
-import { test } from "../../../fixtures/base"; 
+import FileUploaderComponent from '../../components/fileUploaderComponent';
+import {step} from 'allure-js-commons';
 
 export default class UploadFileOnSignPage {
     constructor(page) {
@@ -12,7 +12,7 @@ export default class UploadFileOnSignPage {
     }
 
     async clickPrepareDocumentBtn() {
-        await test.step('Click on the "Prepare Document" button', async () => {
+        await step('Click on the "Prepare Document" button', async () => {
             await this.prepareDocumentBtn.waitFor();
             await this.prepareDocumentBtn.click();
         });
