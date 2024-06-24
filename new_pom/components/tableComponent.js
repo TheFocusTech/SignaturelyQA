@@ -9,6 +9,7 @@ export default class TableComponent {
         this.documentStatus = this.page.locator('.documents__documentStatus').first();
         this.optionsBtn = this.page.getByText('Options');
         this.editAndResendBtn = this.page.getByText('Edit & Resend');
+        this.optionsShareDropdown = this.page.locator('.documents__dropdownOption').getByText('Share');
         this.titleEditAndResendDocument = this.page.getByText('Edit & Resend document');
         this.createAPIKeyBtn = this.page.locator('.documents__empty-table').getByRole('button', { name: 'Create API key' });
         this.addToAPIBtn = this.page.getByRole('button', {name: 'Add to API'});
@@ -29,6 +30,8 @@ export default class TableComponent {
         await this.editAndResendBtn.click();
     }
 
+    async clickOptionsShareDropdown() {
+        await this.optionsShareDropdown.click();
     async getTitleText() {
         const actualText = await this.titleEditAndResendDocument.textContent();
         return actualText

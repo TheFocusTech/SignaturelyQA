@@ -17,7 +17,8 @@ import CreateSignatureOrInitialModal from "../new_pom/modalWindows/createSignatu
 import FinalStepPage from '../new_pom/pages/finalStepPage.js';
 import SuccessModal from '../new_pom/modalWindows/successModal.js';
 import EditAndResendDocumentModal from "../new_pom/modalWindows/editAndResendDocumentModal.js";
-import DowngradeToPersonalPlanModal from "../new_pom/modalWindows/downgradeToPersonalPlanModal.js"
+import DowngradeToPersonalPlanModal from "../new_pom/modalWindows/downgradeToPersonalPlanModal.js";
+import ShareThisDocumentModal from "../new_pom/modalWindows/shareThisDocumentModal.js";
 import NewSettingsAPIPage from "../new_pom/pages/settings/settingsAPIPage";
 import NewCreateAPIKeyModal from "../new_pom/modalWindows/createAPIKeyModal.js";
 import NewTemplatesPage from "../new_pom/pages/templates/templatesPage.js";
@@ -135,6 +136,9 @@ export const test = base.extend({
         await use(new SpecialOneTimeOfferModal(page));
     },
 
+    createSignatureModal: async ({ page }, use) => {
+        await use(new CreateSignatureModal(page));
+
     createSignatureOrInitialModal: async ({ page }, use) => {
         await use(new CreateSignatureOrInitialModal(page));
     },
@@ -149,6 +153,10 @@ export const test = base.extend({
 
     editAndResendDocumentModal: async ({ page }, use) => {
         await use(new EditAndResendDocumentModal(page));
+    },
+  
+    shareThisDocumentModal: async ({ page }, use) => {
+        await use(new ShareThisDocumentModal(page));
     },
 
     templatePage: async ({ page }, use) => {
