@@ -53,10 +53,10 @@ test.describe('DocumentsType', () => {
         await moveToFolderModal.selectFolder(FOLDER_NAME);
         await moveToFolderModal.clickMoveToFolderBtn();
 
-        await expect(documentsPage.toast.toastBody).toHaveText(TOAST_MESSAGE.fileMovedToFolder);
+        await expect(await documentsPage.toast.toastBody).toHaveText(TOAST_MESSAGE.fileMovedToFolder);
 
         await documentsPage.table.openFolder(FOLDER_NAME);
-        await expect(documentsPage.table.documentTitle).toHaveText(UPLOAD_FILE_NAME.jpgDocument);
+        await expect(await documentsPage.table.documentTitle).toHaveText(UPLOAD_FILE_NAME.jpgDocument);
     })
 
 })
