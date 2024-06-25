@@ -3,7 +3,6 @@ import { test } from "../fixtures/base"
 import {
     retrieveUserEmailConfirmationLink,
     createNewUserThroughApi,
-    createNewFreeUserThroughApi,
     retrieveUserEmailConfirmCode,
 } from "../helpers/utils";
 import {
@@ -55,16 +54,36 @@ test.describe('Registration', () => {
         });
     })
 
-    test('TC_01_02_02 | Verify that Free user redirects to the SignPage after confirmation of the registration', async ({ page, request, signPage, settingsCompanyPage, settingsBillingPage}) => {
-        const newUserData = await createNewFreeUserThroughApi(request);
-        const confirmationLink = await retrieveUserEmailConfirmationLink(request, newUserData);
+    test('TC_01_02_01 | Verify successful registration of Free user', async ({ page, request, signUpFreePage, signPage, settingsCompanyPage, settingsBillingPage}) => {
+        await description('To verify that a Free user can successfully register.');
+        await tag('Free user');
+        await severity(Severity.BLOCKER);
+        await link(
+            "https://docs.google.com/spreadsheets/d/1v5LuJ23jSg5qcWZPqiSlBuEJnvvdsJ2HrVxC6Ag2vpA/edit?gid=598757452#gid=598757452&range=B7",
+            "TC_01_02_01"
+        );
+        await epic('Registration');
 
+        const newUserData = await generateNewUserData();
+        await step('Navigate to the Trial user registration page', async () => {
+            await page.goto(URL_END_POINTS.signUpFree);
+        });
+        await signUpFreePage.yourInformation.fillNameInputField(newUserData.name);
+        await signUpFreePage.yourInformation.fillEmailInputField(newUserData.email);
+        await signUpFreePage.yourInformation.fillPasswordInputField(newUserData.password);
+        await signUpFreePage.clickCreateAccountBtn();
+        await step('Verify that the user is on the Confirm account page', async () => {
+            await expect(page).toHaveURL(`${process.env.URL}${URL_END_POINTS.confirmAccountEndPoint}`);
+        });
+
+        const confirmationLink = await retrieveUserEmailConfirmationLink(request, newUserData);
         await page.goto(confirmationLink);
         await page.waitForURL(`${process.env.URL}${URL_END_POINTS.signEndPoint}`);
-
         await signPage.sideMenu.clickSettings();
         await settingsCompanyPage.horizontalMenu.clickBilling();
-        await expect(settingsBillingPage.billingPlanDescription).toHaveText(FREE_PLAN_DESCRIPTION);
+        await step('Verify that the billing plan description is Free', async () => {
+            await expect(settingsBillingPage.billingPlanDescription).toHaveText(FREE_PLAN_DESCRIPTION);
+        });
     })
 
     test.describe('Personal User registration', () => {
