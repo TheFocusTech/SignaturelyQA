@@ -6,7 +6,7 @@ import {
 } from "../helpers/utils";
 import {
     URL_END_POINTS, BUSINESS_MONTHLY_PLAN, CARD_DETAILS, FREE_PLAN_DESCRIPTION, SUBSCRIPTIONS, SUBSCRIBE_TO_PERSONAL_PLAN,
-    PLEASE_ENTER_CONFIRMATION_CODE, PERSONAL_PLAN_DESCRIPTION,
+    PLEASE_ENTER_CONFIRMATION_CODE, PERSONAL_PLAN_DESCRIPTION, NO_ATTACHED_CARD,
 } from "../testData";
 import { generateNewUserData } from "../helpers/utils";
 import {description, tag, severity, Severity, link, epic, step} from "allure-js-commons";
@@ -84,6 +84,9 @@ test.describe('Registration', () => {
         await page.waitForURL(`${process.env.URL}${URL_END_POINTS.signEndPoint}`);
         await signPage.sideMenu.clickSettings();
         await settingsCompanyPage.horizontalMenu.clickBilling();
+        await step('Verify that no card attached', async () => {
+            await expect(settingsBillingPage.creditCardData).toHaveText(NO_ATTACHED_CARD);
+        });
         await step('Verify that the billing plan description is Free', async () => {
             await expect(settingsBillingPage.billingPlanDescription).toHaveText(FREE_PLAN_DESCRIPTION);
         });

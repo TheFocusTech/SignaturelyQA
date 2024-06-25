@@ -17,7 +17,7 @@ export default class ConfirmCodeModal {
     }
 
     async clickSendButton() {
-        await step('Click "Send" button', async () => {
+        await step('Click "Send" button on the modal window', async () => {
             await this.sendButton.click();
             await this.page.waitForURL(`${process.env.URL}${URL_END_POINTS.signEndPoint}`)
         });
