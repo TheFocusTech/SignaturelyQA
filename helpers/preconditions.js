@@ -46,5 +46,5 @@ export const createForm = async (
 
     await prepareForSignatureModal.clickCreateBtn();
     await successModal.clickBackToFormsBtn();
-  
-    }
+    await signPage.sideMenu.clickSign()
+}
