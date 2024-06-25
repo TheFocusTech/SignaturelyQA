@@ -21,7 +21,7 @@ module.exports = defineConfig({
     /* Retry on CI only */
     retries: process.env.CI ? 2 : 0,
     /* Opt out of parallel tests on CI. */
-    workers: process.env.CI ? 1 : undefined,
+    workers: process.env.CI ? 4 : undefined,
     /* Reporter to use. See https://playwright.dev/docs/test-reporters */
     // reporter: 'html',
     grep: testPlanFilter(),
@@ -33,10 +33,12 @@ module.exports = defineConfig({
             {
                 detail: false,
                 suiteTitle: false,
-                categories: {
-                    name: "Outdated tests",
-                    messageRegex: ".*FileNotFound.*",
-                },
+                categories: [
+                    {
+                        name: "Outdated tests",
+                        messageRegex: ".*FileNotFound.*",
+                    },
+                ],
                 environmentInfo: {
                     os_platform: os.platform(),
                     os_release: os.release(),
@@ -54,12 +56,10 @@ module.exports = defineConfig({
         /* Base URL to use in actions like `await page.goto('/')`. */
         baseURL: process.env.URL,
 
-        /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
-        trace: 'retain-on-failure',
         screenshot: 'only-on-failure',
         video: {
             mode: 'retain-on-failure',
-            size: {width: 1440, height: 900}
+            size: process.env.CI ? {width: 800, height: 600} : {width: 1440, height: 900}
         },
     },
 

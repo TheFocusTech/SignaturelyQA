@@ -8,6 +8,7 @@ import {
 	SIGNER_ME
 } from "../testData.js";
 import { createSignature } from "../helpers/preconditions.js";
+import {description, tag, severity, Severity, link, epic, step} from "allure-js-commons";
 
 test.describe("CreateDocument", () => {
 	test("TC_03_07_01 | Sign a document - verify that user can sign a document themselves", async ({
@@ -41,7 +42,7 @@ test.describe("CreateDocument", () => {
 		await expect(await documentsPage.table.documentStatus).toHaveText(DOCUMENT_STATUS.completed);
 	});
 
-	test("TC_03_07_06 | Verify that the user who uploaded the document and created a signature and Other Signer can sign it", async ({
+	test("TC_03_07_06 | Verify user can create, sign, and send a document to another signer", async ({
 		createBusinessUserAndLogin,
 		signPage,
 		prepareForSignatureModal,
@@ -49,8 +50,17 @@ test.describe("CreateDocument", () => {
 		finalStepPage,
 		successModal,
 		documentsPage,
-	}) => {
+		}) => {
 		test.setTimeout(120 * 1000);
+		await description('Objective: To verify the process of creating, signing, and sending a document to another signer.');
+		await severity(Severity.CRITICAL);
+		await link(
+				"Documentation",
+				"https://docs.google.com/document/d/1Qce7tKWOwVYtPxgQv_8ae-HUkbAgeOFph0lB_eziY_k/edit#heading=h.2np2zmox71j",
+				"TC_03_07_06"
+		);
+		await epic('Create Document');
+		await tag('Document');
 
         await signPage.uploadFileTab.fileUploader.uploadFile('testDocuments/todoList.xlsx');
         await signPage.uploadFileTab.clickPrepareDocumentBtn();
@@ -73,7 +83,9 @@ test.describe("CreateDocument", () => {
         await finalStepPage.clickSignDocumentAndSendForSignatureBtn();
         await successModal.clickBackToDocumentsBtn();
 
-		await expect(await documentsPage.table.documentStatus).toHaveText(DOCUMENT_STATUS.awaiting);
+		await step('Verify the created document is in the table with the label "AWAITING".', async () => {
+            await expect(await documentsPage.table.documentStatus).toHaveText(DOCUMENT_STATUS.awaiting);
+        });
 	});
 
 	test("TC_03_07_02 | Verify that the user who uploaded the document and Other Signer can sign it", async ({
@@ -119,5 +131,45 @@ test.describe("CreateDocument", () => {
 		await successModal.clickBackToDocumentsBtn();
 
 		await expect(await documentsPage.table.documentStatus).toHaveText(DOCUMENT_STATUS.awaiting);
+	});
+
+	test("TC_03_07_05 | Verify that user can sign a document themselves with Initial", async ({
+		createBusinessUserAndLogin,
+		signPage,
+		prepareForSignatureModal,
+		settingsCompanyPage,
+		settingsEditSignaturePage,
+		createOrEditSignatureOnSettingModal,
+		chooseSignatureOrInitialModal,
+		finalStepPage,
+		successModal,
+		documentsPage,
+	
+	}) => {
+		test.setTimeout(220 * 1000);
+
+		await createSignature(
+			signPage, 
+			settingsCompanyPage, 
+			settingsEditSignaturePage, 
+			createOrEditSignatureOnSettingModal
+		);
+
+		await signPage.uploadFileTab.fileUploader.uploadFile('testDocuments/picture.jpg');
+        await signPage.uploadFileTab.clickPrepareDocumentBtn();
+        await prepareForSignatureModal.clickSignDocumentRadioBtn();
+        await prepareForSignatureModal.clickContinueBtn();
+        await prepareForSignatureModal.clickGotItBtn();
+        await prepareForSignatureModal.clickInitialFieldsItem();
+        await prepareForSignatureModal.doCanvasClicks();
+		await chooseSignatureOrInitialModal.clickSignatureTyped();
+		await chooseSignatureOrInitialModal.clickSignNowBtn();
+        await prepareForSignatureModal.clickSaveBtn();
+        await finalStepPage.fillDocumentTitleField(DOCUMENT_TITLE);
+        await finalStepPage.fillDocumentOptionalMessageField(MESSAGE);
+        await finalStepPage.clickSignDocumentBtn();
+        await successModal.clickBackToDocumentsBtn();
+
+		await expect(await documentsPage.table.documentStatus).toHaveText(DOCUMENT_STATUS.completed);
 	});
 });

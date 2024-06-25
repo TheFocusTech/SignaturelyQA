@@ -1,6 +1,6 @@
 import StripeEnterPaymentDetailsPage from "./stripeEnterPaymentDetailsPage";
 import SettingsBillingPortalPage from "./settingsBillingPortalPage";
-import {test} from "../../../fixtures/base";
+import {step} from "allure-js-commons";
 
 export default class NewSettingsBillingPage {
     constructor(page) {
@@ -15,6 +15,7 @@ export default class NewSettingsBillingPage {
         this.openBillingPortalButton = this.page.getByRole('button', {name: 'Open Billing Portal'});
         this.editPlanButton = this.page.getByRole('button', {name: "Edit Plan"});
         this.nextInvoiceInfo = this.page.locator('.billing__plan-group--next-invoice');
+        this.billingPlanWrapper = this. page.locator('.billing__plan-wrapper')
     }
 
     async clickUpgradePlanButton() {
@@ -23,7 +24,7 @@ export default class NewSettingsBillingPage {
 
     async clickAttachCardButton() {
         let newPage;
-        await test.step('Click on the button Attach Card', async () => {
+        await step('Click on the button Attach Card', async () => {
             await this.attachCardButton.waitFor();
             const newPagePromise = this.page.waitForEvent('popup');
             await this.attachCardButton.click();
@@ -33,7 +34,7 @@ export default class NewSettingsBillingPage {
     }
 
     async reloadPage() {
-        await test.step('Refresh Billing page', async () => {
+        await step('Refresh the page', async () => {
             await this.page.reload();
             await this.page.waitForTimeout(1000);
         });
@@ -41,7 +42,7 @@ export default class NewSettingsBillingPage {
 
     async clickOpenBillingPortalButton() {
         let newPage;
-        await test.step('Click on the Open Billing Portal button', async () => {
+        await step('Click on the Open Billing Portal button', async () => {
             await this.page.waitForTimeout(1000)
             const pagePromise = this.page.waitForEvent('popup', {timeout: 10 * 1000});
             await this.openBillingPortalButton.click();

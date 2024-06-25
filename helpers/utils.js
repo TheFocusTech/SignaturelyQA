@@ -1,5 +1,6 @@
 import { signUpRequest } from "./apiCalls";
 import { authorize, getConfirmationLinkFromEmail, getConfirmCodeFromEmail, checkEmailMessageReceived } from "../index.js";
+import {step} from "allure-js-commons";
 
 export function generateNumberForNewUser() {
     let dt = new Date();
@@ -19,25 +20,28 @@ export function delay(ms) {
 }
 
 export async function generateNewUserData(free = false, workflowVersion = null) {
-    let userNumber = generateNumberForNewUser();
-    process.env.NEW_USER_NUMBER = userNumber;
-    let userData = {
-        email: `${process.env.EMAIL_PREFIX}${userNumber}${process.env.EMAIL_DOMAIN}`,
-        name: `TestUser${userNumber}`,
-        password: `QA_tester${userNumber}`,
-    };
-    process.env.NEW_USER_EMAIL = userData.email;
-    process.env.NEW_USER_NAME = userData.name;
-    process.env.NEW_USER_PASSWORD = userData.password;
+    let userData;
+    await step('Create new user data', async () => {
+        let userNumber = generateNumberForNewUser();
+        process.env.NEW_USER_NUMBER = userNumber;
+        userData = {
+            email: `${process.env.EMAIL_PREFIX}${userNumber}${process.env.EMAIL_DOMAIN}`,
+            name: `TestUser${userNumber}`,
+            password: `QA_tester${userNumber}`,
+        };
+        process.env.NEW_USER_EMAIL = userData.email;
+        process.env.NEW_USER_NAME = userData.name;
+        process.env.NEW_USER_PASSWORD = userData.password;
 
-    if (free) {
-        userData.free = true;
-    }
-    if (workflowVersion) {
-        userData.workflowVersion = workflowVersion;
-    }
+        if (free) {
+            userData.free = true;
+        }
+        if (workflowVersion) {
+            userData.workflowVersion = workflowVersion;
+        }
 
-    return userData;
+    });
+        return userData;
 }
 
 export async function createNewUserThroughApi(request) {
@@ -59,9 +63,13 @@ export async function createNewFreeUserThroughApi(request) {
 }
 
 export async function retrieveUserEmailConfirmationLink(request, newUserData) {
-    const auth = await authorize();
+    let confirmationLink;
+    await step("Retrieve the confirmation link for the user's email.", async () => {
+        const auth = await authorize();
+        confirmationLink = await getConfirmationLinkFromEmail(auth, newUserData.email);
 
-    return await getConfirmationLinkFromEmail(auth, newUserData.email);
+    });
+        return confirmationLink;
 }
 
 export async function retrieveUserEmailConfirmCode(request, newUserEmail) {
@@ -143,4 +151,34 @@ export async function clickCanvas(page, canvasLocator, excludedAreas = []) {
     }
 
     return clickPosition;
+}
+
+export function generateRandomPassword(length) {
+        const digits = '0123456789';
+        const lowerCaseLetters = 'abcdefghijklmnopqrstuvwxyz';
+        const upperCaseLetters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        const specialCharacters = '!$%&_?';
+
+        function getRandomChar(str) {
+            return str[Math.floor(Math.random() * str.length)];
+        }
+
+        const password = [
+            getRandomChar(digits),
+            getRandomChar(lowerCaseLetters),
+            getRandomChar(upperCaseLetters),
+            getRandomChar(specialCharacters),
+        ];
+
+        const allCharacters = digits + lowerCaseLetters + upperCaseLetters + specialCharacters;
+        while (password.length < length) {
+            password.push(getRandomChar(allCharacters));
+        }
+
+        for (let i = password.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [password[i], password[j]] = [password[j], password[i]];
+        }
+
+        return password.join('');
 }

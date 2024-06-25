@@ -1,4 +1,4 @@
-import {test} from "../../../fixtures/base";
+import {step} from "allure-js-commons";
 
 export default class SettingsBillingPortalPage {
     constructor(page) {
@@ -12,7 +12,7 @@ export default class SettingsBillingPortalPage {
     }
 
     async deleteAllNotDefaultCards() {
-        await test.step('Delete all not default cards', async () => {
+        await step('Delete all not default cards', async () => {
             await this.page.waitForTimeout(2000);
             let count = await this.moreOptionsButtonList.count();
             while (count > 0) {
