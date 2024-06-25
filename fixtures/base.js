@@ -34,6 +34,7 @@ import CreateFolderModal from "../new_pom/modalWindows/createFolderModal.js";
 import MoveToFolderModal from "../new_pom/modalWindows/moveToFolderModal.js";
 import SettingsProfilePage from "../new_pom/pages/settings/settingsProfilePage.js";
 import SignUpTrialPage from "../new_pom/pages/signUp/signUpTrialPage";
+import SignUpFreePage from "../new_pom/pages/signUp/signUpFreePage";
 
 export const test = base.extend({
 
@@ -209,6 +210,10 @@ export const test = base.extend({
 
     signUpTrialPage: async ({ page }, use) => {
         await use(new SignUpTrialPage(page));
+    },
+
+    signUpFreePage: async ({ page }, use) => {
+        await use(new SignUpFreePage(page));
     },
 
 });

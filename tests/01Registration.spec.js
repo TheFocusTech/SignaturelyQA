@@ -1,34 +1,19 @@
-import {expect} from "@playwright/test";
-import {test} from "../fixtures/base"
+import { expect } from "@playwright/test";
+import { test } from "../fixtures/base"
 import {
     retrieveUserEmailConfirmationLink,
-    createNewFreeUserThroughApi,
     retrieveUserEmailConfirmCode,
 } from "../helpers/utils";
 import {
-    URL_END_POINTS,
-    BUSINESS_MONTHLY_PLAN,
-    CARD_DETAILS,
-    FREE_PLAN_DESCRIPTION,
-    SUBSCRIPTIONS,
-    SUBSCRIBE_TO_PERSONAL_PLAN,
-    PLEASE_ENTER_CONFIRMATION_CODE,
-    PERSONAL_PLAN_DESCRIPTION,
+    URL_END_POINTS, BUSINESS_MONTHLY_PLAN, CARD_DETAILS, FREE_PLAN_DESCRIPTION, SUBSCRIPTIONS, SUBSCRIBE_TO_PERSONAL_PLAN,
+    PLEASE_ENTER_CONFIRMATION_CODE, PERSONAL_PLAN_DESCRIPTION,
 } from "../testData";
-import {generateNewUserData} from "../helpers/utils";
+import { generateNewUserData } from "../helpers/utils";
 import {description, tag, severity, Severity, link, epic, step} from "allure-js-commons";
 
 test.describe('Registration', () => {
 
-    test('TC_01_01_01 | Verify successful registration of Trial user', async ({
-                                                                                  page,
-                                                                                  request,
-                                                                                  signUpTrialPage,
-                                                                                  activateTrialStripePage,
-                                                                                  signPage,
-                                                                                  settingsCompanyPage,
-                                                                                  settingsBillingPage
-                                                                              }) => {
+    test('TC_01_01_01 | Verify successful registration of Trial user', async ({page, request, signUpTrialPage, activateTrialStripePage, signPage, settingsCompanyPage, settingsBillingPage}) => {
         await description('To verify that a Trial user can successfully register.');
         await tag('Trial user');
         await severity(Severity.BLOCKER);
@@ -68,34 +53,42 @@ test.describe('Registration', () => {
         });
     })
 
-    test('TC_01_02_02 | Verify that Free user redirects to the SignPage after confirmation of the registration', async ({
-                                                                                                                            page,
-                                                                                                                            request,
-                                                                                                                            signPage,
-                                                                                                                            settingsCompanyPage,
-                                                                                                                            settingsBillingPage
-                                                                                                                        }) => {
-        const newUserData = await createNewFreeUserThroughApi(request);
+    test('TC_01_02_01 | Verify successful registration of Free user', async ({ page, request, signUpFreePage, signPage, settingsCompanyPage, settingsBillingPage}) => {
+        await description('To verify that a Free user can successfully register.');
+        await tag('Free user');
+        await severity(Severity.BLOCKER);
+        await link(
+            "https://docs.google.com/spreadsheets/d/1v5LuJ23jSg5qcWZPqiSlBuEJnvvdsJ2HrVxC6Ag2vpA/edit?gid=598757452#gid=598757452&range=B7",
+            "TC_01_02_01"
+        );
+        await epic('Registration');
+
+        const newUserData = await generateNewUserData();
+        await step('Navigate to the Trial user registration page', async () => {
+            await page.goto(URL_END_POINTS.signUpFree);
+        });
+        await signUpFreePage.yourInformation.fillNameInputField(newUserData.name);
+        await signUpFreePage.yourInformation.fillEmailInputField(newUserData.email);
+        await signUpFreePage.yourInformation.fillPasswordInputField(newUserData.password);
+        await signUpFreePage.clickCreateAccountBtn();
+        await step('Verify that the user is on the Confirm account page', async () => {
+            await expect(page).toHaveURL(`${process.env.URL}${URL_END_POINTS.confirmAccountEndPoint}`);
+        });
+
         const confirmationLink = await retrieveUserEmailConfirmationLink(request, newUserData);
-
-        await page.goto(confirmationLink);
+        await step("Navigate to the confirmation link", async () => {
+            await page.goto(confirmationLink);
+        });
         await page.waitForURL(`${process.env.URL}${URL_END_POINTS.signEndPoint}`);
-
         await signPage.sideMenu.clickSettings();
         await settingsCompanyPage.horizontalMenu.clickBilling();
-        await expect(settingsBillingPage.billingPlanDescription).toHaveText(FREE_PLAN_DESCRIPTION);
+        await step('Verify that the billing plan description is Free', async () => {
+            await expect(settingsBillingPage.billingPlanDescription).toHaveText(FREE_PLAN_DESCRIPTION);
+        });
     })
 
     SUBSCRIPTIONS.forEach((subscription) => {
-        test(`TC_01_03_01 | Verify successful registration of Personal user with ${subscription} subscription`, async ({
-                                                                                                                           request,
-                                                                                                                           page,
-                                                                                                                             signUpPersonalPage,
-                                                                                                                           confirmCodeModal,
-                                                                                                                           signPage,
-                                                                                                                           settingsCompanyPage,
-                                                                                                                           settingsBillingPage
-                                                                                                                       }) => {
+        test(`TC_01_03_01 | Verify successful registration of Personal user with ${subscription} subscription`, async ({ request, page, signUpPersonalPage, confirmCodeModal, signPage, settingsCompanyPage, settingsBillingPage }) => {
             await description('To verify that a Personal user can successfully register.');
             await tag('Personal user');
             await severity(Severity.BLOCKER);
@@ -106,8 +99,12 @@ test.describe('Registration', () => {
             await epic('Registration');
 
             const newUserData = await generateNewUserData();
-            await page.goto(URL_END_POINTS.signUpPersonalEndPoint);
-            await expect(signUpPersonalPage.personalPageLabelTitle).toHaveText(SUBSCRIBE_TO_PERSONAL_PLAN);
+            await step('Navigate to the Personal user registration page', async () => {
+                await page.goto(URL_END_POINTS.signUpPersonalEndPoint);
+            });
+            await step('Verify the Personal user registration page title', async () => {
+                await expect(signUpPersonalPage.personalPageLabelTitle).toHaveText(SUBSCRIBE_TO_PERSONAL_PLAN);
+            });
 
             await signUpPersonalPage.yourInformation.fillNameInputField(newUserData.name);
             await signUpPersonalPage.yourInformation.fillEmailInputField(newUserData.email);
@@ -115,7 +112,7 @@ test.describe('Registration', () => {
             await signUpPersonalPage.clickSubscriptionButton(subscription);
             await signUpPersonalPage.cardDetails.fillData(CARD_DETAILS.VISA);
             await signUpPersonalPage.clickPurchaseNowButton();
-            await step('Verify that the Confirm modal title', async () => {
+            await step('Verify the Confirm modal title', async () => {
                 await expect(confirmCodeModal.confirmCodeModalTitle).toHaveText(PLEASE_ENTER_CONFIRMATION_CODE);
             });
 
