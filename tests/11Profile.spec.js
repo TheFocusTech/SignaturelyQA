@@ -46,7 +46,7 @@ test.describe('Profile', () => {
     })
 
     test('TC_11_44_01 | Verify User can change email', async({createBusinessUserAndLogin, request, page, signPage, settingsCompanyPage, settingsProfilePage}) => {
-        await description('Objective: To verify that the User can change a email');
+        await description('Objective: To verify that the User can change a email.');
         await severity(Severity.CRITICAL);
         await link(
             "https://app.qase.io/case/SIGN-44",
