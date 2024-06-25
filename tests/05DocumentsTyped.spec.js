@@ -7,10 +7,11 @@ import { Severity } from "allure-js-commons";
 
 test.describe('DocumentsType', () => {
 
-    test('TC_05_21_01 | Verify that button "Edit&Resend" is active', async ({ createBusinessUserAndLogin,
+    test('TC_05_21_01 | Verify that button Edit&Resend is active', async ({ createBusinessUserAndLogin,
         signPage, prepareForSignatureModal,
         editAndResendDocumentModal, successModal,
         finalStepPage, documentsPage }) => {
+
         test.setTimeout(250 * 1000);
 
         await allure.description('Objective: To verify that the document can be returned for editing.');
@@ -37,9 +38,9 @@ test.describe('DocumentsType', () => {
             expect(await editAndResendDocumentModal.getTitleText()).toBe("Edit & Resend document");
         });
 
-    })
+    });
 
-    test('TC_05_21_02 | Verify that button "Revert to Draft" is active', async ({ page, createBusinessUserAndLogin, signPage, prepareForSignatureModal, successModal, editAndResendDocumentModal, finalStepPage, documentsPage }) => {
+    test('TC_05_21_02 | Verify that button "Revert to Draft" is active', async ({ createBusinessUserAndLogin, page, signPage, prepareForSignatureModal, successModal, editAndResendDocumentModal, finalStepPage, documentsPage }) => {
 
         test.setTimeout(250 * 1000);
 
@@ -67,46 +68,47 @@ test.describe('DocumentsType', () => {
             expect(await prepareForSignatureModal.getPrepareForSigningTitleText()).toBe("Prepare for Signing");
 
         });
+    })
 
-        test('TC_05_18_01 | Verify moving a document to a folder', async ({
-            createBusinessUserAndLogin,
+    test('TC_05_18_01 | Verify moving a document to a folder', async ({
+        createBusinessUserAndLogin,
+        signPage,
+        documentsPage,
+        moveToFolderModal,
+        createFolderModal }) => {
+        test.slow();
+
+        await allure.description('To verify the process of moving a document into a folder.');
+        await allure.tags('Move_to_folder');
+        await allure.severity(Severity.CRITICAL);
+        await allure.link(
+            "Documentation",
+            "https://docs.google.com/document/d/1Qce7tKWOwVYtPxgQv_8ae-HUkbAgeOFph0lB_eziY_k/edit#heading=h.ylpnl5bdm86k",
+            "TC_05_18_01"
+        );
+        await allure.epic('Documents (typed)');
+
+        await createFolder(
             signPage,
             documentsPage,
-            moveToFolderModal,
-            createFolderModal }) => {
-            test.slow();
+            createFolderModal);
+        await signPage.uploadFileTab.fileUploader.uploadFile(UPLOAD_FILE_PATH.jpgDocument);
 
-            await allure.description('To verify the process of moving a document into a folder.');
-            await allure.tags('Move_to_folder');
-            await allure.severity(Severity.CRITICAL);
-            await allure.link(
-                "Documentation",
-                "https://docs.google.com/document/d/1Qce7tKWOwVYtPxgQv_8ae-HUkbAgeOFph0lB_eziY_k/edit#heading=h.ylpnl5bdm86k",
-                "TC_05_18_01"
-            );
-            await allure.epic('Documents (typed)');
+        await signPage.sideMenu.clickDocuments();
+        await documentsPage.table.clickOptionsBtn(1);
+        await documentsPage.table.clickMoveToBtn();
+        await moveToFolderModal.selectFolder(FOLDER_NAME);
+        await moveToFolderModal.clickMoveToFolderBtn();
 
-            await createFolder(
-                signPage,
-                documentsPage,
-                createFolderModal);
-            await signPage.uploadFileTab.fileUploader.uploadFile(UPLOAD_FILE_PATH.jpgDocument);
+        await test.step('Verify the toast message', async () => {
+            await expect(await documentsPage.toast.toastBody).toHaveText(TOAST_MESSAGE.fileMovedToFolder);
+        });
 
-            await signPage.sideMenu.clickDocuments();
-            await documentsPage.table.clickOptionsBtn(1);
-            await documentsPage.table.clickMoveToBtn();
-            await moveToFolderModal.selectFolder(FOLDER_NAME);
-            await moveToFolderModal.clickMoveToFolderBtn();
+        await documentsPage.table.openFolder(FOLDER_NAME);
+        await test.step('Verify the document is inside the folder', async () => {
+            await expect(await documentsPage.table.documentTitle).toHaveText(UPLOAD_FILE_NAME.jpgDocument);
+        });
+    })
 
-            await test.step('Verify the toast message', async () => {
-                await expect(await documentsPage.toast.toastBody).toHaveText(TOAST_MESSAGE.fileMovedToFolder);
-            });
 
-            await documentsPage.table.openFolder(FOLDER_NAME);
-            await test.step('Verify the document is inside the folder', async () => {
-                await expect(await documentsPage.table.documentTitle).toHaveText(UPLOAD_FILE_NAME.jpgDocument);
-            });
-        })
-
-    });
 })
