@@ -1,5 +1,0 @@
-Generated new user #240624212052481
-User with id #"c211fe9d-3dab-42be-b97a-febda3eb75ef" has been successfully created
-Waiting for email to arrive...
-Fetching emails sent to ...+240624212052481@gmail.com
-No confirmation link found in the email body.

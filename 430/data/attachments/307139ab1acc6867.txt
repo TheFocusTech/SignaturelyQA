@@ -1,6 +1,0 @@
-Generated new user #240624212052481
-User with id #undefined has been successfully created
-Clicking subscription button: Monthly
-Waiting for email to arrive...
-Fetching emails sent to ...+240624212052481@gmail.com
-Confirmation Code: 7Es8pGUR8S

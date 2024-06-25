@@ -1,0 +1,6 @@
+Generated new user #240625173440739
+User with id #"c53ba80f-1bb0-4182-bd1a-050fd931f430" has been successfully created
+Clicking subscription button: Annually
+Waiting for email to arrive...
+Fetching emails sent to ...+240625173440739@gmail.com
+Confirmation Code: NOLPv3jdL1
