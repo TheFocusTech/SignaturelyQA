@@ -44,5 +44,36 @@ test.describe('Profile', () => {
         await step(`Verify that the User is logged in with a new password and is on the homepage ${URL_END_POINTS.signEndPoint} `, async () => {
             await expect(signPage.page).toHaveURL(process.env.URL + URL_END_POINTS.signEndPoint);
         });
+
+    test('TC_11_47_01 | Verify that user can delete account', async ({
+        createBusinessUserAndLogin,
+        signPage,
+        settingsCompanyPage,
+        settingsProfilePage,
+        deleteMyAccountModal,
+        loginPage
+    }) => {
+            await description('Objective: To verify that the User can delete account');
+        await severity(Severity.CRITICAL);
+        await link(
+            "https://docs.google.com/document/d/1Qce7tKWOwVYtPxgQv_8ae-HUkbAgeOFph0lB_eziY_k/edit#heading=h.jpjkpoqpqi9k",
+            "TC_11_47_01"
+        );
+        await epic('Profile');
+        await tag('Delete account');
+
+        await signPage.sideMenu.clickSettings();
+        await settingsCompanyPage.sideMenuSettings.clickProfile();
+        await settingsProfilePage.clickDeleteMyAccountBtn();
+        await settingsProfilePage.clickDeleteMyAccountBtn();
+        await deleteMyAccountModal.clickDeleteMyAccountModal();
+
+        await step(`Verify that the User is deleted account and is on the loginpage ${URL_END_POINTS.loginEndPoint} `, async () => {
+            await expect(loginPage.page).toHaveURL('process.env.URL + URL_END_POINTS.loginEndPoint');
+        })
+            await step(`Verify that a toast message with the text "${TOAST_MESSAGE.deleteAccount}" popped up `, async () => {
+                await expect(settingsProfilePage.toast.toastBody).toHaveText(TOAST_MESSAGE.deleteAccount);
+            })
+        })
     })
-})
+})        

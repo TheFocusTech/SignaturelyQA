@@ -12,6 +12,7 @@ export default class SettingsProfilePage {
         this.newPasswordInputField = this.page.getByPlaceholder('Password', { exact: true });
         this.repeatNewPasswordInputField = this.page.getByPlaceholder('Repeat Password');
         this.saveButton = this.page.getByRole('button', { name: 'Save' });
+        this.deleteMyAccountBtn = this.page.getByText('Delete my Account', {exact: true});
     }
 
     async fillNewPasswordInputField(password) {
@@ -29,6 +30,11 @@ export default class SettingsProfilePage {
     async clickSaveButton() {
         await step('Click "Save" button', async () => {
             await this.saveButton.click();
+        });
+    }
+    async clickDeleteMyAccountBtn() {
+        await step('Click "Delete My Account" button', async () => {
+            await this.deleteMyAccountBtn.click();
         });
     }
 }
