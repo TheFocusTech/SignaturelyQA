@@ -1,7 +1,7 @@
 import { expect } from '@playwright/test';
 import { test } from "../fixtures/base.js";
 import {CARD_DETAILS, RANDOM_ANNUALLY_PLAN, PLANS, END_PLAN} from '../testData.js';
-import {description, tag, severity, Severity, link, epic, feature} from "allure-js-commons";
+import {description, tags, severity, Severity, link, epic, feature, step} from "allure-js-commons";
 
 test.describe('Billing', () => {
 
@@ -42,12 +42,12 @@ test.describe('Billing', () => {
             'through the settings-billing section and deleting a payment card through the Billing Portal.')
         await severity(Severity.CRITICAL);
         await link(
-            "https://docs.google.com/document/d/1Qce7tKWOwVYtPxgQv_8ae-HUkbAgeOFph0lB_eziY_k/edit#heading=h.khucr6xuqdib",
-            "TC_14_54_01"
+            'https://docs.google.com/document/d/1Qce7tKWOwVYtPxgQv_8ae-HUkbAgeOFph0lB_eziY_k/edit#heading=h.khucr6xuqdib',
+            'TC_14_54_01'
         );
-        await epic("Setting");
-        await feature("Billing");
-        await tag("Payment Card");
+        await epic('Setting');
+        await feature('Billing');
+        await tags('Payment Card', 'Billing Portal');
 
         test.setTimeout(100 * 1000);
         await signPage.sideMenu.clickSettings();
@@ -56,21 +56,31 @@ test.describe('Billing', () => {
         await stripeEnterPaymentDetailsPage.attachCard(CARD_DETAILS.VISA_DEBIT);
         await settingsBillingPage.reloadPage();
 
-        await expect(settingsBillingPage.creditCardData).toHaveText(CARD_DETAILS.VISA_DEBIT.displayingOnTheBillingPage);
+        await step('Verify that the added payment card displayed on the Billing page', async () => {
+            await expect(settingsBillingPage.creditCardData).toHaveText(CARD_DETAILS.VISA_DEBIT.displayingOnTheBillingPage);
+        });
 
         stripeEnterPaymentDetailsPage = await settingsBillingPage.clickAttachCardButton();
         await stripeEnterPaymentDetailsPage.attachCard(CARD_DETAILS.MASTERCARD);
         await settingsBillingPage.reloadPage();
 
-        await expect(settingsBillingPage.creditCardData).toHaveText(CARD_DETAILS.MASTERCARD.displayingOnTheBillingPage);
+        await step('Verify that the added payment card displayed on the Billing page', async () => {
+            await expect(settingsBillingPage.creditCardData).toHaveText(CARD_DETAILS.MASTERCARD.displayingOnTheBillingPage);
+        });
 
-        const settingBillingPortalPage = await settingsBillingPage.clickOpenBillingPortalButton();
+        let settingBillingPortalPage = await settingsBillingPage.clickOpenBillingPortalButton();
 
-        await expect(settingBillingPortalPage.paymentDefaultMethod).toHaveText(CARD_DETAILS.MASTERCARD.displayingOnTheBillingPortalPage)
+        await step('Verify that the payment card displayed on the Billing Portal page', async () => {
+            await expect(settingBillingPortalPage.paymentDefaultMethod).toHaveText(CARD_DETAILS.MASTERCARD.displayingOnTheBillingPortalPage)
+        });
 
         await settingBillingPortalPage.deleteAllNotDefaultCards();
 
-        await expect(settingBillingPortalPage.paymentMethodsList).toHaveCount(1);
-        await expect(settingBillingPortalPage.paymentMethodsList).toHaveText(CARD_DETAILS.MASTERCARD.displayingOnTheBillingPortalPage);
+        await step('Verify that there is only one payment card displayed on the Billing Portal page.', async () => {
+            await expect(settingBillingPortalPage.paymentMethodsList).toHaveCount(1);
+        });
+        await step('Verify that there is the last added payment card displayed on the Billing Portal page.', async () => {
+            await expect(settingBillingPortalPage.paymentMethodsList).toHaveText(CARD_DETAILS.MASTERCARD.displayingOnTheBillingPortalPage);
+        });
     });
 })

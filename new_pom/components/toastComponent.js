@@ -21,7 +21,9 @@ export default class ToastComponent {
     }
 
     async waitForToastIsHiddenByText(text) {
-        await this.toastBody.getByText(text).waitFor({ state: "visible"});
-        await this.toastBody.getByText(text).waitFor({ state: "hidden" });
+        await step(`A toast message with the text "${text}" is visible and hidden then`, async () => {
+            await this.toastBody.getByText(text).waitFor({ state: "visible" });
+            await this.toastBody.getByText(text).waitFor({ state: "hidden" });
+        });
     }
 }

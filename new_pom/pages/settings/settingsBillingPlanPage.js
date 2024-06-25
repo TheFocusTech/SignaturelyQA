@@ -1,6 +1,7 @@
 import SideMenuSettingsComponent from "../../components/sideMenuSettingsComponent";
 import SideMenuComponent from "../../components/sideMenuComponent";
 import ToastComponent from "../../components/toastComponent";
+import { step } from "allure-js-commons";
 
 export default class NewSettingsBillingPlanPage {
 
@@ -13,17 +14,19 @@ export default class NewSettingsBillingPlanPage {
 
         this.billingTableColumnHeader = this.page.locator('.billing__table-column--header');
         this.billingHeader = this.page.locator('.billing__trial-header');
-        this.selectPersonalPlanButton = this.page.getByText('Select', { exact: true });        
+        this.selectPersonalPlanButton = this.page.getByText('Select', { exact: true });
     }
 
     async clickUpgradeButton(plan) {
-        await this.billingTableColumnHeader
-            .filter({ hasText: plan })
-            .getByRole('button', { name: "Upgrade" })
-            .click();
+        await step(`Click "Upgrade" button for ${plan} option`, async () => {
+            await this.billingTableColumnHeader
+                .filter({ hasText: plan })
+                .getByRole('button', { name: "Upgrade" })
+                .click();
+        });
     }
 
-    async clickSelectPersonalPlanButton(){
+    async clickSelectPersonalPlanButton() {
         await this.selectPersonalPlanButton.click();
     }
 
