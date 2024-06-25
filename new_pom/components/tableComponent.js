@@ -15,7 +15,7 @@ export default class TableComponent {
         this.moveToBtn = this.page.getByRole('button', { name: 'Move to' });
         this.controlsPath = this.page.locator('.tableControls__path');
         this.optionsDropdown = this.page.locator('.documents__optionsDropdownTrigger').filter({ hasText: 'Options' }).first();
-        this.editDropdown = this.page.locator('.documents__dropdownOption').filter({ hasText: 'Edit' });
+        this.editDropdownItem = this.page.locator('.documents__dropdownOption').filter({ hasText: 'Edit' });
         this.firstFormTitle = this.page.locator('.table__column.table__column--text').nth(1);
     }
 
@@ -62,8 +62,8 @@ export default class TableComponent {
     async clickOptionsDropdown() {
         await this.optionsDropdown.click();
     }
-    async clickEditDropDown() {
-        await this.editDropdown.click();
+    async clickEditDropdownItem() {
+        await this.editDropdownItem.click();
     }
   
 }

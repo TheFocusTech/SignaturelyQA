@@ -5,32 +5,35 @@ import { createForm } from "../helpers/preconditions.js";
 
 test.describe('Forms', () => {
 
-    // test.skip('TC_08_32_01 | Verify that user can create form', async ({ createBusinessUserAndLogin, signPage,
-    //     prepareForSignatureModal, createFormPage, formsPage, successModal}) => {
-    //     test.setTimeout(120 * 1000);
+    test('TC_08_32_01 | Verify that user can create form', async ({ createBusinessUserAndLogin, signPage,
+        prepareForSignatureModal, createEditFormPage, formsPage, successModal}) => {
+        test.setTimeout(120 * 1000);
 
-    //     await signPage.sideMenu.clickForms();
+        await signPage.sideMenu.clickForms();
 
-    //     await formsPage.clickCreateFormBtn();
-    //     await createFormPage.fillFormNameField(SIGNERS_DATA.signerName1);
-    //     await createFormPage.fillOptionalMessageField(SIGNERS_DATA.viewerEmail1);
-    //     await createFormPage.fileUploader.uploadFile('testDocuments/todoList.xlsx');
-    //     await createFormPage.clickFillTemplateBtn();
+        await formsPage.clickCreateFormBtn();
+        await createEditFormPage.fillFormNameField(SIGNERS_DATA.signerName1);
+        await createEditFormPage.fillOptionalMessageField(SIGNERS_DATA.viewerEmail1);
+        await createEditFormPage.fileUploader.uploadFile('testDocuments/todoList.xlsx');
+        await createEditFormPage.clickFillTemplateBtn();
 
-    //     await prepareForSignatureModal.clickNameFieldItem();
-    //     await prepareForSignatureModal.doCanvasClicks();
-    
-    //     await prepareForSignatureModal.clickSignFieldItem();
-    //     await prepareForSignatureModal.doCanvasClicks();
+        await prepareForSignatureModal.clickSignFieldItem();
+        await prepareForSignatureModal.doCanvasClicks();
 
-    //     await prepareForSignatureModal.clickCreateBtn();
+        await prepareForSignatureModal.clickInitialFieldsItem();
+        await prepareForSignatureModal.doCanvasClicks();
 
-    //     await expect(prepareForSignatureModal.toast.toastBody).toHaveText(TOAST_MESSAGE.success);
+        await prepareForSignatureModal.clickDateFieldsItem();
+        await prepareForSignatureModal.doCanvasClicks();
 
-    //     await successModal.clickBackToFormsBtn();
+        await prepareForSignatureModal.clickCreateBtn();
 
-    //     await expect(await formsPage.table.documentStatus).toHaveText(DOCUMENT_STATUS.live);
-    // })
+        await expect(prepareForSignatureModal.toast.toastBody).toHaveText(TOAST_MESSAGE.success);
+
+        await successModal.clickBackToFormsBtn();
+
+        await expect(await formsPage.table.documentStatus).toHaveText(DOCUMENT_STATUS.live);
+    })
 
     test('TC_08_33_01 | Verify that user can edit form', async ({ createBusinessUserAndLogin, signPage,
         formsPage, createEditFormPage, prepareForSignatureModal, successModal }) => {
@@ -38,8 +41,9 @@ test.describe('Forms', () => {
         
         await createForm(signPage, formsPage, createEditFormPage, prepareForSignatureModal, successModal);
 
+        await signPage.sideMenu.clickForms();
         await formsPage.table.clickOptionsDropdown();
-        await formsPage.table.clickEditDropDown();
+        await formsPage.table.clickEditDropdownItem();
         await createEditFormPage.fillFormNameField(FORMS.form_name_edit);
         await createEditFormPage.fillOptionalMessageField(FORMS.optional_message_text_edit);
         await createEditFormPage.clickCancelBtn();
