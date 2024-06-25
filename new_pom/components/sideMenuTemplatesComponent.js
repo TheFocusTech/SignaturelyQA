@@ -1,3 +1,4 @@
+import { step } from "allure-js-commons";
 
 export default class SideMenuTemplatesComponent {
     constructor(page) {
@@ -12,6 +13,8 @@ export default class SideMenuTemplatesComponent {
     }
 
     async clickApiTemplates() {
-        await this.apiTemplates.click();
+        await step('Click the "API Templates" item on the Templates menu', async () => {
+            await this.apiTemplates.click();
+        });
     }
 }
