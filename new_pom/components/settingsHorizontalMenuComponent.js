@@ -1,3 +1,5 @@
+import {test} from "../../fixtures/base";
+
 export default class SettingsHorizontalMenuComponent {
     constructor(page) {
         this.page = page;
@@ -7,7 +9,9 @@ export default class SettingsHorizontalMenuComponent {
     }
 
     async clickBilling() {
-        await this.billing.click();
+        await test.step('Click on the Billing in the Horizontal Menu', async () => {
+            await this.billing.click();
+        });
     }
 
     async clickAPI() {
