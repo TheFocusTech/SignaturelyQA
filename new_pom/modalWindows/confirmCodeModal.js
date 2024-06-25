@@ -1,4 +1,5 @@
 import {URL_END_POINTS} from "../../testData";
+import {step} from "allure-js-commons";
 
 export default class ConfirmCodeModal {
     constructor(page) {
@@ -10,11 +11,15 @@ export default class ConfirmCodeModal {
     }
 
     async fillConfirmCodeInputField(code) {
-        await this.confirmCodeInputField.fill(code);
+        await step("Enter the confirmation code in the modal window", async () => {
+            await this.confirmCodeInputField.fill(code);
+        });
     }
 
     async clickSendButton() {
-        await this.sendButton.click();
-        await this.page.waitForURL(`${process.env.URL}${URL_END_POINTS.signEndPoint}`)
+        await step('Click "Send" button', async () => {
+            await this.sendButton.click();
+            await this.page.waitForURL(`${process.env.URL}${URL_END_POINTS.signEndPoint}`)
+        });
     }
 }
