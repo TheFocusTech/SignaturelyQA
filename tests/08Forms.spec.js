@@ -52,7 +52,7 @@ test.describe('Sign Document', () => {
         await expect(await formsPage.table.documentStatus).toHaveText(DOCUMENT_STATUS.live);
   })
 
-  test.only('TC_08_35_01 | Verify that user can duplicate form', async ({ 
+  test('TC_08_35_01 | Verify that user can duplicate form', async ({ 
         createBusinessUserAndLogin, 
         signPage,  
         prepareForSignatureModal, 
