@@ -17,11 +17,12 @@ test.describe('Registration', () => {
         await description('To verify that a Trial user can successfully register.');
         await tag('Trial user');
         await severity(Severity.BLOCKER);
+        await link("https://app.qase.io/case/SIGN-1",
+                "Qase: SIGN-1");
         await link(
             "https://docs.google.com/document/d/1Qce7tKWOwVYtPxgQv_8ae-HUkbAgeOFph0lB_eziY_k/edit#heading=h.3auuqi4u4l4v",
-            "TC_01_01_01"
+            "ATC_01_01_01"
         );
-        await link("https://app.qase.io/case/SIGN-1", "Qase");
         await epic('Registration');
 
         const newUserData = await generateNewUserData();
@@ -58,11 +59,12 @@ test.describe('Registration', () => {
         await description('To verify that a Free user can successfully register.');
         await tag('Free user');
         await severity(Severity.BLOCKER);
+        await link("https://app.qase.io/case/SIGN-2",
+                "Qase: SIGN-2");
         await link(
             "https://docs.google.com/document/d/1Qce7tKWOwVYtPxgQv_8ae-HUkbAgeOFph0lB_eziY_k/edit#heading=h.18wd1qo653v",
-            "TC_01_02_01"
+            "ATC_01_02_01"
         );
-        await link("https://app.qase.io/case/SIGN-2", "Qase");
         await epic('Registration');
 
         const newUserData = await generateNewUserData();
@@ -97,11 +99,12 @@ test.describe('Registration', () => {
             await description('To verify that a Personal user can successfully register.');
             await tag('Personal user');
             await severity(Severity.BLOCKER);
+            await link("https://app.qase.io/case/SIGN-3",
+                    "Qase: SIGN-3");
             await link(
                 "https://docs.google.com/document/d/1Qce7tKWOwVYtPxgQv_8ae-HUkbAgeOFph0lB_eziY_k/edit#heading=h.ygd7jqo6djdj",
-                "TC_01_03_01"
+                "ATC_01_03_01"
             );
-            await link("https://app.qase.io/case/SIGN-3", "Qase");
             await epic('Registration');
 
             const newUserData = await generateNewUserData();
