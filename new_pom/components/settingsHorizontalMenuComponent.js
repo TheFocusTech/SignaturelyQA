@@ -1,4 +1,4 @@
-import {test} from "../../fixtures/base";
+import {step} from "allure-js-commons";
 
 export default class SettingsHorizontalMenuComponent {
     constructor(page) {
@@ -9,7 +9,7 @@ export default class SettingsHorizontalMenuComponent {
     }
 
     async clickBilling() {
-        await test.step('Click on the Billing in the Horizontal Menu', async () => {
+        await step('Click "Billing" on horizontal menu', async () => {
             await this.billing.click();
         });
     }
