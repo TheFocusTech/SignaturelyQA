@@ -52,7 +52,7 @@ test.describe('Sign Document', () => {
         await expect(await formsPage.table.documentStatus).toHaveText(DOCUMENT_STATUS.live);
   })
 
-  test('TC_08_35_01 | Verify that user can duplicate form', async ({ 
+  test.only('TC_08_35_01 | Verify that user can duplicate form', async ({ 
         createBusinessUserAndLogin, 
         signPage,  
         prepareForSignatureModal, 
@@ -73,7 +73,7 @@ test.describe('Sign Document', () => {
     test.setTimeout(120 * 1000);
         await createForm(signPage, prepareForSignatureModal, createFormPage, formsPage, successModal);
 
-        await formsPage.table.clickOptionsButton();
+        await formsPage.table.clickOptionsBtn(0);
         await formsPage.table.clickDuplicateBtn();
         await successModal.clickOkBtn();
 

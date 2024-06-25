@@ -7,7 +7,7 @@ export default class SuccessModal {
         this.statusDocument = this.page.getByText('Save a copy of your document');
         this.backToDocumentsBtn = this.page.getByRole('button', { name: 'Back to Documents' });
         this.backToFormsBtn = this.page.getByRole('button', { name: 'Back to Forms' });
-        this.OkBtn = this.page.getByRole('button', { name: 'Ok' });
+        this.okBtn = this.page.getByRole('button', { name: 'Ok' });
     }
 
     async clickBackToDocumentsBtn() {
@@ -28,6 +28,6 @@ export default class SuccessModal {
     }
 
         async clickOkBtn() {
-            await this.OkBtn.click();
+            await this.okBtn.click();
         }
 }
