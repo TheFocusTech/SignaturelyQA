@@ -75,23 +75,24 @@ test.describe('DocumentsType', () => {
         });
     })
 
-    test('TC_05_16_01 | Verify that the user receives an email reminder to sign the document', async ({createBusinessUserAndLogin, 
-                                                                                                       signPage, 
-                                                                                                       prepareForSignatureModal, 
-                                                                                                       finalStepPage, 
-                                                                                                       successModal, 
-                                                                                                       documentsPage, 
-                                                                                                       documentsAwaitingPage, 
-                                                                                                       sendReminderDocumentModal}) => {
+    test('TC_05_16_01 | Verify that the user receives an email reminder to sign the document', async ({
+        createBusinessUserAndLogin, 
+        signPage, 
+        prepareForSignatureModal, 
+        finalStepPage, 
+        successModal, 
+        documentsPage, 
+        documentsAwaitingPage, 
+        sendReminderDocumentModal}) => {
         test.setTimeout(250 * 1000);
   
-        await signPage.uploadFile.fileUploader.uploadFile('testDocuments/todoList.xlsx');
-        await signPage.uploadFile.clickPrepareDocumentBtn();
+        await signPage.uploadFileTab.fileUploader.uploadFile('testDocuments/picture.jpg');
+        await signPage.uploadFileTab.clickPrepareDocumentBtn();
   
         await prepareForSignatureModal.clickSendForSignatureRadioBtn();
         await prepareForSignatureModal.clickAddSignerBtn();
-        await prepareForSignatureModal.fillSignerNameField(CHOOSE_SIGNERS_FIELDS.name1, 0)
-        await prepareForSignatureModal.fillSignerEmailField(process.env.EMAIL_PREFIX + '37' + process.env.EMAIL_DOMAIN, 0);
+        await prepareForSignatureModal.fillSignerNameField(SIGNERS_DATA.signerName1, 0)
+        await prepareForSignatureModal.fillSignerEmailField(SIGNERS_DATA.signerEmail1, 0);
         await prepareForSignatureModal.clickContinueBtn();
         await prepareForSignatureModal.clickGotItBtn();
         await prepareForSignatureModal.clickSignFieldsItem();
@@ -99,11 +100,11 @@ test.describe('DocumentsType', () => {
         await prepareForSignatureModal.clickSaveBtn();
         
         await finalStepPage.clickSendForSignatureBtn();
-        await finalStepPage.toast.waitForToastDisappearance();
+        await finalStepPage.toast.waitForToastCompleted();
         await successModal.clickBackToDocumentsBtn();
         
         await documentsPage.sideMenuDocuments.clickAwaitingSignature();
-        await documentsAwaitingPage.table.clickOptionsBtn();
+        await documentsAwaitingPage.table.clickOptionsBtn(0);
         await documentsAwaitingPage.table.clickSendReminderBtn();
         
         await sendReminderDocumentModal.clickSignerCheckbox();
@@ -111,6 +112,6 @@ test.describe('DocumentsType', () => {
   
         await expect(await documentsAwaitingPage.toast.toastBody).toHaveText(TOAST_MESSAGE.sendReminder);
   
-     })
+     });
   
 })

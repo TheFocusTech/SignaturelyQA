@@ -217,7 +217,7 @@ export const test = base.extend({
         await use(new SignUpTrialPage(page));
     },
 
-    endReminderDocumentModal: async ({ page }, use) => {
+    sendReminderDocumentModal: async ({ page }, use) => {
         await use(new SendReminderDocumentModal(page));
     },
     
