@@ -1,0 +1,5 @@
+Generated new Free user #240625010119583
+User with id #undefined has been successfully created
+Waiting for email to arrive...
+Fetching emails sent to ...+240625010119583@gmail.com
+No confirmation link found in the email body.

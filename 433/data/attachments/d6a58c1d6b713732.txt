@@ -1,0 +1,4 @@
+Error occurred while getting confirmation link: TypeError: Cannot read properties of null (reading '0')
+    at getConfirmationLinkFromEmail (/home/runner/work/SignaturelyQA/SignaturelyQA/index.js:111:58)
+    at processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at /home/runner/work/SignaturelyQA/SignaturelyQA/helpers/utils.js:69:28
