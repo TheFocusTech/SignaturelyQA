@@ -4,11 +4,15 @@ export const URL_END_POINTS = {
     activateTrialEndPoint: '/activate-trial',
     settingsBillingPlanEndPoint: '/settings/billing/plan',
     signUpPersonalEndPoint: '/signup/personal',
+    settingsBillingEndPoint: '/settings/billing',
+    settingsCompanyEndPoint: '/settings/company',
+    signUpTrialEndPoint: '/signup',
+    confirmAccountEndPoint: '/confirm-account',
 };
 export const ACTIVE_COLOR = 'rgb(0, 163, 250)';
 export const FILL_FOLDER_NAME = 'Folder 1';
 
-export const TOAST_MESSAGE ={
+export const TOAST_MESSAGE = {
     planSuccessChange: 'Plan has been successfully changed.',
     planRenew: 'Plan has been renew',
     folderDeleted: 'Folder deleted successfully.',
@@ -17,7 +21,9 @@ export const TOAST_MESSAGE ={
     folderRename: 'Folder successfully updated!',
     folderCreated: 'Folder created!',
     signatureCreated: 'Signature created successfully',
-    success: 'Document successfully saved!'
+    success: 'Document successfully saved!',
+    fileMovedToFolder: 'Files successfully moved!',
+    profileUpdated: 'Profile information updated.'
 };
 export const API_KEY_NAME = 'Test Api Key';
 export const NO_API_KEY_MESSAGE = 'You don\'t have any API keys yet.';
@@ -38,9 +44,6 @@ export const CREATE_TEMPLATE = {
     optionalMessage: 'USA',
     nameRole: 'Boss',
 }
-
-export const START_YOUR_FREE_TRIAL_STATEMENT = "Please add your payment details to start the free trial.";
-export const BILLING_INFORMATION = "Billing Information";
 export const PLANS = ["Personal", "Business"];
 export const RANDOM_ANNUALLY_PLAN = (randomPlan) => `${randomPlan} Annually Plan`;
 
@@ -92,6 +95,7 @@ export const END_PLAN = 'Your plan will end on';
 export const MESSAGE = "Project 1";
 export const TEMPLATES_STATUS = {
     live: 'Live',
+    api: 'api',
 }
 
 export const SUBSCRIPTIONS = ["Monthly", "Annually"];
@@ -106,9 +110,17 @@ export const EMAIL_SUBJECTS = {
 export const SIGNER_ME = 'Me (Now)';
 
 export const SIGNERS_DATA = {
-    signerName1 : `${process.env.NEW_USER_NAME}${'001'}`,  
-    signerEmail1 : `${process.env.EMAIL_PREFIX}${process.env.NEW_USER_NUMBER}${'001'}${process.env.EMAIL_DOMAIN}`,
-    signerName2 : `${process.env.NEW_USER_NAME}${'002'}`,  
-    signerEmail2 : `${process.env.EMAIL_PREFIX}${process.env.NEW_USER_NUMBER}${'002'}${process.env.EMAIL_DOMAIN}`,
-    viewerEmail1 : `${process.env.EMAIL_PREFIX}${process.env.NEW_USER_NUMBER}${'003'}${process.env.EMAIL_DOMAIN}`
-}
+    signerName1: `${process.env.NEW_USER_NAME}${'001'}`,
+    signerEmail1: `${process.env.EMAIL_PREFIX}${process.env.NEW_USER_NUMBER}${'001'}${process.env.EMAIL_DOMAIN}`,
+    signerName2: `${process.env.NEW_USER_NAME}${'002'}`,
+    signerEmail2: `${process.env.EMAIL_PREFIX}${process.env.NEW_USER_NUMBER}${'002'}${process.env.EMAIL_DOMAIN}`,
+    viewerEmail1: `${process.env.EMAIL_PREFIX}${process.env.NEW_USER_NUMBER}${'003'}${process.env.EMAIL_DOMAIN}`
+};
+
+export const FOLDER_NAME = 'Folder for documents';
+export const UPLOAD_FILE_PATH = {
+    jpgDocument: 'testDocuments/picture.jpg',
+};
+export const UPLOAD_FILE_NAME = {
+    jpgDocument: 'picture.jpg',
+};
