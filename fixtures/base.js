@@ -7,7 +7,7 @@ import NewSignPage from '../new_pom/pages/sign/signPage.js';
 import NewDocumentsPage from '../new_pom/pages/documents/documentsPage.js';
 import NewDocumentsTrashPage from '../new_pom/pages/documents/documentsTrashPage.js';
 import PrepareForSignatureModal from '../new_pom/modalWindows/prepareForSignatureModal.js';
-import ActivateTrialStripePage from "../new_pom/pages/activateTrialStripePage";
+import ActivateTrialStripePage from "../new_pom/pages/signUp/activateTrialStripePage";
 import NewSettingsCompanyPage from "../new_pom/pages/settings/settingsCompanyPage.js";
 import NewSettingsBillingPage from "../new_pom/pages/settings/settingsBillingPage.js";
 import NewSettingsBillingPlanPage from "../new_pom/pages/settings/settingsBillingPlanPage.js";
@@ -33,6 +33,8 @@ import CreateFormPage from "../new_pom/pages/createFormPage.js";
 import CreateFolderModal from "../new_pom/modalWindows/createFolderModal.js";
 import MoveToFolderModal from "../new_pom/modalWindows/moveToFolderModal.js";
 import SettingsProfilePage from "../new_pom/pages/settings/settingsProfilePage.js";
+import SignUpTrialPage from "../new_pom/pages/signUp/signUpTrialPage";
+import SignUpFreePage from "../new_pom/pages/signUp/signUpFreePage";
 
 export const test = base.extend({
 
@@ -201,8 +203,18 @@ export const test = base.extend({
     createFolderModal: async ({ page }, use) => {
         await use(new CreateFolderModal(page));
     },
+
     settingsProfilePage: async ({ page }, use) => {
         await use(new SettingsProfilePage(page));
     },
+
+    signUpTrialPage: async ({ page }, use) => {
+        await use(new SignUpTrialPage(page));
+    },
+
+    signUpFreePage: async ({ page }, use) => {
+        await use(new SignUpFreePage(page));
+    },
+
 });
 
