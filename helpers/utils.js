@@ -64,18 +64,20 @@ export async function createNewFreeUserThroughApi(request) {
 
 export async function retrieveUserEmailConfirmationLink(request, newUserData) {
     let confirmationLink;
-    await step("Retrieve the confirmation link for the user's email.", async () => {
+    await step("Retrieve the confirmation link from the user's email.", async () => {
         const auth = await authorize();
         confirmationLink = await getConfirmationLinkFromEmail(auth, newUserData.email);
-
     });
         return confirmationLink;
 }
 
 export async function retrieveUserEmailConfirmCode(request, newUserEmail) {
-    const auth = await authorize();
-
-    return await getConfirmCodeFromEmail(auth, newUserEmail);
+    let confirmCode;
+    await step("Retrieve the confirm code from the user's email.", async () => {
+        const auth = await authorize();
+        confirmCode = await getConfirmCodeFromEmail(auth, newUserEmail);
+    });
+        return confirmCode;
 }
 
 export async function retrieveEmailMessage(request, senderName, receiverEmail, subject) {
