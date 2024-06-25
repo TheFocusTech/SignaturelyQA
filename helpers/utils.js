@@ -1,5 +1,6 @@
 import { signUpRequest } from "./apiCalls";
 import { authorize, getConfirmationLinkFromEmail, getConfirmCodeFromEmail, checkEmailMessageReceived } from "../index.js";
+import {step} from "allure-js-commons";
 
 export function generateNumberForNewUser() {
     let dt = new Date();
@@ -19,25 +20,28 @@ export function delay(ms) {
 }
 
 export async function generateNewUserData(free = false, workflowVersion = null) {
-    let userNumber = generateNumberForNewUser();
-    process.env.NEW_USER_NUMBER = userNumber;
-    let userData = {
-        email: `${process.env.EMAIL_PREFIX}${userNumber}${process.env.EMAIL_DOMAIN}`,
-        name: `TestUser${userNumber}`,
-        password: `QA_tester${userNumber}`,
-    };
-    process.env.NEW_USER_EMAIL = userData.email;
-    process.env.NEW_USER_NAME = userData.name;
-    process.env.NEW_USER_PASSWORD = userData.password;
+    let userData;
+    await step('Create new user data', async () => {
+        let userNumber = generateNumberForNewUser();
+        process.env.NEW_USER_NUMBER = userNumber;
+        userData = {
+            email: `${process.env.EMAIL_PREFIX}${userNumber}${process.env.EMAIL_DOMAIN}`,
+            name: `TestUser${userNumber}`,
+            password: `QA_tester${userNumber}`,
+        };
+        process.env.NEW_USER_EMAIL = userData.email;
+        process.env.NEW_USER_NAME = userData.name;
+        process.env.NEW_USER_PASSWORD = userData.password;
 
-    if (free) {
-        userData.free = true;
-    }
-    if (workflowVersion) {
-        userData.workflowVersion = workflowVersion;
-    }
+        if (free) {
+            userData.free = true;
+        }
+        if (workflowVersion) {
+            userData.workflowVersion = workflowVersion;
+        }
 
-    return userData;
+    });
+        return userData;
 }
 
 export async function createNewUserThroughApi(request) {
@@ -59,9 +63,13 @@ export async function createNewFreeUserThroughApi(request) {
 }
 
 export async function retrieveUserEmailConfirmationLink(request, newUserData) {
-    const auth = await authorize();
+    let confirmationLink;
+    await step("Retrieve the confirmation link for the user's email.", async () => {
+        const auth = await authorize();
+        confirmationLink = await getConfirmationLinkFromEmail(auth, newUserData.email);
 
-    return await getConfirmationLinkFromEmail(auth, newUserData.email);
+    });
+        return confirmationLink;
 }
 
 export async function retrieveUserEmailConfirmCode(request, newUserEmail) {
