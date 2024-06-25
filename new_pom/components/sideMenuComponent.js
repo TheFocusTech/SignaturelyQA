@@ -1,4 +1,3 @@
-import { test } from "../../fixtures/base";
 import { step } from "allure-js-commons";
 
 export default class SideMenuComponent {
@@ -29,7 +28,7 @@ export default class SideMenuComponent {
     }
 
     async clickSettings() {
-        await step('Click "Settings" sidemenu', async () => {
+        await step('Click the Settings on the Side Menu', async () => {
             await this.settings.click();
         })
     }

@@ -9,7 +9,7 @@ export default class SettingsHorizontalMenuComponent {
     }
 
     async clickBilling() {
-        await step('Click "Billing" on the horizontal menu', async () => {
+        await step('Click "Billing" on horizontal menu', async () => {
             await this.billing.click();
         });
     }
