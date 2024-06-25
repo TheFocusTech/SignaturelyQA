@@ -1,5 +1,6 @@
 import ToastComponent from "../../components/toastComponent";
 import SideMenuComponent from "../../components/sideMenuComponent";
+import { step } from "allure-js-commons";
 
 export default class SettingsProfilePage {
     constructor(page) {
@@ -14,14 +15,20 @@ export default class SettingsProfilePage {
     }
 
     async fillNewPasswordInputField(password) {
-        await this.newPasswordInputField.type(password);
+        await step('Fill "New Password" input field', async () => {
+            await this.newPasswordInputField.type(password);
+        });
     }
 
     async fillRepeatNewPasswordInputField(password) {
-        await this.repeatNewPasswordInputField.type(password);
+        await step('Fill "Repeate new Password" input field', async () => {
+            await this.repeatNewPasswordInputField.type(password);
+        });
     }
 
     async clickSaveButton() {
-        await this.saveButton.click();
+        await step('Click "Save" button', async () => {
+            await this.saveButton.click();
+        });
     }
 }
