@@ -1,5 +1,6 @@
-import { DATA_SIGNER, FOLDER_NAME, TOAST_MESSAGE, CREATE_TEMPLATE } from "../testData";
+import { DATA_SIGNER, FOLDER_NAME, TOAST_MESSAGE, CREATE_TEMPLATE, UPLOAD_FILE_PATH } from "../testData";
 import { test } from "../fixtures/base";
+import { step } from "allure-js-commons";
 
 export const createSignature = async (signPage, settingsCompanyPage, settingsEditSignaturePage, createOrEditSignatureOnSettingModal) => {
     await signPage.sideMenu.clickSettings();
@@ -27,12 +28,12 @@ export const createFolder = async (
 };
 
 export const createTemplate = async (signPage, prepareForSignatureModal, templatePage) => {
-    await test.step('Create Template', async () => {
+    await step('Create Template', async () => {
         await signPage.sideMenu.clickTemplates();
         await templatePage.sideMenuTemplates.clickCreateTemplate();
         await templatePage.createTemplate.fillTemplateNameField(CREATE_TEMPLATE.nameField);
         await templatePage.createTemplate.fillCreateTemplateRolesField(CREATE_TEMPLATE.nameRole);
-        await templatePage.createTemplate.fileUploader.uploadFile('testDocuments/CSV.csv');
+        await templatePage.createTemplate.fileUploader.uploadFile(UPLOAD_FILE_PATH.jpgDocument);
         await templatePage.createTemplate.clickFillTemplateBtn();
         await prepareForSignatureModal.clickSignFieldsItem();
         await prepareForSignatureModal.doCanvasClicks();

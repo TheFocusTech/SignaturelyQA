@@ -27,18 +27,18 @@ test.describe('Templates', () => {
         await description('Objective: To verify the process of add template to API.');
         await severity(Severity.CRITICAL);
         await link(
-            'https://app.qase.io/project/SIGN?suite=7&case=31',
+            'https://app.qase.io/case/SIGN-31',
             'Qase: SIGN-31'
         );
         await link(
             'https://docs.google.com/document/d/1Qce7tKWOwVYtPxgQv_8ae-HUkbAgeOFph0lB_eziY_k/edit#heading=h.z5onphks9v9p',
-            'TC_07_31_01'
+            'ATC_07_31_01'
         );
         await epic('Templates');
         await tag('User', 'API');
 
         test.setTimeout(250 * 1000);
-        
+
         await createTemplate(signPage, prepareForSignatureModal, templatePage);
         await signPage.sideMenu.clickTemplates();
         await templatePage.table.clickOptionsBtn(0);
