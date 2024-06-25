@@ -34,6 +34,7 @@ import CreateFolderModal from "../new_pom/modalWindows/createFolderModal.js";
 import MoveToFolderModal from "../new_pom/modalWindows/moveToFolderModal.js";
 import SettingsProfilePage from "../new_pom/pages/settings/settingsProfilePage.js";
 import SignUpTrialPage from "../new_pom/pages/signUp/signUpTrialPage";
+import SignUpFreePage from "../new_pom/pages/signUp/signUpFreePage";
 import NewDocumentsAwaitingPage from "../new_pom/pages/documents/documentsAwaitingPage.js";
 import SendReminderDocumentModal from "../new_pom/modalWindows/sendReminderDocumentModal.js";
 
@@ -217,9 +218,13 @@ export const test = base.extend({
         await use(new SignUpTrialPage(page));
     },
 
+    signUpFreePage: async ({ page }, use) => {
+        await use(new SignUpFreePage(page));
+    },
+
     sendReminderDocumentModal: async ({ page }, use) => {
         await use(new SendReminderDocumentModal(page));
     },
-    
+
 });
 
