@@ -129,6 +129,3 @@ export const FORMS = {
     form_name_edit: 'Form is edit D',
     optional_message_text_edit: 'Form edited'
 }
-
-
-
