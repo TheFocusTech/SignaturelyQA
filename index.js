@@ -89,6 +89,8 @@ async function getConfirmationLinkFromEmail(auth, sender) {
         if (!messages || messages.length === 0) {
             console.log('No messages found.');
         }
+        console.log(`Number of messages found: ${messages.length}`);
+        console.log('Email received. Getting email body...');
 
         const newestMessage = messages[0];
         const res1 = await gmail.users.messages.get({
