@@ -1,4 +1,6 @@
 import SideMenuSettingsComponent from "../../components/sideMenuSettingsComponent";
+import SideMenuComponent from "../../components/sideMenuComponent";
+import ToastComponent from "../../components/toastComponent";
 
 export default class NewSettingsBillingPlanPage {
 
@@ -6,6 +8,8 @@ export default class NewSettingsBillingPlanPage {
         this.page = page;
 
         this.sideMenuSettings = new SideMenuSettingsComponent(this.page);
+        this.sideMenu = new SideMenuComponent(this.page);
+        this.toast = new ToastComponent(this.page);
 
         this.billingTableColumnHeader = this.page.locator('.billing__table-column--header');
         this.billingHeader = this.page.locator('.billing__trial-header');

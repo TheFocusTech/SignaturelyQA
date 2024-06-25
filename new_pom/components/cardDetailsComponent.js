@@ -1,3 +1,5 @@
+import {step} from "allure-js-commons";
+
 export default class CardDetailsComponent {
     constructor(page) {
         this.page = page;
@@ -10,10 +12,12 @@ export default class CardDetailsComponent {
     }
 
     async fillData(cardDetails) {
-        await this.cardNumberField.fill(cardDetails.cardNumber);
-        await this.expirationDateField.fill(cardDetails.expirationDate);
-        await this.cvvField.fill(cardDetails.cvc);
-        await this.cardholderNameField.fill(cardDetails.fullNameOnCard);
-        await this.zipField.fill(cardDetails.zip)
+        await step("Enter card details", async () => {
+            await this.cardNumberField.fill(cardDetails.cardNumber);
+            await this.expirationDateField.fill(cardDetails.expirationDate);
+            await this.cvvField.fill(cardDetails.cvc);
+            await this.cardholderNameField.fill(cardDetails.fullNameOnCard);
+            await this.zipField.fill(cardDetails.zip)
+        });
     }
 }

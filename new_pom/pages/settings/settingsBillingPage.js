@@ -14,6 +14,7 @@ export default class NewSettingsBillingPage {
         this.openBillingPortalButton = this.page.getByRole('button', { name: 'Open Billing Portal' });
         this.editPlanButton = this.page.getByRole('button', {name: "Edit Plan"});
         this.nextInvoiceInfo = this.page.locator('.billing__plan-group--next-invoice');
+        this.billingPlanWrapper = this. page.locator('.billing__plan-wrapper')
     }
 
     async clickUpgradePlanButton() {
