@@ -1,0 +1,6 @@
+Generated new user #240625200400787
+User with id #"a713e381-dcbf-475e-be4e-4f3aa40e5130" has been successfully created
+Clicking subscription button: Annually
+Waiting for email to arrive...
+Fetching emails sent to ...+240625200400787@gmail.com
+Confirmation Code: AEWUIYYpAW
