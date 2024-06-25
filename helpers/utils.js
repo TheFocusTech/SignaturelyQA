@@ -23,7 +23,7 @@ export async function generateNewUserEmail(addition) {
     let newEmail;
     await step('Generate new user email', async () => {
         newEmail = `${process.env.EMAIL_PREFIX}${process.env.NEW_USER_NUMBER}${addition}${process.env.EMAIL_DOMAIN}`;
-        console.log(`Generated new user Email: ${newEmail}`);
+        console.log(`Generated new user Email: ${newEmail.slice(-29)}`);
     });
 
     return newEmail;
