@@ -15,6 +15,7 @@ export default class TableComponent {
         this.documentTitle = this.page.locator('.documents__list-item .table__column--text--document p');
         this.moveToBtn = this.page.getByRole('button', { name: 'Move to' });
         this.controlsPath = this.page.locator('.tableControls__path');
+        this.editBtn = this.page.getByRole('button', { name: 'Edit' });
     }
 
     async clickOptionsBtn(i) {
@@ -55,6 +56,12 @@ export default class TableComponent {
     async openFolder(name) { 
         await test.step('Open the folder', async () => {
             await this.documentTitle.filter({ hasText: name }).dblclick();
+        });
+    }
+
+    async clickEditBtn() { 
+        await test.step('Click the "Edit" button', async () => {
+            await this.editBtn.click();
         });
     }
 }

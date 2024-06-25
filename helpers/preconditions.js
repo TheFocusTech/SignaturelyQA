@@ -1,4 +1,4 @@
-import { DATA_SIGNER, FOLDER_NAME, TOAST_MESSAGE } from "../testData";
+import { DATA_SIGNER, FOLDER_NAME, TOAST_MESSAGE, CREATE_TEMPLATE, UPLOAD_FILE_PATH } from "../testData";
 import { test } from "../fixtures/base";
 
 export const createSignature = async (signPage, settingsCompanyPage, settingsEditSignaturePage, createOrEditSignatureOnSettingModal) => {
@@ -25,3 +25,24 @@ export const createFolder = async (
             await documentsPage.toast.waitForToastIsHiddenByText(TOAST_MESSAGE.folderCreated);
     })
 };
+
+export const createTemplate = async (
+    signPage,
+    templatePage,
+    prepareForSignatureModal
+) => {
+    await test.step('Create Template', async () => { 
+        await signPage.sideMenu.clickTemplates();
+        await templatePage.sideMenuTemplates.clickCreateTemplate();
+        await templatePage.createTemplate.fillTemplateNameField(CREATE_TEMPLATE.nameField);
+        await templatePage.createTemplate.fillOptionalMessageField(CREATE_TEMPLATE.optionalMessage);
+        await templatePage.createTemplate.fillCreateTemplateRolesField(CREATE_TEMPLATE.nameRole);
+        await templatePage.createTemplate.fileUploader.uploadFile(UPLOAD_FILE_PATH.csvDocument);
+        await templatePage.createTemplate.clickFillTemplateBtn();
+        await prepareForSignatureModal.clickSignFieldsItem();
+        await prepareForSignatureModal.doCanvasClicks();
+        await prepareForSignatureModal.clickCreateBtn();
+        await prepareForSignatureModal.clickBackToTemplatesBtn();
+        await templatePage.sideMenu.clickSign();
+    })
+}

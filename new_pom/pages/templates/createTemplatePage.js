@@ -14,6 +14,7 @@ export default class NewCreateTemplatePage {
         this.optionalMessageField = this.page.getByPlaceholder('Add an optional message for');
         this.createTemplateRolesField = this.page.getByPlaceholder('Role');
         this.fillTemplateBtn = this.page.getByRole('button', { name: 'Fill Template' });
+        this.deleteUploadedFileBtn = this.page.locator('button.button.cancel');
 
     }
 
@@ -32,6 +33,12 @@ export default class NewCreateTemplatePage {
     async clickFillTemplateBtn() {
         await this.fillTemplateBtn.waitFor();
         await this.fillTemplateBtn.click();
+    }
+
+    async deleteUploadedFile() {
+        await this.deleteUploadedFileBtn.waitFor({ state: 'visible' });
+        await this.deleteUploadedFileBtn.hover();
+        await this.deleteUploadedFileBtn.click({ force: true });
     }
 
 }
