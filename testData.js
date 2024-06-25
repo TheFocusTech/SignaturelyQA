@@ -8,6 +8,7 @@ export const URL_END_POINTS = {
     settingsCompanyEndPoint: '/settings/company',
     signUpTrialEndPoint: '/signup',
     confirmAccountEndPoint: '/confirm-account',
+    signUpFree: '/signup/free',
 };
 export const ACTIVE_COLOR = 'rgb(0, 163, 250)';
 export const FILL_FOLDER_NAME = 'Folder 1';
