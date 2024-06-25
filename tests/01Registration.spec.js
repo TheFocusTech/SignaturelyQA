@@ -77,7 +77,9 @@ test.describe('Registration', () => {
         });
 
         const confirmationLink = await retrieveUserEmailConfirmationLink(request, newUserData);
-        await page.goto(confirmationLink);
+        await step("Navigate to the confirmation link", async () => {
+            await page.goto(confirmationLink);
+        });
         await page.waitForURL(`${process.env.URL}${URL_END_POINTS.signEndPoint}`);
         await signPage.sideMenu.clickSettings();
         await settingsCompanyPage.horizontalMenu.clickBilling();
