@@ -13,9 +13,3 @@ export default class DeleteMyAccountModal {
         });
     }
 }
-
-
-
-
-
-
