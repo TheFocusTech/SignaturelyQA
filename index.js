@@ -162,7 +162,7 @@ async function getConfirmCodeFromEmail(auth, sender) {
         if (confirmCode) {
             console.log('Confirmation Code:', confirmCode[1]);
         } else {
-            console.warn('Confirmation Code not found');
+            console.warn('Confirmation Code not found.');
         }
 
         return confirmCode[1];
