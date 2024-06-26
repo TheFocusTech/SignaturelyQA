@@ -13,8 +13,12 @@ test.describe('Authorization', () => {
         await description('Objective: To verify the process of logging a user into their account.');
         await severity(Severity.BLOCKER);
         await link(
-            "https://docs.google.com/document/d/1Qce7tKWOwVYtPxgQv_8ae-HUkbAgeOFph0lB_eziY_k/edit#heading=h.by32e2y2do4w",
-            "TC_02_05_01"
+            'https://app.qase.io/case/SIGN-5',
+            'Qase: SIGN-5'
+        );
+        await link(
+            'https://docs.google.com/document/d/1Qce7tKWOwVYtPxgQv_8ae-HUkbAgeOFph0lB_eziY_k/edit#heading=h.by32e2y2do4w',
+            'ATC_02_05_01'
         );
         await epic('Authorization');
         await tag('Login');
