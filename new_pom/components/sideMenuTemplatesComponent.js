@@ -12,7 +12,6 @@ export default class SideMenuTemplatesComponent {
         await step('Click the "Create Template" item on the Templates menu', async () => {
             await this.createTemplate.click();
         });
-
     }
 
     async clickApiTemplates() {

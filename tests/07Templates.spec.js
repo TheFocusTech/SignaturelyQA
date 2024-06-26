@@ -1,12 +1,25 @@
 import { expect } from "@playwright/test";
 import { test } from "../fixtures/base.js";
 import { CREATE_TEMPLATE, TEMPLATES_STATUS, TOAST_MESSAGE } from "../testData.js";
-import { description, tag, severity, Severity, link, epic, step } from "allure-js-commons";
 import { createTemplate } from "../helpers/preconditions.js";
+import { description, tags, severity, Severity, link, epic, feature, step } from "allure-js-commons";
 
 test.describe('Templates', () => {
 
     test('TC_07_27_01 | Verify that user can create a template', async ({ createBusinessUserAndLogin, signPage, prepareForSignatureModal, templatePage }) => {
+        await description('Objective: To verify that the user can create a new template in the system successfully. This includes ensuring that all required fields are completed correctly, the template is saved, and it is accessible for future use.')
+        await severity(Severity.CRITICAL);
+        await link(
+            'https://app.qase.io/case/SIGN-27',
+            'Qase: SIGN-27'
+        );
+        await link(
+            'https://docs.google.com/document/d/1Qce7tKWOwVYtPxgQv_8ae-HUkbAgeOFph0lB_eziY_k/edit#heading=h.p443twc6am8u',
+            'ATC__07_27_01'
+        );
+        await epic('Templates');
+        await tags('Create a template');
+
         await signPage.sideMenu.clickTemplates();
         await templatePage.sideMenuTemplates.clickCreateTemplate();
         await templatePage.createTemplate.fillTemplateNameField(CREATE_TEMPLATE.nameField);
@@ -19,7 +32,9 @@ test.describe('Templates', () => {
         await prepareForSignatureModal.clickCreateBtn();
         await prepareForSignatureModal.clickBackToTemplatesBtn();
 
-        await expect(await templatePage.table.documentStatus).toHaveText(TEMPLATES_STATUS.live);
+        await step('Verify that the document status in the template page is "live"', async () => {
+            await expect(await templatePage.table.documentStatus).toHaveText(TEMPLATES_STATUS.live);
+        });
 
     });
 

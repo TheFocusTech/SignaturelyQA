@@ -117,7 +117,9 @@ export default class PrepareForSignatureModal {
     }
 
     async clickBackToTemplatesBtn() {
-        await this.backToTempatesBtn.click();
+        await step('In the modal window, click on the "Back to templates" button.', async () => {
+            await this.backToTempatesBtn.click();
+        });
     }
 
     async clickCustomSigningOrderCheckbox() {
