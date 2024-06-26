@@ -1,5 +1,4 @@
-
-import { DATA_SIGNER, FOLDER_NAME, TOAST_MESSAGE, SIGNERS_DATA } from "../testData";
+import { DATA_SIGNER, FOLDER_NAME, TOAST_MESSAGE, CREATE_TEMPLATE, UPLOAD_FILE_PATH, SIGNERS_DATA } from "../testData";
 import { test } from "../fixtures/base";
 import { step } from "allure-js-commons";
 
@@ -16,12 +15,12 @@ export const createSignature = async (signPage, settingsCompanyPage, settingsEdi
 }
 
 export const createDocumentAwaiting = async (
-    signPage, 
-    prepareForSignatureModal, 
-    documentsPage, 
-    successModal, 
+    signPage,
+    prepareForSignatureModal,
+    documentsPage,
+    successModal,
     finalStepPage) => {
-    await test.step('Document creation in progress with Awaiting status ', async () => {
+    await step('Document creation in progress with Awaiting status ', async () => {
         await signPage.uploadFileTab.fileUploader.uploadFile('testDocuments/picture.jpg');
         await signPage.uploadFileTab.clickPrepareDocumentBtn();
         await prepareForSignatureModal.clickSendForSignatureRadioBtn();
@@ -45,13 +44,31 @@ export const createFolder = async (
     signPage,
     documentsPage,
     createFolderModal) => {
-    
+
     await step('Precondition: Create Folder', async () => {
-            await signPage.sideMenu.clickDocuments();
-            await documentsPage.clickCreateFolderBtn();
-            await createFolderModal.fillNewFolderName(FOLDER_NAME);
-            await createFolderModal.clickCreateBtn();
-            await documentsPage.toast.waitForToastIsHiddenByText(TOAST_MESSAGE.folderCreated);
-            await documentsPage.sideMenu.clickSign();
+        await signPage.sideMenu.clickDocuments();
+        await documentsPage.clickCreateFolderBtn();
+        await createFolderModal.fillNewFolderName(FOLDER_NAME);
+        await createFolderModal.clickCreateBtn();
+        await documentsPage.toast.waitForToastIsHiddenByText(TOAST_MESSAGE.folderCreated);
+        await documentsPage.sideMenu.clickSign();
     })
 };
+
+export const createTemplate = async (signPage, prepareForSignatureModal, templatePage, createTemplatePage) => {
+    await step('Create Template', async () => {
+        await signPage.sideMenu.clickTemplates();
+        await templatePage.sideMenuTemplates.clickCreateTemplate();
+        await createTemplatePage.fillTemplateNameField(CREATE_TEMPLATE.nameField);
+        await createTemplatePage.fillCreateTemplateRolesField(CREATE_TEMPLATE.nameRole);
+        await createTemplatePage.fileUploader.uploadFile(UPLOAD_FILE_PATH.jpgDocument);
+        await createTemplatePage.clickFillTemplateBtn();
+        await prepareForSignatureModal.clickSignFieldsItem();
+        await prepareForSignatureModal.doCanvasClicks();
+        await prepareForSignatureModal.clickCreateBtn();
+        await prepareForSignatureModal.clickBackToTemplatesBtn();
+        await templatePage.sideMenu.clickSign();
+    })
+};
+
+

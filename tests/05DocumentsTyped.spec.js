@@ -101,7 +101,7 @@ test.describe('DocumentsType', () => {
         await documentsPage.table.clickMoveToBtn();
         await moveToFolderModal.selectFolder(FOLDER_NAME);
         await moveToFolderModal.clickMoveToFolderBtn();
-        
+
         await test.step('Verify the toast message', async () => {
             await expect(await documentsPage.toast.toastBody).toHaveText(TOAST_MESSAGE.fileMovedToFolder);
         });
@@ -113,31 +113,31 @@ test.describe('DocumentsType', () => {
     })
 
     test('TC_05_16_01 | Verify that the user receives an email reminder to sign the document', async ({
-        createBusinessUserAndLogin, 
-        signPage, 
-        prepareForSignatureModal, 
-        finalStepPage, 
-        successModal, 
-        documentsPage, 
-        documentsAwaitingPage, 
-        sendReminderDocumentModal}) => {
+        createBusinessUserAndLogin,
+        signPage,
+        prepareForSignatureModal,
+        finalStepPage,
+        successModal,
+        documentsPage,
+        documentsAwaitingPage,
+        sendReminderDocumentModal }) => {
         test.setTimeout(250 * 1000);
 
         await createDocumentAwaiting(
-              signPage, 
-              prepareForSignatureModal,
-              documentsPage, 
-              successModal, 
-              finalStepPage);
-  
+            signPage,
+            prepareForSignatureModal,
+            documentsPage,
+            successModal,
+            finalStepPage);
+
         await signPage.sideMenu.clickDocuments();
         await documentsPage.sideMenuDocuments.clickAwaitingSignature();
         await documentsAwaitingPage.table.clickOptionsBtn(0);
         await documentsAwaitingPage.table.clickSendReminderBtn();
-        
+
         await sendReminderDocumentModal.clickSignerCheckbox();
         await sendReminderDocumentModal.clickSendReminderBtn();
-  
+
         await expect(await documentsAwaitingPage.toast.toastBody).toHaveText(TOAST_MESSAGE.sendReminder);
-     });
+    });
 })

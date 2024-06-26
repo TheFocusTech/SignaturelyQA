@@ -1,7 +1,7 @@
-import {expect} from "@playwright/test";
-import {test} from "../fixtures/base";
-import {URL_END_POINTS, ACTIVE_COLOR} from "../testData";
-import {description, tag, severity, Severity, link, epic, step} from "allure-js-commons";
+import { expect } from "@playwright/test";
+import { test } from "../fixtures/base";
+import { URL_END_POINTS, ACTIVE_COLOR } from "../testData";
+import { description, tag, severity, Severity, link, epic, step } from "allure-js-commons";
 
 test.describe('Authorization', () => {
 
