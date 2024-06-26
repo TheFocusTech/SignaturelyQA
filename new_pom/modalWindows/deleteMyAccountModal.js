@@ -4,12 +4,12 @@ export default class DeleteMyAccountModal {
     constructor(page) {
         this.page = page;
 
-        this.deleteMyAccountModal = this.page.locator('.profile__modal-button--delete');
+        this.deleteMyAccountModalBtn = this.page.locator('.profile__modal-button--delete');
     }
 
-    async clickDeleteMyAccountModal() {
+    async clickDeleteMyAccountModalBtn() {
         await step('Click on the "Delete My Account" button.', async () => {
-            await this.deleteMyAccountModal.click();
+            await this.deleteMyAccountModalBtn.click();
         });
     }
 }

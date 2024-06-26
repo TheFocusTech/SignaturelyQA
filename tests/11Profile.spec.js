@@ -55,11 +55,15 @@ test.describe('Profile', () => {
         deleteMyAccountModal,
         loginPage
     }) => {
-            await description('Objective: To verify that the User can delete account');
+        await description('Objective: To verify that the User can delete account');
         await severity(Severity.CRITICAL);
         await link(
-            "https://docs.google.com/document/d/1Qce7tKWOwVYtPxgQv_8ae-HUkbAgeOFph0lB_eziY_k/edit#heading=h.jpjkpoqpqi9k",
-            "TC_11_47_01"
+            'https://app.qase.io/case/SIGN-47',
+            'Qase: SIGN-47'
+        )
+        await link(
+            "https://docs.google.com/document/d/1Qce7tKWOwVYtPxgQv_8ae-HUkbAgeOFph0lB_eziY_k/edit#heading=h.tcq6ypzibzp5",
+            "АTC_11_47_01"
         );
         await epic('Profile');
         await tag('Delete account');
@@ -67,11 +71,10 @@ test.describe('Profile', () => {
         await signPage.sideMenu.clickSettings();
         await settingsCompanyPage.sideMenuSettings.clickProfile();
         await settingsProfilePage.clickDeleteMyAccountBtn();
-        await settingsProfilePage.clickDeleteMyAccountBtn();
-        await deleteMyAccountModal.clickDeleteMyAccountModal();
+        await deleteMyAccountModal.clickDeleteMyAccountModalBtn();
 
         await step(`Verify that the User is deleted account and is on the loginpage ${URL_END_POINTS.loginEndPoint} `, async () => {
-            await expect(loginPage.page).toHaveURL('process.env.URL + URL_END_POINTS.loginEndPoint');
+            await expect(loginPage.page).toHaveURL(process.env.URL + URL_END_POINTS.loginEndPoint);
         })
         await step(`Verify that a toast message with the text "${TOAST_MESSAGE.deleteAccount}" popped up `, async () => {
             await expect(settingsProfilePage.toast.toastBody).toHaveText(TOAST_MESSAGE.deleteAccount);

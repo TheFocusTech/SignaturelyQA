@@ -9,7 +9,7 @@ export const URL_END_POINTS = {
     signUpTrialEndPoint: '/signup',
     confirmAccountEndPoint: '/confirm-account',
     signUpFree: '/signup/free',
-    loginEndPoint: '/login',
+    loginEndPoint: 'login'
 };
 export const ACTIVE_COLOR = 'rgb(0, 163, 250)';
 export const FILL_FOLDER_NAME = 'Folder 1';
@@ -26,7 +26,7 @@ export const TOAST_MESSAGE = {
     success: 'Document successfully saved!',
     fileMovedToFolder: 'Files successfully moved!',
     profileUpdated: 'Profile information updated.',
-    deleteAccount:'Account Deleted',
+    deleteAccount:'Account Deleted.',
 };
 export const API_KEY_NAME = 'Test Api Key';
 export const NO_API_KEY_MESSAGE = 'You don\'t have any API keys yet.';
