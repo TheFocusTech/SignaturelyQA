@@ -1,7 +1,6 @@
 import ToastComponent from '../components/toastComponent';
 import { clickCanvas } from '../../helpers/utils.js';
-import { test } from "allure-js-commons";
-import {step} from 'allure-js-commons';
+import { step } from 'allure-js-commons';
 
 export default class PrepareForSignatureModal {
     constructor(page) {
@@ -33,10 +32,10 @@ export default class PrepareForSignatureModal {
         this.addRecipientsBtn = this.page.getByText('Recipients', { exact: true });
         this.recipientEmailField = this.page.getByPlaceholder('test@signaturely.com');
         this.prepareForSigningTitle = this.page.getByRole('heading', { name: 'Prepare for Signing' });
-        this.nameFieldItem = this.page.locator('ul.interactModal__fieldBar-fieldList li').filter({ hasText: /^Name$/ }).first();
-        this.signFieldItem = this.page.locator('ul.interactModal__fieldBar-fieldList li').nth(1);
+        this.nameFieldItem = this.page.getByText('Name', { exact: true });
+        this.signFieldItem = this.page.getByText('Sign', { exact: true });
         this.initialFieldItem = this.fieldsMenu.getByText('Initial');
-        this.dateFieldItem = this.page.locator('ul.interactModal__fieldBar-fieldList li').nth(3);
+        this.dateFieldItem = this.page.getByText('Date', { exact: true });
 
     }
 
