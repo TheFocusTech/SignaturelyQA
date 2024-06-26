@@ -21,7 +21,7 @@ import DowngradeToPersonalPlanModal from "../new_pom/modalWindows/downgradeToPer
 import NewSettingsAPIPage from "../new_pom/pages/settings/settingsAPIPage";
 import NewCreateAPIKeyModal from "../new_pom/modalWindows/createAPIKeyModal.js";
 import NewTemplatesPage from "../new_pom/pages/templates/templatesPage.js";
-import SignUpPersonalPage from "../new_pom/pages/signUpPersonalPage";
+import SignUpPersonalPage from "../new_pom/pages/signUp/signUpPersonalPage";
 import ConfirmCodeModal from "../new_pom/modalWindows/confirmCodeModal";
 import ChooseSignatureOrInitialModal from "../new_pom/modalWindows/chooseSignatureOrInitialModal";
 import CreateOrEditSignatureOnSettingModal from "../new_pom/modalWindows/createOrEditSignatureOnSettingModal";
@@ -35,6 +35,8 @@ import MoveToFolderModal from "../new_pom/modalWindows/moveToFolderModal.js";
 import SettingsProfilePage from "../new_pom/pages/settings/settingsProfilePage.js";
 import SignUpTrialPage from "../new_pom/pages/signUp/signUpTrialPage";
 import SignUpFreePage from "../new_pom/pages/signUp/signUpFreePage";
+import DocumentsAwaitingPage from "../new_pom/pages/documents/documentsAwaitingPage.js";
+import SendReminderDocumentModal from "../new_pom/modalWindows/sendReminderDocumentModal.js";
 
 export const test = base.extend({
 
@@ -102,6 +104,10 @@ export const test = base.extend({
 
     documentsPage: async ({ page }, use) => {
         await use(new NewDocumentsPage(page));
+    },
+
+    documentsAwaitingPage: async ({ page }, use) => {
+        await use(new DocumentsAwaitingPage(page));
     },
 
     documentsTrashPage: async ({ page }, use) => {
@@ -214,6 +220,10 @@ export const test = base.extend({
 
     signUpFreePage: async ({ page }, use) => {
         await use(new SignUpFreePage(page));
+    },
+
+    sendReminderDocumentModal: async ({ page }, use) => {
+        await use(new SendReminderDocumentModal(page));
     },
 
 });

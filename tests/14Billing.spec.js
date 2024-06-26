@@ -42,8 +42,12 @@ test.describe('Billing', () => {
             'through the settings-billing section and deleting a payment card through the Billing Portal.')
         await severity(Severity.CRITICAL);
         await link(
+            'https://app.qase.io/case/SIGN-54',
+            'Qase: SIGN-54'
+        );
+        await link(
             'https://docs.google.com/document/d/1Qce7tKWOwVYtPxgQv_8ae-HUkbAgeOFph0lB_eziY_k/edit#heading=h.khucr6xuqdib',
-            'TC_14_54_01'
+            'ATC_14_54_01'
         );
         await epic('Setting');
         await feature('Billing');
