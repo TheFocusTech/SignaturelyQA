@@ -37,7 +37,7 @@ test.describe('Registration', () => {
             await expect(page).toHaveURL(`${process.env.URL}${URL_END_POINTS.confirmAccountEndPoint}`);
         });
 
-        const confirmationLink = await retrieveUserEmailConfirmationLink(request, newUserData);
+        const confirmationLink = await retrieveUserEmailConfirmationLink(request, newUserData.email);
         await step("Navigate to the confirmation link", async () => {
             await page.goto(confirmationLink);
         });
@@ -79,7 +79,7 @@ test.describe('Registration', () => {
             await expect(page).toHaveURL(`${process.env.URL}${URL_END_POINTS.confirmAccountEndPoint}`);
         });
 
-        const confirmationLink = await retrieveUserEmailConfirmationLink(request, newUserData);
+        const confirmationLink = await retrieveUserEmailConfirmationLink(request, newUserData.email);
         await step("Navigate to the confirmation link", async () => {
             await page.goto(confirmationLink);
         });
