@@ -3,6 +3,7 @@ import TableComponent from "../../components/tableComponent";
 import SideMenuDocumentsComponent from "../../components/sideMenuDocumentsComponent";
 import ToastComponent from "../../components/toastComponent";
 
+
 export default class NewDocumentsPage {
     constructor(page) {
         this.page = page;
