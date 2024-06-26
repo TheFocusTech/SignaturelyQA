@@ -4,6 +4,7 @@ import SideMenuDocumentsComponent from "../../components/sideMenuDocumentsCompon
 import ToastComponent from "../../components/toastComponent";
 import { step } from "allure-js-commons";
 
+
 export default class NewDocumentsPage {
     constructor(page) {
         this.page = page;
