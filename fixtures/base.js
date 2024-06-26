@@ -225,7 +225,7 @@ export const test = base.extend({
   
     deleteMyAccountModal: async ({ page }, use) => {
         await use(new DeleteMyAccountModal (page));
-    }
+    },
 
     sendReminderDocumentModal: async ({ page }, use) => {
         await use(new SendReminderDocumentModal(page));
