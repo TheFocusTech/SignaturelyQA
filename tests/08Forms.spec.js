@@ -8,7 +8,8 @@ test.describe('Sign Document', () => {
 
   test('TC_08_32_01 | Verify that user can create form', async ({ createBusinessUserAndLogin, signPage,
     prepareForSignatureModal, createFormPage, formsPage, successModal }) => {
-    test.setTimeout(120 * 1000);
+
+        test.setTimeout(120 * 1000);
         await signPage.sideMenu.clickForms();
 
         await formsPage.clickCreateFormBtn();
@@ -54,9 +55,10 @@ test.describe('Sign Document', () => {
         await epic("Forms");
         await feature("Sign Document");
 
-    test.setTimeout(120 * 1000);
+        test.setTimeout(120 * 1000);
         await createForm(signPage, prepareForSignatureModal, createFormPage, formsPage, successModal);
 
+        await signPage.sideMenu.clickForms();
         await formsPage.table.clickOptionsBtn(0);
         await formsPage.table.clickDuplicateBtn();
         await successModal.clickOkBtn();
