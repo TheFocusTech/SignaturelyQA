@@ -84,7 +84,7 @@ test.describe('Forms', () => {
         await formsPage.table.clickDuplicateBtn();
         await successModal.clickOkBtn();
 
-        await expect(await formsPage.toast.toastBody).toHaveText(TOAST_MESSAGE.duplicated);
+        await expect(await formsPage.toast.toastBody.nth(0)).toHaveText(TOAST_MESSAGE.duplicated);
 
         await expect(await formsPage.table.formsList).toHaveCount(2);
     });
