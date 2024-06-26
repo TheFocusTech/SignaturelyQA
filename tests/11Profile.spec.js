@@ -1,7 +1,7 @@
 import { expect } from "@playwright/test";
 import { test } from "../fixtures/base.js";
 import { generateRandomPassword, generateNewUserEmail, retrieveUserEmailConfirmationLink } from "../helpers/utils.js";
-import { TOAST_MESSAGE, URL_END_POINTS } from "../testData.js";
+import {SELECTORS, TOAST_MESSAGE, URL_END_POINTS} from "../testData.js";
 import { description, tag, severity, Severity, link, epic, step } from "allure-js-commons";
 
 test.describe('Profile', () => {
@@ -72,7 +72,7 @@ test.describe('Profile', () => {
             await expect(settingsProfilePage.toast.toastBody).toHaveText(TOAST_MESSAGE.checkYourEmail);
         });
 
-        const confirmationLink = await retrieveUserEmailConfirmationLink(request, newEmail);
+        const confirmationLink = await retrieveUserEmailConfirmationLink(request, newEmail, SELECTORS.link);
         await step("Navigate to the confirmation link", async () => {
             await page.goto(confirmationLink);
             await page.waitForURL(`${process.env.URL}${URL_END_POINTS.signEndPoint}`);
