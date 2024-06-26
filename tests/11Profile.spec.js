@@ -12,7 +12,7 @@ test.describe('Profile', () => {
         signPage,
         settingsCompanyPage,
         settingsProfilePage,
-        loginPage
+        loginPage,
     }) => {
         await description('Objective: To verify that the User can change a password and login with a new password');
         await severity(Severity.CRITICAL);
@@ -43,9 +43,9 @@ test.describe('Profile', () => {
         
         await step(`Verify that the User is logged in with a new password and is on the homepage ${URL_END_POINTS.signEndPoint} `, async () => {
             await expect(signPage.page).toHaveURL(process.env.URL + URL_END_POINTS.signEndPoint);
-        });
-
     });
+    
+ });
 
     test('TC_11_47_01 | Verify that user can delete account', async ({
         createBusinessUserAndLogin, 
@@ -73,9 +73,8 @@ test.describe('Profile', () => {
         await step(`Verify that the User is deleted account and is on the loginpage ${URL_END_POINTS.loginEndPoint} `, async () => {
             await expect(loginPage.page).toHaveURL('process.env.URL + URL_END_POINTS.loginEndPoint');
         })
-            await step(`Verify that a toast message with the text "${TOAST_MESSAGE.deleteAccount}" popped up `, async () => {
-                await expect(settingsProfilePage.toast.toastBody).toHaveText(TOAST_MESSAGE.deleteAccount);
-            })
+        await step(`Verify that a toast message with the text "${TOAST_MESSAGE.deleteAccount}" popped up `, async () => {
+            await expect(settingsProfilePage.toast.toastBody).toHaveText(TOAST_MESSAGE.deleteAccount);
         })
-    })
-        
+    });
+});
