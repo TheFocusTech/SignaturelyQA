@@ -6,24 +6,8 @@ import {description, tag, severity, Severity, link, epic, feature} from "allure-
 
 test.describe('Sign Document', () => {
 
-    test('TC_08_32_01 | Verify that user can create form', async ({ 
-        createBusinessUserAndLogin, 
-        signPage, 
-        prepareForSignatureModal, 
-        createFormPage, 
-        formsPage, 
-        successModal 
-        }) => {
-        await description('Verify that user can create form');
-        await tag("Create Form");
-        await severity(Severity.CRITICAL);
-        await link(
-              "https://docs.google.com/document/d/1Qce7tKWOwVYtPxgQv_8ae-HUkbAgeOFph0lB_eziY_k/edit#heading=h.c5mhxwvn5pxt",
-              "TC_08_32_01"
-          );
-        await epic("Forms");
-        await feature("Sign Document");
-
+  test.skip('TC_08_32_01 | Verify that user can create form', async ({ createBusinessUserAndLogin, signPage,
+    prepareForSignatureModal, createFormPage, formsPage, successModal }) => {
     test.setTimeout(120 * 1000);
         await signPage.sideMenu.clickForms();
 

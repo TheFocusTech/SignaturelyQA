@@ -21,7 +21,7 @@ import DowngradeToPersonalPlanModal from "../new_pom/modalWindows/downgradeToPer
 import NewSettingsAPIPage from "../new_pom/pages/settings/settingsAPIPage";
 import NewCreateAPIKeyModal from "../new_pom/modalWindows/createAPIKeyModal.js";
 import NewTemplatesPage from "../new_pom/pages/templates/templatesPage.js";
-import SignUpPersonalPage from "../new_pom/pages/signUpPersonalPage";
+import SignUpPersonalPage from "../new_pom/pages/signUp/signUpPersonalPage";
 import ConfirmCodeModal from "../new_pom/modalWindows/confirmCodeModal";
 import ChooseSignatureOrInitialModal from "../new_pom/modalWindows/chooseSignatureOrInitialModal";
 import CreateOrEditSignatureOnSettingModal from "../new_pom/modalWindows/createOrEditSignatureOnSettingModal";
