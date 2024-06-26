@@ -24,8 +24,10 @@ export default class SideMenuComponent {
     }
 
     async clickTemplates() {
+        await step('Click the "Templates" item on the left SideMenu', async () => {
         await this.templates.click();
-    }
+    });
+}
 
     async clickSettings() {
         await step('Click the Settings on the Side Menu', async () => {
