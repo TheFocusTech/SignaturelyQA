@@ -1,3 +1,4 @@
+import { test } from "../../fixtures/base";
 import { step } from "allure-js-commons";
 
 export default class TableComponent {
