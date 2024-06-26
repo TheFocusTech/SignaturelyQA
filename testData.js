@@ -110,6 +110,11 @@ export const EMAIL_SUBJECTS = {
     reminderToSign: "Reminder, Please sign",
     signatureRequest: "requested your signature",
     emailConfirmation: 'Signaturely Email Confirmation',
+    sentToView: 'Sent you a document to view',
+}
+export const SELECTORS = {
+    link: 'span',
+    message: 'td p:has(a)',
 }
 
 export const SIGNER_ME = 'Me (Now)';

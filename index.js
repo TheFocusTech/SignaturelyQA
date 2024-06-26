@@ -69,19 +69,20 @@ async function authorize() {
  * Retrieves the confirmation link from an email using the Gmail API.
  * @param {object} auth The authentication object for the Gmail API.
  * @param {string} sender The email address of the sender.
+ * @param {string} subject The subject of the email to search for.
  * @returns {Promise<string|null>} A Promise that resolves with the confirmation link if found, otherwise resolves with null.
  */
-async function getConfirmationLinkFromEmail(auth, sender) {
+async function getLinkFromEmail(auth, sender, subject) {
     try {
         const gmail = google.gmail({ version: 'v1', auth })
 
         console.log('Waiting for email to arrive...');
-        await delay(15000);
+        await delay(10000);
         console.log(`Fetching emails sent to ...${sender.slice(12)}`);
 
         const res = await gmail.users.messages.list({
             userId: 'me',
-            q: `to:${sender} subject:Signaturely Email Confirmation`,
+            q: `to:${sender} subject:(${subject})`,
             maxResults: 3,
         });
 
@@ -177,22 +178,23 @@ async function getConfirmCodeFromEmail(auth, sender) {
  * Checks if an email message is received from a specific sender with a given subject.
  *
  * @param {object} auth - The OAuth2 client used for authentication.
- * @param {string} senderName - The name of the sender.
- * @param {string} receiverEmail - The email address of the receiver.
+ * @param {string} fromName - The name of the sender.
+ * @param {string} toEmail - The email address of the receiver.
  * @param {string} subject - The subject of the email to search for.
+ * @param {string} messageCss - The CSS selector used to locate specific text within the email.
  * @returns {Promise<string|null>} The extracted text from the email, or null if not found.
  */
-async function checkEmailMessageReceived(auth, senderName, receiverEmail, subject) {
+async function getMessageTextFromEmail(auth, fromName, toEmail, subject, messageCss) {
     try {
         const gmail = google.gmail({version: 'v1', auth})
 
         console.log('Waiting for email to arrive...');
         await delay(10000);
-        console.log(`Fetching emails sent from ...${senderName}`);
+        console.log(`Fetching emails sent from ...${fromName}`);
 
         const res = await gmail.users.messages.list({
             userId: 'me',
-            q: `from:${senderName} to:${receiverEmail} subject:(${subject})`
+            q: `from:${fromName} to:${toEmail} subject:(${subject})`
         });
 
         const messages = res.data.messages;
@@ -215,14 +217,16 @@ async function checkEmailMessageReceived(auth, senderName, receiverEmail, subjec
         const mailBody = Buffer.from(body, "base64").toString();
         const dom = new JSDOM(mailBody);
         const document = dom.window.document;
-        const spanElement = document.querySelector('span');
-        if (spanElement) {
-            let text = spanElement.textContent;
-            text = text.replace(/\s+/g, ' ').trim();
-            console.log(`Extracted text: ${text.slice(0, text.indexOf('(')) + text.slice(text.indexOf(')') + 1).trim()}`);
-            return text;
+
+        const domElement = document.querySelector(messageCss);
+        if (domElement) {
+            let extractedText = domElement.textContent;
+            extractedText = extractedText.replace(/\s+/g, ' ').trim();
+            console.log(`Extracted text: ${extractedText.slice(0, extractedText.indexOf('(')) + extractedText.slice(extractedText.indexOf(')') + 1).trim()}`);
+
+            return extractedText;
         } else {
-            console.warn('Span element not found.');
+            console.warn('Desired element not found in the email body.');
         }
     } catch (error) {
         console.error('Error occurred while extracting username:', error);
@@ -230,8 +234,8 @@ async function checkEmailMessageReceived(auth, senderName, receiverEmail, subjec
 }
 
 module.exports = {
-    checkEmailMessageReceived,
+    getMessageTextFromEmail,
     getConfirmCodeFromEmail,
-    getConfirmationLinkFromEmail,
+    getLinkFromEmail,
     authorize
 };
