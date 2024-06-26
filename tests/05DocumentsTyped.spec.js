@@ -122,24 +122,15 @@ test.describe('DocumentsType', () => {
         documentsAwaitingPage, 
         sendReminderDocumentModal}) => {
         test.setTimeout(250 * 1000);
+
+        await createDocumentAwaiting(
+              signPage, 
+              prepareForSignatureModal,
+              documentsPage, 
+              successModal, 
+              finalStepPage);
   
-        await signPage.uploadFileTab.fileUploader.uploadFile(UPLOAD_FILE_PATH.jpgDocument);
-        await signPage.uploadFileTab.clickPrepareDocumentBtn();
-  
-        await prepareForSignatureModal.clickSendForSignatureRadioBtn();
-        await prepareForSignatureModal.clickAddSignerBtn();
-        await prepareForSignatureModal.fillSignerNameField(SIGNERS_DATA.signerName1, 0)
-        await prepareForSignatureModal.fillSignerEmailField(SIGNERS_DATA.signerEmail1, 0);
-        await prepareForSignatureModal.clickContinueBtn();
-        await prepareForSignatureModal.clickGotItBtn();
-        await prepareForSignatureModal.clickSignFieldsItem();
-        await prepareForSignatureModal.doCanvasClicks();
-        await prepareForSignatureModal.clickSaveBtn();
-        
-        await finalStepPage.clickSendForSignatureBtn();
-        await finalStepPage.toast.waitForToastCompleted();
-        await successModal.clickBackToDocumentsBtn();
-        
+        await signPage.sideMenu.clickDocuments();
         await documentsPage.sideMenuDocuments.clickAwaitingSignature();
         await documentsAwaitingPage.table.clickOptionsBtn(0);
         await documentsAwaitingPage.table.clickSendReminderBtn();

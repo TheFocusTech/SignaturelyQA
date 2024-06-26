@@ -1,7 +1,7 @@
 import TableComponent from "../../components/tableComponent";
 import ToastComponent from "../../components/toastComponent";
 
-export default class NewDocumentsAwaitingPage {
+export default class DocumentsAwaitingPage {
 
   constructor(page) {
       this.page = page;
