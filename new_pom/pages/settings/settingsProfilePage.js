@@ -13,6 +13,8 @@ export default class SettingsProfilePage {
         this.repeatNewPasswordInputField = this.page.getByPlaceholder('Repeat Password');
         this.saveButton = this.page.getByRole('button', { name: 'Save' });
         this.deleteMyAccountBtn = this.page.getByText('Delete my Account', {exact: true});
+        this.emailAddressInputField = this.page.getByPlaceholder('username@gmail.com');
+        this.updateBtn = this.page.getByRole('button', {name: "Update Email"});
     }
 
     async fillNewPasswordInputField(password) {
@@ -32,9 +34,26 @@ export default class SettingsProfilePage {
             await this.saveButton.click();
         });
     }
+
     async clickDeleteMyAccountBtn() {
         await step('Click "Delete My Account" button', async () => {
             await this.deleteMyAccountBtn.click();
+
+    async deleteCurrentEmailFromEmailAddressInputField() {
+        await step('Delete email in the "Email Address" field', async () => {
+            await this.emailAddressInputField.clear();
+        });
+    }
+
+    async fillNewEmailIntoEmailAddressInputField(email) {
+        await step('Fill "Email Address" field with new email', async () => {
+            await this.emailAddressInputField.fill(email);
+        });
+    }
+
+    async clickUpdateBtn() {
+        await step('Click "Update" button', async () => {
+            await this.updateBtn.click();
         });
     }
 }
