@@ -8,7 +8,7 @@ import SignPage from "../page_objects/signPage";
 
 test.describe('Create API key', () => {
 
-    test('TC_12_48_01_01 | Verify User can copy API key created by the "Create API" button on the right.', async ({ page, loginBusinessUser }) => {
+    test.only('TC_12_48_01_01 | Verify User can copy API key created by the "Create API" button on the right.', async ({ page, loginBusinessUser }) => {
         const signPage = new SignPage(page);
 
         const settingsCompanyPage = await signPage.clickSettingsSidebarLinkAndGoSettingsCompanyPage();
@@ -20,7 +20,7 @@ test.describe('Create API key', () => {
         await createAPIKeyModal.clickCopyAPIButton();
 
         await settingsAPIPage.locators.getToaster().waitFor({ state: 'visible' });
-        // await expect(settingsAPIPage.locators.getToaster()).toHaveText(TOASTER_MESSAGE.copyApiKey);
+        await expect(settingsAPIPage.locators.getToaster()).toHaveText(TOASTER_MESSAGE.copyApiKey);
 
         let clipboardApiKeyValue = await createAPIKeyModal.getAPIKeyValueText();
         await createAPIKeyModal.clickCloseDialogButton();
