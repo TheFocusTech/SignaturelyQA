@@ -117,8 +117,10 @@ export default class PrepareForSignatureModal {
     }
 
     async clickBackToTemplatesBtn() {
+        await step('In the modal window, click on the "Back to templates" button.', async () => {
         await this.backToTempatesBtn.click();
-    }
+    });
+}
 
     async clickCustomSigningOrderCheckbox() {
         await this.customSigningOrderCheckbox.click();
@@ -147,8 +149,10 @@ export default class PrepareForSignatureModal {
     }
 
     async clickCreateBtn() {
+        await step('Click on the "Create" button.', async () => {
         await this.createBtn.click();
-    }
+    });
+}
 
     async clickInitialFieldsItem() {
         await this.initialFieldsItem.click();

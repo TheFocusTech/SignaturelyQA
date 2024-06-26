@@ -5,7 +5,7 @@ import {description, tag, severity, Severity, link, epic, step} from "allure-js-
 
 test.describe('Authorization', () => {
 
-    test('TC_02_05_01 | Verify successful login and the user directed to the sign page', async ({
+    test.only('TC_02_05_01 | Verify successful login and the user directed to the sign page', async ({
                                                                                                     page,
                                                                                                     loginPage,
                                                                                                     signPage
