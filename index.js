@@ -87,7 +87,7 @@ async function getConfirmationLinkFromEmail(auth, sender) {
 
         const messages = res.data.messages;
         if (!messages || messages.length === 0) {
-            console.log('No messages found.');
+            console.warn('No messages found.');
         }
         console.log(`Number of messages found: ${messages.length}`);
         console.log('Email received. Getting email body...');
@@ -101,14 +101,14 @@ async function getConfirmationLinkFromEmail(auth, sender) {
         const message = res1.data;
         const body = message.payload.body.data;
         if (!body) {
-            console.log('Message body not found.');
+            console.warn('Message body not found.');
         }
 
         const mailBody = Buffer.from(body, "base64").toString();
         const regex = /https:\/\/staging\.d2twwklgqmrfet\.amplifyapp\.com\/[^"]+/g;
         const links = mailBody.match(regex);
         if (!links || links.length === 0) {
-            console.log('No confirmation link found in the email body.');
+            console.warn('No confirmation link found in the email body.');
         }
         console.log(`Confirmation link retrieved: ${links[0].slice(0,40)}...`);
 
@@ -140,7 +140,7 @@ async function getConfirmCodeFromEmail(auth, sender) {
 
         const messages = res.data.messages;
         if (!messages || messages.length === 0) {
-            console.log('No messages found.');
+            console.warn('No messages found.');
         }
 
         const newestMessage = messages[0];
@@ -152,7 +152,7 @@ async function getConfirmCodeFromEmail(auth, sender) {
         const message = res1.data;
         const body = message.payload.body.data;
         if (!body) {
-            console.log('Message body not found.');
+            console.warn('Message body not found.');
         }
 
         const mailBody = Buffer.from(body, "base64").toString();
@@ -162,7 +162,7 @@ async function getConfirmCodeFromEmail(auth, sender) {
         if (confirmCode) {
             console.log('Confirmation Code:', confirmCode[1]);
         } else {
-            console.log('Confirmation Code not found');
+            console.warn('Confirmation Code not found');
         }
 
         return confirmCode[1];
@@ -197,7 +197,7 @@ async function checkEmailMessageReceived(auth, senderName, receiverEmail, subjec
 
         const messages = res.data.messages;
         if (!messages || messages.length === 0) {
-            console.log('No messages found.');
+            console.warn('No messages found.');
         }
 
         const newestMessage = messages[0];
@@ -209,7 +209,7 @@ async function checkEmailMessageReceived(auth, senderName, receiverEmail, subjec
         const message = res1.data;
         const body = message.payload.body.data;
         if (!body) {
-            console.log('Message body not found.');
+            console.warn('Message body not found.');
         }
 
         const mailBody = Buffer.from(body, "base64").toString();
@@ -222,7 +222,7 @@ async function checkEmailMessageReceived(auth, senderName, receiverEmail, subjec
             console.log(`Extracted text: ${text.slice(0, text.indexOf('(')) + text.slice(text.indexOf(')') + 1).trim()}`);
             return text;
         } else {
-            console.log('Span element not found.');
+            console.warn('Span element not found.');
         }
     } catch (error) {
         console.error('Error occurred while extracting username:', error);

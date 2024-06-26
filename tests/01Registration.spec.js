@@ -2,12 +2,11 @@ import { expect } from "@playwright/test";
 import { test } from "../fixtures/base"
 import {
     retrieveUserEmailConfirmationLink,
-    createNewUserThroughApi,
     retrieveUserEmailConfirmCode,
 } from "../helpers/utils";
 import {
     URL_END_POINTS, BUSINESS_MONTHLY_PLAN, CARD_DETAILS, FREE_PLAN_DESCRIPTION, SUBSCRIPTIONS, SUBSCRIBE_TO_PERSONAL_PLAN,
-    PLEASE_ENTER_CONFIRMATION_CODE, PERSONAL_PLAN_DESCRIPTION,
+    PLEASE_ENTER_CONFIRMATION_CODE, PERSONAL_PLAN_DESCRIPTION, NO_ATTACHED_CARD,
 } from "../testData";
 import { generateNewUserData } from "../helpers/utils";
 import {description, tag, severity, Severity, link, epic, step} from "allure-js-commons";
@@ -18,9 +17,11 @@ test.describe('Registration', () => {
         await description('To verify that a Trial user can successfully register.');
         await tag('Trial user');
         await severity(Severity.BLOCKER);
+        await link("https://app.qase.io/case/SIGN-1",
+                "Qase: SIGN-1");
         await link(
             "https://docs.google.com/document/d/1Qce7tKWOwVYtPxgQv_8ae-HUkbAgeOFph0lB_eziY_k/edit#heading=h.3auuqi4u4l4v",
-            "TC_01_01_01"
+            "ATC_01_01_01"
         );
         await epic('Registration');
 
@@ -58,14 +59,16 @@ test.describe('Registration', () => {
         await description('To verify that a Free user can successfully register.');
         await tag('Free user');
         await severity(Severity.BLOCKER);
+        await link("https://app.qase.io/case/SIGN-2",
+                "Qase: SIGN-2");
         await link(
-            "https://docs.google.com/spreadsheets/d/1v5LuJ23jSg5qcWZPqiSlBuEJnvvdsJ2HrVxC6Ag2vpA/edit?gid=598757452#gid=598757452&range=B7",
-            "TC_01_02_01"
+            "https://docs.google.com/document/d/1Qce7tKWOwVYtPxgQv_8ae-HUkbAgeOFph0lB_eziY_k/edit#heading=h.18wd1qo653v",
+            "ATC_01_02_01"
         );
         await epic('Registration');
 
         const newUserData = await generateNewUserData();
-        await step('Navigate to the Trial user registration page', async () => {
+        await step('Navigate to the Free user registration page', async () => {
             await page.goto(URL_END_POINTS.signUpFree);
         });
         await signUpFreePage.yourInformation.fillNameInputField(newUserData.name);
@@ -83,35 +86,60 @@ test.describe('Registration', () => {
         await page.waitForURL(`${process.env.URL}${URL_END_POINTS.signEndPoint}`);
         await signPage.sideMenu.clickSettings();
         await settingsCompanyPage.horizontalMenu.clickBilling();
+        await step('Verify that no card attached', async () => {
+            await expect(settingsBillingPage.creditCardData).toHaveText(NO_ATTACHED_CARD);
+        });
         await step('Verify that the billing plan description is Free', async () => {
             await expect(settingsBillingPage.billingPlanDescription).toHaveText(FREE_PLAN_DESCRIPTION);
         });
     })
 
-    test.describe('Personal User registration', () => {
-        for (const subscription of SUBSCRIPTIONS) {
-            test(`TC_01_03_01 | Verify successful Personal User registration with ${subscription} subscription`, async ({request, page, signUpPersonalPage, confirmCodeModal, signPage, settingsCompanyPage, settingsBillingPage }) => {
-                const newUserData = await createNewUserThroughApi(request);
+    SUBSCRIPTIONS.forEach((subscription) => {
+        test(`TC_01_03_01 | Verify successful registration of Personal user with ${subscription} subscription`, async ({ request, page, signUpPersonalPage, confirmCodeModal, signPage, settingsCompanyPage, settingsBillingPage }) => {
+            await description('To verify that a Personal user can successfully register.');
+            await tag('Personal user');
+            await severity(Severity.BLOCKER);
+            await link("https://app.qase.io/case/SIGN-3",
+                    "Qase: SIGN-3");
+            await link(
+                "https://docs.google.com/document/d/1Qce7tKWOwVYtPxgQv_8ae-HUkbAgeOFph0lB_eziY_k/edit#heading=h.ygd7jqo6djdj",
+                "ATC_01_03_01"
+            );
+            await epic('Registration');
+
+            const newUserData = await generateNewUserData();
+            await step('Navigate to the Personal user registration page', async () => {
                 await page.goto(URL_END_POINTS.signUpPersonalEndPoint);
+            });
+            await step('Verify the Personal user registration page title', async () => {
                 await expect(signUpPersonalPage.personalPageLabelTitle).toHaveText(SUBSCRIBE_TO_PERSONAL_PLAN);
+            });
 
-                await signUpPersonalPage.fillNameInputField(newUserData.name);
-                await signUpPersonalPage.fillEmailInputField(newUserData.email);
-                await signUpPersonalPage.fillPasswordInputField(newUserData.password);
-                await signUpPersonalPage.clickSubscriptionButton(subscription);
-                await signUpPersonalPage.cardDetails.fillData(CARD_DETAILS.VISA);
-                await signUpPersonalPage.clickPurchaseNowButton();
+            await signUpPersonalPage.yourInformation.fillNameInputField(newUserData.name);
+            await signUpPersonalPage.yourInformation.fillEmailInputField(newUserData.email);
+            await signUpPersonalPage.yourInformation.fillPasswordInputField(newUserData.password);
+            await signUpPersonalPage.clickSubscriptionButton(subscription);
+            await signUpPersonalPage.cardDetails.fillData(CARD_DETAILS.VISA);
+            await signUpPersonalPage.clickPurchaseNowButton();
+            await step('Verify the Confirm modal title', async () => {
                 await expect(confirmCodeModal.confirmCodeModalTitle).toHaveText(PLEASE_ENTER_CONFIRMATION_CODE);
+            });
 
-                const confirmCode = await retrieveUserEmailConfirmCode(request, newUserData.email);
-                await confirmCodeModal.fillConfirmCodeInputField(confirmCode);
-                await confirmCodeModal.clickSendButton();
+            const confirmCode = await retrieveUserEmailConfirmCode(request, newUserData.email);
+            await confirmCodeModal.fillConfirmCodeInputField(confirmCode);
+            await confirmCodeModal.clickSendButton();
+            await step('Verify that the user is on the Home page', async () => {
+                await expect(page).toHaveURL(`${process.env.URL}${URL_END_POINTS.signEndPoint}`);
+            });
+            await step('Verify that the users name appears in the header of the page', async () => {
                 await expect(signPage.header.userName).toHaveText(newUserData.name);
+            });
 
-                await signPage.sideMenu.clickSettings();
-                await settingsCompanyPage.horizontalMenu.clickBilling();
+            await signPage.sideMenu.clickSettings();
+            await settingsCompanyPage.horizontalMenu.clickBilling();
+            await step(`Verify that the billing plan description is Business Personal ${subscription} Plan`, async () => {
                 await expect(settingsBillingPage.billingPlanDescription).toHaveText(PERSONAL_PLAN_DESCRIPTION(subscription));
-            })
-        }
+            });
+        })
     })
 })

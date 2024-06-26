@@ -15,10 +15,10 @@ test.describe('Profile', () => {
     }) => {
         await description('Objective: To verify that the User can change a password and login with a new password');
         await severity(Severity.CRITICAL);
-        await link(
-            "https://docs.google.com/document/d/1Qce7tKWOwVYtPxgQv_8ae-HUkbAgeOFph0lB_eziY_k/edit#heading=h.ei34zdu9ql4d",
-            "TC_11_45_01"
-        );
+        await link("https://app.qase.io/case/SIGN-45",
+            "Qase: SIGN-45");
+        await link("https://docs.google.com/document/d/1Qce7tKWOwVYtPxgQv_8ae-HUkbAgeOFph0lB_eziY_k/edit#heading=h.ei34zdu9ql4d",
+            "ATC_11_45_01");
         await epic('Profile');
         await tag('Password');
 
@@ -39,7 +39,7 @@ test.describe('Profile', () => {
         await loginPage.fillEmailAddressInput(process.env.NEW_USER_EMAIL);
         await loginPage.fillPasswordInput(newPassword);
         await loginPage.clickLogin();
-
+        
         await step(`Verify that the User is logged in with a new password and is on the homepage ${URL_END_POINTS.signEndPoint} `, async () => {
             await expect(signPage.page).toHaveURL(process.env.URL + URL_END_POINTS.signEndPoint);
         });

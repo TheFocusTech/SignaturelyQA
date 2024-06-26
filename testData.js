@@ -128,3 +128,4 @@ export const UPLOAD_FILE_PATH = {
 export const UPLOAD_FILE_NAME = {
     jpgDocument: 'picture.jpg',
 };
+export const NO_ATTACHED_CARD = 'Current Card:No attached card';
