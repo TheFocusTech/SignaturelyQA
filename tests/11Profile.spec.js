@@ -16,10 +16,10 @@ test.describe('Profile', () => {
     }) => {
         await description('Objective: To verify that the User can change a password and login with a new password');
         await severity(Severity.CRITICAL);
-        await link(
-            "https://docs.google.com/document/d/1Qce7tKWOwVYtPxgQv_8ae-HUkbAgeOFph0lB_eziY_k/edit#heading=h.ei34zdu9ql4d",
-            "TC_11_45_01"
-        );
+        await link("https://app.qase.io/case/SIGN-45", 
+            "Qase: SIGN-45");
+        await link("https://docs.google.com/document/d/1Qce7tKWOwVYtPxgQv_8ae-HUkbAgeOFph0lB_eziY_k/edit#heading=h.ei34zdu9ql4d", 
+            "ATC_11_45_01");
         await epic('Profile');
         await tag('Password');
 
