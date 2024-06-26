@@ -1,6 +1,7 @@
 import { expect } from "@playwright/test";
 import { test, createBusinessUserAndLogin, signPage } from "../fixtures/base.js";
 import { CREATE_TEMPLATE, TEMPLATES_STATUS } from "../testData.js";
+import {description, tags, severity, Severity, link, epic, feature, step} from "allure-js-commons";
 
 test.describe('Templates', () => {
 
