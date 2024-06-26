@@ -39,13 +39,13 @@ test.describe('Profile', () => {
         await loginPage.fillEmailAddressInput(process.env.NEW_USER_EMAIL);
         await loginPage.fillPasswordInput(newPassword);
         await loginPage.clickLogin();
-        
+
         await step(`Verify that the User is logged in with a new password and is on the homepage ${URL_END_POINTS.signEndPoint} `, async () => {
             await expect(signPage.page).toHaveURL(process.env.URL + URL_END_POINTS.signEndPoint);
         });
     })
 
-    test('TC_11_44_01 | Verify User can change email', async({createBusinessUserAndLogin, request, page, signPage, settingsCompanyPage, settingsProfilePage}) => {
+    test('TC_11_44_01 | Verify User can change email', async ({ createBusinessUserAndLogin, request, page, signPage, settingsCompanyPage, settingsProfilePage }) => {
         await description('Objective: To verify that the User can change a email.');
         await severity(Severity.CRITICAL);
         await link(
@@ -62,7 +62,7 @@ test.describe('Profile', () => {
         const newEmail = await generateNewUserEmail("_new");
         await signPage.sideMenu.clickSettings();
         await settingsCompanyPage.sideMenuSettings.clickProfile();
-        await step("Verify that the email field is filled with the correct user email", async ()=> {
+        await step("Verify that the email field is filled with the correct user email", async () => {
             await expect(settingsProfilePage.emailAddressInputField).toHaveValue(process.env.NEW_USER_EMAIL);
         });
         await settingsProfilePage.deleteCurrentEmailFromEmailAddressInputField();
@@ -83,7 +83,7 @@ test.describe('Profile', () => {
 
         await signPage.sideMenu.clickSettings();
         await settingsCompanyPage.sideMenuSettings.clickProfile();
-        await step("Verify that the email field is filled with the updated user email", async ()=> {
+        await step("Verify that the email field is filled with the updated user email", async () => {
             await expect(settingsProfilePage.emailAddressInputField).toHaveValue(newEmail);
         });
     })
