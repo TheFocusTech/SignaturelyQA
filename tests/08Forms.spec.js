@@ -18,14 +18,13 @@ test.describe('Forms', () => {
         await severity(Severity.CRITICAL);
         await link(
                 'https://app.qase.io/case/SIGN-35',
-                'Qase: SIGN-5'
+                'Qase: SIGN-35'
             );
         await link(
           "https://docs.google.com/document/d/1Qce7tKWOwVYtPxgQv_8ae-HUkbAgeOFph0lB_eziY_k/edit#heading=h.c5mhxwvn5pxt",
-          "TC_08_35_01"
+          "ATC_08_35_01"
       );
         await epic("Forms");
-        await feature("Sign Document");
         
 
         test.setTimeout(120 * 1000);
@@ -69,14 +68,13 @@ test.describe('Forms', () => {
         await severity(Severity.CRITICAL);
         await link(
             'https://app.qase.io/case/SIGN-32',
-            'Qase: SIGN-5'
+            'Qase: SIGN-32'
         );
         await link(
           "https://docs.google.com/document/d/1Qce7tKWOwVYtPxgQv_8ae-HUkbAgeOFph0lB_eziY_k/edit#heading=h.c5mhxwvn5pxt",
-          "TC_08_35_01"
+          "ATC_08_35_01"
       );
         await epic("Forms");
-        await feature("Sign Document");
 
         test.setTimeout(120 * 1000);
         await createForm(signPage, prepareForSignatureModal, createFormPage, formsPage, successModal);
