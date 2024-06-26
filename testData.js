@@ -136,6 +136,6 @@ export const NO_ATTACHED_CARD = 'Current Card:No attached card';
 
 export const EDIT_TEMPLATE_DATA = {
     nameField: 'Rental agreement 2024',
-    optionalMessage: 'USA - For Internal Use Only',
+    optionalMessage: 'For Internal Use Only',
     nameRole: 'Chief Financial Officer',
 };

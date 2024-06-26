@@ -44,12 +44,4 @@ export default class NewCreateTemplatePage {
         await this.fillTemplateBtn.click();
     });
 }
-
-    async deleteUploadedFile() {
-        await step('Delete uploaded file', async () => {
-            await this.deleteUploadedFileBtn.waitFor({ state: 'visible' });
-            await this.deleteUploadedFileBtn.hover();
-            await this.deleteUploadedFileBtn.click({ force: true });
-        })
-    }
 }
