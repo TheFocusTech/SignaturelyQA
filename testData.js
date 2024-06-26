@@ -27,6 +27,7 @@ export const TOAST_MESSAGE = {
     profileUpdated: 'Profile information updated.',
     checkYourEmail: 'Check your new email to confirm it',
     emailConfirmed: 'Email confirmed',
+    sendReminder: 'Reminder(s) has been sent',
 };
 export const API_KEY_NAME = 'Test Api Key';
 export const NO_API_KEY_MESSAGE = 'You don\'t have any API keys yet.';
