@@ -37,6 +37,7 @@ import SignUpTrialPage from "../new_pom/pages/signUp/signUpTrialPage";
 import SignUpFreePage from "../new_pom/pages/signUp/signUpFreePage";
 import DocumentsAwaitingPage from "../new_pom/pages/documents/documentsAwaitingPage.js";
 import SendReminderDocumentModal from "../new_pom/modalWindows/sendReminderDocumentModal.js";
+import CreateTemplatePage from "../new_pom/pages/templates/createTemplatePage.js";
 
 export const test = base.extend({
 
@@ -224,6 +225,10 @@ export const test = base.extend({
 
     sendReminderDocumentModal: async ({ page }, use) => {
         await use(new SendReminderDocumentModal(page));
+    },
+
+    createTemplatePage: async ({ page }, use) => {
+        await use(new CreateTemplatePage(page));
     },
 
 });

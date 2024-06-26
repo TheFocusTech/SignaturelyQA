@@ -4,7 +4,7 @@ import FileUploaderComponent from "../../components/fileUploaderComponent";
 import { step } from "allure-js-commons";
 
 
-export default class NewCreateTemplatePage {
+export default class CreateTemplatePage {
 
     constructor(page) {
         this.page = page;
@@ -21,27 +21,27 @@ export default class NewCreateTemplatePage {
 
     async fillTemplateNameField(name) {
         await step('Fill in the "Template Name" field', async () => {
-        await this.templateNameField.fill(name);
-    });
-}
+            await this.templateNameField.fill(name);
+        });
+    }
 
     async fillOptionalMessageField(message) {
         await step('Fill in the "Optional Message" field', async () => {
-        await this.optionalMessageField.fill(message);
-    });
-}
+            await this.optionalMessageField.fill(message);
+        });
+    }
 
     async fillCreateTemplateRolesField(role) {
         await step('Fill in the "Role" field', async () => {
-        await this.createTemplateRolesField.fill(role);
-    });
-}
+            await this.createTemplateRolesField.fill(role);
+        });
+    }
 
     async clickFillTemplateBtn() {
         await step('Click on the "Fill template" button', async () => {
-        await this.fillTemplateBtn.waitFor();
-        await this.fillTemplateBtn.click();
-    });
-}
+            await this.fillTemplateBtn.waitFor();
+            await this.fillTemplateBtn.click();
+        });
+    }
 
 }

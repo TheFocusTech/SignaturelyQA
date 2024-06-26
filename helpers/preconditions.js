@@ -55,14 +55,14 @@ export const createFolder = async (
     })
 };
 
-export const createTemplate = async (signPage, prepareForSignatureModal, templatePage) => {
+export const createTemplate = async (signPage, prepareForSignatureModal, templatePage, createTemplatePage) => {
     await step('Create Template', async () => {
         await signPage.sideMenu.clickTemplates();
         await templatePage.sideMenuTemplates.clickCreateTemplate();
-        await templatePage.createTemplate.fillTemplateNameField(CREATE_TEMPLATE.nameField);
-        await templatePage.createTemplate.fillCreateTemplateRolesField(CREATE_TEMPLATE.nameRole);
-        await templatePage.createTemplate.fileUploader.uploadFile(UPLOAD_FILE_PATH.jpgDocument);
-        await templatePage.createTemplate.clickFillTemplateBtn();
+        await createTemplatePage.fillTemplateNameField(CREATE_TEMPLATE.nameField);
+        await createTemplatePage.fillCreateTemplateRolesField(CREATE_TEMPLATE.nameRole);
+        await createTemplatePage.fileUploader.uploadFile(UPLOAD_FILE_PATH.jpgDocument);
+        await createTemplatePage.clickFillTemplateBtn();
         await prepareForSignatureModal.clickSignFieldsItem();
         await prepareForSignatureModal.doCanvasClicks();
         await prepareForSignatureModal.clickCreateBtn();
