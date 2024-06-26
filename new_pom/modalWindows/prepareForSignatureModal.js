@@ -35,7 +35,7 @@ export default class PrepareForSignatureModal {
         this.prepareForSigningTitle = this.page.getByRole('heading', { name: 'Prepare for Signing' });
         this.nameFieldItem = this.page.locator('ul.interactModal__fieldBar-fieldList li').filter({ hasText: /^Name$/ }).first();
         this.signFieldItem = this.page.locator('ul.interactModal__fieldBar-fieldList li').nth(1);
-        this.initialFieldsItem = this.fieldsMenu.getByText('Initial');
+        this.initialFieldItem = this.fieldsMenu.getByText('Initial');
         this.dateFieldItem = this.page.locator('ul.interactModal__fieldBar-fieldList li').nth(3);
 
     }
@@ -153,7 +153,7 @@ export default class PrepareForSignatureModal {
     }
 
     async clickInitialFieldsItem() {
-        await this.initialFieldsItem.click();
+        await this.initialFieldItem.click();
     }
 
     async clickDateFieldItem() {
