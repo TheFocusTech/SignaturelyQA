@@ -1,5 +1,4 @@
 import { test as base } from "@playwright/test";
-import SignPage from "../page_objects/signPage";
 import { api_user_sign_up } from '../newUserUtils/apiUtilsForNewUser.js';
 import { databaseConfirmNewUserEmail } from '../newUserUtils/dbUtilsForNewUser.js';
 import { newFreeUserLogin, upgradeFreeUserToBusinessAndLogin } from '../newUserUtils/uiUtilsForNewUser.js';
