@@ -1,0 +1,2 @@
+"Status","Start Time","Stop Time","Duration in ms","Parent Suite","Suite","Sub Suite","Test Class","Test Method","Name","Description"
+"passed","Wed Jun 26 23:13:14 GMT 2024","Wed Jun 26 23:13:18 GMT 2024","3564","chromium","","Authorization","","","TC_02_05_01 | Verify successful login and the user directed to the sign page","Objective: To verify the process of logging a user into their account."
