@@ -50,7 +50,7 @@ test.describe('Templates', () => {
             'ATC_07_31_01'
         );
         await epic('Templates');
-        await tag('User', 'API');
+        await tags('User', 'API');
 
         test.setTimeout(250 * 1000);
 
