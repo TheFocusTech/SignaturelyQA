@@ -42,7 +42,9 @@ export default class TableComponent {
         await this.addToAPIBtn.click();
     }
     async waitForDocumentTitleVisible(name) {
-        await this.documentTitle.filter({ hasText: name }).waitFor({ state: 'visible' })
+        await step(`Wait for the document title to be visible`, async () => {
+            await this.documentTitle.filter({ hasText: name }).waitFor({ state: 'visible' })
+        })
     }
 
     async clickMoveToBtn() {
@@ -65,7 +67,7 @@ export default class TableComponent {
     }
 
     async clickEditBtn() { 
-        await test.step('Click the "Edit" button', async () => {
+        await step('Click the "Edit" button', async () => {
             await this.editBtn.click();
         });
     }

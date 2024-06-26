@@ -102,7 +102,7 @@ test.describe('DocumentsType', () => {
         await moveToFolderModal.selectFolder(FOLDER_NAME);
         await moveToFolderModal.clickMoveToFolderBtn();
         
-        await test.step('Verify the toast message', async () => {
+        await step('Verify the toast message', async () => {
             await expect(await documentsPage.toast.toastBody).toHaveText(TOAST_MESSAGE.fileMovedToFolder);
         });
 

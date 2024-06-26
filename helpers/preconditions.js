@@ -62,7 +62,7 @@ export const createTemplate = async (
     templatePage,
     prepareForSignatureModal
 ) => {
-    await test.step('Create Template', async () => { 
+    await step('Precondition: Create Template', async () => { 
         await signPage.sideMenu.clickTemplates();
         await templatePage.sideMenuTemplates.clickCreateTemplate();
         await templatePage.createTemplate.fillTemplateNameField(CREATE_TEMPLATE.nameField);

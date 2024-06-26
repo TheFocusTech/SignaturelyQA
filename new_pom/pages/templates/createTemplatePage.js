@@ -1,6 +1,7 @@
 import SideMenuComponent from "../../components/sideMenuComponent";
 import SideMenuTemplatesComponent from "../../components/sideMenuTemplatesComponent";
 import FileUploaderComponent from "../../components/fileUploaderComponent";
+import { step } from "allure-js-commons";
 
 export default class NewCreateTemplatePage {
 
@@ -19,26 +20,35 @@ export default class NewCreateTemplatePage {
     }
 
     async fillTemplateNameField(name) {
-        await this.templateNameField.fill(name);
+        await step('Fill the Template Name input field', async () => {
+            await this.templateNameField.fill(name);
+        });
     }
 
     async fillOptionalMessageField(message) {
-        await this.optionalMessageField.fill(message);
+        await step('Fill the Optional Message input field', async () => {
+            await this.optionalMessageField.fill(message);
+        });
     }
 
     async fillCreateTemplateRolesField(role) {
-        await this.createTemplateRolesField.fill(role);
+        await step('Fill the Roles field', async () => {
+            await this.createTemplateRolesField.fill(role);
+        });
     }
 
     async clickFillTemplateBtn() {
+        await step('Click the "Fill template" button', async () => {
         await this.fillTemplateBtn.waitFor();
         await this.fillTemplateBtn.click();
+        })
     }
 
     async deleteUploadedFile() {
-        await this.deleteUploadedFileBtn.waitFor({ state: 'visible' });
-        await this.deleteUploadedFileBtn.hover();
-        await this.deleteUploadedFileBtn.click({ force: true });
+        await step('Delete uploaded file', async () => {
+            await this.deleteUploadedFileBtn.waitFor({ state: 'visible' });
+            await this.deleteUploadedFileBtn.hover();
+            await this.deleteUploadedFileBtn.click({ force: true });
+        })
     }
-
 }

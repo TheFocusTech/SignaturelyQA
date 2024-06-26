@@ -20,8 +20,10 @@ export default class FileUploaderComponent {
     }
 
     async deleteUploadedFile() {
-        await this.deleteUploadedFileBtn.waitFor({ state: 'visible' });
-        await this.deleteUploadedFileBtn.hover();
-        await this.deleteUploadedFileBtn.click({ force: true });
+        await step('Delete uploaded file', async () => {
+            await this.deleteUploadedFileBtn.waitFor({ state: 'visible' });
+            await this.deleteUploadedFileBtn.hover();
+            await this.deleteUploadedFileBtn.click({ force: true });
+        })
     }
 }

@@ -26,7 +26,7 @@ export const TOAST_MESSAGE = {
     fileMovedToFolder: 'Files successfully moved!',
     profileUpdated: 'Profile information updated.',
     checkYourEmail: 'Check your new email to confirm it',
-    emailConfirmed: 'Email confirmed',,
+    emailConfirmed: 'Email confirmed',
     templateSaved: 'Template saved',
 };
 export const API_KEY_NAME = 'Test Api Key';

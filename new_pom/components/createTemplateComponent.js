@@ -11,19 +11,27 @@ export default class CreateTemplateComponent {
     }
 
     async fillTemplateNameField(name) {
-        await this.templateNameField.fill(name);
+        await step('Fill the Template Name input field', async () => {
+            await this.templateNameField.fill(name);
+        });
     }
 
     async fillOptionalMessageField(message) {
-        await this.optionalMessageField.fill(message);
+        await step('Fill the Optional Message input field', async () => {
+            await this.optionalMessageField.fill(message);
+        });
     }
 
     async fillCreateTemplateRolesField(role) {
-        await this.createTemplateRolesField.fill(role);
+        await step('Fill the Roles field', async () => {
+            await this.createTemplateRolesField.fill(role);
+        });
     }
 
     async clickFillTemplateBtn() {
-        await this.fillTemplateBtn.waitFor();
-        await this.fillTemplateBtn.click();
+        await step('Click the "Fill template" button', async () => {
+            await this.fillTemplateBtn.waitFor();
+            await this.fillTemplateBtn.click();
+        })
     }
 }

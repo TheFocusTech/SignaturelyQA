@@ -6,7 +6,6 @@ export default class ToastComponent {
 
         this.toastFirstCloseBtn = this.page.locator('.Toastify [data-src="/static/media/close-icon.9052da34.svg"]').first();
         this.toastBody = this.page.locator('.Toastify__toast-body');
-
     }
 
     async clickToastFirstCloseBtn() {
@@ -25,9 +24,5 @@ export default class ToastComponent {
             await this.toastBody.getByText(text).waitFor({ state: "visible" });
             await this.toastBody.getByText(text).waitFor({ state: "hidden" });
         });
-    }
-
-    async getToastByText(text) {
-        await this.toastBody.filter({ hasText: text })
     }
 }

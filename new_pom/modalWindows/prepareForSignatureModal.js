@@ -117,7 +117,9 @@ export default class PrepareForSignatureModal {
     }
 
     async clickBackToTemplatesBtn() {
-        await this.backToTempatesBtn.click();
+        await step('Click the "Back to Templates" button', async () => {
+            await this.backToTempatesBtn.click();
+        })
     }
 
     async clickCustomSigningOrderCheckbox() {
@@ -137,9 +139,10 @@ export default class PrepareForSignatureModal {
         return actualText
     }
 
-
     async clickSignFieldItem() {
+        await step('Click on the "Sign" item in "Fields" menu', async () => {
         await this.signFieldItem.click();
+        })
     }
 
     async clickNameFieldItem() {
@@ -147,7 +150,9 @@ export default class PrepareForSignatureModal {
     }
 
     async clickCreateBtn() {
-        await this.createBtn.click();
+        await step('Click the "Create" button', async () => {
+            await this.createBtn.click();
+        })
     }
 
     async clickInitialFieldsItem() {

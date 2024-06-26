@@ -1,8 +1,8 @@
 import { expect } from "@playwright/test";
-import { test, createBusinessUserAndLogin, signPage } from "../fixtures/base.js";
-import { CREATE_TEMPLATE, TEMPLATES_STATUS, EDIT_TEMPLATE_DATA, UPLOAD_FILE_PATH } from "../testData.js";
+import { test } from "../fixtures/base.js";
+import { CREATE_TEMPLATE, TEMPLATES_STATUS, EDIT_TEMPLATE_DATA, UPLOAD_FILE_PATH, TOAST_MESSAGE } from "../testData.js";
 import { createTemplate } from "../helpers/preconditions.js";
-import { description, tags, severity, Severity, link, epic, feature, step } from "allure-js-commons";
+import { description, tags, severity, Severity, link, epic, step } from "allure-js-commons";
 
 test.describe('Templates', () => {
 
@@ -52,20 +52,18 @@ test.describe('Templates', () => {
         prepareForSignatureModal }) => { 
         test.slow();
 
-        // await description('Objective: To verify the functionality of attaching a payment card ' +
-        //     'through the settings-billing section and deleting a payment card through the Billing Portal.')
-        // await severity(Severity.CRITICAL);
-        // await link(
-        //     'https://app.qase.io/case/SIGN-54',
-        //     'Qase: SIGN-54'
-        // );
-        // await link(
-        //     'https://docs.google.com/document/d/1Qce7tKWOwVYtPxgQv_8ae-HUkbAgeOFph0lB_eziY_k/edit#heading=h.khucr6xuqdib',
-        //     'ATC_14_54_01'
-        // );
-        // await epic('Setting');
-        // await feature('Billing');
-        // await tags('Payment Card', 'Billing Portal');
+        await description('Objective: To verify that a user can successfully edit an existing template by changing its name, message, role, and associated document, and ensure that the changes are reflected in the user interface and confirmed by appropriate toast messages.')
+        await severity(Severity.CRITICAL);
+        await link(
+            'https://app.qase.io/case/SIGN-28',
+            'Qase: SIGN-28'
+        );
+        await link(
+            'https://docs.google.com/document/d/1Qce7tKWOwVYtPxgQv_8ae-HUkbAgeOFph0lB_eziY_k/edit#heading=h.ntdi077ei6pg',
+            'ATC_07_28_01'
+        );
+        await epic('Templates');
+        await tags('Edit-template');
 
         await createTemplate(
             signPage,
@@ -84,11 +82,18 @@ test.describe('Templates', () => {
         await prepareForSignatureModal.clickSignFieldsItem();
         await prepareForSignatureModal.doCanvasClicks();
         await prepareForSignatureModal.clickSaveBtn();
-        // await prepareForSignatureModal.clickBackToTemplatesBtn();
+        await templatePage.table.waitForDocumentTitleVisible(EDIT_TEMPLATE_DATA.nameField)
 
-        await expect(await templatePage.table.documentTitle).toHaveText(EDIT_TEMPLATE_DATA.nameField);
-
-        await expect(await templatePage.toast.getToastByText(TOAST_MESSAGE.success)).toBeVisible();
-        await expect(await templatePage.toast.getToastByText(TOAST_MESSAGE.templateSaved)).toBeVisible();
+        await step('Verify the new name of Template is visible in the table', async () => { 
+            await expect(await templatePage.table.documentTitle).toHaveText(EDIT_TEMPLATE_DATA.nameField);
+        })
+        
+        await step('Verify the toast message "Document successfully saved!"', async () => {
+            await expect(await templatePage.toast.toastBody.first()).toHaveText(TOAST_MESSAGE.success);
+        })
+        
+        await step('Verify the toast message "Template saved"', async () => { 
+            await expect(await templatePage.toast.toastBody.nth(1)).toHaveText(TOAST_MESSAGE.templateSaved);
+        })
     });
 });
