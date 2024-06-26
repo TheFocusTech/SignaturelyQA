@@ -150,7 +150,7 @@ export default class PrepareForSignatureModal {
     }
 
     async clickCreateBtn() {
-        await step('Click on the "Create" button.', async () => {
+        await step('Click on the "Create" button.', async () => {     
             await this.createBtn.click();
         });
     }

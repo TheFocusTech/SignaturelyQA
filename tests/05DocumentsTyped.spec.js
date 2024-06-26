@@ -108,6 +108,7 @@ test.describe('DocumentsType', () => {
         await moveToFolderModal.selectFolder(FOLDER_NAME);
         await moveToFolderModal.clickMoveToFolderBtn();
 
+
         await step('Verify the toast message', async () => {
             await expect(await documentsPage.toast.toastBody).toHaveText(TOAST_MESSAGE.fileMovedToFolder);
         });
@@ -176,7 +177,5 @@ test.describe('DocumentsType', () => {
         expect(await documentsPage.table.getDocumentStatusText()).toBe("draft");
 
 
-
     });
 })
-
