@@ -17,12 +17,12 @@ export const createFolder = async (
     documentsPage,
     createFolderModal) => {
     
-    await step('Create Folder', async () => {
+    await step('Precondition: Create Folder', async () => {
             await signPage.sideMenu.clickDocuments();
             await documentsPage.clickCreateFolderBtn();
             await createFolderModal.fillNewFolderName(FOLDER_NAME);
             await createFolderModal.clickCreateBtn();
-            await documentsPage.sideMenu.clickSign();
             await documentsPage.toast.waitForToastIsHiddenByText(TOAST_MESSAGE.folderCreated);
+            await documentsPage.sideMenu.clickSign();
     })
 };
