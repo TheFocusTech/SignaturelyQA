@@ -24,7 +24,7 @@ test.describe('DocumentsType', () => {
             "https://docs.google.com/document/d/1Qce7tKWOwVYtPxgQv_8ae-HUkbAgeOFph0lB_eziY_k/edit#heading=h.a5x7xbzct5pl",
             "ATC_05_21_01"),
 
-        await epic('Documents');
+            await epic('Documents');
 
         await createDocumentAwaiting(
             signPage, prepareForSignatureModal,
@@ -43,7 +43,7 @@ test.describe('DocumentsType', () => {
 
     });
 
-    test('TC_05_21_02 | Verify that button "Revert to Draft" is active', async ({ createBusinessUserAndLogin, page, signPage, prepareForSignatureModal, 
+    test('TC_05_21_02 | Verify that button "Revert to Draft" is active', async ({ createBusinessUserAndLogin, page, signPage, prepareForSignatureModal,
         successModal, editAndResendDocumentModal, finalStepPage, documentsPage }) => {
 
         test.setTimeout(250 * 1000);
@@ -59,7 +59,7 @@ test.describe('DocumentsType', () => {
             "https://docs.google.com/document/d/1Qce7tKWOwVYtPxgQv_8ae-HUkbAgeOFph0lB_eziY_k/edit#heading=h.r25l83kzqn09",
             "TC_05_21_02"),
 
-        await epic('Documents');
+            await epic('Documents');
 
         await createDocumentAwaiting(signPage, prepareForSignatureModal, documentsPage, successModal, finalStepPage);
         await signPage.sideMenu.clickDocuments();
@@ -147,7 +147,8 @@ test.describe('DocumentsType', () => {
         await expect(await documentsAwaitingPage.toast.toastBody).toHaveText(TOAST_MESSAGE.sendReminder);
     });
 
-    test('TC_05_21_03 | Verify that document_status is  Draft', async ({ createBusinessUserAndLogin, page, signPage, prepareForSignatureModal, successModal, editAndResendDocumentModal, finalStepPage, documentsPage }) => {
+    test('TC_05_21_03 | Verify that document_status is  Draft', async ({ createBusinessUserAndLogin, page, signPage, prepareForSignatureModal, successModal, editAndResendDocumentModal,
+        finalStepPage, documentsPage }) => {
 
         test.setTimeout(250 * 1000);
 
@@ -162,7 +163,7 @@ test.describe('DocumentsType', () => {
             "https://///",
             "TC_05_21_03"),
 
-        await epic('Documents');
+            await epic('Documents');
 
         await createDocumentAwaiting(signPage, prepareForSignatureModal, documentsPage, successModal, finalStepPage);
         await signPage.sideMenu.clickDocuments();
@@ -175,10 +176,7 @@ test.describe('DocumentsType', () => {
         expect(await documentsPage.table.getDocumentStatusText()).toBe("draft");
 
 
-        
 
-        
-
-        });
-    })
+    });
+})
 
