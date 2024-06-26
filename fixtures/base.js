@@ -19,7 +19,7 @@ import EditAndResendDocumentModal from "../new_pom/modalWindows/editAndResendDoc
 import DowngradeToPersonalPlanModal from "../new_pom/modalWindows/downgradeToPersonalPlanModal.js"
 import NewSettingsAPIPage from "../new_pom/pages/settings/settingsAPIPage";
 import NewCreateAPIKeyModal from "../new_pom/modalWindows/createAPIKeyModal.js";
-import NewTemplatesPage from "../new_pom/pages/templates/templatesPage.js";
+import TemplatesPage from "../new_pom/pages/templates/templatesPage.js";
 import SignUpPersonalPage from "../new_pom/pages/signUp/signUpPersonalPage";
 import ConfirmCodeModal from "../new_pom/modalWindows/confirmCodeModal";
 import ChooseSignatureOrInitialModal from "../new_pom/modalWindows/chooseSignatureOrInitialModal";
@@ -36,6 +36,7 @@ import SignUpTrialPage from "../new_pom/pages/signUp/signUpTrialPage";
 import SignUpFreePage from "../new_pom/pages/signUp/signUpFreePage";
 import DocumentsAwaitingPage from "../new_pom/pages/documents/documentsAwaitingPage.js";
 import SendReminderDocumentModal from "../new_pom/modalWindows/sendReminderDocumentModal.js";
+import CreateTemplatePage from "../new_pom/pages/templates/createTemplatePage.js";
 
 export const test = base.extend({
 
@@ -158,7 +159,7 @@ export const test = base.extend({
     },
 
     templatePage: async ({ page }, use) => {
-        await use(new NewTemplatesPage(page));
+        await use(new TemplatesPage(page));
     },
 
     settingsAPIPage: async ({ page }, use) => {
@@ -223,6 +224,10 @@ export const test = base.extend({
 
     sendReminderDocumentModal: async ({ page }, use) => {
         await use(new SendReminderDocumentModal(page));
+    },
+
+    createTemplatePage: async ({ page }, use) => {
+        await use(new CreateTemplatePage(page));
     },
 
 });

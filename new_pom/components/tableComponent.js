@@ -16,7 +16,7 @@ export default class TableComponent {
         this.documentTitle = this.page.locator('.documents__list-item .table__column--text--document p');
         this.moveToBtn = this.page.getByRole('button', { name: 'Move to' });
         this.controlsPath = this.page.locator('.tableControls__path');
-        this.sendReminderBtn = this.page.getByRole('button', {name: 'Send Reminder'});
+        this.sendReminderBtn = this.page.getByRole('button', { name: 'Send Reminder' });
     }
 
     async clickOptionsBtn(i) {
@@ -38,8 +38,10 @@ export default class TableComponent {
     }
 
     async clickAddToAPIBtn() {
-        await this.addToAPIBtn.waitFor();
-        await this.addToAPIBtn.click();
+        await step('Click the "Add to API" option', async () => {
+            await this.addToAPIBtn.waitFor();
+            await this.addToAPIBtn.click();
+        });
     }
     async waitForDocumentTitleVisible(name) {
         await this.documentTitle.filter({ hasText: name }).waitFor({ state: 'visible' })
@@ -51,14 +53,14 @@ export default class TableComponent {
         });
     }
 
-    async openFolder(name) { 
+    async openFolder(name) {
         await step('Open the folder', async () => {
             await this.documentTitle.filter({ hasText: name }).dblclick();
         });
     }
-    
+
     async clickOptionsButton() {
-        await test.step('Click the "Options" button', async () => {
+        await step('Click the "Options" button', async () => {
             await this.optionsBtn.waitFor();
             await this.optionsBtn.click();
         });
