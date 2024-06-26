@@ -1,5 +1,5 @@
 import ToastComponent from '../components/toastComponent';
-import {step} from 'allure-js-commons';
+import { step } from 'allure-js-commons';
 
 export default class FinalStepPage {
     constructor(page) {
@@ -29,8 +29,10 @@ export default class FinalStepPage {
     }
 
     async waitAndClickSendForSignatureBtn() {
-        await this.toast.waitForToastCompleted();
-        await this.sendForSignatureBtn.click();
+        await step('Click on the "Send for Signature" button.', async () => {
+            await this.toast.waitForToastCompleted();
+            await this.sendForSignatureBtn.click();
+        });
     }
 
     async fillDocumentOptionalMessageField(message) {

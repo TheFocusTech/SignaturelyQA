@@ -17,6 +17,7 @@ export default class TableComponent {
         this.moveToBtn = this.page.getByRole('button', { name: 'Move to' });
         this.controlsPath = this.page.locator('.tableControls__path');
         this.sendReminderBtn = this.page.getByRole('button', {name: 'Send Reminder'});
+        //.documents__documentStatus-text
     }
 
     async clickOptionsBtn(i) {
@@ -66,5 +67,10 @@ export default class TableComponent {
 
     async clickSendReminderBtn() {
         await this.sendReminderBtn.click();
+    }
+
+    async getDocumentStatusText() {
+        const actualText = await this.documentStatus.textContent();
+        return actualText
     }
 }

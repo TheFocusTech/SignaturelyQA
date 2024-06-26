@@ -1,5 +1,5 @@
 
-import { DATA_SIGNER, FOLDER_NAME, TOAST_MESSAGE, SIGNERS_DATA } from "../testData";
+import { DATA_SIGNER, FOLDER_NAME, TOAST_MESSAGE, SIGNERS_DATA, UPLOAD_FILE_PATH } from "../testData";
 import { test } from "../fixtures/base";
 import { step } from "allure-js-commons";
 
@@ -22,7 +22,7 @@ export const createDocumentAwaiting = async (
     successModal, 
     finalStepPage) => {
     await test.step('Document creation in progress with Awaiting status ', async () => {
-        await signPage.uploadFileTab.fileUploader.uploadFile('testDocuments/picture.jpg');
+        await signPage.uploadFileTab.fileUploader.uploadFile(UPLOAD_FILE_PATH.jpgDocument);
         await signPage.uploadFileTab.clickPrepareDocumentBtn();
         await prepareForSignatureModal.clickSendForSignatureRadioBtn();
         await prepareForSignatureModal.clickAddSignerBtn();
