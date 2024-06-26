@@ -24,7 +24,8 @@ export const TOAST_MESSAGE = {
     signatureCreated: 'Signature created successfully',
     success: 'Document successfully saved!',
     fileMovedToFolder: 'Files successfully moved!',
-    profileUpdated: 'Profile information updated.'
+    profileUpdated: 'Profile information updated.',
+    templateSaved: 'Template saved',
 };
 export const API_KEY_NAME = 'Test Api Key';
 export const NO_API_KEY_MESSAGE = 'You don\'t have any API keys yet.';
@@ -129,7 +130,7 @@ export const UPLOAD_FILE_NAME = {
 };
 
 export const EDIT_TEMPLATE_DATA = {
-    nameField: 'Rental contract 2024',
+    nameField: 'Rental agreement 2024',
     optionalMessage: 'USA - For Internal Use Only',
     nameRole: 'Chief Financial Officer',
 };

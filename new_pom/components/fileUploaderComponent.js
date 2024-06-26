@@ -6,6 +6,7 @@ export default class FileUploaderComponent {
 
         this.fileInput = this.page.locator('input[type = "file"]');
         this.progressBar = this.page.locator('.progress-bar');
+        this.deleteUploadedFileBtn = this.page.locator('button.button.cancel');
     }
 
     
@@ -16,5 +17,11 @@ export default class FileUploaderComponent {
             await this.progressBar.waitFor({ state: 'visible' });
             await this.progressBar.waitFor({ state: 'hidden' });
         });
+    }
+
+    async deleteUploadedFile() {
+        await this.deleteUploadedFileBtn.waitFor({ state: 'visible' });
+        await this.deleteUploadedFileBtn.hover();
+        await this.deleteUploadedFileBtn.click({ force: true });
     }
 }

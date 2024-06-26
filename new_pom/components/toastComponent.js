@@ -26,4 +26,8 @@ export default class ToastComponent {
             await this.toastBody.getByText(text).waitFor({ state: "hidden" });
         });
     }
+
+    async getToastByText(text) {
+        await this.toastBody.filter({ hasText: text })
+    }
 }
