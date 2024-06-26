@@ -1,3 +1,4 @@
+import { step} from "allure-js-commons";
 
 export default class SideMenuTemplatesComponent {
     constructor(page) {

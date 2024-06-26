@@ -1,6 +1,8 @@
 import SideMenuComponent from "../../components/sideMenuComponent";
 import SideMenuTemplatesComponent from "../../components/sideMenuTemplatesComponent";
 import FileUploaderComponent from "../../components/fileUploaderComponent";
+import {step} from "allure-js-commons";
+
 
 export default class NewCreateTemplatePage {
 
