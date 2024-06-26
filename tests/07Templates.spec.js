@@ -1,7 +1,7 @@
 import { expect } from "@playwright/test";
 import { test, createBusinessUserAndLogin, signPage } from "../fixtures/base.js";
 import { CREATE_TEMPLATE, TEMPLATES_STATUS } from "../testData.js";
-import {description, tags, severity, Severity, link, epic, feature, step} from "allure-js-commons";
+import { description, tags, severity, Severity, link, epic, feature, step } from "allure-js-commons";
 
 test.describe('Templates', () => {
 
@@ -32,7 +32,7 @@ test.describe('Templates', () => {
         await prepareForSignatureModal.clickBackToTemplatesBtn();
 
         await step('Verify that the document status in the template page is "live"', async () => {
-            await expect(await templatePage.table.documentStatus).toHaveText(TEMPLATES_STATUS.live);
+        await expect(await templatePage.table.documentStatus).toHaveText(TEMPLATES_STATUS.live);
         });
 
     });
