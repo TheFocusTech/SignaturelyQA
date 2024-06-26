@@ -6,7 +6,7 @@ import {description, tag, severity, Severity, link, epic, feature} from "allure-
 
 test.describe('Sign Document', () => {
 
-  test.skip('TC_08_32_01 | Verify that user can create form', async ({ createBusinessUserAndLogin, signPage,
+  test('TC_08_32_01 | Verify that user can create form', async ({ createBusinessUserAndLogin, signPage,
     prepareForSignatureModal, createFormPage, formsPage, successModal }) => {
     test.setTimeout(120 * 1000);
         await signPage.sideMenu.clickForms();
@@ -34,7 +34,7 @@ test.describe('Sign Document', () => {
         await successModal.clickBackToFormsBtn();
 
         await expect(await formsPage.table.documentStatus).toHaveText(DOCUMENT_STATUS.live);
-  })
+  });
 
   test('TC_08_35_01 | Verify that user can duplicate form', async ({ 
         createBusinessUserAndLogin, 
@@ -63,6 +63,6 @@ test.describe('Sign Document', () => {
 
         await expect(await formsPage.toast.toastBody).toHaveText(TOAST_MESSAGE.duplicated);
 
-        await expect(await formsPage.formsList).toHaveCount(2);
-    })
+        await expect(await formsPage.table.formsList).toHaveCount(2);
+    });
 }) 

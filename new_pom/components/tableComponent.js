@@ -1,4 +1,3 @@
-import { test } from "../../fixtures/base";
 import { step } from "allure-js-commons";
 
 export default class TableComponent {
@@ -17,6 +16,7 @@ export default class TableComponent {
         this.moveToBtn = this.page.getByRole('button', { name: 'Move to' });
         this.controlsPath = this.page.locator('.tableControls__path');
         this.duplicateBtn = this.page.getByText('Duplicate');
+        this.formsList = this.page.locator('div.table__dataRow');
     }
 
     async clickOptionsBtn(i) {
@@ -27,7 +27,7 @@ export default class TableComponent {
     }
 
     async clickEditAndResendBtn() {
-        await test.step('Click the "Edit & Resend" button', async () => {
+        await step('Click the "Edit & Resend" button', async () => {
             await this.editAndResendBtn.click();
         });
     }
@@ -58,13 +58,15 @@ export default class TableComponent {
     }
     
     async clickOptionsButton() {
-        await test.step('Click the "Options" button', async () => {
+        await step('Click the "Options" button', async () => {
             await this.optionsBtn.waitFor();
             await this.optionsBtn.click();
         });
     }
 
     async clickDuplicateBtn() {
+        await step('Click the "Duplicate" button', async () => {
         await this.duplicateBtn.click();
+        });
     }
 }

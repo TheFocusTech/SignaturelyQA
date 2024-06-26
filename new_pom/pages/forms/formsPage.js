@@ -1,5 +1,6 @@
 import TableComponent from "../../components/tableComponent";
 import ToastComponent from "../../components/toastComponent";
+import { step } from "allure-js-commons";
 
 export default class FormsPage {
     constructor(page) {
@@ -8,11 +9,12 @@ export default class FormsPage {
         this.toast = new ToastComponent(this.page);
 
         this.createFormBtn = this.page.locator('div').filter({ hasText: /^Create Form$/ }).getByRole('button');
-        this.formsList = this.page.locator('div.table__dataRow');
     }
 
     
-    clickCreateFormBtn() {
-        this.createFormBtn.click();
+    async clickCreateFormBtn() {
+        await step('Click the "Create Form" button', async () => {
+        await this.createFormBtn.click();
+        });
     }
 }

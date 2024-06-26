@@ -72,4 +72,5 @@ export const createForm = async (signPage,
     await prepareForSignatureModal.doCanvasClicks();
     await prepareForSignatureModal.clickCreateBtn();
     await successModal.clickBackToFormsBtn();
+    await formsPage.sideMenu.clickSign();
     };
