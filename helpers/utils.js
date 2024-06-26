@@ -76,7 +76,6 @@ export async function retrieveUserEmailConfirmationLink(request, newUserEmail) {
     let confirmationLink;
     await step("Retrieve the confirmation link from the user's email.", async () => {
         const auth = await authorize();
-        confirmationLink = await getConfirmationLinkFromEmail(auth, newUserData.email);
         confirmationLink = await getConfirmationLinkFromEmail(auth, newUserEmail);
 
     });
