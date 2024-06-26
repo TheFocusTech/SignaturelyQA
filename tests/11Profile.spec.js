@@ -45,8 +45,10 @@ test.describe('Profile', () => {
             await expect(signPage.page).toHaveURL(process.env.URL + URL_END_POINTS.signEndPoint);
         });
 
+    });
+
     test('TC_11_47_01 | Verify that user can delete account', async ({
-        createBusinessUserAndLogin,
+        createBusinessUserAndLogin, 
         signPage,
         settingsCompanyPage,
         settingsProfilePage,
@@ -76,4 +78,4 @@ test.describe('Profile', () => {
             })
         })
     })
-})        
+        
