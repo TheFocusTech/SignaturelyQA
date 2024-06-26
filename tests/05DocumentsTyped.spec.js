@@ -1,39 +1,75 @@
 import { expect } from "@playwright/test";
 import { test } from "../fixtures/base.js";
 import { SIGNERS_DATA, UPLOAD_FILE_PATH, UPLOAD_FILE_NAME, FOLDER_NAME, TOAST_MESSAGE } from "../testData.js";
-import { createFolder } from "../helpers/preconditions.js";
+import { createFolder, createDocumentAwaiting } from "../helpers/preconditions.js";
 import { allure } from "allure-playwright";
-import { Severity } from "allure-js-commons";
+import { step } from "allure-js-commons";
+import { description, tag, severity, Severity, link, epic } from "allure-js-commons";
 
 test.describe('DocumentsType', () => {
 
-  test('TC_05_21_01 | Verify that button "Edit&Resend" is active', async ({ createBusinessUserAndLogin, signPage, prepareForSignatureModal, successModal, finalStepPage, documentsPage }) => {
+    test('TC_05_21_01 | Verify that button Edit&Resend is active', async ({ createBusinessUserAndLogin,
+        signPage, prepareForSignatureModal,
+        editAndResendDocumentModal, successModal,
+        finalStepPage, documentsPage }) => {
 
-    test.setTimeout(250 * 1000);
+        test.setTimeout(250 * 1000);
 
-    await signPage.uploadFileTab.fileUploader.uploadFile('testDocuments/picture.jpg');
-    await signPage.uploadFileTab.clickPrepareDocumentBtn();
+        await allure.description('Objective: To verify that the document can be returned for editing.');
+        await allure.tags('Edit & Resend, Documents');
+        await allure.severity(Severity.CRITICAL);
+        await allure.link(
+            "Documentation",
+            "https://docs.google.com/document/d/1Qce7tKWOwVYtPxgQv_8ae-HUkbAgeOFph0lB_eziY_k/edit#heading=h.a5x7xbzct5pl",
+            "TC_05_21_01"),
+            await allure.epic('Documents');
 
-    await prepareForSignatureModal.clickSendForSignatureRadioBtn();
-    await prepareForSignatureModal.clickAddSignerBtn();
-    await prepareForSignatureModal.fillSignerNameField(SIGNERS_DATA.signerName1, 0);
-    await prepareForSignatureModal.fillSignerEmailField(SIGNERS_DATA.signerEmail1, 0);
-    await prepareForSignatureModal.clickContinueBtn();
-    await prepareForSignatureModal.clickGotItBtn();
+        await createDocumentAwaiting(
+            signPage, prepareForSignatureModal,
+            documentsPage, successModal, finalStepPage);
 
-    await prepareForSignatureModal.clickSignFieldsItem();
-    await prepareForSignatureModal.doCanvasClicks();
-    await prepareForSignatureModal.clickSaveBtn();
+        await signPage.sideMenu.clickDocuments();
+        await documentsPage.table.clickOptionsButton();
+        await documentsPage.table.clickEditAndResendBtn();
 
-    await finalStepPage.waitAndClickSendForSignatureBtn();
-    await successModal.clickBackToDocumentsBtn();
-    await documentsPage.table.clickOptionsBtn(0);
-    await documentsPage.table.clickEditAndResendBtn();
-
-    await expect(documentsPage.table.titleEditAndResendDocument).toBeVisible();
-    expect(await documentsPage.table.getTitleText()).toBe("Edit & Resend document");
+        await test.step('Verify that modal window Edit & Resend document has opened', async () => {
+            await expect(editAndResendDocumentModal.editAndResendTitle).toBeVisible();
+        });
+        await test.step('Verify that the title matches "Edit & Resend document"', async () => {
+            expect(await editAndResendDocumentModal.getTitleText()).toBe("Edit & Resend document");
+        });
 
     });
+
+    test('TC_05_21_02 | Verify that button "Revert to Draft" is active', async ({ createBusinessUserAndLogin, page, signPage, prepareForSignatureModal, successModal, editAndResendDocumentModal, finalStepPage, documentsPage }) => {
+
+        test.setTimeout(250 * 1000);
+
+        await allure.description('Objective: To verify that the document can be returned for editing.');
+        await allure.tags('Edit & Resend, Documents');
+        await allure.severity(Severity.CRITICAL);
+        await allure.link(
+            "Documentation",
+            "https://docs.google.com/document/d/1Qce7tKWOwVYtPxgQv_8ae-HUkbAgeOFph0lB_eziY_k/edit#heading=h.r25l83kzqn09",
+            "TC_05_21_02"),
+
+            await allure.epic('Documents');
+
+        await createDocumentAwaiting(signPage, prepareForSignatureModal, documentsPage, successModal, finalStepPage);
+        await signPage.sideMenu.clickDocuments();
+        await documentsPage.table.clickOptionsButton();
+        await documentsPage.table.clickEditAndResendBtn();
+        await editAndResendDocumentModal.clickRevertToDraftBtn();
+
+        await test.step('Verify that the editing window is open', async () => {
+            await expect(page).toHaveURL(/documents.*edit$/);
+        });
+
+        await test.step('Verify that the title matches "Prepare for Signing"', async () => {
+            expect(await prepareForSignatureModal.getPrepareForSigningTitleText()).toBe("Prepare for Signing");
+
+        });
+    })
 
     test('TC_05_18_01 | Verify moving a document to a folder', async ({
         createBusinessUserAndLogin,
@@ -43,22 +79,23 @@ test.describe('DocumentsType', () => {
         createFolderModal }) => {
         test.slow();
 
-        await allure.description('To verify the process of moving a document into a folder.');
-        await allure.tags('Move_to_folder');
-        await allure.severity(Severity.CRITICAL);
-        await allure.link(
-            "Documentation",
+        await description('To verify the process of moving a document into a folder.');
+        await severity(Severity.CRITICAL);
+        await link('https://app.qase.io/case/SIGN-18',
+            'Qase: SIGN-18')
+        await link(
             "https://docs.google.com/document/d/1Qce7tKWOwVYtPxgQv_8ae-HUkbAgeOFph0lB_eziY_k/edit#heading=h.ylpnl5bdm86k",
-            "TC_05_18_01"
+            "ATC_05_18_01"
         );
-        await allure.epic('Documents (typed)');
+        await epic('Documents (typed)');
+        await tag('Move_to_folder');
 
         await createFolder(
             signPage,
             documentsPage,
             createFolderModal);
         await signPage.uploadFileTab.fileUploader.uploadFile(UPLOAD_FILE_PATH.jpgDocument);
-        
+
         await signPage.sideMenu.clickDocuments();
         await documentsPage.table.clickOptionsBtn(1);
         await documentsPage.table.clickMoveToBtn();
@@ -70,7 +107,7 @@ test.describe('DocumentsType', () => {
         });
 
         await documentsPage.table.openFolder(FOLDER_NAME);
-        await test.step('Verify the document is inside the folder', async () => {
+        await step('Verify the document is inside the folder', async () => {
             await expect(await documentsPage.table.documentTitle).toHaveText(UPLOAD_FILE_NAME.jpgDocument);
         });
     })
@@ -86,7 +123,7 @@ test.describe('DocumentsType', () => {
         sendReminderDocumentModal}) => {
         test.setTimeout(250 * 1000);
   
-        await signPage.uploadFileTab.fileUploader.uploadFile('testDocuments/picture.jpg');
+        await signPage.uploadFileTab.fileUploader.uploadFile(UPLOAD_FILE_PATH.jpgDocument);
         await signPage.uploadFileTab.clickPrepareDocumentBtn();
   
         await prepareForSignatureModal.clickSendForSignatureRadioBtn();
@@ -111,7 +148,5 @@ test.describe('DocumentsType', () => {
         await sendReminderDocumentModal.clickSendReminderBtn();
   
         await expect(await documentsAwaitingPage.toast.toastBody).toHaveText(TOAST_MESSAGE.sendReminder);
-  
      });
-  
 })
