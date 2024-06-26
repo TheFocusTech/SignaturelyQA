@@ -20,7 +20,7 @@ import EditAndResendDocumentModal from "../new_pom/modalWindows/editAndResendDoc
 import DowngradeToPersonalPlanModal from "../new_pom/modalWindows/downgradeToPersonalPlanModal.js"
 import NewSettingsAPIPage from "../new_pom/pages/settings/settingsAPIPage";
 import NewCreateAPIKeyModal from "../new_pom/modalWindows/createAPIKeyModal.js";
-import NewTemplatesPage from "../new_pom/pages/templates/templatesPage.js";
+import TemplatesPage from "../new_pom/pages/templates/templatesPage.js";
 import SignUpPersonalPage from "../new_pom/pages/signUp/signUpPersonalPage";
 import ConfirmCodeModal from "../new_pom/modalWindows/confirmCodeModal";
 import ChooseSignatureOrInitialModal from "../new_pom/modalWindows/chooseSignatureOrInitialModal";
@@ -159,7 +159,7 @@ export const test = base.extend({
     },
 
     templatePage: async ({ page }, use) => {
-        await use(new NewTemplatesPage(page));
+        await use(new TemplatesPage(page));
     },
 
     settingsAPIPage: async ({ page }, use) => {

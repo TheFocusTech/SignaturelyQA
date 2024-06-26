@@ -1,6 +1,6 @@
 import { expect } from "@playwright/test";
-import { test, createBusinessUserAndLogin, signPage } from "../fixtures/base.js";
-import { CREATE_TEMPLATE, TEMPLATES_STATUS } from "../testData.js";
+import { test } from "../fixtures/base.js";
+import { CREATE_TEMPLATE, TEMPLATES_STATUS, TOAST_MESSAGE } from "../testData.js";
 import { description, tag, severity, Severity, link, epic, step } from "allure-js-commons";
 import { createTemplate } from "../helpers/preconditions.js";
 
@@ -43,7 +43,7 @@ test.describe('Templates', () => {
         await signPage.sideMenu.clickTemplates();
         await templatePage.table.clickOptionsBtn(0);
         await templatePage.table.clickAddToAPIBtn();
-        await templatePage.toast.waitForToastCompleted();
+        await templatePage.toast.waitForToastIsHiddenByText(TOAST_MESSAGE.success);
         await templatePage.sideMenuTemplates.clickApiTemplates();
 
         await step('Template successfully added to API (appears in API Templates).', async () => {

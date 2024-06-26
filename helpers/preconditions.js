@@ -20,7 +20,7 @@ export const createDocumentAwaiting = async (
     documentsPage,
     successModal,
     finalStepPage) => {
-    await test.step('Document creation in progress with Awaiting status ', async () => {
+    await step('Document creation in progress with Awaiting status ', async () => {
         await signPage.uploadFileTab.fileUploader.uploadFile('testDocuments/picture.jpg');
         await signPage.uploadFileTab.clickPrepareDocumentBtn();
         await prepareForSignatureModal.clickSendForSignatureRadioBtn();

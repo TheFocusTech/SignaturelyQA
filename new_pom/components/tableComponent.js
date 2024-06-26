@@ -38,7 +38,7 @@ export default class TableComponent {
     }
 
     async clickAddToAPIBtn() {
-        await test.step('Click the "Add to API" option', async () => {
+        await step('Click the "Add to API" option', async () => {
             await this.addToAPIBtn.waitFor();
             await this.addToAPIBtn.click();
         });
@@ -60,7 +60,7 @@ export default class TableComponent {
     }
 
     async clickOptionsButton() {
-        await test.step('Click the "Options" button', async () => {
+        await step('Click the "Options" button', async () => {
             await this.optionsBtn.waitFor();
             await this.optionsBtn.click();
         });

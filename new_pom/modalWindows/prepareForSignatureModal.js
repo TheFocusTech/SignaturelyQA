@@ -1,6 +1,6 @@
 import ToastComponent from '../components/toastComponent';
 import { clickCanvas } from '../../helpers/utils.js';
-import {step} from 'allure-js-commons';
+import { step } from 'allure-js-commons';
 
 export default class PrepareForSignatureModal {
     constructor(page) {
@@ -88,7 +88,7 @@ export default class PrepareForSignatureModal {
     async fillSignerEmailField(email, i) {
         await step('Fill the email address of the signer into the "Email" input field.', async () => {
             await this.signerEmailField.nth(i).fill(email);
-    });
+        });
     }
 
     async doCanvasClicks() {
@@ -106,7 +106,7 @@ export default class PrepareForSignatureModal {
 
     async clickItemDropDown(signerName) {
         await step('Select a signer\'s name from the "Assigned To" dropdown.', async () => {
-        await this.itemDropDown.getByText(signerName).click();
+            await this.itemDropDown.getByText(signerName).click();
         });
     }
 
@@ -147,7 +147,9 @@ export default class PrepareForSignatureModal {
     }
 
     async clickCreateBtn() {
-        await this.createBtn.click();
+        await step('Click the "Create" button.', async () => {
+            await this.createBtn.click();
+        });
     }
 
     async clickInitialFieldsItem() {
