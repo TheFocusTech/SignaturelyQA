@@ -1,4 +1,4 @@
-import { test } from "../../fixtures/base";
+import { step } from "allure-js-commons";
 
 export default class TableComponent {
 
@@ -18,7 +18,7 @@ export default class TableComponent {
     }
 
     async clickOptionsBtn(i) {
-        await test.step('Click the "Options" button', async () => {
+        await step('Click the "Options" button', async () => {
             await this.optionsBtn.nth(i).waitFor();
             await this.optionsBtn.nth(i).click();
         });
@@ -47,13 +47,13 @@ export default class TableComponent {
     }
 
     async clickMoveToBtn() {
-        await test.step('Click the "Move to" button', async () => {
+        await step('Click the "Move to" button', async () => {
             await this.moveToBtn.click();
         });
     }
 
     async openFolder(name) { 
-        await test.step('Open the folder', async () => {
+        await step('Open the folder', async () => {
             await this.documentTitle.filter({ hasText: name }).dblclick();
         });
     }
