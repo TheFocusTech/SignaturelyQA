@@ -38,7 +38,9 @@ export default class SettingsProfilePage {
     async clickDeleteMyAccountBtn() {
         await step('Click "Delete My Account" button', async () => {
             await this.deleteMyAccountBtn.click();
-
+        });
+    }
+    
     async deleteCurrentEmailFromEmailAddressInputField() {
         await step('Delete email in the "Email Address" field', async () => {
             await this.emailAddressInputField.clear();
