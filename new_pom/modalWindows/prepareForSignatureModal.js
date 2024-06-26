@@ -1,5 +1,6 @@
-import ToastComponent from "../components/toastComponent";
-import { clickCanvas } from "../../helpers/utils.js";
+import ToastComponent from '../components/toastComponent';
+import { clickCanvas } from '../../helpers/utils.js';
+import {step} from 'allure-js-commons';
 
 export default class PrepareForSignatureModal {
     constructor(page) {
@@ -42,8 +43,10 @@ export default class PrepareForSignatureModal {
     }
 
     async clickSignAndSendForSignatureRadioBtn() {
-        await this.signAndSendForSignatureRadioBtn.waitFor({ state: 'visible' });
-        await this.signAndSendForSignatureRadioBtn.click();
+        await step('Select "Sign and Send for Signature" radio button', async () => {
+            await this.signAndSendForSignatureRadioBtn.waitFor({ state: 'visible' });
+            await this.signAndSendForSignatureRadioBtn.click();
+        });
     }
 
     async clickSendForSignatureRadioBtn() {
@@ -51,63 +54,69 @@ export default class PrepareForSignatureModal {
     }
 
     async clickContinueBtn() {
-        await this.continueBtn.click();
+        await step('Click the "Continue" button.', async () => {
+            await this.continueBtn.click();
+        });
     }
 
     async clickSignFieldsItem() {
-        await this.signFieldsItem.waitFor();
-        await this.signFieldsItem.click();
+        await step('Click on the "Sign" in "Fields" menu', async () => {
+            await this.signFieldsItem.waitFor();
+            await this.signFieldsItem.click();
+        });
     }
 
     async clickGotItBtn() {
-        await this.gotItBtn.click();
+        await step('Click the "Got It" button.', async () => {
+            await this.gotItBtn.click();
+        });
     }
 
     async clickAddSignerBtn() {
-        await this.addSignerBtn.click();
+        await step('Click the "Add signer" button.', async () => {
+            await this.addSignerBtn.click();
+        });
     }
 
     async fillSignerNameField(name, i) {
-        await this.signerNameField.nth(i).fill(name);
+        await step('Fill the name of the signer into the "Name" input field.', async () => {
+            await this.signerNameField.nth(i).fill(name);
+        });
     }
 
     async fillSignerEmailField(email, i) {
-        await this.signerEmailField.nth(i).fill(email);
+        await step('Fill the email address of the signer into the "Email" input field.', async () => {
+            await this.signerEmailField.nth(i).fill(email);
+    });
     }
 
     async doCanvasClicks() {
-        await clickCanvas(this.page, this.canvas, this.excludedAreas);
+        await step('Click randomly inside the document', async () => {
+            await clickCanvas(this.page, this.canvas, this.excludedAreas);
+        });
     }
 
     async clickAssignedToDropDown() {
-        await this.assignedToDropDown.waitFor();
-        await this.assignedToDropDown.click();
+        await step('Click on the "Assigned To" dropdown.', async () => {
+            await this.assignedToDropDown.waitFor();
+            await this.assignedToDropDown.click();
+        });
     }
 
     async clickItemDropDown(signerName) {
+        await step('Select a signer\'s name from the "Assigned To" dropdown.', async () => {
         await this.itemDropDown.getByText(signerName).click();
+        });
     }
 
     async clickSaveBtn() {
-        await this.saveBtn.click();
-    }
-
-    async clickCreateBtn() {
-        try {
-            await this.createBtn.click();
-
-        } finally {
-
-        }
+        await step('Click the "Save" button.', async () => {
+            await this.saveBtn.click();
+        });
     }
 
     async clickBackToTemplatesBtn() {
-        try {
-            await this.backToTempatesBtn.click();
-
-        } finally {
-
-        }
+        await this.backToTempatesBtn.click();
     }
 
     async clickCustomSigningOrderCheckbox() {

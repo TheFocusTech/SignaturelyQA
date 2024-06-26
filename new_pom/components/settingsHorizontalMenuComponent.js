@@ -1,3 +1,5 @@
+import {step} from "allure-js-commons";
+
 export default class SettingsHorizontalMenuComponent {
     constructor(page) {
         this.page = page;
@@ -7,7 +9,9 @@ export default class SettingsHorizontalMenuComponent {
     }
 
     async clickBilling() {
-        await this.billing.click();
+        await step('Click "Billing" on horizontal menu', async () => {
+            await this.billing.click();
+        });
     }
 
     async clickAPI() {
