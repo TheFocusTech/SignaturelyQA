@@ -15,6 +15,7 @@ export default class TableComponent {
         this.documentTitle = this.page.locator('.documents__list-item .table__column--text--document p');
         this.moveToBtn = this.page.getByRole('button', { name: 'Move to' });
         this.controlsPath = this.page.locator('.tableControls__path');
+        this.sendReminderBtn = this.page.getByRole('button', {name: 'Send Reminder'});
         this.duplicateBtn = this.page.getByText('Duplicate');
         this.formsList = this.page.locator('div.table__dataRow');
     }
@@ -62,6 +63,10 @@ export default class TableComponent {
             await this.optionsBtn.waitFor();
             await this.optionsBtn.click();
         });
+    }
+
+    async clickSendReminderBtn() {
+        await this.sendReminderBtn.click();
     }
 
     async clickDuplicateBtn() {

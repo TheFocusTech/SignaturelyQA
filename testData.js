@@ -27,6 +27,7 @@ export const TOAST_MESSAGE = {
     profileUpdated: 'Profile information updated.',
     checkYourEmail: 'Check your new email to confirm it',
     emailConfirmed: 'Email confirmed',
+    sendReminder: 'Reminder(s) has been sent',
     duplicated: 'Form successfully duplicated!',
 };
 export const API_KEY_NAME = 'Test Api Key';
