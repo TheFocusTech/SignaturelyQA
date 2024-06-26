@@ -141,23 +141,34 @@ export default class PrepareForSignatureModal {
 
 
     async clickSignFieldItem() {
+        await step('Click on the "Sign" in "Fields" menu', async () => {
+        await this.signFieldItem.waitFor({ state: 'visible' });
         await this.signFieldItem.click();
+        });
     }
 
     async clickNameFieldItem() {
+        await step('Click on the "Name" in "Fields" menu', async () => {
+        await this.nameFieldItem.waitFor({ state: 'visible' });
         await this.nameFieldItem.click();
+        });
     }
 
     async clickCreateBtn() {
+        await step('Click the "Create" button', async () => {
         await this.createBtn.click();
+        });
     }
 
     async clickInitialFieldsItem() {
+        await step('Click on the "Initial" in "Fields" menu', async () => {
         await this.initialFieldItem.click();
+        });
     }
 
     async clickDateFieldItem() {
+        await step('Click on the "Date" in "Fields" menu', async () => {
         await this.dateFieldItem.click();
+        });
     }
-
 }
