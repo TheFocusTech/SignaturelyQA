@@ -2,7 +2,7 @@ import { expect } from '@playwright/test';
 import { test, loginBusinessUser } from "../fixtures/base.js";
 import {
     API_KEY_NAME, NO_API_KEY_MESSAGE,
-    TOASTER_MESSAGE,
+    TOAST_MESSAGE,
 } from '../testData.js';
 import SignPage from "../page_objects/signPage";
 
@@ -36,5 +36,46 @@ test.describe('Create API key', () => {
         await expect(settingsAPIPage.locators.getEmptyAPiKeysHeader()).toHaveText(NO_API_KEY_MESSAGE)
 
         await settingsAPIPage.clickSignSidebarLinkAndGoSignPage();
+
+test.describe('Create API key', () => {
+
+    test('TC_12_48_01_01 | Verify User can copy API key created by the "Create API" button on the right.', async ({ createBusinessUserAndLogin, signPage, settingsCompanyPage, settingsAPIPage, createAPIKeyModal}) => {
+        await signPage.sideMenu.clickSettings();
+        await settingsCompanyPage.horizontalMenu.clickAPI();
+
+        await settingsAPIPage.clickCreateAPIKeyBtnAtRight();
+
+        await createAPIKeyModal.fillCreateAPIKeyNameField(API_KEY_NAME);
+        await createAPIKeyModal.clickCreateAPIBtn();
+        await createAPIKeyModal.clickCopyAPIBtn();
+
+        await settingsAPIPage.toast.toastBody.waitFor();
+
+        const clipboardApiKeyValue = await createAPIKeyModal.getAPIKeyValueText();
+
+        await createAPIKeyModal.clickCloseAPIModalBtn();
+        await settingsAPIPage.fillBillingDetailsField(clipboardApiKeyValue);
+
+        await expect(settingsAPIPage.billingDetailsTextField).toHaveText(clipboardApiKeyValue);
+    });
+
+    test('TC_12_48_01_02 | Verify User can copy API key created by the "Create API" button in Table.', async ({ createBusinessUserAndLogin, signPage, settingsCompanyPage, settingsAPIPage, createAPIKeyModal}) => {
+        await signPage.sideMenu.clickSettings();
+        await settingsCompanyPage.horizontalMenu.clickAPI();
+
+        await settingsAPIPage.table.clickCreateAPIKeyBtnInTable();
+
+        await createAPIKeyModal.fillCreateAPIKeyNameField(API_KEY_NAME);
+        await createAPIKeyModal.clickCreateAPIBtn();
+        await createAPIKeyModal.clickCopyAPIBtn();
+
+        await settingsAPIPage.toast.toastBody.waitFor();
+
+        const clipboardApiKeyValue = await createAPIKeyModal.getAPIKeyValueText();
+
+        await createAPIKeyModal.clickCloseAPIModalBtn();
+        await settingsAPIPage.fillBillingDetailsField(clipboardApiKeyValue);
+
+        await expect(settingsAPIPage.billingDetailsTextField).toHaveText(clipboardApiKeyValue);
     });
 })

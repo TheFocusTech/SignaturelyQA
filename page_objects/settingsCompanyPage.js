@@ -1,5 +1,6 @@
 import SettingsBillingPage from "./settingsBillingPage";
 import SettingsAPIPage from "./settingsAPIPage";
+import SettingsEditSignaturePage from "./settingsEditSignaturePage";
 
 class SettingsCompanyPage {
     constructor(page){
@@ -21,6 +22,10 @@ class SettingsCompanyPage {
         await this.locators.getAPILink().click();
 
         return new SettingsAPIPage(this.page);
+    async clickEditSignatureLinkAndGoSettingsEditSignaturePage() {
+        await this.locators.getEditSignatureLink().click();
+
+        return new SettingsEditSignaturePage(this.page);
     }
 }
 export default SettingsCompanyPage;

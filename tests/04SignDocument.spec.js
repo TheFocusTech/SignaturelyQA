@@ -1,36 +1,62 @@
 import { expect } from "@playwright/test";
-import {test,loginBusinessUser} from "../fixtures/base.js";
-import SignPage from "../page_objects/signPage";
-const EMAIL = process.env.USER_EMAIL;
-const PASSWORD = process.env.USER_PASSWORD;
-const BASE_URL = process.env.URL;
-import {CHOOSE_SIGNERS_FIELDS} from '../testData.js';
+import { test } from "../fixtures/base.js";
+import { DOCUMENT_STATUS, SIGNERS_DATA } from '../testData.js';
 
-test.describe('SignDocument', () => {
+test.describe('Sign Document', () => {
 
-    test('TC_04_11_02 | Verify custom signing order', async ({page,loginBusinessUser}) => {
-        const signPage = new SignPage(page);
-        signPage.clickUploadFileBtn('testDocuments/picture.jpg');
+    test('TC_04_11_02 | Verify custom signing order', async ({ createBusinessUserAndLogin, signPage, prepareForSignatureModal }) => {
 
-        await signPage.locators.getPrepareDocumentBtn().waitFor({state: 'visible'});
-        signPage.clickPrepareDocumentBtn();
+        await signPage.uploadFileTab.fileUploader.uploadFile('testDocuments/picture.jpg');
+        await signPage.uploadFileTab.clickPrepareDocumentBtn();
+    
+        await prepareForSignatureModal.clickSignAndSendForSignatureRadioBtn();
+        
+        await prepareForSignatureModal.clickAddSignerBtn();
+        await prepareForSignatureModal.fillSignerNameField(SIGNERS_DATA.signerName1, 0);
+        await prepareForSignatureModal.fillSignerEmailField(SIGNERS_DATA.signerEmail1, 0);
+    
+        await prepareForSignatureModal.clickAddSignerBtn();
+        await prepareForSignatureModal.fillSignerNameField(SIGNERS_DATA.signerName2, 1);
+        await prepareForSignatureModal.fillSignerEmailField(SIGNERS_DATA.signerEmail2, 1);
+    
+        await prepareForSignatureModal.clickCustomSigningOrderCheckbox();
+    
+        await expect(prepareForSignatureModal.customSigningOrderPositionNumberOne).toBeVisible();
+        await expect(prepareForSignatureModal.customSigningOrderPositionNumberOne).toHaveText("1.");
+    
+        await expect(prepareForSignatureModal.customSigningOrderPositionNumberTwo).toBeVisible();
+        await expect(prepareForSignatureModal.customSigningOrderPositionNumberTwo).toHaveText("2.");
+      })
 
-        await signPage.clickSendForSignatureRadioBtn();
-        await signPage.clickAddSignerBtn();
+    test('TC_04_14_01 | Verify adding users who can view the document', async ({ 
+        createBusinessUserAndLogin, 
+        signPage, 
+        prepareForSignatureModal,
+        finalStepPage, 
+        documentsPage,
+        successModal     
+    }) => {
 
-        await signPage.fillChooseSignersNameField(CHOOSE_SIGNERS_FIELDS.name1);
-        await signPage.fillChooseSignersEmailField(CHOOSE_SIGNERS_FIELDS.email1);
+        await signPage.uploadFileTab.fileUploader.uploadFile('testDocuments/todoList.xlsx');
+        await signPage.uploadFileTab.clickPrepareDocumentBtn();
 
-        await signPage.clickAddSignerBtn();
+        await prepareForSignatureModal.clickSendForSignatureRadioBtn();
+        await prepareForSignatureModal.clickAddSignerBtn();
+        await prepareForSignatureModal.fillSignerNameField(SIGNERS_DATA.signerName1, 0);
+        await prepareForSignatureModal.fillSignerEmailField(SIGNERS_DATA.signerEmail1, 0);
+        await prepareForSignatureModal.clickAddRecipientsBtn();
+        await prepareForSignatureModal.fillRecipientEmailField(SIGNERS_DATA.viewerEmail1);
+        await prepareForSignatureModal.clickContinueBtn();
+        await prepareForSignatureModal.clickGotItBtn();
+        await prepareForSignatureModal.clickSignFieldsItem();
+        await prepareForSignatureModal.doCanvasClicks();
+        await prepareForSignatureModal.clickSaveBtn();
 
-        await signPage.fillChooseSignersNameField(CHOOSE_SIGNERS_FIELDS.name2);
-        await signPage.fillChooseSignersEmailField(CHOOSE_SIGNERS_FIELDS.email2);
+        await expect(await prepareForSignatureModal.toast.toastBody).toBeVisible();
+        
+        await finalStepPage.clickSendForSignatureBtn();
+        await successModal.clickBackToDocumentsBtn();
 
-        await signPage.clickCustomSigningOrderCheckbox();
-
-        await expect(signPage.locators.getCustomSigningOrderPositionNumberOne()).toBeVisible();
-        await expect(signPage.locators.getCustomSigningOrderPositionNumberTwo()).toBeVisible();
-
-        await signPage.clickCancelBtnAndDeleteDocument();
+        await expect(await documentsPage.table.documentStatus).toHaveText(DOCUMENT_STATUS.awaiting);        
     })
 })
