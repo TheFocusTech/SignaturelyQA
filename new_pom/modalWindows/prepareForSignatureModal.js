@@ -32,10 +32,10 @@ export default class PrepareForSignatureModal {
         this.addRecipientsBtn = this.page.getByText('Recipients', { exact: true });
         this.recipientEmailField = this.page.getByPlaceholder('test@signaturely.com');
         this.prepareForSigningTitle = this.page.getByRole('heading', { name: 'Prepare for Signing' });
-        this.nameFieldItem = this.page.getByText('Name', { exact: true });
-        this.signFieldItem = this.page.getByText('Sign');
+        this.nameFieldItem = this.page.getByRole('complementary').getByText('Name', { exact: true });
+        this.signFieldItem = this.page.getByRole('complementary').getByText('Sign', { exact: true });
         this.initialFieldItem = this.fieldsMenu.getByText('Initial');
-        this.dateFieldItem = this.page.getByText('Date', { exact: true });
+        this.dateFieldItem = this.page.getByRole('complementary').getByText('Date', { exact: true });
 
     }
 
@@ -143,6 +143,7 @@ export default class PrepareForSignatureModal {
 
     async clickSignFieldItem() {
         await step('Click on the "Sign" in "Fields" menu', async () => {
+        await this.signFieldItem.waitFor({ state: 'visible' });
         await this.signFieldItem.click();
         });
     }
@@ -168,6 +169,7 @@ export default class PrepareForSignatureModal {
 
     async clickDateFieldItem() {
         await step('Click on the "Date" in "Fields" menu', async () => {
+        await this.dateFieldItem.waitFor({ state: 'visible' });
         await this.dateFieldItem.click();
         });
     }
