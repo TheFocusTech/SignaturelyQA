@@ -3,6 +3,7 @@ import SideMenuTemplatesComponent from "../../components/sideMenuTemplatesCompon
 import FileUploaderComponent from "../../components/fileUploaderComponent";
 import { step } from "allure-js-commons";
 
+
 export default class NewCreateTemplatePage {
 
     constructor(page) {
@@ -20,29 +21,29 @@ export default class NewCreateTemplatePage {
     }
 
     async fillTemplateNameField(name) {
-        await step('Fill the Template Name input field', async () => {
-            await this.templateNameField.fill(name);
-        });
-    }
+        await step('Fill in the "Template Name" field', async () => {
+        await this.templateNameField.fill(name);
+    });
+}
 
     async fillOptionalMessageField(message) {
-        await step('Fill the Optional Message input field', async () => {
-            await this.optionalMessageField.fill(message);
-        });
-    }
+        await step('Fill in the "Optional Message" field', async () => {
+        await this.optionalMessageField.fill(message);
+    });
+}
 
     async fillCreateTemplateRolesField(role) {
-        await step('Fill the Roles field', async () => {
-            await this.createTemplateRolesField.fill(role);
-        });
-    }
+        await step('Fill in the "Role" field', async () => {
+        await this.createTemplateRolesField.fill(role);
+    });
+}
 
     async clickFillTemplateBtn() {
-        await step('Click the "Fill template" button', async () => {
+        await step('Click on the "Fill template" button', async () => {
         await this.fillTemplateBtn.waitFor();
         await this.fillTemplateBtn.click();
-        })
-    }
+    });
+}
 
     async deleteUploadedFile() {
         await step('Delete uploaded file', async () => {
