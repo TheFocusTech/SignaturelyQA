@@ -104,22 +104,24 @@ export const PLEASE_ENTER_CONFIRMATION_CODE = 'Please enter confirmation code';
 export const PERSONAL_PLAN_DESCRIPTION = (billingPeriod) => `Your plan (Billed ${billingPeriod})Personal`;
 export const EMAIL_SUBJECTS = {
     reminderToSign: "Reminder, Please sign",
-    signatureRequest: "requested your signature"
+    signatureRequest: "requested your signature",
+    documentToView: "Sent you a document to view"
 }
 
 export const SIGNER_ME = 'Me (Now)';
 
-export const SIGNERS_DATA = {
+export let SIGNERS_DATA = {
     signerName1: `${process.env.NEW_USER_NAME}${'001'}`,
-    signerEmail1: `${process.env.EMAIL_PREFIX}${process.env.NEW_USER_NUMBER}${'001'}${process.env.EMAIL_DOMAIN}`,
+    signerEmail1: `${process.env.EMAIL_PREFIX}${'001'}${process.env.EMAIL_DOMAIN}`,
     signerName2: `${process.env.NEW_USER_NAME}${'002'}`,
-    signerEmail2: `${process.env.EMAIL_PREFIX}${process.env.NEW_USER_NUMBER}${'002'}${process.env.EMAIL_DOMAIN}`,
-    viewerEmail1: `${process.env.EMAIL_PREFIX}${process.env.NEW_USER_NUMBER}${'003'}${process.env.EMAIL_DOMAIN}`
+    signerEmail2: `${process.env.EMAIL_PREFIX}${'002'}${process.env.EMAIL_DOMAIN}`,
+    viewerEmail1: `${process.env.EMAIL_PREFIX}${'003'}${process.env.EMAIL_DOMAIN}`
 };
 
 export const FOLDER_NAME = 'Folder for documents';
 export const UPLOAD_FILE_PATH = {
     jpgDocument: 'testDocuments/picture.jpg',
+    xlsxDocument: 'testDocuments/todoList.xlsx'
 };
 export const UPLOAD_FILE_NAME = {
     jpgDocument: 'picture.jpg',

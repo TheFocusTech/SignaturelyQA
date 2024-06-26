@@ -182,3 +182,25 @@ export function generateRandomPassword(length) {
 
         return password.join('');
 }
+
+export async function getRecipientFromResponse(response) {
+    let firstResponseCaptured = false;
+    let recipientEmail;
+    const requestUrl = response.url();    
+
+    if (!firstResponseCaptured && requestUrl.includes('/send_out')) {
+        const body = await response.text();
+        try {
+            const data = JSON.parse(body);
+            const recipients = data.recipients || [];
+            const recipientEmails = recipients.map((recipient) => recipient.email);
+            recipientEmail = recipientEmails[0].slice(-28);
+            console.log('Recipient Email:', recipientEmail);
+            firstResponseCaptured = true;         
+        } catch (e) {
+            console.error('Error parsing JSON response:', e);
+        }
+    }
+
+    return recipientEmail;
+}
