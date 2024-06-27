@@ -115,19 +115,19 @@ export const EMAIL_SUBJECTS = {
 
 export const COMPANY_INFO ={
     companyName: 'companyName',
-    emailFrom:`${process.env.EMAIL_PREFIX}${process.env.NEW_USER_NUMBER}${'001'}${process.env.EMAIL_DOMAIN}`,
-    emailTo: `${process.env.EMAIL_PREFIX}${process.env.NEW_USER_NUMBER}${'002'}${process.env.EMAIL_DOMAIN}`,
+    emailFrom:`${process.env.EMAIL_PREFIX}${'001'}`,
+    emailTo:`${process.env.EMAIL_PREFIX}${'002'}${process.env.EMAIL_DOMAIN}`,
     redirectionPage: 'https://yourcompany.com/'
 }
 
 export const SIGNER_ME = 'Me (Now)';
 
 export const SIGNERS_DATA = {
-    signerName1: `${process.env.NEW_USER_NAME}${'001'}`,
-    signerEmail1: `${process.env.EMAIL_PREFIX}${process.env.NEW_USER_NUMBER}${'001'}${process.env.EMAIL_DOMAIN}`,
-    signerName2: `${process.env.NEW_USER_NAME}${'002'}`,
-    signerEmail2: `${process.env.EMAIL_PREFIX}${process.env.NEW_USER_NUMBER}${'002'}${process.env.EMAIL_DOMAIN}`,
-    viewerEmail1: `${process.env.EMAIL_PREFIX}${process.env.NEW_USER_NUMBER}${'003'}${process.env.EMAIL_DOMAIN}`
+    signerName1: `${process.env.EMAIL_PREFIX}${'001'}`,
+    signerEmail1: `${process.env.EMAIL_PREFIX}${'001'}${process.env.EMAIL_DOMAIN}`,
+    signerName2: `${process.env.EMAIL_PREFIX}${'002'}`,
+    signerEmail2: `${process.env.EMAIL_PREFIX}${'002'}${process.env.EMAIL_DOMAIN}`,
+    viewerEmail1: `${process.env.EMAIL_PREFIX}${'003'}${process.env.EMAIL_DOMAIN}`
 };
 
 export const FOLDER_NAME = 'Folder for documents';
