@@ -56,8 +56,13 @@ test.describe('Sign Document', () => {
 
         await description('To verify the adding viewers / adding users who can view the document.');
         await severity(Severity.CRITICAL);
-        await link('https://app.qase.io/case/SIGN-14', 'Qase: SIGN-14');
-        await link('https://docs.google.com/document/d/1Qce7tKWOwVYtPxgQv_8ae-HUkbAgeOFph0lB_eziY_k/edit#heading=h.ojom1b8sk9ht', 'ATC_04_11_02');
+        await link(
+            'https://app.qase.io/case/SIGN-14', 'Qase: SIGN-14'
+        );
+        await link(
+            'https://docs.google.com/document/d/1Qce7tKWOwVYtPxgQv_8ae-HUkbAgeOFph0lB_eziY_k/edit#heading=h.ojom1b8sk9ht',
+            'ATC_04_11_02'
+        );
         await epic('Sign document');
         await tag('Viewers');
 
@@ -102,9 +107,50 @@ test.describe('Sign Document', () => {
         await documentSubmitProccessModal.waitForSubmitTitleByText(SUBMIT_TITLE);
 
         const message = await retrieveEmailMessage(request, SERVICE_NAME, reviewerEmail, EMAIL_SUBJECTS.sentToView, SELECTORS.message);
-        
+
         await step('Verify that Viewer has got email for viewing document', async () => {
             expect(message).toEqual(`${process.env.NEW_USER_NAME} (${process.env.NEW_USER_EMAIL})${EMAIL_MESSAGE}`);
+        });
+    });
+
+    test('TC_04_10_01 | Verify sign document as myself', async ({
+        createBusinessUserAndLogin,
+        signPage,
+        prepareForSignatureModal,
+        finalStepPage,
+        documentsPage,
+        successModal,
+        createSignatureOrInitialModal,
+    }) => {
+        test.setTimeout(250 * 1000);
+
+        await description('Objective: To verify sign document as myself');
+        await severity(Severity.CRITICAL);
+        await link(
+            'https://app.qase.io/case/SIGN-10', 'Qase: SIGN-10'
+        );
+        await link(
+            'https://docs.google.com/document/d/1Qce7tKWOwVYtPxgQv_8ae-HUkbAgeOFph0lB_eziY_k/edit#heading=h.jl55qbudbe8i',
+            'ATC_04_10_01'
+        );
+        await epic('Sign document');
+        await tag('Document');
+
+        await signPage.uploadFileTab.fileUploader.uploadFile(UPLOAD_FILE_PATH.xlsxDocument);
+        await signPage.uploadFileTab.clickPrepareDocumentBtn();
+        await prepareForSignatureModal.clickSignDocumentRadioBtn();
+        await prepareForSignatureModal.clickContinueBtn();
+        await prepareForSignatureModal.clickGotItBtn();
+        await prepareForSignatureModal.clickSignFieldsItem();
+        await prepareForSignatureModal.doCanvasClicks();
+        await createSignatureOrInitialModal.clickCheckboxAgree();
+        await createSignatureOrInitialModal.clickSignNowBtn();
+        await prepareForSignatureModal.clickSaveBtn();
+        await finalStepPage.clickSignDocumentBtn();
+        await successModal.clickBackToDocumentsBtn();
+
+        await step('Verify that document has complited status', async () => {
+            await expect(await documentsPage.table.documentStatus).toHaveText(DOCUMENT_STATUS.completed);
         });
     });
 });

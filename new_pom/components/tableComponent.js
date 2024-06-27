@@ -16,6 +16,9 @@ export default class TableComponent {
         this.moveToBtn = this.page.getByRole('button', { name: 'Move to' });
         this.controlsPath = this.page.locator('.tableControls__path');
         this.sendReminderBtn = this.page.getByRole('button', { name: 'Send Reminder' });
+        this.duplicateBtn = this.page.getByText('Duplicate');
+        this.formsList = this.page.locator('div.table__dataRow');
+
         this.editBtn = this.page.getByRole('button', { name: 'Edit' });
     }
 
@@ -62,15 +65,15 @@ export default class TableComponent {
         });
     }
 
-    async clickOptionsButton() {
-        await step('Click the "Options" button', async () => {
-            await this.optionsBtn.waitFor();
-            await this.optionsBtn.click();
-        });
-    }
+    
 
     async clickSendReminderBtn() {
         await this.sendReminderBtn.click();
+    }
+
+    async getDocumentStatusText() {
+        const actualText = await this.documentStatus.textContent();
+        return actualText
     }
 
     async waitForDocumentStatusVisible(status) {
@@ -79,6 +82,17 @@ export default class TableComponent {
         });        
     }
 
+    async clickDuplicateBtn() {
+        await step('Click the "Duplicate" button', async () => {
+        await this.duplicateBtn.click();
+        });
+    }
+
+    async clickDuplicateBtn() {
+        await step('Click the "Duplicate" button', async () => {
+        await this.duplicateBtn.click();
+        });
+    }
 
     async clickEditBtn() { 
         await step('Click the "Edit" button', async () => {

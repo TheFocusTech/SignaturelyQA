@@ -1,5 +1,5 @@
+
 import { DATA_SIGNER, FOLDER_NAME, TOAST_MESSAGE, CREATE_TEMPLATE, UPLOAD_FILE_PATH, SIGNERS_DATA } from "../testData";
-import { test } from "../fixtures/base";
 import { step } from "allure-js-commons";
 
 export const createSignature = async (signPage, settingsCompanyPage, settingsEditSignaturePage, createOrEditSignatureOnSettingModal) => {
@@ -20,8 +20,9 @@ export const createDocumentAwaiting = async (
     documentsPage,
     successModal,
     finalStepPage) => {
-    await step('Document creation in progress with Awaiting status ', async () => {
-        await signPage.uploadFileTab.fileUploader.uploadFile('testDocuments/picture.jpg');
+
+    await step('Precondition: Document creation in progress with Awaiting status ', async () => {
+        await signPage.uploadFileTab.fileUploader.uploadFile(UPLOAD_FILE_PATH.jpgDocument);
         await signPage.uploadFileTab.clickPrepareDocumentBtn();
         await prepareForSignatureModal.clickSendForSignatureRadioBtn();
         await prepareForSignatureModal.clickAddSignerBtn();
@@ -33,11 +34,10 @@ export const createDocumentAwaiting = async (
         await prepareForSignatureModal.clickSignFieldsItem();
         await prepareForSignatureModal.doCanvasClicks();
         await prepareForSignatureModal.clickSaveBtn();
-        await finalStepPage.waitAndClickSendForSignatureBtn();
+        await finalStepPage.waitAndClickSendForSignatureBtn(TOAST_MESSAGE.success);
         await successModal.clickBackToDocumentsBtn();
         await documentsPage.sideMenu.clickSign();
     })
-
 };
 
 export const createFolder = async (
@@ -56,7 +56,7 @@ export const createFolder = async (
 };
 
 export const createTemplate = async (signPage, prepareForSignatureModal, templatePage, createTemplatePage) => {
-    await step('Precondition:  Create Template', async () => {
+    await step('Precondition: Create Template', async () => {
         await signPage.sideMenu.clickTemplates();
         await templatePage.sideMenuTemplates.clickCreateTemplate();
         await createTemplatePage.fillTemplateNameField(CREATE_TEMPLATE.nameField);
@@ -69,4 +69,25 @@ export const createTemplate = async (signPage, prepareForSignatureModal, templat
         await prepareForSignatureModal.clickBackToTemplatesBtn();
         await templatePage.sideMenu.clickSign();
     })
-}
+};
+
+export const createForm = async (signPage,
+    prepareForSignatureModal, createFormPage, formsPage, successModal) => {
+    await step('Precondition: Create Form', async () => {        
+        await signPage.sideMenu.clickForms();
+        await formsPage.clickCreateFormBtn();
+        await createFormPage.fillFormNameField(SIGNERS_DATA.signerName1);
+        await createFormPage.fillOptionalMessageField(SIGNERS_DATA.viewerEmail1);
+        await createFormPage.fileUploader.uploadFile(UPLOAD_FILE_PATH.jpgDocument);
+        await createFormPage.clickFillTemplateBtn();
+        await prepareForSignatureModal.clickNameFieldItem();
+        await prepareForSignatureModal.doCanvasClicks();
+        await prepareForSignatureModal.clickSignFieldItem();
+        await prepareForSignatureModal.doCanvasClicks();
+        await prepareForSignatureModal.clickDateFieldItem();
+        await prepareForSignatureModal.doCanvasClicks();
+        await prepareForSignatureModal.clickCreateBtn();
+        await successModal.clickBackToFormsBtn();
+        await formsPage.sideMenu.clickSign();
+    })
+};
