@@ -3,7 +3,7 @@ import SideMenuComponent from "../../components/sideMenuComponent";
 import ToastComponent from "../../components/toastComponent";
 import { step } from "allure-js-commons";
 
-export default class NewSettingsBillingPlanPage {
+export default class SettingsBillingPlanPage {
 
     constructor(page) {
         this.page = page;

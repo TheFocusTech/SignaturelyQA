@@ -2,7 +2,7 @@ import StripeEnterPaymentDetailsPage from "./stripeEnterPaymentDetailsPage";
 import SettingsBillingPortalPage from "./settingsBillingPortalPage";
 import {step} from "allure-js-commons";
 
-export default class NewSettingsBillingPage {
+export default class SettingsBillingPage {
     constructor(page) {
         this.page = page;
 

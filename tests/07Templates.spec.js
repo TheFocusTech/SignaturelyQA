@@ -6,7 +6,7 @@ import { description, tags, severity, Severity, link, epic, feature, step } from
 
 test.describe('Templates', () => {
 
-    test('TC_07_27_01 | Verify that user can create a template', async ({ createBusinessUserAndLogin, signPage, prepareForSignatureModal, templatePage }) => {
+    test('TC_07_27_01 | Verify that user can create a template', async ({ createBusinessUserAndLogin, signPage, prepareForSignatureModal, templatePage, createNewTemplatePage: createTemplatePage }) => {
         await description('Objective: To verify that the user can create a new template in the system successfully. This includes ensuring that all required fields are completed correctly, the template is saved, and it is accessible for future use.')
         await severity(Severity.CRITICAL);
         await link(
@@ -22,11 +22,11 @@ test.describe('Templates', () => {
 
         await signPage.sideMenu.clickTemplates();
         await templatePage.sideMenuTemplates.clickCreateTemplate();
-        await templatePage.createTemplate.fillTemplateNameField(CREATE_TEMPLATE.nameField);
-        await templatePage.createTemplate.fillOptionalMessageField(CREATE_TEMPLATE.optionalMessage);
-        await templatePage.createTemplate.fillCreateTemplateRolesField(CREATE_TEMPLATE.nameRole);
-        await templatePage.createTemplate.fileUploader.uploadFile('testDocuments/CSV.csv');
-        await templatePage.createTemplate.clickFillTemplateBtn();
+        await createTemplatePage.fillTemplateNameField(CREATE_TEMPLATE.nameField);
+        await createTemplatePage.fillOptionalMessageField(CREATE_TEMPLATE.optionalMessage);
+        await createTemplatePage.fillCreateTemplateRolesField(CREATE_TEMPLATE.nameRole);
+        await createTemplatePage.fileUploader.uploadFile('testDocuments/CSV.csv');
+        await createTemplatePage.clickFillTemplateBtn();
         await prepareForSignatureModal.clickSignFieldsItem();
         await prepareForSignatureModal.doCanvasClicks();
         await prepareForSignatureModal.clickCreateBtn();
@@ -38,7 +38,7 @@ test.describe('Templates', () => {
 
     });
 
-    test('TC_07_31_01 | Verify that  the user can select Add to API', async ({ createBusinessUserAndLogin, signPage, prepareForSignatureModal, templatePage, apiTemplatesPage, createTemplatePage }) => {
+    test('TC_07_31_01 | Verify that  the user can select Add to API', async ({ createBusinessUserAndLogin, signPage, prepareForSignatureModal, templatePage, apiTemplatesPage, createNewTemplatePage: createTemplatePage }) => {
         await description('Objective: To verify the process of add template to API.');
         await severity(Severity.CRITICAL);
         await link(
