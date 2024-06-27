@@ -35,7 +35,6 @@ test.describe('Create API key', () => {
             await expect(settingsAPIPage.toast.toastBody).toHaveText(TOAST_MESSAGE.copyApiKey);
         });
 
-        // const clipboardApiKeyValue1 = await createAPIKeyModal.getAPIKeyValueText(); // not works
         const clipboardApiKeyValue = await createAPIKeyModal.APIKeyValue.innerText();
 
         await step('Ensure the API key is not empty', async () => {
