@@ -16,6 +16,7 @@ export default class PrepareForSignatureModal {
         this.gotItBtn = this.page.getByRole('button', { name: 'Got it' });
         this.fieldsMenu = this.page.locator('.interactModal__fieldBar-fieldList');
         this.signFieldsItem = this.fieldsMenu.getByText('Sign');
+        this.nameFieldsItem = this.fieldsMenu.getByText('Name');
         this.addSignerBtn = this.page.getByText('Add signer', { exact: true });
         this.signerNameField = this.page.getByPlaceholder('Name');
         this.signerEmailField = this.page.getByPlaceholder('Email');
@@ -31,9 +32,7 @@ export default class PrepareForSignatureModal {
         this.customSigningOrderPositionNumberTwo = this.page.locator('span.signers__item-order-position').last();
         this.addRecipientsBtn = this.page.getByText('Recipients', { exact: true });
         this.recipientEmailField = this.page.getByPlaceholder('test@signaturely.com');
-        this.prepareForSigningTitle = this.page.getByRole('heading', { name: 'Prepare for Signing' });
-        this.nameFieldItem = this.page.locator('ul.interactModal__fieldBar-fieldList li').filter({ hasText: /^Name$/ }).first();
-        this.signFieldItem = this.page.locator('ul.interactModal__fieldBar-fieldList li').nth(1);
+        this.prepareForSigningTitle = this.page.getByRole('heading', { name: 'Prepare for Signing' });        
         this.initialFieldsItem = this.fieldsMenu.getByText('Initial');
 
     }
@@ -51,7 +50,9 @@ export default class PrepareForSignatureModal {
     }
 
     async clickSendForSignatureRadioBtn() {
-        await this.sendForSignatureRadioBtn.click();
+        await step('Select the "Send for Signature" radio button.', async () => {
+            await this.sendForSignatureRadioBtn.click();
+        });
     }
 
     async clickContinueBtn() {
@@ -68,7 +69,7 @@ export default class PrepareForSignatureModal {
     }
 
     async clickGotItBtn() {
-        await step('Click the "Got It" button.', async () => {
+        await step('Click the "Got it" button.', async () => {
             await this.gotItBtn.click();
         });
     }
@@ -127,11 +128,15 @@ export default class PrepareForSignatureModal {
     }
 
     async clickAddRecipientsBtn() {
-        await this.addRecipientsBtn.click();
+        await step('Click the "Recipients" button.', async () => {
+            await this.addRecipientsBtn.click();
+        });
     }
 
     async fillRecipientEmailField(email) {
-        await this.recipientEmailField.fill(email);
+        await step('Fill the email address of the viewer into the input field.', async () => {
+            await this.recipientEmailField.fill(email);
+        });
     }
 
     async getPrepareForSigningTitleText() {
@@ -139,13 +144,8 @@ export default class PrepareForSignatureModal {
         return actualText
     }
 
-
-    async clickSignFieldItem() {
-        await this.signFieldItem.click();
-    }
-
-    async clickNameFieldItem() {
-        await this.nameFieldItem.click();
+    async clickNameFieldsItem() {
+        await this.nameFieldsItem.click();
     }
 
     async clickCreateBtn() {

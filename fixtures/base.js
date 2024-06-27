@@ -37,6 +37,9 @@ import SignUpFreePage from "../new_pom/pages/signUp/signUpFreePage";
 import DocumentsAwaitingPage from "../new_pom/pages/documents/documentsAwaitingPage.js";
 import SendReminderDocumentModal from "../new_pom/modalWindows/sendReminderDocumentModal.js";
 import CreateNewTemplatePage from "../new_pom/pages/templates/createNewTemplatePage.js";
+import NotRegisterSignerSignPage from '../new_pom/pages/notRegisterSignerSignPage.js';
+import SignerAlmostDoneModal from '../new_pom/modalWindows/signerAlmostDoneModal.js';
+import DocumentSubmitProccessModal from '../new_pom/modalWindows/documentSubmitProccessModal.js';
 
 export const test = base.extend({
 
@@ -228,6 +231,18 @@ export const test = base.extend({
 
     createNewTemplatePage: async ({ page }, use) => {
         await use(new CreateNewTemplatePage(page));
+    },
+
+    notRegisterSignerSignPage: async ({ page }, use) => {
+        await use(new NotRegisterSignerSignPage(page));
+    },
+
+    signerAlmostDoneModal: async ({ page }, use) => {
+        await use(new SignerAlmostDoneModal(page));
+    },
+
+    documentSubmitProccessModal: async ({ page }, use) => {
+        await use(new DocumentSubmitProccessModal(page));
     },
 });
 
