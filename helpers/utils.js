@@ -19,6 +19,16 @@ export function delay(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
 }
 
+export async function generateNewUserEmail(addition) {
+    let newEmail;
+    await step('Generate new user email', async () => {
+        newEmail = `${process.env.EMAIL_PREFIX}${process.env.NEW_USER_NUMBER}${addition}${process.env.EMAIL_DOMAIN}`;
+        console.log(`Generated new user Email: ${newEmail.slice(-29)}`);
+    });
+
+    return newEmail;
+}
+
 export async function generateNewUserData(free = false, workflowVersion = null) {
     let userData;
     await step('Create new user data', async () => {
@@ -62,20 +72,23 @@ export async function createNewFreeUserThroughApi(request) {
     return newFreeUserData;
 }
 
-export async function retrieveUserEmailConfirmationLink(request, newUserData) {
+export async function retrieveUserEmailConfirmationLink(request, newUserEmail) {
     let confirmationLink;
-    await step("Retrieve the confirmation link for the user's email.", async () => {
+    await step("Retrieve the confirmation link from the user's email.", async () => {
         const auth = await authorize();
-        confirmationLink = await getConfirmationLinkFromEmail(auth, newUserData.email);
+        confirmationLink = await getConfirmationLinkFromEmail(auth, newUserEmail);
 
     });
         return confirmationLink;
 }
 
 export async function retrieveUserEmailConfirmCode(request, newUserEmail) {
-    const auth = await authorize();
-
-    return await getConfirmCodeFromEmail(auth, newUserEmail);
+    let confirmCode;
+    await step("Retrieve the confirm code from the user's email.", async () => {
+        const auth = await authorize();
+        confirmCode = await getConfirmCodeFromEmail(auth, newUserEmail);
+    });
+        return confirmCode;
 }
 
 export async function retrieveEmailMessage(request, senderName, receiverEmail, subject) {
