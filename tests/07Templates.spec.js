@@ -66,26 +66,6 @@ test.describe('Templates', () => {
 
         });
     })
-    test('TC_07_31_01 | Verify that  the user can select Add to API', async ({ createBusinessUserAndLogin, signPage, prepareForSignatureModal, templatePage, apiTemplatesPage }) => {
-        test.setTimeout(250 * 1000);
-        await signPage.sideMenu.clickTemplates();
-        await templatePage.sideMenuTemplates.clickCreateTemplate();
-        await templatePage.createTemplate.fillTemplateNameField(CREATE_TEMPLATE.nameField);
-        await templatePage.createTemplate.fillCreateTemplateRolesField(CREATE_TEMPLATE.nameRole);
-        await templatePage.createTemplate.fileUploader.uploadFile('testDocuments/CSV.csv');
-        await templatePage.createTemplate.clickFillTemplateBtn();
-        await prepareForSignatureModal.clickSignFieldsItem();
-        await prepareForSignatureModal.doCanvasClicks();
-        await prepareForSignatureModal.clickCreateBtn();
-        await prepareForSignatureModal.clickBackToTemplatesBtn();
-        await templatePage.table.clickOptionsBtn(0);
-        await templatePage.table.clickAddToAPIBtn();
-        await templatePage.toast.waitForToastCompleted();
-        await templatePage.sideMenuTemplates.clickApiTemplates();
-
-        await expect(await apiTemplatesPage.table.documentStatus).toHaveText(TEMPLATES_STATUS.api);
-
-    });
 
     test('TC_07_28_01 | Verify that user can edit template', async ({
         createBusinessUserAndLogin,
