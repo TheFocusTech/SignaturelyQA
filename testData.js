@@ -120,10 +120,10 @@ export const SELECTORS = {
 
 export const SIGNER_ME = 'Me (Now)';
 
-export let SIGNERS_DATA = {
-    signerName1: `${process.env.NEW_USER_NAME}${'001'}`,
+export const SIGNERS_DATA = {
+    signerName1: `${process.env.EMAIL_PREFIX}${'001'}`,
     signerEmail1: `${process.env.EMAIL_PREFIX}${'001'}${process.env.EMAIL_DOMAIN}`,
-    signerName2: `${process.env.NEW_USER_NAME}${'002'}`,
+    signerName2: `${process.env.EMAIL_PREFIX}${'002'}`,
     signerEmail2: `${process.env.EMAIL_PREFIX}${'002'}${process.env.EMAIL_DOMAIN}`,
     viewerEmail1: `${process.env.EMAIL_PREFIX}${'003'}${process.env.EMAIL_DOMAIN}`
 };

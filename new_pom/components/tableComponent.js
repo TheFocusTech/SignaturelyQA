@@ -26,7 +26,7 @@ export default class TableComponent {
     }
 
     async clickEditAndResendBtn() {
-        await test.step('Click the "Edit & Resend" button', async () => {
+        await step('Click the "Edit & Resend" button', async () => {
             await this.editAndResendBtn.click();
         });
     }
@@ -53,7 +53,7 @@ export default class TableComponent {
         });
     }
 
-    async openFolder(name) { 
+    async openFolder(name) {
         await step('Open the folder', async () => {
             await this.documentTitle.filter({ hasText: name }).dblclick();
         });

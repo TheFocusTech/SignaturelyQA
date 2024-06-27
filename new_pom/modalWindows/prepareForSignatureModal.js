@@ -16,6 +16,7 @@ export default class PrepareForSignatureModal {
         this.gotItBtn = this.page.getByRole('button', { name: 'Got it' });
         this.fieldsMenu = this.page.locator('.interactModal__fieldBar-fieldList');
         this.signFieldsItem = this.fieldsMenu.getByText('Sign');
+        this.nameFieldsItem = this.fieldsMenu.getByText('Name');
         this.addSignerBtn = this.page.getByText('Add signer', { exact: true });
         this.signerNameField = this.page.getByPlaceholder('Name');
         this.signerEmailField = this.page.getByPlaceholder('Email');
@@ -31,8 +32,7 @@ export default class PrepareForSignatureModal {
         this.customSigningOrderPositionNumberTwo = this.page.locator('span.signers__item-order-position').last();
         this.addRecipientsBtn = this.page.getByText('Recipients', { exact: true });
         this.recipientEmailField = this.page.getByPlaceholder('test@signaturely.com');
-        this.prepareForSigningTitle = this.page.getByRole('heading', { name: 'Prepare for Signing' });
-        this.nameFieldsItem = this.page.locator('ul.interactModal__fieldBar-fieldList li').filter({ hasText: /^Name$/ }).first();     
+        this.prepareForSigningTitle = this.page.getByRole('heading', { name: 'Prepare for Signing' });        
         this.initialFieldsItem = this.fieldsMenu.getByText('Initial');
 
     }
