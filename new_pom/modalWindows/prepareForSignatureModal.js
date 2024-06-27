@@ -173,7 +173,7 @@ export default class PrepareForSignatureModal {
         });
     }
 
-    async clickInitialFieldsItem() {
+    async clickInitialFieldItem() {
         await step('Click on the "Initial" in "Fields" menu', async () => {
             await this.initialFieldItem.click();
         });

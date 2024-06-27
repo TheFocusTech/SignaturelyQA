@@ -71,8 +71,7 @@ export const createTemplate = async (signPage, prepareForSignatureModal, templat
     })
 };
 
-export const createForm = async (signPage,
-    prepareForSignatureModal, createFormPage, formsPage, successModal) => {
+export const createForm = async (signPage, formsPage, createFormPage, prepareForSignatureModal, successModal) => {
     await step('Precondition: Create Form', async () => {        
         await signPage.sideMenu.clickForms();
         await formsPage.clickCreateFormBtn();
@@ -84,6 +83,8 @@ export const createForm = async (signPage,
         await prepareForSignatureModal.doCanvasClicks();
         await prepareForSignatureModal.clickSignFieldItem();
         await prepareForSignatureModal.doCanvasClicks();
+        await prepareForSignatureModal.clickInitialFieldItem();
+        await prepareForSignatureModal.doCanvasClicks();
         await prepareForSignatureModal.clickDateFieldItem();
         await prepareForSignatureModal.doCanvasClicks();
         await prepareForSignatureModal.clickCreateBtn();
@@ -91,3 +92,4 @@ export const createForm = async (signPage,
         await formsPage.sideMenu.clickSign();
     })
 };
+
