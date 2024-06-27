@@ -35,22 +35,15 @@ test.describe('Create API key', () => {
             await expect(settingsAPIPage.toast.toastBody).toHaveText(TOAST_MESSAGE.copyApiKey);
         });
 
-        // const clipboardApiKeyValue = await createAPIKeyModal.getAPIKeyValueText();
         const clipboardApiKeyValue = await createAPIKeyModal.APIKeyValue.innerText();
 
         await step('Ensure the API key is not empty', async () => {
-            await expect(clipboardApiKeyValue).not.toBe('');
+            await expect(createAPIKeyModal.getAPIKeyValueText()).not.toBe('');
         });
 
         await createAPIKeyModal.clickCloseAPIModalBtn();
-        // imitation mouse right click
         await settingsAPIPage.rightClickBillingDetailsField();
         await settingsAPIPage.fillBillingDetailsField(clipboardApiKeyValue);
-
-        // imitation ctrl+v -> doesnt work
-        // await settingsAPIPage.keyboard.down('Control');
-        // await settingsAPIPage.keyboard.press('V');
-        // await settingsAPIPage.keyboard.up('Control');
 
         await step('Verify the copied API Key appears in the "Billing Details" input', async () => {
             await expect(settingsAPIPage.billingDetailsTextField).toHaveText(clipboardApiKeyValue);
