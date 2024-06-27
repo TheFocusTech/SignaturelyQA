@@ -1,5 +1,6 @@
 import ToastComponent from "../../components/toastComponent";
 import TableComponent from "../../components/tableComponent";
+import {step} from "allure-js-commons";
 
 export default class NewSettingsAPIPage {
     constructor(page) {
@@ -14,12 +15,22 @@ export default class NewSettingsAPIPage {
     }
 
     async clickCreateAPIKeyBtnAtRight() {
-        await this.createAPIKeyBtnAtRight.waitFor();
-        await this.createAPIKeyBtnAtRight.click();
+        await step('Click on the "Create API key" button at the right', async () => {
+            await this.createAPIKeyBtnAtRight.waitFor();
+            await this.createAPIKeyBtnAtRight.click();
+        });
     }
 
     async fillBillingDetailsField(text) {
-        await this.billingDetailsField.waitFor();
-        await this.billingDetailsField.fill(text);
+        await step('Fill in the "Billing Details" field', async () => {
+            await this.billingDetailsField.waitFor();
+            await this.billingDetailsField.fill(text);
+        });
+    }
+
+    async rightClickBillingDetailsField() {
+        await step('Right click on the "Billing Details" field', async () => {
+            await this.billingDetailsField.click({ button: 'right' });
+        });
     }
 }
