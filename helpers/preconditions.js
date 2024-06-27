@@ -77,7 +77,7 @@ export const createForm = async (signPage,
         await formsPage.clickCreateFormBtn();
         await createFormPage.fillFormNameField(SIGNERS_DATA.signerName1);
         await createFormPage.fillOptionalMessageField(SIGNERS_DATA.viewerEmail1);
-        await createFormPage.fileUploader.uploadFile('testDocuments/todoList.xlsx');
+        await createFormPage.fileUploader.uploadFile(UPLOAD_FILE_PATH.jpgDocument);
         await createFormPage.clickFillTemplateBtn();
         await prepareForSignatureModal.clickNameFieldItem();
         await prepareForSignatureModal.doCanvasClicks();

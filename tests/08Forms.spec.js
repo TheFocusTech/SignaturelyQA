@@ -1,8 +1,8 @@
 import { expect } from "@playwright/test";
 import { test } from "../fixtures/base.js";
-import { SIGNERS_DATA, TOAST_MESSAGE, DOCUMENT_STATUS } from "../testData.js";
+import { SIGNERS_DATA, TOAST_MESSAGE, DOCUMENT_STATUS, UPLOAD_FILE_PATH } from "../testData.js";
 import { createForm } from "../helpers/preconditions.js";
-import {description, tag, severity, Severity, link, epic, feature} from "allure-js-commons";
+import {description, tag, severity, Severity, link, epic} from "allure-js-commons";
 
 test.describe('Forms', () => {
 
@@ -34,7 +34,7 @@ test.describe('Forms', () => {
         await createFormPage.fillFormNameField(SIGNERS_DATA.signerName1);
         await createFormPage.fillOptionalMessageField(SIGNERS_DATA.viewerEmail1);
     
-        await createFormPage.fileUploader.uploadFile('testDocuments/todoList.xlsx');
+        await createFormPage.fileUploader.uploadFile(UPLOAD_FILE_PATH.jpgDocument);
         await createFormPage.clickFillTemplateBtn();
 
         await prepareForSignatureModal.clickNameFieldItem();
