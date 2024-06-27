@@ -33,10 +33,12 @@ export default class PrepareForSignatureModal {
         this.addRecipientsBtn = this.page.getByText('Recipients', { exact: true });
         this.recipientEmailField = this.page.getByPlaceholder('test@signaturely.com');
         this.prepareForSigningTitle = this.page.getByRole('heading', { name: 'Prepare for Signing' });
+        this.cancelBtn = this.page.getByRole('button', { name: 'Cancel' });
         this.nameFieldItem = this.page.getByRole('complementary').getByText('Name', { exact: true });
         this.signFieldItem = this.page.getByRole('complementary').getByText('Sign', { exact: true });
         this.initialFieldItem = this.fieldsMenu.getByText('Initial');
         this.dateFieldItem = this.page.getByRole('complementary').getByText('Date', { exact: true });
+
 
     }
 
@@ -128,7 +130,7 @@ export default class PrepareForSignatureModal {
 
     async clickCustomSigningOrderCheckbox() {
         await step('Click on the "Custom signing order" checkbox.', async () => {
-        await this.customSigningOrderCheckbox.click();
+            await this.customSigningOrderCheckbox.click();
         });
     }
 
@@ -152,27 +154,34 @@ export default class PrepareForSignatureModal {
 
     async clickSignFieldItem() {
         await step('Click on the "Sign" in "Fields" menu', async () => {
-        await this.signFieldItem.waitFor({ state: 'visible' });
-        await this.signFieldItem.click();
+            await this.signFieldItem.waitFor({ state: 'visible' });
+            await this.signFieldItem.click();
         });
     }
 
     async clickNameFieldItem() {
         await step('Click on the "Name" in "Fields" menu', async () => {
-        await this.nameFieldItem.waitFor({ state: 'visible' });
-        await this.nameFieldItem.click();
+            await this.nameFieldItem.waitFor({ state: 'visible' });
+            await this.nameFieldItem.click();
         });
     }
 
     async clickCreateBtn() {
-        await step('Click the "Create" button', async () => {
-        await this.createBtn.click();
+        await step('Click the "Create" button.', async () => {
+            await this.createBtn.click();
+
         });
     }
 
     async clickInitialFieldsItem() {
         await step('Click on the "Initial" in "Fields" menu', async () => {
-        await this.initialFieldItem.click();
+            await this.initialFieldItem.click();
+        });
+    }
+
+    async clickCancelBtn() {
+        await step('Click the "Cancel" button.', async () => {
+            await this.cancelBtn.click();
         });
     }
 
@@ -181,5 +190,6 @@ export default class PrepareForSignatureModal {
         await this.dateFieldItem.waitFor({ state: 'visible' });
         await this.dateFieldItem.click();
         });
+
     }
 }
