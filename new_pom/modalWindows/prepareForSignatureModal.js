@@ -31,11 +31,10 @@ export default class PrepareForSignatureModal {
         this.customSigningOrderPositionNumberTwo = this.page.locator('span.signers__item-order-position').last();
         this.addRecipientsBtn = this.page.getByText('Recipients', { exact: true });
         this.recipientEmailField = this.page.getByPlaceholder('test@signaturely.com');
-        this.nameFieldItem = this.page
-            .locator('ul.interactModal__fieldBar-fieldList li')
-            .filter({ hasText: /^Name$/ })
-            .first();    
+        this.prepareForSigningTitle = this.page.getByRole('heading', { name: 'Prepare for Signing' });
+        this.nameFieldsItem = this.page.locator('ul.interactModal__fieldBar-fieldList li').filter({ hasText: /^Name$/ }).first();     
         this.initialFieldsItem = this.fieldsMenu.getByText('Initial');
+
     }
 
     async clickSignDocumentRadioBtn() {
@@ -108,7 +107,7 @@ export default class PrepareForSignatureModal {
 
     async clickItemDropDown(signerName) {
         await step('Select a signer\'s name from the "Assigned To" dropdown.', async () => {
-        await this.itemDropDown.getByText(signerName).click();
+            await this.itemDropDown.getByText(signerName).click();
         });
     }
 
@@ -119,7 +118,9 @@ export default class PrepareForSignatureModal {
     }
 
     async clickBackToTemplatesBtn() {
-        await this.backToTempatesBtn.click();
+        await step('In the modal window, click on the "Back to templates" button.', async () => {
+            await this.backToTempatesBtn.click();
+        });
     }
 
     async clickCustomSigningOrderCheckbox() {
@@ -138,15 +139,23 @@ export default class PrepareForSignatureModal {
         });
     }
 
-    async clickNameFieldItem() {
-        await this.nameFieldItem.click();
+    async getPrepareForSigningTitleText() {
+        const actualText = await this.prepareForSigningTitle.textContent();
+        return actualText
+    }
+
+    async clickNameFieldsItem() {
+        await this.nameFieldsItem.click();
     }
 
     async clickCreateBtn() {
-        await this.createBtn.click();
+        await step('Click the "Create" button.', async () => {
+            await this.createBtn.click();
+        });
     }
 
     async clickInitialFieldsItem() {
         await this.initialFieldsItem.click();
     }
+
 }

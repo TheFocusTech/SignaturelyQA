@@ -1,6 +1,6 @@
 import { signUpRequest } from "./apiCalls";
-import { authorize, getConfirmationLinkFromEmail, getConfirmCodeFromEmail, checkEmailMessageReceived, getSignLinkFromEmail } from "../index.js";
-import {step} from "allure-js-commons";
+import { authorize, getLinkFromEmail, getConfirmCodeFromEmail, getMessageTextFromEmail } from "../index.js";
+import { step } from "allure-js-commons";
 
 export function generateNumberForNewUser() {
     let dt = new Date();
@@ -17,6 +17,16 @@ export function generateNumberForNewUser() {
 
 export function delay(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+export async function generateNewUserEmail(addition) {
+    let newEmail;
+    await step('Generate new user email', async () => {
+        newEmail = `${process.env.EMAIL_PREFIX}${process.env.NEW_USER_NUMBER}${addition}${process.env.EMAIL_DOMAIN}`;
+        console.log(`Generated new user Email: ${newEmail.slice(-29)}`);
+    });
+
+    return newEmail;
 }
 
 export async function generateNewUserData(free = false, workflowVersion = null) {
@@ -62,37 +72,28 @@ export async function createNewFreeUserThroughApi(request) {
     return newFreeUserData;
 }
 
-export async function retrieveUserEmailConfirmationLink(request, newUserData) {
+export async function retrieveUserEmailConfirmationLink(request, newUserEmail, subject) {
     let confirmationLink;
-    await step("Retrieve the confirmation link for the user's email.", async () => {
+    await step("Retrieve the confirmation link from the user's email.", async () => {
         const auth = await authorize();
-        confirmationLink = await getConfirmationLinkFromEmail(auth, newUserData.email);
-
+        confirmationLink = await getLinkFromEmail(auth, newUserEmail, subject);
     });
         return confirmationLink;
 }
 
-export async function retrieveSignerLink(request, signerEmail) {
-    let confirmationLink;
-    await step("Retrieve the confirmation link for the user's email.", async () => {
-        const auth = await authorize();
-        confirmationLink = await getSignLinkFromEmail(auth, signerEmail);
-        console.log(confirmationLink);
-
-    });
-    return confirmationLink;
-}
-
 export async function retrieveUserEmailConfirmCode(request, newUserEmail) {
-    const auth = await authorize();
-
-    return await getConfirmCodeFromEmail(auth, newUserEmail);
+    let confirmCode;
+    await step("Retrieve the confirm code from the user's email.", async () => {
+        const auth = await authorize();
+        confirmCode = await getConfirmCodeFromEmail(auth, newUserEmail);
+    });
+        return confirmCode;
 }
 
-export async function retrieveEmailMessage(request, senderName, receiverEmail, subject) {
+export async function retrieveEmailMessage(request, fromName, toEmail, subject, messageCss) {
     const auth = await authorize();
 
-    return await checkEmailMessageReceived(auth, senderName, receiverEmail, subject);
+    return await getMessageTextFromEmail(auth, fromName, toEmail, subject, messageCss);
 }
 
 export async function clickCanvas(page, canvasLocator, excludedAreas = []) {
@@ -192,26 +193,4 @@ export function generateRandomPassword(length) {
         }
 
         return password.join('');
-}
-
-export async function getRecipientFromResponse(response) {
-    let firstResponseCaptured = false;
-    let recipientEmail;
-    const requestUrl = response.url();    
-
-    if (!firstResponseCaptured && requestUrl.includes('/send_out')) {
-        const body = await response.text();
-        try {
-            const data = JSON.parse(body);
-            const recipients = data.recipients || [];
-            const recipientEmails = recipients.map((recipient) => recipient.email);
-            recipientEmail = recipientEmails[0].slice(-28);
-            console.log('Recipient Email:', recipientEmail);
-            firstResponseCaptured = true;         
-        } catch (e) {
-            console.error('Error parsing JSON response:', e);
-        }
-    }
-
-    return recipientEmail;
 }

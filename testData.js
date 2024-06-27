@@ -25,7 +25,10 @@ export const TOAST_MESSAGE = {
     success: 'Document successfully saved!',
     fileMovedToFolder: 'Files successfully moved!',
     profileUpdated: 'Profile information updated.',
-    documentSubmited: 'Document submitted.'
+    checkYourEmail: 'Check your new email to confirm it',
+    emailConfirmed: 'Email confirmed',
+    sendReminder: 'Reminder(s) has been sent',
+    documentSubmited: 'Document submitted.',
 };
 export const API_KEY_NAME = 'Test Api Key';
 export const NO_API_KEY_MESSAGE = 'You don\'t have any API keys yet.';
@@ -107,7 +110,12 @@ export const PERSONAL_PLAN_DESCRIPTION = (billingPeriod) => `Your plan (Billed $
 export const EMAIL_SUBJECTS = {
     reminderToSign: "Reminder, Please sign",
     signatureRequest: "requested your signature",
-    documentToView: "Sent you a document to view"
+    emailConfirmation: 'Signaturely Email Confirmation',
+    sentToView: 'Sent you a document to view',
+}
+export const SELECTORS = {
+    link: 'span',
+    message: 'td p:has(a)',
 }
 
 export const SIGNER_ME = 'Me (Now)';
@@ -128,3 +136,4 @@ export const UPLOAD_FILE_PATH = {
 export const UPLOAD_FILE_NAME = {
     jpgDocument: 'picture.jpg',
 };
+export const NO_ATTACHED_CARD = 'Current Card:No attached card';

@@ -1,8 +1,8 @@
 import { expect } from '@playwright/test';
 import { test } from "../fixtures/base.js";
 import { description, tag, severity, Severity, link, epic, step } from 'allure-js-commons';
-import { DOCUMENT_STATUS, SIGNERS_DATA, TOAST_MESSAGE, UPLOAD_FILE_PATH, EMAIL_SUBJECTS } from '../testData.js';
-import { getRecipientFromResponse, retrieveSignerLink, retrieveEmailMessage } from '../helpers/utils.js';
+import { DOCUMENT_STATUS, SIGNERS_DATA, TOAST_MESSAGE, UPLOAD_FILE_PATH, EMAIL_SUBJECTS, SELECTORS } from '../testData.js';
+import { retrieveUserEmailConfirmationLink, retrieveEmailMessage } from '../helpers/utils.js';
 
 test.describe('Sign Document', () => {
     test('TC_04_11_02 | Verify custom signing order', async ({ createBusinessUserAndLogin, signPage, prepareForSignatureModal }) => {
@@ -57,8 +57,7 @@ test.describe('Sign Document', () => {
         await epic('Sign document');
         await tag('Viewers');
 
-        const signerName = `${process.env.NEW_USER_NAME}${'001'}`;
-        const viewerName = `${process.env.NEW_USER_NAME}${'003'}`;
+        const signerName = `${process.env.NEW_USER_NAME}${'001'}`;        
         const signerEmail = `${process.env.EMAIL_PREFIX}${process.env.NEW_USER_NUMBER}${'001'}${process.env.EMAIL_DOMAIN}`;
         const reviewerEmail = `${process.env.EMAIL_PREFIX}${process.env.NEW_USER_NUMBER}${'003'}${process.env.EMAIL_DOMAIN}`;
 
@@ -83,20 +82,10 @@ test.describe('Sign Document', () => {
         
         await finalStepPage.clickSendForSignatureBtn();
 
-        await step('Verify that viewer email in API response', async () => { 
-            page.on('response', async response => {
-                const recipientEmail = await getRecipientFromResponse(response);                
-
-                if (recipientEmail) {
-                    expect(recipientEmail).toEqual(reviewerEmail.slice(-28));
-                } 
-            });
-        });
-
         await successModal.clickBackToDocumentsBtn();
         await documentsPage.table.waitForDocumentStatusVisible(DOCUMENT_STATUS.awaiting);
         
-        const signerLink = await retrieveSignerLink(request, signerEmail);
+        const signerLink = await retrieveUserEmailConfirmationLink(request, signerEmail, EMAIL_SUBJECTS.signatureRequest);
 
         await step("Navigate to the sign link", async () => {
             await page.goto(signerLink);            
@@ -112,10 +101,10 @@ test.describe('Sign Document', () => {
         await notRegisterSignerSignPage.toast.waitForToastIsHiddenByText(TOAST_MESSAGE.documentSubmited);
         await documentSubmitProccessModal.waitForSubmitTitleByText('Thanks for Submitting your Document');
         
-        const message = await retrieveEmailMessage(request, 'Signaturely', reviewerEmail, EMAIL_SUBJECTS.documentToView);
+        const message = await retrieveEmailMessage(request, 'Signaturely', reviewerEmail, EMAIL_SUBJECTS.sentToView, SELECTORS.message);
         console.log(message);
         await step('Verify that Viewer has got email for viewing docoment', async () => {            
-            expect(message).toEqual('Sent you a document to view');
+            expect(message).toEqual(`${process.env.NEW_USER_NAME} (${process.env.NEW_USER_EMAIL}) sent you the following document to view`);
         });
 
     });

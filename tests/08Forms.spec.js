@@ -16,7 +16,7 @@ test.describe('Sign Document', () => {
     await createFormPage.fileUploader.uploadFile('testDocuments/todoList.xlsx');
     await createFormPage.clickFillTemplateBtn();
 
-    await prepareForSignatureModal.clickNameFieldItem();
+    await prepareForSignatureModal.clickNameFieldsItem();
     await prepareForSignatureModal.doCanvasClicks();
     
     await prepareForSignatureModal.clickSignFieldsItem();
