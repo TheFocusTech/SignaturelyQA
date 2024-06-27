@@ -60,6 +60,7 @@ export const createTemplate = async (signPage, prepareForSignatureModal, templat
         await signPage.sideMenu.clickTemplates();
         await templatePage.sideMenuTemplates.clickCreateTemplate();
         await createTemplatePage.fillTemplateNameField(CREATE_TEMPLATE.nameField);
+        await createTemplatePage.fillOptionalMessageField(CREATE_TEMPLATE.optionalMessage);
         await createTemplatePage.fillCreateTemplateRolesField(CREATE_TEMPLATE.nameRole);
         await createTemplatePage.fileUploader.uploadFile(UPLOAD_FILE_PATH.jpgDocument);
         await createTemplatePage.clickFillTemplateBtn();

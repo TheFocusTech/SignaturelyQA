@@ -72,7 +72,8 @@ test.describe('Templates', () => {
         signPage,
         templatePage,
         editTemplatesPage,
-        prepareForSignatureModal }) => {
+        prepareForSignatureModal,
+        createNewTemplatePage: createTemplatePage }) => {
         test.slow();
 
         await description('Objective: To verify that a user can successfully edit an existing template by changing its name, message, role, and associated document, and ensure that the changes are reflected in the user interface and confirmed by appropriate toast messages.')
@@ -90,8 +91,9 @@ test.describe('Templates', () => {
 
         await createTemplate(
             signPage,
+            prepareForSignatureModal,
             templatePage,
-            prepareForSignatureModal);
+            createTemplatePage);
 
         await signPage.sideMenu.clickTemplates();
         await templatePage.table.clickOptionsBtn(0);
@@ -100,7 +102,7 @@ test.describe('Templates', () => {
         await editTemplatesPage.createTemplate.fillOptionalMessageField(EDIT_TEMPLATE_DATA.optionalMessage);
         await editTemplatesPage.createTemplate.fillCreateTemplateRolesField(EDIT_TEMPLATE_DATA.nameRole);
         await editTemplatesPage.fileUploader.deleteUploadedFile();
-        await editTemplatesPage.fileUploader.uploadFile(UPLOAD_FILE_PATH.jpgDocument);
+        await editTemplatesPage.fileUploader.uploadFile(UPLOAD_FILE_PATH.csvDocument);
         await editTemplatesPage.createTemplate.clickFillTemplateBtn();
         await prepareForSignatureModal.clickSignFieldsItem();
         await prepareForSignatureModal.doCanvasClicks();

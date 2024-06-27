@@ -18,7 +18,6 @@ export default class TableComponent {
         this.sendReminderBtn = this.page.getByRole('button', { name: 'Send Reminder' });
         this.duplicateBtn = this.page.getByText('Duplicate');
         this.formsList = this.page.locator('div.table__dataRow');
-
         this.editBtn = this.page.getByRole('button', { name: 'Edit' });
     }
 
