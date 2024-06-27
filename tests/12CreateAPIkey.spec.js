@@ -5,7 +5,7 @@ import {description, tag, severity, Severity, link, epic, step} from "allure-js-
 
 test.describe('Create API key', () => {
 
-    test.only('TC_12_48_01 | Verify User can copy API key created by the "Create API" button on the right.', async ({ createBusinessUserAndLogin, signPage, settingsCompanyPage, settingsAPIPage, createAPIKeyModal}) => {
+    test('TC_12_48_01 | Verify User can copy API key created by the "Create API" button on the right.', async ({ createBusinessUserAndLogin, signPage, settingsCompanyPage, settingsAPIPage, createAPIKeyModal}) => {
         await description('To verify that a Free user can successfully register.');
         await severity(Severity.BLOCKER);
         await link(
