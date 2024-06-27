@@ -40,6 +40,7 @@ import CreateNewTemplatePage from "../new_pom/pages/templates/createNewTemplateP
 import NotRegisterSignerSignPage from '../new_pom/pages/notRegisterSignerSignPage.js';
 import SignerAlmostDoneModal from '../new_pom/modalWindows/signerAlmostDoneModal.js';
 import DocumentSubmitProccessModal from '../new_pom/modalWindows/documentSubmitProccessModal.js';
+import DeleteFolderModal from "../new_pom/modalWindows/confirmDeleteFolderModal.js"
 
 export const test = base.extend({
 
@@ -244,5 +245,9 @@ export const test = base.extend({
     documentSubmitProccessModal: async ({ page }, use) => {
         await use(new DocumentSubmitProccessModal(page));
     },
+
+    confirmDeleteFolderModal: async ({ page }, use) => {
+        await use(new DeleteFolderModal(page));
+    }
 });
 

@@ -15,11 +15,25 @@ export default class DocumentsPage {
         this.toast = new ToastComponent(this.page);
         
         this.createFolderBtn = this.page.getByRole('button', { name: 'Create Folder' });
+        this.optionsDropdown = this.page.getByRole('button', { name: 'Options' }).first();
+        this.deleteBtn = this.page.getByRole('button', { name: 'Delete' })
     }
 
     async clickCreateFolderBtn() {
         await step('Click the "Create Folder" button', async () => {
             await this.createFolderBtn.click();
+        });
+    }
+
+    async clickOptionsDropdown() {
+        await step('Click the "Options" dropdown', async () => {
+            await this.optionsDropdown.click();
+        });
+    }
+
+    async clickDeleteBtn() {
+        await step('Click the "Delete" button on the dropdown menu', async () => {
+            await this.deleteBtn.click();
         });
     }
 }
