@@ -69,7 +69,9 @@ export default class TableComponent {
     }
 
     async clickSendReminderBtn() {
-        await this.sendReminderBtn.click();
+        await step('Click the "Send reminder" button', async () => {
+            await this.sendReminderBtn.click();
+        });        
     }
 
     async waitForDocumentStatusVisible(status) {
