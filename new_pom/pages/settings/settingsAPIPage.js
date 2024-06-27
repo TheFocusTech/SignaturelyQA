@@ -1,7 +1,7 @@
 import ToastComponent from "../../components/toastComponent";
 import TableComponent from "../../components/tableComponent";
 
-export default class NewSettingsAPIPage {
+export default class SettingsAPIPage {
     constructor(page) {
         this.page = page;
 

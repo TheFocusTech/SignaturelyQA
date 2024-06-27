@@ -1,6 +1,5 @@
 
 import { DATA_SIGNER, FOLDER_NAME, TOAST_MESSAGE, CREATE_TEMPLATE, UPLOAD_FILE_PATH, SIGNERS_DATA } from "../testData";
-import { test } from "../fixtures/base";
 import { step } from "allure-js-commons";
 
 export const createSignature = async (signPage, settingsCompanyPage, settingsEditSignaturePage, createOrEditSignatureOnSettingModal) => {
@@ -73,4 +72,23 @@ export const createTemplate = async (signPage, prepareForSignatureModal, templat
     })
 };
 
-
+export const createForm = async (signPage, 
+    prepareForSignatureModal, createFormPage, formsPage, successModal) => {
+    await step('Create Form', async () => {        
+        await signPage.sideMenu.clickForms();
+        await formsPage.clickCreateFormBtn();
+        await createFormPage.fillFormNameField(SIGNERS_DATA.signerName1);
+        await createFormPage.fillOptionalMessageField(SIGNERS_DATA.viewerEmail1);
+        await createFormPage.fileUploader.uploadFile(UPLOAD_FILE_PATH.jpgDocument);
+        await createFormPage.clickFillTemplateBtn();
+        await prepareForSignatureModal.clickNameFieldItem();
+        await prepareForSignatureModal.doCanvasClicks();
+        await prepareForSignatureModal.clickSignFieldItem();
+        await prepareForSignatureModal.doCanvasClicks();
+        await prepareForSignatureModal.clickDateFieldItem();
+        await prepareForSignatureModal.doCanvasClicks();
+        await prepareForSignatureModal.clickCreateBtn();
+        await successModal.clickBackToFormsBtn();
+        await formsPage.sideMenu.clickSign();
+        })
+};

@@ -17,6 +17,7 @@ test.describe('DocumentsType', () => {
         await tag('Edit & Resend, Documents');
         await severity(Severity.CRITICAL);
         await link(
+
             "https://app.qase.io/case/SIGN-21",
             "QASE: SIGN-21 ")
         await link(
@@ -24,7 +25,7 @@ test.describe('DocumentsType', () => {
             "https://docs.google.com/document/d/1Qce7tKWOwVYtPxgQv_8ae-HUkbAgeOFph0lB_eziY_k/edit#heading=h.a5x7xbzct5pl",
             "ATC_05_21_01"),
 
-            await epic('Documents');
+        await epic('Documents');
 
         await createDocumentAwaiting(
             signPage, prepareForSignatureModal,
@@ -40,7 +41,6 @@ test.describe('DocumentsType', () => {
         await step('Verify that the title matches "Edit & Resend document"', async () => {
             expect(await editAndResendDocumentModal.getTitleText()).toBe("Edit & Resend document");
         });
-
     });
 
     test('TC_05_21_02 | Verify that button "Revert to Draft" is active', async ({ createBusinessUserAndLogin, page, signPage, prepareForSignatureModal,
@@ -54,6 +54,7 @@ test.describe('DocumentsType', () => {
         await link(
             "https://app.qase.io/case/SIGN-21",
             "QASE: SIGN-21 ")
+
         await link(
             "Documentation",
             "https://docs.google.com/document/d/1Qce7tKWOwVYtPxgQv_8ae-HUkbAgeOFph0lB_eziY_k/edit#heading=h.r25l83kzqn09",
@@ -107,7 +108,6 @@ test.describe('DocumentsType', () => {
         await documentsPage.table.clickMoveToBtn();
         await moveToFolderModal.selectFolder(FOLDER_NAME);
         await moveToFolderModal.clickMoveToFolderBtn();
-
 
         await step('Verify the toast message', async () => {
             await expect(await documentsPage.toast.toastBody).toHaveText(TOAST_MESSAGE.fileMovedToFolder);

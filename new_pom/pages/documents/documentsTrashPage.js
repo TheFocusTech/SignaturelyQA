@@ -2,7 +2,7 @@ import TableComponent from "../../components/tableComponent";
 import SideMenuDocumentsComponent from "../../components/sideMenuDocumentsComponent";
 import SideMenuComponent from "../../components/sideMenuComponent";
 
-export default class NewDocumentsTrashPage {
+export default class DocumentsTrashPage {
 
     constructor(page) {
         this.page = page;
