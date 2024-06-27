@@ -71,7 +71,7 @@ export default class TableComponent {
     }
 
     async waitForDocumentStatusVisible(status) {
-        await step(`Wait for ${status} the created document in the table.`, async () => {
+        await step(`Wait for ${status} status of the created document in the table.`, async () => {
             await this.documentStatus.getByText(status).waitFor({ state: 'visible' })
         });        
     }

@@ -2,7 +2,7 @@ import { expect } from "@playwright/test";
 import { test } from "../fixtures/base.js";
 import { SIGNERS_DATA, TOAST_MESSAGE, DOCUMENT_STATUS } from "../testData.js";
 
-test.describe('Sign Document', () => {
+test.describe('Forms', () => {
 
   test('TC_08_32_01 | Verify that user can create form', async ({ createBusinessUserAndLogin, signPage, 
     prepareForSignatureModal, createFormPage, formsPage, successModal }) => {
