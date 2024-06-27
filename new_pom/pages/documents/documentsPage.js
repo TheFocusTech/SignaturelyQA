@@ -2,8 +2,10 @@ import SideMenuComponent from "../../components/sideMenuComponent";
 import TableComponent from "../../components/tableComponent";
 import SideMenuDocumentsComponent from "../../components/sideMenuDocumentsComponent";
 import ToastComponent from "../../components/toastComponent";
+import { step } from "allure-js-commons";
 
-export default class NewDocumentsPage {
+
+export default class DocumentsPage {
     constructor(page) {
         this.page = page;
 
@@ -15,6 +17,8 @@ export default class NewDocumentsPage {
     }
 
     async clickCreateFolderBtn() {
-        await this.createFolderBtn.click();
+        await step('Click the "Create Folder" button', async () => {
+            await this.createFolderBtn.click();
+        });
     }
 }

@@ -1,7 +1,7 @@
 import SideMenuSettingsComponent from "../../components/sideMenuSettingsComponent";
 import ToastComponent from "../../components/toastComponent";
 
-export default class NewSettingsEditSignaturePage {
+export default class SettingsEditSignaturePage {
     constructor(page) {
         this.page = page;
 

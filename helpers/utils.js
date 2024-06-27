@@ -1,5 +1,6 @@
 import { signUpRequest } from "./apiCalls";
-import { authorize, getConfirmationLinkFromEmail, getConfirmCodeFromEmail, checkEmailMessageReceived } from "../index.js";
+import { authorize, getLinkFromEmail, getConfirmCodeFromEmail, getMessageTextFromEmail } from "../index.js";
+import { step } from "allure-js-commons";
 
 export function generateNumberForNewUser() {
     let dt = new Date();
@@ -18,26 +19,39 @@ export function delay(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
 }
 
+export async function generateNewUserEmail(addition) {
+    let newEmail;
+    await step('Generate new user email', async () => {
+        newEmail = `${process.env.EMAIL_PREFIX}${process.env.NEW_USER_NUMBER}${addition}${process.env.EMAIL_DOMAIN}`;
+        console.log(`Generated new user Email: ${newEmail.slice(-29)}`);
+    });
+
+    return newEmail;
+}
+
 export async function generateNewUserData(free = false, workflowVersion = null) {
-    let userNumber = generateNumberForNewUser();
-    process.env.NEW_USER_NUMBER = userNumber;
-    let userData = {
-        email: `${process.env.EMAIL_PREFIX}${userNumber}${process.env.EMAIL_DOMAIN}`,
-        name: `TestUser${userNumber}`,
-        password: `QA_tester${userNumber}`,
-    };
-    process.env.NEW_USER_EMAIL = userData.email;
-    process.env.NEW_USER_NAME = userData.name;
-    process.env.NEW_USER_PASSWORD = userData.password;
+    let userData;
+    await step('Create new user data', async () => {
+        let userNumber = generateNumberForNewUser();
+        process.env.NEW_USER_NUMBER = userNumber;
+        userData = {
+            email: `${process.env.EMAIL_PREFIX}${userNumber}${process.env.EMAIL_DOMAIN}`,
+            name: `TestUser${userNumber}`,
+            password: `QA_tester${userNumber}`,
+        };
+        process.env.NEW_USER_EMAIL = userData.email;
+        process.env.NEW_USER_NAME = userData.name;
+        process.env.NEW_USER_PASSWORD = userData.password;
 
-    if (free) {
-        userData.free = true;
-    }
-    if (workflowVersion) {
-        userData.workflowVersion = workflowVersion;
-    }
+        if (free) {
+            userData.free = true;
+        }
+        if (workflowVersion) {
+            userData.workflowVersion = workflowVersion;
+        }
 
-    return userData;
+    });
+        return userData;
 }
 
 export async function createNewUserThroughApi(request) {
@@ -58,22 +72,28 @@ export async function createNewFreeUserThroughApi(request) {
     return newFreeUserData;
 }
 
-export async function retrieveUserEmailConfirmationLink(request, newUserData) {
-    const auth = await authorize();
-
-    return await getConfirmationLinkFromEmail(auth, newUserData.email);
+export async function retrieveUserEmailConfirmationLink(request, newUserEmail, subject) {
+    let confirmationLink;
+    await step("Retrieve the confirmation link from the user's email.", async () => {
+        const auth = await authorize();
+        confirmationLink = await getLinkFromEmail(auth, newUserEmail, subject);
+    });
+        return confirmationLink;
 }
 
 export async function retrieveUserEmailConfirmCode(request, newUserEmail) {
-    const auth = await authorize();
-
-    return await getConfirmCodeFromEmail(auth, newUserEmail);
+    let confirmCode;
+    await step("Retrieve the confirm code from the user's email.", async () => {
+        const auth = await authorize();
+        confirmCode = await getConfirmCodeFromEmail(auth, newUserEmail);
+    });
+        return confirmCode;
 }
 
-export async function retrieveEmailMessage(request, senderName, receiverEmail, subject) {
+export async function retrieveEmailMessage(request, fromName, toEmail, subject, messageCss) {
     const auth = await authorize();
 
-    return await checkEmailMessageReceived(auth, senderName, receiverEmail, subject);
+    return await getMessageTextFromEmail(auth, fromName, toEmail, subject, messageCss);
 }
 
 export async function clickCanvas(page, canvasLocator, excludedAreas = []) {

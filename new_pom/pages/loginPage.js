@@ -1,6 +1,6 @@
-import {test} from "../../fixtures/base";
+import {step} from "allure-js-commons";
 
-export default class NewLoginPage {
+export default class LoginPage {
     constructor(page) {
         this.page = page;
 
@@ -10,19 +10,19 @@ export default class NewLoginPage {
     }
 
     async fillEmailAddressInput(email){
-        await test.step('Fill in Email Address', async () => {
+        await step('Fill in Email Address', async () => {
             await this.emailAddressInput.fill(email);
         });
     }
 
     async fillPasswordInput(password) {
-        await test.step('Fill in Password', async () => {
+        await step('Fill in Password', async () => {
             await this.passwordInput.fill(password);
         });
     }
 
     async clickLogin() {
-        await test.step('Click on the Login Button', async () => {
+        await step('Click on the Login Button', async () => {
             await this.loginBtn.click();
         });
     }

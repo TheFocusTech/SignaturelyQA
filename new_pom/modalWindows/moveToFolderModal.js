@@ -1,4 +1,4 @@
-import { test } from "../../fixtures/base";
+import { step } from "allure-js-commons";
 
 export default class MoveToFolderModal {
     constructor(page) {
@@ -9,13 +9,13 @@ export default class MoveToFolderModal {
     }
 
     async selectFolder(name) {
-        await test.step('Select the folder', async () => {
+        await step('Select the folder', async () => {
             await this.nameOfFolder.filter({ hasText: name }).click();
         });
     }
 
     async clickMoveToFolderBtn() {
-        await test.step('Click the "Move to folder" button', async () => {
+        await step('Click the "Move to folder" button', async () => {
             await this.moveToFolderBtn.click();
         });    
     }

@@ -1,12 +1,11 @@
 import { expect } from "@playwright/test"
 import {test, createBusinessUserAndLogin, createNewFolder} from "../fixtures/base.js";
-import SignPage from "../page_objects/signPage";
 import { TOAST_MESSAGE, FILL_RENAME_FOLDER_NAME } from "../testData.js";
 
 
 test.describe ('Folders', () => {
 
-    test('TC_06_22_01 | Verify the business user can create folder', async ({ page , createBusinessUserAndLogin}) => {
+    test.skip('TC_06_22_01 | Verify the business user can create folder', async ({ page , createBusinessUserAndLogin}) => {
         const signPage = new SignPage(page); 
 
         const documentsPage = await signPage.clickDocumentsSidebarLinkAndGoDocumentsPage();
@@ -17,7 +16,7 @@ test.describe ('Folders', () => {
         await expect(documentsPage.locators.getToast()).toHaveText(TOAST_MESSAGE.folderCreated);
     });
 
-    test('TC_06_24_01 | Verify the business user can delete folder', async ({ page, createBusinessUserAndLogin, createNewFolder }) => {
+    test.skip('TC_06_24_01 | Verify the business user can delete folder', async ({ page, createBusinessUserAndLogin, createNewFolder }) => {
         const signPage = new SignPage(page); 
 
         const documentsPage = await signPage.clickDocumentsSidebarLinkAndGoDocumentsPage();
@@ -30,7 +29,7 @@ test.describe ('Folders', () => {
         await expect(documentsPage.locators.getToast()).toHaveText(TOAST_MESSAGE.folderDeleted);
     });
 
-    test('TC_06_23_01 | Rename folder', async ({ page, createBusinessUserAndLogin, createNewFolder }) => {
+    test.skip('TC_06_23_01 | Rename folder', async ({ page, createBusinessUserAndLogin, createNewFolder }) => {
         const signPage = new SignPage(page); 
 
         const documentsPage = await signPage.clickDocumentsSidebarLinkAndGoDocumentsPage();

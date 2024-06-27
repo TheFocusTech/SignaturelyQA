@@ -1,3 +1,5 @@
+import {step} from 'allure-js-commons';
+
 export default class CreateSignatureOrInitialModal {
     constructor(page) {
         this.page = page;
@@ -8,12 +10,16 @@ export default class CreateSignatureOrInitialModal {
     }
 
     async clickCheckboxAgree() {
-        await this.checkboxAgree.waitFor({ state: 'visible' });
-        await this.checkboxAgree.click();
+        await step('Click the "I agree" checkbox for electronic signing.', async () => {
+            await this.checkboxAgree.waitFor({ state: 'visible' });
+            await this.checkboxAgree.click();
+        });
     }
 
     async clickSignNowBtn() {
-        await this.signNowBtn.click();
+        await step('Click on the "Sign Now" button.', async () => {
+            await this.signNowBtn.click();
+        });
     }
 
     async fillInputSignature(text) {
