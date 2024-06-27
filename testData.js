@@ -137,3 +137,7 @@ export const UPLOAD_FILE_NAME = {
     jpgDocument: 'picture.jpg',
 };
 export const NO_ATTACHED_CARD = 'Current Card:No attached card';
+
+export const SUBMIT_TITLE = 'Thanks for Submitting your Document';
+export const SERVICE_NAME = 'Signaturely';
+export const EMAIL_MESSAGE = " sent you the following document to view"
