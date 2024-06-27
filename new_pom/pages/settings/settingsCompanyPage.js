@@ -3,6 +3,7 @@ import SideMenuComponent from "../../components/sideMenuComponent";
 import SideMenuSettingsComponent from "../../components/sideMenuSettingsComponent";
 import ToastComponent from "../../components/toastComponent";
 import {test} from "../../../fixtures/base";
+import { step } from "allure-js-commons";
 
 export default class NewSettingsCompanyPage {
     constructor(page) {
@@ -25,43 +26,43 @@ export default class NewSettingsCompanyPage {
     }
 
     async logoUpLoadFile(file) {
-        await test.step('Upload File', async () => {
+        await step('Upload File', async () => {
             await this.inputFile.setInputFiles(file)
         });
     }
 
     async fillCompanyName(email) {
-        await test.step('Fill company name field', async () => {
+        await step('Fill company name field', async () => {
             await this.companyName.fill(email)
         });
     }
 
     async fillFromEmail(email) {
-        await test.step('Fill  fromEmail field', async () => {
+        await step('Fill  fromEmail field', async () => {
             await this.fromEmailName.fill(email)
         });
     }
 
     async fillEmailClosingSignature(email) {
-        await test.step('Fill emailClosingSignature  field', async () => {
+        await step('Fill emailClosingSignature  field', async () => {
             await this.emailClosingSignature.fill(email)
         });
     }
 
     async  fillRedirectionPage(url) {
-        await test.step('Fill redirectionPage field', async () => {
+        await step('Fill redirectionPage field', async () => {
             await this.redirectionPage.fill(url)
         });
     }
 
     async checkActivateCheckbox() {
-        await test.step('Check aktivate checkbox', async () => {
+        await step('Check aktivate checkbox', async () => {
             await this.checkboxActivate.click()
         });
     }
 
     async clickSaveBtn() {
-        await test.step('Click on Save btn', async () => {
+        await step('Click on Save btn', async () => {
             await this.saveBtn.click()
         });
     }
