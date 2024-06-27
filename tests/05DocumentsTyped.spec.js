@@ -1,38 +1,32 @@
 import { expect } from "@playwright/test";
 import { test } from "../fixtures/base.js";
-import { UPLOAD_FILE_PATH, UPLOAD_FILE_NAME, FOLDER_NAME, TOAST_MESSAGE } from "../testData.js";
+import { UPLOAD_FILE_PATH, UPLOAD_FILE_NAME, FOLDER_NAME, TOAST_MESSAGE, DOCUMENT_STATUS } from "../testData.js";
 import { createFolder, createDocumentAwaiting } from "../helpers/preconditions.js";
 import { description, tag, severity, Severity, link, epic, step } from "allure-js-commons";
 
 test.describe('DocumentsType', () => {
 
     test('TC_05_21_01 | Verify that button Edit&Resend is active', async ({ createBusinessUserAndLogin,
-        signPage, prepareForSignatureModal,
-        editAndResendDocumentModal, successModal,
+        signPage, prepareForSignatureModal, editAndResendDocumentModal, successModal,
         finalStepPage, documentsPage }) => {
 
         test.setTimeout(250 * 1000);
 
         await description('Objective: To verify that the document can be returned for editing.');
-        await tag('Edit & Resend, Documents');
         await severity(Severity.CRITICAL);
-        await link(
-
-            "https://app.qase.io/case/SIGN-21",
-            "QASE: SIGN-21 ")
-        await link(
-            "Documentation",
+        await link("https://app.qase.io/case/SIGN-21", "QASE: SIGN-21 ");
+        await link("Documentation",
             "https://docs.google.com/document/d/1Qce7tKWOwVYtPxgQv_8ae-HUkbAgeOFph0lB_eziY_k/edit#heading=h.a5x7xbzct5pl",
-            "ATC_05_21_01"),
-
-        await epic('Documents');
+            "ATC_05_21_01");
+        await tag('Edit & Resend, Documents');
+        await epic('Documents (typed)');
 
         await createDocumentAwaiting(
             signPage, prepareForSignatureModal,
             documentsPage, successModal, finalStepPage);
 
         await signPage.sideMenu.clickDocuments();
-        await documentsPage.table.clickOptionsButton();
+        await documentsPage.table.clickOptionsBtn(0);
         await documentsPage.table.clickEditAndResendBtn();
 
         await step('Verify that modal window Edit & Resend document has opened', async () => {
@@ -43,28 +37,23 @@ test.describe('DocumentsType', () => {
         });
     });
 
-    test('TC_05_21_02 | Verify that button "Revert to Draft" is active', async ({ createBusinessUserAndLogin, page, signPage, prepareForSignatureModal,
-        successModal, editAndResendDocumentModal, finalStepPage, documentsPage }) => {
+    test('TC_05_21_02 | Verify that button "Revert to Draft" is active', async ({ createBusinessUserAndLogin, page, signPage, prepareForSignatureModal, successModal, editAndResendDocumentModal, finalStepPage, documentsPage }) => {
 
         test.setTimeout(250 * 1000);
 
         await description('Objective: To verify that the document can be returned for editing.');
-        await tag('Edit & Resend, Documents');
         await severity(Severity.CRITICAL);
-        await link(
-            "https://app.qase.io/case/SIGN-21",
-            "QASE: SIGN-21 ")
+        await link("https://app.qase.io/case/SIGN-21", "QASE: SIGN-21 ");
 
-        await link(
-            "Documentation",
+        await link("Documentation",
             "https://docs.google.com/document/d/1Qce7tKWOwVYtPxgQv_8ae-HUkbAgeOFph0lB_eziY_k/edit#heading=h.r25l83kzqn09",
-            "TC_05_21_02"),
-
-            await epic('Documents');
+            "ATC_05_21_02");
+        await tag('Edit & Resend, Documents');
+        await epic('Documents (typed)');
 
         await createDocumentAwaiting(signPage, prepareForSignatureModal, documentsPage, successModal, finalStepPage);
         await signPage.sideMenu.clickDocuments();
-        await documentsPage.table.clickOptionsButton();
+        await documentsPage.table.clickOptionsBtn(0);
         await documentsPage.table.clickEditAndResendBtn();
         await editAndResendDocumentModal.clickRevertToDraftBtn();
 
@@ -148,23 +137,19 @@ test.describe('DocumentsType', () => {
         await expect(await documentsAwaitingPage.toast.toastBody).toHaveText(TOAST_MESSAGE.sendReminder);
     });
 
-    test('TC_05_21_03 | Verify that document_status is  Draft', async ({ createBusinessUserAndLogin, page, signPage, prepareForSignatureModal, successModal, editAndResendDocumentModal,
-        finalStepPage, documentsPage }) => {
+    test('TC_05_21_03 | Verify that document_status is  Draft', async ({ createBusinessUserAndLogin, signPage, prepareForSignatureModal, successModal, editAndResendDocumentModal, finalStepPage, documentsPage }) => {
 
         test.setTimeout(250 * 1000);
 
         await description('Objective: To verify that the document can be returned for editing.');
-        await tag('Edit & Resend, Documents');
         await severity(Severity.CRITICAL);
-        await link(
-            "https://app.qase.io/case/SIGN-21",
-            "QASE: SIGN-21 ")
-        await link(
-            "Documentation",
-            "https://///",
-            "TC_05_21_03"),
+        await link("https://app.qase.io/case/SIGN-21", "QASE: SIGN-21 ")
+        await link("Documentation",
+            "https://docs.google.com/document/d/1Qce7tKWOwVYtPxgQv_8ae-HUkbAgeOFph0lB_eziY_k/edit#heading=h.cl44yvv352v8",
+            "TC_05_21_03");
 
-            await epic('Documents');
+        await tag('Revert document');
+        await epic('Documents (typed)');
 
         await createDocumentAwaiting(signPage, prepareForSignatureModal, documentsPage, successModal, finalStepPage);
         await signPage.sideMenu.clickDocuments();
@@ -174,8 +159,9 @@ test.describe('DocumentsType', () => {
         await prepareForSignatureModal.clickCancelBtn();
         await signPage.sideMenu.clickDocuments();
 
-        expect(await documentsPage.table.getDocumentStatusText()).toBe("draft");
+        await step('Verify the document has status "Draft" ', async () => {
+            expect(await documentsPage.table.getDocumentStatusText()).toBe(DOCUMENT_STATUS.draft);
 
-
+        });
     });
 })

@@ -62,12 +62,7 @@ export default class TableComponent {
         });
     }
 
-    async clickOptionsButton() {
-        await step('Click the "Options" button', async () => {
-            await this.optionsBtn.waitFor();
-            await this.optionsBtn.click();
-        });
-    }
+    
 
     async clickSendReminderBtn() {
         await this.sendReminderBtn.click();
