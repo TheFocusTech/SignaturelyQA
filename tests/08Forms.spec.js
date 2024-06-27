@@ -1,6 +1,6 @@
 import { expect } from "@playwright/test";
 import { test } from "../fixtures/base.js";
-import { SIGNERS_DATA, TOAST_MESSAGE, DOCUMENT_STATUS, UPLOAD_FILE_PATH } from "../testData.js";
+import { SIGNERS_DATA, TOAST_MESSAGE, DOCUMENT_STATUS, UPLOAD_FILE_PATH, FORMS } from "../testData.js";
 import { createForm } from "../helpers/preconditions.js";
 import {description, tag, severity, Severity, link, epic} from "allure-js-commons";
 
@@ -87,5 +87,56 @@ test.describe('Forms', () => {
         await expect(await formsPage.toast.toastBody.nth(0)).toHaveText(TOAST_MESSAGE.duplicated);
 
         await expect(await formsPage.table.formsList).toHaveCount(2);
-    });
-}) 
+  });
+    test('TC_08_33_01 | Verify that user can edit form', async ({ createBusinessUserAndLogin, signPage,
+        formsPage, createFormPage, prepareForSignatureModal, successModal, updateFormPage }) => {
+        await severity(Severity.CRITICAL);
+        await link(
+            'https://app.qase.io/case/SIGN-33',
+            'Qase: SIGN-33'
+        );
+        await link(
+            'https://docs.google.com/document/d/1Qce7tKWOwVYtPxgQv_8ae-HUkbAgeOFph0lB_eziY_k/edit#heading=h.go4aj45aaddt',
+            'TC_08_33_01'
+        );
+        await epic('Forms');
+        await tag('Edit Form');
+
+        test.setTimeout(90000);
+
+        await createForm(signPage, formsPage, createFormPage, prepareForSignatureModal, successModal);
+
+        await signPage.sideMenu.clickForms();
+        await formsPage.table.clickOptionsDropdown();
+        await formsPage.table.clickEditDropdownItem();
+        await updateFormPage.fillFormNameField(FORMS.form_name_edit);
+        await updateFormPage.fillOptionalMessageField(FORMS.optional_message_text_edit);
+        await updateFormPage.clickDeleteDocumentBtn();
+        await updateFormPage.fileUploader.uploadFile(UPLOAD_FILE_PATH.xlsxDocument);
+        await updateFormPage.clickFillTemplateBtn();
+
+        await prepareForSignatureModal.clickSignFieldItem();
+        await prepareForSignatureModal.doCanvasClicks();
+
+        await prepareForSignatureModal.clickInitialFieldItem();
+        await prepareForSignatureModal.doCanvasClicks();
+
+        await prepareForSignatureModal.clickDateFieldItem();
+        await prepareForSignatureModal.doCanvasClicks();
+
+        await prepareForSignatureModal.clickSaveBtn();
+
+        await test.step('Verify that first toast message has text "Document successfully saved!"', async () => {
+            await expect(formsPage.toast.toastBody.nth(0)).toHaveText(TOAST_MESSAGE.success);
+        })
+        await test.step('Verify that second toast message has text "Form saved!"', async () => {
+            await expect(formsPage.toast.toastBody.nth(1)).toHaveText(TOAST_MESSAGE.editedFormSaved);
+        })
+        await test.step('Verify that Edited Form has edited title "Form is Edited"', async () => {
+            await expect(formsPage.table.firstFormTitle).toHaveText(FORMS.form_name_edit);
+        })
+    })
+})
+
+
+

@@ -30,6 +30,7 @@ export const TOAST_MESSAGE = {
     sendReminder: 'Reminder(s) has been sent',
     documentSubmited: 'Document submitted.',
     duplicated: 'Form successfully duplicated!',
+    editedFormSaved: 'Form saved'
 };
 export const API_KEY_NAME = 'Test Api Key';
 export const NO_API_KEY_MESSAGE = 'You don\'t have any API keys yet.';
@@ -142,3 +143,7 @@ export const NO_ATTACHED_CARD = 'Current Card:No attached card';
 export const SUBMIT_TITLE = 'Thanks for Submitting your Document';
 export const SERVICE_NAME = 'Signaturely';
 export const EMAIL_MESSAGE = " sent you the following document to view"
+export const FORMS = {
+    form_name_edit: 'Edited Form Name',
+    optional_message_text_edit: 'Editing form test'
+}
