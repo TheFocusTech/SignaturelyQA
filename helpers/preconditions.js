@@ -21,7 +21,7 @@ export const createDocumentAwaiting = async (
     successModal,
     finalStepPage) => {
 
-    await test.step('Document creation in progress with Awaiting status ', async () => {
+    await step('Document creation in progress with Awaiting status ', async () => {
         await signPage.uploadFileTab.fileUploader.uploadFile(UPLOAD_FILE_PATH.jpgDocument);
         await signPage.uploadFileTab.clickPrepareDocumentBtn();
         await prepareForSignatureModal.clickSendForSignatureRadioBtn();
@@ -34,7 +34,7 @@ export const createDocumentAwaiting = async (
         await prepareForSignatureModal.clickSignFieldsItem();
         await prepareForSignatureModal.doCanvasClicks();
         await prepareForSignatureModal.clickSaveBtn();
-        await finalStepPage.waitAndClickSendForSignatureBtn(TOAST_MESSAGE.success);
+        await finalStepPage.waitAndClickSendForSignatureBtn(TOAST_MESSAGE.fileMovedToFolder);
         await successModal.clickBackToDocumentsBtn();
         await documentsPage.sideMenu.clickSign();
     })
