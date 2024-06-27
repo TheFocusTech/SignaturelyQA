@@ -1,4 +1,4 @@
-import {step} from 'allure-js-commons';
+import { step } from 'allure-js-commons';
 
 export default class FileUploaderComponent {
     constructor(page) {
@@ -8,8 +8,6 @@ export default class FileUploaderComponent {
         this.progressBar = this.page.locator('.progress-bar');
     }
 
-    
-    
     async uploadFile(file) {
         await step('Upload file', async () => {
             await this.fileInput.setInputFiles(file);
