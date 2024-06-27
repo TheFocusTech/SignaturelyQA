@@ -1,6 +1,7 @@
 import ToastComponent from '../components/toastComponent';
 import { clickCanvas } from '../../helpers/utils.js';
 import { step } from 'allure-js-commons';
+import { step } from 'allure-js-commons';
 
 export default class PrepareForSignatureModal {
     constructor(page) {
@@ -16,6 +17,7 @@ export default class PrepareForSignatureModal {
         this.gotItBtn = this.page.getByRole('button', { name: 'Got it' });
         this.fieldsMenu = this.page.locator('.interactModal__fieldBar-fieldList');
         this.signFieldsItem = this.fieldsMenu.getByText('Sign');
+        this.nameFieldsItem = this.fieldsMenu.getByText('Name');
         this.addSignerBtn = this.page.getByText('Add signer', { exact: true });
         this.signerNameField = this.page.getByPlaceholder('Name');
         this.signerEmailField = this.page.getByPlaceholder('Email');
@@ -52,7 +54,9 @@ export default class PrepareForSignatureModal {
     }
 
     async clickSendForSignatureRadioBtn() {
-        await this.sendForSignatureRadioBtn.click();
+        await step('Select the "Send for Signature" radio button.', async () => {
+            await this.sendForSignatureRadioBtn.click();
+        });
     }
 
     async clickContinueBtn() {
@@ -69,7 +73,7 @@ export default class PrepareForSignatureModal {
     }
 
     async clickGotItBtn() {
-        await step('Click the "Got It" button.', async () => {
+        await step('Click the "Got it" button.', async () => {
             await this.gotItBtn.click();
         });
     }
@@ -89,7 +93,7 @@ export default class PrepareForSignatureModal {
     async fillSignerEmailField(email, i) {
         await step('Fill the email address of the signer into the "Email" input field.', async () => {
             await this.signerEmailField.nth(i).fill(email);
-    });
+        });
     }
 
     async doCanvasClicks() {
@@ -107,7 +111,7 @@ export default class PrepareForSignatureModal {
 
     async clickItemDropDown(signerName) {
         await step('Select a signer\'s name from the "Assigned To" dropdown.', async () => {
-        await this.itemDropDown.getByText(signerName).click();
+            await this.itemDropDown.getByText(signerName).click();
         });
     }
 
@@ -119,20 +123,26 @@ export default class PrepareForSignatureModal {
 
     async clickBackToTemplatesBtn() {
         await step('In the modal window, click on the "Back to templates" button.', async () => {
-        await this.backToTempatesBtn.click();
-    });
-}
+            await this.backToTempatesBtn.click();
+        });
+    }
 
     async clickCustomSigningOrderCheckbox() {
+        await step('Click on the "Custom signing order" checkbox.', async () => {
         await this.customSigningOrderCheckbox.click();
+        });
     }
 
     async clickAddRecipientsBtn() {
-        await this.addRecipientsBtn.click();
+        await step('Click the "Recipients" button.', async () => {
+            await this.addRecipientsBtn.click();
+        });
     }
 
     async fillRecipientEmailField(email) {
-        await this.recipientEmailField.fill(email);
+        await step('Fill the email address of the viewer into the input field.', async () => {
+            await this.recipientEmailField.fill(email);
+        });
     }
 
     async getPrepareForSigningTitleText() {

@@ -5,8 +5,16 @@ import {
     retrieveUserEmailConfirmCode,
 } from "../helpers/utils";
 import {
-    URL_END_POINTS, BUSINESS_MONTHLY_PLAN, CARD_DETAILS, FREE_PLAN_DESCRIPTION, SUBSCRIPTIONS, SUBSCRIBE_TO_PERSONAL_PLAN,
-    PLEASE_ENTER_CONFIRMATION_CODE, PERSONAL_PLAN_DESCRIPTION, NO_ATTACHED_CARD,
+    URL_END_POINTS,
+    BUSINESS_MONTHLY_PLAN,
+    CARD_DETAILS,
+    FREE_PLAN_DESCRIPTION,
+    SUBSCRIPTIONS,
+    SUBSCRIBE_TO_PERSONAL_PLAN,
+    PLEASE_ENTER_CONFIRMATION_CODE,
+    PERSONAL_PLAN_DESCRIPTION,
+    NO_ATTACHED_CARD,
+    EMAIL_SUBJECTS,
 } from "../testData";
 import { generateNewUserData } from "../helpers/utils";
 import {description, tag, severity, Severity, link, epic, step} from "allure-js-commons";
@@ -18,7 +26,7 @@ test.describe('Registration', () => {
         await tag('Trial user');
         await severity(Severity.BLOCKER);
         await link("https://app.qase.io/case/SIGN-1",
-                "Qase: SIGN-1");
+                    "Qase: SIGN-1");
         await link(
             "https://docs.google.com/document/d/1Qce7tKWOwVYtPxgQv_8ae-HUkbAgeOFph0lB_eziY_k/edit#heading=h.3auuqi4u4l4v",
             "ATC_01_01_01"
@@ -37,7 +45,7 @@ test.describe('Registration', () => {
             await expect(page).toHaveURL(`${process.env.URL}${URL_END_POINTS.confirmAccountEndPoint}`);
         });
 
-        const confirmationLink = await retrieveUserEmailConfirmationLink(request, newUserData.email);
+        const confirmationLink = await retrieveUserEmailConfirmationLink(request, newUserData.email, EMAIL_SUBJECTS.emailConfirmation);
         await step("Navigate to the confirmation link", async () => {
             await page.goto(confirmationLink);
         });
@@ -79,7 +87,7 @@ test.describe('Registration', () => {
             await expect(page).toHaveURL(`${process.env.URL}${URL_END_POINTS.confirmAccountEndPoint}`);
         });
 
-        const confirmationLink = await retrieveUserEmailConfirmationLink(request, newUserData.email);
+        const confirmationLink = await retrieveUserEmailConfirmationLink(request, newUserData.email, EMAIL_SUBJECTS.emailConfirmation);
         await step("Navigate to the confirmation link", async () => {
             await page.goto(confirmationLink);
         });

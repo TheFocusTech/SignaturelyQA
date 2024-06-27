@@ -1,4 +1,4 @@
-import { step } from "allure-js-commons";
+import { step } from 'allure-js-commons';
 
 export default class TableComponent {
 
@@ -15,7 +15,7 @@ export default class TableComponent {
         this.documentTitle = this.page.locator('.documents__list-item .table__column--text--document p');
         this.moveToBtn = this.page.getByRole('button', { name: 'Move to' });
         this.controlsPath = this.page.locator('.tableControls__path');
-        this.sendReminderBtn = this.page.getByRole('button', {name: 'Send Reminder'});
+        this.sendReminderBtn = this.page.getByRole('button', { name: 'Send Reminder' });
         this.duplicateBtn = this.page.getByText('Duplicate');
         this.formsList = this.page.locator('div.table__dataRow');
     }
@@ -39,9 +39,12 @@ export default class TableComponent {
     }
 
     async clickAddToAPIBtn() {
-        await this.addToAPIBtn.waitFor();
-        await this.addToAPIBtn.click();
+        await step('Click the "Add to API" option', async () => {
+            await this.addToAPIBtn.waitFor();
+            await this.addToAPIBtn.click();
+        });
     }
+
     async waitForDocumentTitleVisible(name) {
         await this.documentTitle.filter({ hasText: name }).waitFor({ state: 'visible' })
     }
@@ -52,12 +55,12 @@ export default class TableComponent {
         });
     }
 
-    async openFolder(name) { 
+    async openFolder(name) {
         await step('Open the folder', async () => {
             await this.documentTitle.filter({ hasText: name }).dblclick();
         });
     }
-    
+
     async clickOptionsButton() {
         await step('Click the "Options" button', async () => {
             await this.optionsBtn.waitFor();
@@ -69,9 +72,16 @@ export default class TableComponent {
         await this.sendReminderBtn.click();
     }
 
+    async waitForDocumentStatusVisible(status) {
+        await step(`Wait for ${status} status of the created document in the table.`, async () => {
+            await this.documentStatus.getByText(status).waitFor({ state: 'visible' })
+        });        
+    }
+
     async clickDuplicateBtn() {
         await step('Click the "Duplicate" button', async () => {
         await this.duplicateBtn.click();
         });
     }
+
 }

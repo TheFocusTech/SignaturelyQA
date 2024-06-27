@@ -1,4 +1,4 @@
-import {step} from 'allure-js-commons';
+import { step } from 'allure-js-commons';
 
 export default class SuccessModal {
     constructor(page) {
