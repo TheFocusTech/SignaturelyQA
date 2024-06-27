@@ -1,7 +1,7 @@
 import { expect } from "@playwright/test";
 import { test } from "../fixtures/base.js";
 import { generateRandomPassword, generateNewUserEmail, retrieveUserEmailConfirmationLink } from "../helpers/utils.js";
-import { TOAST_MESSAGE, URL_END_POINTS } from "../testData.js";
+import {EMAIL_SUBJECTS, TOAST_MESSAGE, URL_END_POINTS} from "../testData.js";
 import { description, tag, severity, Severity, link, epic, step } from "allure-js-commons";
 
 test.describe('Profile', () => {
@@ -39,13 +39,13 @@ test.describe('Profile', () => {
         await loginPage.fillEmailAddressInput(process.env.NEW_USER_EMAIL);
         await loginPage.fillPasswordInput(newPassword);
         await loginPage.clickLogin();
-        
+
         await step(`Verify that the User is logged in with a new password and is on the homepage ${URL_END_POINTS.signEndPoint} `, async () => {
             await expect(signPage.page).toHaveURL(process.env.URL + URL_END_POINTS.signEndPoint);
         });
     })
 
-    test('TC_11_44_01 | Verify User can change email', async({createBusinessUserAndLogin, request, page, signPage, settingsCompanyPage, settingsProfilePage}) => {
+    test('TC_11_44_01 | Verify User can change email', async ({ createBusinessUserAndLogin, request, page, signPage, settingsCompanyPage, settingsProfilePage }) => {
         await description('Objective: To verify that the User can change a email.');
         await severity(Severity.CRITICAL);
         await link(
@@ -62,7 +62,7 @@ test.describe('Profile', () => {
         const newEmail = await generateNewUserEmail("_new");
         await signPage.sideMenu.clickSettings();
         await settingsCompanyPage.sideMenuSettings.clickProfile();
-        await step("Verify that the email field is filled with the correct user email", async ()=> {
+        await step("Verify that the email field is filled with the correct user email", async () => {
             await expect(settingsProfilePage.emailAddressInputField).toHaveValue(process.env.NEW_USER_EMAIL);
         });
         await settingsProfilePage.deleteCurrentEmailFromEmailAddressInputField();
@@ -72,7 +72,7 @@ test.describe('Profile', () => {
             await expect(settingsProfilePage.toast.toastBody).toHaveText(TOAST_MESSAGE.checkYourEmail);
         });
 
-        const confirmationLink = await retrieveUserEmailConfirmationLink(request, newEmail);
+        const confirmationLink = await retrieveUserEmailConfirmationLink(request, newEmail, EMAIL_SUBJECTS.emailConfirmation);
         await step("Navigate to the confirmation link", async () => {
             await page.goto(confirmationLink);
             await page.waitForURL(`${process.env.URL}${URL_END_POINTS.signEndPoint}`);
@@ -83,7 +83,7 @@ test.describe('Profile', () => {
 
         await signPage.sideMenu.clickSettings();
         await settingsCompanyPage.sideMenuSettings.clickProfile();
-        await step("Verify that the email field is filled with the updated user email", async ()=> {
+        await step("Verify that the email field is filled with the updated user email", async () => {
             await expect(settingsProfilePage.emailAddressInputField).toHaveValue(newEmail);
         });
     })

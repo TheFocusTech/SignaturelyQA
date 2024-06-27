@@ -1,15 +1,15 @@
-import {expect} from "@playwright/test";
-import {test} from "../fixtures/base";
-import {URL_END_POINTS, ACTIVE_COLOR} from "../testData";
-import {description, tag, severity, Severity, link, epic, step} from "allure-js-commons";
+import { expect } from "@playwright/test";
+import { test } from "../fixtures/base";
+import { URL_END_POINTS, ACTIVE_COLOR } from "../testData";
+import { description, tag, severity, Severity, link, epic, step } from "allure-js-commons";
 
 test.describe('Authorization', () => {
 
     test('TC_02_05_01 | Verify successful login and the user directed to the sign page', async ({
-                                                                                                    page,
-                                                                                                    loginPage,
-                                                                                                    signPage
-                                                                                                }) => {
+        page,
+        loginPage,
+        signPage
+    }) => {
         await description('Objective: To verify the process of logging a user into their account.');
         await severity(Severity.BLOCKER);
         await link(

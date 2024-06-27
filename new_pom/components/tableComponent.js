@@ -1,4 +1,5 @@
 import { test } from "../../fixtures/base";
+import { step } from "allure-js-commons";
 
 export default class TableComponent {
 
@@ -15,10 +16,11 @@ export default class TableComponent {
         this.documentTitle = this.page.locator('.documents__list-item .table__column--text--document p');
         this.moveToBtn = this.page.getByRole('button', { name: 'Move to' });
         this.controlsPath = this.page.locator('.tableControls__path');
+        this.sendReminderBtn = this.page.getByRole('button', { name: 'Send Reminder' });
     }
 
     async clickOptionsBtn(i) {
-        await test.step('Click the "Options" button', async () => {
+        await step('Click the "Options" button', async () => {
             await this.optionsBtn.nth(i).waitFor();
             await this.optionsBtn.nth(i).click();
         });
@@ -36,29 +38,35 @@ export default class TableComponent {
     }
 
     async clickAddToAPIBtn() {
-        await this.addToAPIBtn.waitFor();
-        await this.addToAPIBtn.click();
+        await step('Click the "Add to API" option', async () => {
+            await this.addToAPIBtn.waitFor();
+            await this.addToAPIBtn.click();
+        });
     }
     async waitForDocumentTitleVisible(name) {
         await this.documentTitle.filter({ hasText: name }).waitFor({ state: 'visible' })
     }
 
     async clickMoveToBtn() {
-        await test.step('Click the "Move to" button', async () => {
+        await step('Click the "Move to" button', async () => {
             await this.moveToBtn.click();
         });
     }
 
     async openFolder(name) {
-        await test.step('Open the folder', async () => {
+        await step('Open the folder', async () => {
             await this.documentTitle.filter({ hasText: name }).dblclick();
         });
-
     }
+
     async clickOptionsButton() {
-        await test.step('Click the "Options" button', async () => {
+        await step('Click the "Options" button', async () => {
             await this.optionsBtn.waitFor();
             await this.optionsBtn.click();
         });
+    }
+
+    async clickSendReminderBtn() {
+        await this.sendReminderBtn.click();
     }
 }

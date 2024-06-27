@@ -1,9 +1,10 @@
 import { expect } from "@playwright/test";
 import { test } from "../fixtures/base.js";
-import { UPLOAD_FILE_PATH, UPLOAD_FILE_NAME, FOLDER_NAME, TOAST_MESSAGE } from "../testData.js";
+import { SIGNERS_DATA, UPLOAD_FILE_PATH, UPLOAD_FILE_NAME, FOLDER_NAME, TOAST_MESSAGE } from "../testData.js";
 import { createFolder, createDocumentAwaiting } from "../helpers/preconditions.js";
 import { allure } from "allure-playwright";
-import { Severity } from "allure-js-commons";
+import { step } from "allure-js-commons";
+import { description, tag, severity, Severity, link, epic } from "allure-js-commons";
 
 test.describe('DocumentsType', () => {
 
@@ -78,15 +79,16 @@ test.describe('DocumentsType', () => {
         createFolderModal }) => {
         test.slow();
 
-        await allure.description('To verify the process of moving a document into a folder.');
-        await allure.tags('Move_to_folder');
-        await allure.severity(Severity.CRITICAL);
-        await allure.link(
-            "Documentation",
+        await description('To verify the process of moving a document into a folder.');
+        await severity(Severity.CRITICAL);
+        await link('https://app.qase.io/case/SIGN-18',
+            'Qase: SIGN-18')
+        await link(
             "https://docs.google.com/document/d/1Qce7tKWOwVYtPxgQv_8ae-HUkbAgeOFph0lB_eziY_k/edit#heading=h.ylpnl5bdm86k",
-            "TC_05_18_01"
+            "ATC_05_18_01"
         );
-        await allure.epic('Documents (typed)');
+        await epic('Documents (typed)');
+        await tag('Move_to_folder');
 
         await createFolder(
             signPage,
@@ -105,10 +107,37 @@ test.describe('DocumentsType', () => {
         });
 
         await documentsPage.table.openFolder(FOLDER_NAME);
-        await test.step('Verify the document is inside the folder', async () => {
+        await step('Verify the document is inside the folder', async () => {
             await expect(await documentsPage.table.documentTitle).toHaveText(UPLOAD_FILE_NAME.jpgDocument);
         });
     })
 
+    test('TC_05_16_01 | Verify that the user receives an email reminder to sign the document', async ({
+        createBusinessUserAndLogin,
+        signPage,
+        prepareForSignatureModal,
+        finalStepPage,
+        successModal,
+        documentsPage,
+        documentsAwaitingPage,
+        sendReminderDocumentModal }) => {
+        test.setTimeout(250 * 1000);
 
+        await createDocumentAwaiting(
+            signPage,
+            prepareForSignatureModal,
+            documentsPage,
+            successModal,
+            finalStepPage);
+
+        await signPage.sideMenu.clickDocuments();
+        await documentsPage.sideMenuDocuments.clickAwaitingSignature();
+        await documentsAwaitingPage.table.clickOptionsBtn(0);
+        await documentsAwaitingPage.table.clickSendReminderBtn();
+
+        await sendReminderDocumentModal.clickSignerCheckbox();
+        await sendReminderDocumentModal.clickSendReminderBtn();
+
+        await expect(await documentsAwaitingPage.toast.toastBody).toHaveText(TOAST_MESSAGE.sendReminder);
+    });
 })
