@@ -1,5 +1,0 @@
-No messages found.
-Error occurred while getting confirmation link: TypeError: Cannot read properties of undefined (reading '0')
-    at getConfirmCodeFromEmail (/home/runner/work/SignaturelyQA/SignaturelyQA/index.js:146:39)
-    at processTicksAndRejections (node:internal/process/task_queues:95:5)
-    at /home/runner/work/SignaturelyQA/SignaturelyQA/helpers/utils.js:89:23
