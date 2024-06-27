@@ -16,6 +16,8 @@ export default class TableComponent {
         this.moveToBtn = this.page.getByRole('button', { name: 'Move to' });
         this.controlsPath = this.page.locator('.tableControls__path');
         this.sendReminderBtn = this.page.getByRole('button', { name: 'Send Reminder' });
+        this.duplicateBtn = this.page.getByText('Duplicate');
+        this.formsList = this.page.locator('div.table__dataRow');
     }
 
     async clickOptionsBtn(i) {
@@ -74,6 +76,12 @@ export default class TableComponent {
         await step(`Wait for ${status} status of the created document in the table.`, async () => {
             await this.documentStatus.getByText(status).waitFor({ state: 'visible' })
         });        
+    }
+
+    async clickDuplicateBtn() {
+        await step('Click the "Duplicate" button', async () => {
+        await this.duplicateBtn.click();
+        });
     }
 
 }
