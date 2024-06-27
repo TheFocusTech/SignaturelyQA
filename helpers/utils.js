@@ -1,6 +1,6 @@
 import { signUpRequest } from "./apiCalls";
 import { authorize, getLinkFromEmail, getConfirmCodeFromEmail, getMessageTextFromEmail } from "../index.js";
-import {step} from "allure-js-commons";
+import { step } from "allure-js-commons";
 
 export function generateNumberForNewUser() {
     let dt = new Date();
@@ -77,7 +77,6 @@ export async function retrieveUserEmailConfirmationLink(request, newUserEmail, s
     await step("Retrieve the confirmation link from the user's email.", async () => {
         const auth = await authorize();
         confirmationLink = await getLinkFromEmail(auth, newUserEmail, subject);
-
     });
         return confirmationLink;
 }

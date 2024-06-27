@@ -1,5 +1,4 @@
-import { test } from "../../fixtures/base";
-import { step } from "allure-js-commons";
+import { step } from 'allure-js-commons';
 
 export default class TableComponent {
 
@@ -27,7 +26,7 @@ export default class TableComponent {
     }
 
     async clickEditAndResendBtn() {
-        await test.step('Click the "Edit & Resend" button', async () => {
+        await step('Click the "Edit & Resend" button', async () => {
             await this.editAndResendBtn.click();
         });
     }
@@ -43,6 +42,7 @@ export default class TableComponent {
             await this.addToAPIBtn.click();
         });
     }
+
     async waitForDocumentTitleVisible(name) {
         await this.documentTitle.filter({ hasText: name }).waitFor({ state: 'visible' })
     }
@@ -69,4 +69,11 @@ export default class TableComponent {
     async clickSendReminderBtn() {
         await this.sendReminderBtn.click();
     }
+
+    async waitForDocumentStatusVisible(status) {
+        await step(`Wait for ${status} status of the created document in the table.`, async () => {
+            await this.documentStatus.getByText(status).waitFor({ state: 'visible' })
+        });        
+    }
+
 }
