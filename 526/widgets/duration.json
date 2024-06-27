@@ -1,0 +1,1 @@
+[{"uid":"ece09143f0508a","name":"TC_12_48_01 | Verify User can copy API key created by the \"Create API\" button on the right.","time":{"start":1719461103357,"stop":1719461124472,"duration":21115},"status":"passed","severity":"blocker"}]
