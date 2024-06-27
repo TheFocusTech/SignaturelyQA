@@ -1,6 +1,6 @@
 import { signUpRequest } from "./apiCalls";
-import { authorize, getConfirmationLinkFromEmail, getConfirmCodeFromEmail, checkEmailMessageReceived } from "../index.js";
-import {step} from "allure-js-commons";
+import { authorize, getLinkFromEmail, getConfirmCodeFromEmail, getMessageTextFromEmail } from "../index.js";
+import { step } from "allure-js-commons";
 
 export function generateNumberForNewUser() {
     let dt = new Date();
@@ -72,12 +72,11 @@ export async function createNewFreeUserThroughApi(request) {
     return newFreeUserData;
 }
 
-export async function retrieveUserEmailConfirmationLink(request, newUserEmail) {
+export async function retrieveUserEmailConfirmationLink(request, newUserEmail, subject) {
     let confirmationLink;
     await step("Retrieve the confirmation link from the user's email.", async () => {
         const auth = await authorize();
-        confirmationLink = await getConfirmationLinkFromEmail(auth, newUserEmail);
-
+        confirmationLink = await getLinkFromEmail(auth, newUserEmail, subject);
     });
         return confirmationLink;
 }
@@ -91,10 +90,10 @@ export async function retrieveUserEmailConfirmCode(request, newUserEmail) {
         return confirmCode;
 }
 
-export async function retrieveEmailMessage(request, senderName, receiverEmail, subject) {
+export async function retrieveEmailMessage(request, fromName, toEmail, subject, messageCss) {
     const auth = await authorize();
 
-    return await checkEmailMessageReceived(auth, senderName, receiverEmail, subject);
+    return await getMessageTextFromEmail(auth, fromName, toEmail, subject, messageCss);
 }
 
 export async function clickCanvas(page, canvasLocator, excludedAreas = []) {

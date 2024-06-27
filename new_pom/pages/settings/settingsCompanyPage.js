@@ -5,7 +5,7 @@ import ToastComponent from "../../components/toastComponent";
 import {test} from "../../../fixtures/base";
 import { step } from "allure-js-commons";
 
-export default class NewSettingsCompanyPage {
+export default class SettingsCompanyPage {
     constructor(page) {
         this.page = page;
 

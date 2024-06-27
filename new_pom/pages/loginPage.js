@@ -1,6 +1,6 @@
 import {step} from "allure-js-commons";
 
-export default class NewLoginPage {
+export default class LoginPage {
     constructor(page) {
         this.page = page;
 

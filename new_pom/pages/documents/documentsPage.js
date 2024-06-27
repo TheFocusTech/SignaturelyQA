@@ -5,7 +5,7 @@ import ToastComponent from "../../components/toastComponent";
 import { step } from "allure-js-commons";
 
 
-export default class NewDocumentsPage {
+export default class DocumentsPage {
     constructor(page) {
         this.page = page;
 

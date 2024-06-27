@@ -1,4 +1,4 @@
-export default class NewCreateAPIKeyModal {
+export default class CreateAPIKeyModal {
     constructor(page) {
         this.page = page;
 
