@@ -34,7 +34,7 @@ export const createDocumentAwaiting = async (
         await prepareForSignatureModal.clickSignFieldsItem();
         await prepareForSignatureModal.doCanvasClicks();
         await prepareForSignatureModal.clickSaveBtn();
-        await finalStepPage.waitAndClickSendForSignatureBtn(TOAST_MESSAGE.fileMovedToFolder);
+        await finalStepPage.waitAndClickSendForSignatureBtn(TOAST_MESSAGE.success);
         await successModal.clickBackToDocumentsBtn();
         await documentsPage.sideMenu.clickSign();
     })
