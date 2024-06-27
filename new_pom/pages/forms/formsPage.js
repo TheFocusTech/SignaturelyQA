@@ -1,4 +1,4 @@
-import TableComponent from "../components/tableComponent";
+import TableComponent from "../../components/tableComponent";
 export default class FormsPage {
     constructor(page) {
         this.page = page;

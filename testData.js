@@ -28,6 +28,7 @@ export const TOAST_MESSAGE = {
     checkYourEmail: 'Check your new email to confirm it',
     emailConfirmed: 'Email confirmed',
     sendReminder: 'Reminder(s) has been sent',
+    documentSubmited: 'Document submitted.',
     templateSaved: 'Template saved',
 };
 export const API_KEY_NAME = 'Test Api Key';
@@ -111,21 +112,27 @@ export const EMAIL_SUBJECTS = {
     reminderToSign: "Reminder, Please sign",
     signatureRequest: "requested your signature",
     emailConfirmation: 'Signaturely Email Confirmation',
+    sentToView: 'Sent you a document to view',
+}
+export const SELECTORS = {
+    link: 'span',
+    message: 'td p:has(a)',
 }
 
 export const SIGNER_ME = 'Me (Now)';
 
 export const SIGNERS_DATA = {
-    signerName1: `${process.env.NEW_USER_NAME}${'001'}`,
-    signerEmail1: `${process.env.EMAIL_PREFIX}${process.env.NEW_USER_NUMBER}${'001'}${process.env.EMAIL_DOMAIN}`,
-    signerName2: `${process.env.NEW_USER_NAME}${'002'}`,
-    signerEmail2: `${process.env.EMAIL_PREFIX}${process.env.NEW_USER_NUMBER}${'002'}${process.env.EMAIL_DOMAIN}`,
-    viewerEmail1: `${process.env.EMAIL_PREFIX}${process.env.NEW_USER_NUMBER}${'003'}${process.env.EMAIL_DOMAIN}`
+    signerName1: `${process.env.EMAIL_PREFIX}${'001'}`,
+    signerEmail1: `${process.env.EMAIL_PREFIX}${'001'}${process.env.EMAIL_DOMAIN}`,
+    signerName2: `${process.env.EMAIL_PREFIX}${'002'}`,
+    signerEmail2: `${process.env.EMAIL_PREFIX}${'002'}${process.env.EMAIL_DOMAIN}`,
+    viewerEmail1: `${process.env.EMAIL_PREFIX}${'003'}${process.env.EMAIL_DOMAIN}`
 };
 
 export const FOLDER_NAME = 'Folder for documents';
 export const UPLOAD_FILE_PATH = {
     jpgDocument: 'testDocuments/picture.jpg',
+    xlsxDocument: 'testDocuments/todoList.xlsx',
     csvDocument: 'testDocuments/CSV.csv',
 };
 export const UPLOAD_FILE_NAME = {
@@ -134,6 +141,9 @@ export const UPLOAD_FILE_NAME = {
 };
 export const NO_ATTACHED_CARD = 'Current Card:No attached card';
 
+export const SUBMIT_TITLE = 'Thanks for Submitting your Document';
+export const SERVICE_NAME = 'Signaturely';
+export const EMAIL_MESSAGE = " sent you the following document to view"
 export const EDIT_TEMPLATE_DATA = {
     nameField: 'Rental agreement 2024',
     optionalMessage: 'For Internal Use Only',

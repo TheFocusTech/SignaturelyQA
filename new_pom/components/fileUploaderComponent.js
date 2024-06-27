@@ -1,4 +1,4 @@
-import {step} from 'allure-js-commons';
+import { step } from 'allure-js-commons';
 
 export default class FileUploaderComponent {
     constructor(page) {
@@ -9,8 +9,6 @@ export default class FileUploaderComponent {
         this.deleteUploadedFileBtn = this.page.locator('button.button.cancel');
     }
 
-    
-    
     async uploadFile(file) {
         await step('Upload file', async () => {
             await this.fileInput.setInputFiles(file);

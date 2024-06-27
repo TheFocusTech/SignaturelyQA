@@ -2,9 +2,7 @@ import { expect } from "@playwright/test";
 import { test } from "../fixtures/base.js";
 import { SIGNERS_DATA, UPLOAD_FILE_PATH, UPLOAD_FILE_NAME, FOLDER_NAME, TOAST_MESSAGE } from "../testData.js";
 import { createFolder, createDocumentAwaiting } from "../helpers/preconditions.js";
-import { allure } from "allure-playwright";
-import { step } from "allure-js-commons";
-import { description, tag, severity, Severity, link, epic } from "allure-js-commons";
+import { description, tag, severity, Severity, link, epic, step } from "allure-js-commons";
 
 test.describe('DocumentsType', () => {
 
@@ -15,14 +13,14 @@ test.describe('DocumentsType', () => {
 
         test.setTimeout(250 * 1000);
 
-        await allure.description('Objective: To verify that the document can be returned for editing.');
-        await allure.tags('Edit & Resend, Documents');
-        await allure.severity(Severity.CRITICAL);
-        await allure.link(
+        await description('Objective: To verify that the document can be returned for editing.');
+        await tag('Edit & Resend, Documents');
+        await severity(Severity.CRITICAL);
+        await link(
             "Documentation",
             "https://docs.google.com/document/d/1Qce7tKWOwVYtPxgQv_8ae-HUkbAgeOFph0lB_eziY_k/edit#heading=h.a5x7xbzct5pl",
             "TC_05_21_01"),
-            await allure.epic('Documents');
+            await epic('Documents');
 
         await createDocumentAwaiting(
             signPage, prepareForSignatureModal,
@@ -32,10 +30,10 @@ test.describe('DocumentsType', () => {
         await documentsPage.table.clickOptionsButton();
         await documentsPage.table.clickEditAndResendBtn();
 
-        await test.step('Verify that modal window Edit & Resend document has opened', async () => {
+        await step('Verify that modal window Edit & Resend document has opened', async () => {
             await expect(editAndResendDocumentModal.editAndResendTitle).toBeVisible();
         });
-        await test.step('Verify that the title matches "Edit & Resend document"', async () => {
+        await step('Verify that the title matches "Edit & Resend document"', async () => {
             expect(await editAndResendDocumentModal.getTitleText()).toBe("Edit & Resend document");
         });
 
@@ -45,15 +43,15 @@ test.describe('DocumentsType', () => {
 
         test.setTimeout(250 * 1000);
 
-        await allure.description('Objective: To verify that the document can be returned for editing.');
-        await allure.tags('Edit & Resend, Documents');
-        await allure.severity(Severity.CRITICAL);
-        await allure.link(
+        await description('Objective: To verify that the document can be returned for editing.');
+        await tag('Edit & Resend, Documents');
+        await severity(Severity.CRITICAL);
+        await link(
             "Documentation",
             "https://docs.google.com/document/d/1Qce7tKWOwVYtPxgQv_8ae-HUkbAgeOFph0lB_eziY_k/edit#heading=h.r25l83kzqn09",
             "TC_05_21_02"),
 
-            await allure.epic('Documents');
+            await epic('Documents');
 
         await createDocumentAwaiting(signPage, prepareForSignatureModal, documentsPage, successModal, finalStepPage);
         await signPage.sideMenu.clickDocuments();
@@ -61,11 +59,11 @@ test.describe('DocumentsType', () => {
         await documentsPage.table.clickEditAndResendBtn();
         await editAndResendDocumentModal.clickRevertToDraftBtn();
 
-        await test.step('Verify that the editing window is open', async () => {
+        await step('Verify that the editing window is open', async () => {
             await expect(page).toHaveURL(/documents.*edit$/);
         });
 
-        await test.step('Verify that the title matches "Prepare for Signing"', async () => {
+        await step('Verify that the title matches "Prepare for Signing"', async () => {
             expect(await prepareForSignatureModal.getPrepareForSigningTitleText()).toBe("Prepare for Signing");
 
         });
@@ -101,7 +99,7 @@ test.describe('DocumentsType', () => {
         await documentsPage.table.clickMoveToBtn();
         await moveToFolderModal.selectFolder(FOLDER_NAME);
         await moveToFolderModal.clickMoveToFolderBtn();
-        
+
         await step('Verify the toast message', async () => {
             await expect(await documentsPage.toast.toastBody).toHaveText(TOAST_MESSAGE.fileMovedToFolder);
         });
@@ -113,31 +111,31 @@ test.describe('DocumentsType', () => {
     })
 
     test('TC_05_16_01 | Verify that the user receives an email reminder to sign the document', async ({
-        createBusinessUserAndLogin, 
-        signPage, 
-        prepareForSignatureModal, 
-        finalStepPage, 
-        successModal, 
-        documentsPage, 
-        documentsAwaitingPage, 
-        sendReminderDocumentModal}) => {
+        createBusinessUserAndLogin,
+        signPage,
+        prepareForSignatureModal,
+        finalStepPage,
+        successModal,
+        documentsPage,
+        documentsAwaitingPage,
+        sendReminderDocumentModal }) => {
         test.setTimeout(250 * 1000);
 
         await createDocumentAwaiting(
-              signPage, 
-              prepareForSignatureModal,
-              documentsPage, 
-              successModal, 
-              finalStepPage);
-  
+            signPage,
+            prepareForSignatureModal,
+            documentsPage,
+            successModal,
+            finalStepPage);
+
         await signPage.sideMenu.clickDocuments();
         await documentsPage.sideMenuDocuments.clickAwaitingSignature();
         await documentsAwaitingPage.table.clickOptionsBtn(0);
         await documentsAwaitingPage.table.clickSendReminderBtn();
-        
+
         await sendReminderDocumentModal.clickSignerCheckbox();
         await sendReminderDocumentModal.clickSendReminderBtn();
-  
+
         await expect(await documentsAwaitingPage.toast.toastBody).toHaveText(TOAST_MESSAGE.sendReminder);
-     });
+    });
 })
