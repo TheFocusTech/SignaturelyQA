@@ -1,3 +1,4 @@
+
 import { DATA_SIGNER, FOLDER_NAME, TOAST_MESSAGE, CREATE_TEMPLATE, UPLOAD_FILE_PATH, SIGNERS_DATA } from "../testData";
 import { step } from "allure-js-commons";
 
@@ -19,8 +20,9 @@ export const createDocumentAwaiting = async (
     documentsPage,
     successModal,
     finalStepPage) => {
+
     await step('Precondition: Document creation in progress with Awaiting status ', async () => {
-        await signPage.uploadFileTab.fileUploader.uploadFile('testDocuments/picture.jpg');
+        await signPage.uploadFileTab.fileUploader.uploadFile(UPLOAD_FILE_PATH.jpgDocument);
         await signPage.uploadFileTab.clickPrepareDocumentBtn();
         await prepareForSignatureModal.clickSendForSignatureRadioBtn();
         await prepareForSignatureModal.clickAddSignerBtn();
@@ -32,11 +34,10 @@ export const createDocumentAwaiting = async (
         await prepareForSignatureModal.clickSignFieldsItem();
         await prepareForSignatureModal.doCanvasClicks();
         await prepareForSignatureModal.clickSaveBtn();
-        await finalStepPage.waitAndClickSendForSignatureBtn();
+        await finalStepPage.waitAndClickSendForSignatureBtn(TOAST_MESSAGE.success);
         await successModal.clickBackToDocumentsBtn();
         await documentsPage.sideMenu.clickSign();
     })
-
 };
 
 export const createFolder = async (
@@ -70,7 +71,7 @@ export const createTemplate = async (signPage, prepareForSignatureModal, templat
     })
 };
 
-export const createForm = async (signPage, 
+export const createForm = async (signPage,
     prepareForSignatureModal, createFormPage, formsPage, successModal) => {
     await step('Precondition: Create Form', async () => {        
         await signPage.sideMenu.clickForms();

@@ -26,9 +26,11 @@ export default class FinalStepPage {
         });
     }
 
-    async waitAndClickSendForSignatureBtn() {
-        await this.toast.waitForToastCompleted();
-        await this.sendForSignatureBtn.click();
+    async waitAndClickSendForSignatureBtn(text) {
+        await step('Click on the "Send for Signature" button.', async () => {
+            await this.toast.waitForToastIsHiddenByText(text);
+            await this.sendForSignatureBtn.click();
+        });
     }
 
     async fillDocumentOptionalMessageField(message) {
