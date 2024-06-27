@@ -167,7 +167,7 @@ export default class PrepareForSignatureModal {
     }
 
     async clickCreateBtn() {
-        await step('Click on the "Create" button.', async () => {
+        await step('Click the "Create" button.', async () => {
             await this.createBtn.click();
 
         });
@@ -184,7 +184,7 @@ export default class PrepareForSignatureModal {
             await this.cancelBtn.click();
         });
     }
-    
+
     async clickDateFieldItem() {
         await step('Click on the "Date" in "Fields" menu', async () => {
         await this.dateFieldItem.waitFor({ state: 'visible' });
