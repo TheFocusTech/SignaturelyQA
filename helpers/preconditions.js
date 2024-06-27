@@ -73,7 +73,7 @@ export const createTemplate = async (signPage, prepareForSignatureModal, templat
 
 export const createForm = async (signPage,
     prepareForSignatureModal, createFormPage, formsPage, successModal) => {
-    await step('Create Form', async () => {
+    await step('Precondition: Create Form', async () => {        
         await signPage.sideMenu.clickForms();
         await formsPage.clickCreateFormBtn();
         await createFormPage.fillFormNameField(SIGNERS_DATA.signerName1);
