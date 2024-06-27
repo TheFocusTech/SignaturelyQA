@@ -1,5 +1,4 @@
 import { expect } from "@playwright/test";
-import SignPage from "../page_objects/signPage";
 import { test } from "../fixtures/base.js";
 import {TOAST_MESSAGE, COMPANY_INFO} from '../testData.js';
 import { description, tags, severity, Severity, link, epic, step } from 'allure-js-commons';
