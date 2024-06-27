@@ -18,6 +18,7 @@ export default class TableComponent {
         this.sendReminderBtn = this.page.getByRole('button', { name: 'Send Reminder' });
         this.duplicateBtn = this.page.getByText('Duplicate');
         this.formsList = this.page.locator('div.table__dataRow');
+
     }
 
     async clickOptionsBtn(i) {
@@ -61,15 +62,15 @@ export default class TableComponent {
         });
     }
 
-    async clickOptionsButton() {
-        await step('Click the "Options" button', async () => {
-            await this.optionsBtn.waitFor();
-            await this.optionsBtn.click();
-        });
-    }
+    
 
     async clickSendReminderBtn() {
         await this.sendReminderBtn.click();
+    }
+
+    async getDocumentStatusText() {
+        const actualText = await this.documentStatus.textContent();
+        return actualText
     }
 
     async waitForDocumentStatusVisible(status) {
