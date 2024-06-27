@@ -1,4 +1,4 @@
-import { test } from "../../fixtures/base";
+import { step } from 'allure-js-commons';
 
 export default class TableComponent {
 
@@ -18,7 +18,7 @@ export default class TableComponent {
     }
 
     async clickOptionsBtn(i) {
-        await test.step('Click the "Options" button', async () => {
+        await step('Click the "Options" button', async () => {
             await this.optionsBtn.nth(i).waitFor();
             await this.optionsBtn.nth(i).click();
         });
@@ -42,19 +42,28 @@ export default class TableComponent {
         await this.addToAPIBtn.waitFor();
         await this.addToAPIBtn.click();
     }
+
     async waitForDocumentTitleVisible(name) {
         await this.documentTitle.filter({ hasText: name }).waitFor({ state: 'visible' })
     }
 
     async clickMoveToBtn() {
-        await test.step('Click the "Move to" button', async () => {
+        await step('Click the "Move to" button', async () => {
             await this.moveToBtn.click();
         });
     }
 
     async openFolder(name) { 
-        await test.step('Open the folder', async () => {
+        await step('Open the folder', async () => {
             await this.documentTitle.filter({ hasText: name }).dblclick();
         });
     }
+
+    async waitForDocumentStatusVisible(status) {
+        await step(`Wait for ${status} the created document in the table.`, async () => {
+            await this.documentStatus.getByText(status).waitFor({ state: 'visible' })
+        });
+        
+    }
+
 }

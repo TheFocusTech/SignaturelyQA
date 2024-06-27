@@ -1,8 +1,8 @@
 import { expect } from '@playwright/test';
 import { test } from "../fixtures/base.js";
 import { description, tag, severity, Severity, link, epic, step } from 'allure-js-commons';
-import { DOCUMENT_STATUS, SIGNERS_DATA, TOAST_MESSAGE, UPLOAD_FILE_PATH } from '../testData.js';
-import { getRecipientFromResponse } from '../helpers/utils.js';
+import { DOCUMENT_STATUS, SIGNERS_DATA, TOAST_MESSAGE, UPLOAD_FILE_PATH, EMAIL_SUBJECTS } from '../testData.js';
+import { getRecipientFromResponse, retrieveSignerLink, retrieveEmailMessage } from '../helpers/utils.js';
 
 test.describe('Sign Document', () => {
     test('TC_04_11_02 | Verify custom signing order', async ({ createBusinessUserAndLogin, signPage, prepareForSignatureModal }) => {
@@ -37,7 +37,12 @@ test.describe('Sign Document', () => {
         finalStepPage,
         documentsPage,
         successModal,
-        page      
+        createSignatureOrInitialModal,
+        notRegisterSignerSignPage,
+        signerAlmostDoneModal,
+        documentSubmitProccessModal,
+        page,
+        request    
     }) => {
         test.setTimeout(250 * 1000);
 
@@ -52,6 +57,9 @@ test.describe('Sign Document', () => {
         await epic('Sign document');
         await tag('Viewers');
 
+        const signerName = `${process.env.NEW_USER_NAME}${'001'}`;
+        const viewerName = `${process.env.NEW_USER_NAME}${'003'}`;
+        const signerEmail = `${process.env.EMAIL_PREFIX}${process.env.NEW_USER_NUMBER}${'001'}${process.env.EMAIL_DOMAIN}`;
         const reviewerEmail = `${process.env.EMAIL_PREFIX}${process.env.NEW_USER_NUMBER}${'003'}${process.env.EMAIL_DOMAIN}`;
 
         await signPage.uploadFileTab.fileUploader.uploadFile(UPLOAD_FILE_PATH.xlsxDocument);
@@ -59,8 +67,8 @@ test.describe('Sign Document', () => {
 
         await prepareForSignatureModal.clickSendForSignatureRadioBtn();
         await prepareForSignatureModal.clickAddSignerBtn();
-        await prepareForSignatureModal.fillSignerNameField(`${process.env.NEW_USER_NAME}${'001'}`, 0);
-        await prepareForSignatureModal.fillSignerEmailField(`${process.env.EMAIL_PREFIX}${process.env.NEW_USER_NUMBER}${'001'}${process.env.EMAIL_DOMAIN}`, 0);
+        await prepareForSignatureModal.fillSignerNameField(signerName, 0);
+        await prepareForSignatureModal.fillSignerEmailField(signerEmail, 0);
         await prepareForSignatureModal.clickAddRecipientsBtn();
         await prepareForSignatureModal.fillRecipientEmailField(reviewerEmail);
         await prepareForSignatureModal.clickContinueBtn();
@@ -86,11 +94,29 @@ test.describe('Sign Document', () => {
         });
 
         await successModal.clickBackToDocumentsBtn();
+        await documentsPage.table.waitForDocumentStatusVisible(DOCUMENT_STATUS.awaiting);
+        
+        const signerLink = await retrieveSignerLink(request, signerEmail);
 
-        await step('Verify that  the created document exists in the table with the "AWAITING" status.', async () => {
-            await expect(await documentsPage.table.documentStatus).toHaveText(DOCUMENT_STATUS.awaiting);
+        await step("Navigate to the sign link", async () => {
+            await page.goto(signerLink);            
         });
+   
+        await notRegisterSignerSignPage.clickSignInput();
+
+        await createSignatureOrInitialModal.clickCheckboxAgree();
+        await createSignatureOrInitialModal.clickSignNowBtn();
+
+        await notRegisterSignerSignPage.clickSubmitBtn();
+        await signerAlmostDoneModal.clickIAgreeBtn();
+        await notRegisterSignerSignPage.toast.waitForToastIsHiddenByText(TOAST_MESSAGE.documentSubmited);
+        await documentSubmitProccessModal.waitForSubmitTitleByText('Thanks for Submitting your Document');
         
-        
+        const message = await retrieveEmailMessage(request, 'Signaturely', reviewerEmail, EMAIL_SUBJECTS.documentToView);
+        console.log(message);
+        await step('Verify that Viewer has got email for viewing docoment', async () => {            
+            expect(message).toEqual('Sent you a document to view');
+        });
+
     });
 });

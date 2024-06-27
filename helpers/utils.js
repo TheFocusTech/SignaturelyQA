@@ -1,5 +1,5 @@
 import { signUpRequest } from "./apiCalls";
-import { authorize, getConfirmationLinkFromEmail, getConfirmCodeFromEmail, checkEmailMessageReceived } from "../index.js";
+import { authorize, getConfirmationLinkFromEmail, getConfirmCodeFromEmail, checkEmailMessageReceived, getSignLinkFromEmail } from "../index.js";
 import {step} from "allure-js-commons";
 
 export function generateNumberForNewUser() {
@@ -70,6 +70,17 @@ export async function retrieveUserEmailConfirmationLink(request, newUserData) {
 
     });
         return confirmationLink;
+}
+
+export async function retrieveSignerLink(request, signerEmail) {
+    let confirmationLink;
+    await step("Retrieve the confirmation link for the user's email.", async () => {
+        const auth = await authorize();
+        confirmationLink = await getSignLinkFromEmail(auth, signerEmail);
+        console.log(confirmationLink);
+
+    });
+    return confirmationLink;
 }
 
 export async function retrieveUserEmailConfirmCode(request, newUserEmail) {
