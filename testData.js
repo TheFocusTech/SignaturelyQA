@@ -29,6 +29,8 @@ export const TOAST_MESSAGE = {
     checkYourEmail: 'Check your new email to confirm it',
     emailConfirmed: 'Email confirmed',
     sendReminder: 'Reminder(s) has been sent',
+    documentSubmited: 'Document submitted.',
+    duplicated: 'Form successfully duplicated!',
 };
 export const API_KEY_NAME = 'Test Api Key';
 export const NO_API_KEY_MESSAGE = 'You don\'t have any API keys yet.';
@@ -111,6 +113,11 @@ export const EMAIL_SUBJECTS = {
     reminderToSign: "Reminder, Please sign",
     signatureRequest: "requested your signature",
     emailConfirmation: 'Signaturely Email Confirmation',
+    sentToView: 'Sent you a document to view',
+}
+export const SELECTORS = {
+    link: 'span',
+    message: 'td p:has(a)',
 }
 
 export const COMPANY_INFO ={
@@ -133,9 +140,13 @@ export const SIGNERS_DATA = {
 export const FOLDER_NAME = 'Folder for documents';
 export const UPLOAD_FILE_PATH = {
     jpgDocument: 'testDocuments/picture.jpg',
+    xlsxDocument: 'testDocuments/todoList.xlsx'
 };
 export const UPLOAD_FILE_NAME = {
     jpgDocument: 'picture.jpg',
 };
 export const NO_ATTACHED_CARD = 'Current Card:No attached card';
+export const SUBMIT_TITLE = 'Thanks for Submitting your Document';
+export const SERVICE_NAME = 'Signaturely';
+export const EMAIL_MESSAGE = " sent you the following document to view";
 
