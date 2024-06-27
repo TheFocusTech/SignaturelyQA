@@ -139,7 +139,7 @@ export const test = base.extend({
     },
 
     downgradeToPersonalPlanModal: async ({ page }, use) => {
-        await use(new DowngradeToPersonalPlanModal(page))
+        await use(new DowngradeToPersonalPlanModal(page));
     },
 
     specialOneTimeOfferModal: async ({ page }, use) => {
