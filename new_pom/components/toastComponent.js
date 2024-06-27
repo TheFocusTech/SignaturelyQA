@@ -1,4 +1,4 @@
-import {step} from 'allure-js-commons';
+import { step } from 'allure-js-commons';
 
 export default class ToastComponent {
     constructor(page) {
@@ -16,12 +16,16 @@ export default class ToastComponent {
     }
 
     async waitForToastCompleted() {
-        await this.toastFirstCloseBtn.waitFor({ state: 'visible' });
-        await this.toastFirstCloseBtn.waitFor({ state: 'hidden' });
+        await step('Wait for toast hidden.', async () => {
+            await this.toastFirstCloseBtn.waitFor({ state: 'visible' });
+            await this.toastFirstCloseBtn.waitFor({ state: 'hidden' });
+        });
     }
 
     async waitForToastIsHiddenByText(text) {
-        await this.toastBody.getByText(text).waitFor({ state: "visible"});
-        await this.toastBody.getByText(text).waitFor({ state: "hidden" });
+        await step(`A toast message with the text "${text}" is visible and hidden then`, async () => {
+            await this.toastBody.getByText(text).waitFor({ state: "visible" });
+            await this.toastBody.getByText(text).waitFor({ state: "hidden" });
+        });
     }
 }

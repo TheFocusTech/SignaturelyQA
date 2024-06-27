@@ -1,3 +1,5 @@
+import { step } from "allure-js-commons";
+
 export default class CreateFolderModal {
     constructor(page) {
         this.page = page;
@@ -8,10 +10,14 @@ export default class CreateFolderModal {
     }
 
     async fillNewFolderName(name) {
-        await this.newFolderName.fill(name);
+        await step('Fill the new folder name input field', async () => {
+            await this.newFolderName.fill(name);
+        });
     }
 
     async clickCreateBtn() {
-        await this.createBtn.click();
+        await step('Click the "Create" button', async () => {
+            await this.createBtn.click();
+        });
     }
 }

@@ -1,4 +1,5 @@
 import CardDetailsComponent from "../components/cardDetailsComponent";
+import { step } from "allure-js-commons";
 
 export default class UpgradeYourPlanModal {
     constructor(page) {
@@ -10,6 +11,8 @@ export default class UpgradeYourPlanModal {
     }
 
     async clickSubscribeButton() {
-        await this.suscribeButton.click();
+        await step('Click "Subscribe" button', async () => {
+            await this.suscribeButton.click();
+        });
     }
 }
