@@ -19,7 +19,7 @@ export const createDocumentAwaiting = async (
     documentsPage,
     successModal,
     finalStepPage) => {
-    await step('Document creation in progress with Awaiting status ', async () => {
+    await step('Precondition: Document creation in progress with Awaiting status ', async () => {
         await signPage.uploadFileTab.fileUploader.uploadFile('testDocuments/picture.jpg');
         await signPage.uploadFileTab.clickPrepareDocumentBtn();
         await prepareForSignatureModal.clickSendForSignatureRadioBtn();
@@ -55,7 +55,7 @@ export const createFolder = async (
 };
 
 export const createTemplate = async (signPage, prepareForSignatureModal, templatePage, createTemplatePage) => {
-    await step('Create Template', async () => {
+    await step('Precondition: Create Template', async () => {
         await signPage.sideMenu.clickTemplates();
         await templatePage.sideMenuTemplates.clickCreateTemplate();
         await createTemplatePage.fillTemplateNameField(CREATE_TEMPLATE.nameField);
@@ -72,7 +72,7 @@ export const createTemplate = async (signPage, prepareForSignatureModal, templat
 
 export const createForm = async (signPage, 
     prepareForSignatureModal, createFormPage, formsPage, successModal) => {
-    await step('Create Form', async () => {        
+    await step('Precondition: Create Form', async () => {        
         await signPage.sideMenu.clickForms();
         await formsPage.clickCreateFormBtn();
         await createFormPage.fillFormNameField(SIGNERS_DATA.signerName1);
@@ -88,5 +88,5 @@ export const createForm = async (signPage,
         await prepareForSignatureModal.clickCreateBtn();
         await successModal.clickBackToFormsBtn();
         await formsPage.sideMenu.clickSign();
-        })
+    })
 };
