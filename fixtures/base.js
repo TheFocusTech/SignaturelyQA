@@ -16,7 +16,7 @@ import CreateSignatureOrInitialModal from "../new_pom/modalWindows/createSignatu
 import FinalStepPage from '../new_pom/pages/finalStepPage.js';
 import SuccessModal from '../new_pom/modalWindows/successModal.js';
 import EditAndResendDocumentModal from "../new_pom/modalWindows/editAndResendDocumentModal.js";
-import DowngradeToPersonalPlanModal from "../new_pom/modalWindows/downgradeToPersonalPlanModal.js"
+import DowngradeToPersonalPlanModal from "../new_pom/modalWindows/downgradeToPersonalPlanModal.js";
 import SettingsAPIPage from "../new_pom/pages/settings/settingsAPIPage";
 import CreateAPIKeyModal from "../new_pom/modalWindows/createAPIKeyModal.js";
 import TemplatesPage from "../new_pom/pages/templates/templatesPage.js";
