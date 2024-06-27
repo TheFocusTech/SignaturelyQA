@@ -3,7 +3,7 @@ import UploadFileOnSignPage from '../../pages/sign/uploadFileOnSignPage';
 import HeaderComponent from '../../components/headerComponent';
 
 
-export default class NewSignPage {
+export default class SignPage {
   constructor(page) {
     this.page = page;
 

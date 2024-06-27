@@ -3,7 +3,7 @@ import SideMenuComponent from "../../components/sideMenuComponent";
 import SideMenuSettingsComponent from "../../components/sideMenuSettingsComponent";
 import ToastComponent from "../../components/toastComponent";
 
-export default class NewSettingsCompanyPage {
+export default class SettingsCompanyPage {
     constructor(page) {
         this.page = page;
 
