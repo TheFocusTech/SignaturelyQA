@@ -1,7 +1,6 @@
 import ToastComponent from '../components/toastComponent';
 import { clickCanvas } from '../../helpers/utils.js';
 import { step } from 'allure-js-commons';
-import { step } from 'allure-js-commons';
 
 export default class PrepareForSignatureModal {
     constructor(page) {
