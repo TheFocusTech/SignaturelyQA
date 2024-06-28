@@ -51,6 +51,8 @@ module.exports = defineConfig({
     /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
     timeout: 60000,
     use: {
+        permissions: ['clipboard-write', 'clipboard-read'],
+
         headless: process.env.CI ? true : false,
 
         /* Base URL to use in actions like `await page.goto('/')`. */

@@ -16,13 +16,17 @@ export default class SettingsAPIPage {
     }
 
     async clickCreateAPIKeyBtnAtRight() {
-        await this.createAPIKeyBtnAtRight.waitFor();
-        await this.createAPIKeyBtnAtRight.click();
+        await step('Click on the "Create API key" button at the right', async () => {
+            await this.createAPIKeyBtnAtRight.waitFor();
+            await this.createAPIKeyBtnAtRight.click();
+        });
     }
 
     async fillBillingDetailsField(text) {
-        await this.billingDetailsField.waitFor();
-        await this.billingDetailsField.fill(text);
+        await step('Fill in the "Billing Details" field', async () => {
+            await this.billingDetailsField.waitFor();
+            await this.billingDetailsField.fill(text);
+        });
     }
 
     async clickUpgradeButton(plan) {
@@ -31,6 +35,20 @@ export default class SettingsAPIPage {
                 .filter({ hasText: plan })
                 .getByRole('button', { name: "Upgrade" })
                 .click();
+        });
+    }
+
+    async pasteIntoBillingDetailsField(text) {
+        await step('Paste into the "Billing Details" field with Ctrl+V shortcuts', async () => {
+            await this.page.evaluate(async (text) => {
+                await navigator.clipboard.writeText(text);
+            }, text);
+
+            await this.billingDetailsTextField.click();
+
+            await this.page.keyboard.down('Control');
+            await this.page.keyboard.press('V');
+            await this.page.keyboard.up('Control');
         });
     }
 }
