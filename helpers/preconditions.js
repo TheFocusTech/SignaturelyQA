@@ -1,18 +1,18 @@
-
 import { DATA_SIGNER, FOLDER_NAME, TOAST_MESSAGE, CREATE_TEMPLATE, UPLOAD_FILE_PATH, SIGNERS_DATA } from "../testData";
 import { step } from "allure-js-commons";
 
 export const createSignature = async (signPage, settingsCompanyPage, settingsEditSignaturePage, createOrEditSignatureOnSettingModal) => {
-    await signPage.sideMenu.clickSettings();
-    await settingsCompanyPage.sideMenuSettings.clickEditSignature();
-    await settingsEditSignaturePage.clickCreateSignatureBtn();
-    await createOrEditSignatureOnSettingModal.fillFullNameField(DATA_SIGNER.fullName);
-    await createOrEditSignatureOnSettingModal.fillInitialsField(DATA_SIGNER.initials);
-    await createOrEditSignatureOnSettingModal.clickCheckboxAgree();
-    await createOrEditSignatureOnSettingModal.clickCreateSignatureBtn();
-    await settingsCompanyPage.sideMenu.clickSign();
-
-}
+    await step('Precondition: Create signature ', async () => {
+        await signPage.sideMenu.clickSettings();
+        await settingsCompanyPage.sideMenuSettings.clickEditSignature();
+        await settingsEditSignaturePage.clickCreateSignatureBtn();
+        await createOrEditSignatureOnSettingModal.fillFullNameField(DATA_SIGNER.fullName);
+        await createOrEditSignatureOnSettingModal.fillInitialsField(DATA_SIGNER.initials);
+        await createOrEditSignatureOnSettingModal.clickCheckboxAgree();
+        await createOrEditSignatureOnSettingModal.clickCreateSignatureBtn();
+        await settingsCompanyPage.sideMenu.clickSign();
+    })
+};
 
 export const createDocumentAwaiting = async (
     signPage,
@@ -90,4 +90,12 @@ export const createForm = async (signPage,
         await successModal.clickBackToFormsBtn();
         await formsPage.sideMenu.clickSign();
     })
+};
+
+export const uploadDocumentForDraft = async (signPage, prepareForSignatureModal) => {
+    await step('Precondition: Upload document for draft', async () => {    
+        await signPage.uploadFileTab.fileUploader.uploadFile(UPLOAD_FILE_PATH.xlsxDocument);
+        await signPage.uploadFileTab.clickPrepareDocumentBtn();
+        await prepareForSignatureModal.clickCancelBtn();        
+    });
 };
