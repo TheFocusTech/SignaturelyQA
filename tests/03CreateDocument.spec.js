@@ -61,7 +61,7 @@ test.describe("CreateDocument", () => {
 		await link(
 				"Documentation",
 				"https://docs.google.com/document/d/1Qce7tKWOwVYtPxgQv_8ae-HUkbAgeOFph0lB_eziY_k/edit#heading=h.2np2zmox71j",
-				"TC_03_07_06"
+				"ATC_03_07_06"
 		);
 		await epic('Create Document');
 		await tag('Document');
