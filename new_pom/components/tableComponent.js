@@ -48,7 +48,7 @@ export default class TableComponent {
 
     async waitForDocumentTitleVisible(name) {
         await step(`Wait for the document title to be visible`, async () => {
-            await this.documentTitle.filter({ hasText: name }).waitFor({ state: 'visible' })
+            await this.documentTitle.filter({ hasText: name }).waitFor()
         })
     }
 
