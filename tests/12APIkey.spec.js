@@ -74,7 +74,8 @@ test.describe('API key', () => {
 
         await settingsAPIPage.toast.toastBody.waitFor();
 
-        const clipboardApiKeyValue = await createAPIKeyModal.getAPIKeyValueText();
+        // const clipboardApiKeyValue = await createAPIKeyModal.getAPIKeyValueText();
+        const clipboardApiKeyValue = await createAPIKeyModal.APIKeyValue.innerText();
 
         await createAPIKeyModal.clickCloseAPIModalBtn();
         await settingsAPIPage.fillBillingDetailsField(clipboardApiKeyValue);
