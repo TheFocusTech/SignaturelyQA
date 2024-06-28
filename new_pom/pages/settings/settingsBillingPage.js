@@ -19,7 +19,9 @@ export default class SettingsBillingPage {
     }
 
     async clickUpgradePlanButton() {
-        await this.upgradePlanBtn.click();
+        await step('Click "UpgradePlan" button', async () => {
+            await this.upgradePlanBtn.click();
+        });
     }
 
     async clickAttachCardButton() {
