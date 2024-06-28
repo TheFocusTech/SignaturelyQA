@@ -19,8 +19,22 @@ import { createSignature, uploadDocumentForDraft } from "../helpers/precondition
 
 
 test.describe('Sign Document', () => {
-    test('TC_04_11_01 | Verify custom signing order me & others', async ({ createBusinessUserAndLogin, signPage, prepareForSignatureModal }) => {
-        await signPage.uploadFileTab.fileUploader.uploadFile('testDocuments/picture.jpg');
+    test('TC_04_11_02 | Verify custom signing order', async ({ 
+        createBusinessUserAndLogin, 
+        signPage, 
+        prepareForSignatureModal }) => {
+        await description('To verify custom signing order');
+        await severity(Severity.CRITICAL);
+        await link(
+            'https://app.qase.io/case/SIGN-11', 'Qase: SIGN-11');
+        await link(
+            'https://docs.google.com/document/d/1Qce7tKWOwVYtPxgQv_8ae-HUkbAgeOFph0lB_eziY_k/edit#heading=h.7y8njhymxgmj', 'ATC_04_11_02');
+        await epic('Sign document');
+        await tag('Signing order');
+
+        test.setTimeout(250 * 1000);
+
+        await signPage.uploadFileTab.fileUploader.uploadFile(UPLOAD_FILE_PATH.xlsxDocument);
         await signPage.uploadFileTab.clickPrepareDocumentBtn();
 
         await prepareForSignatureModal.clickSignAndSendForSignatureRadioBtn();
@@ -35,11 +49,15 @@ test.describe('Sign Document', () => {
 
         await prepareForSignatureModal.clickCustomSigningOrderCheckbox();
 
-        await expect(prepareForSignatureModal.customSigningOrderPositionNumberOne).toBeVisible();
-        await expect(prepareForSignatureModal.customSigningOrderPositionNumberOne).toHaveText('1.');
+        await step('Verify the custom signing order position number 1 is displayed', async () => {
+            await expect(prepareForSignatureModal.customSigningOrderPositionNumberOne).toBeVisible();
+            await expect(prepareForSignatureModal.customSigningOrderPositionNumberOne).toHaveText('1.');
+        });
 
-        await expect(prepareForSignatureModal.customSigningOrderPositionNumberTwo).toBeVisible();
-        await expect(prepareForSignatureModal.customSigningOrderPositionNumberTwo).toHaveText('2.');
+        await step('Verify that the custom signing order position number 2 is displayed', async () => {
+            await expect(prepareForSignatureModal.customSigningOrderPositionNumberTwo).toBeVisible();
+            await expect(prepareForSignatureModal.customSigningOrderPositionNumberTwo).toHaveText('2.');
+        });
     });
 
     test('TC_04_14_01 | Verify adding users who can view the document', async ({
@@ -61,12 +79,9 @@ test.describe('Sign Document', () => {
         await description('To verify the adding viewers / adding users who can view the document.');
         await severity(Severity.CRITICAL);
         await link(
-            'https://app.qase.io/case/SIGN-14', 'Qase: SIGN-14'
-        );
+            'https://app.qase.io/case/SIGN-14', 'Qase: SIGN-14');
         await link(
-            'https://docs.google.com/document/d/1Qce7tKWOwVYtPxgQv_8ae-HUkbAgeOFph0lB_eziY_k/edit#heading=h.ojom1b8sk9ht',
-            'ATC_04_11_02'
-        );
+            'https://docs.google.com/document/d/1Qce7tKWOwVYtPxgQv_8ae-HUkbAgeOFph0lB_eziY_k/edit#heading=h.ojom1b8sk9ht', 'ATC_04_14_01');
         await epic('Sign document');
         await tag('Viewers');
 
