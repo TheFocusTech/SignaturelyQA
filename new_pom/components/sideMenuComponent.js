@@ -9,6 +9,7 @@ export default class SideMenuComponent {
         this.settings = this.page.locator('.sidebar__wrapper').getByText('Settings');
         this.templates = this.page.getByRole('link', { name: 'Templates', exact: true });
         this.forms = this.page.getByRole('link', { name: 'Forms', exact: true });
+        this.team = this.page.getByRole('link', { name: 'Team', exact: true });
     }
 
     async clickSign() {
@@ -37,5 +38,11 @@ export default class SideMenuComponent {
 
     async clickForms() {
         await this.forms.click();
+    }
+
+    async clickTeam() {
+        await step('Click "Team" on the Side Menu', async () => {
+            await this.team.click();
+        })
     }
 }
