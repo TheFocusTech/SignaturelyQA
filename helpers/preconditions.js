@@ -51,19 +51,19 @@ export const createFolder = async (signPage, documentsPage, createFolderModal) =
     });
 };
 
-export const createTemplate = async (signPage, prepareForSignatureModal, templatePage, createNewTemplatePage) => {
+export const createTemplate = async (signPage, prepareForSignatureModal, templatesPage, createNewTemplatePage) => {
     await step('Precondition: Create Template', async () => {
         await signPage.sideMenu.clickTemplates();
-        await templatePage.sideMenuTemplates.clickCreateTemplate();
-        await createNewTemplatePage.createTemplate.fillTemplateNameField(CREATE_TEMPLATE.nameField);
-        await createNewTemplatePage.createTemplate.fillCreateTemplateRolesField(CREATE_TEMPLATE.nameRole);
+        await templatesPage.sideMenuTemplates.clickCreateTemplate();
+        await createNewTemplatePage.fillTemplateNameField(CREATE_TEMPLATE.nameField);
+        await createNewTemplatePage.fillCreateTemplateRolesField(CREATE_TEMPLATE.nameRole);
         await createNewTemplatePage.fileUploader.uploadFile(UPLOAD_FILE_PATH.jpgDocument);
-        await createNewTemplatePage.createTemplate.clickFillTemplateBtn();
+        await createNewTemplatePage.clickFillTemplateBtn();
         await prepareForSignatureModal.clickSignOnFieldsMenu();
         await prepareForSignatureModal.clickDocumentBody();
         await prepareForSignatureModal.clickCreateBtn();
         await prepareForSignatureModal.clickBackToTemplatesBtn();
-        await templatePage.sideMenu.clickSign();
+        await templatesPage.sideMenu.clickSign();
     });
 };
 

@@ -149,7 +149,7 @@ export const test = base.extend({
         await use(new EditAndResendDocumentModal(page));
     },
 
-    templatePage: async ({ page }, use) => {
+    templatesPage: async ({ page }, use) => {
         await use(new TemplatesPage(page));
     },
 
@@ -240,7 +240,6 @@ export const test = base.extend({
         await use(new EditTemplatesPage(page));
     },
 
-
     teamPage: async ({ page }, use) => {
         await use(new TeamPage(page));
     },
@@ -252,6 +251,5 @@ export const test = base.extend({
     teamsAcceptInvitePage: async ({ page }, use) => {
         await use(new TeamsAcceptInvitePage(page));
     },
-    
 });
 
