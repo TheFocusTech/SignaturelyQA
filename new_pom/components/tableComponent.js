@@ -64,8 +64,6 @@ export default class TableComponent {
         });
     }
 
-
-
     async clickSendReminderBtn() {
         await this.sendReminderBtn.click();
     }
@@ -87,12 +85,6 @@ export default class TableComponent {
         });
     }
 
-    async clickDuplicateBtn() {
-        await step('Click the "Duplicate" button', async () => {
-            await this.duplicateBtn.click();
-        });
-    }
-
     async clickEditBtn() {
         await step('Click the "Edit" button', async () => {
             await this.editBtn.click();
@@ -100,7 +92,11 @@ export default class TableComponent {
     }
 
     async getTemplateTitle() {
-        const actualText = await this.documentTitle.textContent();
+        let actualText;
+        await step('Get template title', async () => {
+            actualText = await this.documentTitle.textContent();
+        });
         return actualText;
+
     }
 }
