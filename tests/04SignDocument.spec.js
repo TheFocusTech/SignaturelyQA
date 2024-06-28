@@ -86,7 +86,7 @@ test.describe('Sign Document', () => {
         await prepareForSignatureModal.clickContinueBtn();
         await prepareForSignatureModal.clickGotItBtn();
         await prepareForSignatureModal.clickSignFieldsItem();
-        await prepareForSignatureModal.doCanvasClicks();
+        await prepareForSignatureModal.clickDocumentBody();
         await prepareForSignatureModal.clickSaveBtn();
 
         await step('Verify that Success Toast Notification is shown', async () => {
@@ -146,7 +146,7 @@ test.describe('Sign Document', () => {
         await prepareForSignatureModal.clickContinueBtn();
         await prepareForSignatureModal.clickGotItBtn();
         await prepareForSignatureModal.clickSignFieldsItem();
-        await prepareForSignatureModal.doCanvasClicks();
+        await prepareForSignatureModal.clickDocumentBody();
         await createSignatureOrInitialModal.clickCheckboxAgree();
         await createSignatureOrInitialModal.clickSignNowBtn();
         await prepareForSignatureModal.clickSaveBtn();
@@ -205,13 +205,13 @@ test.describe('Sign Document', () => {
         await prepareForSignatureModal.clickContinueBtn();
         await prepareForSignatureModal.clickGotItBtn();
         await prepareForSignatureModal.clickSignFieldsItem();
-        await prepareForSignatureModal.doCanvasClicks();
+        await prepareForSignatureModal.clickDocumentBody();
         await prepareForSignatureModal.clickAssignedToDropDown();
         await prepareForSignatureModal.clickItemDropDown(SIGNER_ME);
         await chooseSignatureOrInitialModal.clickSignatureTyped();
         await chooseSignatureOrInitialModal.clickSignNowBtn();
         await prepareForSignatureModal.clickSignFieldsItem();
-        await prepareForSignatureModal.doCanvasClicks();
+        await prepareForSignatureModal.clickDocumentBody();
         await prepareForSignatureModal.clickSaveBtn();
         await finalStepPage.fillDocumentTitleField(DOCUMENT_TITLE);
         await finalStepPage.clickSignDocumentAndSendForSignatureBtn();
