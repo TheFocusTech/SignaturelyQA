@@ -268,6 +268,5 @@ export const test = base.extend({
     teamsAcceptInvitePage: async ({ page }, use) => {
         await use(new TeamsAcceptInvitePage(page));
     },
-    
 });
 
