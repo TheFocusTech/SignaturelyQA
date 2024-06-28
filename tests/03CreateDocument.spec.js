@@ -28,7 +28,7 @@ test.describe("CreateDocument", () => {
         await prepareForSignatureModal.clickContinueBtn();
         await prepareForSignatureModal.clickGotItBtn();
         await prepareForSignatureModal.clickSignFieldsItem();
-        await prepareForSignatureModal.doCanvasClicks();
+        await prepareForSignatureModal.clickDocumentBody();
         await createSignatureOrInitialModal.fillInputSignature(SIGNERS_DATA.signerName1);
         await createSignatureOrInitialModal.clickCheckboxAgree();
         await createSignatureOrInitialModal.clickSignNowBtn();
@@ -55,6 +55,10 @@ test.describe("CreateDocument", () => {
 		await description('Objective: To verify the process of creating, signing, and sending a document to another signer.');
 		await severity(Severity.CRITICAL);
 		await link(
+            "https://app.qase.io/case/SIGN-7",
+            "Qase: SIGN-7"
+            );
+		await link(
 				"Documentation",
 				"https://docs.google.com/document/d/1Qce7tKWOwVYtPxgQv_8ae-HUkbAgeOFph0lB_eziY_k/edit#heading=h.2np2zmox71j",
 				"TC_03_07_06"
@@ -71,8 +75,8 @@ test.describe("CreateDocument", () => {
         await prepareForSignatureModal.clickContinueBtn();
         await prepareForSignatureModal.clickGotItBtn();
         await prepareForSignatureModal.clickSignFieldsItem();
-        await prepareForSignatureModal.doCanvasClicks();
-        await prepareForSignatureModal.doCanvasClicks();
+        await prepareForSignatureModal.clickDocumentBody();
+        await prepareForSignatureModal.clickDocumentBody();
         await prepareForSignatureModal.clickAssignedToDropDown();
         await prepareForSignatureModal.clickItemDropDown(SIGNER_ME);
         await createSignatureOrInitialModal.clickCheckboxAgree();
@@ -118,13 +122,13 @@ test.describe("CreateDocument", () => {
 		await prepareForSignatureModal.clickContinueBtn();
 		await prepareForSignatureModal.clickGotItBtn();
 		await prepareForSignatureModal.clickSignFieldsItem();
-		await prepareForSignatureModal.doCanvasClicks();
+		await prepareForSignatureModal.clickDocumentBody();
 		await prepareForSignatureModal.clickAssignedToDropDown();
 		await prepareForSignatureModal.clickItemDropDown(SIGNER_ME);
 		await chooseSignatureOrInitialModal.clickSignatureTyped();
 		await chooseSignatureOrInitialModal.clickSignNowBtn();
 		await prepareForSignatureModal.clickSignFieldsItem();
-		await prepareForSignatureModal.doCanvasClicks();
+		await prepareForSignatureModal.clickDocumentBody();
 		await prepareForSignatureModal.clickSaveBtn();
 		await finalStepPage.fillDocumentTitleField(DOCUMENT_TITLE);
 		await finalStepPage.clickSignDocumentAndSendForSignatureBtn();
@@ -161,7 +165,7 @@ test.describe("CreateDocument", () => {
         await prepareForSignatureModal.clickContinueBtn();
         await prepareForSignatureModal.clickGotItBtn();
         await prepareForSignatureModal.clickInitialFieldsItem();
-        await prepareForSignatureModal.doCanvasClicks();
+        await prepareForSignatureModal.clickDocumentBody();
 		await chooseSignatureOrInitialModal.clickSignatureTyped();
 		await chooseSignatureOrInitialModal.clickSignNowBtn();
         await prepareForSignatureModal.clickSaveBtn();

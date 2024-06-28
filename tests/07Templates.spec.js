@@ -28,7 +28,7 @@ test.describe('Templates', () => {
         await createTemplatePage.fileUploader.uploadFile('testDocuments/CSV.csv');
         await createTemplatePage.clickFillTemplateBtn();
         await prepareForSignatureModal.clickSignFieldsItem();
-        await prepareForSignatureModal.doCanvasClicks();
+        await prepareForSignatureModal.clickDocumentBody();
         await prepareForSignatureModal.clickCreateBtn();
         await prepareForSignatureModal.clickBackToTemplatesBtn();
 
@@ -105,7 +105,7 @@ test.describe('Templates', () => {
         await editTemplatesPage.fileUploader.uploadFile(UPLOAD_FILE_PATH.csvDocument);
         await editTemplatesPage.createTemplate.clickFillTemplateBtn();
         await prepareForSignatureModal.clickSignFieldsItem();
-        await prepareForSignatureModal.doCanvasClicks();
+        await prepareForSignatureModal.clickDocumentBody();
         await prepareForSignatureModal.clickSaveBtn();
         await templatePage.table.waitForDocumentTitleVisible(EDIT_TEMPLATE_DATA.nameField)
 

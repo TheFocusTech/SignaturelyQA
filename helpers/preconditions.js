@@ -32,7 +32,7 @@ export const createDocumentAwaiting = async (
         await prepareForSignatureModal.clickGotItBtn();
 
         await prepareForSignatureModal.clickSignFieldsItem();
-        await prepareForSignatureModal.doCanvasClicks();
+        await prepareForSignatureModal.clickDocumentBody();
         await prepareForSignatureModal.clickSaveBtn();
         await finalStepPage.waitAndClickSendForSignatureBtn(TOAST_MESSAGE.success);
         await successModal.clickBackToDocumentsBtn();
@@ -64,7 +64,7 @@ export const createTemplate = async (signPage, prepareForSignatureModal, templat
         await createTemplatePage.fileUploader.uploadFile(UPLOAD_FILE_PATH.jpgDocument);
         await createTemplatePage.clickFillTemplateBtn();
         await prepareForSignatureModal.clickSignFieldsItem();
-        await prepareForSignatureModal.doCanvasClicks();
+        await prepareForSignatureModal.clickDocumentBody();
         await prepareForSignatureModal.clickCreateBtn();
         await prepareForSignatureModal.clickBackToTemplatesBtn();
         await templatePage.sideMenu.clickSign();
@@ -81,11 +81,11 @@ export const createForm = async (signPage,
         await createFormPage.fileUploader.uploadFile(UPLOAD_FILE_PATH.jpgDocument);
         await createFormPage.clickFillTemplateBtn();
         await prepareForSignatureModal.clickNameFieldItem();
-        await prepareForSignatureModal.doCanvasClicks();
+        await prepareForSignatureModal.clickDocumentBody();
         await prepareForSignatureModal.clickSignFieldItem();
-        await prepareForSignatureModal.doCanvasClicks();
+        await prepareForSignatureModal.clickDocumentBody();
         await prepareForSignatureModal.clickDateFieldItem();
-        await prepareForSignatureModal.doCanvasClicks();
+        await prepareForSignatureModal.clickDocumentBody();
         await prepareForSignatureModal.clickCreateBtn();
         await successModal.clickBackToFormsBtn();
         await formsPage.sideMenu.clickSign();
