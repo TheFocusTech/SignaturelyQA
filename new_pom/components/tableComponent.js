@@ -18,8 +18,7 @@ export default class TableComponent {
         this.sendReminderBtn = this.page.getByRole('button', { name: 'Send Reminder' });
         this.duplicateBtn = this.page.getByText('Duplicate');
         this.formsList = this.page.locator('div.table__dataRow');
-        this.optionsDropdown = this.page.locator('.documents__optionsDropdownTrigger').filter({ hasText: 'Options' }).first();
-        this.editDropdownItem = this.page.locator('.documents__dropdownOption').filter({ hasText: 'Edit' });
+        this.editBtn = this.page.getByRole('button', { name: 'Edit' });
         this.firstFormTitle = this.page.locator('.table__column.table__column--text').nth(1);
     }
 
@@ -85,14 +84,9 @@ export default class TableComponent {
         });
     }
 
-    async clickOptionsDropdown() {
-        await step('Click on "Options" dropdown', async () => {
-            await this.optionsDropdown.click();
-        })
-    }
-    async clickEditDropdownItem() {
+    async clickEditBtn() {
         await step('Click on "Edit" dropdownItem', async () => {
-            await this.editDropdownItem.click();
+            await this.editBtn.click();
         })
     }
 }

@@ -81,7 +81,7 @@ test.describe('Sign Document', () => {
         await prepareForSignatureModal.fillRecipientEmailField(reviewerEmail);
         await prepareForSignatureModal.clickContinueBtn();
         await prepareForSignatureModal.clickGotItBtn();
-        await prepareForSignatureModal.clickSignFieldsItem();
+        await prepareForSignatureModal.clickSignOnFieldsMenu();
         await prepareForSignatureModal.doCanvasClicks();
         await prepareForSignatureModal.clickSaveBtn();
 
@@ -141,7 +141,7 @@ test.describe('Sign Document', () => {
         await prepareForSignatureModal.clickSignDocumentRadioBtn();
         await prepareForSignatureModal.clickContinueBtn();
         await prepareForSignatureModal.clickGotItBtn();
-        await prepareForSignatureModal.clickSignFieldsItem();
+        await prepareForSignatureModal.clickSignOnFieldsMenu();
         await prepareForSignatureModal.doCanvasClicks();
         await createSignatureOrInitialModal.clickCheckboxAgree();
         await createSignatureOrInitialModal.clickSignNowBtn();

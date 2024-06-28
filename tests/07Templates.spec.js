@@ -27,7 +27,7 @@ test.describe('Templates', () => {
         await createTemplatePage.fillCreateTemplateRolesField(CREATE_TEMPLATE.nameRole);
         await createTemplatePage.fileUploader.uploadFile('testDocuments/CSV.csv');
         await createTemplatePage.clickFillTemplateBtn();
-        await prepareForSignatureModal.clickSignFieldsItem();
+        await prepareForSignatureModal.clickSignOnFieldsMenu();
         await prepareForSignatureModal.doCanvasClicks();
         await prepareForSignatureModal.clickCreateBtn();
         await prepareForSignatureModal.clickBackToTemplatesBtn();

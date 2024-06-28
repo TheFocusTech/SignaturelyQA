@@ -10,13 +10,14 @@ export default class FormsPage {
         this.toast = new ToastComponent(this.page);
         this.sideMenu = new SideMenuComponent(this.page);
 
-        this.createFormBtn = this.page.locator('div').filter({ hasText: /^Create Form$/ }).getByRole('button');
+        this.createFormBtn = this.page.locator('.documents__header').getByRole('button', { name: 'Create Form', exact: true });
     }
 
     
     async clickCreateFormBtn() {
         await step('Click the "Create Form" button', async () => {
-        await this.createFormBtn.click();
+           await this.createFormBtn.waitFor({state: 'visible'}) 
+           await this.createFormBtn.click();
         });
     }
 }
