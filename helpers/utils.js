@@ -194,3 +194,24 @@ export function generateRandomPassword(length) {
 
         return password.join('');
 }
+
+export async function editDocumentStatus(request, status) {
+    try {
+        await signInRequest(request);
+
+        const documentId = await documentIdRequest(request);
+        if (!documentId) {
+            console.warn("Failed to get document ID.");
+        }
+        const documentStatus = await documentStatusRequest(request, documentId);
+        console.log(`Status of the document with id ${documentId} is ${documentStatus}`);
+
+        await dbEditDocumentStatus(status, documentId);
+        const updatedDocumentStatus = await documentStatusRequest(request, documentId);
+        if (updatedDocumentStatus !== DOCUMENT_STATUS.expired) {
+            console.warn("Failed to edit status of the document");
+        }
+    } catch (error) {
+        console.error(`An error occurred: ${error.message}`);
+    }
+}

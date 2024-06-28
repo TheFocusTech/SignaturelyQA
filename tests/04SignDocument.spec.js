@@ -14,7 +14,7 @@ import {
     DOCUMENT_TITLE,
     SIGNER_ME,
 } from '../testData.js';
-import { retrieveUserEmailConfirmationLink, retrieveEmailMessage } from '../helpers/utils.js';
+import {retrieveUserEmailConfirmationLink, retrieveEmailMessage, editDocumentStatus} from '../helpers/utils.js';
 import { createSignature, uploadDocumentForDraft } from "../helpers/preconditions.js";
 
 
@@ -221,4 +221,52 @@ test.describe('Sign Document', () => {
             await expect(await documentsPage.table.documentStatus).toHaveText(DOCUMENT_STATUS.awaiting);
         })
      });
+
+    test('TC_04_13_01 | Verify the document\'s expiration', async ({
+                                                                       createBusinessUserAndLogin,
+                                                                       page, request,
+                                                                       signPage,
+                                                                       prepareForSignatureModal,
+                                                                       finalStepPage,
+                                                                       documentsPage,
+                                                                       successModal
+                                                                   }) => {
+        await description('Objective: Verify that changing the document status to "expired"(db) updates the front-end display')
+        await severity(Severity.CRITICAL);
+        await link(
+            'https://app.qase.io/case/SIGN-13',
+            'Qase: SIGN-13'
+        );
+        await link(
+            'https://docs.google.com/document/d/1Qce7tKWOwVYtPxgQv_8ae-HUkbAgeOFph0lB_eziY_k/edit#heading=h.fm3jt5v1qq97',
+            'ATC_04_13_01'
+        );
+        await epic('Sign a document');
+        await tag('Document status: expiring');
+
+        test.setTimeout(250 * 1000);
+        await signPage.uploadFileTab.fileUploader.uploadFile(UPLOAD_FILE_PATH.xlsxDocument);
+        await signPage.uploadFileTab.clickPrepareDocumentBtn();
+        await prepareForSignatureModal.clickSendForSignatureRadioBtn();
+        await prepareForSignatureModal.clickAddSignerBtn();
+        await prepareForSignatureModal.fillSignerNameField(SIGNERS_DATA.signerName1, 0);
+        await prepareForSignatureModal.fillSignerEmailField(SIGNERS_DATA.signerEmail1, 0);
+        await prepareForSignatureModal.clickContinueBtn();
+        await prepareForSignatureModal.clickGotItBtn();
+        await prepareForSignatureModal.clickSignFieldsItem();
+        await prepareForSignatureModal.clickDocumentBody();
+        await prepareForSignatureModal.clickSaveBtn();
+
+        await finalStepPage.calendar.clickSelectDate();
+        await finalStepPage.calendar.pickExpirationDateInCalendar();
+        await finalStepPage.calendar.clickSelectBtn();
+        await finalStepPage.clickSendForSignatureBtn();
+        await successModal.clickBackToDocumentsBtn();
+        await documentsPage.table.waitForDocumentStatus(page, DOCUMENT_STATUS.awaiting);
+
+        await editDocumentStatus(request, DOCUMENT_STATUS.expired);
+        await page.reload();
+
+        await expect(await documentsPage.table.documentStatus).toHaveText(DOCUMENT_STATUS.expired);
+    })
 });

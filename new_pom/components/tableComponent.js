@@ -98,4 +98,15 @@ export default class TableComponent {
             await this.editBtn.click();
         });
     }
+
+    async waitForDocumentStatus(page, expectedStatus) {
+        await this.documentStatus.waitFor();
+        let documentStatus = await this.documentStatus.textContent();
+
+        while (documentStatus !== expectedStatus) {
+            console.log(`The status of the document after creation is ${documentStatus}`);
+            await page.reload();
+            documentStatus = await this.documentStatus.textContent();
+        }
+    }
 }
