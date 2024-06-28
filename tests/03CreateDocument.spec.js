@@ -5,7 +5,8 @@ import {
 	DOCUMENT_STATUS,
 	MESSAGE,
 	SIGNERS_DATA,
-	SIGNER_ME
+	SIGNER_ME,
+	UPLOAD_FILE_PATH
 } from "../testData.js";
 import { createSignature } from "../helpers/preconditions.js";
 import {description, tag, severity, Severity, link, epic, step} from "allure-js-commons";
@@ -66,7 +67,7 @@ test.describe("CreateDocument", () => {
 		await epic('Create Document');
 		await tag('Document');
 
-        await signPage.uploadFileTab.fileUploader.uploadFile('testDocuments/todoList.xlsx');
+        await signPage.uploadFileTab.fileUploader.uploadFile(UPLOAD_FILE_PATH.xlsxDocument);
         await signPage.uploadFileTab.clickPrepareDocumentBtn();
         await prepareForSignatureModal.clickSignAndSendForSignatureRadioBtn();
         await prepareForSignatureModal.clickAddSignerBtn();
