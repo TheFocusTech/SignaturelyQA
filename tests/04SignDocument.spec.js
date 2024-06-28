@@ -15,7 +15,7 @@ import {
 import { retrieveUserEmailConfirmationLink, retrieveEmailMessage } from '../helpers/utils.js';
 
 test.describe('Sign Document', () => {
-    test('TC_04_11_02 | Verify custom signing order', async ({ createBusinessUserAndLogin, signPage, prepareForSignatureModal }) => {
+    test('TC_04_11_01 | Verify custom signing order me & others', async ({ createBusinessUserAndLogin, signPage, prepareForSignatureModal }) => {
         await signPage.uploadFileTab.fileUploader.uploadFile('testDocuments/picture.jpg');
         await signPage.uploadFileTab.clickPrepareDocumentBtn();
 
@@ -152,5 +152,53 @@ test.describe('Sign Document', () => {
         await step('Verify that document has complited status', async () => {
             await expect(await documentsPage.table.documentStatus).toHaveText(DOCUMENT_STATUS.completed);
         });
+    });
+
+    test('TC_04_11_02 | Verify custom signing order between others customers', async ({
+        createBusinessUserAndLogin,
+        signPage,
+        prepareForSignatureModal,
+    }) => {
+        test.setTimeout(250 * 1000);
+
+        await description('To verify custom signing order between others customers');
+        await severity(Severity.CRITICAL);
+        await link(
+            'https://app.qase.io/case/SIGN-11', 'Qase: SIGN-11'
+        );
+        await link(
+            'https://docs.google.com/document/d/1Qce7tKWOwVYtPxgQv_8ae-HUkbAgeOFph0lB_eziY_k/edit#heading=h.jc3cfedpihif',
+            'ATC_04_11_02'
+        );
+        await epic('Sign document');
+        await tag('Signing order');
+
+        await signPage.uploadFileTab.fileUploader.uploadFile(UPLOAD_FILE_PATH.xlsxDocument);
+        await signPage.uploadFileTab.clickPrepareDocumentBtn();
+        await prepareForSignatureModal.clickSendForSignatureRadioBtn();
+
+        for(let i = 0; i < 3; i++) {
+        const signerName = `${process.env.NEW_USER_NAME}${'00'}${i}`;
+        const signerEmail = `${process.env.EMAIL_PREFIX}${process.env.NEW_USER_NUMBER}${'00'}${i}${process.env.EMAIL_DOMAIN}`;
+        
+        await prepareForSignatureModal.clickAddSignerBtn();
+        await prepareForSignatureModal.fillSignerNameField(signerName, i);
+        await prepareForSignatureModal.fillSignerEmailField(signerEmail, i);
+        }
+        await prepareForSignatureModal.clickCustomSigningOrderCheckbox();
+
+        await step('Verify that customers orders number visibility', async () => {
+            await expect(prepareForSignatureModal.customSigningOrderPositionNumberOne).toBeVisible();
+        });
+        
+        await step('Verify that customers orders has been positioned', async () => {
+            await expect(prepareForSignatureModal.customSigningOrderPositionNumberOne).toHaveText('1.');
+        });
+
+        await prepareForSignatureModal.customSigningOrderPositionNumberOne.dragTo(prepareForSignatureModal.customSigningOrderPositionNumberTwo,);
+
+        await step('Verify that customers orders has been changed', async () => {
+            expect(prepareForSignatureModal.signerNameField.nth(1)).toHaveValue(`${process.env.NEW_USER_NAME}${'00'}${1}`);
+        })
     });
 });
