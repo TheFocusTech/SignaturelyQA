@@ -1,6 +1,6 @@
 import { expect } from '@playwright/test';
 import { test } from "../fixtures/base.js";
-import {API_KEY_NAME, API_PLANS} from '../testData.js';
+import {API_KEY_NAME, API_PLANS, currentPlan, TOAST_MESSAGE} from '../testData.js';
 import {description, epic, feature, link, Severity, severity, step, tags} from "allure-js-commons";
 
 test.describe('Create API key', () => {
@@ -44,7 +44,7 @@ test.describe('Create API key', () => {
 
         await expect(settingsAPIPage.billingDetailsTextField).toHaveText(clipboardApiKeyValue);
     });
-});
+})
 
 test.describe('Purchase API plan', () => {
     for (const apiPlan of API_PLANS) {
