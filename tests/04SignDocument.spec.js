@@ -180,7 +180,7 @@ test.describe('Sign Document', () => {
         );
         await link(
             'Documentation',
-            'https://docs.google.com/document/d/1Qce7tKWOwVYtPxgQv_8ae-HUkbAgeOFph0lB_eziY_k/edit#heading=h.khucr6xuqdib',
+            'https://docs.google.com/document/d/1Qce7tKWOwVYtPxgQv_8ae-HUkbAgeOFph0lB_eziY_k/edit#heading=h.s5pa7fnboi83',
             'TC_04_10_02'
         );
         await epic('Sign a document');
