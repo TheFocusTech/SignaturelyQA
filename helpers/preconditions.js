@@ -19,32 +19,28 @@ export const createDocumentAwaiting = async (
     prepareForSignatureModal,
     documentsPage,
     successModal,
-    finalStepPage) => {
-
+    finalStepPage
+) => {
     await step('Precondition: Document creation in progress with Awaiting status ', async () => {
         await signPage.uploadFileTab.fileUploader.uploadFile(UPLOAD_FILE_PATH.jpgDocument);
         await signPage.uploadFileTab.clickPrepareDocumentBtn();
         await prepareForSignatureModal.clickSendForSignatureRadioBtn();
         await prepareForSignatureModal.clickAddSignerBtn();
-        await prepareForSignatureModal.fillSignerNameField(SIGNERS_DATA.signerName1, 0)
+        await prepareForSignatureModal.fillSignerNameField(SIGNERS_DATA.signerName1, 0);
         await prepareForSignatureModal.fillSignerEmailField(SIGNERS_DATA.signerEmail1, 0);
         await prepareForSignatureModal.clickContinueBtn();
         await prepareForSignatureModal.clickGotItBtn();
 
-        await prepareForSignatureModal.clickSignFieldsItem();
+        await prepareForSignatureModal.clickSignOnFieldsMenu();
         await prepareForSignatureModal.clickDocumentBody();
         await prepareForSignatureModal.clickSaveBtn();
         await finalStepPage.waitAndClickSendForSignatureBtn(TOAST_MESSAGE.success);
         await successModal.clickBackToDocumentsBtn();
         await documentsPage.sideMenu.clickSign();
-    })
+    });
 };
 
-export const createFolder = async (
-    signPage,
-    documentsPage,
-    createFolderModal) => {
-
+export const createFolder = async (signPage, documentsPage, createFolderModal) => {
     await step('Precondition: Create Folder', async () => {
         await signPage.sideMenu.clickDocuments();
         await documentsPage.clickCreateFolderBtn();
@@ -52,7 +48,7 @@ export const createFolder = async (
         await createFolderModal.clickCreateBtn();
         await documentsPage.toast.waitForToastIsHiddenByText(TOAST_MESSAGE.folderCreated);
         await documentsPage.sideMenu.clickSign();
-    })
+    });
 };
 
 export const createTemplate = async (signPage, prepareForSignatureModal, templatePage, createNewTemplatePage) => {
@@ -63,16 +59,15 @@ export const createTemplate = async (signPage, prepareForSignatureModal, templat
         await createNewTemplatePage.createTemplate.fillCreateTemplateRolesField(CREATE_TEMPLATE.nameRole);
         await createNewTemplatePage.fileUploader.uploadFile(UPLOAD_FILE_PATH.jpgDocument);
         await createNewTemplatePage.createTemplate.clickFillTemplateBtn();
-        await prepareForSignatureModal.clickSignFieldsItem();
+        await prepareForSignatureModal.clickSignOnFieldsMenu();
         await prepareForSignatureModal.clickDocumentBody();
         await prepareForSignatureModal.clickCreateBtn();
         await prepareForSignatureModal.clickBackToTemplatesBtn();
         await templatePage.sideMenu.clickSign();
-    })
+    });
 };
 
-export const createForm = async (signPage,
-    prepareForSignatureModal, createFormPage, formsPage, successModal) => {
+export const createForm = async (signPage, prepareForSignatureModal, createFormPage, formsPage, successModal) => {
     await step('Precondition: Create Form', async () => {
         await signPage.sideMenu.clickForms();
         await formsPage.clickCreateFormBtn();
@@ -80,16 +75,16 @@ export const createForm = async (signPage,
         await createFormPage.fillOptionalMessageField(SIGNERS_DATA.viewerEmail1);
         await createFormPage.fileUploader.uploadFile(UPLOAD_FILE_PATH.jpgDocument);
         await createFormPage.clickFillTemplateBtn();
-        await prepareForSignatureModal.clickNameFieldItem();
+        await prepareForSignatureModal.clickNameOnFieldsMenu();
         await prepareForSignatureModal.clickDocumentBody();
-        await prepareForSignatureModal.clickSignFieldItem();
+        await prepareForSignatureModal.clickSignOnFieldsMenu();
         await prepareForSignatureModal.clickDocumentBody();
-        await prepareForSignatureModal.clickDateFieldItem();
+        await prepareForSignatureModal.clickDateOnFieldsMenu();
         await prepareForSignatureModal.clickDocumentBody();
         await prepareForSignatureModal.clickCreateBtn();
         await successModal.clickBackToFormsBtn();
         await formsPage.sideMenu.clickSign();
-    })
+    });
 };
 
 export const uploadDocumentForDraft = async (signPage, prepareForSignatureModal) => {

@@ -1,11 +1,18 @@
 import { expect } from '@playwright/test';
-import { test } from "../fixtures/base.js";
+import { test } from '../fixtures/base.js';
 import { CARD_DETAILS, RANDOM_ANNUALLY_PLAN, PLANS, END_PLAN } from '../testData.js';
-import { description, tags, severity, Severity, link, epic, feature, step } from "allure-js-commons";
+import { description, tags, severity, Severity, link, epic, feature, step } from 'allure-js-commons';
 
 test.describe('Billing', () => {
-
-    test('TC_14_57_02 | Verify the ability to successfully downgrade subscription', async ({ createBusinessUserAndLogin, signPage, settingsCompanyPage, settingsBillingPage, settingsBillingPlanPage, downgradeToPersonalPlanModal, specialOneTimeOfferModal }) => {
+    test('TC_14_57_02 | Verify the ability to successfully downgrade subscription', async ({
+        createBusinessUserAndLogin,
+        signPage,
+        settingsCompanyPage,
+        settingsBillingPage,
+        settingsBillingPlanPage,
+        downgradeToPersonalPlanModal,
+        specialOneTimeOfferModal,
+    }) => {
         await signPage.sideMenu.clickSettings();
         await settingsCompanyPage.sideMenuSettings.clickBilling();
         await settingsBillingPage.clickEditPlanButton();
@@ -15,20 +22,22 @@ test.describe('Billing', () => {
         await settingsBillingPlanPage.sideMenuSettings.clickBilling();
 
         await expect(settingsBillingPage.nextInvoiceInfo).toContainText(END_PLAN);
-    })
+    });
 
     PLANS.forEach((plan) => {
-        test(`TC_14_56_01 | Verify successful upsell of users subscription ${plan} plan`, async ({createFreeUserAndLogin, signPage, settingsCompanyPage, settingsBillingPage, settingsBillingPlanPage, upgradeYourPlanModal, specialOneTimeOfferModal}) => {
-            await description('Objective: Verify that free users can successfully upgrade their subscription plan.\n')
+        test(`TC_14_56_01 | Verify successful upsell of users subscription ${plan} plan`, async ({
+            createFreeUserAndLogin,
+            signPage,
+            settingsCompanyPage,
+            settingsBillingPage,
+            settingsBillingPlanPage,
+            upgradeYourPlanModal,
+            specialOneTimeOfferModal,
+        }) => {
+            await description('Objective: Verify that free users can successfully upgrade their subscription plan.\n');
             await severity(Severity.CRITICAL);
-            await link(
-                'https://app.qase.io/case/SIGN-56',
-                'Qase: SIGN-56'
-            );
-            await link(
-                'https://docs.google.com/document/d/1Qce7tKWOwVYtPxgQv_8ae-HUkbAgeOFph0lB_eziY_k/edit#heading=h.8e0ff2hol3sq',
-                'ATC_14_56_01'
-            );
+            await link(`${QASE_LINK}/SIGN-56`, 'Qase: SIGN-56');
+            await link(`${GOOGLE_DOC_LINK}8e0ff2hol3sq`, 'ATC_14_56_01');
             await epic('Setting');
             await feature('Billing');
             await tags('Upsell');
@@ -43,8 +52,8 @@ test.describe('Billing', () => {
             await step(`Verify that the billing plan is ${plan} Annually Plan`, async () => {
                 await expect(settingsBillingPlanPage.billingHeader).toContainText(RANDOM_ANNUALLY_PLAN(plan));
             });
-        })
-    })
+        });
+    });
 
     test('TC_14_54_01 | Attach/delete payment card', async ({
         createFreeUserAndLogin,
@@ -52,17 +61,13 @@ test.describe('Billing', () => {
         settingsCompanyPage,
         settingsBillingPage,
     }) => {
-        await description('Objective: To verify the functionality of attaching a payment card ' +
-            'through the settings-billing section and deleting a payment card through the Billing Portal.')
+        await description(
+            'Objective: To verify the functionality of attaching a payment card ' +
+                'through the settings-billing section and deleting a payment card through the Billing Portal.'
+        );
         await severity(Severity.CRITICAL);
-        await link(
-            'https://app.qase.io/case/SIGN-54',
-            'Qase: SIGN-54'
-        );
-        await link(
-            'https://docs.google.com/document/d/1Qce7tKWOwVYtPxgQv_8ae-HUkbAgeOFph0lB_eziY_k/edit#heading=h.khucr6xuqdib',
-            'ATC_14_54_01'
-        );
+        await link(`${QASE_LINK}/SIGN-54`, 'Qase: SIGN-54');
+        await link(`${GOOGLE_DOC_LINK}khucr6xuqdib`, 'ATC_14_54_01');
         await epic('Setting');
         await feature('Billing');
         await tags('Payment Card', 'Billing Portal');
@@ -75,7 +80,9 @@ test.describe('Billing', () => {
         await settingsBillingPage.reloadPage();
 
         await step('Verify that the added payment card displayed on the Billing page', async () => {
-            await expect(settingsBillingPage.creditCardData).toHaveText(CARD_DETAILS.VISA_DEBIT.displayingOnTheBillingPage);
+            await expect(settingsBillingPage.creditCardData).toHaveText(
+                CARD_DETAILS.VISA_DEBIT.displayingOnTheBillingPage
+            );
         });
 
         stripeEnterPaymentDetailsPage = await settingsBillingPage.clickAttachCardButton();
@@ -83,13 +90,17 @@ test.describe('Billing', () => {
         await settingsBillingPage.reloadPage();
 
         await step('Verify that the added payment card displayed on the Billing page', async () => {
-            await expect(settingsBillingPage.creditCardData).toHaveText(CARD_DETAILS.MASTERCARD.displayingOnTheBillingPage);
+            await expect(settingsBillingPage.creditCardData).toHaveText(
+                CARD_DETAILS.MASTERCARD.displayingOnTheBillingPage
+            );
         });
 
         let settingBillingPortalPage = await settingsBillingPage.clickOpenBillingPortalButton();
 
         await step('Verify that the payment card displayed on the Billing Portal page', async () => {
-            await expect(settingBillingPortalPage.paymentDefaultMethod).toHaveText(CARD_DETAILS.MASTERCARD.displayingOnTheBillingPortalPage)
+            await expect(settingBillingPortalPage.paymentDefaultMethod).toHaveText(
+                CARD_DETAILS.MASTERCARD.displayingOnTheBillingPortalPage
+            );
         });
 
         await settingBillingPortalPage.deleteAllNotDefaultCards();
@@ -97,8 +108,13 @@ test.describe('Billing', () => {
         await step('Verify that there is only one payment card displayed on the Billing Portal page.', async () => {
             await expect(settingBillingPortalPage.paymentMethodsList).toHaveCount(1);
         });
-        await step('Verify that there is the last added payment card displayed on the Billing Portal page.', async () => {
-            await expect(settingBillingPortalPage.paymentMethodsList).toHaveText(CARD_DETAILS.MASTERCARD.displayingOnTheBillingPortalPage);
-        });
+        await step(
+            'Verify that there is the last added payment card displayed on the Billing Portal page.',
+            async () => {
+                await expect(settingBillingPortalPage.paymentMethodsList).toHaveText(
+                    CARD_DETAILS.MASTERCARD.displayingOnTheBillingPortalPage
+                );
+            }
+        );
     });
-})
+});
