@@ -1,6 +1,6 @@
 import ToastComponent from '../components/toastComponent';
 import { clickCanvas } from '../../helpers/utils.js';
-import {step} from 'allure-js-commons';
+import { step } from 'allure-js-commons';
 
 export default class PrepareForSignatureModal {
     constructor(page) {
@@ -16,6 +16,7 @@ export default class PrepareForSignatureModal {
         this.gotItBtn = this.page.getByRole('button', { name: 'Got it' });
         this.fieldsMenu = this.page.locator('.interactModal__fieldBar-fieldList');
         this.signFieldsItem = this.fieldsMenu.getByText('Sign');
+        this.nameFieldsItem = this.fieldsMenu.getByText('Name');
         this.addSignerBtn = this.page.getByText('Add signer', { exact: true });
         this.signerNameField = this.page.getByPlaceholder('Name');
         this.signerEmailField = this.page.getByPlaceholder('Email');
@@ -30,10 +31,14 @@ export default class PrepareForSignatureModal {
         this.customSigningOrderPositionNumberOne = this.page.locator('span.signers__item-order-position').first();
         this.customSigningOrderPositionNumberTwo = this.page.locator('span.signers__item-order-position').last();
         this.addRecipientsBtn = this.page.getByText('Recipients', { exact: true });
-        this.recipientEmailField = this.page.getByPlaceholder('test@signaturely.com'); 
-        this.nameFieldItem = this.page.locator('ul.interactModal__fieldBar-fieldList li').filter({ hasText: /^Name$/ }).first();
-        this.signFieldItem = this.page.locator('ul.interactModal__fieldBar-fieldList li').nth(1);
-        this.initialFieldsItem = this.fieldsMenu.getByText('Initial');     
+        this.recipientEmailField = this.page.getByPlaceholder('test@signaturely.com');
+        this.prepareForSigningTitle = this.page.getByRole('heading', { name: 'Prepare for Signing' });
+        this.cancelBtn = this.page.getByRole('button', { name: 'Cancel' });
+        this.nameFieldItem = this.page.getByRole('complementary').getByText('Name', { exact: true });
+        this.signFieldItem = this.page.getByRole('complementary').getByText('Sign', { exact: true });
+        this.initialFieldItem = this.fieldsMenu.getByText('Initial');
+        this.dateFieldItem = this.page.getByRole('complementary').getByText('Date', { exact: true });
+
 
     }
 
@@ -50,7 +55,9 @@ export default class PrepareForSignatureModal {
     }
 
     async clickSendForSignatureRadioBtn() {
-        await this.sendForSignatureRadioBtn.click();
+        await step('Select the "Send for Signature" radio button.', async () => {
+            await this.sendForSignatureRadioBtn.click();
+        });
     }
 
     async clickContinueBtn() {
@@ -67,7 +74,7 @@ export default class PrepareForSignatureModal {
     }
 
     async clickGotItBtn() {
-        await step('Click the "Got It" button.', async () => {
+        await step('Click the "Got it" button.', async () => {
             await this.gotItBtn.click();
         });
     }
@@ -87,7 +94,7 @@ export default class PrepareForSignatureModal {
     async fillSignerEmailField(email, i) {
         await step('Fill the email address of the signer into the "Email" input field.', async () => {
             await this.signerEmailField.nth(i).fill(email);
-    });
+        });
     }
 
     async doCanvasClicks() {
@@ -105,7 +112,7 @@ export default class PrepareForSignatureModal {
 
     async clickItemDropDown(signerName) {
         await step('Select a signer\'s name from the "Assigned To" dropdown.', async () => {
-        await this.itemDropDown.getByText(signerName).click();
+            await this.itemDropDown.getByText(signerName).click();
         });
     }
 
@@ -116,34 +123,73 @@ export default class PrepareForSignatureModal {
     }
 
     async clickBackToTemplatesBtn() {
-        await this.backToTempatesBtn.click();
+        await step('In the modal window, click on the "Back to templates" button.', async () => {
+            await this.backToTempatesBtn.click();
+        });
     }
 
     async clickCustomSigningOrderCheckbox() {
-        await this.customSigningOrderCheckbox.click();
+        await step('Click on the "Custom signing order" checkbox.', async () => {
+            await this.customSigningOrderCheckbox.click();
+        });
     }
 
     async clickAddRecipientsBtn() {
-        await this.addRecipientsBtn.click();
+        await step('Click the "Recipients" button.', async () => {
+            await this.addRecipientsBtn.click();
+        });
     }
 
     async fillRecipientEmailField(email) {
-        await this.recipientEmailField.fill(email);
+        await step('Fill the email address of the viewer into the input field.', async () => {
+            await this.recipientEmailField.fill(email);
+        });
     }
 
+    async getPrepareForSigningTitleText() {
+        const actualText = await this.prepareForSigningTitle.textContent();
+        return actualText
+    }
+
+
     async clickSignFieldItem() {
-        await this.signFieldItem.click();
+        await step('Click on the "Sign" in "Fields" menu', async () => {
+            await this.signFieldItem.waitFor({ state: 'visible' });
+            await this.signFieldItem.click();
+        });
     }
 
     async clickNameFieldItem() {
-        await this.nameFieldItem.click();
+        await step('Click on the "Name" in "Fields" menu', async () => {
+            await this.nameFieldItem.waitFor({ state: 'visible' });
+            await this.nameFieldItem.click();
+        });
     }
 
     async clickCreateBtn() {
-        await this.createBtn.click();
+        await step('Click the "Create" button.', async () => {
+            await this.createBtn.click();
+
+        });
     }
 
     async clickInitialFieldsItem() {
-        await this.initialFieldsItem.click();
+        await step('Click on the "Initial" in "Fields" menu', async () => {
+            await this.initialFieldItem.click();
+        });
+    }
+
+    async clickCancelBtn() {
+        await step('Click the "Cancel" button.', async () => {
+            await this.cancelBtn.click();
+        });
+    }
+
+    async clickDateFieldItem() {
+        await step('Click on the "Date" in "Fields" menu', async () => {
+        await this.dateFieldItem.waitFor({ state: 'visible' });
+        await this.dateFieldItem.click();
+        });
+
     }
 }

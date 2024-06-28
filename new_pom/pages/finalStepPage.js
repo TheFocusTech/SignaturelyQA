@@ -1,18 +1,16 @@
 import ToastComponent from '../components/toastComponent';
-import {step} from 'allure-js-commons';
+import { step } from 'allure-js-commons';
 
 export default class FinalStepPage {
     constructor(page) {
-
         this.page = page;
         this.toast = new ToastComponent(this.page);
 
-        this.documentTitleField = this.page.getByPlaceholder("Enter the title");
-        this.signDocumentAndSendForSignatureBtn = this.page.getByRole("button", { name: "Sign Document and Send for Signature" });
-        this.sendForSignatureBtn = this.page.getByRole("button", { name: "Send for Signature" });
+        this.documentTitleField = this.page.getByPlaceholder('Enter the title');
+        this.signDocumentAndSendForSignatureBtn = this.page.getByRole('button', { name: 'Sign Document and Send for Signature' });
+        this.sendForSignatureBtn = this.page.getByRole('button', { name: 'Send for Signature' });
         this.documentOptionalMessageField = this.page.getByPlaceholder('Add an optional message for the document signers.');
         this.signDocumentBtn = this.page.getByRole('button', { name: 'Sign Document' });
-
     }
 
     async fillDocumentTitleField(title) {
@@ -28,9 +26,11 @@ export default class FinalStepPage {
         });
     }
 
-    async waitAndClickSendForSignatureBtn() {
-        await this.toast.waitForToastCompleted();
-        await this.sendForSignatureBtn.click();
+    async waitAndClickSendForSignatureBtn(text) {
+        await step('Click on the "Send for Signature" button.', async () => {
+            await this.toast.waitForToastIsHiddenByText(text);
+            await this.sendForSignatureBtn.click();
+        });
     }
 
     async fillDocumentOptionalMessageField(message) {
@@ -42,7 +42,8 @@ export default class FinalStepPage {
     }
 
     async clickSendForSignatureBtn() {
-        await this.sendForSignatureBtn.click();
+        await step('Click the "Send for Signature" button.', async () => {
+            await this.sendForSignatureBtn.click();
+        });
     }
-
 }
