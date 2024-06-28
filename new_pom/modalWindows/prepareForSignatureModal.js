@@ -151,7 +151,6 @@ export default class PrepareForSignatureModal {
         return actualText
     }
 
-
     async clickSignFieldItem() {
         await step('Click on the "Sign" in "Fields" menu', async () => {
             await this.signFieldItem.waitFor({ state: 'visible' });

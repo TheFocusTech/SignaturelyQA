@@ -144,7 +144,7 @@ test.describe('DocumentsType', () => {
         await description('Objective: To verify that the document can be returned for editing.');
         await severity(Severity.CRITICAL);
         await link("https://app.qase.io/case/SIGN-21", "QASE: SIGN-21 ")
-        await link("Documentation",
+        await link(
             "https://docs.google.com/document/d/1Qce7tKWOwVYtPxgQv_8ae-HUkbAgeOFph0lB_eziY_k/edit#heading=h.cl44yvv352v8",
             "TC_05_21_03");
 
