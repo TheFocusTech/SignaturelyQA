@@ -7,7 +7,7 @@ export default class FinalStepPage {
         this.page = page;
 
         this.toast = new ToastComponent(this.page);
-        this.calendar = new CalendarComponent(this.page);
+        this.expirationDateCalendar = new CalendarComponent(this.page);
 
         this.documentTitleField = this.page.getByPlaceholder('Enter the title');
         this.signDocumentAndSendForSignatureBtn = this.page.getByRole('button', { name: 'Sign Document and Send for Signature' });

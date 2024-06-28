@@ -64,8 +64,6 @@ export default class TableComponent {
         });
     }
 
-    
-
     async clickSendReminderBtn() {
         await this.sendReminderBtn.click();
     }
@@ -78,25 +76,28 @@ export default class TableComponent {
     async waitForDocumentStatusVisible(status) {
         await step(`Wait for ${status} status of the created document in the table.`, async () => {
             await this.documentStatus.getByText(status).waitFor({ state: 'visible' })
-        });        
-    }
-
-    async clickDuplicateBtn() {
-        await step('Click the "Duplicate" button', async () => {
-        await this.duplicateBtn.click();
         });
     }
 
     async clickDuplicateBtn() {
         await step('Click the "Duplicate" button', async () => {
-        await this.duplicateBtn.click();
+            await this.duplicateBtn.click();
         });
     }
 
-    async clickEditBtn() { 
+    async clickEditBtn() {
         await step('Click the "Edit" button', async () => {
             await this.editBtn.click();
         });
+    }
+
+    async getTemplateTitle() {
+        let actualText;
+        await step('Get template title', async () => {
+            actualText = await this.documentTitle.textContent();
+        });
+        return actualText;
+
     }
 
     async waitForDocumentStatus(page, expectedStatus) {

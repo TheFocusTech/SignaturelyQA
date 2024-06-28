@@ -1,6 +1,8 @@
-import { signUpRequest } from "./apiCalls";
+import {documentIdRequest, documentStatusRequest, signInRequest, signUpRequest} from "./apiCalls";
 import { authorize, getLinkFromEmail, getConfirmCodeFromEmail, getMessageTextFromEmail } from "../index.js";
 import { step } from "allure-js-commons";
+import {DOCUMENT_STATUS} from "../testData";
+import {dbEditDocumentStatus} from "../newUserUtils/dbUtilsForNewUser";
 
 export function generateNumberForNewUser() {
     let dt = new Date();

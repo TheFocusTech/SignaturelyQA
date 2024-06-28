@@ -257,9 +257,9 @@ test.describe('Sign Document', () => {
         await prepareForSignatureModal.clickDocumentBody();
         await prepareForSignatureModal.clickSaveBtn();
 
-        await finalStepPage.calendar.clickSelectDate();
-        await finalStepPage.calendar.pickExpirationDateInCalendar();
-        await finalStepPage.calendar.clickSelectBtn();
+        await finalStepPage.expirationDateCalendar.clickSelectDate();
+        await finalStepPage.expirationDateCalendar.pickExpirationDateInCalendar();
+        await finalStepPage.expirationDateCalendar.clickSelectBtn();
         await finalStepPage.clickSendForSignatureBtn();
         await successModal.clickBackToDocumentsBtn();
         await documentsPage.table.waitForDocumentStatus(page, DOCUMENT_STATUS.awaiting);
