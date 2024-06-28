@@ -21,8 +21,10 @@ test.describe('Sign Document', () => {
         prepareForSignatureModal }) => {
         await description('To verify custom signing order');
         await severity(Severity.CRITICAL);
-        await link('https://app.qase.io/case/SIGN-11', 'Qase: SIGN-11');
-        await link('https://docs.google.com/document/d/1Qce7tKWOwVYtPxgQv_8ae-HUkbAgeOFph0lB_eziY_k/edit#heading=h.7y8njhymxgmj', 'ATC_04_11_02');
+        await link(
+            'https://app.qase.io/case/SIGN-11', 'Qase: SIGN-11');
+        await link(
+            'https://docs.google.com/document/d/1Qce7tKWOwVYtPxgQv_8ae-HUkbAgeOFph0lB_eziY_k/edit#heading=h.7y8njhymxgmj', 'ATC_04_11_02');
         await epic('Sign document');
         await tag('Signing order');
 
@@ -72,8 +74,10 @@ test.describe('Sign Document', () => {
 
         await description('To verify the adding viewers / adding users who can view the document.');
         await severity(Severity.CRITICAL);
-        await link('https://app.qase.io/case/SIGN-14', 'Qase: SIGN-14');
-        await link('https://docs.google.com/document/d/1Qce7tKWOwVYtPxgQv_8ae-HUkbAgeOFph0lB_eziY_k/edit#heading=h.ojom1b8sk9ht', 'ATC_04_14_01');
+        await link(
+            'https://app.qase.io/case/SIGN-14', 'Qase: SIGN-14');
+        await link(
+            'https://docs.google.com/document/d/1Qce7tKWOwVYtPxgQv_8ae-HUkbAgeOFph0lB_eziY_k/edit#heading=h.ojom1b8sk9ht', 'ATC_04_14_01');
         await epic('Sign document');
         await tag('Viewers');
 
