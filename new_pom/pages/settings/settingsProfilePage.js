@@ -12,7 +12,7 @@ export default class SettingsProfilePage {
         this.newPasswordInputField = this.page.getByPlaceholder('Password', { exact: true });
         this.repeatNewPasswordInputField = this.page.getByPlaceholder('Repeat Password');
         this.saveButton = this.page.getByRole('button', { name: 'Save' });
-        this.deleteMyAccountBtn = this.page.getByText('Delete my Account', {exact: true});
+        this.deleteMyAccountBtn = this.page.getByRole('button', {name: 'Delete my Account'});
         this.emailAddressInputField = this.page.getByPlaceholder('username@gmail.com');
         this.updateBtn = this.page.getByRole('button', {name: "Update Email"});
     }
