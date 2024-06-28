@@ -44,7 +44,7 @@ test.describe('Create API key', () => {
 
         await expect(settingsAPIPage.billingDetailsTextField).toHaveText(clipboardApiKeyValue);
     });
-});
+})
 
 test.describe('Purchase API plan', () => {
     for (const apiPlan of API_PLANS) {
