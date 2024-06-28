@@ -31,6 +31,9 @@ export const TOAST_MESSAGE = {
     documentSubmited: 'Document submitted.',
     duplicated: 'Form successfully duplicated!',
     apiPlanUpgraded: 'Api plan have been upgraded',
+    invitesSent: 'Invites sent successfully',
+    inviteAccepted: 'Invite accepted.',
+    upgradedToAdmin: 'Team member successfully upgraded to admin.',
 };
 export const API_KEY_NAME = 'Test Api Key';
 export const NO_API_KEY_MESSAGE = 'You don\'t have any API keys yet.';
@@ -114,6 +117,7 @@ export const EMAIL_SUBJECTS = {
     signatureRequest: "requested your signature",
     emailConfirmation: 'Signaturely Email Confirmation',
     sentToView: 'Sent you a document to view',
+    inviteToJoin:' invited you to join Signaturely'
 }
 export const SELECTORS = {
     link: 'span',
@@ -145,3 +149,8 @@ export const SERVICE_NAME = 'Signaturely';
 export const EMAIL_MESSAGE = " sent you the following document to view";
 export const API_PLANS = ['Gold', 'Platinum', 'Titanium'];
 export const currentPlan = 'Current plan'
+
+export const TEAM_MEMBER_ROLES = {
+    user: 'User',
+    admin: 'Admin',
+}
