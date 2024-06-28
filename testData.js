@@ -30,6 +30,7 @@ export const TOAST_MESSAGE = {
     sendReminder: 'Reminder(s) has been sent',
     documentSubmited: 'Document submitted.',
     duplicated: 'Form successfully duplicated!',
+    apiPlanUpgraded: 'Api plan have been upgraded',
 };
 export const API_KEY_NAME = 'Test Api Key';
 export const NO_API_KEY_MESSAGE = 'You don\'t have any API keys yet.';
@@ -141,4 +142,6 @@ export const NO_ATTACHED_CARD = 'Current Card:No attached card';
 
 export const SUBMIT_TITLE = 'Thanks for Submitting your Document';
 export const SERVICE_NAME = 'Signaturely';
-export const EMAIL_MESSAGE = " sent you the following document to view"
+export const EMAIL_MESSAGE = " sent you the following document to view";
+export const API_PLANS = ['Gold', 'Platinum', 'Titanium'];
+export const currentPlan = 'Current plan'
