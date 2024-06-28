@@ -17,19 +17,33 @@ test.describe('Billing', () => {
         await expect(settingsBillingPage.nextInvoiceInfo).toContainText(END_PLAN);
     })
 
-    test.describe('Upsell plan', () => {
-        for (const plan of PLANS) {
-            test(`TC_14_56_01 | Verify successful upsell of users subscription ${plan} plan`, async ({ createFreeUserAndLogin, signPage, settingsCompanyPage, settingsBillingPage, settingsBillingPlanPage, upgradeYourPlanModal, specialOneTimeOfferModal }) => {
-                await signPage.sideMenu.clickSettings();
-                await settingsCompanyPage.horizontalMenu.clickBilling();
-                await settingsBillingPage.clickUpgradePlanButton();
-                await settingsBillingPlanPage.clickUpgradeButton(plan);
-                await upgradeYourPlanModal.cardDetails.fillData(CARD_DETAILS.VISA);
-                await upgradeYourPlanModal.clickSubscribeButton();
-                await specialOneTimeOfferModal.clickYesUpgradeMeBtn();
+    PLANS.forEach((plan) => {
+        test(`TC_14_56_01 | Verify successful upsell of users subscription ${plan} plan`, async ({createFreeUserAndLogin, signPage, settingsCompanyPage, settingsBillingPage, settingsBillingPlanPage, upgradeYourPlanModal, specialOneTimeOfferModal}) => {
+            await description('Objective: Verify that free users can successfully upgrade their subscription plan.\n')
+            await severity(Severity.CRITICAL);
+            await link(
+                'https://app.qase.io/case/SIGN-56',
+                'Qase: SIGN-56'
+            );
+            await link(
+                'https://docs.google.com/document/d/1Qce7tKWOwVYtPxgQv_8ae-HUkbAgeOFph0lB_eziY_k/edit#heading=h.8e0ff2hol3sq',
+                'ATC_14_56_01'
+            );
+            await epic('Setting');
+            await feature('Billing');
+            await tags('Upsell');
+
+            await signPage.sideMenu.clickSettings();
+            await settingsCompanyPage.horizontalMenu.clickBilling();
+            await settingsBillingPage.clickUpgradePlanButton();
+            await settingsBillingPlanPage.clickUpgradeButton(plan);
+            await upgradeYourPlanModal.cardDetails.fillData(CARD_DETAILS.VISA);
+            await upgradeYourPlanModal.clickSubscribeButton();
+            await specialOneTimeOfferModal.clickYesUpgradeMeBtn();
+            await step(`Verify that the billing plan is ${plan} Annually Plan`, async () => {
                 await expect(settingsBillingPlanPage.billingHeader).toContainText(RANDOM_ANNUALLY_PLAN(plan));
-            })
-        }
+            });
+        })
     })
 
     test('TC_14_54_01 | Attach/delete payment card', async ({

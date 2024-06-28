@@ -38,13 +38,13 @@ test.describe('Forms', () => {
         await createFormPage.clickFillTemplateBtn();
 
         await prepareForSignatureModal.clickNameFieldItem();
-        await prepareForSignatureModal.doCanvasClicks();
+        await prepareForSignatureModal.clickDocumentBody();
     
         await prepareForSignatureModal.clickSignFieldItem();
-        await prepareForSignatureModal.doCanvasClicks();
+        await prepareForSignatureModal.clickDocumentBody();
 
         await prepareForSignatureModal.clickDateFieldItem();
-        await prepareForSignatureModal.doCanvasClicks();
+        await prepareForSignatureModal.clickDocumentBody();
 
         await prepareForSignatureModal.clickCreateBtn();
 
