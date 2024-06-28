@@ -61,11 +61,14 @@ test.describe('Templates', () => {
         await templatePage.toast.waitForToastIsHiddenByText(TOAST_MESSAGE.success);
         await templatePage.sideMenuTemplates.clickApiTemplates();
 
-        await step('Template successfully added to API (appears in API Templates).', async () => {
+        await step('Template successfully added to API (appears in API Templates) - status API.', async () => {
             await expect(await apiTemplatesPage.table.documentStatus).toHaveText(TEMPLATES_STATUS.api);
-
         });
-    })
+
+        await step('Template successfully added to API (appears in API Templates) - name checked.', async () => {
+            await expect(templatePage.table.getTemplateTitle()).resolves.toEqual(CREATE_TEMPLATE.nameField);
+        });
+    });
 
     test('TC_07_28_01 | Verify that user can edit template', async ({
         createBusinessUserAndLogin,
