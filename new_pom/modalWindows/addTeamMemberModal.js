@@ -1,0 +1,56 @@
+import { step } from "allure-js-commons";
+export default class AddTeamMemberModal {
+    constructor(page) {
+        this.page = page;
+
+        this.teamMemberEmail = this.page.getByPlaceholder('test@signaturely.com');
+        this.teamMemberName = this.page.getByPlaceholder('Name');
+        this.teamMemberActualRole = this.page.locator('.uiSelect__select-value');
+        this.teamMembersRoleOptionsDropdown = this.page.locator('.teammates__role-wrapper');
+        this.teamMemberRoleOption = this.page.locator('.uiSelect__select-row');
+        this.sendInvitesBtn = this.page.getByRole('button', {name: 'Send Invites'});
+    }
+
+    async fillTeamMemberEmailInputField(teamMemberEmail) {
+        await step('Fill in the team member email input field', async () => {
+            await this.teamMemberEmail.type(teamMemberEmail);
+        });
+    }
+
+    async fillTeamMemberNameInputField(teamMemberName) {
+        await step('Fill in the team member name input field', async () => {
+            await this.teamMemberName.type(teamMemberName);
+        });
+    }
+
+    async isTeamMemberRoleSet(role) {
+        return await step('Get team member role value', async () => {
+            return (await this.teamMemberActualRole.innerText()) === role;
+        });
+    }
+
+    async openTeamMemberRoleDropdown() {
+        await step('Open team member role dropdown', async () => {
+            await this.teamMembersRoleOptionsDropdown.click();
+        });
+    }
+
+    async selectTeamMemberRoleFromDropdown(role) {
+        await step('Select team member role from dropdown', async () => {
+            await this.teamMemberRoleOption.getByText(role).click();
+        });
+    }
+
+    async changeTeamMemberRole( expectedRole) {
+        await step(`Change team member role to ${expectedRole}`, async () => {
+            await this.openTeamMemberRoleDropdown();
+            await this.selectTeamMemberRoleFromDropdown(expectedRole);
+        });
+    }
+
+    async clickSendInvitesButton() {
+        await step('Click on the "Send Invites" button', async () => {
+            await this.sendInvitesBtn.click();
+        });
+    }
+}
