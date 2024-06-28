@@ -31,6 +31,7 @@ export const TOAST_MESSAGE = {
     documentSubmited: 'Document submitted.',
     duplicated: 'Form successfully duplicated!',
     apiPlanUpgraded: 'Api plan have been upgraded',
+    templateSaved: 'Template saved',
 };
 export const API_KEY_NAME = 'Test Api Key';
 export const NO_API_KEY_MESSAGE = 'You don\'t have any API keys yet.';
@@ -133,10 +134,12 @@ export const SIGNERS_DATA = {
 export const FOLDER_NAME = 'Folder for documents';
 export const UPLOAD_FILE_PATH = {
     jpgDocument: 'testDocuments/picture.jpg',
-    xlsxDocument: 'testDocuments/todoList.xlsx'
+    xlsxDocument: 'testDocuments/todoList.xlsx',
+    csvDocument: 'testDocuments/CSV.csv',
 };
 export const UPLOAD_FILE_NAME = {
     jpgDocument: 'picture.jpg',
+    csvDocument: 'CSV.csv',
 };
 export const NO_ATTACHED_CARD = 'Current Card:No attached card';
 
@@ -145,3 +148,8 @@ export const SERVICE_NAME = 'Signaturely';
 export const EMAIL_MESSAGE = " sent you the following document to view";
 export const API_PLANS = ['Gold', 'Platinum', 'Titanium'];
 export const currentPlan = 'Current plan'
+export const EDIT_TEMPLATE_DATA = {
+    nameField: 'Rental agreement 2024',
+    optionalMessage: 'For Internal Use Only',
+    nameRole: 'Chief Financial Officer',
+};
