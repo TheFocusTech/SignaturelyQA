@@ -1,33 +1,32 @@
 import { expect } from "@playwright/test";
 import { test } from "../fixtures/base.js";
-import { SIGNERS_DATA, UPLOAD_FILE_PATH, UPLOAD_FILE_NAME, FOLDER_NAME, TOAST_MESSAGE } from "../testData.js";
+import { UPLOAD_FILE_PATH, UPLOAD_FILE_NAME, FOLDER_NAME, TOAST_MESSAGE, DOCUMENT_STATUS } from "../testData.js";
 import { createFolder, createDocumentAwaiting } from "../helpers/preconditions.js";
 import { description, tag, severity, Severity, link, epic, step } from "allure-js-commons";
 
 test.describe('DocumentsType', () => {
 
     test('TC_05_21_01 | Verify that button Edit&Resend is active', async ({ createBusinessUserAndLogin,
-        signPage, prepareForSignatureModal,
-        editAndResendDocumentModal, successModal,
+        signPage, prepareForSignatureModal, editAndResendDocumentModal, successModal,
         finalStepPage, documentsPage }) => {
 
         test.setTimeout(250 * 1000);
 
         await description('Objective: To verify that the document can be returned for editing.');
-        await tag('Edit & Resend, Documents');
         await severity(Severity.CRITICAL);
+        await link("https://app.qase.io/case/SIGN-21", "QASE: SIGN-21 ");
         await link(
-            "Documentation",
             "https://docs.google.com/document/d/1Qce7tKWOwVYtPxgQv_8ae-HUkbAgeOFph0lB_eziY_k/edit#heading=h.a5x7xbzct5pl",
-            "TC_05_21_01"),
-            await epic('Documents');
+            "ATC_05_21_01");
+        await tag('Edit & Resend, Documents');
+        await epic('Documents (typed)');
 
         await createDocumentAwaiting(
             signPage, prepareForSignatureModal,
             documentsPage, successModal, finalStepPage);
 
         await signPage.sideMenu.clickDocuments();
-        await documentsPage.table.clickOptionsButton();
+        await documentsPage.table.clickOptionsBtn(0);
         await documentsPage.table.clickEditAndResendBtn();
 
         await step('Verify that modal window Edit & Resend document has opened', async () => {
@@ -36,7 +35,6 @@ test.describe('DocumentsType', () => {
         await step('Verify that the title matches "Edit & Resend document"', async () => {
             expect(await editAndResendDocumentModal.getTitleText()).toBe("Edit & Resend document");
         });
-
     });
 
     test('TC_05_21_02 | Verify that button "Revert to Draft" is active', async ({ createBusinessUserAndLogin, page, signPage, prepareForSignatureModal, successModal, editAndResendDocumentModal, finalStepPage, documentsPage }) => {
@@ -44,18 +42,18 @@ test.describe('DocumentsType', () => {
         test.setTimeout(250 * 1000);
 
         await description('Objective: To verify that the document can be returned for editing.');
-        await tag('Edit & Resend, Documents');
         await severity(Severity.CRITICAL);
-        await link(
-            "Documentation",
-            "https://docs.google.com/document/d/1Qce7tKWOwVYtPxgQv_8ae-HUkbAgeOFph0lB_eziY_k/edit#heading=h.r25l83kzqn09",
-            "TC_05_21_02"),
+        await link("https://app.qase.io/case/SIGN-21", "QASE: SIGN-21 ");
 
-            await epic('Documents');
+        await link(
+            "https://docs.google.com/document/d/1Qce7tKWOwVYtPxgQv_8ae-HUkbAgeOFph0lB_eziY_k/edit#heading=h.r25l83kzqn09",
+            "ATC_05_21_02");
+        await tag('Edit & Resend, Documents');
+        await epic('Documents (typed)');
 
         await createDocumentAwaiting(signPage, prepareForSignatureModal, documentsPage, successModal, finalStepPage);
         await signPage.sideMenu.clickDocuments();
-        await documentsPage.table.clickOptionsButton();
+        await documentsPage.table.clickOptionsBtn(0);
         await documentsPage.table.clickEditAndResendBtn();
         await editAndResendDocumentModal.clickRevertToDraftBtn();
 
@@ -67,7 +65,7 @@ test.describe('DocumentsType', () => {
             expect(await prepareForSignatureModal.getPrepareForSigningTitleText()).toBe("Prepare for Signing");
 
         });
-    })
+    });
 
     test('TC_05_18_01 | Verify moving a document to a folder', async ({
         createBusinessUserAndLogin,
@@ -108,7 +106,7 @@ test.describe('DocumentsType', () => {
         await step('Verify the document is inside the folder', async () => {
             await expect(await documentsPage.table.documentTitle).toHaveText(UPLOAD_FILE_NAME.jpgDocument);
         });
-    })
+    });
 
     test('TC_05_16_01 | Verify that the user receives an email reminder to sign the document', async ({
         createBusinessUserAndLogin,
@@ -137,5 +135,33 @@ test.describe('DocumentsType', () => {
         await sendReminderDocumentModal.clickSendReminderBtn();
 
         await expect(await documentsAwaitingPage.toast.toastBody).toHaveText(TOAST_MESSAGE.sendReminder);
+    });
+
+    test('TC_05_21_03 | Verify that document_status is  Draft', async ({ createBusinessUserAndLogin, signPage, prepareForSignatureModal, successModal, editAndResendDocumentModal, finalStepPage, documentsPage }) => {
+
+        test.setTimeout(250 * 1000);
+
+        await description('Objective: To verify that the document can be returned for editing.');
+        await severity(Severity.CRITICAL);
+        await link("https://app.qase.io/case/SIGN-21", "QASE: SIGN-21 ")
+        await link(
+            "https://docs.google.com/document/d/1Qce7tKWOwVYtPxgQv_8ae-HUkbAgeOFph0lB_eziY_k/edit#heading=h.cl44yvv352v8",
+            "TC_05_21_03");
+
+        await tag('Revert document');
+        await epic('Documents (typed)');
+
+        await createDocumentAwaiting(signPage, prepareForSignatureModal, documentsPage, successModal, finalStepPage);
+        await signPage.sideMenu.clickDocuments();
+        await documentsPage.table.clickOptionsBtn(0);
+        await documentsPage.table.clickEditAndResendBtn();
+        await editAndResendDocumentModal.clickRevertToDraftBtn();
+        await prepareForSignatureModal.clickCancelBtn();
+        await signPage.sideMenu.clickDocuments();
+
+        await step('Verify the document has status "Draft" ', async () => {
+            expect(await documentsPage.table.getDocumentStatusText()).toBe(DOCUMENT_STATUS.draft);
+
+        });
     });
 })

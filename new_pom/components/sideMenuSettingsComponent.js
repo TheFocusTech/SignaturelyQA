@@ -17,7 +17,9 @@ export default class SideMenuSettingsComponent {
     }
 
     async clickEditSignature() {
-        await this.editSignature.click();
+        await step("Click on the Edit Signature option in the submenu", async () => {
+            await this.editSignature.click();
+        });
     }
 
     async clickProfile() {
