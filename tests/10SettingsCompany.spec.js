@@ -1,6 +1,6 @@
 import { expect } from "@playwright/test";
 import { test } from "../fixtures/base.js";
-import {TOAST_MESSAGE, COMPANY_INFO} from '../testData.js';
+import {TOAST_MESSAGE, COMPANY_INFO, UPLOAD_FILE_PATH} from '../testData.js';
 import { description, tags, severity, Severity, link, epic, step } from 'allure-js-commons';
 
 test.describe('Company', () => {
@@ -23,7 +23,7 @@ test.describe('Company', () => {
         await tags("Fill company's form");
         
         await signPage.sideMenu.clickSettings();
-        await settingsCompanyPage.logoUpLoadFile('testDocuments/picture.jpg');
+        await settingsCompanyPage.logoUpLoadFile('UPLOAD_FILE_PATH.jpgDocument');
         await settingsCompanyPage.clickSaveBtn();
         await settingsCompanyPage.fillCompanyName(COMPANY_INFO.companyName);
         await settingsCompanyPage.fillFromEmail(COMPANY_INFO.emailFrom);
