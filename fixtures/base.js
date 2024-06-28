@@ -41,6 +41,7 @@ import NotRegisterSignerSignPage from '../new_pom/pages/notRegisterSignerSignPag
 import SignerAlmostDoneModal from '../new_pom/modalWindows/signerAlmostDoneModal.js';
 import DocumentSubmitProccessModal from '../new_pom/modalWindows/documentSubmitProccessModal.js';
 import UpgradeYourPlanAPIModal from "../new_pom/modalWindows/upgradeYourPlanAPIModal";
+import EditTemplatesPage from "../new_pom/pages/templates/editTemplatesPage.js";
 import TeamPage from "../new_pom/pages/team/teamPage.js";
 import AddTeamMemberModal from "../new_pom/modalWindows/addTeamMemberModal.js";
 import TeamsAcceptInvitePage from "../new_pom/pages/team/teamsAcceptInvitePage.js";
@@ -252,6 +253,10 @@ export const test = base.extend({
     upgradeYourPlanAPIModal: async ({ page }, use) => {
         await use(new UpgradeYourPlanAPIModal(page));
     },
+    editTemplatesPage: async ({ page }, use) => {
+        await use(new EditTemplatesPage(page));
+    },
+
 
     teamPage: async ({ page }, use) => {
         await use(new TeamPage(page));
