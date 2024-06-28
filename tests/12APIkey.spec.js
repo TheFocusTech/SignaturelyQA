@@ -5,13 +5,26 @@ import {description, epic, feature, link, Severity, severity, step, tags} from "
 
 test.describe('API key', () => {
 
-    test('TC_12_48_01_01 | Verify User can copy API key created by the "Create API" button on the right.', async ({
-                                                                                                                      createBusinessUserAndLogin,
-                                                                                                                      signPage,
-                                                                                                                      settingsCompanyPage,
-                                                                                                                      settingsAPIPage,
-                                                                                                                      createAPIKeyModal
-                                                                                                                  }) => {
+    test('TC_12_48_01 | Copy API key created by the "Create API" button on the right.', async ({
+            createBusinessUserAndLogin,
+            signPage,
+            settingsCompanyPage,
+            settingsAPIPage,
+            createAPIKeyModal
+        }) => {
+        await description('To verify that user can copy API key created by the "Create API" button on the right.');
+        await severity(Severity.BLOCKER);
+        await link(
+            'https://app.qase.io/case/SIGN-48',
+            'Qase: SIGN-48'
+        );
+        await link(
+            "https://docs.google.com/document/d/1Qce7tKWOwVYtPxgQv_8ae-HUkbAgeOFph0lB_eziY_k/edit#heading=h.l0o8p7o1i4k",
+            "ATC_12_48_01"
+        );
+        await epic('API');
+        await tags('Settings, API key');
+
         await signPage.sideMenu.clickSettings();
         await settingsCompanyPage.horizontalMenu.clickAPI();
 
@@ -21,12 +34,24 @@ test.describe('API key', () => {
         await createAPIKeyModal.clickCreateAPIBtn();
         await createAPIKeyModal.clickCopyAPIBtn();
 
-        await settingsAPIPage.toast.toastBody.waitFor();
+        const clipboardApiKeyValue = await createAPIKeyModal.APIKeyValue.innerText();
 
-        const clipboardApiKeyValue = await createAPIKeyModal.getAPIKeyValueText();
+        await step('Wait the toast appears indicating API key has been successfully copied to clipboard', async () => {
+            await settingsAPIPage.toast.toastBody.waitFor();
+        });
+        await step('Verify the toast message that API key has been successfully copied to clipboard', async () => {
+            await expect(settingsAPIPage.toast.toastBody).toHaveText(TOAST_MESSAGE.copyApiKey);
+        });
+
+        await step('Ensure the API key is not empty', async () => {
+            await expect(createAPIKeyModal.getAPIKeyValueText()).not.toBe('');
+        });
+        await step('Ensure the API key is not undefined', async () => {
+            await expect(createAPIKeyModal.getAPIKeyValueText()).not.toBe('undefined');
+        });
 
         await createAPIKeyModal.clickCloseAPIModalBtn();
-        await settingsAPIPage.fillBillingDetailsField(clipboardApiKeyValue);
+        await settingsAPIPage.pasteIntoBillingDetailsField(clipboardApiKeyValue);
 
         await expect(settingsAPIPage.billingDetailsTextField).toHaveText(clipboardApiKeyValue);
     });
@@ -49,7 +74,8 @@ test.describe('API key', () => {
 
         await settingsAPIPage.toast.toastBody.waitFor();
 
-        const clipboardApiKeyValue = await createAPIKeyModal.getAPIKeyValueText();
+        // const clipboardApiKeyValue = await createAPIKeyModal.getAPIKeyValueText();
+        const clipboardApiKeyValue = await createAPIKeyModal.APIKeyValue.innerText();
 
         await createAPIKeyModal.clickCloseAPIModalBtn();
         await settingsAPIPage.fillBillingDetailsField(clipboardApiKeyValue);
