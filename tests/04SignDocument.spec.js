@@ -173,6 +173,19 @@ test.describe('Sign Document', () => {
 
         test.setTimeout(270 * 1000);
 
+        await description('Objective: To verify that the user who uploaded the document and Other Signer can sign it' )
+        await severity(Severity.CRITICAL);
+        await link(
+            'https://app.qase.io/case/SIGN-10', 'Qase: SIGN-10'
+        );
+        await link(
+            'Documentation',
+            'https://docs.google.com/document/d/1Qce7tKWOwVYtPxgQv_8ae-HUkbAgeOFph0lB_eziY_k/edit#heading=h.khucr6xuqdib',
+            'TC_04_10_02'
+        );
+        await epic('Sign a document');
+        await tag('me&others');
+
         await createSignature(
             signPage,
             settingsCompanyPage,
@@ -204,6 +217,8 @@ test.describe('Sign Document', () => {
         await finalStepPage.clickSignDocumentAndSendForSignatureBtn();
         await successModal.clickBackToDocumentsBtn();
 
-        await expect(await documentsPage.table.documentStatus).toHaveText(DOCUMENT_STATUS.awaiting);
+        await step('Verify that document has awaiting status', async () => {
+            await expect(await documentsPage.table.documentStatus).toHaveText(DOCUMENT_STATUS.awaiting);
+        })
      });
 });

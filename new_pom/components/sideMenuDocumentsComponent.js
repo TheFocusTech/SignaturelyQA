@@ -17,6 +17,8 @@ export default class SideMenuDocumentsComponent {
     }
 
     async clickDraft() {
-        await this.draft.click();
+        await step('Click "Draft" submenu', async () => {
+            await this.draft.click();
+        })
     }
 }
