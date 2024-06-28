@@ -91,3 +91,10 @@ export const createForm = async (signPage,
         await formsPage.sideMenu.clickSign();
     })
 };
+
+export const uploadDocumentForDraft = async (signPage, prepareForSignatureModal) => {
+    await signPage.uploadFileTab.fileUploader.uploadFile("testDocuments/picture.jpg");
+    await signPage.uploadFileTab.clickPrepareDocumentBtn();
+    await prepareForSignatureModal.clickCancelBtn();
+};
+

@@ -4,6 +4,7 @@ export default class SideMenuDocumentsComponent {
 
         this.trash = this.page.getByRole('link', { name: 'Trash' });
         this.awaitingSignature = this.page.getByRole('link', {name: 'Awaiting Signature'});
+        this.draft = this.page.getByRole('link', { name: 'Draft' });
 
     }
 
@@ -14,5 +15,8 @@ export default class SideMenuDocumentsComponent {
     async clickAwaitingSignature() {
         await this.awaitingSignature.click();
     }
-    
+
+    async clickDraft() {
+        await this.draft.click();
+    }
 }

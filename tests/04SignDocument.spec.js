@@ -11,8 +11,12 @@ import {
     SUBMIT_TITLE,
     SERVICE_NAME,
     EMAIL_MESSAGE,
+    DOCUMENT_TITLE,
+    SIGNER_ME,
 } from '../testData.js';
 import { retrieveUserEmailConfirmationLink, retrieveEmailMessage } from '../helpers/utils.js';
+import { createSignature, uploadDocumentForDraft } from "../helpers/preconditions.js";
+
 
 test.describe('Sign Document', () => {
     test('TC_04_11_02 | Verify custom signing order', async ({ createBusinessUserAndLogin, signPage, prepareForSignatureModal }) => {
@@ -52,7 +56,7 @@ test.describe('Sign Document', () => {
         page,
         request,
     }) => {
-        test.setTimeout(250 * 1000);
+        test.setTimeout(270 * 1000);
 
         await description('To verify the adding viewers / adding users who can view the document.');
         await severity(Severity.CRITICAL);
@@ -153,4 +157,53 @@ test.describe('Sign Document', () => {
             await expect(await documentsPage.table.documentStatus).toHaveText(DOCUMENT_STATUS.completed);
         });
     });
+
+    test("TC_04_10_02 | Verify that the user who uploaded the document and other signer can sign it", async ({
+        createBusinessUserAndLogin,
+        signPage,
+        settingsCompanyPage,
+        settingsEditSignaturePage,
+        createOrEditSignatureOnSettingModal,
+        prepareForSignatureModal,
+        chooseSignatureOrInitialModal,
+        finalStepPage,
+        successModal,
+        documentsPage,
+    }) => {
+
+        test.setTimeout(270 * 1000);
+
+        await createSignature(
+            signPage,
+            settingsCompanyPage,
+            settingsEditSignaturePage,
+            createOrEditSignatureOnSettingModal
+        );
+
+        await uploadDocumentForDraft(signPage, prepareForSignatureModal); 
+        await signPage.sideMenu.clickDocuments();
+        await documentsPage.sideMenuDocuments.clickDraft();
+        await documentsPage.table.clickOptionsBtn(0);
+        await documentsPage.table.clickEditAndResendBtn();
+        await prepareForSignatureModal.clickSignAndSendForSignatureRadioBtn(); 
+        await prepareForSignatureModal.clickAddSignerBtn();
+        await prepareForSignatureModal.fillSignerNameField(SIGNERS_DATA.signerName2, 0);
+        await prepareForSignatureModal.fillSignerEmailField(SIGNERS_DATA.signerEmail2, 0);
+        await prepareForSignatureModal.clickContinueBtn();
+        await prepareForSignatureModal.clickGotItBtn();
+        await prepareForSignatureModal.clickSignFieldsItem();
+        await prepareForSignatureModal.doCanvasClicks();
+        await prepareForSignatureModal.clickAssignedToDropDown();
+        await prepareForSignatureModal.clickItemDropDown(SIGNER_ME);
+        await chooseSignatureOrInitialModal.clickSignatureTyped();
+        await chooseSignatureOrInitialModal.clickSignNowBtn();
+        await prepareForSignatureModal.clickSignFieldsItem();
+        await prepareForSignatureModal.doCanvasClicks();
+        await prepareForSignatureModal.clickSaveBtn();
+        await finalStepPage.fillDocumentTitleField(DOCUMENT_TITLE);
+        await finalStepPage.clickSignDocumentAndSendForSignatureBtn();
+        await successModal.clickBackToDocumentsBtn();
+
+        await expect(await documentsPage.table.documentStatus).toHaveText(DOCUMENT_STATUS.awaiting);
+     });
 });
