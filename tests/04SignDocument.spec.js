@@ -246,7 +246,7 @@ test.describe('Sign Document', () => {
                                                                        documentsPage,
                                                                        successModal
                                                                    }) => {
-        await description('Objective: Verify that changing the document status to "expired"(db) updates the front-end display')
+        await description('Objective: Verify that changing the document status to "expired"(database) updates the front-end display')
         await severity(Severity.CRITICAL);
         await link(
             'https://app.qase.io/case/SIGN-13',
