@@ -75,10 +75,12 @@ export const createForm = async (signPage, formsPage, createFormPage, prepareFor
     await step('Precondition: Create Form', async () => {
         await signPage.sideMenu.clickForms();
         await formsPage.clickCreateFormBtn();
-        await createFormPage.fillFormNameField(SIGNERS_DATA.signerName1);
-        await createFormPage.fillOptionalMessageField(SIGNERS_DATA.viewerEmail1);
+
+        //await createFormPage.createUpdateForm.fillFormNameField(SIGNERS_DATA.signerEmail1)
+       // await createFormPage.createUpdateForm.fillOptionalMessageField(SIGNERS_DATA.viewerEmail1);
         await createFormPage.fileUploader.uploadFile(UPLOAD_FILE_PATH.jpgDocument);
-        await createFormPage.clickFillTemplateBtn();
+        await createFormPage.createUpdateForm.clickFillTemplateBtn();
+
         await prepareForSignatureModal.clickNameOnFieldsMenu();
         await prepareForSignatureModal.doCanvasClicks();
         await prepareForSignatureModal.clickSignOnFieldsMenu();
@@ -89,6 +91,7 @@ export const createForm = async (signPage, formsPage, createFormPage, prepareFor
         await prepareForSignatureModal.doCanvasClicks();
         await prepareForSignatureModal.clickCreateBtn();
         await successModal.clickBackToFormsBtn();
+        
         await formsPage.sideMenu.clickSign();
     })
 };

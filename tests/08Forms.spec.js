@@ -31,11 +31,11 @@ test.describe('Forms', () => {
         await signPage.sideMenu.clickForms();
 
         await formsPage.clickCreateFormBtn();
-        await createFormPage.fillFormNameField(SIGNERS_DATA.signerName1);
-        await createFormPage.fillOptionalMessageField(SIGNERS_DATA.viewerEmail1);
+        await createFormPage.createUpdateForm.fillFormNameField(SIGNERS_DATA.signerName1);
+        await createFormPage.createUpdateForm.fillOptionalMessageField(SIGNERS_DATA.viewerEmail1);
 
         await createFormPage.fileUploader.uploadFile(UPLOAD_FILE_PATH.jpgDocument);
-        await createFormPage.clickFillTemplateBtn();
+        await createFormPage.createUpdateForm.clickFillTemplateBtn();
 
         await prepareForSignatureModal.clickNameOnFieldsMenu();
         await prepareForSignatureModal.doCanvasClicks();
@@ -109,11 +109,11 @@ test.describe('Forms', () => {
         await signPage.sideMenu.clickForms();
         await formsPage.table.clickOptionsBtn(0);
         await formsPage.table.clickEditBtn();
-        await updateFormPage.fillFormNameField(FORMS.form_name_edit);
-        await updateFormPage.fillOptionalMessageField(FORMS.optional_message_text_edit);
-        await updateFormPage.clickDeleteDocumentBtn();
+        await updateFormPage.createUpdateForm.fillFormNameField(FORMS.form_name_edit);
+        await updateFormPage.createUpdateForm.fillOptionalMessageField(FORMS.optional_message_text_edit);
+        await updateFormPage.createUpdateForm.clickDeleteDocumentBtn();
         await updateFormPage.fileUploader.uploadFile(UPLOAD_FILE_PATH.xlsxDocument);
-        await updateFormPage.clickFillTemplateBtn();
+        await updateFormPage.createUpdateForm.clickFillTemplateBtn();
 
         await prepareForSignatureModal.clickSignOnFieldsMenu();
         await prepareForSignatureModal.doCanvasClicks();

@@ -1,32 +1,18 @@
+import CreateUpdateFormComponent from "../../components/createUpdateFormComponent";
 import FileUploaderComponent from "../../components/fileUploaderComponent";
-import {step} from 'allure-js-commons';
+import TableComponent from "../../components/tableComponent";
+import ToastComponent from "../../components/toastComponent";
 
 export default class UpdateFormPage {
     constructor(page) {
         this.page = page;
+
+        this.createUpdateForm = new CreateUpdateFormComponent(this.page)
         this.fileUploader = new FileUploaderComponent(this.page);
-
-        this.formNameField = this.page.getByPlaceholder('A form name to identify your');
-        this.optionalMessageField = this.page.getByPlaceholder('Add an optional message for');
-        this.fillTemplateBtn = this.page.getByRole('button', { name: 'Fill Template' });
-        this.deleteDocumentBtn = this.page.locator('.documentPreview__document-header-button-icon');
-    }
-
-    async fillFormNameField(name) {
-        await step('Fill the Form name field in the Update Form window with the new name.', async () => {
-            await this.formNameField.fill(name);
-        })
-    }
-    async fillOptionalMessageField(message) {
-        await step('Fill the Optional message field with the new description.', async () => {
-            await this.optionalMessageField.fill(message);
-        })
-    }
-    async clickFillTemplateBtn() {
-        await step('Click the Fill template button.', async () => {
-            await this.fillTemplateBtn.waitFor();
-            await this.fillTemplateBtn.click();
-        })
+        this.table = new TableComponent(this.page); 
+        this.toast = new ToastComponent(this.page);
+        
+        this.deleteDocumentBtn = this.page.getByRole('button').locator('.button.cancel')
     }
     async clickDeleteDocumentBtn() {
         await step('Click the cross icon (X) next to the uploaded document to remove it.', async () => {
