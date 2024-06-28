@@ -30,8 +30,9 @@ test.describe('Team', () => {
 
         test.setTimeout(90000);
 
-        const teamMemberEmail = `${process.env.EMAIL_PREFIX}${process.env.NEW_USER_NUMBER}${'_teammember'}
-        ${process.env.EMAIL_DOMAIN}`;
+        const teamMemberEmail = `${process.env.EMAIL_PREFIX}${process.env.NEW_USER_NUMBER}${'_teammember'}${
+            process.env.EMAIL_DOMAIN
+        }`;
         const teamMemberName = `${process.env.NEW_USER_NAME}${'_teammember'}`;
 
         await signPage.sideMenu.clickTeam();

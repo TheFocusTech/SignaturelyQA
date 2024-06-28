@@ -198,7 +198,7 @@ test.describe('Sign Document', () => {
         await uploadDocumentForDraft(signPage, prepareForSignatureModal);
         await signPage.sideMenu.clickDocuments();
         await documentsPage.sideMenuDocuments.clickDraft();
-        await documentsPage.table.clickOptionsBtn(0);
+        await documentsPage.table.clickFirstOptionsBtn();
         await documentsPage.table.clickEditAndResendBtn();
         await prepareForSignatureModal.clickSignAndSendForSignatureRadioBtn();
         await prepareForSignatureModal.clickAddSignerBtn();
