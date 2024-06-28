@@ -38,12 +38,8 @@ export default class SettingsAPIPage {
         });
     }
 
-    async pasteIntoBillingDetailsField(text) {
+    async pasteIntoBillingDetailsField() {
         await step('Paste into the "Billing Details" field with Ctrl+V shortcuts', async () => {
-            await this.page.evaluate(async (text) => {
-                await navigator.clipboard.writeText(text);
-            }, text);
-
             await this.billingDetailsTextField.click();
 
             await this.page.keyboard.down('Control');
