@@ -38,7 +38,7 @@ test.describe('Templates', () => {
 
     });
 
-    test('TC_07_31_01 | Verify that  the user can select Add to API', async ({ createBusinessUserAndLogin, signPage, prepareForSignatureModal, templatePage, apiTemplatesPage, createNewTemplatePage: createTemplatePage }) => {
+    test('TC_07_31_01 | Verify that  the user can select Add to API', async ({ createBusinessUserAndLogin, signPage, prepareForSignatureModal, templatePage, apiTemplatesPage, createNewTemplatePage }) => {
         await description('Objective: To verify the process of add template to API.');
         await severity(Severity.CRITICAL);
         await link(
@@ -54,7 +54,7 @@ test.describe('Templates', () => {
 
         test.setTimeout(250 * 1000);
 
-        await createTemplate(signPage, prepareForSignatureModal, templatePage, createTemplatePage);
+        await createTemplate(signPage, prepareForSignatureModal, templatePage, createNewTemplatePage);
         await signPage.sideMenu.clickTemplates();
         await templatePage.table.clickOptionsBtn(0);
         await templatePage.table.clickAddToAPIBtn();
