@@ -1,4 +1,3 @@
-
 import { DATA_SIGNER, FOLDER_NAME, TOAST_MESSAGE, CREATE_TEMPLATE, UPLOAD_FILE_PATH, SIGNERS_DATA } from "../testData";
 import { step } from "allure-js-commons";
 
@@ -95,7 +94,7 @@ export const createForm = async (signPage,
 
 export const uploadDocumentForDraft = async (signPage, prepareForSignatureModal) => {
     await step('Precondition: Upload document for draft', async () => {    
-        await signPage.uploadFileTab.fileUploader.uploadFile("testDocuments/picture.jpg");
+        await signPage.uploadFileTab.fileUploader.uploadFile(UPLOAD_FILE_PATH.xlsxDocument);
         await signPage.uploadFileTab.clickPrepareDocumentBtn();
         await prepareForSignatureModal.clickCancelBtn();        
     });
