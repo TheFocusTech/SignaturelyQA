@@ -257,7 +257,6 @@ export const test = base.extend({
         await use(new TeamPage(page));
     },
 
-
     addTeamMemberModal: async ({ page }, use) => {
         await use(new AddTeamMemberModal(page));
     },
