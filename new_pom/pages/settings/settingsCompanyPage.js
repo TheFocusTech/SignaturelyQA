@@ -18,7 +18,7 @@ export default class SettingsCompanyPage {
         this.inputFile = this.page.locator('input[type="file"]');
         this.companyName = this.page.getByPlaceholder('Company Name');
         this.emailClosingSignature = this.page.getByPlaceholder('A brief closing signature for signature request emails.');
-        this.fromEmailName = this.page.getByPlaceholder("From' Email Name");
+        this.fromEmail = this.page.getByPlaceholder("From' Email Name");
         this.redirectionPage = this.page.getByPlaceholder('https://yourcompany.com');
         this.checkboxActivate = this.page.getByText('Activate custom redirection page');
         this.saveBtn = this.page.getByRole('button', {name: 'Save', exact: true});
@@ -32,31 +32,31 @@ export default class SettingsCompanyPage {
     }
 
     async fillCompanyName(email) {
-        await step('Fill "company name" field', async () => {
+        await step('Fill "Company Name" field', async () => {
             await this.companyName.fill(email);
         });
     }
 
     async fillFromEmail(email) {
-        await step('Fill  "fromEmail" field', async () => {
-            await this.fromEmailName.fill(email);
+        await step('Fill  "From Email" field', async () => {
+            await this.fromEmail.fill(email);
         });
     }
 
     async fillEmailClosingSignature(email) {
-        await step('Fill "emailClosingSignature"  field', async () => {
+        await step('Fill "Email Closing Signature"  field', async () => {
             await this.emailClosingSignature.fill(email);
         });
     }
 
     async  fillRedirectionPage(url) {
-        await step('Fill "redirectionPage" field', async () => {
+        await step('Fill "Redirection Page" field', async () => {
             await this.redirectionPage.fill(url);
         });
     }
 
     async checkActivateCheckbox() {
-        await step('Check "aktivate" checkbox', async () => {
+        await step('Check "Aktivate" checkbox', async () => {
             await this.checkboxActivate.click();
         });
     }
