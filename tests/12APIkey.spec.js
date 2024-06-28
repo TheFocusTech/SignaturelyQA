@@ -23,7 +23,7 @@ test.describe('API key', () => {
             "ATC_12_48_01"
         );
         await epic('API');
-        await tag('Settings, API key');
+        await tags('Settings, API key');
 
         await signPage.sideMenu.clickSettings();
         await settingsCompanyPage.horizontalMenu.clickAPI();
@@ -34,8 +34,7 @@ test.describe('API key', () => {
         await createAPIKeyModal.clickCreateAPIBtn();
         await createAPIKeyModal.clickCopyAPIBtn();
 
-        const clipboardApiKeyValue = await createAPIKeyModal.getAPIKeyValueText();
-        console.log('clipboardApiKeyValue', clipboardApiKeyValue)
+        const clipboardApiKeyValue = await createAPIKeyModal.APIKeyValue.innerText();
 
         await step('Wait the toast appears indicating API key has been successfully copied to clipboard', async () => {
             await settingsAPIPage.toast.toastBody.waitFor();
