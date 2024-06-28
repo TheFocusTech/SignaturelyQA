@@ -19,7 +19,7 @@ test.describe('Billing', () => {
 
     PLANS.forEach((plan) => {
         test(`TC_14_56_01 | Verify successful upsell of users subscription ${plan} plan`, async ({createFreeUserAndLogin, signPage, settingsCompanyPage, settingsBillingPage, settingsBillingPlanPage, upgradeYourPlanModal, specialOneTimeOfferModal}) => {
-            await description('')
+            await description('Objective: Verify that free users can successfully upgrade their subscription plan.\n')
             await severity(Severity.CRITICAL);
             await link(
                 'https://app.qase.io/case/SIGN-56',
