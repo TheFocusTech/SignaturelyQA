@@ -97,7 +97,7 @@ export default class PrepareForSignatureModal {
         });
     }
 
-    async doCanvasClicks() {
+    async clickDocumentBody() {
         await step('Click randomly inside the document', async () => {
             await clickCanvas(this.page, this.canvas, this.excludedAreas);
         });
@@ -150,7 +150,6 @@ export default class PrepareForSignatureModal {
         const actualText = await this.prepareForSigningTitle.textContent();
         return actualText
     }
-
 
     async clickSignFieldItem() {
         await step('Click on the "Sign" in "Fields" menu', async () => {
