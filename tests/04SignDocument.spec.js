@@ -282,6 +282,8 @@ test.describe('Sign Document', () => {
         await editDocumentStatus(request, DOCUMENT_STATUS.expired);
         await page.reload();
 
-        await expect(await documentsPage.table.documentStatus).toHaveText(DOCUMENT_STATUS.expired);
+        await step('Verify that the document has "expired" status', async () => {
+            await expect(await documentsPage.table.documentStatus).toHaveText(DOCUMENT_STATUS.expired);
+        });
     })
 });
