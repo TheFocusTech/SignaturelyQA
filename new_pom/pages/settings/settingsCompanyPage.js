@@ -27,43 +27,43 @@ export default class SettingsCompanyPage {
 
     async logoUpLoadFile(file) {
         await step('Upload File', async () => {
-            await this.inputFile.setInputFiles(file)
+            await this.inputFile.setInputFiles(file);
         });
     }
 
     async fillCompanyName(email) {
-        await step('Fill company name field', async () => {
-            await this.companyName.fill(email)
+        await step('Fill "company name" field', async () => {
+            await this.companyName.fill(email);
         });
     }
 
     async fillFromEmail(email) {
-        await step('Fill  fromEmail field', async () => {
-            await this.fromEmailName.fill(email)
+        await step('Fill  "fromEmail" field', async () => {
+            await this.fromEmailName.fill(email);
         });
     }
 
     async fillEmailClosingSignature(email) {
-        await step('Fill emailClosingSignature  field', async () => {
-            await this.emailClosingSignature.fill(email)
+        await step('Fill "emailClosingSignature"  field', async () => {
+            await this.emailClosingSignature.fill(email);
         });
     }
 
     async  fillRedirectionPage(url) {
-        await step('Fill redirectionPage field', async () => {
-            await this.redirectionPage.fill(url)
+        await step('Fill "redirectionPage" field', async () => {
+            await this.redirectionPage.fill(url);
         });
     }
 
     async checkActivateCheckbox() {
-        await step('Check aktivate checkbox', async () => {
-            await this.checkboxActivate.click()
+        await step('Check "aktivate" checkbox', async () => {
+            await this.checkboxActivate.click();
         });
     }
 
     async clickSaveBtn() {
-        await step('Click on Save btn', async () => {
-            await this.saveBtn.click()
+        await step('Click on "Save" btn', async () => {
+            await this.saveBtn.click();
         });
     }
 }
