@@ -89,6 +89,7 @@ export default class TableComponent {
     async clickDuplicateBtn() {
         await step('Click the "Duplicate" button', async () => {
             await this.duplicateBtn.click();
+            await this.duplicateBtn.click();
         });
     }
 
@@ -96,5 +97,13 @@ export default class TableComponent {
         await step('Click the "Edit" button', async () => {
             await this.editBtn.click();
         });
+    }
+
+    async getTemplateTitle() {
+        let actualText;
+        await step('Get template title', async () => {
+            actualText = await this.documentTitle.textContent();
+        });
+        return actualText;
     }
 }
