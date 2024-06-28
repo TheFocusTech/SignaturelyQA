@@ -1,11 +1,17 @@
-import { expect } from '@playwright/test';
-import { test } from "../fixtures/base.js";
+import {expect} from '@playwright/test';
+import {test} from "../fixtures/base.js";
 import {API_KEY_NAME, API_PLANS, currentPlan, TOAST_MESSAGE} from '../testData.js';
 import {description, epic, feature, link, Severity, severity, step, tags} from "allure-js-commons";
 
-test.describe('Create API key', () => {
+test.describe('API key', () => {
 
-    test('TC_12_48_01_01 | Verify User can copy API key created by the "Create API" button on the right.', async ({ createBusinessUserAndLogin, signPage, settingsCompanyPage, settingsAPIPage, createAPIKeyModal}) => {
+    test('TC_12_48_01_01 | Verify User can copy API key created by the "Create API" button on the right.', async ({
+                                                                                                                      createBusinessUserAndLogin,
+                                                                                                                      signPage,
+                                                                                                                      settingsCompanyPage,
+                                                                                                                      settingsAPIPage,
+                                                                                                                      createAPIKeyModal
+                                                                                                                  }) => {
         await signPage.sideMenu.clickSettings();
         await settingsCompanyPage.horizontalMenu.clickAPI();
 
@@ -25,7 +31,13 @@ test.describe('Create API key', () => {
         await expect(settingsAPIPage.billingDetailsTextField).toHaveText(clipboardApiKeyValue);
     });
 
-    test('TC_12_48_01_02 | Verify User can copy API key created by the "Create API" button in Table.', async ({ createBusinessUserAndLogin, signPage, settingsCompanyPage, settingsAPIPage, createAPIKeyModal}) => {
+    test('TC_12_48_01_02 | Verify User can copy API key created by the "Create API" button in Table.', async ({
+                                                                                                                  createBusinessUserAndLogin,
+                                                                                                                  signPage,
+                                                                                                                  settingsCompanyPage,
+                                                                                                                  settingsAPIPage,
+                                                                                                                  createAPIKeyModal
+                                                                                                              }) => {
         await signPage.sideMenu.clickSettings();
         await settingsCompanyPage.horizontalMenu.clickAPI();
 
@@ -44,10 +56,8 @@ test.describe('Create API key', () => {
 
         await expect(settingsAPIPage.billingDetailsTextField).toHaveText(clipboardApiKeyValue);
     });
-})
 
-test.describe('Purchase API plan', () => {
-    for (const apiPlan of API_PLANS) {
+    API_PLANS.forEach((apiPlan) => {
         test(`TC_12_49_01 | Purchase ${apiPlan} API plan`, async ({
                                                                       createBusinessUserAndLogin,
                                                                       signPage,
@@ -81,5 +91,5 @@ test.describe('Purchase API plan', () => {
                 await expect(settingsAPIPage.apiPlansList.filter({hasText: apiPlan})).toContainText(currentPlan);
             });
         });
-    }
+    });
 });
