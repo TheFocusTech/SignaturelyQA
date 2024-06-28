@@ -12,13 +12,13 @@ export default class AddTeamMemberModal {
     }
 
     async fillTeamMemberEmailInputField(teamMemberEmail) {
-        await step('Fill team member email input field', async () => {
+        await step('Fill in the team member email input field', async () => {
             await this.teamMemberEmail.type(teamMemberEmail);
         });
     }
 
     async fillTeamMemberNameInputField(teamMemberName) {
-        await step('Fill team member name input field', async () => {
+        await step('Fill in the team member name input field', async () => {
             await this.teamMemberName.type(teamMemberName);
         });
     }
