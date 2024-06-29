@@ -107,13 +107,17 @@ test.describe("CreateDocument", () => {
 		await description('Objective: To verify the process of creating and sending a document for signature.');
 		await severity(Severity.CRITICAL);
 		await link(
+            "https://app.qase.io/case/SIGN-7",
+            "Qase: SIGN-7"
+            );
+		await link(
 				"Documentation",
 				"https://docs.google.com/document/d/1Qce7tKWOwVYtPxgQv_8ae-HUkbAgeOFph0lB_eziY_k/edit#heading=h.hvbgto58wwgb",
-				"TC_03_07_03"
+				"ATC_03_07_03"
 		);
 		await epic('Create Document');
 		await tag('Send Document');
-        await signPage.uploadFileTab.fileUploader.uploadFile('testDocuments/openHouse.pdf');
+        await signPage.uploadFileTab.fileUploader.uploadFile(UPLOAD_FILE_PATH.xlsxDocument);
         await signPage.uploadFileTab.clickPrepareDocumentBtn();
         await prepareForSignatureModal.clickSendForSignatureRadioBtn();
         await prepareForSignatureModal.clickAddSignerBtn();
@@ -122,7 +126,7 @@ test.describe("CreateDocument", () => {
         await prepareForSignatureModal.clickContinueBtn();
         await prepareForSignatureModal.clickGotItBtn();
         await prepareForSignatureModal.clickSignFieldsItem();
-        await prepareForSignatureModal.doCanvasClicks();
+        await prepareForSignatureModal.clickDocumentBody();
         await prepareForSignatureModal.clickSaveBtn();
         await prepareForSignatureModal.toast.waitForToastCompleted();
         await finalStepPage.clickSendForSignatureBtn();
@@ -130,7 +134,6 @@ test.describe("CreateDocument", () => {
         await step('Verify the created document is in the table with the label "AWAITING".', async () => {
             await expect(await documentsPage.table.documentStatus).toHaveText(DOCUMENT_STATUS.awaiting);
         });
-
     })
 
 	test("TC_03_07_02 | Verify that the user who uploaded the document and Other Signer can sign it", async ({
