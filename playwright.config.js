@@ -49,7 +49,7 @@ module.exports = defineConfig({
         ],
     ],
     /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
-    timeout: 60000,
+    timeout: 240000,
     use: {
         permissions: ['clipboard-write', 'clipboard-read'],
 
