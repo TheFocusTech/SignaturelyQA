@@ -1,8 +1,8 @@
 import { expect } from "@playwright/test";
+import { Severity, description, epic, link, severity, step, tag } from "allure-js-commons";
 import { test } from "../fixtures/base.js";
-import { generateRandomPassword, generateNewUserEmail, retrieveUserEmailConfirmationLink } from "../helpers/utils.js";
-import {EMAIL_SUBJECTS, TOAST_MESSAGE, URL_END_POINTS} from "../testData.js";
-import { description, tag, severity, Severity, link, epic, step } from "allure-js-commons";
+import { generateNewUserEmail, generateRandomPassword, retrieveUserEmailConfirmationLink } from "../helpers/utils.js";
+import { EMAIL_SUBJECTS, TOAST_MESSAGE, URL_END_POINTS, CHECK_BOXES_STATUS } from "../testData.js";
 
 test.describe('Profile', () => {
 
@@ -85,6 +85,58 @@ test.describe('Profile', () => {
         await settingsCompanyPage.sideMenuSettings.clickProfile();
         await step("Verify that the email field is filled with the updated user email", async () => {
             await expect(settingsProfilePage.emailAddressInputField).toHaveValue(newEmail);
+        });
+    })
+
+    test('TC_11_46_03 | Verify user can enabling, disabling checkboxes', async ({
+        createBusinessUserAndLogin,
+        signPage,
+        settingsCompanyPage,
+        settingsProfilePage,
+        loginPage
+    }) => {
+        await description('Objective: To verify that the User can enabling, disabling checkboxes');
+        await severity(Severity.CRITICAL);
+        await link("https://app.qase.io/case/SIGN-46",
+            "Qase: SIGN-46");
+        await link("https://docs.google.com/document/d/1Qce7tKWOwVYtPxgQv_8ae-HUkbAgeOFph0lB_eziY_k/edit#heading=h.ei34zdu9ql4d",
+            "ATC_11_46_03");
+        await epic('Profile');
+        await tag('Update');
+
+        await signPage.sideMenu.clickSettings();
+        await settingsCompanyPage.sideMenuSettings.clickProfile();
+        await settingsProfilePage.toggleCheckboxes(false)
+        await settingsProfilePage.clickSaveButton();
+
+        await step(`Verify that a toast message with the text "${TOAST_MESSAGE.profileUpdated}" popped up `, async () => {
+            await expect(settingsProfilePage.toast.toastBody).toHaveText(TOAST_MESSAGE.profileUpdated);
+        })
+
+        await step('Verify that checkboxes are unchecked', async () => {
+            const checkBoxes = await settingsProfilePage.checkBoxesFrameList;
+            const checkBoxCount = await checkBoxes.count();
+
+            for (let i = 0; i < checkBoxCount; i++) {
+                await expect(checkBoxes.nth(i)).toHaveClass(CHECK_BOXES_STATUS.unChecked);
+            }
+        });
+
+        await settingsProfilePage.toast.waitForToastIsHiddenByText(TOAST_MESSAGE.profileUpdated);
+        await settingsProfilePage.toggleCheckboxes(true)
+        await settingsProfilePage.clickSaveButton();
+
+        await step(`Verify that a toast message with the text "${TOAST_MESSAGE.profileUpdated}" popped up `, async () => {
+            await expect(settingsProfilePage.toast.toastBody).toHaveText(TOAST_MESSAGE.profileUpdated);
+        })
+
+        await step('Verify that checkboxes are checked', async () => {
+            const checkBoxes = await settingsProfilePage.checkBoxesFrameList;
+            const checkBoxCount = await checkBoxes.count();
+
+            for (let i = 0; i < checkBoxCount; i++) {
+                await expect(checkBoxes.nth(i)).toHaveClass(CHECK_BOXES_STATUS.checked);
+            }
         });
     })
 })

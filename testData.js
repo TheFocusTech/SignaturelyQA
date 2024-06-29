@@ -119,7 +119,7 @@ export const EMAIL_SUBJECTS = {
     signatureRequest: "requested your signature",
     emailConfirmation: 'Signaturely Email Confirmation',
     sentToView: 'Sent you a document to view',
-    inviteToJoin:' invited you to join Signaturely'
+    inviteToJoin: ' invited you to join Signaturely'
 }
 export const SELECTORS = {
     link: 'span',
@@ -162,4 +162,9 @@ export const EDIT_TEMPLATE_DATA = {
 export const TEAM_MEMBER_ROLES = {
     user: 'User',
     admin: 'Admin',
-}
+};
+
+export const CHECK_BOXES_STATUS = {
+    checked: 'uiCheckbox__inner uiCheckbox--checked',
+    unChecked: 'uiCheckbox__inner uiCheckbox--unChecked'
+};
