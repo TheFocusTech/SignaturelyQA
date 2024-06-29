@@ -45,7 +45,7 @@ test.describe('Folders', () => {
         await description('Objective: Testing Folder Renaming Functionality.');
         await severity(Severity.CRITICAL);
         await link(`${QASE_LINK}/SIGN-23`, "QASE: SIGN-23 ");
-        await link(`${GOOGLE_DOC_LINK}tmxz904usbum`, "ATC_06_23_01");
+        await link(`${GOOGLE_DOC_LINK}i7nf7965pwpi`, "ATC_06_23_01");
         await tag('Rename Folder ');
         await epic('Folders');
 
