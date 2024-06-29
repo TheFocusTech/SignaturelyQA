@@ -102,12 +102,4 @@ export default class TableComponent {
         return actualText;
     }
 
-    async getCount() {
-        const elements = await this.listElements.first().elements();
-        const elementCount = elements.length;
-        console.log(elementCount)
-
-        return elementCount;
-    }
-
 }
