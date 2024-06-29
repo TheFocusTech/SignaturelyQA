@@ -139,17 +139,18 @@ test.describe('Templates', () => {
     }) => {
         await description('Objective: To verify the process of duplicate template.');
         await severity(Severity.CRITICAL);
-        await link('https://app.qase.io/case/SIGN-30', 'Qase: SIGN-31');
-        await link(
-            'https://***',
-            'ATC_07_30_01'
-        );
+        await link(`${QASE_LINK}/SIGN-30`, 'Qase: SIGN-30');
+        await link(`${GOOGLE_DOC_LINK}nz5pn2p8lvfz`, 'ATC_07_30_01');
         await epic('Templates');
         await tags('User', 'Dublicat');
 
         test.setTimeout(250 * 1000);
 
-        await createTemplate(signPage, prepareForSignatureModal, templatesPage, createNewTemplatePage);
+        await createTemplate(signPage,
+            prepareForSignatureModal,
+            templatesPage,
+            createNewTemplatePage);
+
         await signPage.sideMenu.clickTemplates();
         await templatesPage.table.clickFirstOptionsBtn()
         await templatesPage.table.clickDuplicateBtn();

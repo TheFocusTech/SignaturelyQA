@@ -94,7 +94,7 @@ export default class TableComponent {
     async clickDuplicateBtn() {
         await step('Click the "Duplicate" button', async () => {
             await this.duplicateBtn.click();
-            await this.duplicateBtn.click();
+            
         });
     }
 
