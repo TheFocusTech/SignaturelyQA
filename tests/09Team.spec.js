@@ -129,4 +129,52 @@ test.describe('Team', () => {
             expect(await teamPage.teamMemberRoleForExactTeamMemeber(teamMemberEmail)).toHaveText(TEAM_MEMBER_ROLES.user);
         });
     })
+
+    test('TC_09_40_01 | Verify that Business User can remove teammate from Team', async ({
+        page,
+        request,
+        createBusinessUserAndLogin,
+        signPage,
+        teamPage,
+        addTeamMemberModal,
+        teamsAcceptInvitePage
+    }) => {
+        await description('Objective: To verify that Business User can remove teammate from Team');
+        await severity(Severity.CRITICAL);
+        await link(
+            "https://app.qase.io/case/SIGN-40",
+            "Qase: SIGN-40"
+            );
+        await link(
+            "",
+            "ATC_09_40_01"
+            );
+        await epic('Team');
+        await tag('Team Member Roles');
+
+        test.setTimeout(90000);
+
+        const teamMemberEmail = `${process.env.EMAIL_PREFIX}${process.env.NEW_USER_NUMBER}${'_teammember'}${process.env.EMAIL_DOMAIN}`;
+        const teamMemberName = `${process.env.NEW_USER_NAME}${'_teammember'}`
+
+        await signPage.sideMenu.clickTeam();
+        await teamPage.clickAddTeamMemberButton();
+        await addTeamMemberModal.fillTeamMemberEmailInputField(teamMemberEmail);
+        await addTeamMemberModal.fillTeamMemberNameInputField(teamMemberName);
+        await addTeamMemberModal.isTeamMemberRoleSet(TEAM_MEMBER_ROLES.user) ? null : await addTeamMemberModal.changeTeamMemberRole(TEAM_MEMBER_ROLES.user)
+        await addTeamMemberModal.clickSendInvitesButton();
+
+        await step("Verify that a toast message ‘Invites sent successfully’ popped up", async () => {
+            await expect(teamPage.toast.toastBody).toHaveText(TOAST_MESSAGE.invitesSent);
+        });
+
+        const emailSubject = `${process.env.NEW_USER_NAME}${EMAIL_SUBJECTS.inviteToJoin}`;
+        const inviteLink = await retrieveUserEmailConfirmationLink(request, teamMemberEmail, emailSubject);
+        await step("Navigate to the invite link", async () => {
+            await page.goto(inviteLink);
+        });
+        await teamsAcceptInvitePage.clickBackToMainPageButton();
+        await teamsAcceptInvitePage.toast.waitForToastIsHiddenByText(TOAST_MESSAGE.inviteAccepted);
+        await signPage.sideMenu.clickTeam();
+
 })
