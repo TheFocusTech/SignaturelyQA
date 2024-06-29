@@ -170,9 +170,27 @@ export const EDIT_TEMPLATE_DATA = {
 export const TEAM_MEMBER_ROLES = {
     user: 'User',
     admin: 'Admin',
+<<<<<<< HEAD
 };
+||||||| merged common ancestors
+<<<<<<<<< Temporary merge branch 1
+}
+||||||||| 9e53ab0
+}
+=========
+};
+=======
+}
+>>>>>>> ffbc7835cbee3b0549e18b816d943434e3f5fa1f
 
 export const QASE_LINK = 'https://app.qase.io/case';
 export const GOOGLE_DOC_LINK =
+<<<<<<< HEAD
     'https://docs.google.com/document/d/1Qce7tKWOwVYtPxgQv_8ae-HUkbAgeOFph0lB_eziY_k/edit#heading=h.';
 
+||||||| merged common ancestors
+    'https://docs.google.com/document/d/1Qce7tKWOwVYtPxgQv_8ae-HUkbAgeOFph0lB_eziY_k/edit#heading=h.';
+>>>>>>>>> Temporary merge branch 2
+=======
+    'https://docs.google.com/document/d/1Qce7tKWOwVYtPxgQv_8ae-HUkbAgeOFph0lB_eziY_k/edit#heading=h.';
+>>>>>>> ffbc7835cbee3b0549e18b816d943434e3f5fa1f
