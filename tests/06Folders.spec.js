@@ -64,7 +64,7 @@ test.describe('Folders', () => {
 
     });
 
-    test.only('TC_06_25_01 | Move folder to folder', async ({ createBusinessUserAndLogin,
+    test('TC_06_25_01 | Move folder to folder', async ({ createBusinessUserAndLogin,
         signPage,
         documentsPage,
         createFolderModal,
