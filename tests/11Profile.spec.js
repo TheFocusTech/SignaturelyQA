@@ -2,7 +2,7 @@ import { expect } from "@playwright/test";
 import { Severity, description, epic, link, severity, step, tag } from "allure-js-commons";
 import { test } from "../fixtures/base.js";
 import { generateNewUserEmail, generateRandomPassword, retrieveUserEmailConfirmationLink } from "../helpers/utils.js";
-import { EMAIL_SUBJECTS, TOAST_MESSAGE, URL_END_POINTS, CHECK_BOXES_STATUS } from "../testData.js";
+import { CHECK_BOXES_STATUS, EMAIL_SUBJECTS, GOOGLE_DOC_LINK, QASE_LINK, TOAST_MESSAGE, URL_END_POINTS } from "../testData.js";
 
 test.describe('Profile', () => {
     test('TC_11_45_01 | Verify that User can change password', async ({
@@ -111,10 +111,8 @@ test.describe('Profile', () => {
     }) => {
         await description('Objective: To verify that the User can enabling, disabling checkboxes');
         await severity(Severity.CRITICAL);
-        await link("https://app.qase.io/case/SIGN-46",
-            "Qase: SIGN-46");
-        await link("https://docs.google.com/document/d/1Qce7tKWOwVYtPxgQv_8ae-HUkbAgeOFph0lB_eziY_k/edit#heading=h.ei34zdu9ql4d",
-            "ATC_11_46_03");
+        await link(`${QASE_LINK}/SIGN-46`, 'Qase: SIGN-46');
+        await link(`${GOOGLE_DOC_LINK}781u9ev2p6y5`, 'ATC_11_46_03');
         await epic('Profile');
         await tag('Update');
 

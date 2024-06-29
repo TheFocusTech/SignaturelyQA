@@ -164,6 +164,12 @@ export const TEAM_MEMBER_ROLES = {
     user: 'User',
     admin: 'Admin',
 };
+
 export const QASE_LINK = 'https://app.qase.io/case';
 export const GOOGLE_DOC_LINK =
     'https://docs.google.com/document/d/1Qce7tKWOwVYtPxgQv_8ae-HUkbAgeOFph0lB_eziY_k/edit#heading=h.';
+
+export const CHECK_BOXES_STATUS = {
+    checked: 'uiCheckbox__inner uiCheckbox--checked',
+    unChecked: 'uiCheckbox__inner uiCheckbox--unChecked'
+};
