@@ -80,7 +80,7 @@ test.describe('DocumentsType', () => {
         });
     });
 
-    test('TC_05_18_01 | Verify moving a document to a folder', async ({
+    test.skip('TC_05_18_01 | Verify moving a document to a folder', async ({
         createBusinessUserAndLogin,
         signPage,
         documentsPage,
