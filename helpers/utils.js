@@ -197,12 +197,12 @@ export function generateRandomPassword(length) {
         return password.join('');
 }
 
-export async function editDocumentStatus(request, status) {
+export async function editDocumentStatus(request, documentName, status) {
     await step('Change status of the document to "expired"', async () => {
         try {
             await signInRequest(request);
 
-            const documentId = await documentIdRequest(request);
+            const documentId = await documentIdRequest(request, documentName);
             if (!documentId) {
                 console.warn("Failed to get document ID.");
             }

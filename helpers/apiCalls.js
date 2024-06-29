@@ -33,21 +33,26 @@ export async function signInRequest(request) {
     }
 }
 
-export async function documentIdRequest(request) {
+export async function documentIdRequest(request, documentName) {
     try {
         const getDocumentsResponse = await request.get(`${process.env.API_URL}${API_URL_END_POINTS.getDocumentsEndPoint}`);
-        if (!getDocumentsResponse.ok()) {
-            console.error(`Failed to find documents: ${getDocumentsResponse.statusText()}`);
+        if (!getDocumentsResponse.ok) {
+            console.warn(`Failed to find documents: ${getDocumentsResponse.statusText()}`);
             return null;
         }
         const documentsResponseData = await getDocumentsResponse.json();
-        const numberOfDocuments = documentsResponseData.length;
-        if (numberOfDocuments === 0) {
+        const documentDataArray = documentsResponseData.items;
+
+        if (!documentDataArray || documentDataArray.length === 0) {
             console.log("No documents found.");
             return null;
         }
-        const documentDataArray = documentsResponseData.items;
-        const documentId = documentDataArray[0].id;
+        const document = documentDataArray.find(doc => doc.title === documentName);
+        if (!document) {
+            console.warn(`Document with name ${documentName} not found.`);
+            return null;
+        }
+        const documentId = document.id;
         console.log(`Retrieved document id ${documentId}`);
 
         return documentId;

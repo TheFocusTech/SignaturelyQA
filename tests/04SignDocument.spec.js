@@ -279,7 +279,8 @@ test.describe('Sign Document', () => {
         await successModal.clickBackToDocumentsBtn();
         await documentsPage.table.waitForDocumentStatus(page, DOCUMENT_STATUS.awaiting);
 
-        await editDocumentStatus(request, DOCUMENT_STATUS.expired);
+        const documentName = UPLOAD_FILE_PATH.xlsxDocument.split("/").pop();
+        await editDocumentStatus(request, documentName, DOCUMENT_STATUS.expired);
         await page.reload();
 
         await step('Verify that the document has "expired" status', async () => {
