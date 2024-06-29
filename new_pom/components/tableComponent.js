@@ -20,6 +20,8 @@ export default class TableComponent {
         this.duplicateBtn = this.page.getByText('Duplicate');
         this.formsList = this.page.locator('div.table__dataRow');
         this.editBtn = this.page.getByRole('button', { name: 'Edit' });
+        this.deleteForm = this.page.getByRole('button', { name: 'Delete Form' });
+        this.yesDelete = this.page.getByRole('button', { name: 'Yes, Delete' });
     }
 
     async clickFirstOptionsBtn() {
@@ -106,5 +108,17 @@ export default class TableComponent {
             actualText = await this.documentTitle.textContent();
         });
         return actualText;
+    }
+
+    async clickDeleteForm() {
+        await step('Click the "Delete Form" button', async () => {
+            await this.deleteForm.click();
+        });
+    }
+
+    async clickYesDelete() {
+        await step('Click the "Yes, Delete" button', async () => {
+            await this.yesDelete.click();
+        });
     }
 }
