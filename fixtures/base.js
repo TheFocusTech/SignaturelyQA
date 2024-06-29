@@ -48,23 +48,6 @@ import TeamsAcceptInvitePage from "../new_pom/pages/team/teamsAcceptInvitePage.j
 
 export const test = base.extend({
 
-    createNewFolder: [
-        async ({ page }, use) => {
-            const signPage = new SignPage(page);
-
-            const documentsPage = await signPage.clickDocumentsSidebarLinkAndGoDocumentsPage();
-            await documentsPage.clickCreateFolderBtn();
-            await documentsPage.fillNewFolderNameInputField();
-            await documentsPage.clickCreateBtn();
-            await documentsPage.clickSignSidebarLinkAndGoSignPage();
-            await documentsPage.locators.getToast().waitFor({ state: "visible" });
-            await documentsPage.locators.getToast().waitFor({ state: "hidden" });
-
-            await use("");
-        },
-        { scope: "test" },
-    ],
-
     createFreeUserAndLogin: [
         async ({ request, page, loginPage }, use) => {
             await api_user_sign_up(request);
