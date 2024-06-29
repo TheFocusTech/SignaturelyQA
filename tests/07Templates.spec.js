@@ -1,6 +1,15 @@
 import { expect } from '@playwright/test';
 import { test } from '../fixtures/base.js';
-import { CREATE_TEMPLATE, TEMPLATES_STATUS, EDIT_TEMPLATE_DATA, UPLOAD_FILE_PATH, TOAST_MESSAGE } from '../testData.js';
+import {
+    CREATE_TEMPLATE,
+    TEMPLATES_STATUS,
+    EDIT_TEMPLATE_DATA,
+    UPLOAD_FILE_PATH,
+    TOAST_MESSAGE,
+    QASE_LINK,
+    GOOGLE_DOC_LINK,
+} from '../testData.js';
+
 import { createTemplate } from '../helpers/preconditions.js';
 import { description, tags, severity, Severity, link, epic, step } from 'allure-js-commons';
 
@@ -16,11 +25,8 @@ test.describe('Templates', () => {
             'Objective: To verify that the user can create a new template in the system successfully. This includes ensuring that all required fields are completed correctly, the template is saved, and it is accessible for future use.'
         );
         await severity(Severity.CRITICAL);
-        await link('https://app.qase.io/case/SIGN-27', 'Qase: SIGN-27');
-        await link(
-            'https://docs.google.com/document/d/1Qce7tKWOwVYtPxgQv_8ae-HUkbAgeOFph0lB_eziY_k/edit#heading=h.p443twc6am8u',
-            'ATC__07_27_01'
-        );
+        await link(`${QASE_LINK}/SIGN-27`, 'Qase: SIGN-27');
+        await link(`${GOOGLE_DOC_LINK}p443twc6am8u`, 'ATC__07_27_01');
         await epic('Templates');
         await tags('Create a template');
 
@@ -31,7 +37,7 @@ test.describe('Templates', () => {
         await createNewTemplatePage.fillCreateTemplateRolesField(CREATE_TEMPLATE.nameRole);
         await createNewTemplatePage.fileUploader.uploadFile('testDocuments/CSV.csv');
         await createNewTemplatePage.clickFillTemplateBtn();
-        await prepareForSignatureModal.clickSignFieldsItem();
+        await prepareForSignatureModal.clickSignOnFieldsMenu();
         await prepareForSignatureModal.clickDocumentBody();
         await prepareForSignatureModal.clickCreateBtn();
         await prepareForSignatureModal.clickBackToTemplatesBtn();
@@ -51,11 +57,8 @@ test.describe('Templates', () => {
     }) => {
         await description('Objective: To verify the process of add template to API.');
         await severity(Severity.CRITICAL);
-        await link('https://app.qase.io/case/SIGN-31', 'Qase: SIGN-31');
-        await link(
-            'https://docs.google.com/document/d/1Qce7tKWOwVYtPxgQv_8ae-HUkbAgeOFph0lB_eziY_k/edit#heading=h.z5onphks9v9p',
-            'ATC_07_31_01'
-        );
+        await link(`${QASE_LINK}/SIGN-31`, 'Qase: SIGN-31');
+        await link(`${GOOGLE_DOC_LINK}z5onphks9v9p`, 'ATC_07_31_01');
         await epic('Templates');
         await tags('User', 'API');
 
@@ -63,7 +66,7 @@ test.describe('Templates', () => {
 
         await createTemplate(signPage, prepareForSignatureModal, templatesPage, createNewTemplatePage);
         await signPage.sideMenu.clickTemplates();
-        await templatesPage.table.clickOptionsBtn(0);
+        await templatesPage.table.clickFirstOptionsBtn();
         await templatesPage.table.clickAddToAPIBtn();
         await templatesPage.toast.waitForToastIsHiddenByText(TOAST_MESSAGE.success);
         await templatesPage.sideMenuTemplates.clickApiTemplates();
@@ -91,18 +94,15 @@ test.describe('Templates', () => {
             'Objective: To verify that a user can successfully edit an existing template by changing its name, message, role, and associated document, and ensure that the changes are reflected in the user interface and confirmed by appropriate toast messages.'
         );
         await severity(Severity.CRITICAL);
-        await link('https://app.qase.io/case/SIGN-28', 'Qase: SIGN-28');
-        await link(
-            'https://docs.google.com/document/d/1Qce7tKWOwVYtPxgQv_8ae-HUkbAgeOFph0lB_eziY_k/edit#heading=h.ntdi077ei6pg',
-            'ATC_07_28_01'
-        );
+        await link(`${QASE_LINK}/SIGN-28`, 'Qase: SIGN-28');
+        await link(`${GOOGLE_DOC_LINK}ntdi077ei6pg`, 'ATC_07_28_01');
         await epic('Templates');
         await tags('Edit-template');
 
         await createTemplate(signPage, prepareForSignatureModal, templatesPage, createNewTemplatePage);
 
         await signPage.sideMenu.clickTemplates();
-        await templatesPage.table.clickOptionsBtn(0);
+        await templatesPage.table.clickFirstOptionsBtn();
         await templatesPage.table.clickEditBtn();
         await editTemplatesPage.createTemplate.fillTemplateNameField(EDIT_TEMPLATE_DATA.nameField);
         await editTemplatesPage.createTemplate.fillOptionalMessageField(EDIT_TEMPLATE_DATA.optionalMessage);
@@ -110,13 +110,14 @@ test.describe('Templates', () => {
         await editTemplatesPage.fileUploader.deleteUploadedFile();
         await editTemplatesPage.fileUploader.uploadFile(UPLOAD_FILE_PATH.csvDocument);
         await editTemplatesPage.createTemplate.clickFillTemplateBtn();
-        await prepareForSignatureModal.clickSignFieldsItem();
+        await prepareForSignatureModal.clickSignOnFieldsMenu();
         await prepareForSignatureModal.clickDocumentBody();
         await prepareForSignatureModal.clickSaveBtn();
         await templatesPage.table.waitForDocumentTitleVisible(EDIT_TEMPLATE_DATA.nameField);
 
         await step('Verify the new name of Template is visible in the table', async () => {
-            await expect(await templatesPage.table.objectTitle).toHaveText(EDIT_TEMPLATE_DATA.nameField);
+            await expect(await templatesPage.table.documentTitle).toHaveText(EDIT_TEMPLATE_DATA.nameField);
+
         });
 
         await step('Verify the toast message "Document successfully saved!"', async () => {
@@ -150,7 +151,7 @@ test.describe('Templates', () => {
 
         await createTemplate(signPage, prepareForSignatureModal, templatesPage, createNewTemplatePage);
         await signPage.sideMenu.clickTemplates();
-        await templatesPage.table.clickOptionsBtn(0);
+        await templatesPage.table.clickFirstOptionsBtn()
         await templatesPage.table.clickDuplicateBtn();
         await successModal.clickOkBtn();
         await templatesPage.toast.waitForToastIsHiddenByText(TOAST_MESSAGE.templateDuplicate);
@@ -160,4 +161,5 @@ test.describe('Templates', () => {
         });
 
     });
+
 });
