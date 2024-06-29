@@ -147,8 +147,6 @@ test.describe('Billing', () => {
         await expect(await settingsBillingPlanPage.toast.toastBody).toHaveText(TOAST_MESSAGE.planSuccessChange);
       });
 
-      // await settingsBillingPlanPage.toast.waitForToastIsHiddenByText(TOAST_MESSAGE.planSuccessChange);
-      // await settingsBillingPlanPage.sideMenuSettings.clickSettings()
       await settingsBillingPlanPage.sideMenuSettings.clickBilling();
 
       await step('Verify that the billing plan description is Business', async () => {
