@@ -134,9 +134,6 @@ export const test = base.extend({
         await use(new SpecialOneTimeOfferModal(page));
     },
 
-    createSignatureModal: async ({ page }, use) => {
-        await use(new CreateSignatureModal(page));
-
     createSignatureOrInitialModal: async ({ page }, use) => {
         await use(new CreateSignatureOrInitialModal(page));
     },
