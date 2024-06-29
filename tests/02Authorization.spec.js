@@ -5,11 +5,11 @@ import { description, tag, severity, Severity, link, epic, step } from "allure-j
 
 test.describe('Authorization', () => {
 
-    test('TC_02_05_01 | Verify successful login and the user directed to the sign page', async ({
-        page,
-        loginPage,
-        signPage
-    }) => {
+    test.only('TC_02_05_01 | Verify successful login and the user directed to the sign page', async ({
+                                                                                                    page,
+                                                                                                    loginPage,
+                                                                                                    signPage
+                                                                                                }) => {
         await description('Objective: To verify the process of logging a user into their account.');
         await severity(Severity.BLOCKER);
         await link(
