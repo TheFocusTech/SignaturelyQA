@@ -1,7 +1,6 @@
 import { step } from 'allure-js-commons';
 
 export default class TableComponent {
-
     constructor(page) {
         this.page = page;
 
@@ -9,7 +8,9 @@ export default class TableComponent {
         this.documentStatus = this.page.locator('.documents__documentStatus').first();
         this.optionsBtn = this.page.getByText('Options');
         this.editAndResendBtn = this.page.getByText('Edit & Resend');
-        this.createAPIKeyBtn = this.page.locator('.documents__empty-table').getByRole('button', { name: 'Create API key' });
+        this.createAPIKeyBtn = this.page
+            .locator('.documents__empty-table')
+            .getByRole('button', { name: 'Create API key' });
         this.titleEditAndResendDocument = this.page.getByText('Edit & Resend document');
         this.addToAPIBtn = this.page.getByRole('button', { name: 'Add to API' });
         this.documentTitle = this.page.locator('.documents__list-item .table__column--text--document p');
@@ -21,10 +22,17 @@ export default class TableComponent {
         this.editBtn = this.page.getByRole('button', { name: 'Edit' });
     }
 
-    async clickOptionsBtn(i) {
-        await step('Click the "Options" button', async () => {
-            await this.optionsBtn.nth(i).waitFor();
-            await this.optionsBtn.nth(i).click();
+    async clickFirstOptionsBtn() {
+        await step('Click the first "Options" button', async () => {
+            await this.optionsBtn.first().waitFor();
+            await this.optionsBtn.first().click();
+        });
+    }
+
+    async clickSecondOptionsBtn() {
+        await step('Click the second "Options" button', async () => {
+            await this.optionsBtn.nth(1).waitFor();
+            await this.optionsBtn.nth(1).click();
         });
     }
 
@@ -48,8 +56,8 @@ export default class TableComponent {
 
     async waitForDocumentTitleVisible(name) {
         await step(`Wait for the document title to be visible`, async () => {
-            await this.documentTitle.filter({ hasText: name }).waitFor()
-        })
+            await this.documentTitle.filter({ hasText: name }).waitFor();
+        });
     }
 
     async clickMoveToBtn() {
@@ -64,38 +72,39 @@ export default class TableComponent {
         });
     }
 
-    
-
     async clickSendReminderBtn() {
         await this.sendReminderBtn.click();
     }
 
     async getDocumentStatusText() {
         const actualText = await this.documentStatus.textContent();
-        return actualText
+        return actualText;
     }
 
     async waitForDocumentStatusVisible(status) {
         await step(`Wait for ${status} status of the created document in the table.`, async () => {
-            await this.documentStatus.getByText(status).waitFor({ state: 'visible' })
-        });        
-    }
-
-    async clickDuplicateBtn() {
-        await step('Click the "Duplicate" button', async () => {
-        await this.duplicateBtn.click();
+            await this.documentStatus.getByText(status).waitFor({ state: 'visible' });
         });
     }
 
     async clickDuplicateBtn() {
         await step('Click the "Duplicate" button', async () => {
-        await this.duplicateBtn.click();
+            await this.duplicateBtn.click();
+            await this.duplicateBtn.click();
         });
     }
 
-    async clickEditBtn() { 
+    async clickEditBtn() {
         await step('Click the "Edit" button', async () => {
             await this.editBtn.click();
         });
+    }
+
+    async getTemplateTitle() {
+        let actualText;
+        await step('Get template title', async () => {
+            actualText = await this.documentTitle.textContent();
+        });
+        return actualText;
     }
 }

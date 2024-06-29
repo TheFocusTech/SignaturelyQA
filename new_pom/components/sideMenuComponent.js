@@ -6,7 +6,7 @@ export default class SideMenuComponent {
 
         this.sign = this.page.getByRole('link', { name: 'Sign', exact: true });
         this.documents = this.page.getByRole('link', { name: 'Documents', exact: true });
-        this.settings = this.page.locator('.sidebar__wrapper').getByText('Settings');
+        this.settings = this.page.getByRole('link', { name: 'Settings', exact: true });
         this.templates = this.page.getByRole('link', { name: 'Templates', exact: true });
         this.forms = this.page.getByRole('link', { name: 'Forms', exact: true });
         this.team = this.page.getByRole('link', { name: 'Team', exact: true });
