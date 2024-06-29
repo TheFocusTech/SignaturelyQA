@@ -9,6 +9,7 @@ import {
     UPLOAD_FILE_PATH,
     QASE_LINK,
     GOOGLE_DOC_LINK,
+	TOAST_MESSAGE,
 } from '../testData.js';
 import { createSignature } from '../helpers/preconditions.js';
 import { description, tag, severity, Severity, link, epic, step } from 'allure-js-commons';
@@ -106,13 +107,13 @@ test.describe('CreateDocument', () => {
 		await description('Objective: To verify the process of creating and sending a document for signature.');
 		await severity(Severity.CRITICAL);
 		await link(
-            "https://app.qase.io/case/SIGN-7",
+            `${QASE_LINK}/SIGN-7`,
             "Qase: SIGN-7"
             );
 		await link(
-				"Documentation",
-				"https://docs.google.com/document/d/1Qce7tKWOwVYtPxgQv_8ae-HUkbAgeOFph0lB_eziY_k/edit#heading=h.hvbgto58wwgb",
-				"ATC_03_07_03"
+			"Documentation",
+			`${GOOGLE_DOC_LINK}hvbgto58wwgb`,
+			"ATC_03_07_03"
 		);
 		await epic('Create Document');
 		await tag('Send Document');
@@ -127,7 +128,7 @@ test.describe('CreateDocument', () => {
         await prepareForSignatureModal.clickSignOnFieldsMenu();
         await prepareForSignatureModal.clickDocumentBody();
         await prepareForSignatureModal.clickSaveBtn();
-        await prepareForSignatureModal.toast.waitForToastCompleted();
+        await finalStepPage.toast.waitForToastIsHiddenByText(TOAST_MESSAGE.success);
         await finalStepPage.clickSendForSignatureBtn();
         await successModal.clickBackToDocumentsBtn();
         await step('Verify the created document is in the table with the label "AWAITING".', async () => {
