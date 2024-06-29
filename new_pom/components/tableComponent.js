@@ -28,10 +28,11 @@ export default class TableComponent {
             await this.optionsBtn.first().click();
         });
     }
+
     async clickSecondOptionsBtn() {
         await step('Click the second "Options" button', async () => {
-            await this.optionsBtn.last().waitFor();
-            await this.optionsBtn.last().click();
+            await this.optionsBtn.nth(1).waitFor();
+            await this.optionsBtn.nth(1).click();
         });
     }
 
