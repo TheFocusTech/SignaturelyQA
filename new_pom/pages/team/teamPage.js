@@ -11,6 +11,7 @@ export default class TeamPage {
         this.optionsDropdownForExactTeamMember = (teamMemberEmail) => this.page.locator('.table__column--team-email').getByText(`${teamMemberEmail}`).locator('~ *').getByRole('button', { name: 'Options' });
         this.upgradeToAdminOptionBtn = this.page.getByRole('button', { name: 'Upgrade to Admin' });
         this.teamMemberRoleForExactTeamMemeber = (teamMemberEmail) => this.page.locator('.table__column--team-email').getByText(`${teamMemberEmail}`).locator('~ div.table__column--status');
+        this.downgradeToAdminOptionBtn = this.page.getByRole('button', { name: 'Downgrade to User' });
     }
 
     async clickAddTeamMemberButton() {
@@ -28,6 +29,12 @@ export default class TeamPage {
     async clickUpgradeToAdminButton() {
         await step('Click on the "Upgrade to Admin" button', async () => {
             await this.upgradeToAdminOptionBtn.click();
+        });
+    }
+
+    async clickDowngradeToUserButton() {
+        await step('Click on the "Downgrade to User" button', async () => {
+            await this.downgradeToAdminOptionBtn.click();
         });
     }
 }
