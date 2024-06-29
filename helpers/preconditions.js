@@ -84,7 +84,7 @@ export const createForm = async (signPage, prepareForSignatureModal, createFormP
         await prepareForSignatureModal.clickCreateBtn();
         await successModal.clickBackToFormsBtn();
         await formsPage.sideMenu.clickSign();
-    });
+    })
 };
 
 export const uploadDocumentForDraft = async (signPage, prepareForSignatureModal) => {
