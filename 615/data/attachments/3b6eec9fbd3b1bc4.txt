@@ -1,0 +1,9 @@
+Free User has been successfully created: #240629120341410
+Email has been successfully confirmed
+Free User #240629120341410 has been successfully upgraded to Bussiness
+Generated new user Email: 240629120341410_new@gmail.com
+Waiting for email to arrive...
+Fetching emails sent to ...+240629120341410_new@gmail.com
+Number of messages found: 1
+Email received. Getting email body...
+Confirmation link retrieved: https://staging.d2twwklgqmrfet.amplifyap...
