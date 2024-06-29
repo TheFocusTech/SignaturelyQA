@@ -54,14 +54,8 @@ test.describe('Profile', () => {
     }) => {
         await description('Objective: To verify that the User can delete account');
         await severity(Severity.CRITICAL);
-        await link(
-            'https://app.qase.io/case/SIGN-47',
-            'Qase: SIGN-47'
-        );
-        await link(
-            "https://docs.google.com/document/d/1Qce7tKWOwVYtPxgQv_8ae-HUkbAgeOFph0lB_eziY_k/edit#heading=h.tcq6ypzibzp5",
-            "АTC_11_47_01"
-        );
+        await link(`${QASE_LINK}/SIGN-47`, 'Qase: SIGN-47');
+        await link(`${GOOGLE_DOC_LINK}tcq6ypzibzp5`, 'ATC_11_47_01');
         await epic('Profile');
         await tag('Delete account');
 
