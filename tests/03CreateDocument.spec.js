@@ -94,24 +94,42 @@ test.describe("CreateDocument", () => {
         });
 	});
 
-    test('TC_03_07_03 | Verify that user can create document and send for signature', async ({ createBusinessUserAndLogin, signPage, prepareForSignatureModal, finalStepPage, successModal, documentsPage }) => {
+    test('TC_03_07_03 | Verify user can create document and send it for signature', async ({ 
+		createBusinessUserAndLogin, 
+		signPage, 
+		prepareForSignatureModal, 
+		finalStepPage, 
+		successModal, 
+		documentsPage
+	}) => {
         test.setTimeout(220 * 1000);
-        await signPage.uploadFile.fileUploader.uploadFile('testDocuments/openHouse.pdf');
-        await signPage.uploadFile.clickPrepareDocumentBtn();
+
+		await description('Objective: To verify the process of creating and sending a document for signature.');
+		await severity(Severity.CRITICAL);
+		await link(
+				"Documentation",
+				"https://docs.google.com/document/d/1Qce7tKWOwVYtPxgQv_8ae-HUkbAgeOFph0lB_eziY_k/edit#heading=h.hvbgto58wwgb",
+				"TC_03_07_03"
+		);
+		await epic('Create Document');
+		await tag('Send Document');
+        await signPage.uploadFileTab.fileUploader.uploadFile('testDocuments/openHouse.pdf');
+        await signPage.uploadFileTab.clickPrepareDocumentBtn();
         await prepareForSignatureModal.clickSendForSignatureRadioBtn();
         await prepareForSignatureModal.clickAddSignerBtn();
-        await prepareForSignatureModal.fillSignerNameField(CHOOSE_SIGNERS_FIELDS.name1, 0);
-        await prepareForSignatureModal.fillSignerEmailField(process.env.PREFIX_EMAIL + '01' + process.env.EMAIL_DOMAIN, 0);
+        await prepareForSignatureModal.fillSignerNameField(SIGNERS_DATA.signerName1, 0);
+        await prepareForSignatureModal.fillSignerEmailField(SIGNERS_DATA.signerEmail1, 0);
         await prepareForSignatureModal.clickContinueBtn();
         await prepareForSignatureModal.clickGotItBtn();
         await prepareForSignatureModal.clickSignFieldsItem();
         await prepareForSignatureModal.doCanvasClicks();
         await prepareForSignatureModal.clickSaveBtn();
-        await prepareForSignatureModal.toast.waitForToastVisible();
-        await prepareForSignatureModal.toast.waitForToastHidden();
+        await prepareForSignatureModal.toast.waitForToastCompleted();
         await finalStepPage.clickSendForSignatureBtn();
         await successModal.clickBackToDocumentsBtn();
-        await expect(await documentsPage.table.documentStatus).toHaveText(DOCUMENT_STATUS.awaiting);
+        await step('Verify the created document is in the table with the label "AWAITING".', async () => {
+            await expect(await documentsPage.table.documentStatus).toHaveText(DOCUMENT_STATUS.awaiting);
+        });
 
     })
 
