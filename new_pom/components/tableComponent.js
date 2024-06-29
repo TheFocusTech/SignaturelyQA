@@ -107,4 +107,17 @@ export default class TableComponent {
         });
         return actualText;
     }
+
+    async waitForDocumentStatus(page, expectedStatus) {
+        await step('Wait for status of the document to update', async () => {
+            await this.documentStatus.waitFor();
+            let documentStatus = await this.documentStatus.textContent();
+
+            while (documentStatus !== expectedStatus) {
+                console.log(`The status of the document after creation is ${documentStatus}`);
+                await page.reload();
+                documentStatus = await this.documentStatus.textContent();
+            }
+        });
+    }
 }
