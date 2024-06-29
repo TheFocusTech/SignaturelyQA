@@ -26,9 +26,11 @@ test.describe('Sign Document', () => {
         await description('To verify custom signing order');
         await severity(Severity.CRITICAL);
         await link(
-            'https://app.qase.io/case/SIGN-11', 'Qase: SIGN-11');
+            'https://app.qase.io/case/SIGN-11', 
+            'Qase: SIGN-11');
         await link(
-            'https://docs.google.com/document/d/1Qce7tKWOwVYtPxgQv_8ae-HUkbAgeOFph0lB_eziY_k/edit#heading=h.7y8njhymxgmj', 'ATC_04_11_02');
+            'https://docs.google.com/document/d/1Qce7tKWOwVYtPxgQv_8ae-HUkbAgeOFph0lB_eziY_k/edit#heading=h.7y8njhymxgmj', 
+            'ATC_04_11_01');
         await epic('Sign document');
         await tag('Signing order');
 
