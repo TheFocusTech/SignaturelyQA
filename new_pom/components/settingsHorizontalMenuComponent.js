@@ -15,6 +15,8 @@ export default class SettingsHorizontalMenuComponent {
     }
 
     async clickAPI() {
-        await this.api.click();
+        await step('Click API on Horizontal Menu', async () => {
+            await this.api.click();
+        });
     }
 }
