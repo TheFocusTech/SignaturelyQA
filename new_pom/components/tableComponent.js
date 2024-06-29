@@ -62,7 +62,7 @@ export default class TableComponent {
         await step(`Wait for the document title to be visible`, async () => {
             await this.titleObjectField.filter({ hasText: name }).waitFor()
         });
-       
+
     }
 
     async clickMoveToBtn() {
@@ -113,24 +113,24 @@ export default class TableComponent {
 
     async clickRenameBtn() {
         await step('Click the "Rename" button', async () => {
-        await this.renameBtn.click();
+            await this.renameBtn.click();
         });
     }
 
     async fillInputNameField(name) {
-        await step('Input new value' , async () => {
-        await this.inputNameField.fill(name);
+        await step('Input new value', async () => {
+            await this.inputNameField.fill(name);
         });
     }
 
     async pressEnterInputNameField() {
-        await step('Input new value' , async () => {
-        await this.inputNameField.press('Enter');
+        await step('Input new value', async () => {
+            await this.inputNameField.press('Enter');
         });
     }
 
     async getTitleFolder() {
-        let actualNameFolder; 
+        let actualNameFolder;
         actualNameFolder = await this.titleObjectField.textContent();
 
         return actualNameFolder.trim();

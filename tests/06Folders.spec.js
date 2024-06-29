@@ -18,48 +18,40 @@ test.describe('Folders', () => {
 
         await expect(documentsPage.locators.getToast()).toHaveText(TOAST_MESSAGE.folderCreated);
     });
-});
 
 
-test.skip('TC_06_24_01 | Verify the business user can delete folder', async ({
-    page,
-    createBusinessUserAndLogin,
-}) => {
-    const signPage = new SignPage(page);
+    test.skip('TC_06_24_01 | Verify the business user can delete folder', async ({
+        page,
+        createBusinessUserAndLogin,
+    }) => {
+        const signPage = new SignPage(page);
 
-    const documentsPage = await signPage.clickDocumentsSidebarLinkAndGoDocumentsPage();
+        const documentsPage = await signPage.clickDocumentsSidebarLinkAndGoDocumentsPage();
 
-    await documentsPage.clickOptionsBtn();
-    await documentsPage.clickDeleteBtn();
-    await documentsPage.clickYesDeleteBtn();
-    await documentsPage.locators.getToast().waitFor({ state: 'visible' });
+        await documentsPage.clickOptionsBtn();
+        await documentsPage.clickDeleteBtn();
+        await documentsPage.clickYesDeleteBtn();
+        await documentsPage.locators.getToast().waitFor({ state: 'visible' });
 
-    await expect(documentsPage.locators.getToast()).toHaveText(TOAST_MESSAGE.folderDeleted);
-});
+        await expect(documentsPage.locators.getToast()).toHaveText(TOAST_MESSAGE.folderDeleted);
+    });
 
-test('TC_06_23_01 | Rename folder', async ({
-    createBusinessUserAndLogin,
-    signPage,
-    documentsPage,
-    createFolderModal,
-}) => {
-    await description('Objective: Testing Folder Renaming Functionality.');
-    await severity(Severity.CRITICAL);
-    await link("https://app.qase.io/case/SIGN-23", "QASE: SIGN-23 ");
-    await link(
-        "https://docs.google.com/document/d/1Qce7tKWOwVYtPxgQv_8ae-HUkbAgeOFph0lB_eziY_k/edit#heading=h.tmxz904usbum",
-        "ATC_06_23_01");
-    await tag('Rename Folder ');
-    await epic('Folders');
-
-    test('TC_06_23_01 | Rename folder', async ({ signPage,
+    test('TC_06_23_01 | Rename folder', async ({
+        createBusinessUserAndLogin,
+        signPage,
         documentsPage,
         createFolderModal,
-        createBusinessUserAndLogin }) => {
+    }) => {
+        await description('Objective: Testing Folder Renaming Functionality.');
+        await severity(Severity.CRITICAL);
+        await link(`${QASE_LINK}/SIGN-23`, "QASE: SIGN-23 ");
+        await link(`${GOOGLE_DOC_LINK}tmxz904usbum`, "ATC_06_23_01");
+        await tag('Rename Folder ');
+        await epic('Folders');
 
         await createFolder(signPage, documentsPage, createFolderModal);
         await signPage.sideMenu.clickDocuments();
-        await documentsPage.table.clickOptionsBtn(0);
+        await documentsPage.table.clickFirstOptionsBtn();
         await documentsPage.table.clickRenameBtn();
         await documentsPage.table.fillInputNameField(FILL_RENAME_FOLDER_NAME);
         await documentsPage.table.pressEnterInputNameField();
@@ -70,5 +62,5 @@ test('TC_06_23_01 | Rename folder', async ({
         });
 
     });
-});
 
+});
