@@ -1,6 +1,6 @@
 import { expect } from "@playwright/test";
 import { test } from "../fixtures/base.js";
-import {TOAST_MESSAGE, COMPANY_INFO, UPLOAD_FILE_PATH} from '../testData.js';
+import {TOAST_MESSAGE, COMPANY_INFO, UPLOAD_FILE_PATH, QASE_LINK, GOOGLE_DOC_LINK} from '../testData.js';
 import { description, tags, severity, Severity, link, epic, step } from 'allure-js-commons';
 
 test.describe('Company', () => {
@@ -11,14 +11,9 @@ test.describe('Company', () => {
         await description("To verify the process of filling company form.");
         await tags('Fill company form');
         await severity(Severity.CRITICAL);
-        await link(
-            'https://app.qase.io/case/SIGN-43',
-            'Qase: SIGN-43'
-        );
-        await link(
-            "https://docs.google.com/document/d/1Qce7tKWOwVYtPxgQv_8ae-HUkbAgeOFph0lB_eziY_k/edit#heading=h.buu76mms6cci",
-            "АTC_10_43_01"
-        );
+        await link(`${QASE_LINK}/SIGN-43`, 'Qase: SIGN-43');
+        await link(`${GOOGLE_DOC_LINK}buu76mms6cci`, 'ATC_10_43_01');
+    
         await epic("Settings: Company");
         await tags("Fill company's form");
         
