@@ -32,8 +32,13 @@ export default class PrepareForSignatureModal {
         this.customSigningOrderPositionNumberTwo = this.page.locator('span.signers__item-order-position').last();
         this.addRecipientsBtn = this.page.getByText('Recipients', { exact: true });
         this.recipientEmailField = this.page.getByPlaceholder('test@signaturely.com');
-        this.prepareForSigningTitle = this.page.getByRole('heading', { name: 'Prepare for Signing' });        
-        this.initialFieldsItem = this.fieldsMenu.getByText('Initial');
+        this.prepareForSigningTitle = this.page.getByRole('heading', { name: 'Prepare for Signing' });
+        this.cancelBtn = this.page.getByRole('button', { name: 'Cancel' });
+        this.nameFieldItem = this.page.getByRole('complementary').getByText('Name', { exact: true });
+        this.signFieldItem = this.page.getByRole('complementary').getByText('Sign', { exact: true });
+        this.initialFieldItem = this.fieldsMenu.getByText('Initial');
+        this.dateFieldItem = this.page.getByRole('complementary').getByText('Date', { exact: true });
+
 
     }
 
@@ -92,7 +97,7 @@ export default class PrepareForSignatureModal {
         });
     }
 
-    async doCanvasClicks() {
+    async clickDocumentBody() {
         await step('Click randomly inside the document', async () => {
             await clickCanvas(this.page, this.canvas, this.excludedAreas);
         });
@@ -124,7 +129,9 @@ export default class PrepareForSignatureModal {
     }
 
     async clickCustomSigningOrderCheckbox() {
-        await this.customSigningOrderCheckbox.click();
+        await step('Click on the "Custom signing order" checkbox.', async () => {
+            await this.customSigningOrderCheckbox.click();
+        });
     }
 
     async clickAddRecipientsBtn() {
@@ -144,18 +151,44 @@ export default class PrepareForSignatureModal {
         return actualText
     }
 
-    async clickNameFieldsItem() {
-        await this.nameFieldsItem.click();
+    async clickSignFieldItem() {
+        await step('Click on the "Sign" in "Fields" menu', async () => {
+            await this.signFieldItem.waitFor({ state: 'visible' });
+            await this.signFieldItem.click();
+        });
+    }
+
+    async clickNameFieldItem() {
+        await step('Click on the "Name" in "Fields" menu', async () => {
+            await this.nameFieldItem.waitFor({ state: 'visible' });
+            await this.nameFieldItem.click();
+        });
     }
 
     async clickCreateBtn() {
         await step('Click the "Create" button.', async () => {
             await this.createBtn.click();
+
         });
     }
 
     async clickInitialFieldsItem() {
-        await this.initialFieldsItem.click();
+        await step('Click on the "Initial" in "Fields" menu', async () => {
+            await this.initialFieldItem.click();
+        });
     }
 
+    async clickCancelBtn() {
+        await step('Click the "Cancel" button.', async () => {
+            await this.cancelBtn.click();
+        });
+    }
+
+    async clickDateFieldItem() {
+        await step('Click on the "Date" in "Fields" menu', async () => {
+        await this.dateFieldItem.waitFor({ state: 'visible' });
+        await this.dateFieldItem.click();
+        });
+
+    }
 }

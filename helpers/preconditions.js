@@ -1,18 +1,18 @@
 import { DATA_SIGNER, FOLDER_NAME, TOAST_MESSAGE, CREATE_TEMPLATE, UPLOAD_FILE_PATH, SIGNERS_DATA } from "../testData";
-import { test } from "../fixtures/base";
 import { step } from "allure-js-commons";
 
 export const createSignature = async (signPage, settingsCompanyPage, settingsEditSignaturePage, createOrEditSignatureOnSettingModal) => {
-    await signPage.sideMenu.clickSettings();
-    await settingsCompanyPage.sideMenuSettings.clickEditSignature();
-    await settingsEditSignaturePage.clickCreateSignatureBtn();
-    await createOrEditSignatureOnSettingModal.fillFullNameField(DATA_SIGNER.fullName);
-    await createOrEditSignatureOnSettingModal.fillInitialsField(DATA_SIGNER.initials);
-    await createOrEditSignatureOnSettingModal.clickCheckboxAgree();
-    await createOrEditSignatureOnSettingModal.clickCreateSignatureBtn();
-    await settingsCompanyPage.sideMenu.clickSign();
-
-}
+    await step('Precondition: Create signature ', async () => {
+        await signPage.sideMenu.clickSettings();
+        await settingsCompanyPage.sideMenuSettings.clickEditSignature();
+        await settingsEditSignaturePage.clickCreateSignatureBtn();
+        await createOrEditSignatureOnSettingModal.fillFullNameField(DATA_SIGNER.fullName);
+        await createOrEditSignatureOnSettingModal.fillInitialsField(DATA_SIGNER.initials);
+        await createOrEditSignatureOnSettingModal.clickCheckboxAgree();
+        await createOrEditSignatureOnSettingModal.clickCreateSignatureBtn();
+        await settingsCompanyPage.sideMenu.clickSign();
+    })
+};
 
 export const createDocumentAwaiting = async (
     signPage,
@@ -20,8 +20,9 @@ export const createDocumentAwaiting = async (
     documentsPage,
     successModal,
     finalStepPage) => {
-    await step('Document creation in progress with Awaiting status ', async () => {
-        await signPage.uploadFileTab.fileUploader.uploadFile('testDocuments/picture.jpg');
+
+    await step('Precondition: Document creation in progress with Awaiting status ', async () => {
+        await signPage.uploadFileTab.fileUploader.uploadFile(UPLOAD_FILE_PATH.jpgDocument);
         await signPage.uploadFileTab.clickPrepareDocumentBtn();
         await prepareForSignatureModal.clickSendForSignatureRadioBtn();
         await prepareForSignatureModal.clickAddSignerBtn();
@@ -31,13 +32,12 @@ export const createDocumentAwaiting = async (
         await prepareForSignatureModal.clickGotItBtn();
 
         await prepareForSignatureModal.clickSignFieldsItem();
-        await prepareForSignatureModal.doCanvasClicks();
+        await prepareForSignatureModal.clickDocumentBody();
         await prepareForSignatureModal.clickSaveBtn();
-        await finalStepPage.waitAndClickSendForSignatureBtn();
+        await finalStepPage.waitAndClickSendForSignatureBtn(TOAST_MESSAGE.success);
         await successModal.clickBackToDocumentsBtn();
         await documentsPage.sideMenu.clickSign();
     })
-
 };
 
 export const createFolder = async (
@@ -55,20 +55,47 @@ export const createFolder = async (
     })
 };
 
-export const createTemplate = async (signPage, prepareForSignatureModal, templatePage, createTemplatePage) => {
-    await step('Create Template', async () => {
+export const createTemplate = async (signPage, prepareForSignatureModal, templatesPage, createNewTemplatePage) => {
+    await step('Precondition: Create Template', async () => {
         await signPage.sideMenu.clickTemplates();
-        await templatePage.sideMenuTemplates.clickCreateTemplate();
-        await createTemplatePage.fillTemplateNameField(CREATE_TEMPLATE.nameField);
-        await createTemplatePage.fillCreateTemplateRolesField(CREATE_TEMPLATE.nameRole);
-        await createTemplatePage.fileUploader.uploadFile(UPLOAD_FILE_PATH.jpgDocument);
-        await createTemplatePage.clickFillTemplateBtn();
+        await templatesPage.sideMenuTemplates.clickCreateTemplate();
+        await createNewTemplatePage.fillTemplateNameField(CREATE_TEMPLATE.nameField);
+        await createNewTemplatePage.fillCreateTemplateRolesField(CREATE_TEMPLATE.nameRole);
+        await createNewTemplatePage.fileUploader.uploadFile(UPLOAD_FILE_PATH.jpgDocument);
+        await createNewTemplatePage.clickFillTemplateBtn();
         await prepareForSignatureModal.clickSignFieldsItem();
-        await prepareForSignatureModal.doCanvasClicks();
+        await prepareForSignatureModal.clickDocumentBody();
         await prepareForSignatureModal.clickCreateBtn();
         await prepareForSignatureModal.clickBackToTemplatesBtn();
-        await templatePage.sideMenu.clickSign();
+        await templatesPage.sideMenu.clickSign();
     })
 };
 
+export const createForm = async (signPage,
+    prepareForSignatureModal, createFormPage, formsPage, successModal) => {
+    await step('Precondition: Create Form', async () => {
+        await signPage.sideMenu.clickForms();
+        await formsPage.clickCreateFormBtn();
+        await createFormPage.fillFormNameField(SIGNERS_DATA.signerName1);
+        await createFormPage.fillOptionalMessageField(SIGNERS_DATA.viewerEmail1);
+        await createFormPage.fileUploader.uploadFile(UPLOAD_FILE_PATH.jpgDocument);
+        await createFormPage.clickFillTemplateBtn();
+        await prepareForSignatureModal.clickNameFieldItem();
+        await prepareForSignatureModal.clickDocumentBody();
+        await prepareForSignatureModal.clickSignFieldItem();
+        await prepareForSignatureModal.clickDocumentBody();
+        await prepareForSignatureModal.clickDateFieldItem();
+        await prepareForSignatureModal.clickDocumentBody();
+        await prepareForSignatureModal.clickCreateBtn();
+        await successModal.clickBackToFormsBtn();
+        await formsPage.sideMenu.clickSign();
+    })
+};
 
+export const uploadDocumentForDraft = async (signPage, prepareForSignatureModal) => {
+    await step('Precondition: Upload document for draft', async () => {    
+        await signPage.uploadFileTab.fileUploader.uploadFile(UPLOAD_FILE_PATH.xlsxDocument);
+        await signPage.uploadFileTab.clickPrepareDocumentBtn();
+        await prepareForSignatureModal.clickCancelBtn();        
+    });
+};

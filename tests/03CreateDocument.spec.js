@@ -5,7 +5,8 @@ import {
 	DOCUMENT_STATUS,
 	MESSAGE,
 	SIGNERS_DATA,
-	SIGNER_ME
+	SIGNER_ME,
+	UPLOAD_FILE_PATH
 } from "../testData.js";
 import { createSignature } from "../helpers/preconditions.js";
 import {description, tag, severity, Severity, link, epic, step} from "allure-js-commons";
@@ -29,7 +30,7 @@ test.describe("CreateDocument", () => {
         await prepareForSignatureModal.clickContinueBtn();
         await prepareForSignatureModal.clickGotItBtn();
         await prepareForSignatureModal.clickSignFieldsItem();
-        await prepareForSignatureModal.doCanvasClicks();
+        await prepareForSignatureModal.clickDocumentBody();
         await createSignatureOrInitialModal.fillInputSignature(SIGNERS_DATA.signerName1);
         await createSignatureOrInitialModal.clickCheckboxAgree();
         await createSignatureOrInitialModal.clickSignNowBtn();
@@ -56,14 +57,18 @@ test.describe("CreateDocument", () => {
 		await description('Objective: To verify the process of creating, signing, and sending a document to another signer.');
 		await severity(Severity.CRITICAL);
 		await link(
+            "https://app.qase.io/case/SIGN-7",
+            "Qase: SIGN-7"
+            );
+		await link(
 				"Documentation",
 				"https://docs.google.com/document/d/1Qce7tKWOwVYtPxgQv_8ae-HUkbAgeOFph0lB_eziY_k/edit#heading=h.2np2zmox71j",
-				"TC_03_07_06"
+				"ATC_03_07_06"
 		);
 		await epic('Create Document');
 		await tag('Document');
 
-        await signPage.uploadFileTab.fileUploader.uploadFile('testDocuments/todoList.xlsx');
+        await signPage.uploadFileTab.fileUploader.uploadFile(UPLOAD_FILE_PATH.xlsxDocument);
         await signPage.uploadFileTab.clickPrepareDocumentBtn();
         await prepareForSignatureModal.clickSignAndSendForSignatureRadioBtn();
         await prepareForSignatureModal.clickAddSignerBtn();
@@ -72,8 +77,8 @@ test.describe("CreateDocument", () => {
         await prepareForSignatureModal.clickContinueBtn();
         await prepareForSignatureModal.clickGotItBtn();
         await prepareForSignatureModal.clickSignFieldsItem();
-        await prepareForSignatureModal.doCanvasClicks();
-        await prepareForSignatureModal.doCanvasClicks();
+        await prepareForSignatureModal.clickDocumentBody();
+        await prepareForSignatureModal.clickDocumentBody();
         await prepareForSignatureModal.clickAssignedToDropDown();
         await prepareForSignatureModal.clickItemDropDown(SIGNER_ME);
         await createSignatureOrInitialModal.clickCheckboxAgree();
@@ -140,13 +145,13 @@ test.describe("CreateDocument", () => {
 		await prepareForSignatureModal.clickContinueBtn();
 		await prepareForSignatureModal.clickGotItBtn();
 		await prepareForSignatureModal.clickSignFieldsItem();
-		await prepareForSignatureModal.doCanvasClicks();
+		await prepareForSignatureModal.clickDocumentBody();
 		await prepareForSignatureModal.clickAssignedToDropDown();
 		await prepareForSignatureModal.clickItemDropDown(SIGNER_ME);
 		await chooseSignatureOrInitialModal.clickSignatureTyped();
 		await chooseSignatureOrInitialModal.clickSignNowBtn();
 		await prepareForSignatureModal.clickSignFieldsItem();
-		await prepareForSignatureModal.doCanvasClicks();
+		await prepareForSignatureModal.clickDocumentBody();
 		await prepareForSignatureModal.clickSaveBtn();
 		await finalStepPage.fillDocumentTitleField(DOCUMENT_TITLE);
 		await finalStepPage.clickSignDocumentAndSendForSignatureBtn();
@@ -183,7 +188,7 @@ test.describe("CreateDocument", () => {
         await prepareForSignatureModal.clickContinueBtn();
         await prepareForSignatureModal.clickGotItBtn();
         await prepareForSignatureModal.clickInitialFieldsItem();
-        await prepareForSignatureModal.doCanvasClicks();
+        await prepareForSignatureModal.clickDocumentBody();
 		await chooseSignatureOrInitialModal.clickSignatureTyped();
 		await chooseSignatureOrInitialModal.clickSignNowBtn();
         await prepareForSignatureModal.clickSaveBtn();

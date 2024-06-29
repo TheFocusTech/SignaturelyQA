@@ -1,4 +1,5 @@
 import FileUploaderComponent from "../../components/fileUploaderComponent";
+import { step } from "allure-js-commons";
 
 export default class CreateFormPage {
     constructor(page) {
@@ -11,15 +12,21 @@ export default class CreateFormPage {
     }
 
     async fillFormNameField(name) {
-            await this.formNameField.fill(name);
+        await step('Fill in Form Name', async () => {
+        await this.formNameField.fill(name);
+        });
     }
 
     async fillOptionalMessageField(message) {
-            await this.optionalMessageField.fill(message);
+        await step('Fill in Optional Message', async () => {
+        await this.optionalMessageField.fill(message);
+        });
     }
 
     async clickFillTemplateBtn() {
+        await step('Click on the "Fill Template" button', async () => {
         await this.fillTemplateBtn.waitFor();
         await this.fillTemplateBtn.click();
+        });
     }
 }
