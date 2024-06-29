@@ -99,12 +99,6 @@ export default class TableComponent {
         });
     }
 
-    async clickDuplicateBtn() {
-        await step('Click the "Duplicate" button', async () => {
-            await this.duplicateBtn.click();
-        });
-    }
-
     async clickEditBtn() {
         await step('Click the "Edit" button', async () => {
             await this.editBtn.click();
