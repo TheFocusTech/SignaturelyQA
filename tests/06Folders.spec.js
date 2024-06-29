@@ -16,8 +16,11 @@ test.describe ('Folders', () => {
         await expect(documentsPage.locators.getToast()).toHaveText(TOAST_MESSAGE.folderCreated);
     });
 
-    test.skip('TC_06_24_01 | Verify the business user can delete folder', async ({ page, createBusinessUserAndLogin, createNewFolder }) => {
-        const signPage = new SignPage(page); 
+    test.skip('TC_06_24_01 | Verify the business user can delete folder', async ({
+        page,
+        createBusinessUserAndLogin,
+    }) => {
+        const signPage = new SignPage(page);
 
         const documentsPage = await signPage.clickDocumentsSidebarLinkAndGoDocumentsPage();
 
@@ -29,14 +32,14 @@ test.describe ('Folders', () => {
         await expect(documentsPage.locators.getToast()).toHaveText(TOAST_MESSAGE.folderDeleted);
     });
 
-    test.skip('TC_06_23_01 | Rename folder', async ({ page, createBusinessUserAndLogin, createNewFolder }) => {
-        const signPage = new SignPage(page); 
+    test.skip('TC_06_23_01 | Rename folder', async ({ page, createBusinessUserAndLogin }) => {
+        const signPage = new SignPage(page);
 
         const documentsPage = await signPage.clickDocumentsSidebarLinkAndGoDocumentsPage();
 
         await documentsPage.clickOptionsBtn();
         await documentsPage.clickRenameBtn();
-        await documentsPage.fillRenameInputField(FILL_RENAME_FOLDER_NAME)
+        await documentsPage.fillRenameInputField(FILL_RENAME_FOLDER_NAME);
         await documentsPage.pressEnterRenameInputFielder();
 
         await expect(documentsPage.locators.getToast()).toHaveText(TOAST_MESSAGE.folderRename);
