@@ -12,7 +12,7 @@ export default class TableComponent {
         this.createAPIKeyBtn = this.page.locator('.documents__empty-table').getByRole('button', { name: 'Create API key' });
         this.titleEditAndResendDocument = this.page.getByText('Edit & Resend document');
         this.addToAPIBtn = this.page.getByRole('button', { name: 'Add to API' });
-        this.documentTitle = this.page.locator('.documents__list-item .table__column--text--document p');
+        this.objectTitle = this.page.locator('p.table__column');
         this.moveToBtn = this.page.getByRole('button', { name: 'Move to' });
         this.controlsPath = this.page.locator('.tableControls__path');
         this.sendReminderBtn = this.page.getByRole('button', { name: 'Send Reminder' });
@@ -48,7 +48,7 @@ export default class TableComponent {
 
     async waitForDocumentTitleVisible(name) {
         await step(`Wait for the document title to be visible`, async () => {
-            await this.documentTitle.filter({ hasText: name }).waitFor()
+            await this.objectTitle.filter({ hasText: name }).waitFor()
         })
     }
 
@@ -60,7 +60,7 @@ export default class TableComponent {
 
     async openFolder(name) {
         await step('Open the folder', async () => {
-            await this.documentTitle.filter({ hasText: name }).dblclick();
+            await this.objectTitle.filter({ hasText: name }).dblclick();
         });
     }
 
@@ -94,7 +94,7 @@ export default class TableComponent {
     async getTemplateTitle() {
         let actualText;
         await step('Get template title', async () => {
-            actualText = await this.documentTitle.textContent();
+            actualText = await this.objectTitle.textContent();
         });
         return actualText;
 

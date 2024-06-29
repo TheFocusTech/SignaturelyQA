@@ -104,7 +104,7 @@ test.describe('DocumentsType', () => {
 
         await documentsPage.table.openFolder(FOLDER_NAME);
         await step('Verify the document is inside the folder', async () => {
-            await expect(await documentsPage.table.documentTitle).toHaveText(UPLOAD_FILE_NAME.jpgDocument);
+            await expect(await documentsPage.table.objectTitle).toHaveText(UPLOAD_FILE_NAME.jpgDocument);
         });
     });
 
