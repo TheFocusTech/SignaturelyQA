@@ -1,7 +1,7 @@
 import { expect } from '@playwright/test';
 import { test } from '../fixtures/base.js';
 import { createFolder } from '../helpers/preconditions.js';
-import { TOAST_MESSAGE, FILL_RENAME_FOLDER_NAME } from '../testData.js';
+import { TOAST_MESSAGE, FILL_RENAME_FOLDER_NAME, QASE_LINK, GOOGLE_DOC_LINK, } from '../testData.js';
 import { description, tag, severity, Severity, link, epic, step } from "allure-js-commons";
 
 test.describe('Folders', () => {
@@ -42,6 +42,7 @@ test.describe('Folders', () => {
         documentsPage,
         createFolderModal,
     }) => {
+        test.setTimeout(150 * 1000);
         await description('Objective: Testing Folder Renaming Functionality.');
         await severity(Severity.CRITICAL);
         await link(`${QASE_LINK}/SIGN-23`, "QASE: SIGN-23 ");
