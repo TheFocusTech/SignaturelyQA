@@ -19,7 +19,7 @@ import { createSignature, uploadDocumentForDraft } from "../helpers/precondition
 
 
 test.describe('Sign Document', () => {
-    test('TC_04_11_02 | Verify custom signing order', async ({ 
+    test('TC_04_11_01 | Verify custom signing order', async ({ 
         createBusinessUserAndLogin, 
         signPage, 
         prepareForSignatureModal }) => {
