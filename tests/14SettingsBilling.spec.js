@@ -118,7 +118,7 @@ test.describe('Billing', () => {
         );
     });
 
-    test('TC_14_57_01 | Verify the ability to upgrade subscription', async ({
+    test('TC_14_57_01 | Verify that user can upgrade subscription (from Monthly to Annually)', async ({
       createBusinessUserAndLogin,
       signPage,
       settingsCompanyPage,
