@@ -56,7 +56,7 @@ test.describe('Profile', () => {
         await severity(Severity.CRITICAL);
         await link(
             'https://app.qase.io/case/SIGN-47',
-            'Qase: SIGN-47
+            'Qase: SIGN-47'
         );
         await link(
             "https://docs.google.com/document/d/1Qce7tKWOwVYtPxgQv_8ae-HUkbAgeOFph0lB_eziY_k/edit#heading=h.tcq6ypzibzp5",
