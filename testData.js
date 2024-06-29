@@ -67,6 +67,7 @@ export const DOCUMENT_STATUS = {
     completed: 'completed',
     live: 'live',
     processing: 'processing',
+    expired: 'expired'
 };
 export const CI_USER_NAME = 'CI_user';
 export const BUSINESS_MONTHLY_PLAN = 'Your plan (Billed Monthly)Business';

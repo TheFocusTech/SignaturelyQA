@@ -22,7 +22,6 @@ export default class TableComponent {
         this.editBtn = this.page.getByRole('button', { name: 'Edit' });
         this.listElements = this.page.locator('.documents__list-container');
 
-
     }
 
     async clickFirstOptionsBtn() {
@@ -60,8 +59,8 @@ export default class TableComponent {
     async waitForDocumentTitleVisible(name) {
         await step(`Wait for the document title to be visible`, async () => {
             await this.objectTitle.filter({ hasText: name }).waitFor()
-        })
-      
+        });
+
     }
 
     async clickMoveToBtn() {
@@ -94,7 +93,7 @@ export default class TableComponent {
     async clickDuplicateBtn() {
         await step('Click the "Duplicate" button', async () => {
             await this.duplicateBtn.click();
-            
+
         });
     }
 
@@ -106,7 +105,7 @@ export default class TableComponent {
 
     async getTemplateTitle() {
         let actualText;
-                await step('Get template title', async () => {
+        await step('Get template title', async () => {
             actualText = await this.objectTitle.first().textContent();
         });
         return actualText;
@@ -121,5 +120,18 @@ export default class TableComponent {
         });
         return actualText === actualSecondText;
     }
-   
-}
+
+    async waitForDocumentStatus(page, expectedStatus) {
+        await step('Wait for status of the document to update', async () => {
+            await this.documentStatus.waitFor();
+            let documentStatus = await this.documentStatus.textContent();
+
+            while (documentStatus !== expectedStatus) {
+                console.log(`The status of the document after creation is ${documentStatus}`);
+                await page.reload();
+                documentStatus = await this.documentStatus.textContent();
+            }
+        });
+    }
+
+
