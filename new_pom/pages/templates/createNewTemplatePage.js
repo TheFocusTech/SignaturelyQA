@@ -1,6 +1,7 @@
 import SideMenuComponent from "../../components/sideMenuComponent";
 import SideMenuTemplatesComponent from "../../components/sideMenuTemplatesComponent";
 import FileUploaderComponent from "../../components/fileUploaderComponent";
+import CreateTemplateComponent from "../../components/createTemplateComponent";
 import { step } from "allure-js-commons";
 
 export default class CreateNewTemplatePage {
@@ -10,14 +11,13 @@ export default class CreateNewTemplatePage {
         this.sideMenu = new SideMenuComponent(this.page);
         this.sideMenuTemplates = new SideMenuTemplatesComponent(this.page);
         this.fileUploader = new FileUploaderComponent(this.page);
+        this.createTemplate = new CreateTemplateComponent(this.page);
 
         this.templateNameField = this.page.getByPlaceholder('A template name to identify');
         this.optionalMessageField = this.page.getByPlaceholder('Add an optional message for');
         this.createTemplateRolesField = this.page.getByPlaceholder('Role');
         this.fillTemplateBtn = this.page.getByRole('button', { name: 'Fill Template' });
-
     }
-
     async fillTemplateNameField(name) {
         await step('Fill in the "Template Name" field', async () => {
             await this.templateNameField.fill(name);

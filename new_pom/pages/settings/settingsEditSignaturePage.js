@@ -1,5 +1,6 @@
 import SideMenuSettingsComponent from "../../components/sideMenuSettingsComponent";
 import ToastComponent from "../../components/toastComponent";
+import { step } from "allure-js-commons"; 
 
 export default class SettingsEditSignaturePage {
     constructor(page) {
@@ -13,6 +14,8 @@ export default class SettingsEditSignaturePage {
     }
 
     async clickCreateSignatureBtn() {
-        await this.createSignatureBtn.click();
+        await step('Click on the "Create Signature" button', async () => {
+            await this.createSignatureBtn.click();
+        })
     }
 }

@@ -1,7 +1,6 @@
 import { step } from 'allure-js-commons';
 
 export default class TableComponent {
-
     constructor(page) {
         this.page = page;
 
@@ -9,7 +8,9 @@ export default class TableComponent {
         this.documentStatus = this.page.locator('.documents__documentStatus').first();
         this.optionsBtn = this.page.getByText('Options');
         this.editAndResendBtn = this.page.getByText('Edit & Resend');
-        this.createAPIKeyBtn = this.page.locator('.documents__empty-table').getByRole('button', { name: 'Create API key' });
+        this.createAPIKeyBtn = this.page
+            .locator('.documents__empty-table')
+            .getByRole('button', { name: 'Create API key' });
         this.titleEditAndResendDocument = this.page.getByText('Edit & Resend document');
         this.addToAPIBtn = this.page.getByRole('button', { name: 'Add to API' });
         this.documentTitle = this.page.locator('.documents__list-item .table__column--text--document p');
@@ -19,13 +20,24 @@ export default class TableComponent {
         this.duplicateBtn = this.page.getByText('Duplicate');
         this.formsList = this.page.locator('div.table__dataRow');
         this.editBtn = this.page.getByRole('button', { name: 'Edit' });
-        this.optionsShareDropdown = this.page.locator('.documents__dropdownOption').getByText('Share');      
+        this.renameBtn = this.page.getByRole('button', { name: 'Rename' });
+        this.inputNameField = this.page.locator('.form__input--hidden');
+        this.titleObjectField = this.page.locator('p.table__column')
+        this.shareBtn = this.page.getByRole('button', { name: 'Share' });
+      
     }
 
-    async clickOptionsBtn(i) {
-        await step('Click the "Options" button', async () => {
-            await this.optionsBtn.nth(i).waitFor();
-            await this.optionsBtn.nth(i).click();
+    async clickFirstOptionsBtn() {
+        await step('Click the first "Options" button', async () => {
+            await this.optionsBtn.first().waitFor();
+            await this.optionsBtn.first().click();
+        });
+    }
+
+    async clickSecondOptionsBtn() {
+        await step('Click the second "Options" button', async () => {
+            await this.optionsBtn.nth(1).waitFor();
+            await this.optionsBtn.nth(1).click();
         });
     }
 
@@ -49,8 +61,9 @@ export default class TableComponent {
 
     async waitForDocumentTitleVisible(name) {
         await step(`Wait for the document title to be visible`, async () => {
-            await this.documentTitle.filter({ hasText: name }).waitFor()
-        })
+            await this.titleObjectField.filter({ hasText: name }).waitFor()
+        });
+
     }
 
     async clickMoveToBtn() {
@@ -63,7 +76,7 @@ export default class TableComponent {
         await step('Open the folder', async () => {
             await this.documentTitle.filter({ hasText: name }).dblclick();
         });
-    }  
+    }
 
     async clickSendReminderBtn() {
         await this.sendReminderBtn.click();
@@ -71,28 +84,77 @@ export default class TableComponent {
 
     async getDocumentStatusText() {
         const actualText = await this.documentStatus.textContent();
-        return actualText
+        return actualText;
     }
 
     async waitForDocumentStatusVisible(status) {
         await step(`Wait for ${status} status of the created document in the table.`, async () => {
-            await this.documentStatus.getByText(status).waitFor({ state: 'visible' })
-        });        
+            await this.documentStatus.getByText(status).waitFor({ state: 'visible' });
+        });
     }
 
     async clickDuplicateBtn() {
         await step('Click the "Duplicate" button', async () => {
-        await this.duplicateBtn.click();
+            await this.duplicateBtn.click();
+            
         });
     }
 
-    async clickEditBtn() { 
+    async clickEditBtn() {
         await step('Click the "Edit" button', async () => {
             await this.editBtn.click();
         });
     }
+
+    async clickRenameBtn() {
+        await step('Click the "Rename" button', async () => {
+            await this.renameBtn.click();
+        });
+    }
+
+    async fillInputNameField(name) {
+        await step('Input new value', async () => {
+            await this.inputNameField.fill(name);
+        });
+    }
+
+    async pressEnterInputNameField() {
+        await step('Input new value', async () => {
+            await this.inputNameField.press('Enter');
+        });
+    }
+
+    async getTitleFolder() {
+        let actualNameFolder;
+        actualNameFolder = await this.titleObjectField.textContent();
+
+        return actualNameFolder.trim();
+    }
+
+    async getTemplateTitle() {
+        let actualText;
+        await step('Get template title', async () => {
+            actualText = await this.documentTitle.textContent();
+        });
+        return actualText;
+    }
+
+    async waitForDocumentStatus(page, expectedStatus) {
+        await step('Wait for status of the document to update', async () => {
+            await this.documentStatus.waitFor();
+            let documentStatus = await this.documentStatus.textContent();
+
+            while (documentStatus !== expectedStatus) {
+                console.log(`The status of the document after creation is ${documentStatus}`);
+                await page.reload();
+                documentStatus = await this.documentStatus.textContent();
+            }
+        });
+    }
   
-    async clickOptionsShareDropdown() {
-        await this.optionsShareDropdown.click();
+    async clickshareBtn() {
+        await this.shareBtn.click();
     }
 }
+
+
