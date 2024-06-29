@@ -19,6 +19,10 @@ export default class TableComponent {
         this.duplicateBtn = this.page.getByText('Duplicate');
         this.formsList = this.page.locator('div.table__dataRow');
         this.editBtn = this.page.getByRole('button', { name: 'Edit' });
+        this.renameBtn = this.page.getByRole('button', { name: 'Rename' });
+        this.inputNameField = this.page.locator('.form__input--hidden');
+        this.titleObjectField = this.page.locator('p.table__column')
+
     }
 
     async clickOptionsBtn(i) {
@@ -64,8 +68,6 @@ export default class TableComponent {
         });
     }
 
-    
-
     async clickSendReminderBtn() {
         await this.sendReminderBtn.click();
     }
@@ -78,24 +80,50 @@ export default class TableComponent {
     async waitForDocumentStatusVisible(status) {
         await step(`Wait for ${status} status of the created document in the table.`, async () => {
             await this.documentStatus.getByText(status).waitFor({ state: 'visible' })
-        });        
-    }
-
-    async clickDuplicateBtn() {
-        await step('Click the "Duplicate" button', async () => {
-        await this.duplicateBtn.click();
         });
     }
 
     async clickDuplicateBtn() {
         await step('Click the "Duplicate" button', async () => {
-        await this.duplicateBtn.click();
+            await this.duplicateBtn.click();
         });
     }
 
-    async clickEditBtn() { 
+    async clickDuplicateBtn() {
+        await step('Click the "Duplicate" button', async () => {
+            await this.duplicateBtn.click();
+        });
+    }
+
+    async clickEditBtn() {
         await step('Click the "Edit" button', async () => {
             await this.editBtn.click();
         });
     }
+
+    async clickRenameBtn() {
+        await step('Click the "Rename" button', async () => {
+        await this.renameBtn.click();
+        });
+    }
+
+    async fillInputNameField(name) {
+        await step('Input new value' , async () => {
+        await this.inputNameField.fill(name);
+        });
+    }
+
+    async pressEnterInputNameField() {
+        await step('Input new value' , async () => {
+        await this.inputNameField.press('Enter');
+        });
+    }
+    async getTitleFolder() {
+        let actualNameFolder; 
+        actualNameFolder = await this.titleObjectField.textContent();
+
+        return actualNameFolder.trim();
+    }
+
+
 }

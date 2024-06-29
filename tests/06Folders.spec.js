@@ -1,12 +1,13 @@
 import { expect } from "@playwright/test"
-import {test, createBusinessUserAndLogin, createNewFolder} from "../fixtures/base.js";
+import { test } from "../fixtures/base.js";
+import { createFolder } from "../helpers/preconditions.js";
 import { TOAST_MESSAGE, FILL_RENAME_FOLDER_NAME } from "../testData.js";
 
 
-test.describe ('Folders', () => {
+test.describe('Folders', () => {
 
-    test.skip('TC_06_22_01 | Verify the business user can create folder', async ({ page , createBusinessUserAndLogin}) => {
-        const signPage = new SignPage(page); 
+    test.skip('TC_06_22_01 | Verify the business user can create folder', async ({ page, createBusinessUserAndLogin }) => {
+        const signPage = new SignPage(page);
 
         const documentsPage = await signPage.clickDocumentsSidebarLinkAndGoDocumentsPage();
         await documentsPage.clickCreateFolderBtn();
@@ -16,8 +17,8 @@ test.describe ('Folders', () => {
         await expect(documentsPage.locators.getToast()).toHaveText(TOAST_MESSAGE.folderCreated);
     });
 
-    test.skip('TC_06_24_01 | Verify the business user can delete folder', async ({ page, createBusinessUserAndLogin, createNewFolder }) => {
-        const signPage = new SignPage(page); 
+    test.skip('TC_06_24_01 | Verify the business user can delete folder', async ({ createBusinessUserAndLogin }) => {
+        const signPage = new SignPage(page);
 
         const documentsPage = await signPage.clickDocumentsSidebarLinkAndGoDocumentsPage();
 
@@ -29,16 +30,19 @@ test.describe ('Folders', () => {
         await expect(documentsPage.locators.getToast()).toHaveText(TOAST_MESSAGE.folderDeleted);
     });
 
-    test.skip('TC_06_23_01 | Rename folder', async ({ page, createBusinessUserAndLogin, createNewFolder }) => {
-        const signPage = new SignPage(page); 
+    test('TC_06_23_01 | Rename folder', async ({ createBusinessUserAndLogin, signPage, documentsPage,
+        createFolderModal }) => {
 
-        const documentsPage = await signPage.clickDocumentsSidebarLinkAndGoDocumentsPage();
+        await createFolder(signPage, documentsPage, createFolderModal);
+        await signPage.sideMenu.clickDocuments();
+        await documentsPage.table.clickOptionsBtn(0);
+        await documentsPage.table.clickRenameBtn();
+        await documentsPage.table.fillInputNameField(FILL_RENAME_FOLDER_NAME);
+        await documentsPage.table.pressEnterInputNameField();
+        await documentsPage.toast.waitForToastIsHiddenByText(TOAST_MESSAGE.folderRename)
 
-        await documentsPage.clickOptionsBtn();
-        await documentsPage.clickRenameBtn();
-        await documentsPage.fillRenameInputField(FILL_RENAME_FOLDER_NAME)
-        await documentsPage.pressEnterRenameInputFielder();
-
-        await expect(documentsPage.locators.getToast()).toHaveText(TOAST_MESSAGE.folderRename);
+        await step('Verify that the new value has been saved' , async () => {
+        expect(await documentsPage.table.getTitleFolder()).toBe(FILL_RENAME_FOLDER_NAME);
+        });
     });
 })
