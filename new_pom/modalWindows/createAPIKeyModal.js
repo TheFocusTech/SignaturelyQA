@@ -1,3 +1,5 @@
+import {step} from "allure-js-commons";
+
 export default class CreateAPIKeyModal {
     constructor(page) {
         this.page = page;
@@ -10,24 +12,35 @@ export default class CreateAPIKeyModal {
     }
 
     async fillCreateAPIKeyNameField(keyName) {
-        await this.createAPIKeyNameField.waitFor();
-        await this.createAPIKeyNameField.fill(keyName);
+        await step('Fill in the "API key name" field', async () => {
+            await this.createAPIKeyNameField.waitFor();
+            await this.createAPIKeyNameField.fill(keyName);
+        });
     }
 
     async clickCreateAPIBtn() {
-        await this.createAPIBtn.click();
+        await step('Click "Create API" button', async () => {
+            await this.createAPIBtn.click();
+        });
     }
 
     async clickCopyAPIBtn() {
-        await this.copyAPIBtn.click();
+        await step('Click "Copy API" button', async () => {
+            await this.copyAPIBtn.click();
+        });
     }
 
     async getAPIKeyValueText() {
-        await this.APIKeyValue.waitFor();
-        return await this.APIKeyValue.textContent();
+        await step('Retrieve API key value', async () => {
+            await this.APIKeyValue.waitFor();
+
+            return await this.APIKeyValue.innerText();
+        });
     }
 
     async clickCloseAPIModalBtn() {
-        await this.closeAPIModalBtn.click();
+        await step('Click close button at the API modal window', async () => {
+            await this.closeAPIModalBtn.click();
+        });
     }
 }

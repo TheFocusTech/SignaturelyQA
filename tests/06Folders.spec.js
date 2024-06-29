@@ -1,26 +1,30 @@
-import { expect } from "@playwright/test"
-import {test, createBusinessUserAndLogin, createNewFolder} from "../fixtures/base.js";
-// import { TOAST_MESSAGE, FILL_RENAME_FOLDER_NAME } from "../testData.js";
-import { createFolder, createSecondFolder } from "../helpers/preconditions.js";
-import { FOLDER_NAME, FOLDER_NAME_SECOND, TOAST_MESSAGE } from "../testData.js";
+import { expect } from '@playwright/test';
+import { test } from '../fixtures/base.js';
+import { createFolder } from '../helpers/preconditions.js';
+import { TOAST_MESSAGE, FILL_RENAME_FOLDER_NAME, QASE_LINK, GOOGLE_DOC_LINK, } from '../testData.js';
 import { description, tag, severity, Severity, link, epic, step } from "allure-js-commons";
 
-
-test.describe ('Folders', () => {
-
-    test.skip('TC_06_22_01 | Verify the business user can create folder', async ({ page , createBusinessUserAndLogin}) => {
-        const signPage = new SignPage(page); 
+test.describe('Folders', () => {
+    test.skip('TC_06_22_01 | Verify the business user can create folder', async ({
+        page,
+        createBusinessUserAndLogin,
+    }) => {
+        const signPage = new SignPage(page);
 
         const documentsPage = await signPage.clickDocumentsSidebarLinkAndGoDocumentsPage();
         await documentsPage.clickCreateFolderBtn();
-        await documentsPage.locators.getNewFolderNameInputField().fill('New Folder')
+        await documentsPage.locators.getNewFolderNameInputField().fill('New Folder');
         await documentsPage.clickCreateBtn();
 
         await expect(documentsPage.locators.getToast()).toHaveText(TOAST_MESSAGE.folderCreated);
     });
 
-    test.skip('TC_06_24_01 | Verify the business user can delete folder', async ({ page, createBusinessUserAndLogin, createNewFolder }) => {
-        const signPage = new SignPage(page); 
+
+    test.skip('TC_06_24_01 | Verify the business user can delete folder', async ({
+        page,
+        createBusinessUserAndLogin,
+    }) => {
+        const signPage = new SignPage(page);
 
         const documentsPage = await signPage.clickDocumentsSidebarLinkAndGoDocumentsPage();
 
@@ -32,6 +36,35 @@ test.describe ('Folders', () => {
         await expect(documentsPage.locators.getToast()).toHaveText(TOAST_MESSAGE.folderDeleted);
     });
 
+    test('TC_06_23_01 | Rename folder', async ({
+        createBusinessUserAndLogin,
+        signPage,
+        documentsPage,
+        createFolderModal,
+    }) => {
+        test.setTimeout(150 * 1000);
+        await description('Objective: Testing Folder Renaming Functionality.');
+        await severity(Severity.CRITICAL);
+        await link(`${QASE_LINK}/SIGN-23`, "QASE: SIGN-23 ");
+        await link(`${GOOGLE_DOC_LINK}i7nf7965pwpi`, "ATC_06_23_01");
+        await tag('Rename Folder ');
+        await epic('Folders');
+
+        await createFolder(signPage, documentsPage, createFolderModal);
+        await signPage.sideMenu.clickDocuments();
+        await documentsPage.table.clickFirstOptionsBtn();
+        await documentsPage.table.clickRenameBtn();
+        await documentsPage.table.fillInputNameField(FILL_RENAME_FOLDER_NAME);
+        await documentsPage.table.pressEnterInputNameField();
+        await documentsPage.toast.waitForToastIsHiddenByText(TOAST_MESSAGE.folderRename);
+
+        await step('Verify that the new value has been saved', async () => {
+            expect(await documentsPage.table.getTitleFolder()).toBe(FILL_RENAME_FOLDER_NAME);
+        });
+
+    });
+
+});
     test.skip('TC_06_23_01 | Rename folder', async ({ page, createBusinessUserAndLogin, createNewFolder }) => {
         const signPage = new SignPage(page); 
 
@@ -48,8 +81,6 @@ test.describe ('Folders', () => {
     test('TC_06_25_01 | Move folder to folder', async ({ createBusinessUserAndLogin,
         signPage,
         documentsPage,
-        // createFolder,
-        // createSecondFolder,
         createFolderModal,
         moveToFolderModal  }) => {
 
@@ -80,4 +111,3 @@ test.describe ('Folders', () => {
                 await expect(await documentsPage.toast.toastBody).toHaveText(TOAST_MESSAGE.folderMovedToFolder);
             });
     });
-})
