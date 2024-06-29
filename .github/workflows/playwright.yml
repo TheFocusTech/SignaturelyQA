@@ -10,7 +10,7 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 18
       - name: Install dependencies
         run: npm ci
       - name: Install Playwright Browsers
@@ -36,7 +36,7 @@ jobs:
           retention-days: 30
 
       - name: Attach artifacts on failure
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v3
         if: failure()
         with:
           name: Artifacts
