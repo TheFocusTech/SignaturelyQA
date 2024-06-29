@@ -118,6 +118,7 @@ export default class TableComponent {
         await this.inputNameField.press('Enter');
         });
     }
+
     async getTitleFolder() {
         let actualNameFolder; 
         actualNameFolder = await this.titleObjectField.textContent();
@@ -125,5 +126,12 @@ export default class TableComponent {
         return actualNameFolder.trim();
     }
 
+    async getTemplateTitle() {
+        let actualText;
+        await step('Get template title', async () => {
+            actualText = await this.documentTitle.textContent();
+        });
+        return actualText;
+    }
 
 }

@@ -2,7 +2,7 @@ import { expect } from "@playwright/test";
 import { test } from "../fixtures/base.js";
 import { SIGNERS_DATA, TOAST_MESSAGE, DOCUMENT_STATUS, UPLOAD_FILE_PATH } from "../testData.js";
 import { createForm } from "../helpers/preconditions.js";
-import {description, tag, severity, Severity, link, epic} from "allure-js-commons";
+import { description, tag, severity, Severity, link, epic, step } from "allure-js-commons";
 
 test.describe('Forms', () => {
 
@@ -17,16 +17,15 @@ test.describe('Forms', () => {
         await tag('Create Form');
         await severity(Severity.CRITICAL);
         await link(
-                'https://app.qase.io/case/SIGN-35',
-                'Qase: SIGN-35'
+                'https://app.qase.io/case/SIGN-32',
+                'Qase: SIGN-32'
             );
         await link(
           "https://docs.google.com/document/d/1Qce7tKWOwVYtPxgQv_8ae-HUkbAgeOFph0lB_eziY_k/edit#heading=h.c5mhxwvn5pxt",
-          "ATC_08_35_01"
+          "ATC_08_32_01"
       );
         await epic("Forms");
         
-
         test.setTimeout(120 * 1000);
         await signPage.sideMenu.clickForms();
 
@@ -38,21 +37,25 @@ test.describe('Forms', () => {
         await createFormPage.clickFillTemplateBtn();
 
         await prepareForSignatureModal.clickNameFieldItem();
-        await prepareForSignatureModal.doCanvasClicks();
+        await prepareForSignatureModal.clickDocumentBody();
     
         await prepareForSignatureModal.clickSignFieldItem();
-        await prepareForSignatureModal.doCanvasClicks();
+        await prepareForSignatureModal.clickDocumentBody();
 
         await prepareForSignatureModal.clickDateFieldItem();
-        await prepareForSignatureModal.doCanvasClicks();
+        await prepareForSignatureModal.clickDocumentBody();
 
         await prepareForSignatureModal.clickCreateBtn();
 
-        await expect(prepareForSignatureModal.toast.toastBody).toHaveText(TOAST_MESSAGE.success);
+        await step('Verify that Success Toast Notification is shown', async () => {
+          await expect(prepareForSignatureModal.toast.toastBody).toHaveText(TOAST_MESSAGE.success);
+        });
 
         await successModal.clickBackToFormsBtn();
 
-        await expect(await formsPage.table.documentStatus).toHaveText(DOCUMENT_STATUS.live);
+        await step('Verify that "Live" status of the created form in the table is "Live"', async () => {
+          await expect(await formsPage.table.documentStatus).toHaveText(DOCUMENT_STATUS.live);
+        });
   });
 
   test('TC_08_35_01 | Verify that user can duplicate form', async ({ 
@@ -67,11 +70,11 @@ test.describe('Forms', () => {
         await tag('Duplicate Form');
         await severity(Severity.CRITICAL);
         await link(
-            'https://app.qase.io/case/SIGN-32',
-            'Qase: SIGN-32'
+            'https://app.qase.io/case/SIGN-35',
+            'Qase: SIGN-35'
         );
         await link(
-          "https://docs.google.com/document/d/1Qce7tKWOwVYtPxgQv_8ae-HUkbAgeOFph0lB_eziY_k/edit#heading=h.c5mhxwvn5pxt",
+          "https://docs.google.com/document/d/1Qce7tKWOwVYtPxgQv_8ae-HUkbAgeOFph0lB_eziY_k/edit#heading=h.ertctkmlxc8",
           "ATC_08_35_01"
       );
         await epic("Forms");
@@ -84,8 +87,12 @@ test.describe('Forms', () => {
         await formsPage.table.clickDuplicateBtn();
         await successModal.clickOkBtn();
 
-        await expect(await formsPage.toast.toastBody.nth(0)).toHaveText(TOAST_MESSAGE.duplicated);
+        await step('Verify that toast notification form is duplicated is shown', async () => {
+          await expect(await formsPage.toast.toastBody.nth(0)).toHaveText(TOAST_MESSAGE.duplicated);
+        });
 
-        await expect(await formsPage.table.formsList).toHaveCount(2);
+        await step('Verify that the number of forms in the table is increased by 1', async () => {
+          await expect(await formsPage.table.formsList).toHaveCount(2);
+        });
     });
 }) 
