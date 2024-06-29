@@ -158,9 +158,12 @@ test.describe('Templates', () => {
         await templatesPage.toast.waitForToastIsHiddenByText(TOAST_MESSAGE.templateDuplicate);
 
         await step('Verify that the number of tamplates in the table is increased by 1', async () => {
-            await expect(await formsPage.table.formsList).toHaveCount(2);
+            await expect(await templatesPage.table.objectTitle).toHaveCount(2);
         });
 
+        await step("Verify that template1's title equals template2's title.", async () => {
+            expect(await templatesPage.table.compareTitles()).toBe(true);
+        });
     });
 
 });

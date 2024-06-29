@@ -106,10 +106,20 @@ export default class TableComponent {
 
     async getTemplateTitle() {
         let actualText;
-        await step('Get template title', async () => {
-            actualText = await this.objectTitle.textContent();
+                await step('Get template title', async () => {
+            actualText = await this.objectTitle.first().textContent();
         });
         return actualText;
     }
 
+    async compareTitles() {
+        let actualText;
+        let actualSecondText;
+        await step('Get template titles', async () => {
+            actualText = await this.objectTitle.first().textContent();
+            actualSecondText = await this.objectTitle.nth(1).textContent();
+        });
+        return actualText === actualSecondText;
+    }
+   
 }
