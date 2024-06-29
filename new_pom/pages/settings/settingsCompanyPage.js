@@ -2,7 +2,6 @@ import SettingsHorizontalMenuComponent from "../../components/settingsHorizontal
 import SideMenuComponent from "../../components/sideMenuComponent";
 import SideMenuSettingsComponent from "../../components/sideMenuSettingsComponent";
 import ToastComponent from "../../components/toastComponent";
-import {test} from "../../../fixtures/base";
 import { step } from "allure-js-commons";
 
 export default class SettingsCompanyPage {
