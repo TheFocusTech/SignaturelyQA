@@ -21,6 +21,8 @@ export default class TableComponent {
         this.formsList = this.page.locator('div.table__dataRow');
         this.editBtn = this.page.getByRole('button', { name: 'Edit' });
         this.listElements = this.page.locator('.documents__list-container');
+        this.renameBtn = this.page.getByRole('button', { name: 'Rename' });
+        this.inputNameField = this.page.locator('.form__input--hidden');
 
     }
 
@@ -93,7 +95,6 @@ export default class TableComponent {
     async clickDuplicateBtn() {
         await step('Click the "Duplicate" button', async () => {
             await this.duplicateBtn.click();
-
         });
     }
 
@@ -101,6 +102,32 @@ export default class TableComponent {
         await step('Click the "Edit" button', async () => {
             await this.editBtn.click();
         });
+    }
+
+    async clickRenameBtn() {
+        await step('Click the "Rename" button', async () => {
+            await this.renameBtn.click();
+        });
+    }
+
+    async fillInputNameField(name) {
+        await step('Input new value', async () => {
+            await this.inputNameField.fill(name);
+        });
+    }
+
+    async pressEnterInputNameField() {
+        await step('Input new value', async () => {
+            await this.inputNameField.press('Enter');
+        });
+    }
+
+    async getTitleFolder() {
+        let actualNameFolder;
+        await step('Get title folder', async () => {
+            actualNameFolder = await this.objectTitle.textContent();
+        });
+        return actualNameFolder.trim();
     }
 
     async getTemplateTitle() {
@@ -135,3 +162,4 @@ export default class TableComponent {
     }
 
 }
+
