@@ -19,6 +19,9 @@ export default class TableComponent {
         this.duplicateBtn = this.page.getByText('Duplicate');
         this.formsList = this.page.locator('div.table__dataRow');
         this.editBtn = this.page.getByRole('button', { name: 'Edit' });
+        this.listElements = this.page.locator('.documents__list-container');
+
+
     }
 
     async clickOptionsBtn(i) {
@@ -97,6 +100,14 @@ export default class TableComponent {
             actualText = await this.objectTitle.textContent();
         });
         return actualText;
-
     }
+
+    async getCount() {
+        const elements = await this.listElements.first().elements();
+        const elementCount = elements.length;
+        console.log(elementCount)
+
+        return elementCount;
+    }
+
 }

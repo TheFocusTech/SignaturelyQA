@@ -98,6 +98,7 @@ export default class PrepareForSignatureModal {
     }
 
     async clickDocumentBody() {
+
         await step('Click randomly inside the document', async () => {
             await clickCanvas(this.page, this.canvas, this.excludedAreas);
         });
@@ -186,8 +187,8 @@ export default class PrepareForSignatureModal {
 
     async clickDateFieldItem() {
         await step('Click on the "Date" in "Fields" menu', async () => {
-        await this.dateFieldItem.waitFor({ state: 'visible' });
-        await this.dateFieldItem.click();
+            await this.dateFieldItem.waitFor({ state: 'visible' });
+            await this.dateFieldItem.click();
         });
 
     }

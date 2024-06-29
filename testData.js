@@ -36,6 +36,7 @@ export const TOAST_MESSAGE = {
     inviteAccepted: 'Invite accepted.',
     upgradedToAdmin: 'Team member successfully upgraded to admin.',
     downgradeToUser: 'Team member successfully downgraded to user.',
+    templateDublicate: 'Template successfully duplicated!',
 };
 export const API_KEY_NAME = 'Test Api Key';
 export const NO_API_KEY_MESSAGE = 'You don\'t have any API keys yet.';
