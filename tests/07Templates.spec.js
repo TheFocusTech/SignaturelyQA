@@ -133,7 +133,7 @@ test.describe('Templates', () => {
         signPage,
         prepareForSignatureModal,
         templatesPage,
-        createNewTemplatePage, 
+        createNewTemplatePage,
         successModal
     }) => {
         await description('Objective: To verify the process of duplicate template.');
@@ -153,21 +153,11 @@ test.describe('Templates', () => {
         await templatesPage.table.clickOptionsBtn(0);
         await templatesPage.table.clickDuplicateBtn();
         await successModal.clickOkBtn();
-        await templatesPage.toast.waitForToastIsHiddenByText(TOAST_MESSAGE.templateDublicate);
-        await templatesPage.table.getCount();
+        await templatesPage.toast.waitForToastIsHiddenByText(TOAST_MESSAGE.templateDuplicate);
 
+        await step('Verify that the number of tamplates in the table is increased by 1', async () => {
+            await expect(await formsPage.table.formsList).toHaveCount(2);
+        });
 
-        
-        // await templatesPage.table.clickAddToAPIBtn();
-        // await templatesPage.toast.waitForToastIsHiddenByText(TOAST_MESSAGE.success);
-        // await templatesPage.sideMenuTemplates.clickApiTemplates();
-
-        // await step('Template successfully added to API (appears in API Templates) - status API.', async () => {
-        //     await expect(await apiTemplatesPage.table.documentStatus).toHaveText(TEMPLATES_STATUS.api);
-        // });
-
-        // await step('Template successfully added to API (appears in API Templates) - name checked.', async () => {
-        //     await expect(templatesPage.table.getTemplateTitle()).resolves.toEqual(CREATE_TEMPLATE.nameField);
-        // });
     });
 });
