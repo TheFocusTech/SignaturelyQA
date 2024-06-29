@@ -12,9 +12,8 @@ export default class DocumentsPage {
         this.sideMenu = new SideMenuComponent(this.page);
         this.table = new TableComponent(this.page); 
         this.sideMenuDocuments = new SideMenuDocumentsComponent(this.page);
-        this.toast = new ToastComponent(this.page);
-        
-        this.createFolderBtn = this.page.getByRole('button', { name: 'Create Folder' });
+        this.toast = new ToastComponent(this.page);        
+        this.createFolderBtn = this.page.getByRole('button', { name: 'Create Folder' })
     }
 
     async clickCreateFolderBtn() {
