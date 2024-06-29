@@ -1,6 +1,6 @@
 import { expect } from '@playwright/test';
 import { test } from "../fixtures/base.js";
-import { CARD_DETAILS, RANDOM_ANNUALLY_PLAN, PLANS, END_PLAN } from '../testData.js';
+import { CARD_DETAILS, RANDOM_ANNUALLY_PLAN, PLANS, END_PLAN, TOAST_MESSAGE, BUSINESS_ANNUALLY_PLAN } from '../testData.js';
 import { description, tags, severity, Severity, link, epic, feature, step } from "allure-js-commons";
 
 test.describe('Billing', () => {
@@ -101,4 +101,35 @@ test.describe('Billing', () => {
             await expect(settingBillingPortalPage.paymentMethodsList).toHaveText(CARD_DETAILS.MASTERCARD.displayingOnTheBillingPortalPage);
         });
     });
+
+    test('TC_14_57_01 | Verify the ability to upgrade subscription', async ({
+        createBusinessUserAndLogin,
+        signPage,
+        settingsCompanyPage,
+        settingsBillingPage,
+        settingsBillingPlanPage }) => {
+        
+
+
+        
+        test.slow()
+        await signPage.sideMenu.clickSettings();
+        await settingsCompanyPage.sideMenuSettings.clickBilling();
+        await settingsBillingPage.clickEditPlanButton();
+        await settingsBillingPlanPage.switchmonthlyAnnyallyToggle();
+        await settingsBillingPlanPage.clickUpgradeButton(PLANS[1]);
+        await settingsBillingPlanPage.upgradeYourPlanModal.clickSubscribeButton();
+        
+        await step('Verify the toast message', async () => {
+            await expect(await settingsBillingPlanPage.toast.toastBody).toHaveText(TOAST_MESSAGE.planSuccessChange);
+        });
+
+        // await settingsBillingPlanPage.toast.waitForToastIsHiddenByText(TOAST_MESSAGE.planSuccessChange);
+        // await settingsBillingPlanPage.sideMenuSettings.clickSettings()
+        await settingsBillingPlanPage.sideMenuSettings.clickBilling();
+
+        await step('Verify that the billing plan description is Business', async () => {
+            await expect(await settingsBillingPage.billingPlanDescription).toHaveText(BUSINESS_ANNUALLY_PLAN);
+        });
+    })
 })
