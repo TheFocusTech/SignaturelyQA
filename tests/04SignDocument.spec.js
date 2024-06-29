@@ -15,7 +15,11 @@ import {
 import { retrieveUserEmailConfirmationLink, retrieveEmailMessage } from '../helpers/utils.js';
 
 test.describe('Sign Document', () => {
-    test('TC_04_11_02 | Verify custom signing order', async ({ createBusinessUserAndLogin, signPage, prepareForSignatureModal }) => {
+    test('TC_04_11_02 | Verify custom signing order', async ({
+        createBusinessUserAndLogin,
+        signPage,
+        prepareForSignatureModal,
+    }) => {
         await signPage.uploadFileTab.fileUploader.uploadFile('testDocuments/picture.jpg');
         await signPage.uploadFileTab.clickPrepareDocumentBtn();
 
@@ -57,13 +61,20 @@ test.describe('Sign Document', () => {
         await description('To verify the adding viewers / adding users who can view the document.');
         await severity(Severity.CRITICAL);
         await link('https://app.qase.io/case/SIGN-14', 'Qase: SIGN-14');
-        await link('https://docs.google.com/document/d/1Qce7tKWOwVYtPxgQv_8ae-HUkbAgeOFph0lB_eziY_k/edit#heading=h.ojom1b8sk9ht', 'ATC_04_11_02');
+        await link(
+            'https://docs.google.com/document/d/1Qce7tKWOwVYtPxgQv_8ae-HUkbAgeOFph0lB_eziY_k/edit#heading=h.ojom1b8sk9ht',
+            'ATC_04_11_02'
+        );
         await epic('Sign document');
         await tag('Viewers');
 
         const signerName = `${process.env.NEW_USER_NAME}${'001'}`;
-        const signerEmail = `${process.env.EMAIL_PREFIX}${process.env.NEW_USER_NUMBER}${'001'}${process.env.EMAIL_DOMAIN}`;
-        const reviewerEmail = `${process.env.EMAIL_PREFIX}${process.env.NEW_USER_NUMBER}${'003'}${process.env.EMAIL_DOMAIN}`;
+        const signerEmail = `${process.env.EMAIL_PREFIX}${process.env.NEW_USER_NUMBER}${'001'}${
+            process.env.EMAIL_DOMAIN
+        }`;
+        const reviewerEmail = `${process.env.EMAIL_PREFIX}${process.env.NEW_USER_NUMBER}${'003'}${
+            process.env.EMAIL_DOMAIN
+        }`;
 
         await signPage.uploadFileTab.fileUploader.uploadFile(UPLOAD_FILE_PATH.xlsxDocument);
         await signPage.uploadFileTab.clickPrepareDocumentBtn();
@@ -80,15 +91,15 @@ test.describe('Sign Document', () => {
         await prepareForSignatureModal.doCanvasClicks();
         await prepareForSignatureModal.clickSaveBtn();
 
-        await step('Verify that Success Toast Notification is shown', async () => {
-            await expect(await prepareForSignatureModal.toast.toastBody).toHaveText(TOAST_MESSAGE.success);
-        });
-
-        await finalStepPage.clickSendForSignatureBtn();
+        await finalStepPage.waitAndClickSendForSignatureBtn(TOAST_MESSAGE.success);
         await successModal.clickBackToDocumentsBtn();
         await documentsPage.table.waitForDocumentStatusVisible(DOCUMENT_STATUS.awaiting);
 
-        const signerLink = await retrieveUserEmailConfirmationLink(request, signerEmail, EMAIL_SUBJECTS.signatureRequest);
+        const signerLink = await retrieveUserEmailConfirmationLink(
+            request,
+            signerEmail,
+            EMAIL_SUBJECTS.signatureRequest
+        );
         await step('Navigate to the signing document link', async () => {
             await page.goto(signerLink);
         });
@@ -101,8 +112,14 @@ test.describe('Sign Document', () => {
         await notRegisterSignerSignPage.toast.waitForToastIsHiddenByText(TOAST_MESSAGE.documentSubmited);
         await documentSubmitProccessModal.waitForSubmitTitleByText(SUBMIT_TITLE);
 
-        const message = await retrieveEmailMessage(request, SERVICE_NAME, reviewerEmail, EMAIL_SUBJECTS.sentToView, SELECTORS.message);
-        
+        const message = await retrieveEmailMessage(
+            request,
+            SERVICE_NAME,
+            reviewerEmail,
+            EMAIL_SUBJECTS.sentToView,
+            SELECTORS.message
+        );
+
         await step('Verify that Viewer has got email for viewing document', async () => {
             expect(message).toEqual(`${process.env.NEW_USER_NAME} (${process.env.NEW_USER_EMAIL})${EMAIL_MESSAGE}`);
         });

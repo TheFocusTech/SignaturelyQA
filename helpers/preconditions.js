@@ -1,8 +1,13 @@
-import { DATA_SIGNER, FOLDER_NAME, TOAST_MESSAGE, CREATE_TEMPLATE, UPLOAD_FILE_PATH, SIGNERS_DATA } from "../testData";
-import { test } from "../fixtures/base";
-import { step } from "allure-js-commons";
+import { DATA_SIGNER, FOLDER_NAME, TOAST_MESSAGE, CREATE_TEMPLATE, UPLOAD_FILE_PATH, SIGNERS_DATA } from '../testData';
+import { test } from '../fixtures/base';
+import { step } from 'allure-js-commons';
 
-export const createSignature = async (signPage, settingsCompanyPage, settingsEditSignaturePage, createOrEditSignatureOnSettingModal) => {
+export const createSignature = async (
+    signPage,
+    settingsCompanyPage,
+    settingsEditSignaturePage,
+    createOrEditSignatureOnSettingModal
+) => {
     await signPage.sideMenu.clickSettings();
     await settingsCompanyPage.sideMenuSettings.clickEditSignature();
     await settingsEditSignaturePage.clickCreateSignatureBtn();
@@ -11,21 +16,21 @@ export const createSignature = async (signPage, settingsCompanyPage, settingsEdi
     await createOrEditSignatureOnSettingModal.clickCheckboxAgree();
     await createOrEditSignatureOnSettingModal.clickCreateSignatureBtn();
     await settingsCompanyPage.sideMenu.clickSign();
-
-}
+};
 
 export const createDocumentAwaiting = async (
     signPage,
     prepareForSignatureModal,
     documentsPage,
     successModal,
-    finalStepPage) => {
+    finalStepPage
+) => {
     await step('Document creation in progress with Awaiting status ', async () => {
         await signPage.uploadFileTab.fileUploader.uploadFile('testDocuments/picture.jpg');
         await signPage.uploadFileTab.clickPrepareDocumentBtn();
         await prepareForSignatureModal.clickSendForSignatureRadioBtn();
         await prepareForSignatureModal.clickAddSignerBtn();
-        await prepareForSignatureModal.fillSignerNameField(SIGNERS_DATA.signerName1, 0)
+        await prepareForSignatureModal.fillSignerNameField(SIGNERS_DATA.signerName1, 0);
         await prepareForSignatureModal.fillSignerEmailField(SIGNERS_DATA.signerEmail1, 0);
         await prepareForSignatureModal.clickContinueBtn();
         await prepareForSignatureModal.clickGotItBtn();
@@ -33,18 +38,13 @@ export const createDocumentAwaiting = async (
         await prepareForSignatureModal.clickSignFieldsItem();
         await prepareForSignatureModal.doCanvasClicks();
         await prepareForSignatureModal.clickSaveBtn();
-        await finalStepPage.waitAndClickSendForSignatureBtn();
+        await finalStepPage.waitAndClickSendForSignatureBtn(TOAST_MESSAGE.success);
         await successModal.clickBackToDocumentsBtn();
         await documentsPage.sideMenu.clickSign();
-    })
-
+    });
 };
 
-export const createFolder = async (
-    signPage,
-    documentsPage,
-    createFolderModal) => {
-
+export const createFolder = async (signPage, documentsPage, createFolderModal) => {
     await step('Precondition: Create Folder', async () => {
         await signPage.sideMenu.clickDocuments();
         await documentsPage.clickCreateFolderBtn();
@@ -52,7 +52,7 @@ export const createFolder = async (
         await createFolderModal.clickCreateBtn();
         await documentsPage.toast.waitForToastIsHiddenByText(TOAST_MESSAGE.folderCreated);
         await documentsPage.sideMenu.clickSign();
-    })
+    });
 };
 
 export const createTemplate = async (signPage, prepareForSignatureModal, templatePage, createTemplatePage) => {
@@ -68,7 +68,5 @@ export const createTemplate = async (signPage, prepareForSignatureModal, templat
         await prepareForSignatureModal.clickCreateBtn();
         await prepareForSignatureModal.clickBackToTemplatesBtn();
         await templatePage.sideMenu.clickSign();
-    })
+    });
 };
-
-
