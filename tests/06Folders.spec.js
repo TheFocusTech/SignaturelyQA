@@ -1,17 +1,19 @@
-import { expect } from "@playwright/test"
-import { test } from "../fixtures/base.js";
-import { createFolder } from "../helpers/preconditions.js";
-import { TOAST_MESSAGE, FILL_RENAME_FOLDER_NAME } from "../testData.js";
-
+import { expect } from '@playwright/test';
+import { test } from '../fixtures/base.js';
+import { createFolder } from '../helpers/preconditions.js';
+import { TOAST_MESSAGE, FILL_RENAME_FOLDER_NAME } from '../testData.js';
+import { description, tag, severity, Severity, link, epic, step } from "allure-js-commons";
 
 test.describe('Folders', () => {
-
-    test.skip('TC_06_22_01 | Verify the business user can create folder', async ({ page, createBusinessUserAndLogin }) => {
+    test.skip('TC_06_22_01 | Verify the business user can create folder', async ({
+        page,
+        createBusinessUserAndLogin,
+    }) => {
         const signPage = new SignPage(page);
 
         const documentsPage = await signPage.clickDocumentsSidebarLinkAndGoDocumentsPage();
         await documentsPage.clickCreateFolderBtn();
-        await documentsPage.locators.getNewFolderNameInputField().fill('New Folder')
+        await documentsPage.locators.getNewFolderNameInputField().fill('New Folder');
         await documentsPage.clickCreateBtn();
 
         await expect(documentsPage.locators.getToast()).toHaveText(TOAST_MESSAGE.folderCreated);
@@ -30,8 +32,20 @@ test.describe('Folders', () => {
         await expect(documentsPage.locators.getToast()).toHaveText(TOAST_MESSAGE.folderDeleted);
     });
 
-    test('TC_06_23_01 | Rename folder', async ({ createBusinessUserAndLogin, signPage, documentsPage,
-        createFolderModal }) => {
+    test('TC_06_23_01 | Rename folder', async ({
+        createBusinessUserAndLogin,
+        signPage,
+        documentsPage,
+        createFolderModal,
+    }) => {
+        await description('Objective: Testing Folder Renaming Functionality.');
+        await severity(Severity.CRITICAL);
+        await link("https://app.qase.io/case/SIGN-23", "QASE: SIGN-23 ");
+        await link(
+            "https://docs.google.com/document/d/1Qce7tKWOwVYtPxgQv_8ae-HUkbAgeOFph0lB_eziY_k/edit#heading=h.tmxz904usbum",
+            "ATC_06_23_01");
+        await tag('Rename Folder ');
+        await epic('Folders');
 
         await createFolder(signPage, documentsPage, createFolderModal);
         await signPage.sideMenu.clickDocuments();
@@ -39,10 +53,10 @@ test.describe('Folders', () => {
         await documentsPage.table.clickRenameBtn();
         await documentsPage.table.fillInputNameField(FILL_RENAME_FOLDER_NAME);
         await documentsPage.table.pressEnterInputNameField();
-        await documentsPage.toast.waitForToastIsHiddenByText(TOAST_MESSAGE.folderRename)
+        await documentsPage.toast.waitForToastIsHiddenByText(TOAST_MESSAGE.folderRename);
 
-        await step('Verify that the new value has been saved' , async () => {
-        expect(await documentsPage.table.getTitleFolder()).toBe(FILL_RENAME_FOLDER_NAME);
+        await step('Verify that the new value has been saved', async () => {
+            expect(await documentsPage.table.getTitleFolder()).toBe(FILL_RENAME_FOLDER_NAME);
         });
     });
-})
+});
