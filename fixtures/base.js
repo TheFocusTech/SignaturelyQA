@@ -48,23 +48,6 @@ import TeamsAcceptInvitePage from "../new_pom/pages/team/teamsAcceptInvitePage.j
 
 export const test = base.extend({
 
-    createNewFolder: [
-        async ({ page }, use) => {
-            const signPage = new SignPage(page);
-
-            const documentsPage = await signPage.clickDocumentsSidebarLinkAndGoDocumentsPage();
-            await documentsPage.clickCreateFolderBtn();
-            await documentsPage.fillNewFolderNameInputField();
-            await documentsPage.clickCreateBtn();
-            await documentsPage.clickSignSidebarLinkAndGoSignPage();
-            await documentsPage.locators.getToast().waitFor({ state: "visible" });
-            await documentsPage.locators.getToast().waitFor({ state: "hidden" });
-
-            await use("");
-        },
-        { scope: "test" },
-    ],
-
     createFreeUserAndLogin: [
         async ({ request, page, loginPage }, use) => {
             await api_user_sign_up(request);
@@ -166,7 +149,7 @@ export const test = base.extend({
         await use(new EditAndResendDocumentModal(page));
     },
 
-    templatePage: async ({ page }, use) => {
+    templatesPage: async ({ page }, use) => {
         await use(new TemplatesPage(page));
     },
 
@@ -257,7 +240,6 @@ export const test = base.extend({
         await use(new EditTemplatesPage(page));
     },
 
-
     teamPage: async ({ page }, use) => {
         await use(new TeamPage(page));
     },
@@ -269,6 +251,5 @@ export const test = base.extend({
     teamsAcceptInvitePage: async ({ page }, use) => {
         await use(new TeamsAcceptInvitePage(page));
     },
-    
 });
 
