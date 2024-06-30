@@ -13,13 +13,14 @@ export default class TableComponent {
             .getByRole('button', { name: 'Create API key' });
         this.titleEditAndResendDocument = this.page.getByText('Edit & Resend document');
         this.addToAPIBtn = this.page.getByRole('button', { name: 'Add to API' });
-        this.documentTitle = this.page.locator('.documents__list-item .table__column--text--document p');
+        this.documentTitle = this.page.locator('ul .table__column--text--document p');
         this.moveToBtn = this.page.getByRole('button', { name: 'Move to' });
         this.controlsPath = this.page.locator('.tableControls__path');
         this.sendReminderBtn = this.page.getByRole('button', { name: 'Send Reminder' });
         this.duplicateBtn = this.page.getByText('Duplicate');
         this.formsList = this.page.locator('div.table__dataRow');
         this.editBtn = this.page.getByRole('button', { name: 'Edit' });
+        this.optionsDeleteBtn = this.page.getByRole('button', { name: 'Delete' });
     }
 
     async clickFirstOptionsBtn() {
@@ -77,6 +78,7 @@ export default class TableComponent {
     }
 
     async getDocumentStatusText() {
+        await this.documentStatus.waitFor({state:'visible', timeout: 3000});
         const actualText = await this.documentStatus.textContent();
         return actualText;
     }
@@ -118,6 +120,13 @@ export default class TableComponent {
                 await page.reload();
                 documentStatus = await this.documentStatus.textContent();
             }
+        });
+    }
+
+    async clickOptionsDeleteBtn() {
+        await step('Click the "Option delete" button it the dropdown menu', async () => {
+            await this.optionsDeleteBtn.waitFor( {state: 'visible'});
+            await this.optionsDeleteBtn.click();
         });
     }
 }
