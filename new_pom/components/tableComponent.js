@@ -27,7 +27,7 @@ export default class TableComponent {
         this.disableFormBtn = this.page.getByRole('button', { name: 'Disable Form' });
         this.enableFormBtn = this.page.getByRole('button', { name: 'Enable Form' });
         this.deleteForm = this.page.getByRole('button', { name: 'Delete Form' });
-
+        this.shareBtn = this.page.getByRole('button', { name: 'Share' });
     }
 
     async clickFirstOptionsBtn() {
@@ -180,6 +180,12 @@ export default class TableComponent {
     async clickDeleteForm() {
         await step('Click the "Delete Form" button', async () => {
             await this.deleteForm.click();
+        });
+    }
+
+    async clickShareBtn() {
+        await step('Click the "Share" button', async () => {
+            await this.shareBtn.click();
         });
     }
 }

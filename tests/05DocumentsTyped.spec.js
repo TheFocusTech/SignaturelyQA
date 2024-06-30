@@ -8,8 +8,9 @@ import {
     DOCUMENT_STATUS,
     QASE_LINK,
     GOOGLE_DOC_LINK,
+    SIGNERS_DATA,
 } from '../testData.js';
-import { createFolder, createDocumentAwaiting } from '../helpers/preconditions.js';
+import { createFolder, createDocumentAwaiting, createDocumentCompleted } from '../helpers/preconditions.js';
 import { description, tag, severity, Severity, link, epic, step } from 'allure-js-commons';
 
 test.describe('DocumentsType', () => {
@@ -169,5 +170,29 @@ test.describe('DocumentsType', () => {
         await step('Verify the document has status "Draft" ', async () => {
             expect(await documentsPage.table.getDocumentStatusText()).toBe(DOCUMENT_STATUS.draft);
         });
+    });
+
+    test('TC_05_17_01 | Share document', async ({createBusinessUserAndLogin, signPage, prepareForSignatureModal, createSignatureOrInitialModal, finalStepPage, successModal, documentsPage, shareThisDocumentModal}) => {   
+        await description('Objective: To verify that the document can be Share.');
+        await severity(Severity.CRITICAL);
+        await link(`${QASE_LINK}/SIGN-17`, 'Qase: SIGN-17');
+        await link(`${GOOGLE_DOC_LINK}sp7vb8tsrias`, 'TC_05_17_01');
+        await epic('Share document');
+        await tag('Documents (typed)');
+
+        test.slow();   
+        await createDocumentCompleted(signPage, prepareForSignatureModal, createSignatureOrInitialModal, finalStepPage, successModal, documentsPage);
+        
+        await signPage.sideMenu.clickDocuments();
+        await documentsPage.sideMenuDocuments.clickCompleted();
+        await documentsPage.table.clickFirstOptionsBtn();
+        await documentsPage.table.clickShareBtn();
+           
+        await shareThisDocumentModal.clickInputEmailField(SIGNERS_DATA.signerEmail1);
+        await shareThisDocumentModal.clickShareDocumentBtn();
+              
+        await step('Verify that the document sent to the email." ', async () => {
+            await expect(documentsPage.toast.toastBody).toHaveText(TOAST_MESSAGE.documentSended);
+        });      
     });
 });

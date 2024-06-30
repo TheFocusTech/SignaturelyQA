@@ -43,8 +43,9 @@ export const TOAST_MESSAGE = {
     formDisabled: 'Form successfully disabled!',
     formEnabled: 'Form successfully enabled!',
     formDeleted: 'Form deleted successfully.',
-
+    documentSended: 'Document successfully sended to specified email(s).',
 };
+
 export const API_KEY_NAME = 'Test Api Key';
 export const NO_API_KEY_MESSAGE = "You don't have any API keys yet.";
 export const DATA_SIGNER = {

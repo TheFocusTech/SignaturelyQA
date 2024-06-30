@@ -47,6 +47,7 @@ import TeamPage from "../new_pom/pages/team/teamPage.js";
 import AddTeamMemberModal from "../new_pom/modalWindows/addTeamMemberModal.js";
 import TeamsAcceptInvitePage from "../new_pom/pages/team/teamsAcceptInvitePage.js";
 import ConfirmDeletionModal from "../new_pom/modalWindows/confirmDeletionModal.js";
+import ShareThisDocumentModal from "../new_pom/modalWindows/shareThisDocumentModal.js";
 
 export const test = base.extend({
 
@@ -261,5 +262,9 @@ export const test = base.extend({
 
     confirmDeletionModal: async ({ page }, use) => {
         await use(new ConfirmDeletionModal(page));
+    },
+
+    shareThisDocumentModal: async ({ page }, use) => {
+        await use(new ShareThisDocumentModal(page));
     },
 });
