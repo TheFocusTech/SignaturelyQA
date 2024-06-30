@@ -34,6 +34,7 @@ import MoveToFolderModal from "../new_pom/modalWindows/moveToFolderModal.js";
 import SettingsProfilePage from "../new_pom/pages/settings/settingsProfilePage.js";
 import SignUpTrialPage from "../new_pom/pages/signUp/signUpTrialPage";
 import SignUpFreePage from "../new_pom/pages/signUp/signUpFreePage";
+import DeleteMyAccountModal from "../new_pom/modalWindows/deleteMyAccountModal.js";
 import DocumentsAwaitingPage from "../new_pom/pages/documents/documentsAwaitingPage.js";
 import SendReminderDocumentModal from "../new_pom/modalWindows/sendReminderDocumentModal.js";
 import CreateNewTemplatePage from "../new_pom/pages/templates/createNewTemplatePage.js";
@@ -47,6 +48,7 @@ import AddTeamMemberModal from "../new_pom/modalWindows/addTeamMemberModal.js";
 import TeamsAcceptInvitePage from "../new_pom/pages/team/teamsAcceptInvitePage.js";
 import DeleteModal from "../new_pom/modalWindows/deleteModal.js";
 import ConfirmTrashEmptyingModal from "../new_pom/modalWindows/confirmTrashEmptyingModal.js";
+import ShareThisDocumentModal from "../new_pom/modalWindows/shareThisDocumentModal.js";
 
 export const test = base.extend({
 
@@ -214,6 +216,10 @@ export const test = base.extend({
     signUpFreePage: async ({ page }, use) => {
         await use(new SignUpFreePage(page));
     },
+  
+    deleteMyAccountModal: async ({ page }, use) => {
+        await use(new DeleteMyAccountModal (page));
+    },
 
     sendReminderDocumentModal: async ({ page }, use) => {
         await use(new SendReminderDocumentModal(page));
@@ -238,6 +244,7 @@ export const test = base.extend({
     upgradeYourPlanAPIModal: async ({ page }, use) => {
         await use(new UpgradeYourPlanAPIModal(page));
     },
+  
     editTemplatesPage: async ({ page }, use) => {
         await use(new EditTemplatesPage(page));
     },
@@ -252,6 +259,10 @@ export const test = base.extend({
 
     teamsAcceptInvitePage: async ({ page }, use) => {
         await use(new TeamsAcceptInvitePage(page));
+    }, 
+    
+    shareThisDocumentModal: async ({ page }, use) => {
+        await use(new ShareThisDocumentModal(page));
     },
 
     deleteModal:  async ({ page }, use) => {
@@ -262,4 +273,3 @@ export const test = base.extend({
         await use(new ConfirmTrashEmptyingModal(page));
     },
 });
-

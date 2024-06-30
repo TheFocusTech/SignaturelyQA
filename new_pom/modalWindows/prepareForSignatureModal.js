@@ -94,6 +94,7 @@ export default class PrepareForSignatureModal {
     }
 
     async clickDocumentBody() {
+
         await step('Click randomly inside the document', async () => {
             await clickCanvas(this.page, this.canvas, this.excludedAreas);
         });
@@ -143,8 +144,11 @@ export default class PrepareForSignatureModal {
     }
 
     async getPrepareForSigningTitleText() {
-        const actualText = await this.prepareForSigningTitle.textContent();
-        return actualText;
+        let actualText;
+        await step('Get title text', async () => {
+        actualText = await this.prepareForSigningTitle.textContent();
+    });
+        return actualText
     }
 
     async clickNameOnFieldsMenu() {
@@ -177,6 +181,7 @@ export default class PrepareForSignatureModal {
         await step('Click on the "Date" in "Fields" menu', async () => {
             await this.dateOnFieldsMenu.waitFor({ state: 'visible' });
             await this.dateOnFieldsMenu.click();
+
         });
     }
 }
