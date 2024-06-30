@@ -192,7 +192,7 @@ test.describe('DocumentsType', () => {
         await shareThisDocumentModal.clickShareDocumentBtn();
               
         await step('Verify that the document sent to the email." ', async () => {
-            await expect(documentsPage.toast.toastBody).toHaveText(TOAST_MESSAGE.documentSuccessfullySended);
+            await expect(documentsPage.toast.toastBody).toHaveText(TOAST_MESSAGE.documentSended);
         });      
     });
 });

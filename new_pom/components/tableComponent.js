@@ -176,7 +176,7 @@ export default class TableComponent {
         });
     }
 
-    async clickshareBtn() {
+    async clickShareBtn() {
         await step('Click the "Share" button', async () => {
             await this.shareBtn.click();
         });
