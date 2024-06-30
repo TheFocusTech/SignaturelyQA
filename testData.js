@@ -182,3 +182,8 @@ export const FORM_STATUS = {
     live: 'live',
     disabled: 'disabled',
 }
+
+export const CHECK_BOXES_STATUS = {
+    checked: 'uiCheckbox__inner uiCheckbox--checked',
+    unChecked: 'uiCheckbox__inner uiCheckbox--unChecked'
+};
