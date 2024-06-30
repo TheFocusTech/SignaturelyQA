@@ -237,7 +237,7 @@ test.describe('Sign Document', () => {
         });
     });
 
-    test.skip('TC_04_13_01 | Verify the document\'s expiration', async ({
+    test('TC_04_13_01 | Verify the document\'s expiration date', async ({
         createBusinessUserAndLogin,
         page, request,
         signPage,
