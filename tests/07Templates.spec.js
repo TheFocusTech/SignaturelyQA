@@ -113,7 +113,7 @@ test.describe('Templates', () => {
         await templatesPage.table.waitForDocumentTitleVisible(EDIT_TEMPLATE_DATA.nameField);
 
         await step('Verify the new name of Template is visible in the table', async () => {
-            await expect(await templatesPage.table.documentTitle).toHaveText(EDIT_TEMPLATE_DATA.nameField);
+            await expect(await templatesPage.table.objectTitle).toHaveText(EDIT_TEMPLATE_DATA.nameField);
 
         });
 
