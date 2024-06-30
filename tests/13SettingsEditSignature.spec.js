@@ -4,7 +4,7 @@ import { DATA_SIGNER, TOAST_MESSAGE, QASE_LINK, GOOGLE_DOC_LINK } from "../testD
 import { description, tag, severity, Severity, link, epic, step } from 'allure-js-commons';
 
 test.describe('Settings: Edit signature', () => {
-    test('TC_13_51_01 | Verify that user can create Signature', async ({
+    test.only('TC_13_51_01 | Verify that user can create Signature', async ({
         createBusinessUserAndLogin,
         signPage,
         settingsCompanyPage,
@@ -26,7 +26,11 @@ test.describe('Settings: Edit signature', () => {
         await createOrEditSignatureOnSettingModal.clickCheckboxAgree();
         await createOrEditSignatureOnSettingModal.clickCreateSignatureBtn();
 
-        await expect(settingsEditSignaturePage.toast.toastBody).toHaveText(TOAST_MESSAGE.signatureCreated);
-        await expect(settingsEditSignaturePage.settingsSignatureList).toHaveCount(1);
+        await step(`Verify that the user can see toast message ${TOAST_MESSAGE.signatureCreated}`, async () => {
+            await expect(settingsEditSignaturePage.toast.toastBody).toHaveText(TOAST_MESSAGE.signatureCreated);
+        });
+        await step('Verify that User can see one displayed signature', async () => {
+            await expect(settingsEditSignaturePage.settingsSignatureList).toHaveCount(1);
+        });
     })
 })
