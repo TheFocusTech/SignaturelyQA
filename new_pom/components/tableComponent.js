@@ -23,7 +23,8 @@ export default class TableComponent {
         this.renameBtn = this.page.getByRole('button', { name: 'Rename' });
         this.inputNameField = this.page.locator('.form__input--hidden');
         this.titleObjectField = this.page.locator('p.table__column')
-
+        this.disableFormBtn =  this.page.getByRole('button', { name: 'Disable Form' });
+        this.enableFormBtn =  this.page.getByRole('button', { name: 'Enable Form' });
     }
 
     async clickFirstOptionsBtn() {
@@ -148,6 +149,18 @@ export default class TableComponent {
                 await page.reload();
                 documentStatus = await this.documentStatus.textContent();
             }
+        });
+    }
+
+    async clickDisableFormBtn() {
+        await step('Click on "Disable Form" option', async () => {
+            await this.disableFormBtn.click();
+        });
+    }
+
+    async clickEnableFormBtn() {
+        await step('Click on "Enable Form" option', async () => {
+        await this.enableFormBtn.click();
         });
     }
 }
