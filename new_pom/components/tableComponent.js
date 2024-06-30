@@ -26,7 +26,7 @@ export default class TableComponent {
         this.titleObjectField = this.page.locator('p.table__column')
         this.disableFormBtn =  this.page.getByRole('button', { name: 'Disable Form' });
         this.enableFormBtn =  this.page.getByRole('button', { name: 'Enable Form' });
-
+        this.shareBtn = this.page.getByRole('button', { name: 'Share' });
     }
 
     async clickFirstOptionsBtn() {
@@ -176,5 +176,10 @@ export default class TableComponent {
         });
     }
 
+    async clickShareBtn() {
+        await step('Click the "Share" button', async () => {
+            await this.shareBtn.click();
+        });
+    }
 }
 
