@@ -143,8 +143,11 @@ export default class PrepareForSignatureModal {
     }
 
     async getPrepareForSigningTitleText() {
-        const actualText = await this.prepareForSigningTitle.textContent();
-        return actualText;
+        let actualText;
+        await step('Get title text', async () => {
+        actualText = await this.prepareForSigningTitle.textContent();
+    });
+        return actualText
     }
 
     async clickNameOnFieldsMenu() {

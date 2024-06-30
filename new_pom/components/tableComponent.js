@@ -20,6 +20,10 @@ export default class TableComponent {
         this.duplicateBtn = this.page.getByText('Duplicate');
         this.formsList = this.page.locator('div.table__dataRow');
         this.editBtn = this.page.getByRole('button', { name: 'Edit' });
+        this.renameBtn = this.page.getByRole('button', { name: 'Rename' });
+        this.inputNameField = this.page.locator('.form__input--hidden');
+        this.titleObjectField = this.page.locator('p.table__column')
+
     }
 
     async clickFirstOptionsBtn() {
@@ -56,8 +60,9 @@ export default class TableComponent {
 
     async waitForDocumentTitleVisible(name) {
         await step(`Wait for the document title to be visible`, async () => {
-            await this.documentTitle.filter({ hasText: name }).waitFor();
+            await this.titleObjectField.filter({ hasText: name }).waitFor()
         });
+
     }
 
     async clickMoveToBtn() {
@@ -90,7 +95,7 @@ export default class TableComponent {
     async clickDuplicateBtn() {
         await step('Click the "Duplicate" button', async () => {
             await this.duplicateBtn.click();
-            await this.duplicateBtn.click();
+            
         });
     }
 
@@ -98,6 +103,31 @@ export default class TableComponent {
         await step('Click the "Edit" button', async () => {
             await this.editBtn.click();
         });
+    }
+
+    async clickRenameBtn() {
+        await step('Click the "Rename" button', async () => {
+            await this.renameBtn.click();
+        });
+    }
+
+    async fillInputNameField(name) {
+        await step('Input new value', async () => {
+            await this.inputNameField.fill(name);
+        });
+    }
+
+    async pressEnterInputNameField() {
+        await step('Input new value', async () => {
+            await this.inputNameField.press('Enter');
+        });
+    }
+
+    async getTitleFolder() {
+        let actualNameFolder;
+        actualNameFolder = await this.titleObjectField.textContent();
+
+        return actualNameFolder.trim();
     }
 
     async getTemplateTitle() {
@@ -121,3 +151,4 @@ export default class TableComponent {
         });
     }
 }
+
