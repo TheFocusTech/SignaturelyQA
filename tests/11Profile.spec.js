@@ -31,21 +31,47 @@ test.describe('Profile', () => {
             `Verify that a toast message with the text "${TOAST_MESSAGE.profileUpdated}" popped up `,
             async () => {
                 await expect(settingsProfilePage.toast.toastBody).toHaveText(TOAST_MESSAGE.profileUpdated);
-            }
-        );
+            });
 
         await settingsProfilePage.toast.waitForToastIsHiddenByText(TOAST_MESSAGE.profileUpdated);
         await settingsProfilePage.sideMenu.clickSign();
         await loginPage.fillEmailAddressInput(process.env.NEW_USER_EMAIL);
         await loginPage.fillPasswordInput(newPassword);
         await loginPage.clickLogin();
+        await step(`Verify that the User is logged in with a new password and is on the homepage ${URL_END_POINTS.signEndPoint} `, async () => {
+            await expect(signPage.page).toHaveURL(process.env.URL + URL_END_POINTS.signEndPoint);
+    });
+    
+ });
 
-        await step(
-            `Verify that the User is logged in with a new password and is on the homepage ${URL_END_POINTS.signEndPoint} `,
-            async () => {
-                await expect(signPage.page).toHaveURL(process.env.URL + URL_END_POINTS.signEndPoint);
-            }
-        );
+    test('TC_11_47_01 | Verify that user can delete account', async ({
+        createBusinessUserAndLogin, 
+        signPage,
+        settingsCompanyPage,
+        settingsProfilePage,
+        deleteMyAccountModal,
+        loginPage
+    }) => {
+        await description('Objective: To verify that the User can delete account');
+        await severity(Severity.CRITICAL);
+        await link(`${QASE_LINK}/SIGN-47`, 'Qase: SIGN-47');
+        await link(`${GOOGLE_DOC_LINK}tcq6ypzibzp5`, 'ATC_11_47_01');
+        await epic('Profile');
+        await tag('Delete account');
+
+        await signPage.sideMenu.clickSettings();
+        await settingsCompanyPage.sideMenuSettings.clickProfile();
+        await settingsProfilePage.clickDeleteMyAccountBtn();
+        await deleteMyAccountModal.clickDeleteMyAccountModalBtn();
+
+        await step(`Verify that the User is deleted account and is on the loginpage ${URL_END_POINTS.loginEndPoint} `, async () => {
+            await expect(loginPage.page).toHaveURL(process.env.URL + URL_END_POINTS.loginEndPoint);
+        });
+      
+        await step(`Verify that a toast message with the text "${TOAST_MESSAGE.deleteAccount}" popped up `, async () => {
+            await expect(settingsProfilePage.toast.toastBody).toHaveText(TOAST_MESSAGE.deleteAccount);
+        });
+      
     });
 
     test('TC_11_44_01 | Verify User can change email', async ({
@@ -76,8 +102,7 @@ test.describe('Profile', () => {
             `Verify that a toast message with the text "${TOAST_MESSAGE.checkYourEmail}" popped up `,
             async () => {
                 await expect(settingsProfilePage.toast.toastBody).toHaveText(TOAST_MESSAGE.checkYourEmail);
-            }
-        );
+            });
 
         const confirmationLink = await retrieveUserEmailConfirmationLink(
             request,
@@ -92,13 +117,13 @@ test.describe('Profile', () => {
             `Verify that a toast message with the text "${TOAST_MESSAGE.emailConfirmed}" popped up `,
             async () => {
                 await expect(settingsProfilePage.toast.toastBody).toHaveText(TOAST_MESSAGE.emailConfirmed);
-            }
-        );
+            });
 
         await signPage.sideMenu.clickSettings();
         await settingsCompanyPage.sideMenuSettings.clickProfile();
         await step('Verify that the email field is filled with the updated user email', async () => {
             await expect(settingsProfilePage.emailAddressInputField).toHaveValue(newEmail);
         });
-    });
-});
+
+    })
+})
