@@ -48,5 +48,19 @@ export default class ChooseTemplateComponent {
             await this.sendTheDocumentBtn.click();
         });
     }
+
+    async fillSecondSignerNameField(name) {
+        await step('Fill the second signer\'s name field', async () => {
+            await this.signerNameField.nth(1).waitFor();
+            await this.signerNameField.nth(1).fill(name);
+        });
+    }
+    
+    async fillSecondSignerEmailField(email) {
+        await step('Fill the second signer\'s email field', async () => {
+            await this.signerEmailField.nth(1).waitFor()
+            await this.signerEmailField.nth(1).fill(email);
+        });
+    }
     
 }

@@ -116,3 +116,24 @@ export const createTemplateForMeAndUser = async (signPage, prepareForSignatureMo
         await templatesPage.sideMenu.clickSign();
     });
 };
+
+export const createTemplateFor2User = async (signPage, prepareForSignatureModal, templatesPage, createNewTemplatePage, createSignatureOrInitialModal) => {
+    await step('Precondition: Create Template for two users (excluding me) ', async () => {
+        await signPage.sideMenu.clickTemplates();
+        await templatesPage.sideMenuTemplates.clickCreateTemplate();
+        await createNewTemplatePage.fillTemplateNameField(CREATE_TEMPLATE.nameField);
+        await createNewTemplatePage.fillCreateTemplateRolesField(CREATE_TEMPLATE.nameRole);
+        await createNewTemplatePage.clickAddRoleBtn();
+        await createNewTemplatePage.fillCreateTemplateSecondRolesField(CREATE_TEMPLATE.nameRole2);
+        await createNewTemplatePage.fileUploader.uploadFile(UPLOAD_FILE_PATH.xlsxDocument);
+        await createNewTemplatePage.clickFillTemplateBtn();
+        await prepareForSignatureModal.clickSignOnFieldsMenu();
+        await prepareForSignatureModal.clickDocumentBody();
+        await prepareForSignatureModal.clickDocumentBody();
+        await prepareForSignatureModal.clickAssignedToDropDown();
+        await prepareForSignatureModal.clickItemDropDown(CREATE_TEMPLATE.nameRole);
+        await prepareForSignatureModal.clickCreateBtn();
+        await prepareForSignatureModal.clickBackToTemplatesBtn();
+        await templatesPage.sideMenu.clickSign();
+    });
+};

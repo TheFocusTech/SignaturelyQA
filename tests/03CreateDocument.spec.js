@@ -11,7 +11,7 @@ import {
     GOOGLE_DOC_LINK,
     CREATE_TEMPLATE
 } from '../testData.js';
-import { createSignature, createTemplateForMeAndUser } from '../helpers/preconditions.js';
+import { createSignature, createTemplateForMeAndUser, createTemplateFor2User } from '../helpers/preconditions.js';
 import { description, tag, severity, Severity, link, epic, step } from 'allure-js-commons';
 
 
@@ -261,4 +261,48 @@ test.describe('CreateDocument', () => {
         await step('Verify the created document is in the table with the label "AWAITING".', async () => {
             await expect(await documentsPage.table.documentStatus).toHaveText(DOCUMENT_STATUS.awaiting);
         });
+    });
+
+        test('TC_03_08_02 | Verify that user can sending a signed template to other users for signature', async ({
+            createBusinessUserAndLogin,
+            signPage,
+            prepareForSignatureModal,
+            createSignatureOrInitialModal,
+            finalStepPage,
+            successModal,
+            documentsPage,
+            templatesPage,
+            createNewTemplatePage,
+        }) => {
+            test.setTimeout(200 * 1000);
+            await description(
+                'Objective: To verify sending a signed template to other users for signature.'
+            );
+            await severity(Severity.CRITICAL);
+            await link(`${QASE_LINK}/SIGN-8`, 'Qase: SIGN-8');
+            await link(`${GOOGLE_DOC_LINK}q2q7g1micqkl`, 'ATC_03_08_02');
+            await epic('Create Document');
+            await tag('Document');
+    
+    
+            await createTemplateFor2User(signPage,
+                prepareForSignatureModal,
+                templatesPage,
+                createNewTemplatePage,
+                createSignatureOrInitialModal
+            );
+    
+            await signPage.uploadFileTab.chooseTemplate.clickChooseTemplateDropdown();
+            await signPage.uploadFileTab.chooseTemplate.clickTemplateItem(CREATE_TEMPLATE.nameField);
+            await signPage.uploadFileTab.chooseTemplate.fillFirstSignerNameField(SIGNERS_DATA.signerName1);
+            await signPage.uploadFileTab.chooseTemplate.fillFirstSignerEmailField(SIGNERS_DATA.signerEmail1);
+            await signPage.uploadFileTab.chooseTemplate.fillSecondSignerNameField(SIGNERS_DATA.signerName2);
+            await signPage.uploadFileTab.chooseTemplate.fillSecondSignerEmailField(SIGNERS_DATA.signerEmail2);
+            await signPage.uploadFileTab.chooseTemplate.clickSendTheDocumentBtn();
+            await finalStepPage.clickSendForSignatureBtn();
+            await successModal.clickBackToDocumentsBtn();
+    
+            await step('Verify the created document is in the table with the label "AWAITING".', async () => {
+                await expect(await documentsPage.table.documentStatus).toHaveText(DOCUMENT_STATUS.awaiting);
+            });
     });
