@@ -13,22 +13,22 @@ import {
     EMAIL_MESSAGE,
     DOCUMENT_TITLE,
     SIGNER_ME,
+    QASE_LINK,
+    GOOGLE_DOC_LINK,
 } from '../testData.js';
-import { retrieveUserEmailConfirmationLink, retrieveEmailMessage } from '../helpers/utils.js';
-import { createSignature, uploadDocumentForDraft } from "../helpers/preconditions.js";
-
+import { retrieveUserEmailConfirmationLink, retrieveEmailMessage, editDocumentStatus } from '../helpers/utils.js';
+import { createSignature, uploadDocumentForDraft } from '../helpers/preconditions.js';
 
 test.describe('Sign Document', () => {
-    test('TC_04_11_02 | Verify custom signing order', async ({ 
-        createBusinessUserAndLogin, 
-        signPage, 
-        prepareForSignatureModal }) => {
+    test('TC_04_11_02 | Verify custom signing order', async ({
+        createBusinessUserAndLogin,
+        signPage,
+        prepareForSignatureModal,
+    }) => {
         await description('To verify custom signing order');
         await severity(Severity.CRITICAL);
-        await link(
-            'https://app.qase.io/case/SIGN-11', 'Qase: SIGN-11');
-        await link(
-            'https://docs.google.com/document/d/1Qce7tKWOwVYtPxgQv_8ae-HUkbAgeOFph0lB_eziY_k/edit#heading=h.7y8njhymxgmj', 'ATC_04_11_02');
+        await link(`${QASE_LINK}/SIGN-11`, 'Qase: SIGN-11');
+        await link(`${GOOGLE_DOC_LINK}7y8njhymxgmj`, 'ATC_04_11_02');
         await epic('Sign document');
         await tag('Signing order');
 
@@ -78,16 +78,18 @@ test.describe('Sign Document', () => {
 
         await description('To verify the adding viewers / adding users who can view the document.');
         await severity(Severity.CRITICAL);
-        await link(
-            'https://app.qase.io/case/SIGN-14', 'Qase: SIGN-14');
-        await link(
-            'https://docs.google.com/document/d/1Qce7tKWOwVYtPxgQv_8ae-HUkbAgeOFph0lB_eziY_k/edit#heading=h.ojom1b8sk9ht', 'ATC_04_14_01');
+        await link(`${QASE_LINK}/SIGN-14`, 'Qase: SIGN-14');
+        await link(`${GOOGLE_DOC_LINK}ojom1b8sk9ht`, 'ATC_04_14_01');
         await epic('Sign document');
         await tag('Viewers');
 
         const signerName = `${process.env.NEW_USER_NAME}${'001'}`;
-        const signerEmail = `${process.env.EMAIL_PREFIX}${process.env.NEW_USER_NUMBER}${'001'}${process.env.EMAIL_DOMAIN}`;
-        const reviewerEmail = `${process.env.EMAIL_PREFIX}${process.env.NEW_USER_NUMBER}${'003'}${process.env.EMAIL_DOMAIN}`;
+        const signerEmail = `${process.env.EMAIL_PREFIX}${process.env.NEW_USER_NUMBER}${'001'}${
+            process.env.EMAIL_DOMAIN
+        }`;
+        const reviewerEmail = `${process.env.EMAIL_PREFIX}${process.env.NEW_USER_NUMBER}${'003'}${
+            process.env.EMAIL_DOMAIN
+        }`;
 
         await signPage.uploadFileTab.fileUploader.uploadFile(UPLOAD_FILE_PATH.xlsxDocument);
         await signPage.uploadFileTab.clickPrepareDocumentBtn();
@@ -100,7 +102,7 @@ test.describe('Sign Document', () => {
         await prepareForSignatureModal.fillRecipientEmailField(reviewerEmail);
         await prepareForSignatureModal.clickContinueBtn();
         await prepareForSignatureModal.clickGotItBtn();
-        await prepareForSignatureModal.clickSignFieldsItem();
+        await prepareForSignatureModal.clickSignOnFieldsMenu();
         await prepareForSignatureModal.clickDocumentBody();
         await prepareForSignatureModal.clickSaveBtn();
 
@@ -112,7 +114,11 @@ test.describe('Sign Document', () => {
         await successModal.clickBackToDocumentsBtn();
         await documentsPage.table.waitForDocumentStatusVisible(DOCUMENT_STATUS.awaiting);
 
-        const signerLink = await retrieveUserEmailConfirmationLink(request, signerEmail, EMAIL_SUBJECTS.signatureRequest);
+        const signerLink = await retrieveUserEmailConfirmationLink(
+            request,
+            signerEmail,
+            EMAIL_SUBJECTS.signatureRequest
+        );
         await step('Navigate to the signing document link', async () => {
             await page.goto(signerLink);
         });
@@ -125,7 +131,13 @@ test.describe('Sign Document', () => {
         await notRegisterSignerSignPage.toast.waitForToastIsHiddenByText(TOAST_MESSAGE.documentSubmited);
         await documentSubmitProccessModal.waitForSubmitTitleByText(SUBMIT_TITLE);
 
-        const message = await retrieveEmailMessage(request, SERVICE_NAME, reviewerEmail, EMAIL_SUBJECTS.sentToView, SELECTORS.message);
+        const message = await retrieveEmailMessage(
+            request,
+            SERVICE_NAME,
+            reviewerEmail,
+            EMAIL_SUBJECTS.sentToView,
+            SELECTORS.message
+        );
 
         await step('Verify that Viewer has got email for viewing document', async () => {
             expect(message).toEqual(`${process.env.NEW_USER_NAME} (${process.env.NEW_USER_EMAIL})${EMAIL_MESSAGE}`);
@@ -145,13 +157,8 @@ test.describe('Sign Document', () => {
 
         await description('Objective: To verify sign document as myself');
         await severity(Severity.CRITICAL);
-        await link(
-            'https://app.qase.io/case/SIGN-10', 'Qase: SIGN-10'
-        );
-        await link(
-            'https://docs.google.com/document/d/1Qce7tKWOwVYtPxgQv_8ae-HUkbAgeOFph0lB_eziY_k/edit#heading=h.jl55qbudbe8i',
-            'ATC_04_10_01'
-        );
+        await link(`${QASE_LINK}/SIGN-10`, 'Qase: SIGN-10');
+        await link(`${GOOGLE_DOC_LINK}jl55qbudbe8i`, 'ATC_04_10_01');
         await epic('Sign document');
         await tag('Document');
 
@@ -160,7 +167,7 @@ test.describe('Sign Document', () => {
         await prepareForSignatureModal.clickSignDocumentRadioBtn();
         await prepareForSignatureModal.clickContinueBtn();
         await prepareForSignatureModal.clickGotItBtn();
-        await prepareForSignatureModal.clickSignFieldsItem();
+        await prepareForSignatureModal.clickSignOnFieldsMenu();
         await prepareForSignatureModal.clickDocumentBody();
         await createSignatureOrInitialModal.clickCheckboxAgree();
         await createSignatureOrInitialModal.clickSignNowBtn();
@@ -173,7 +180,7 @@ test.describe('Sign Document', () => {
         });
     });
 
-    test("TC_04_10_02 | Verify that the user who uploaded the document and other signer can sign it", async ({
+    test('TC_04_10_02 | Verify that the user who uploaded the document and other signer can sign it', async ({
         createBusinessUserAndLogin,
         signPage,
         settingsCompanyPage,
@@ -185,19 +192,12 @@ test.describe('Sign Document', () => {
         successModal,
         documentsPage,
     }) => {
-
         test.setTimeout(270 * 1000);
 
-        await description('Objective: To verify that the user who uploaded the document and Other Signer can sign it' )
+        await description('Objective: To verify that the user who uploaded the document and Other Signer can sign it');
         await severity(Severity.CRITICAL);
-        await link(
-            'https://app.qase.io/case/SIGN-10', 'Qase: SIGN-10'
-        );
-        await link(
-            'Documentation',
-            'https://docs.google.com/document/d/1Qce7tKWOwVYtPxgQv_8ae-HUkbAgeOFph0lB_eziY_k/edit#heading=h.s5pa7fnboi83',
-            'TC_04_10_02'
-        );
+        await link(`${QASE_LINK}/SIGN-10`, 'Qase: SIGN-10');
+        await link(`${GOOGLE_DOC_LINK}s5pa7fnboi83`, 'TC_04_10_02');
         await epic('Sign a document');
         await tag('me&others');
 
@@ -208,24 +208,24 @@ test.describe('Sign Document', () => {
             createOrEditSignatureOnSettingModal
         );
 
-        await uploadDocumentForDraft(signPage, prepareForSignatureModal); 
+        await uploadDocumentForDraft(signPage, prepareForSignatureModal);
         await signPage.sideMenu.clickDocuments();
         await documentsPage.sideMenuDocuments.clickDraft();
-        await documentsPage.table.clickOptionsBtn(0);
+        await documentsPage.table.clickFirstOptionsBtn();
         await documentsPage.table.clickEditAndResendBtn();
-        await prepareForSignatureModal.clickSignAndSendForSignatureRadioBtn(); 
+        await prepareForSignatureModal.clickSignAndSendForSignatureRadioBtn();
         await prepareForSignatureModal.clickAddSignerBtn();
         await prepareForSignatureModal.fillSignerNameField(SIGNERS_DATA.signerName2, 0);
         await prepareForSignatureModal.fillSignerEmailField(SIGNERS_DATA.signerEmail2, 0);
         await prepareForSignatureModal.clickContinueBtn();
         await prepareForSignatureModal.clickGotItBtn();
-        await prepareForSignatureModal.clickSignFieldsItem();
+        await prepareForSignatureModal.clickSignOnFieldsMenu();
         await prepareForSignatureModal.clickDocumentBody();
         await prepareForSignatureModal.clickAssignedToDropDown();
         await prepareForSignatureModal.clickItemDropDown(SIGNER_ME);
         await chooseSignatureOrInitialModal.clickSignatureTyped();
         await chooseSignatureOrInitialModal.clickSignNowBtn();
-        await prepareForSignatureModal.clickSignFieldsItem();
+        await prepareForSignatureModal.clickSignOnFieldsMenu();
         await prepareForSignatureModal.clickDocumentBody();
         await prepareForSignatureModal.clickSaveBtn();
         await finalStepPage.fillDocumentTitleField(DOCUMENT_TITLE);
@@ -234,6 +234,57 @@ test.describe('Sign Document', () => {
 
         await step('Verify that document has awaiting status', async () => {
             await expect(await documentsPage.table.documentStatus).toHaveText(DOCUMENT_STATUS.awaiting);
-        })
-     });
+        });
+    });
+
+    test.skip('TC_04_13_01 | Verify the document\'s expiration', async ({
+        createBusinessUserAndLogin,
+        page, request,
+        signPage,
+        prepareForSignatureModal,
+        finalStepPage,
+        documentsPage,
+        successModal
+    }) => {
+        await description('Objective: Verify that changing the document status to "expired"(database) updates the front-end display')
+        await severity(Severity.CRITICAL);
+        await link(
+            'https://app.qase.io/case/SIGN-13',
+            'Qase: SIGN-13'
+        );
+        await link(
+            'https://docs.google.com/document/d/1Qce7tKWOwVYtPxgQv_8ae-HUkbAgeOFph0lB_eziY_k/edit#heading=h.fm3jt5v1qq97',
+            'ATC_04_13_01'
+        );
+        await epic('Sign a document');
+        await tag('Document status: expiring');
+
+        test.setTimeout(250 * 1000);
+        await signPage.uploadFileTab.fileUploader.uploadFile(UPLOAD_FILE_PATH.xlsxDocument);
+        await signPage.uploadFileTab.clickPrepareDocumentBtn();
+        await prepareForSignatureModal.clickSendForSignatureRadioBtn();
+        await prepareForSignatureModal.clickAddSignerBtn();
+        await prepareForSignatureModal.fillSignerNameField(SIGNERS_DATA.signerName1, 0);
+        await prepareForSignatureModal.fillSignerEmailField(SIGNERS_DATA.signerEmail1, 0);
+        await prepareForSignatureModal.clickContinueBtn();
+        await prepareForSignatureModal.clickGotItBtn();
+        await prepareForSignatureModal.clickSignOnFieldsMenu();
+        await prepareForSignatureModal.clickDocumentBody();
+        await prepareForSignatureModal.clickSaveBtn();
+
+        await finalStepPage.expirationDateCalendar.clickSelectDate();
+        await finalStepPage.expirationDateCalendar.pickExpirationDateInCalendar();
+        await finalStepPage.expirationDateCalendar.clickSelectBtn();
+        await finalStepPage.clickSendForSignatureBtn();
+        await successModal.clickBackToDocumentsBtn();
+        await documentsPage.table.waitForDocumentStatus(page, DOCUMENT_STATUS.awaiting);
+
+        const documentName = UPLOAD_FILE_PATH.xlsxDocument.split("/").pop();
+        await editDocumentStatus(request, documentName, DOCUMENT_STATUS.expired);
+        await page.reload();
+
+        await step('Verify that the document has "expired" status', async () => {
+            await expect(await documentsPage.table.documentStatus).toHaveText(DOCUMENT_STATUS.expired);
+        });
+    });
 });
