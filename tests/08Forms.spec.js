@@ -132,4 +132,39 @@ test.describe('Forms', () => {
             await expect(await formsPage.table.documentStatus).toHaveText(FORM_STATUS.live);
         });
     });
+
+    test('TC_08_34_01 | Verify that user can delete form', async ({
+        createBusinessUserAndLogin,
+        signPage,
+        prepareForSignatureModal,
+        createFormPage,
+        formsPage,
+        successModal
+    }) => {
+        await description('Verify that user can delete form');
+        await tag('Delete Form');
+        await severity(Severity.CRITICAL);
+        await link(
+            'https://app.qase.io/case/SIGN-34',
+            'Qase: SIGN-34'
+        );
+        await link(
+            "https://docs.google.com/document/d/1Qce7tKWOwVYtPxgQv_8ae-HUkbAgeOFph0lB_eziY_k/edit#heading=h.ertctkmlxc8",
+            "ATC_08_34_01"
+        );
+        await epic("Forms");
+
+        test.setTimeout(120 * 1000);
+        await createForm(signPage, prepareForSignatureModal, createFormPage, formsPage, successModal);
+
+        await signPage.sideMenu.clickForms();
+        await formsPage.table.clickOptionsBtn(0);
+        await formsPage.table.clickDeleteForm();
+        await formsPage.table.clickYesDelete();
+        await formsPage.toast.waitForToastIsHiddenByText(TOAST_MESSAGE.success);
+
+        await step('Verify that the number of forms in the table is 0', async () => {
+            await expect(await formsPage.table.formsList).toHaveCount(0);
+        });
+    });
 });

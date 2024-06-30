@@ -40,6 +40,7 @@ export const TOAST_MESSAGE = {
     downgradeToUser: 'Team member successfully downgraded to user.',
     formDisabled: 'Form successfully disabled!',
     formEnabled: 'Form successfully enabled!',
+    formDeleted: 'Form deleted successfully.',
 };
 export const API_KEY_NAME = 'Test Api Key';
 export const NO_API_KEY_MESSAGE = "You don't have any API keys yet.";
