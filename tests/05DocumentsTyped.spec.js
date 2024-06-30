@@ -186,7 +186,7 @@ test.describe('DocumentsType', () => {
         await signPage.sideMenu.clickDocuments();
         await documentsPage.sideMenuDocuments.clickCompleted();
         await documentsPage.table.clickFirstOptionsBtn();
-        await documentsPage.table.clickshareBtn();
+        await documentsPage.table.clickShareBtn();
            
         await shareThisDocumentModal.clickInputEmailField(SIGNERS_DATA.signerEmail1);
         await shareThisDocumentModal.clickShareDocumentBtn();
