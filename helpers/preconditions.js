@@ -1,4 +1,4 @@
-import { DATA_SIGNER, FOLDER_NAME, TOAST_MESSAGE, CREATE_TEMPLATE, UPLOAD_FILE_PATH, SIGNERS_DATA, FOLDER_NAME_SECOND } from "../testData";
+import { DATA_SIGNER, TOAST_MESSAGE, CREATE_TEMPLATE, UPLOAD_FILE_PATH, SIGNERS_DATA } from "../testData";
 import { step } from "allure-js-commons";
 
 export const createSignature = async (signPage, settingsCompanyPage, settingsEditSignaturePage, createOrEditSignatureOnSettingModal) => {
@@ -40,11 +40,11 @@ export const createDocumentAwaiting = async (
     });
 };
 
-export const createFolder = async (signPage, documentsPage, createFolderModal) => {
+export const createFolder = async (signPage, documentsPage, createFolderModal, folderName) => {
     await step('Precondition: Create Folder', async () => {
         await signPage.sideMenu.clickDocuments();
         await documentsPage.clickCreateFolderBtn();
-        await createFolderModal.fillNewFolderName(FOLDER_NAME);
+        await createFolderModal.fillNewFolderName(folderName);
         await createFolderModal.clickCreateBtn();
         await documentsPage.toast.waitForToastIsHiddenByText(TOAST_MESSAGE.folderCreated);
         await documentsPage.sideMenu.clickSign();
@@ -93,19 +93,4 @@ export const uploadDocumentForDraft = async (signPage, prepareForSignatureModal)
         await signPage.uploadFileTab.clickPrepareDocumentBtn();
         await prepareForSignatureModal.clickCancelBtn();        
     });
-};
-
-export const createSecondFolder = async (
-    signPage,
-    documentsPage,
-    createFolderModal) => {
-
-    await step('Precondition: Create Second Folder', async () => {
-        await signPage.sideMenu.clickDocuments();
-        await documentsPage.clickCreateFolderBtn();
-        await createFolderModal.fillNewFolderName(FOLDER_NAME_SECOND);
-        await createFolderModal.clickCreateBtn();
-        await documentsPage.toast.waitForToastIsHiddenByText(TOAST_MESSAGE.folderCreated);
-        await documentsPage.sideMenu.clickSign();
-    })
 };

@@ -96,7 +96,7 @@ test.describe('DocumentsType', () => {
         await epic('Documents (typed)');
         await tag('Move_to_folder');
 
-        await createFolder(signPage, documentsPage, createFolderModal);
+        await createFolder(signPage, documentsPage, createFolderModal, FOLDER_NAME);
         await signPage.uploadFileTab.fileUploader.uploadFile(UPLOAD_FILE_PATH.jpgDocument);
 
         await signPage.sideMenu.clickDocuments();
