@@ -1,7 +1,7 @@
 import { expect } from '@playwright/test';
 import { test } from '../fixtures/base.js';
-import { createFolder } from '../helpers/preconditions.js';
-import { TOAST_MESSAGE, FILL_RENAME_FOLDER_NAME, QASE_LINK, GOOGLE_DOC_LINK, } from '../testData.js';
+import { createFolder, createSecondFolder } from '../helpers/preconditions.js';
+import { TOAST_MESSAGE, FILL_RENAME_FOLDER_NAME, QASE_LINK, GOOGLE_DOC_LINK, FOLDER_NAME, FOLDER_NAME_SECOND } from '../testData.js';
 import { description, tag, severity, Severity, link, epic, step } from "allure-js-commons";
 
 test.describe('Folders', () => {
@@ -50,7 +50,7 @@ test.describe('Folders', () => {
         await tag('Rename Folder ');
         await epic('Folders');
 
-        await createFolder(signPage, documentsPage, createFolderModal);
+        await createFolder(signPage, documentsPage, createFolderModal, FOLDER_NAME);
         await signPage.sideMenu.clickDocuments();
         await documentsPage.table.clickFirstOptionsBtn();
         await documentsPage.table.clickRenameBtn();
@@ -64,4 +64,32 @@ test.describe('Folders', () => {
 
     });
 
+    test('TC_06_25_01 | Move folder to folder', async ({ createBusinessUserAndLogin,
+        signPage,
+        documentsPage,
+        createFolderModal,
+        moveToFolderModal }) => {
+            
+        test.setTimeout(250 * 1000);
+
+        await description('To verify the user can move folder to folder');
+        await tag('Move folder to folder');
+        await severity(Severity.CRITICAL);
+        await link(`${QASE_LINK}/SIGN-25`, 'Qase: SIGN-25');
+        await link(`${GOOGLE_DOC_LINK}2d0wcpkoa0jo`, 'ATC_06_25_01');
+        await epic('Folder');
+
+        await createFolder(signPage, documentsPage, createFolderModal, FOLDER_NAME);
+        await createFolder(signPage, documentsPage, createFolderModal, FOLDER_NAME_SECOND);
+        await signPage.sideMenu.clickDocuments();
+        await documentsPage.table.clickFirstOptionsBtn();
+        await documentsPage.table.clickMoveToBtn();
+        await moveToFolderModal.selectFolder(FOLDER_NAME);
+        await moveToFolderModal.clickMoveToFolderBtn();
+
+        await step('Verify the toast message', async () => {
+            await documentsPage.toast.toastBody.waitFor({ state: 'visible' });
+            await expect(documentsPage.toast.toastBody).toHaveText(TOAST_MESSAGE.folderMovedToFolder);
+        });
+    });
 });
