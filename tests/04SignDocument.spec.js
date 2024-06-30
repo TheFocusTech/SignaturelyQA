@@ -237,7 +237,7 @@ test.describe('Sign Document', () => {
         });
     });
 
-    test('TC_04_13_01 | Verify the document\'s expiration', async ({
+    test('TC_04_13_01 | Verify the document\'s expiration date', async ({
         createBusinessUserAndLogin,
         page, request,
         signPage,
@@ -249,11 +249,11 @@ test.describe('Sign Document', () => {
         await description('Objective: Verify that changing the document status to "expired"(database) updates the front-end display')
         await severity(Severity.CRITICAL);
         await link(
-            'https://app.qase.io/case/SIGN-13',
+            `${QASE_LINK}/SIGN-13`,
             'Qase: SIGN-13'
         );
         await link(
-            'https://docs.google.com/document/d/1Qce7tKWOwVYtPxgQv_8ae-HUkbAgeOFph0lB_eziY_k/edit#heading=h.fm3jt5v1qq97',
+            `${GOOGLE_DOC_LINK}fm3jt5v1qq97`,
             'ATC_04_13_01'
         );
         await epic('Sign a document');

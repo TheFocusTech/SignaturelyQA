@@ -9,10 +9,11 @@ import {
     UPLOAD_FILE_PATH,
     QASE_LINK,
     GOOGLE_DOC_LINK,
-    CREATE_TEMPLATE
 } from '../testData.js';
 import { createSignature, createTemplateForMeAndUser } from '../helpers/preconditions.js';
 import { description, tag, severity, Severity, link, epic, step } from 'allure-js-commons';
+
+
 
 test.describe('CreateDocument', () => {
     test('TC_03_07_01 | Sign a document - verify that user can sign a document themselves', async ({
@@ -90,6 +91,49 @@ test.describe('CreateDocument', () => {
             await expect(await documentsPage.table.documentStatus).toHaveText(DOCUMENT_STATUS.awaiting);
         });
     });
+	});
+
+    test('TC_03_07_03 | Verify user can create document and send it for signature', async ({ 
+		createBusinessUserAndLogin, 
+		signPage, 
+		prepareForSignatureModal, 
+		finalStepPage, 
+		successModal, 
+		documentsPage
+	}) => {
+        test.setTimeout(220 * 1000);
+
+		await description('Objective: To verify the process of creating and sending a document for signature.');
+		await severity(Severity.CRITICAL);
+		await link(
+            `${QASE_LINK}/SIGN-7`,
+            "Qase: SIGN-7"
+            );
+		await link(
+			"Documentation",
+			`${GOOGLE_DOC_LINK}hvbgto58wwgb`,
+			"ATC_03_07_03"
+		);
+		await epic('Create Document');
+		await tag('Send Document');
+        await signPage.uploadFileTab.fileUploader.uploadFile(UPLOAD_FILE_PATH.xlsxDocument);
+        await signPage.uploadFileTab.clickPrepareDocumentBtn();
+        await prepareForSignatureModal.clickSendForSignatureRadioBtn();
+        await prepareForSignatureModal.clickAddSignerBtn();
+        await prepareForSignatureModal.fillSignerNameField(SIGNERS_DATA.signerName1, 0);
+        await prepareForSignatureModal.fillSignerEmailField(SIGNERS_DATA.signerEmail1, 0);
+        await prepareForSignatureModal.clickContinueBtn();
+        await prepareForSignatureModal.clickGotItBtn();
+        await prepareForSignatureModal.clickSignOnFieldsMenu();
+        await prepareForSignatureModal.clickDocumentBody();
+        await prepareForSignatureModal.clickSaveBtn();
+        await finalStepPage.toast.waitForToastIsHiddenByText(TOAST_MESSAGE.success);
+        await finalStepPage.clickSendForSignatureBtn();
+        await successModal.clickBackToDocumentsBtn();
+        await step('Verify the created document is in the table with the label "AWAITING".', async () => {
+            await expect(await documentsPage.table.documentStatus).toHaveText(DOCUMENT_STATUS.awaiting);
+        });
+    })
 
     test('TC_03_07_02 | Verify that the user who uploaded the document and Other Signer can sign it', async ({
         createBusinessUserAndLogin,
@@ -174,6 +218,7 @@ test.describe('CreateDocument', () => {
 
         await expect(await documentsPage.table.documentStatus).toHaveText(DOCUMENT_STATUS.completed);
     });
+
 
         test('TC_03_08_01 | Verify that the user can send a template they have signed to another user for signature', async ({
         createBusinessUserAndLogin,
