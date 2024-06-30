@@ -9,6 +9,7 @@ import {
     UPLOAD_FILE_PATH,
     QASE_LINK,
     GOOGLE_DOC_LINK,
+    CREATE_TEMPLATE
 } from '../testData.js';
 import { createSignature, createTemplateForMeAndUser } from '../helpers/preconditions.js';
 import { description, tag, severity, Severity, link, epic, step } from 'allure-js-commons';
@@ -261,5 +262,3 @@ test.describe('CreateDocument', () => {
             await expect(await documentsPage.table.documentStatus).toHaveText(DOCUMENT_STATUS.awaiting);
         });
     });
-});
-
