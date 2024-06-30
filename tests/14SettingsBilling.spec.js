@@ -23,6 +23,7 @@ test.describe('Billing', () => {
 
         await expect(settingsBillingPage.nextInvoiceInfo).toContainText(END_PLAN);
     });
+    
     PLANS.forEach((plan) => {
         test(`TC_14_56_01 | Verify successful upsell of users subscription ${plan} plan`, async ({
             createFreeUserAndLogin,
