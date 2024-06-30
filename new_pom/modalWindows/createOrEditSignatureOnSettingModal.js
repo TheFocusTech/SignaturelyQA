@@ -22,7 +22,7 @@ export default class CreateOrEditSignatureOnSettingModal {
     }
 
     async clickCheckboxAgree() {
-        await step('Click the "I agree" checkbox for electronic signing.', async () => {
+        await step('Click the "I agree" checkbox for electronic signing', async () => {
             await this.checkboxAgree.click();
         })
     }

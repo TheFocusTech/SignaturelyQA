@@ -4,7 +4,7 @@ import { DATA_SIGNER, TOAST_MESSAGE, QASE_LINK, GOOGLE_DOC_LINK } from "../testD
 import { description, tag, severity, Severity, link, epic, step } from 'allure-js-commons';
 
 test.describe('Settings: Edit signature', () => {
-    test.only('TC_13_51_01 | Verify that user can create Signature', async ({
+    test('TC_13_51_01 | Verify that user can create Signature', async ({
         createBusinessUserAndLogin,
         signPage,
         settingsCompanyPage,
