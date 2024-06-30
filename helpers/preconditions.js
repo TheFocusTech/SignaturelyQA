@@ -1,4 +1,4 @@
-import { DATA_SIGNER, FOLDER_NAME, TOAST_MESSAGE, CREATE_TEMPLATE, UPLOAD_FILE_PATH, SIGNERS_DATA } from "../testData";
+import { DATA_SIGNER, FOLDER_NAME, TOAST_MESSAGE, CREATE_TEMPLATE, UPLOAD_FILE_PATH, SIGNERS_DATA, SIGNER_ME } from "../testData";
 import { step } from "allure-js-commons";
 
 export const createSignature = async (signPage, settingsCompanyPage, settingsEditSignaturePage, createOrEditSignatureOnSettingModal) => {
@@ -92,5 +92,27 @@ export const uploadDocumentForDraft = async (signPage, prepareForSignatureModal)
         await signPage.uploadFileTab.fileUploader.uploadFile(UPLOAD_FILE_PATH.xlsxDocument);
         await signPage.uploadFileTab.clickPrepareDocumentBtn();
         await prepareForSignatureModal.clickCancelBtn();        
+    });
+};
+
+export const createTemplateForMeAndUser = async (signPage, prepareForSignatureModal, templatesPage, createNewTemplatePage, createSignatureOrInitialModal) => {
+    await step('Precondition: Create Template for user and another user', async () => {
+        await signPage.sideMenu.clickTemplates();
+        await templatesPage.sideMenuTemplates.clickCreateTemplate();
+        await createNewTemplatePage.fillTemplateNameField(CREATE_TEMPLATE.nameField);
+        await createNewTemplatePage.fillCreateTemplateRolesField(CREATE_TEMPLATE.nameRole);
+        await createNewTemplatePage.fileUploader.uploadFile(UPLOAD_FILE_PATH.xlsxDocument);
+        await createNewTemplatePage.clickFillTemplateBtn();
+        await prepareForSignatureModal.clickSignOnFieldsMenu();
+        await prepareForSignatureModal.clickDocumentBody();
+        await prepareForSignatureModal.clickDocumentBody();
+        await prepareForSignatureModal.clickAssignedToDropDown();
+        await prepareForSignatureModal.clickItemDropDown(SIGNER_ME);
+        await createSignatureOrInitialModal.clickCheckboxAgree();
+        await createSignatureOrInitialModal.clickSignNowBtn();
+        await prepareForSignatureModal.toast.clickToastFirstCloseBtn();
+        await prepareForSignatureModal.clickCreateBtn();
+        await prepareForSignatureModal.clickBackToTemplatesBtn();
+        await templatesPage.sideMenu.clickSign();
     });
 };
