@@ -59,6 +59,7 @@ export const CREATE_TEMPLATE = {
     nameField: 'Rental contract',
     optionalMessage: 'USA',
     nameRole: 'Boss',
+    nameRole2: 'Manager'
 };
 export const PLANS = ['Personal', 'Business'];
 export const RANDOM_ANNUALLY_PLAN = (randomPlan) => `${randomPlan} Annually Plan`;
