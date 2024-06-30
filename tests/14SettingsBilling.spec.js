@@ -4,7 +4,7 @@ import { CARD_DETAILS, RANDOM_ANNUALLY_PLAN, PLANS, END_PLAN, QASE_LINK, GOOGLE_
 import { description, tags, severity, Severity, link, epic, feature, step } from 'allure-js-commons';
 
 test.describe('Billing', () => {
-  test('TC_14_57_02 | Verify the ability to successfully downgrade subscription', async ({
+    test('TC_14_57_02 | Verify the ability to successfully downgrade subscription', async ({
         createBusinessUserAndLogin,
         signPage,
         settingsCompanyPage,
@@ -23,7 +23,7 @@ test.describe('Billing', () => {
 
         await expect(settingsBillingPage.nextInvoiceInfo).toContainText(END_PLAN);
     });
-  PLANS.forEach((plan) => {
+    PLANS.forEach((plan) => {
         test(`TC_14_56_01 | Verify successful upsell of users subscription ${plan} plan`, async ({
             createFreeUserAndLogin,
             signPage,
@@ -54,7 +54,7 @@ test.describe('Billing', () => {
         });
     });
 
-test('TC_14_54_01 | Attach/delete payment card', async ({
+    test('TC_14_54_01 | Attach/delete payment card', async ({
         createFreeUserAndLogin,
         signPage,
         settingsCompanyPage,
