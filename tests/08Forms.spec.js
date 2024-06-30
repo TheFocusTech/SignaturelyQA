@@ -158,7 +158,7 @@ test.describe('Forms', () => {
         await createForm(signPage, prepareForSignatureModal, createFormPage, formsPage, successModal);
 
         await signPage.sideMenu.clickForms();
-        await formsPage.table.clickOptionsBtn(0);
+        await formsPage.table.clickFirstOptionsBtn();
         await formsPage.table.clickDeleteForm();
         await formsPage.table.clickYesDelete();
         await formsPage.toast.waitForToastIsHiddenByText(TOAST_MESSAGE.success);
