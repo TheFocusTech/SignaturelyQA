@@ -14,8 +14,6 @@ import {
 import { createSignature } from '../helpers/preconditions.js';
 import { description, tag, severity, Severity, link, epic, step } from 'allure-js-commons';
 
-
-
 test.describe('CreateDocument', () => {
     test('TC_03_07_01 | Sign a document - verify that user can sign a document themselves', async ({
         createBusinessUserAndLogin,
@@ -28,7 +26,14 @@ test.describe('CreateDocument', () => {
     }) => {
         test.setTimeout(220 * 1000);
 
-        await signPage.uploadFileTab.fileUploader.uploadFile('testDocuments/picture.jpg');
+        await description('Objective: To verify the process of creating and signing a document');
+        await severity(Severity.CRITICAL);
+        await link(`${QASE_LINK}/SIGN-7`, 'Qase: SIGN-7');
+        await link(`${GOOGLE_DOC_LINK}yaxaf6jrhsdw`, 'TC_03_07_01');
+        await epic('Create Document');
+        await tag('Sign a document: me');
+
+        await signPage.uploadFileTab.fileUploader.uploadFile(UPLOAD_FILE_PATH.xlsxDocument);
         await signPage.uploadFileTab.clickPrepareDocumentBtn();
         await prepareForSignatureModal.clickSignDocumentRadioBtn();
         await prepareForSignatureModal.clickContinueBtn();
@@ -45,7 +50,9 @@ test.describe('CreateDocument', () => {
         await finalStepPage.clickSignDocumentBtn();
         await successModal.clickBackToDocumentsBtn();
 
+        await step('Verify the created document is in the table with the label "COMPLETED".', async () => {
         await expect(await documentsPage.table.documentStatus).toHaveText(DOCUMENT_STATUS.completed);
+        });
     });
 
     test('TC_03_07_06 | Verify user can create, sign, and send a document to another signer', async ({
@@ -92,8 +99,7 @@ test.describe('CreateDocument', () => {
             await expect(await documentsPage.table.documentStatus).toHaveText(DOCUMENT_STATUS.awaiting);
         });
     });
-	});
-
+	
     test('TC_03_07_03 | Verify user can create document and send it for signature', async ({ 
 		createBusinessUserAndLogin, 
 		signPage, 
@@ -219,4 +225,4 @@ test.describe('CreateDocument', () => {
 
         await expect(await documentsPage.table.documentStatus).toHaveText(DOCUMENT_STATUS.completed);
     });
-
+});
