@@ -60,7 +60,6 @@ test.describe('DocumentsType', () => {
         await description('Objective: To verify that the document can be returned for editing.');
         await severity(Severity.CRITICAL);
         await link(`${QASE_LINK}/SIGN-21`, 'QASE: SIGN-21 ');
-
         await link(`${GOOGLE_DOC_LINK}r25l83kzqn09`, 'ATC_05_21_02');
         await tag('Edit & Resend, Documents');
         await epic('Documents (typed)');
@@ -111,7 +110,7 @@ test.describe('DocumentsType', () => {
 
         await documentsPage.table.openFolder(FOLDER_NAME);
         await step('Verify the document is inside the folder', async () => {
-            await expect(await documentsPage.table.documentTitle).toHaveText(UPLOAD_FILE_NAME.jpgDocument);
+            await expect(await documentsPage.table.objectTitle).toHaveText(UPLOAD_FILE_NAME.jpgDocument);
         });
     });
 
