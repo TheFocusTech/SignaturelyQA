@@ -14,7 +14,7 @@ test.describe('Settings: Edit signature', () => {
         await description('Verify that the user can create a Signature.');
         await severity(Severity.CRITICAL);
         await link(`${QASE_LINK}/SIGN-51`, 'Qase: SIGN-51');
-        await link(`${GOOGLE_DOC_LINK}h.5bzz9ln1m6ek`, 'ATC_13_51_01');
+        await link(`${GOOGLE_DOC_LINK}5bzz9ln1m6ek`, 'ATC_13_51_01');
         await epic('Settings: Edit signature');
         await tag('Create a signature');
         
@@ -26,7 +26,7 @@ test.describe('Settings: Edit signature', () => {
         await createOrEditSignatureOnSettingModal.clickCheckboxAgree();
         await createOrEditSignatureOnSettingModal.clickCreateSignatureBtn();
 
-        await step(`Verify that the user can see toast message ${TOAST_MESSAGE.signatureCreated}`, async () => {
+        await step(`Verify that the user can see toast message "${TOAST_MESSAGE.signatureCreated}"`, async () => {
             await expect(settingsEditSignaturePage.toast.toastBody).toHaveText(TOAST_MESSAGE.signatureCreated);
         });
         await step('Verify that User can see one displayed signature', async () => {
