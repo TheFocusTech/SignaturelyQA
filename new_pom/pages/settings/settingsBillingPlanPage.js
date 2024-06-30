@@ -33,7 +33,7 @@ export default class SettingsBillingPlanPage {
         await this.selectPersonalPlanButton.click();
     }
 
-    async switchmonthlyAnnyallyToggle() {
+    async switchMonthlyAnnyallyToggle() {
         await step('Switch the Monthly/Annually toggle', async () => {
             await this.monthlyAnnyallyToggle.click();
         })
