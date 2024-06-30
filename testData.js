@@ -9,6 +9,7 @@ export const URL_END_POINTS = {
     signUpTrialEndPoint: '/signup',
     confirmAccountEndPoint: '/confirm-account',
     signUpFree: '/signup/free',
+    loginEndPoint: '/login'
 };
 export const ACTIVE_COLOR = 'rgb(0, 163, 250)';
 export const FILL_FOLDER_NAME = 'Folder 1';
@@ -26,6 +27,7 @@ export const TOAST_MESSAGE = {
     companyInformationSave: 'Company information successfully saved',
     fileMovedToFolder: 'Files successfully moved!',
     profileUpdated: 'Profile information updated.',
+    deleteAccount:'Account Deleted.',
     checkYourEmail: 'Check your new email to confirm it',
     emailConfirmed: 'Email confirmed',
     sendReminder: 'Reminder(s) has been sent',
@@ -37,6 +39,8 @@ export const TOAST_MESSAGE = {
     inviteAccepted: 'Invite accepted.',
     upgradedToAdmin: 'Team member successfully upgraded to admin.',
     downgradeToUser: 'Team member successfully downgraded to user.',
+    formDisabled: 'Form successfully disabled!',
+    formEnabled: 'Form successfully enabled!',
 };
 export const API_KEY_NAME = 'Test Api Key';
 export const NO_API_KEY_MESSAGE = "You don't have any API keys yet.";
@@ -178,3 +182,8 @@ export const GOOGLE_DOC_LINK =
     'https://docs.google.com/document/d/1Qce7tKWOwVYtPxgQv_8ae-HUkbAgeOFph0lB_eziY_k/edit#heading=h.';
     'https://docs.google.com/document/d/1Qce7tKWOwVYtPxgQv_8ae-HUkbAgeOFph0lB_eziY_k/edit#heading=h.';
     'https://docs.google.com/document/d/1Qce7tKWOwVYtPxgQv_8ae-HUkbAgeOFph0lB_eziY_k/edit#heading=h.';
+
+export const FORM_STATUS = {
+    live: 'live',
+    disabled: 'disabled',
+}

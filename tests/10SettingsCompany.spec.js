@@ -1,6 +1,6 @@
 import { expect } from "@playwright/test";
 import { test } from "../fixtures/base.js";
-import {TOAST_MESSAGE, COMPANY_INFO, UPLOAD_FILE_NAME, QASE_LINK, GOOGLE_DOC_LINK} from '../testData.js';
+import {TOAST_MESSAGE, COMPANY_INFO, UPLOAD_FILE_PATH, QASE_LINK, GOOGLE_DOC_LINK} from '../testData.js';
 import { description, tags, severity, Severity, link, epic, step } from 'allure-js-commons';
 
 test.describe('Company', () => {
@@ -16,9 +16,9 @@ test.describe('Company', () => {
     
         await epic("Settings: Company");
         await tags("Fill company's form");
-        
+
         await signPage.sideMenu.clickSettings();
-        await settingsCompanyPage.logoUpLoadFile(UPLOAD_FILE_NAME.jpgDocument);
+        await settingsCompanyPage.logoUpLoadFile(UPLOAD_FILE_PATH.jpgDocument);
         await settingsCompanyPage.clickSaveBtn();
         await settingsCompanyPage.fillCompanyName(COMPANY_INFO.companyName);
         await settingsCompanyPage.fillFromEmail(COMPANY_INFO.emailFrom);
@@ -33,7 +33,7 @@ test.describe('Company', () => {
 
         const actualCompanyName = await settingsCompanyPage.companyName.inputValue();
         const actualEmailClosingSignature = await settingsCompanyPage.emailClosingSignature.inputValue();
-        const actualFromEmailName = await settingsCompanyPage.fromEmailName.inputValue();
+        const actualFromEmailName = await settingsCompanyPage.fromEmail.inputValue();
         const actualRedirectionPage = await settingsCompanyPage.redirectionPage.inputValue();
         
         
