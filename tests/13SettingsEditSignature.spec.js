@@ -36,7 +36,7 @@ test.describe('Settings: Edit signature', () => {
         });
     })
 
-    test.only('TC_13_53_01 | Verify that user can delete Signature.', async ({ 
+    test('TC_13_53_01 | Verify that user can delete Signature.', async ({ 
         createBusinessUserAndLogin, 
         signPage, settingsCompanyPage, 
         settingsEditSignaturePage, 
