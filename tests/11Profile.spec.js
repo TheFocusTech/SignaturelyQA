@@ -1,7 +1,7 @@
 import { expect } from '@playwright/test';
 import { test } from '../fixtures/base.js';
 import { generateRandomPassword, generateNewUserEmail, retrieveUserEmailConfirmationLink } from '../helpers/utils.js';
-import { EMAIL_SUBJECTS, TOAST_MESSAGE, URL_END_POINTS, QASE_LINK, GOOGLE_DOC_LINK } from '../testData.js';
+import { EMAIL_SUBJECTS, TOAST_MESSAGE, URL_END_POINTS, QASE_LINK, GOOGLE_DOC_LINK, CHECK_BOXES_STATUS } from '../testData.js';
 import { description, tag, severity, Severity, link, epic, step } from 'allure-js-commons';
 
 test.describe('Profile', () => {
@@ -125,5 +125,59 @@ test.describe('Profile', () => {
             await expect(settingsProfilePage.emailAddressInputField).toHaveValue(newEmail);
         });
 
+    })
+
+    test('TC_11_46_03 | Verify user can enabling, disabling checkboxes', async ({
+        createBusinessUserAndLogin,
+        signPage,
+        settingsCompanyPage,
+        settingsProfilePage,
+        loginPage
+    }) => {
+        await description('Objective: To verify that the User can enabling, disabling checkboxes');
+        await severity(Severity.CRITICAL);
+        await link(`${QASE_LINK}/SIGN-46`, 'Qase: SIGN-46');
+        await link(`${GOOGLE_DOC_LINK}781u9ev2p6y5`, 'ATC_11_46_03');
+        await epic('Profile');
+        await tag('Update');
+
+        await signPage.sideMenu.clickSettings();
+        await settingsCompanyPage.sideMenuSettings.clickProfile();
+        await settingsProfilePage.toggleCheckboxes(false)
+        await settingsProfilePage.clickSaveButton();
+
+        await step(
+            `Verify that a toast message with the text "${TOAST_MESSAGE.profileUpdated}" popped up `,
+            async () => {
+                await expect(settingsProfilePage.toast.toastBody).toHaveText(TOAST_MESSAGE.profileUpdated);
+            });
+
+        await step('Verify that checkboxes are unchecked', async () => {
+            const checkBoxes = await settingsProfilePage.checkBoxesFrameList;
+            const checkBoxCount = await checkBoxes.count();
+
+            for (let i = 0; i < checkBoxCount; i++) {
+                await expect(checkBoxes.nth(i)).toHaveClass(CHECK_BOXES_STATUS.unChecked);
+            }
+        });
+
+        await settingsProfilePage.toast.waitForToastIsHiddenByText(TOAST_MESSAGE.profileUpdated);
+        await settingsProfilePage.toggleCheckboxes(true)
+        await settingsProfilePage.clickSaveButton();
+
+        await step(
+            `Verify that a toast message with the text "${TOAST_MESSAGE.profileUpdated}" popped up `,
+            async () => {
+                await expect(settingsProfilePage.toast.toastBody).toHaveText(TOAST_MESSAGE.profileUpdated);
+            });
+
+        await step('Verify that checkboxes are checked', async () => {
+            const checkBoxes = await settingsProfilePage.checkBoxesFrameList;
+            const checkBoxCount = await checkBoxes.count();
+
+            for (let i = 0; i < checkBoxCount; i++) {
+                await expect(checkBoxes.nth(i)).toHaveClass(CHECK_BOXES_STATUS.checked);
+            }
+        });
     })
 })

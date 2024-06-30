@@ -1,6 +1,6 @@
 import { expect } from '@playwright/test';
 import { test } from '../fixtures/base.js';
-import { CARD_DETAILS, RANDOM_ANNUALLY_PLAN, PLANS, END_PLAN, QASE_LINK, GOOGLE_DOC_LINK } from '../testData.js';
+import { CARD_DETAILS, RANDOM_ANNUALLY_PLAN, PLANS, END_PLAN, QASE_LINK, GOOGLE_DOC_LINK, TOAST_MESSAGE, BUSINESS_ANNUALLY_PLAN } from '../testData.js';
 import { description, tags, severity, Severity, link, epic, feature, step } from 'allure-js-commons';
 
 test.describe('Billing', () => {
@@ -117,4 +117,41 @@ test.describe('Billing', () => {
             }
         );
     });
+
+  test('TC_14_57_01 | Verify that user can upgrade subscription (from Monthly to Annually)', async ({
+    createBusinessUserAndLogin,
+    signPage,
+    settingsCompanyPage,
+    settingsBillingPage,
+    settingsBillingPlanPage,
+  }) => {
+    await description(
+      'Objective: Verify that a user can successfully upgrade their subscription from a monthly plan to an annual plan.'
+    );
+    await severity(Severity.CRITICAL);
+    await link(`${QASE_LINK}/SIGN-57`, 'Qase: SIGN-57');
+    await link(`${GOOGLE_DOC_LINK}56zml0w3xji7`, 'ATC_14_57_01');
+    await epic('Setting');
+    await feature('Billing');
+    await tags('Subscription');
+
+    test.slow();
+    await signPage.sideMenu.clickSettings();
+    await settingsCompanyPage.sideMenuSettings.clickBilling();
+    await settingsBillingPage.clickEditPlanButton();
+    await settingsBillingPlanPage.switchMonthlyAnnyallyToggle();
+    await settingsBillingPlanPage.clickUpgradeButton(PLANS[1]);
+    await settingsBillingPlanPage.upgradeYourPlanModal.clickSubscribeButton();
+    await settingsBillingPlanPage.toast.waitForToastText();
+      
+    await step('Verify the toast message', async () => {
+      await expect(await settingsBillingPlanPage.toast.toastBody).toHaveText(TOAST_MESSAGE.planSuccessChange);
+    });
+
+    await settingsBillingPlanPage.sideMenuSettings.clickBilling();
+
+    await step('Verify that the billing plan description is Business', async () => {
+      await expect(await settingsBillingPage.billingPlanDescription).toHaveText(BUSINESS_ANNUALLY_PLAN);
+    });
+  });
 });
