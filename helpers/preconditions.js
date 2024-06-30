@@ -94,3 +94,22 @@ export const uploadDocumentForDraft = async (signPage, prepareForSignatureModal)
         await prepareForSignatureModal.clickCancelBtn();        
     });
 };
+
+export const createDocumentCompleted = async (signPage, prepareForSignatureModal, createSignatureOrInitialModal, finalStepPage, successModal, documentsPage) => {
+    await step('Precondition: Document creation in progress with Completed status ', async () => {
+        await signPage.uploadFileTab.fileUploader.uploadFile('testDocuments/picture.jpg');   
+        await signPage.uploadFileTab.clickPrepareDocumentBtn();   
+
+        await prepareForSignatureModal.clickSignDocumentRadioBtn();
+        await prepareForSignatureModal.clickContinueBtn();
+        await prepareForSignatureModal.clickGotItBtn(); 
+        await prepareForSignatureModal.clickSignOnFieldsMenu();
+        await prepareForSignatureModal.clickDocumentBody();
+        await createSignatureOrInitialModal.clickCheckboxAgree();
+        await createSignatureOrInitialModal.clickSignNowBtn();     
+        await prepareForSignatureModal.clickSaveBtn();
+        await finalStepPage.clickSignDocumentBtn();
+        await successModal.clickBackToDocumentsBtn();
+        await documentsPage.sideMenu.clickSign();
+    });
+};
