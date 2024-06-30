@@ -23,7 +23,7 @@ test.describe('Billing', () => {
 
         await expect(settingsBillingPage.nextInvoiceInfo).toContainText(END_PLAN);
     });
-    
+
     PLANS.forEach((plan) => {
         test(`TC_14_56_01 | Verify successful upsell of users subscription ${plan} plan`, async ({
             createFreeUserAndLogin,
@@ -142,7 +142,8 @@ test.describe('Billing', () => {
     await settingsBillingPlanPage.switchMonthlyAnnyallyToggle();
     await settingsBillingPlanPage.clickUpgradeButton(PLANS[1]);
     await settingsBillingPlanPage.upgradeYourPlanModal.clickSubscribeButton();
-
+    await settingsBillingPlanPage.toast.waitForToastText();
+      
     await step('Verify the toast message', async () => {
       await expect(await settingsBillingPlanPage.toast.toastBody).toHaveText(TOAST_MESSAGE.planSuccessChange);
     });
