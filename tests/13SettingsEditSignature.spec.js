@@ -25,6 +25,7 @@ test.describe('Settings: Edit signature', () => {
         await createOrEditSignatureOnSettingModal.fillInitialsField(DATA_SIGNER.initials);
         await createOrEditSignatureOnSettingModal.clickCheckboxAgree();
         await createOrEditSignatureOnSettingModal.clickCreateSignatureBtn();
+        await settingsEditSignaturePage.toast.waitForToastText();
 
         await step(`Verify that the user can see toast message "${TOAST_MESSAGE.signatureCreated}"`, async () => {
             await expect(settingsEditSignaturePage.toast.toastBody).toHaveText(TOAST_MESSAGE.signatureCreated);
