@@ -73,8 +73,9 @@ export const DOCUMENT_STATUS = {
     expired: 'expired'
 };
 export const CI_USER_NAME = 'CI_user';
-export const BUSINESS_MONTHLY_PLAN = 'Your plan (Billed Monthly)Business';
-export const FREE_PLAN_DESCRIPTION = 'Your plan (Billed Monthly)Free';
+export const BUSINESS_MONTHLY_PLAN = "Your plan (Billed Monthly)Business";
+export const BUSINESS_ANNUALLY_PLAN = "Your plan (Billed Annually)Business";
+export const FREE_PLAN_DESCRIPTION = "Your plan (Billed Monthly)Free";
 
 export const CARD_DETAILS = {
     VISA: {
