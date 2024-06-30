@@ -7,7 +7,7 @@ export default class CalendarComponent {
         this.selectDateContainer = this.page.locator('[class="DayPickerContainer__icon"]');
         this.customDateInCalendar = this.page.locator('[class="DayPicker__custom-day"]');
         this.calendarMonthAndYear = this.page.locator('[class="DayPicker__nav-title"]');
-        this.datePickerNavigationLeft = this.page.locator('[class="DayPicker__nav DayPicker__nav--left"]');
+        this.datePickerNavigationLeft = this.page.locator('[class="DayPicker__nav"]');
         this.selectBtn = this.page.getByRole('button', {name: "Select"});
     }
 
