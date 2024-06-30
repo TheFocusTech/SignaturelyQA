@@ -1,6 +1,7 @@
 import SideMenuSettingsComponent from "../../components/sideMenuSettingsComponent";
 import SideMenuComponent from "../../components/sideMenuComponent";
 import ToastComponent from "../../components/toastComponent";
+import UpgradeYourPlanModal from "../../modalWindows/upgradeYourPlanModal";
 import { step } from "allure-js-commons";
 
 export default class SettingsBillingPlanPage {
@@ -11,10 +12,12 @@ export default class SettingsBillingPlanPage {
         this.sideMenuSettings = new SideMenuSettingsComponent(this.page);
         this.sideMenu = new SideMenuComponent(this.page);
         this.toast = new ToastComponent(this.page);
+        this.upgradeYourPlanModal = new UpgradeYourPlanModal(this.page);
 
         this.billingTableColumnHeader = this.page.locator('.billing__table-column--header');
         this.billingHeader = this.page.locator('.billing__trial-header');
         this.selectPersonalPlanButton = this.page.getByText('Select', { exact: true });
+        this.monthlyAnnyallyToggle = this.page.locator('.react-toggle-thumb');
     }
 
     async clickUpgradeButton(plan) {
@@ -32,4 +35,9 @@ export default class SettingsBillingPlanPage {
         }); 
     }
 
+    async switchMonthlyAnnyallyToggle() {
+        await step('Switch the Monthly/Annually toggle', async () => {
+            await this.monthlyAnnyallyToggle.click();
+        })
+    }
 }

@@ -55,8 +55,8 @@ export default class SettingsBillingPage {
     }
 
     async clickEditPlanButton() {
-        await step('Click on "Edit Plan" button', async () => {
-            await this.editPlanButton.click();
-        });        
+        await step('Click the “Edit plan” button', async () => {
+             await this.editPlanButton.click();
+        });
     }
 }
