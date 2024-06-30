@@ -2,6 +2,7 @@ import { expect } from "@playwright/test";
 import { test, createBusinessUserAndLogin } from "../fixtures/base.js";
 import { DATA_SIGNER, TOAST_MESSAGE, QASE_LINK, GOOGLE_DOC_LINK } from "../testData.js";
 import { description, tag, severity, Severity, link, epic, step } from 'allure-js-commons';
+import { createSignature } from '../helpers/preconditions.js';
 
 test.describe('Settings: Edit signature', () => {
     test('TC_13_51_01 | Verify that user can create Signature', async ({
@@ -35,21 +36,15 @@ test.describe('Settings: Edit signature', () => {
         });
     })
 
-    test('TC_13_53_01 | Verify that user can delete Signature.', async ({ 
+    test.only('TC_13_53_01 | Verify that user can delete Signature.', async ({ 
         createBusinessUserAndLogin, 
         signPage, settingsCompanyPage, 
         settingsEditSignaturePage, 
         createOrEditSignatureOnSettingModal }) => {
             await description('Verify that user can delete our Signature.');
             await severity(Severity.CRITICAL);
-            await link(
-                'https://app.qase.io/case/SIGN-53',
-                'Qase: SIGN-53'
-            );
-            await link(
-                'https://docs.google.com/document/d/1Qce7tKWOwVYtPxgQv_8ae-HUkbAgeOFph0lB_eziY_k/edit#heading=h.9go15k207w7b',
-                'ATC_13_53_01'
-            );
+            await link(`${QASE_LINK}/SIGN-53`, 'Qase: SIGN-53');
+            await link(`${GOOGLE_DOC_LINK}9go15k207w7b`,'ATC_13_53_01');
             await epic('Settings');
             await tag('Delete Signature');
             test.setTimeout(120 * 1000);
