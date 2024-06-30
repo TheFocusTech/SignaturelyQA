@@ -20,7 +20,7 @@ import { retrieveUserEmailConfirmationLink, retrieveEmailMessage, editDocumentSt
 import { createSignature, uploadDocumentForDraft } from '../helpers/preconditions.js';
 
 test.describe('Sign Document', () => {
-    test('TC_04_11_02 | Verify custom signing order', async ({
+    test('TC_04_11_01 | Verify custom signing order', async ({
         createBusinessUserAndLogin,
         signPage,
         prepareForSignatureModal,
@@ -28,7 +28,7 @@ test.describe('Sign Document', () => {
         await description('To verify custom signing order');
         await severity(Severity.CRITICAL);
         await link(`${QASE_LINK}/SIGN-11`, 'Qase: SIGN-11');
-        await link(`${GOOGLE_DOC_LINK}7y8njhymxgmj`, 'ATC_04_11_02');
+        await link(`${GOOGLE_DOC_LINK}7y8njhymxgmj`, 'ATC_04_11_01');
         await epic('Sign document');
         await tag('Signing order');
 
@@ -248,14 +248,8 @@ test.describe('Sign Document', () => {
     }) => {
         await description('Objective: Verify that changing the document status to "expired"(database) updates the front-end display')
         await severity(Severity.CRITICAL);
-        await link(
-            `${QASE_LINK}/SIGN-13`,
-            'Qase: SIGN-13'
-        );
-        await link(
-            `${GOOGLE_DOC_LINK}fm3jt5v1qq97`,
-            'ATC_04_13_01'
-        );
+        await link(`${QASE_LINK}/SIGN-13`, 'Qase: SIGN-13');
+        await link(`${GOOGLE_DOC_LINK}fm3jt5v1qq97`, 'ATC_04_13_01');
         await epic('Sign a document');
         await tag('Document status: expiring');
 
@@ -285,6 +279,49 @@ test.describe('Sign Document', () => {
 
         await step('Verify that the document has "expired" status', async () => {
             await expect(await documentsPage.table.documentStatus).toHaveText(DOCUMENT_STATUS.expired);
+        });
+    });
+
+    test('TC_04_11_02 | Verify custom signing order between others customers', async ({
+        createBusinessUserAndLogin,
+        signPage,
+        prepareForSignatureModal,
+    }) => {
+        test.setTimeout(250 * 1000);
+
+        await description('To verify custom signing order between others customers');
+        await severity(Severity.CRITICAL);
+        await link(`${QASE_LINK}/SIGN-11`, 'Qase: SIGN-11');
+        await link(`${GOOGLE_DOC_LINK}jc3cfedpihif`, 'ATC_04_11_02');
+        await epic('Sign document');
+        await tag('Signing order');
+
+        await signPage.uploadFileTab.fileUploader.uploadFile(UPLOAD_FILE_PATH.xlsxDocument);
+        await signPage.uploadFileTab.clickPrepareDocumentBtn();
+        await prepareForSignatureModal.clickSendForSignatureRadioBtn();
+
+        for(let i = 0; i < 3; i++) {
+        const signerName = `${process.env.NEW_USER_NAME}${'00'}${i}`;
+        const signerEmail = `${process.env.EMAIL_PREFIX}${process.env.NEW_USER_NUMBER}${'00'}${i}${process.env.EMAIL_DOMAIN}`;
+        
+        await prepareForSignatureModal.clickAddSignerBtn();
+        await prepareForSignatureModal.fillSignerNameField(signerName, i);
+        await prepareForSignatureModal.fillSignerEmailField(signerEmail, i);
+        }
+        await prepareForSignatureModal.clickCustomSigningOrderCheckbox();
+
+        await step('Verify that customers orders number visibility', async () => {
+            await expect(prepareForSignatureModal.customSigningOrderPositionNumberOne).toBeVisible();
+        });
+        
+        await step('Verify that customers orders has been positioned', async () => {
+            await expect(prepareForSignatureModal.customSigningOrderPositionNumberOne).toHaveText('1.');
+        });
+
+        await prepareForSignatureModal.customSigningOrderPositionNumberOne.dragTo(prepareForSignatureModal.customSigningOrderPositionNumberTwo,);
+
+        await step('Verify that customers orders has been changed', async () => {
+            expect(prepareForSignatureModal.signerNameField.nth(1)).toHaveValue(`${process.env.NEW_USER_NAME}${'00'}${1}`);
         });
     });
 });
