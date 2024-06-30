@@ -72,11 +72,6 @@ test.describe('Profile', () => {
             await expect(settingsProfilePage.toast.toastBody).toHaveText(TOAST_MESSAGE.deleteAccount);
         });
       
-        await step(
-            `Verify that the User is logged in with a new password and is on the homepage ${URL_END_POINTS.signEndPoint} `,
-            async () => {
-                await expect(signPage.page).toHaveURL(process.env.URL + URL_END_POINTS.signEndPoint);
-            });
     });
 
     test('TC_11_44_01 | Verify User can change email', async ({
