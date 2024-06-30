@@ -27,7 +27,7 @@ export default class TableComponent {
         this.disableFormBtn = this.page.getByRole('button', { name: 'Disable Form' });
         this.enableFormBtn = this.page.getByRole('button', { name: 'Enable Form' });
         this.deleteForm = this.page.getByRole('button', { name: 'Delete Form' });
-        this.yesDelete = this.page.getByRole('button', { name: 'Yes, Delete' });
+
     }
 
     async clickFirstOptionsBtn() {
@@ -182,12 +182,5 @@ export default class TableComponent {
             await this.deleteForm.click();
         });
     }
-
-    async clickYesDelete() {
-        await step('Click the "Yes, Delete" button', async () => {
-            await this.yesDelete.click();
-        });
-    }
-
 }
 

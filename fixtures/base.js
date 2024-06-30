@@ -46,6 +46,7 @@ import EditTemplatesPage from "../new_pom/pages/templates/editTemplatesPage.js";
 import TeamPage from "../new_pom/pages/team/teamPage.js";
 import AddTeamMemberModal from "../new_pom/modalWindows/addTeamMemberModal.js";
 import TeamsAcceptInvitePage from "../new_pom/pages/team/teamsAcceptInvitePage.js";
+import ConfirmDeletionModal from "../new_pom/modalWindows/confirmDeletionModal.js";
 
 export const test = base.extend({
 
@@ -213,9 +214,9 @@ export const test = base.extend({
     signUpFreePage: async ({ page }, use) => {
         await use(new SignUpFreePage(page));
     },
-  
+
     deleteMyAccountModal: async ({ page }, use) => {
-        await use(new DeleteMyAccountModal (page));
+        await use(new DeleteMyAccountModal(page));
     },
 
     sendReminderDocumentModal: async ({ page }, use) => {
@@ -241,7 +242,7 @@ export const test = base.extend({
     upgradeYourPlanAPIModal: async ({ page }, use) => {
         await use(new UpgradeYourPlanAPIModal(page));
     },
-  
+
     editTemplatesPage: async ({ page }, use) => {
         await use(new EditTemplatesPage(page));
     },
@@ -256,5 +257,9 @@ export const test = base.extend({
 
     teamsAcceptInvitePage: async ({ page }, use) => {
         await use(new TeamsAcceptInvitePage(page));
-    },  
+    },
+
+    confirmDeletionModal: async ({ page }, use) => {
+        await use(new ConfirmDeletionModal(page));
+    },
 });

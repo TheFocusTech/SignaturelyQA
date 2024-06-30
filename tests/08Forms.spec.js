@@ -139,19 +139,14 @@ test.describe('Forms', () => {
         prepareForSignatureModal,
         createFormPage,
         formsPage,
-        successModal
+        successModal,
+        confirmDeletionModal,
     }) => {
         await description('Verify that user can delete form');
         await tag('Delete Form');
         await severity(Severity.CRITICAL);
-        await link(
-            'https://app.qase.io/case/SIGN-34',
-            'Qase: SIGN-34'
-        );
-        await link(
-            "https://docs.google.com/document/d/1Qce7tKWOwVYtPxgQv_8ae-HUkbAgeOFph0lB_eziY_k/edit#heading=h.ertctkmlxc8",
-            "ATC_08_34_01"
-        );
+        await link(`${QASE_LINK}/SIGN-34`, 'Qase: SIGN-34');
+        await link(`${GOOGLE_DOC_LINK}1rswbzg5kt90`, 'ATC_08_34_01');
         await epic("Forms");
 
         test.setTimeout(120 * 1000);
@@ -160,7 +155,7 @@ test.describe('Forms', () => {
         await signPage.sideMenu.clickForms();
         await formsPage.table.clickFirstOptionsBtn();
         await formsPage.table.clickDeleteForm();
-        await formsPage.table.clickYesDelete();
+        await confirmDeletionModal.clickYesDelete();
         await formsPage.toast.waitForToastIsHiddenByText(TOAST_MESSAGE.success);
 
         await step('Verify that the number of forms in the table is 0', async () => {
