@@ -34,4 +34,42 @@ test.describe('Settings: Edit signature', () => {
             await expect(settingsEditSignaturePage.settingsSignatureList).toHaveCount(1);
         });
     })
+
+    test('TC_13_52_01 | Verify that user can edit Signature.', async ({ 
+        createBusinessUserAndLogin, 
+        signPage, settingsCompanyPage, 
+        settingsEditSignaturePage, 
+        createOrEditSignatureOnSettingModal }) => {
+            await description('Verify that user can delete our Signature.');
+            await severity(Severity.CRITICAL);
+            await link(`${QASE_LINK}/SIGN-51`, 'Qase: SIGN-52');
+            await link(`${GOOGLE_DOC_LINK}5bzz9ln1m6ek`, 'ATC_13_52_01');
+            await epic('Settings');
+            await tag('Edit Signature');
+            test.setTimeout(120 * 1000);
+
+            await createSignature(
+                signPage, 
+                settingsCompanyPage, 
+                settingsEditSignaturePage, 
+                createOrEditSignatureOnSettingModal, 
+                );
+
+            await signPage.sideMenu.clickSettings();
+            await settingsCompanyPage.sideMenuSettings.clickEditSignature();
+
+            await settingsEditSignaturePage.clickDropDownMenu();
+            await settingsEditSignaturePage.clickEditSignatureDropDownItem();
+            
+            await createOrEditSignatureOnSettingModal.clickEditBtn();
+
+            await step('Verify that Signature was edited', async () => {
+                await expect(settingsEditSignaturePage.toast.toastBody.first()).toHaveText(TOAST_MESSAGE.signatureEdited);
+            })
+
+            await step('Verify that Signature only one', async () => {
+                await expect(settingsEditSignaturePage.settingsSignatureList).toHaveCount(1);
+            })
+    })
+
 })
