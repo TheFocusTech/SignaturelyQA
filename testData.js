@@ -32,12 +32,14 @@ export const TOAST_MESSAGE = {
     sendReminder: 'Reminder(s) has been sent',
     documentSubmited: 'Document submitted.',
     duplicated: 'Form successfully duplicated!',
+    folderMovedToFolder: 'Files successfully moved!',
     apiPlanUpgraded: 'Api plan have been upgraded',
     templateSaved: 'Template saved',
     invitesSent: 'Invites sent successfully',
     inviteAccepted: 'Invite accepted.',
     upgradedToAdmin: 'Team member successfully upgraded to admin.',
     downgradeToUser: 'Team member successfully downgraded to user.',
+    templateDuplicate: 'Template successfully duplicated!',
     formDisabled: 'Form successfully disabled!',
     formEnabled: 'Form successfully enabled!',
     documentSuccessfullySended: 'Document successfully sended to specified email(s).',
@@ -158,6 +160,7 @@ export const NO_ATTACHED_CARD = 'Current Card:No attached card';
 export const SUBMIT_TITLE = 'Thanks for Submitting your Document';
 export const SERVICE_NAME = 'Signaturely';
 export const EMAIL_MESSAGE = ' sent you the following document to view';
+export const FOLDER_NAME_SECOND = 'Second Folder';
 export const API_PLANS = ['Gold', 'Platinum', 'Titanium'];
 export const currentPlan = 'Current plan';
 export const EDIT_TEMPLATE_DATA = {

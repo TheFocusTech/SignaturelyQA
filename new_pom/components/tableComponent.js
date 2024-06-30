@@ -13,13 +13,14 @@ export default class TableComponent {
             .getByRole('button', { name: 'Create API key' });
         this.titleEditAndResendDocument = this.page.getByText('Edit & Resend document');
         this.addToAPIBtn = this.page.getByRole('button', { name: 'Add to API' });
-        this.documentTitle = this.page.locator('.documents__list-item .table__column--text--document p');
+        this.objectTitle = this.page.locator('p.table__column');
         this.moveToBtn = this.page.getByRole('button', { name: 'Move to' });
         this.controlsPath = this.page.locator('.tableControls__path');
         this.sendReminderBtn = this.page.getByRole('button', { name: 'Send Reminder' });
         this.duplicateBtn = this.page.getByText('Duplicate');
         this.formsList = this.page.locator('div.table__dataRow');
         this.editBtn = this.page.getByRole('button', { name: 'Edit' });
+        this.listElements = this.page.locator('.documents__list-container');
         this.renameBtn = this.page.getByRole('button', { name: 'Rename' });
         this.inputNameField = this.page.locator('.form__input--hidden');
         this.titleObjectField = this.page.locator('p.table__column')
@@ -62,7 +63,7 @@ export default class TableComponent {
 
     async waitForDocumentTitleVisible(name) {
         await step(`Wait for the document title to be visible`, async () => {
-            await this.titleObjectField.filter({ hasText: name }).waitFor()
+            await this.objectTitle.filter({ hasText: name }).waitFor()
         });
 
     }
@@ -75,7 +76,7 @@ export default class TableComponent {
 
     async openFolder(name) {
         await step('Open the folder', async () => {
-            await this.documentTitle.filter({ hasText: name }).dblclick();
+            await this.objectTitle.filter({ hasText: name }).dblclick();
         });
     }
 
@@ -97,7 +98,6 @@ export default class TableComponent {
     async clickDuplicateBtn() {
         await step('Click the "Duplicate" button', async () => {
             await this.duplicateBtn.click();
-            
         });
     }
 
@@ -127,17 +127,28 @@ export default class TableComponent {
 
     async getTitleFolder() {
         let actualNameFolder;
-        actualNameFolder = await this.titleObjectField.textContent();
-
+        await step('Get title folder', async () => {
+            actualNameFolder = await this.objectTitle.textContent();
+        });
         return actualNameFolder.trim();
     }
 
     async getTemplateTitle() {
         let actualText;
         await step('Get template title', async () => {
-            actualText = await this.documentTitle.textContent();
+            actualText = await this.objectTitle.first().textContent();
         });
         return actualText;
+    }
+
+    async compareTitles() {
+        let actualText;
+        let actualSecondText;
+        await step('Get template titles', async () => {
+            actualText = await this.objectTitle.first().textContent();
+            actualSecondText = await this.objectTitle.nth(1).textContent();
+        });
+        return actualText === actualSecondText;
     }
 
     async waitForDocumentStatus(page, expectedStatus) {
