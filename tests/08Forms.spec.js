@@ -156,7 +156,7 @@ test.describe('Forms', () => {
         await formsPage.table.clickFirstOptionsBtn();
         await formsPage.table.clickDeleteForm();
         await confirmDeletionModal.clickYesDelete();
-        await formsPage.toast.waitForToastIsHiddenByText(TOAST_MESSAGE.success);
+        await formsPage.toast.waitForToastIsHiddenByText(TOAST_MESSAGE.formDeleted);
 
         await step('Verify that the number of forms in the table is 0', async () => {
             await expect(await formsPage.table.formsList).toHaveCount(0);
