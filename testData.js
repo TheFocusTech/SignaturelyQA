@@ -27,7 +27,7 @@ export const TOAST_MESSAGE = {
     companyInformationSave: 'Company information successfully saved',
     fileMovedToFolder: 'Files successfully moved!',
     profileUpdated: 'Profile information updated.',
-    deleteAccount:'Account Deleted.',
+    deleteAccount: 'Account Deleted.',
     checkYourEmail: 'Check your new email to confirm it',
     emailConfirmed: 'Email confirmed',
     sendReminder: 'Reminder(s) has been sent',
@@ -43,8 +43,10 @@ export const TOAST_MESSAGE = {
     templateDuplicate: 'Template successfully duplicated!',
     formDisabled: 'Form successfully disabled!',
     formEnabled: 'Form successfully enabled!',
-
+    formDeleted: 'Form deleted successfully.',
+    documentSended: 'Document successfully sended to specified email(s).',
 };
+
 export const API_KEY_NAME = 'Test Api Key';
 export const NO_API_KEY_MESSAGE = "You don't have any API keys yet.";
 export const DATA_SIGNER = {
@@ -74,7 +76,8 @@ export const DOCUMENT_STATUS = {
     completed: 'completed',
     live: 'live',
     processing: 'processing',
-    expired: 'expired'
+    expired: 'expired',
+    deleted: 'DELETED',
 };
 export const CI_USER_NAME = 'CI_user';
 export const BUSINESS_MONTHLY_PLAN = "Your plan (Billed Monthly)Business";
@@ -158,6 +161,7 @@ export const UPLOAD_FILE_PATH = {
     jpgDocument: 'testDocuments/picture.jpg',
     xlsxDocument: 'testDocuments/todoList.xlsx',
     csvDocument: 'testDocuments/CSV.csv',
+    pdfDocument: 'testDocuments/openHouse.pdf',
 };
 export const UPLOAD_FILE_NAME = {
     jpgDocument: 'picture.jpg',
@@ -189,9 +193,14 @@ export const GOOGLE_DOC_LINK =
 export const FORM_STATUS = {
     live: 'live',
     disabled: 'disabled',
-}
+};
 
 export const CHECK_BOXES_STATUS = {
     checked: 'uiCheckbox__inner uiCheckbox--checked',
     unChecked: 'uiCheckbox__inner uiCheckbox--unChecked'
+};
+
+export const EMPTY_TABLE_HEADER ={
+    documents: "You don't have any documents yet.",
+    trash: "You don't have any deleted documents yet.",
 };
