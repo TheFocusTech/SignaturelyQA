@@ -1,10 +1,13 @@
 import ToastComponent from '../components/toastComponent';
 import { step } from 'allure-js-commons';
+import CalendarComponent from "../components/calendarComponent";
 
 export default class FinalStepPage {
     constructor(page) {
         this.page = page;
+
         this.toast = new ToastComponent(this.page);
+        this.expirationDateCalendar = new CalendarComponent(this.page);
 
         this.documentTitleField = this.page.getByPlaceholder('Enter the title');
         this.signDocumentAndSendForSignatureBtn = this.page.getByRole('button', {
@@ -38,7 +41,9 @@ export default class FinalStepPage {
     }
 
     async fillDocumentOptionalMessageField(message) {
-        await this.documentOptionalMessageField.fill(message);
+        await step('Fill in the document Optional Message.', async () => {
+            await this.documentOptionalMessageField.fill(message);
+        });
     }
 
     async clickSignDocumentBtn() {

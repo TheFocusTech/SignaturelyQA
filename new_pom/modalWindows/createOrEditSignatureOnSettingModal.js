@@ -1,3 +1,4 @@
+import { step } from "allure-js-commons";
 export default class CreateOrEditSignatureOnSettingModal {
     constructor(page) {
         this.page = page;
@@ -9,18 +10,26 @@ export default class CreateOrEditSignatureOnSettingModal {
     }
 
     async fillFullNameField(name) {
-        await this.fullNameField.fill(name);
+        await step('Fill "Full Name" field', async () => {
+            await this.fullNameField.fill(name);
+        })
     }
 
     async fillInitialsField(initial) {
-        await this.initialsField.fill(initial);
+        await step('Fill "Initials" field', async () => {
+            await this.initialsField.fill(initial);
+        })
     }
 
     async clickCheckboxAgree() {
-        await this.checkboxAgree.click();
+        await step('Click the "I agree" checkbox for electronic signing', async () => {
+            await this.checkboxAgree.click();
+        })
     }
 
     async clickCreateSignatureBtn() {
-        await this.createSignatureBtn.click();
+        await step('Click the "Create Signature" button', async () => {
+            await this.createSignatureBtn.click();
+        })
     }
 }

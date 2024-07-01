@@ -1,7 +1,16 @@
 import { expect } from '@playwright/test';
 import { test } from '../fixtures/base.js';
-import { UPLOAD_FILE_PATH, UPLOAD_FILE_NAME, FOLDER_NAME, TOAST_MESSAGE } from '../testData.js';
-import { createFolder, createDocumentAwaiting } from '../helpers/preconditions.js';
+import {
+    UPLOAD_FILE_PATH,
+    UPLOAD_FILE_NAME,
+    FOLDER_NAME,
+    TOAST_MESSAGE,
+    DOCUMENT_STATUS,
+    QASE_LINK,
+    GOOGLE_DOC_LINK,
+    SIGNERS_DATA,
+} from '../testData.js';
+import { createFolder, createDocumentAwaiting, createDocumentCompleted } from '../helpers/preconditions.js';
 import { description, tag, severity, Severity, link, epic, step } from 'allure-js-commons';
 
 test.describe('DocumentsType', () => {
@@ -17,19 +26,16 @@ test.describe('DocumentsType', () => {
         test.setTimeout(250 * 1000);
 
         await description('Objective: To verify that the document can be returned for editing.');
-        await tag('Edit & Resend, Documents');
         await severity(Severity.CRITICAL);
-        await link(
-            'Documentation',
-            'https://docs.google.com/document/d/1Qce7tKWOwVYtPxgQv_8ae-HUkbAgeOFph0lB_eziY_k/edit#heading=h.a5x7xbzct5pl',
-            'TC_05_21_01'
-        ),
-            await epic('Documents');
+        await link(`${QASE_LINK}/SIGN-21`, 'QASE: SIGN-21 ');
+        await link(`${GOOGLE_DOC_LINK}a5x7xbzct5pl`, 'ATC_05_21_01');
+        await tag('Edit & Resend, Documents');
+        await epic('Documents (typed)');
 
         await createDocumentAwaiting(signPage, prepareForSignatureModal, documentsPage, successModal, finalStepPage);
 
         await signPage.sideMenu.clickDocuments();
-        await documentsPage.table.clickOptionsButton();
+        await documentsPage.table.clickFirstOptionsBtn();
         await documentsPage.table.clickEditAndResendBtn();
 
         await step('Verify that modal window Edit & Resend document has opened', async () => {
@@ -53,18 +59,15 @@ test.describe('DocumentsType', () => {
         test.setTimeout(250 * 1000);
 
         await description('Objective: To verify that the document can be returned for editing.');
-        await tag('Edit & Resend, Documents');
         await severity(Severity.CRITICAL);
-        await link(
-            'Documentation',
-            'https://docs.google.com/document/d/1Qce7tKWOwVYtPxgQv_8ae-HUkbAgeOFph0lB_eziY_k/edit#heading=h.r25l83kzqn09',
-            'TC_05_21_02'
-        ),
-            await epic('Documents');
+        await link(`${QASE_LINK}/SIGN-21`, 'QASE: SIGN-21 ');
+        await link(`${GOOGLE_DOC_LINK}r25l83kzqn09`, 'ATC_05_21_02');
+        await tag('Edit & Resend, Documents');
+        await epic('Documents (typed)');
 
         await createDocumentAwaiting(signPage, prepareForSignatureModal, documentsPage, successModal, finalStepPage);
         await signPage.sideMenu.clickDocuments();
-        await documentsPage.table.clickOptionsButton();
+        await documentsPage.table.clickFirstOptionsBtn();
         await documentsPage.table.clickEditAndResendBtn();
         await editAndResendDocumentModal.clickRevertToDraftBtn();
 
@@ -88,19 +91,16 @@ test.describe('DocumentsType', () => {
 
         await description('To verify the process of moving a document into a folder.');
         await severity(Severity.CRITICAL);
-        await link('https://app.qase.io/case/SIGN-18', 'Qase: SIGN-18');
-        await link(
-            'https://docs.google.com/document/d/1Qce7tKWOwVYtPxgQv_8ae-HUkbAgeOFph0lB_eziY_k/edit#heading=h.ylpnl5bdm86k',
-            'ATC_05_18_01'
-        );
+        await link(`${QASE_LINK}/SIGN-18`, 'Qase: SIGN-18');
+        await link(`${GOOGLE_DOC_LINK}ylpnl5bdm86k`, 'ATC_05_18_01');
         await epic('Documents (typed)');
         await tag('Move_to_folder');
 
-        await createFolder(signPage, documentsPage, createFolderModal);
+        await createFolder(signPage, documentsPage, createFolderModal, FOLDER_NAME);
         await signPage.uploadFileTab.fileUploader.uploadFile(UPLOAD_FILE_PATH.jpgDocument);
 
         await signPage.sideMenu.clickDocuments();
-        await documentsPage.table.clickOptionsBtn(1);
+        await documentsPage.table.clickSecondOptionsBtn();
         await documentsPage.table.clickMoveToBtn();
         await moveToFolderModal.selectFolder(FOLDER_NAME);
         await moveToFolderModal.clickMoveToFolderBtn();
@@ -111,7 +111,7 @@ test.describe('DocumentsType', () => {
 
         await documentsPage.table.openFolder(FOLDER_NAME);
         await step('Verify the document is inside the folder', async () => {
-            await expect(await documentsPage.table.documentTitle).toHaveText(UPLOAD_FILE_NAME.jpgDocument);
+            await expect(await documentsPage.table.objectTitle).toHaveText(UPLOAD_FILE_NAME.jpgDocument);
         });
     });
 
@@ -129,11 +129,8 @@ test.describe('DocumentsType', () => {
             'To verify that the user can send a reminder through the user interface and receive the email successfully.'
         );
         await severity(Severity.CRITICAL);
-        await link('https://app.qase.io/case/SIGN-16', 'Qase: SIGN-16');
-        await link(
-            'https://docs.google.com/document/d/1Qce7tKWOwVYtPxgQv_8ae-HUkbAgeOFph0lB_eziY_k/edit#heading=h.pm2gfzvmp6ok',
-            'ATC_05_16_01'
-        );
+        await link(`${QASE_LINK}/SIGN-16`, 'Qase: SIGN-16');
+        await link(`${GOOGLE_DOC_LINK}pm2gfzvmp6ok`, 'ATC_05_16_01');
         await epic('Documents (typed)');
         await tag('Documents', 'Reminder');
 
@@ -142,7 +139,7 @@ test.describe('DocumentsType', () => {
 
         await signPage.sideMenu.clickDocuments();
         await documentsPage.sideMenuDocuments.clickAwaitingSignature();
-        await documentsAwaitingPage.table.clickOptionsBtn(0);
+        await documentsAwaitingPage.table.clickFirstOptionsBtn();
         await documentsAwaitingPage.table.clickSendReminderBtn();
 
         await sendReminderDocumentModal.clickSignerCheckbox();
@@ -150,6 +147,78 @@ test.describe('DocumentsType', () => {
 
         await step('Verify the toast message', async () => {
             await expect(await documentsAwaitingPage.toast.toastBody).toHaveText(TOAST_MESSAGE.sendReminder);
+        });
+    });
+
+    test('TC_05_21_03 | Verify that document_status is  Draft', async ({
+        createBusinessUserAndLogin,
+        signPage,
+        prepareForSignatureModal,
+        successModal,
+        editAndResendDocumentModal,
+        finalStepPage,
+        documentsPage,
+    }) => {
+        test.setTimeout(250 * 1000);
+
+        await description('Objective: To verify that the document can be returned for editing.');
+        await severity(Severity.CRITICAL);
+        await link(`${QASE_LINK}/SIGN-21`, 'QASE: SIGN-21 ');
+        await link(`${GOOGLE_DOC_LINK}cl44yvv352v8`, 'TC_05_21_03');
+
+        await tag('Revert document');
+        await epic('Documents (typed)');
+
+        await createDocumentAwaiting(signPage, prepareForSignatureModal, documentsPage, successModal, finalStepPage);
+        await signPage.sideMenu.clickDocuments();
+        await documentsPage.table.clickFirstOptionsBtn();
+        await documentsPage.table.clickEditAndResendBtn();
+        await editAndResendDocumentModal.clickRevertToDraftBtn();
+        await prepareForSignatureModal.clickCancelBtn();
+        await signPage.sideMenu.clickDocuments();
+
+        await step('Verify the document has status "Draft" ', async () => {
+            expect(await documentsPage.table.getDocumentStatusText()).toBe(DOCUMENT_STATUS.draft);
+        });
+    });
+
+    test('TC_05_17_01 | Share document', async ({
+        createBusinessUserAndLogin,
+        signPage,
+        prepareForSignatureModal,
+        createSignatureOrInitialModal,
+        finalStepPage,
+        successModal,
+        documentsPage,
+        shareThisDocumentModal,
+    }) => {
+        await description('Objective: To verify that the document can be Share.');
+        await severity(Severity.CRITICAL);
+        await link(`${QASE_LINK}/SIGN-17`, 'Qase: SIGN-17');
+        await link(`${GOOGLE_DOC_LINK}sp7vb8tsrias`, 'TC_05_17_01');
+        await epic('Share document');
+        await tag('Documents (typed)');
+
+        test.slow();
+        await createDocumentCompleted(
+            signPage,
+            prepareForSignatureModal,
+            createSignatureOrInitialModal,
+            finalStepPage,
+            successModal,
+            documentsPage
+        );
+
+        await signPage.sideMenu.clickDocuments();
+        await documentsPage.sideMenuDocuments.clickCompleted();
+        await documentsPage.table.clickFirstOptionsBtn();
+        await documentsPage.table.clickShareBtn();
+
+        await shareThisDocumentModal.clickInputEmailField(SIGNERS_DATA.signerEmail1);
+        await shareThisDocumentModal.clickShareDocumentBtn();
+
+        await step('Verify that the document sent to the email." ', async () => {
+            await expect(documentsPage.toast.toastBody).toHaveText(TOAST_MESSAGE.documentSended);
         });
     });
 });
