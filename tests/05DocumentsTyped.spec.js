@@ -125,9 +125,7 @@ test.describe('DocumentsType', () => {
         documentsAwaitingPage,
         sendReminderDocumentModal,
     }) => {
-        await description(
-            'To verify that the user can send a reminder through the user interface and receive the email successfully.'
-        );
+        await description('Objective: To verify that the user can send a reminder through the user interface.');
         await severity(Severity.CRITICAL);
         await link(`${QASE_LINK}/SIGN-16`, 'Qase: SIGN-16');
         await link(`${GOOGLE_DOC_LINK}pm2gfzvmp6ok`, 'ATC_05_16_01');
