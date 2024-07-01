@@ -191,4 +191,10 @@ export default class TableComponent {
             await this.optionsDeleteBtn.click();
         });
     }
+
+    async waitForTable(time) {
+        await step(`Wait for table data to be loaded.`, async () => {
+            await this.page.waitForTimeout(time);
+        });
+    }
 }

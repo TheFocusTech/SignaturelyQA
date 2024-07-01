@@ -151,6 +151,7 @@ export const UPLOAD_FILE_PATH = {
     jpgDocument: 'testDocuments/picture.jpg',
     xlsxDocument: 'testDocuments/todoList.xlsx',
     csvDocument: 'testDocuments/CSV.csv',
+    pdfDocument: 'testDocuments/openHouse.pdf',
 };
 export const UPLOAD_FILE_NAME = {
     jpgDocument: 'picture.jpg',
@@ -187,4 +188,9 @@ export const FORM_STATUS = {
 export const CHECK_BOXES_STATUS = {
     checked: 'uiCheckbox__inner uiCheckbox--checked',
     unChecked: 'uiCheckbox__inner uiCheckbox--unChecked'
+};
+
+export const EMPTY_TABLE_HEADER ={
+    documents: "You don't have any documents yet.",
+    trash: "You don't have any deleted documents yet.",
 };
