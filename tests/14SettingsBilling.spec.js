@@ -133,6 +133,7 @@ test.describe('Billing', () => {
         settingsCompanyPage,
         settingsBillingPage,
         settingsBillingPlanPage,
+        upgradeYourPlanModal,
     }) => {
         await description(
             'Objective: Verify that a user can successfully upgrade their subscription from a monthly plan to an annual plan.'
@@ -150,7 +151,7 @@ test.describe('Billing', () => {
         await settingsBillingPage.clickEditPlanButton();
         await settingsBillingPlanPage.switchMonthlyAnnyallyToggle();
         await settingsBillingPlanPage.clickUpgradeButton(PLANS[1]);
-        await settingsBillingPlanPage.upgradeYourPlanModal.clickSubscribeButton();
+        await upgradeYourPlanModal.clickSubscribeButton();
         await settingsBillingPlanPage.toast.waitForToastText();
 
         await step('Verify the toast message', async () => {
