@@ -42,7 +42,7 @@ export const TOAST_MESSAGE = {
     templateDuplicate: 'Template successfully duplicated!',
     formDisabled: 'Form successfully disabled!',
     formEnabled: 'Form successfully enabled!',
-
+    documentSended: 'Document successfully sended to specified email(s).',
 };
 export const API_KEY_NAME = 'Test Api Key';
 export const NO_API_KEY_MESSAGE = "You don't have any API keys yet.";
@@ -182,3 +182,8 @@ export const FORM_STATUS = {
     live: 'live',
     disabled: 'disabled',
 }
+
+export const CHECK_BOXES_STATUS = {
+    checked: 'uiCheckbox__inner uiCheckbox--checked',
+    unChecked: 'uiCheckbox__inner uiCheckbox--unChecked'
+};
