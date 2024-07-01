@@ -21,7 +21,6 @@ export default class SettingsCompanyPage {
         this.redirectionPage = this.page.getByPlaceholder('https://yourcompany.com');
         this.checkboxActivate = this.page.getByText('Activate custom redirection page');
         this.saveBtn = this.page.getByRole('button', {name: 'Save', exact: true});
-        this.toastPopup = this.page.locator('.Toastify__toast-body');
     }
 
     async logoUpLoadFile(file) {
