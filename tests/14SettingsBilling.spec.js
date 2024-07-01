@@ -1,6 +1,15 @@
 import { expect } from '@playwright/test';
 import { test } from '../fixtures/base.js';
-import { CARD_DETAILS, RANDOM_ANNUALLY_PLAN, PLANS, END_PLAN, QASE_LINK, GOOGLE_DOC_LINK, TOAST_MESSAGE, BUSINESS_ANNUALLY_PLAN } from '../testData.js';
+import {
+    CARD_DETAILS,
+    RANDOM_ANNUALLY_PLAN,
+    PLANS,
+    END_PLAN,
+    QASE_LINK,
+    GOOGLE_DOC_LINK,
+    TOAST_MESSAGE,
+    BUSINESS_ANNUALLY_PLAN,
+} from '../testData.js';
 import { description, tags, severity, Severity, link, epic, feature, step } from 'allure-js-commons';
 
 test.describe('Billing', () => {
@@ -24,7 +33,7 @@ test.describe('Billing', () => {
         await expect(settingsBillingPage.nextInvoiceInfo).toContainText(END_PLAN);
     });
 
-    PLANS.forEach((plan) => {
+    PLANS.forEach(plan => {
         test(`TC_14_56_01 | Verify successful upsell of users subscription ${plan} plan`, async ({
             createFreeUserAndLogin,
             signPage,
@@ -153,6 +162,31 @@ test.describe('Billing', () => {
 
         await step('Verify that the billing plan description is Business', async () => {
             await expect(await settingsBillingPage.billingPlanDescription).toHaveText(BUSINESS_ANNUALLY_PLAN);
+        });
+    });
+
+    test('TC_14_58_01 | Verify the ability to successfully cancel subscription', async ({
+        createBusinessUserAndLogin,
+        signPage,
+        settingsCompanyPage,
+        settingsBillingPage,
+        cancelSubscriptionModal,
+    }) => {
+        await description('Objective: Verify that users can successfully cancel their subscription.');
+        await severity(Severity.CRITICAL);
+        await link(`${QASE_LINK}/SIGN-58`, 'Qase: SIGN-58');
+        await link(`${GOOGLE_DOC_LINK}iqyp5s242v7c`, 'ATC_14_58_01');
+        await epic('Setting');
+        await feature('Billing');
+        await tags('Subscription');
+
+        await signPage.sideMenu.clickSettings();
+        await settingsCompanyPage.sideMenuSettings.clickBilling();
+        await settingsBillingPage.clickCancelSubscriptionButton();
+        await cancelSubscriptionModal.clickCancelSubscriptionButton();
+
+        await step('Verify that the plan cancel message has appeared', async () => {
+            await expect(settingsBillingPage.nextInvoiceInfo).toContainText(END_PLAN);
         });
     });
 });

@@ -132,4 +132,34 @@ test.describe('Forms', () => {
             await expect(await formsPage.table.documentStatus).toHaveText(FORM_STATUS.live);
         });
     });
+
+    test('TC_08_34_01 | Verify that user can delete form', async ({
+        createBusinessUserAndLogin,
+        signPage,
+        prepareForSignatureModal,
+        createFormPage,
+        formsPage,
+        successModal,
+        confirmDeletionModal,
+    }) => {
+        await description('Verify that user can delete form');
+        await tag('Delete Form');
+        await severity(Severity.CRITICAL);
+        await link(`${QASE_LINK}/SIGN-34`, 'Qase: SIGN-34');
+        await link(`${GOOGLE_DOC_LINK}1rswbzg5kt90`, 'ATC_08_34_01');
+        await epic("Forms");
+
+        test.setTimeout(120 * 1000);
+        await createForm(signPage, prepareForSignatureModal, createFormPage, formsPage, successModal);
+
+        await signPage.sideMenu.clickForms();
+        await formsPage.table.clickFirstOptionsBtn();
+        await formsPage.table.clickDeleteForm();
+        await confirmDeletionModal.clickYesDelete();
+        await formsPage.toast.waitForToastIsHiddenByText(TOAST_MESSAGE.formDeleted);
+
+        await step('Verify that the number of forms in the table is 0', async () => {
+            await expect(await formsPage.table.formsList).toHaveCount(0);
+        });
+    });
 });

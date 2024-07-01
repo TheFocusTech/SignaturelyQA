@@ -24,7 +24,7 @@ test.describe('Folders', () => {
         signPage,
         documentsPage,
         createFolderModal,
-        confirmDeleteFolderModal
+        confirmDeletionModal
     }) => {
 
         await description('Objective: To verify the user can delete the folder')
@@ -44,7 +44,7 @@ test.describe('Folders', () => {
         await signPage.sideMenu.clickDocuments();
         await documentsPage.table.clickFirstOptionsBtn();
         await documentsPage.table.clickDeleteBtn();
-        await confirmDeleteFolderModal.clickYesDeleteBtn();
+        await confirmDeletionModal.clickYesDelete();
 
         await step('Verify the toaster notification with the "Folder deleted successfully" text appears after deleting a folder', async () => {
             await expect(await documentsPage.toast.toastBody).toHaveText(TOAST_MESSAGE.folderDeleted)

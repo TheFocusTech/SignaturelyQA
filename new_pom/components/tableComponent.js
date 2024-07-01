@@ -24,8 +24,9 @@ export default class TableComponent {
         this.renameBtn = this.page.getByRole('button', { name: 'Rename' });
         this.inputNameField = this.page.locator('.form__input--hidden');
         this.titleObjectField = this.page.locator('p.table__column')
-        this.disableFormBtn =  this.page.getByRole('button', { name: 'Disable Form' });
-        this.enableFormBtn =  this.page.getByRole('button', { name: 'Enable Form' });
+        this.disableFormBtn = this.page.getByRole('button', { name: 'Disable Form' });
+        this.enableFormBtn = this.page.getByRole('button', { name: 'Enable Form' });
+        this.deleteForm = this.page.getByRole('button', { name: 'Delete Form' });
         this.shareBtn = this.page.getByRole('button', { name: 'Share' });
         this.deleteBtn = this.page.getByRole('button', { name: 'Delete' })
     }
@@ -82,7 +83,9 @@ export default class TableComponent {
     }
 
     async clickSendReminderBtn() {
-        await this.sendReminderBtn.click();
+        await step('Click the "Send Reminder" button', async () => {
+            await this.sendReminderBtn.click();
+    });
     }
 
     async getDocumentStatusText() {
@@ -173,7 +176,13 @@ export default class TableComponent {
 
     async clickEnableFormBtn() {
         await step('Click on "Enable Form" option', async () => {
-        await this.enableFormBtn.click();
+            await this.enableFormBtn.click();
+        });
+    }
+
+    async clickDeleteForm() {
+        await step('Click the "Delete Form" button', async () => {
+            await this.deleteForm.click();
         });
     }
 
