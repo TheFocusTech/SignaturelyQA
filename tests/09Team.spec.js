@@ -58,7 +58,7 @@ test.describe('Team', () => {
         await signPage.sideMenu.clickTeam();
 
         await step("Verify that a team member has role 'Admin' set in the Team table", async () => {
-            expect(await teamPage.teamMemberRoleForExactTeamMemeber(teamMemberEmail)).toHaveText(
+            await expect(await teamPage.teamMemberRoleForExactTeamMemeber(teamMemberEmail)).toHaveText(
                 TEAM_MEMBER_ROLES.admin
             );
         });
@@ -110,7 +110,7 @@ test.describe('Team', () => {
         await signPage.sideMenu.clickTeam();
 
         await step("Verify that a team member has role 'User' set in the Team table", async () => {
-            expect(await teamPage.teamMemberRoleForExactTeamMemeber(teamMemberEmail)).toHaveText(
+            await expect(await teamPage.teamMemberRoleForExactTeamMemeber(teamMemberEmail)).toHaveText(
                 TEAM_MEMBER_ROLES.user);
         });
         await teamPage.clickOptionsForExactTeamMemberByEmail(teamMemberEmail);
@@ -121,7 +121,7 @@ test.describe('Team', () => {
         });
 
         await step("Verify that a team member has role 'Admin' set in the Team table", async () => {
-            expect(await teamPage.teamMemberRoleForExactTeamMemeber(teamMemberEmail)).toHaveText(
+            await expect(await teamPage.teamMemberRoleForExactTeamMemeber(teamMemberEmail)).toHaveText(
                 TEAM_MEMBER_ROLES.admin);
         });
     });
@@ -173,7 +173,7 @@ test.describe('Team', () => {
         await signPage.sideMenu.clickTeam();
 
         await step("Verify that a team member has role 'Admin' set in the Team table", async () => {
-            expect(await teamPage.teamMemberRoleForExactTeamMemeber(teamMemberEmail)).toHaveText(
+            await expect(await teamPage.teamMemberRoleForExactTeamMemeber(teamMemberEmail)).toHaveText(
                 TEAM_MEMBER_ROLES.admin
             );
         });
@@ -185,7 +185,7 @@ test.describe('Team', () => {
         });
 
         await step("Verify that a team member has role 'User' set in the Team table", async () => {
-            expect(await teamPage.teamMemberRoleForExactTeamMemeber(teamMemberEmail)).toHaveText(
+            await expect(await teamPage.teamMemberRoleForExactTeamMemeber(teamMemberEmail)).toHaveText(
                 TEAM_MEMBER_ROLES.user);
         });
     });
