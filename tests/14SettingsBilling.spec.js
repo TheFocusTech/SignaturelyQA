@@ -1,6 +1,15 @@
 import { expect } from '@playwright/test';
 import { test } from '../fixtures/base.js';
-import { CARD_DETAILS, RANDOM_ANNUALLY_PLAN, PLANS, END_PLAN, QASE_LINK, GOOGLE_DOC_LINK, TOAST_MESSAGE, BUSINESS_ANNUALLY_PLAN } from '../testData.js';
+import {
+    CARD_DETAILS,
+    RANDOM_ANNUALLY_PLAN,
+    PLANS,
+    END_PLAN,
+    QASE_LINK,
+    GOOGLE_DOC_LINK,
+    TOAST_MESSAGE,
+    BUSINESS_ANNUALLY_PLAN,
+} from '../testData.js';
 import { description, tags, severity, Severity, link, epic, feature, step } from 'allure-js-commons';
 
 test.describe('Billing', () => {
@@ -24,7 +33,7 @@ test.describe('Billing', () => {
         await expect(settingsBillingPage.nextInvoiceInfo).toContainText(END_PLAN);
     });
 
-    PLANS.forEach((plan) => {
+    PLANS.forEach(plan => {
         test(`TC_14_56_01 | Verify successful upsell of users subscription ${plan} plan`, async ({
             createFreeUserAndLogin,
             signPage,
