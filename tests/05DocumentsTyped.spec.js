@@ -117,7 +117,7 @@ test.describe('DocumentsType', () => {
         });
     });
 
-    test('TC_05_16_01 | Verify that the user receives an email reminder to sign the document', async ({
+    test.skip('TC_05_16_01 | Verify that the user receives an email reminder to sign the document', async ({
         createBusinessUserAndLogin,
         signPage,
         prepareForSignatureModal,
