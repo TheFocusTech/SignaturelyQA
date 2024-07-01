@@ -214,7 +214,7 @@ test.describe('DocumentsType', () => {
         await epic('Documents (typed)');
         await tag('Delete_documents');
 
-        await uploadDraftDocument();
+        await uploadDraftDocument(signPage);
 
         await signPage.sideMenu.clickDocuments();
         await documentsPage.table.clickFirstOptionsBtn();
