@@ -9,8 +9,9 @@ import {
     QASE_LINK,
     GOOGLE_DOC_LINK,
     SIGNERS_DATA,
+    EMPTY_TABLE_HEADER,
 } from '../testData.js';
-import { createFolder, createDocumentAwaiting, createDocumentCompleted } from '../helpers/preconditions.js';
+import { createFolder, createDocumentAwaiting, createDocumentCompleted, uploadDraftDocument } from '../helpers/preconditions.js';
 import { description, tag, severity, Severity, link, epic, step } from 'allure-js-commons';
 
 test.describe('DocumentsType', () => {
@@ -139,7 +140,7 @@ test.describe('DocumentsType', () => {
         await documentsPage.sideMenuDocuments.clickAwaitingSignature();
         await documentsAwaitingPage.table.clickFirstOptionsBtn();
         await documentsAwaitingPage.table.clickSendReminderBtn();
-
+        
         await sendReminderDocumentModal.clickSignerCheckbox();
         await sendReminderDocumentModal.clickSendReminderBtn();
 
@@ -218,5 +219,49 @@ test.describe('DocumentsType', () => {
         await step('Verify that the document sent to the email." ', async () => {
             await expect(documentsPage.toast.toastBody).toHaveText(TOAST_MESSAGE.documentSended);
         });
+    });
+
+    test('TC_05_19_01 | Verify that deleted document has been moved to the trash by using ACTIONS_options dropdown menu and then deleted permanently', async ({
+        createBusinessUserAndLogin,
+        signPage,
+        documentsPage,
+        deleteModal,
+        confirmTrashEmptyingModal,
+        documentsTrashPage}) => {                
+        test.setTimeout(250 * 1000);
+
+        await description('To verify the process of moving the document to the trash and then deleting document permanently.');
+        await severity(Severity.CRITICAL);
+        await link(`${QASE_LINK}/SIGN-19`, 'Qase: SIGN-19');
+        await link(`${GOOGLE_DOC_LINK}bpzeytlzlbz`, 'ATC__05_19_01');
+        await epic('Documents (typed)');
+        await tag('Delete_documents');
+
+        await uploadDraftDocument(signPage);
+
+        await signPage.sideMenu.clickDocuments();
+        await documentsPage.table.clickFirstOptionsBtn();
+        await documentsPage.table.clickOptionsDeleteBtn();
+        await deleteModal.clickYesDeleteBtn();
+        await documentsPage.toast.waitForToastCompleted();
+        await documentsPage.table.waitForTable(3000);
+       
+        await test.step('Verify that table is empty', async () => {
+            await expect (documentsPage.table.emptyTableHeader).toHaveText(EMPTY_TABLE_HEADER.documents);
+        });
+       
+        await documentsPage.sideMenuDocuments.clickTrash();
+           
+        await test.step('Verify document deleted status', async () => {
+            expect(await documentsPage.table.getDocumentStatusText()).toBe(DOCUMENT_STATUS.deleted);
+        });
+
+        await documentsTrashPage.clickEmptyTrashBtn();
+        await confirmTrashEmptyingModal.clickEmptyTrashBtn();
+        await documentsTrashPage.table.waitForTable(3000);
+
+        await test.step('Verify that trash is empty', async () => {
+            await expect (documentsTrashPage.table.emptyTableHeader).toHaveText(EMPTY_TABLE_HEADER.trash);
+        });      
     });
 });
