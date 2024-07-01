@@ -19,6 +19,7 @@ export default class TableComponent {
         this.duplicateBtn = this.page.getByText('Duplicate');
         this.formsList = this.page.locator('div.table__dataRow');
         this.editBtn = this.page.getByRole('button', { name: 'Edit' });
+        this.firstFormTitle = this.page.getByText('Edited Form Name');
     }
 
     async clickOptionsBtn(i) {

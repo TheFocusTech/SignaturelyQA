@@ -45,6 +45,7 @@ import EditTemplatesPage from "../new_pom/pages/templates/editTemplatesPage.js";
 import TeamPage from "../new_pom/pages/team/teamPage.js";
 import AddTeamMemberModal from "../new_pom/modalWindows/addTeamMemberModal.js";
 import TeamsAcceptInvitePage from "../new_pom/pages/team/teamsAcceptInvitePage.js";
+import UpdateFormPage from "../new_pom/pages/forms/updateFormPage.js";
 
 export const test = base.extend({
 
@@ -268,5 +269,8 @@ export const test = base.extend({
     teamsAcceptInvitePage: async ({ page }, use) => {
         await use(new TeamsAcceptInvitePage(page));
     },
+    updateFormPage: async ({ page }, use) => {
+        await use(new UpdateFormPage(page))
+    }
 });
 

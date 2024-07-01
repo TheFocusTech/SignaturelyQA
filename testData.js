@@ -35,6 +35,7 @@ export const TOAST_MESSAGE = {
     invitesSent: 'Invites sent successfully',
     inviteAccepted: 'Invite accepted.',
     upgradedToAdmin: 'Team member successfully upgraded to admin.',
+    editedFormSaved: 'Form saved'
 };
 export const API_KEY_NAME = 'Test Api Key';
 export const NO_API_KEY_MESSAGE = 'You don\'t have any API keys yet.';
@@ -162,3 +163,10 @@ export const TEAM_MEMBER_ROLES = {
     user: 'User',
     admin: 'Admin',
 }
+export const FORMS = {
+    formNameEdit:'Edited Form Name',
+    optionalMessageFormEdit:'Form edited'
+}
+export const QASE_LINK = 'https://app.qase.io/case';
+export const GOOGLE_DOC_LINK =
+    'https://docs.google.com/document/d/1Qce7tKWOwVYtPxgQv_8ae-HUkbAgeOFph0lB_eziY_k/edit#heading=h.';
