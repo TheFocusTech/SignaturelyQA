@@ -164,7 +164,7 @@ test.describe('Team', () => {
         await epic('Team');
         await tag('Team Member Roles');
 
-        test.setTimeout(90000);
+        test.setTimeout(90*1000);
 
         const teamMemberEmail = `${process.env.EMAIL_PREFIX}${process.env.NEW_USER_NUMBER}${'_teammember'}${process.env.EMAIL_DOMAIN}`;
         const teamMemberName = `${process.env.NEW_USER_NAME}${'_teammember'}`
@@ -188,5 +188,9 @@ test.describe('Team', () => {
         await teamsAcceptInvitePage.clickBackToMainPageButton();
         await teamsAcceptInvitePage.toast.waitForToastIsHiddenByText(TOAST_MESSAGE.inviteAccepted);
         await signPage.sideMenu.clickTeam();
+        await teamPage.checkMemberCheckbox();
+        await teamPage.clickDeleteButton();
+        await teamPage.clickDeleteTeamMemberAnywayButton();
+
 
 })
