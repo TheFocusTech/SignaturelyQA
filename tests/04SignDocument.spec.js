@@ -106,11 +106,7 @@ test.describe('Sign Document', () => {
         await prepareForSignatureModal.clickDocumentBody();
         await prepareForSignatureModal.clickSaveBtn();
 
-        await step('Verify that Success Toast Notification is shown', async () => {
-            await expect(await prepareForSignatureModal.toast.toastBody).toHaveText(TOAST_MESSAGE.success);
-        });
-
-        await finalStepPage.clickSendForSignatureBtn();
+        await finalStepPage.waitAndClickSendForSignatureBtn(TOAST_MESSAGE.success);
         await successModal.clickBackToDocumentsBtn();
         await documentsPage.table.waitForDocumentStatusVisible(DOCUMENT_STATUS.awaiting);
 
@@ -237,16 +233,19 @@ test.describe('Sign Document', () => {
         });
     });
 
-    test('TC_04_13_01 | Verify the document\'s expiration date', async ({
+    test("TC_04_13_01 | Verify the document's expiration date", async ({
         createBusinessUserAndLogin,
-        page, request,
+        page,
+        request,
         signPage,
         prepareForSignatureModal,
         finalStepPage,
         documentsPage,
-        successModal
+        successModal,
     }) => {
-        await description('Objective: Verify that changing the document status to "expired"(database) updates the front-end display')
+        await description(
+            'Objective: Verify that changing the document status to "expired"(database) updates the front-end display'
+        );
         await severity(Severity.CRITICAL);
         await link(`${QASE_LINK}/SIGN-13`, 'Qase: SIGN-13');
         await link(`${GOOGLE_DOC_LINK}fm3jt5v1qq97`, 'ATC_04_13_01');
@@ -273,7 +272,7 @@ test.describe('Sign Document', () => {
         await successModal.clickBackToDocumentsBtn();
         await documentsPage.table.waitForDocumentStatus(page, DOCUMENT_STATUS.awaiting);
 
-        const documentName = UPLOAD_FILE_PATH.xlsxDocument.split("/").pop();
+        const documentName = UPLOAD_FILE_PATH.xlsxDocument.split('/').pop();
         await editDocumentStatus(request, documentName, DOCUMENT_STATUS.expired);
         await page.reload();
 
@@ -300,28 +299,34 @@ test.describe('Sign Document', () => {
         await signPage.uploadFileTab.clickPrepareDocumentBtn();
         await prepareForSignatureModal.clickSendForSignatureRadioBtn();
 
-        for(let i = 0; i < 3; i++) {
-        const signerName = `${process.env.NEW_USER_NAME}${'00'}${i}`;
-        const signerEmail = `${process.env.EMAIL_PREFIX}${process.env.NEW_USER_NUMBER}${'00'}${i}${process.env.EMAIL_DOMAIN}`;
-        
-        await prepareForSignatureModal.clickAddSignerBtn();
-        await prepareForSignatureModal.fillSignerNameField(signerName, i);
-        await prepareForSignatureModal.fillSignerEmailField(signerEmail, i);
+        for (let i = 0; i < 3; i++) {
+            const signerName = `${process.env.NEW_USER_NAME}${'00'}${i}`;
+            const signerEmail = `${process.env.EMAIL_PREFIX}${process.env.NEW_USER_NUMBER}${'00'}${i}${
+                process.env.EMAIL_DOMAIN
+            }`;
+
+            await prepareForSignatureModal.clickAddSignerBtn();
+            await prepareForSignatureModal.fillSignerNameField(signerName, i);
+            await prepareForSignatureModal.fillSignerEmailField(signerEmail, i);
         }
         await prepareForSignatureModal.clickCustomSigningOrderCheckbox();
 
         await step('Verify that customers orders number visibility', async () => {
             await expect(prepareForSignatureModal.customSigningOrderPositionNumberOne).toBeVisible();
         });
-        
+
         await step('Verify that customers orders has been positioned', async () => {
             await expect(prepareForSignatureModal.customSigningOrderPositionNumberOne).toHaveText('1.');
         });
 
-        await prepareForSignatureModal.customSigningOrderPositionNumberOne.dragTo(prepareForSignatureModal.customSigningOrderPositionNumberTwo,);
+        await prepareForSignatureModal.customSigningOrderPositionNumberOne.dragTo(
+            prepareForSignatureModal.customSigningOrderPositionNumberTwo
+        );
 
         await step('Verify that customers orders has been changed', async () => {
-            expect(prepareForSignatureModal.signerNameField.nth(1)).toHaveValue(`${process.env.NEW_USER_NAME}${'00'}${1}`);
+            expect(prepareForSignatureModal.signerNameField.nth(1)).toHaveValue(
+                `${process.env.NEW_USER_NAME}${'00'}${1}`
+            );
         });
     });
 });
