@@ -20,6 +20,7 @@ export default class TableComponent {
         this.duplicateBtn = this.page.getByText('Duplicate');
         this.formsList = this.page.locator('div.table__dataRow');
         this.editBtn = this.page.getByRole('button', { name: 'Edit' });
+        this.optionsDeleteBtn = this.page.getByRole('button', { name: 'Delete' });
         this.listElements = this.page.locator('.documents__list-container');
         this.renameBtn = this.page.getByRole('button', { name: 'Rename' });
         this.inputNameField = this.page.locator('.form__input--hidden');
@@ -89,6 +90,7 @@ export default class TableComponent {
     }
 
     async getDocumentStatusText() {
+        await this.documentStatus.waitFor({state:'visible', timeout: 3000});
         const actualText = await this.documentStatus.textContent();
         return actualText;
     }
@@ -197,5 +199,18 @@ export default class TableComponent {
             await this.deleteBtn.click();
         });
     }
-}
 
+
+    async clickOptionsDeleteBtn() {
+        await step('Click the "Option delete" button it the dropdown menu', async () => {
+            await this.optionsDeleteBtn.waitFor( {state: 'visible'});
+            await this.optionsDeleteBtn.click();
+        });
+    }
+
+    async waitForTable(time) {
+        await step(`Wait for table data to be loaded.`, async () => {
+            await this.page.waitForTimeout(time);
+        });
+    }
+}

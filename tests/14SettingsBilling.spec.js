@@ -22,6 +22,16 @@ test.describe('Billing', () => {
         downgradeToPersonalPlanModal,
         specialOneTimeOfferModal,
     }) => {
+        await description(
+            'Objective: To verify the functionality of downgrade subscription.'
+        );
+        await severity(Severity.CRITICAL);
+        await link(`${QASE_LINK}/SIGN-57`, 'Qase: SIGN-57');
+        await link(`${GOOGLE_DOC_LINK}83e29wiaygvp`, 'ATC_14_57_02');
+        await epic('Setting');
+        await feature('Billing');
+        await tags('Subscription');
+
         await signPage.sideMenu.clickSettings();
         await settingsCompanyPage.sideMenuSettings.clickBilling();
         await settingsBillingPage.clickEditPlanButton();
@@ -30,7 +40,9 @@ test.describe('Billing', () => {
         await specialOneTimeOfferModal.clickNoThanksModalBtn();
         await settingsBillingPlanPage.sideMenuSettings.clickBilling();
 
-        await expect(settingsBillingPage.nextInvoiceInfo).toContainText(END_PLAN);
+         await step('Verify that text "Your plan will end on" displayed on the Billing page', async () => {
+            await expect(settingsBillingPage.nextInvoiceInfo).toContainText(END_PLAN);
+        }); 
     });
 
     PLANS.forEach(plan => {
