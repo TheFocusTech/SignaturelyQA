@@ -117,7 +117,7 @@ test.describe('DocumentsType', () => {
         });
     });
 
-    test.skip('TC_05_16_01 | Verify that the user receives an email reminder to sign the document', async ({
+    test('TC_05_16_01 | Verify that the user receives an email reminder to sign the document', async ({
         createBusinessUserAndLogin,
         signPage,
         prepareForSignatureModal,
@@ -141,7 +141,6 @@ test.describe('DocumentsType', () => {
         await documentsPage.sideMenuDocuments.clickAwaitingSignature();
         await documentsAwaitingPage.table.clickFirstOptionsBtn();
         await documentsAwaitingPage.table.clickSendReminderBtn();
-        await deleteModal.clickYesDeleteBtn();
         await sendReminderDocumentModal.clickSignerCheckbox();
         await sendReminderDocumentModal.clickSendReminderBtn();
 
