@@ -24,6 +24,7 @@ export const TOAST_MESSAGE = {
     folderCreated: 'Folder created!',
     signatureCreated: 'Signature created successfully',
     success: 'Document successfully saved!',
+    companyInformationSave: 'Company information successfully saved',
     fileMovedToFolder: 'Files successfully moved!',
     profileUpdated: 'Profile information updated.',
     deleteAccount: 'Account Deleted.',
@@ -138,6 +139,13 @@ export const SELECTORS = {
     message: 'td p:has(a)',
 };
 
+export const COMPANY_INFO ={
+    companyName: 'companyName',
+    emailFrom:`${process.env.EMAIL_PREFIX}${'001'}`,
+    emailTo:`${process.env.EMAIL_PREFIX}${'002'}${process.env.EMAIL_DOMAIN}`,
+    redirectionPage: 'https://yourcompany.com/'
+}
+
 export const SIGNER_ME = 'Me (Now)';
 
 export const SIGNERS_DATA = {
@@ -160,7 +168,6 @@ export const UPLOAD_FILE_NAME = {
     csvDocument: 'CSV.csv',
 };
 export const NO_ATTACHED_CARD = 'Current Card:No attached card';
-
 export const SUBMIT_TITLE = 'Thanks for Submitting your Document';
 export const SERVICE_NAME = 'Signaturely';
 export const EMAIL_MESSAGE = ' sent you the following document to view';
@@ -176,6 +183,7 @@ export const EDIT_TEMPLATE_DATA = {
 export const TEAM_MEMBER_ROLES = {
     user: 'User',
     admin: 'Admin',
+
 };
 
 export const QASE_LINK = 'https://app.qase.io/case';
@@ -185,7 +193,7 @@ export const GOOGLE_DOC_LINK =
 export const FORM_STATUS = {
     live: 'live',
     disabled: 'disabled',
-}
+};
 
 export const CHECK_BOXES_STATUS = {
     checked: 'uiCheckbox__inner uiCheckbox--checked',
