@@ -1,4 +1,4 @@
-import { DATA_SIGNER, FOLDER_NAME, TOAST_MESSAGE, CREATE_TEMPLATE, UPLOAD_FILE_PATH, SIGNERS_DATA } from "../testData";
+import { DATA_SIGNER, TOAST_MESSAGE, CREATE_TEMPLATE, UPLOAD_FILE_PATH, SIGNERS_DATA } from "../testData";
 import { step } from "allure-js-commons";
 
 export const createSignature = async (signPage, settingsCompanyPage, settingsEditSignaturePage, createOrEditSignatureOnSettingModal) => {
@@ -19,60 +19,55 @@ export const createDocumentAwaiting = async (
     prepareForSignatureModal,
     documentsPage,
     successModal,
-    finalStepPage) => {
-
+    finalStepPage
+) => {
     await step('Precondition: Document creation in progress with Awaiting status ', async () => {
         await signPage.uploadFileTab.fileUploader.uploadFile(UPLOAD_FILE_PATH.jpgDocument);
         await signPage.uploadFileTab.clickPrepareDocumentBtn();
         await prepareForSignatureModal.clickSendForSignatureRadioBtn();
         await prepareForSignatureModal.clickAddSignerBtn();
-        await prepareForSignatureModal.fillSignerNameField(SIGNERS_DATA.signerName1, 0)
+        await prepareForSignatureModal.fillSignerNameField(SIGNERS_DATA.signerName1, 0);
         await prepareForSignatureModal.fillSignerEmailField(SIGNERS_DATA.signerEmail1, 0);
         await prepareForSignatureModal.clickContinueBtn();
         await prepareForSignatureModal.clickGotItBtn();
 
-        await prepareForSignatureModal.clickSignFieldsItem();
+        await prepareForSignatureModal.clickSignOnFieldsMenu();
         await prepareForSignatureModal.clickDocumentBody();
         await prepareForSignatureModal.clickSaveBtn();
         await finalStepPage.waitAndClickSendForSignatureBtn(TOAST_MESSAGE.success);
         await successModal.clickBackToDocumentsBtn();
         await documentsPage.sideMenu.clickSign();
-    })
+    });
 };
 
-export const createFolder = async (
-    signPage,
-    documentsPage,
-    createFolderModal) => {
-
+export const createFolder = async (signPage, documentsPage, createFolderModal, folderName) => {
     await step('Precondition: Create Folder', async () => {
         await signPage.sideMenu.clickDocuments();
         await documentsPage.clickCreateFolderBtn();
-        await createFolderModal.fillNewFolderName(FOLDER_NAME);
+        await createFolderModal.fillNewFolderName(folderName);
         await createFolderModal.clickCreateBtn();
         await documentsPage.toast.waitForToastIsHiddenByText(TOAST_MESSAGE.folderCreated);
         await documentsPage.sideMenu.clickSign();
-    })
+    });
 };
 
-export const createTemplate = async (signPage, prepareForSignatureModal, templatePage, createNewTemplatePage) => {
+export const createTemplate = async (signPage, prepareForSignatureModal, templatesPage, createNewTemplatePage) => {
     await step('Precondition: Create Template', async () => {
         await signPage.sideMenu.clickTemplates();
-        await templatePage.sideMenuTemplates.clickCreateTemplate();
-        await createNewTemplatePage.createTemplate.fillTemplateNameField(CREATE_TEMPLATE.nameField);
-        await createNewTemplatePage.createTemplate.fillCreateTemplateRolesField(CREATE_TEMPLATE.nameRole);
+        await templatesPage.sideMenuTemplates.clickCreateTemplate();
+        await createNewTemplatePage.fillTemplateNameField(CREATE_TEMPLATE.nameField);
+        await createNewTemplatePage.fillCreateTemplateRolesField(CREATE_TEMPLATE.nameRole);
         await createNewTemplatePage.fileUploader.uploadFile(UPLOAD_FILE_PATH.jpgDocument);
-        await createNewTemplatePage.createTemplate.clickFillTemplateBtn();
-        await prepareForSignatureModal.clickSignFieldsItem();
+        await createNewTemplatePage.clickFillTemplateBtn();
+        await prepareForSignatureModal.clickSignOnFieldsMenu();
         await prepareForSignatureModal.clickDocumentBody();
         await prepareForSignatureModal.clickCreateBtn();
         await prepareForSignatureModal.clickBackToTemplatesBtn();
-        await templatePage.sideMenu.clickSign();
-    })
+        await templatesPage.sideMenu.clickSign();
+    });
 };
 
-export const createForm = async (signPage,
-    prepareForSignatureModal, createFormPage, formsPage, successModal) => {
+export const createForm = async (signPage, prepareForSignatureModal, createFormPage, formsPage, successModal) => {
     await step('Precondition: Create Form', async () => {
         await signPage.sideMenu.clickForms();
         await formsPage.clickCreateFormBtn();
@@ -80,11 +75,11 @@ export const createForm = async (signPage,
         await createFormPage.fillOptionalMessageField(SIGNERS_DATA.viewerEmail1);
         await createFormPage.fileUploader.uploadFile(UPLOAD_FILE_PATH.jpgDocument);
         await createFormPage.clickFillTemplateBtn();
-        await prepareForSignatureModal.clickNameFieldItem();
+        await prepareForSignatureModal.clickNameOnFieldsMenu();
         await prepareForSignatureModal.clickDocumentBody();
-        await prepareForSignatureModal.clickSignFieldItem();
+        await prepareForSignatureModal.clickSignOnFieldsMenu();
         await prepareForSignatureModal.clickDocumentBody();
-        await prepareForSignatureModal.clickDateFieldItem();
+        await prepareForSignatureModal.clickDateOnFieldsMenu();
         await prepareForSignatureModal.clickDocumentBody();
         await prepareForSignatureModal.clickCreateBtn();
         await successModal.clickBackToFormsBtn();
@@ -97,5 +92,24 @@ export const uploadDocumentForDraft = async (signPage, prepareForSignatureModal)
         await signPage.uploadFileTab.fileUploader.uploadFile(UPLOAD_FILE_PATH.xlsxDocument);
         await signPage.uploadFileTab.clickPrepareDocumentBtn();
         await prepareForSignatureModal.clickCancelBtn();        
+    });
+};
+
+export const createDocumentCompleted = async (signPage, prepareForSignatureModal, createSignatureOrInitialModal, finalStepPage, successModal, documentsPage) => {
+    await step('Precondition: Document creation in progress with Completed status ', async () => {
+        await signPage.uploadFileTab.fileUploader.uploadFile('testDocuments/picture.jpg');   
+        await signPage.uploadFileTab.clickPrepareDocumentBtn();   
+
+        await prepareForSignatureModal.clickSignDocumentRadioBtn();
+        await prepareForSignatureModal.clickContinueBtn();
+        await prepareForSignatureModal.clickGotItBtn(); 
+        await prepareForSignatureModal.clickSignOnFieldsMenu();
+        await prepareForSignatureModal.clickDocumentBody();
+        await createSignatureOrInitialModal.clickCheckboxAgree();
+        await createSignatureOrInitialModal.clickSignNowBtn();     
+        await prepareForSignatureModal.clickSaveBtn();
+        await finalStepPage.clickSignDocumentBtn();
+        await successModal.clickBackToDocumentsBtn();
+        await documentsPage.sideMenu.clickSign();
     });
 };

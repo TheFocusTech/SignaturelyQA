@@ -17,6 +17,8 @@ export default class DocumentsPage {
         this.createFolderBtn = this.page.getByRole('button', { name: 'Create Folder' });
         this.optionsDropdown = this.page.getByRole('button', { name: 'Options' }).first();
         this.deleteBtn = this.page.getByRole('button', { name: 'Delete' })
+                
+        this.createFolderBtn = this.page.getByRole('button', { name: 'Create Folder' })
     }
 
     async clickCreateFolderBtn() {

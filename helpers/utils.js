@@ -1,6 +1,8 @@
-import { signUpRequest } from "./apiCalls";
+import {documentIdRequest, documentStatusRequest, signInRequest, signUpRequest} from "./apiCalls";
 import { authorize, getLinkFromEmail, getConfirmCodeFromEmail, getMessageTextFromEmail } from "../index.js";
 import { step } from "allure-js-commons";
+import {DOCUMENT_STATUS} from "../testData";
+import {dbEditDocumentStatus} from "../newUserUtils/dbUtilsForNewUser";
 
 export function generateNumberForNewUser() {
     let dt = new Date();
@@ -193,4 +195,27 @@ export function generateRandomPassword(length) {
         }
 
         return password.join('');
+}
+
+export async function editDocumentStatus(request, documentName, status) {
+    await step('Change status of the document to "expired"', async () => {
+        try {
+            await signInRequest(request);
+
+            const documentId = await documentIdRequest(request, documentName);
+            if (!documentId) {
+                console.warn("Failed to get document ID.");
+            }
+            const documentStatus = await documentStatusRequest(request, documentId);
+            console.log(`Status of the document with id ${documentId} is ${documentStatus}`);
+
+            await dbEditDocumentStatus(status, documentId);
+            const updatedDocumentStatus = await documentStatusRequest(request, documentId);
+            if (updatedDocumentStatus !== DOCUMENT_STATUS.expired) {
+                console.warn("Failed to edit status of the document");
+            }
+        } catch (error) {
+            console.error(`An error occurred: ${error.message}`);
+        }
+    });
 }

@@ -34,6 +34,7 @@ import MoveToFolderModal from "../new_pom/modalWindows/moveToFolderModal.js";
 import SettingsProfilePage from "../new_pom/pages/settings/settingsProfilePage.js";
 import SignUpTrialPage from "../new_pom/pages/signUp/signUpTrialPage";
 import SignUpFreePage from "../new_pom/pages/signUp/signUpFreePage";
+import DeleteMyAccountModal from "../new_pom/modalWindows/deleteMyAccountModal.js";
 import DocumentsAwaitingPage from "../new_pom/pages/documents/documentsAwaitingPage.js";
 import SendReminderDocumentModal from "../new_pom/modalWindows/sendReminderDocumentModal.js";
 import CreateNewTemplatePage from "../new_pom/pages/templates/createNewTemplatePage.js";
@@ -45,26 +46,10 @@ import EditTemplatesPage from "../new_pom/pages/templates/editTemplatesPage.js";
 import TeamPage from "../new_pom/pages/team/teamPage.js";
 import AddTeamMemberModal from "../new_pom/modalWindows/addTeamMemberModal.js";
 import TeamsAcceptInvitePage from "../new_pom/pages/team/teamsAcceptInvitePage.js";
+import ShareThisDocumentModal from "../new_pom/modalWindows/shareThisDocumentModal.js";
 import DeleteFolderModal from "../new_pom/modalWindows/confirmDeleteFolderModal.js"
 
 export const test = base.extend({
-
-    createNewFolder: [
-        async ({ page }, use) => {
-            const signPage = new SignPage(page);
-
-            const documentsPage = await signPage.clickDocumentsSidebarLinkAndGoDocumentsPage();
-            await documentsPage.clickCreateFolderBtn();
-            await documentsPage.fillNewFolderNameInputField();
-            await documentsPage.clickCreateBtn();
-            await documentsPage.clickSignSidebarLinkAndGoSignPage();
-            await documentsPage.locators.getToast().waitFor({ state: "visible" });
-            await documentsPage.locators.getToast().waitFor({ state: "hidden" });
-
-            await use("");
-        },
-        { scope: "test" },
-    ],
 
     createFreeUserAndLogin: [
         async ({ request, page, loginPage }, use) => {
@@ -167,7 +152,7 @@ export const test = base.extend({
         await use(new EditAndResendDocumentModal(page));
     },
 
-    templatePage: async ({ page }, use) => {
+    templatesPage: async ({ page }, use) => {
         await use(new TemplatesPage(page));
     },
 
@@ -230,6 +215,10 @@ export const test = base.extend({
     signUpFreePage: async ({ page }, use) => {
         await use(new SignUpFreePage(page));
     },
+  
+    deleteMyAccountModal: async ({ page }, use) => {
+        await use(new DeleteMyAccountModal (page));
+    },
 
     sendReminderDocumentModal: async ({ page }, use) => {
         await use(new SendReminderDocumentModal(page));
@@ -254,10 +243,10 @@ export const test = base.extend({
     upgradeYourPlanAPIModal: async ({ page }, use) => {
         await use(new UpgradeYourPlanAPIModal(page));
     },
+  
     editTemplatesPage: async ({ page }, use) => {
         await use(new EditTemplatesPage(page));
     },
-
 
     teamPage: async ({ page }, use) => {
         await use(new TeamPage(page));
@@ -269,11 +258,13 @@ export const test = base.extend({
 
     teamsAcceptInvitePage: async ({ page }, use) => {
         await use(new TeamsAcceptInvitePage(page));
-    },
+    }, 
     
+    shareThisDocumentModal: async ({ page }, use) => {
+        await use(new ShareThisDocumentModal(page));
+    },
 
     confirmDeleteFolderModal: async ({ page }, use) => {
         await use(new DeleteFolderModal(page));
     }
 });
-
