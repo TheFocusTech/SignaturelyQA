@@ -1,4 +1,4 @@
-import { test as base } from "@playwright/test";
+import { test as base } from '@playwright/test';
 import { api_user_sign_up } from '../newUserUtils/apiUtilsForNewUser.js';
 import { databaseConfirmNewUserEmail } from '../newUserUtils/dbUtilsForNewUser.js';
 import { newFreeUserLogin, upgradeFreeUserToBusinessAndLogin } from '../newUserUtils/uiUtilsForNewUser.js';
@@ -6,80 +6,85 @@ import SignPage from '../new_pom/pages/sign/signPage.js';
 import DocumentsPage from '../new_pom/pages/documents/documentsPage.js';
 import DocumentsTrashPage from '../new_pom/pages/documents/documentsTrashPage.js';
 import PrepareForSignatureModal from '../new_pom/modalWindows/prepareForSignatureModal.js';
-import ActivateTrialStripePage from "../new_pom/pages/signUp/activateTrialStripePage";
-import SettingsCompanyPage from "../new_pom/pages/settings/settingsCompanyPage.js";
-import SettingsBillingPage from "../new_pom/pages/settings/settingsBillingPage.js";
-import SettingsBillingPlanPage from "../new_pom/pages/settings/settingsBillingPlanPage.js";
-import UpgradeYourPlanModal from "../new_pom/modalWindows/upgradeYourPlanModal";
-import SpecialOneTimeOfferModal from "../new_pom/modalWindows/specialOneTimeOfferModal";
-import CreateSignatureOrInitialModal from "../new_pom/modalWindows/createSignatureOrInitialModal.js";
+import ActivateTrialStripePage from '../new_pom/pages/signUp/activateTrialStripePage';
+import SettingsCompanyPage from '../new_pom/pages/settings/settingsCompanyPage.js';
+import SettingsBillingPage from '../new_pom/pages/settings/settingsBillingPage.js';
+import SettingsBillingPlanPage from '../new_pom/pages/settings/settingsBillingPlanPage.js';
+import UpgradeYourPlanModal from '../new_pom/modalWindows/upgradeYourPlanModal';
+import SpecialOneTimeOfferModal from '../new_pom/modalWindows/specialOneTimeOfferModal';
+import CreateSignatureOrInitialModal from '../new_pom/modalWindows/createSignatureOrInitialModal.js';
 import FinalStepPage from '../new_pom/pages/finalStepPage.js';
 import SuccessModal from '../new_pom/modalWindows/successModal.js';
-import EditAndResendDocumentModal from "../new_pom/modalWindows/editAndResendDocumentModal.js";
-import DowngradeToPersonalPlanModal from "../new_pom/modalWindows/downgradeToPersonalPlanModal.js"
-import SettingsAPIPage from "../new_pom/pages/settings/settingsAPIPage";
-import CreateAPIKeyModal from "../new_pom/modalWindows/createAPIKeyModal.js";
-import TemplatesPage from "../new_pom/pages/templates/templatesPage.js";
-import SignUpPersonalPage from "../new_pom/pages/signUp/signUpPersonalPage";
-import ConfirmCodeModal from "../new_pom/modalWindows/confirmCodeModal";
-import ChooseSignatureOrInitialModal from "../new_pom/modalWindows/chooseSignatureOrInitialModal";
-import CreateOrEditSignatureOnSettingModal from "../new_pom/modalWindows/createOrEditSignatureOnSettingModal";
-import SettingsEditSignaturePage from "../new_pom/pages/settings/settingsEditSignaturePage";
-import LoginPage from "../new_pom/pages/loginPage";
-import ApiTemplatesPage from "../new_pom/pages/templates/apiTemplatesPage.js";
-import FormsPage from "../new_pom/pages/forms/formsPage.js";
-import CreateFormPage from "../new_pom/pages/forms/createFormPage.js";
-import CreateFolderModal from "../new_pom/modalWindows/createFolderModal.js";
-import MoveToFolderModal from "../new_pom/modalWindows/moveToFolderModal.js";
-import SettingsProfilePage from "../new_pom/pages/settings/settingsProfilePage.js";
-import SignUpTrialPage from "../new_pom/pages/signUp/signUpTrialPage";
-import SignUpFreePage from "../new_pom/pages/signUp/signUpFreePage";
-import DeleteMyAccountModal from "../new_pom/modalWindows/deleteMyAccountModal.js";
-import DocumentsAwaitingPage from "../new_pom/pages/documents/documentsAwaitingPage.js";
-import SendReminderDocumentModal from "../new_pom/modalWindows/sendReminderDocumentModal.js";
-import CreateNewTemplatePage from "../new_pom/pages/templates/createNewTemplatePage.js";
+import EditAndResendDocumentModal from '../new_pom/modalWindows/editAndResendDocumentModal.js';
+import DowngradeToPersonalPlanModal from '../new_pom/modalWindows/downgradeToPersonalPlanModal.js';
+import SettingsAPIPage from '../new_pom/pages/settings/settingsAPIPage';
+import CreateAPIKeyModal from '../new_pom/modalWindows/createAPIKeyModal.js';
+import TemplatesPage from '../new_pom/pages/templates/templatesPage.js';
+import SignUpPersonalPage from '../new_pom/pages/signUp/signUpPersonalPage';
+import ConfirmCodeModal from '../new_pom/modalWindows/confirmCodeModal';
+import ChooseSignatureOrInitialModal from '../new_pom/modalWindows/chooseSignatureOrInitialModal';
+import CreateOrEditSignatureOnSettingModal from '../new_pom/modalWindows/createOrEditSignatureOnSettingModal';
+import SettingsEditSignaturePage from '../new_pom/pages/settings/settingsEditSignaturePage';
+import LoginPage from '../new_pom/pages/loginPage';
+import ApiTemplatesPage from '../new_pom/pages/templates/apiTemplatesPage.js';
+import FormsPage from '../new_pom/pages/forms/formsPage.js';
+import CreateFormPage from '../new_pom/pages/forms/createFormPage.js';
+import CreateFolderModal from '../new_pom/modalWindows/createFolderModal.js';
+import MoveToFolderModal from '../new_pom/modalWindows/moveToFolderModal.js';
+import SettingsProfilePage from '../new_pom/pages/settings/settingsProfilePage.js';
+import SignUpTrialPage from '../new_pom/pages/signUp/signUpTrialPage';
+import SignUpFreePage from '../new_pom/pages/signUp/signUpFreePage';
+import DeleteMyAccountModal from '../new_pom/modalWindows/deleteMyAccountModal.js';
+import DocumentsAwaitingPage from '../new_pom/pages/documents/documentsAwaitingPage.js';
+import SendReminderDocumentModal from '../new_pom/modalWindows/sendReminderDocumentModal.js';
+import CreateNewTemplatePage from '../new_pom/pages/templates/createNewTemplatePage.js';
 import NotRegisterSignerSignPage from '../new_pom/pages/notRegisterSignerSignPage.js';
 import SignerAlmostDoneModal from '../new_pom/modalWindows/signerAlmostDoneModal.js';
 import DocumentSubmitProccessModal from '../new_pom/modalWindows/documentSubmitProccessModal.js';
-import UpgradeYourPlanAPIModal from "../new_pom/modalWindows/upgradeYourPlanAPIModal";
-import EditTemplatesPage from "../new_pom/pages/templates/editTemplatesPage.js";
-import TeamPage from "../new_pom/pages/team/teamPage.js";
-import AddTeamMemberModal from "../new_pom/modalWindows/addTeamMemberModal.js";
-import TeamsAcceptInvitePage from "../new_pom/pages/team/teamsAcceptInvitePage.js";
+import UpgradeYourPlanAPIModal from '../new_pom/modalWindows/upgradeYourPlanAPIModal';
+import EditTemplatesPage from '../new_pom/pages/templates/editTemplatesPage.js';
+import TeamPage from '../new_pom/pages/team/teamPage.js';
+import AddTeamMemberModal from '../new_pom/modalWindows/addTeamMemberModal.js';
+import TeamsAcceptInvitePage from '../new_pom/pages/team/teamsAcceptInvitePage.js';
+import ConfirmDeletionModal from '../new_pom/modalWindows/confirmDeletionModal.js';
+import ShareThisDocumentModal from '../new_pom/modalWindows/shareThisDocumentModal.js';
+import CancelSubscriptionModal from '../new_pom/modalWindows/cancelSubscriptionModal.js';
 
 export const test = base.extend({
-
     createFreeUserAndLogin: [
         async ({ request, page, loginPage }, use) => {
             await api_user_sign_up(request);
             await databaseConfirmNewUserEmail();
             await newFreeUserLogin({ page, loginPage });
 
-            await use("");
+            await use('');
         },
-        { scope: "test" },
+        { scope: 'test' },
     ],
 
     createBusinessUserAndLogin: [
-        async ({
-            createFreeUserAndLogin,
-            signPage,
-            settingsCompanyPage,
-            upgradeYourPlanModal,
-            settingsBillingPlanPage,
-            specialOneTimeOfferModal }, use) => {
-
+        async (
+            {
+                createFreeUserAndLogin,
+                signPage,
+                settingsCompanyPage,
+                upgradeYourPlanModal,
+                settingsBillingPlanPage,
+                specialOneTimeOfferModal,
+            },
+            use
+        ) => {
             await upgradeFreeUserToBusinessAndLogin({
                 signPage,
                 settingsCompanyPage,
                 upgradeYourPlanModal,
                 settingsBillingPlanPage,
-                specialOneTimeOfferModal
+                specialOneTimeOfferModal,
             });
 
-            await use("");
+            await use('');
         },
-        { scope: "test" },
+        { scope: 'test' },
     ],
 
     loginPage: async ({ page }, use) => {
@@ -127,7 +132,7 @@ export const test = base.extend({
     },
 
     downgradeToPersonalPlanModal: async ({ page }, use) => {
-        await use(new DowngradeToPersonalPlanModal(page))
+        await use(new DowngradeToPersonalPlanModal(page));
     },
 
     specialOneTimeOfferModal: async ({ page }, use) => {
@@ -213,9 +218,9 @@ export const test = base.extend({
     signUpFreePage: async ({ page }, use) => {
         await use(new SignUpFreePage(page));
     },
-  
+
     deleteMyAccountModal: async ({ page }, use) => {
-        await use(new DeleteMyAccountModal (page));
+        await use(new DeleteMyAccountModal(page));
     },
 
     sendReminderDocumentModal: async ({ page }, use) => {
@@ -241,7 +246,7 @@ export const test = base.extend({
     upgradeYourPlanAPIModal: async ({ page }, use) => {
         await use(new UpgradeYourPlanAPIModal(page));
     },
-  
+
     editTemplatesPage: async ({ page }, use) => {
         await use(new EditTemplatesPage(page));
     },
@@ -256,5 +261,17 @@ export const test = base.extend({
 
     teamsAcceptInvitePage: async ({ page }, use) => {
         await use(new TeamsAcceptInvitePage(page));
-    },  
+    },
+
+    confirmDeletionModal: async ({ page }, use) => {
+        await use(new ConfirmDeletionModal(page));
+    },
+
+    shareThisDocumentModal: async ({ page }, use) => {
+        await use(new ShareThisDocumentModal(page));
+    },
+
+    cancelSubscriptionModal: async ({ page }, use) => {
+        await use(new CancelSubscriptionModal(page));
+    },
 });

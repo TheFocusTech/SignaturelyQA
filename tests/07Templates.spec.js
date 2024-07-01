@@ -9,6 +9,7 @@ import {
     QASE_LINK,
     GOOGLE_DOC_LINK,
 } from '../testData.js';
+
 import { createTemplate } from '../helpers/preconditions.js';
 import { description, tags, severity, Severity, link, epic, step } from 'allure-js-commons';
 
@@ -72,9 +73,12 @@ test.describe('Templates', () => {
 
         await step('Template successfully added to API (appears in API Templates).', async () => {
             await expect(await apiTemplatesPage.table.documentStatus).toHaveText(TEMPLATES_STATUS.api);
-
         });
-    })
+
+        await step('Template successfully added to API (appears in API Templates) - name checked.', async () => {
+            await expect(templatesPage.table.getTemplateTitle()).resolves.toEqual(CREATE_TEMPLATE.nameField);
+        });
+    });
 
     test('TC_07_28_01 | Verify that user can edit template', async ({
         createBusinessUserAndLogin,
@@ -112,7 +116,8 @@ test.describe('Templates', () => {
         await templatesPage.table.waitForDocumentTitleVisible(EDIT_TEMPLATE_DATA.nameField);
 
         await step('Verify the new name of Template is visible in the table', async () => {
-            await expect(await templatesPage.table.documentTitle).toHaveText(EDIT_TEMPLATE_DATA.nameField);
+            await expect(await templatesPage.table.objectTitle).toHaveText(EDIT_TEMPLATE_DATA.nameField);
+
         });
 
         await step('Verify the toast message "Document successfully saved!"', async () => {
@@ -123,4 +128,42 @@ test.describe('Templates', () => {
             await expect(await templatesPage.toast.toastBody.nth(1)).toHaveText(TOAST_MESSAGE.templateSaved);
         });
     });
+
+    test('TC_07_30_01 | Verify that user can duplicate template', async ({
+        createBusinessUserAndLogin,
+        signPage,
+        prepareForSignatureModal,
+        templatesPage,
+        createNewTemplatePage,
+        successModal
+    }) => {
+        await description('Objective: To verify the process of duplicate template.');
+        await severity(Severity.CRITICAL);
+        await link(`${QASE_LINK}/SIGN-30`, 'Qase: SIGN-30');
+        await link(`${GOOGLE_DOC_LINK}nz5pn2p8lvfz`, 'ATC_07_30_01');
+        await epic('Templates');
+        await tags('User', 'Dublicat');
+
+        test.setTimeout(250 * 1000);
+
+        await createTemplate(signPage,
+            prepareForSignatureModal,
+            templatesPage,
+            createNewTemplatePage);
+
+        await signPage.sideMenu.clickTemplates();
+        await templatesPage.table.clickFirstOptionsBtn()
+        await templatesPage.table.clickDuplicateBtn();
+        await successModal.clickOkBtn();
+        await templatesPage.toast.waitForToastIsHiddenByText(TOAST_MESSAGE.templateDuplicate);
+
+        await step('Verify that the number of tamplates in the table is increased by 1', async () => {
+            await expect(await templatesPage.table.objectTitle).toHaveCount(2);
+        });
+
+        await step("Verify that template1's title equals template2's title.", async () => {
+            expect(await templatesPage.table.compareTitles()).toBe(true);
+        });
+    });
+
 });

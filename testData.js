@@ -26,22 +26,27 @@ export const TOAST_MESSAGE = {
     success: 'Document successfully saved!',
     fileMovedToFolder: 'Files successfully moved!',
     profileUpdated: 'Profile information updated.',
-    deleteAccount:'Account Deleted.',
+    deleteAccount: 'Account Deleted.',
     checkYourEmail: 'Check your new email to confirm it',
     emailConfirmed: 'Email confirmed',
     sendReminder: 'Reminder(s) has been sent',
     documentSubmited: 'Document submitted.',
     duplicated: 'Form successfully duplicated!',
+    folderMovedToFolder: 'Files successfully moved!',
     apiPlanUpgraded: 'Api plan have been upgraded',
     templateSaved: 'Template saved',
     invitesSent: 'Invites sent successfully',
     inviteAccepted: 'Invite accepted.',
     upgradedToAdmin: 'Team member successfully upgraded to admin.',
     downgradeToUser: 'Team member successfully downgraded to user.',
+    templateDuplicate: 'Template successfully duplicated!',
     formDisabled: 'Form successfully disabled!',
     formEnabled: 'Form successfully enabled!',
+    formDeleted: 'Form deleted successfully.',
+    documentSended: 'Document successfully sended to specified email(s).',
     signatureDeleted: 'Signature deleted successfully',
 };
+
 export const API_KEY_NAME = 'Test Api Key';
 export const NO_API_KEY_MESSAGE = "You don't have any API keys yet.";
 export const DATA_SIGNER = {
@@ -74,8 +79,9 @@ export const DOCUMENT_STATUS = {
     expired: 'expired'
 };
 export const CI_USER_NAME = 'CI_user';
-export const BUSINESS_MONTHLY_PLAN = 'Your plan (Billed Monthly)Business';
-export const FREE_PLAN_DESCRIPTION = 'Your plan (Billed Monthly)Free';
+export const BUSINESS_MONTHLY_PLAN = "Your plan (Billed Monthly)Business";
+export const BUSINESS_ANNUALLY_PLAN = "Your plan (Billed Annually)Business";
+export const FREE_PLAN_DESCRIPTION = "Your plan (Billed Monthly)Free";
 
 export const CARD_DETAILS = {
     VISA: {
@@ -157,6 +163,7 @@ export const NO_ATTACHED_CARD = 'Current Card:No attached card';
 export const SUBMIT_TITLE = 'Thanks for Submitting your Document';
 export const SERVICE_NAME = 'Signaturely';
 export const EMAIL_MESSAGE = ' sent you the following document to view';
+export const FOLDER_NAME_SECOND = 'Second Folder';
 export const API_PLANS = ['Gold', 'Platinum', 'Titanium'];
 export const currentPlan = 'Current plan';
 export const EDIT_TEMPLATE_DATA = {
@@ -178,3 +185,8 @@ export const FORM_STATUS = {
     live: 'live',
     disabled: 'disabled',
 }
+
+export const CHECK_BOXES_STATUS = {
+    checked: 'uiCheckbox__inner uiCheckbox--checked',
+    unChecked: 'uiCheckbox__inner uiCheckbox--unChecked'
+};
