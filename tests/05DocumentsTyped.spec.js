@@ -8,8 +8,10 @@ import {
     DOCUMENT_STATUS,
     QASE_LINK,
     GOOGLE_DOC_LINK,
+    SIGNERS_DATA,
+    EMPTY_TABLE_HEADER,
 } from '../testData.js';
-import { createFolder, createDocumentAwaiting } from '../helpers/preconditions.js';
+import { createFolder, createDocumentAwaiting, createDocumentCompleted, uploadDraftDocument } from '../helpers/preconditions.js';
 import { description, tag, severity, Severity, link, epic, step } from 'allure-js-commons';
 
 test.describe('DocumentsType', () => {
@@ -114,7 +116,7 @@ test.describe('DocumentsType', () => {
         });
     });
 
-    test('TC_05_16_01 | Verify that the user receives an email reminder to sign the document', async ({
+    test('TC_05_16_01 | Verify the user receives an email reminder to sign the document', async ({
         createBusinessUserAndLogin,
         signPage,
         prepareForSignatureModal,
@@ -124,19 +126,27 @@ test.describe('DocumentsType', () => {
         documentsAwaitingPage,
         sendReminderDocumentModal,
     }) => {
-        test.setTimeout(250 * 1000);
+        await description('Objective: To verify that the user can send a reminder through the user interface.');
+        await severity(Severity.CRITICAL);
+        await link(`${QASE_LINK}/SIGN-16`, 'Qase: SIGN-16');
+        await link(`${GOOGLE_DOC_LINK}pm2gfzvmp6ok`, 'ATC_05_16_01');
+        await epic('Documents (typed)');
+        await tag('Documents', 'Reminder');
 
+        test.setTimeout(250 * 1000);
         await createDocumentAwaiting(signPage, prepareForSignatureModal, documentsPage, successModal, finalStepPage);
 
         await signPage.sideMenu.clickDocuments();
         await documentsPage.sideMenuDocuments.clickAwaitingSignature();
         await documentsAwaitingPage.table.clickFirstOptionsBtn();
         await documentsAwaitingPage.table.clickSendReminderBtn();
-
+        
         await sendReminderDocumentModal.clickSignerCheckbox();
         await sendReminderDocumentModal.clickSendReminderBtn();
 
-        await expect(await documentsAwaitingPage.toast.toastBody).toHaveText(TOAST_MESSAGE.sendReminder);
+        await step('Verify the toast message', async () => {
+            await expect(await documentsAwaitingPage.toast.toastBody).toHaveText(TOAST_MESSAGE.sendReminder);
+        });
     });
 
     test('TC_05_21_03 | Verify that document_status is  Draft', async ({
@@ -169,5 +179,89 @@ test.describe('DocumentsType', () => {
         await step('Verify the document has status "Draft" ', async () => {
             expect(await documentsPage.table.getDocumentStatusText()).toBe(DOCUMENT_STATUS.draft);
         });
+    });
+
+    test('TC_05_17_01 | Share document', async ({
+        createBusinessUserAndLogin,
+        signPage,
+        prepareForSignatureModal,
+        createSignatureOrInitialModal,
+        finalStepPage,
+        successModal,
+        documentsPage,
+        shareThisDocumentModal,
+    }) => {
+        await description('Objective: To verify that the document can be Share.');
+        await severity(Severity.CRITICAL);
+        await link(`${QASE_LINK}/SIGN-17`, 'Qase: SIGN-17');
+        await link(`${GOOGLE_DOC_LINK}sp7vb8tsrias`, 'TC_05_17_01');
+        await epic('Share document');
+        await tag('Documents (typed)');
+
+        test.slow();
+        await createDocumentCompleted(
+            signPage,
+            prepareForSignatureModal,
+            createSignatureOrInitialModal,
+            finalStepPage,
+            successModal,
+            documentsPage
+        );
+
+        await signPage.sideMenu.clickDocuments();
+        await documentsPage.sideMenuDocuments.clickCompleted();
+        await documentsPage.table.clickFirstOptionsBtn();
+        await documentsPage.table.clickShareBtn();
+
+        await shareThisDocumentModal.clickInputEmailField(SIGNERS_DATA.signerEmail1);
+        await shareThisDocumentModal.clickShareDocumentBtn();
+
+        await step('Verify that the document sent to the email." ', async () => {
+            await expect(documentsPage.toast.toastBody).toHaveText(TOAST_MESSAGE.documentSended);
+        });
+    });
+
+    test('TC_05_19_01 | Verify that deleted document has been moved to the trash by using ACTIONS_options dropdown menu and then deleted permanently', async ({
+        createBusinessUserAndLogin,
+        signPage,
+        documentsPage,
+        deleteModal,
+        confirmTrashEmptyingModal,
+        documentsTrashPage}) => {                
+        test.setTimeout(250 * 1000);
+
+        await description('To verify the process of moving the document to the trash and then deleting document permanently.');
+        await severity(Severity.CRITICAL);
+        await link(`${QASE_LINK}/SIGN-19`, 'Qase: SIGN-19');
+        await link(`${GOOGLE_DOC_LINK}bpzeytlzlbz`, 'ATC__05_19_01');
+        await epic('Documents (typed)');
+        await tag('Delete_documents');
+
+        await uploadDraftDocument(signPage);
+
+        await signPage.sideMenu.clickDocuments();
+        await documentsPage.table.clickFirstOptionsBtn();
+        await documentsPage.table.clickOptionsDeleteBtn();
+        await deleteModal.clickYesDeleteBtn();
+        await documentsPage.toast.waitForToastCompleted();
+        await documentsPage.table.waitForTable(3000);
+       
+        await test.step('Verify that table is empty', async () => {
+            await expect (documentsPage.table.emptyTableHeader).toHaveText(EMPTY_TABLE_HEADER.documents);
+        });
+       
+        await documentsPage.sideMenuDocuments.clickTrash();
+           
+        await test.step('Verify document deleted status', async () => {
+            expect(await documentsPage.table.getDocumentStatusText()).toBe(DOCUMENT_STATUS.deleted);
+        });
+
+        await documentsTrashPage.clickEmptyTrashBtn();
+        await confirmTrashEmptyingModal.clickEmptyTrashBtn();
+        await documentsTrashPage.table.waitForTable(3000);
+
+        await test.step('Verify that trash is empty', async () => {
+            await expect (documentsTrashPage.table.emptyTableHeader).toHaveText(EMPTY_TABLE_HEADER.trash);
+        });      
     });
 });
