@@ -283,5 +283,5 @@ export const test = base.extend({
 
     cancelSubscriptionModal: async ({ page }, use) => {
         await use(new CancelSubscriptionModal(page));
-    },
+    }
 });

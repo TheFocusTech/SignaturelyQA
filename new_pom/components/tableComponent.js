@@ -193,7 +193,6 @@ export default class TableComponent {
         });
     }
 
-
     async clickOptionsDeleteBtn() {
         await step('Click the "Option delete" button it the dropdown menu', async () => {
             await this.optionsDeleteBtn.waitFor( {state: 'visible'});
