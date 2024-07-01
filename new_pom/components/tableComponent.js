@@ -29,6 +29,7 @@ export default class TableComponent {
         this.enableFormBtn = this.page.getByRole('button', { name: 'Enable Form' });
         this.deleteForm = this.page.getByRole('button', { name: 'Delete Form' });
         this.shareBtn = this.page.getByRole('button', { name: 'Share' });
+        this.firstFormTitle = this.page.getByText('Edited Form Name');
     }
 
     async clickFirstOptionsBtn() {
