@@ -28,7 +28,9 @@ export default class SettingsBillingPlanPage {
     }
 
     async clickSelectPersonalPlanButton() {
-        await this.selectPersonalPlanButton.click();
+        await step('Click on "Select" personal plan button', async () => {
+            await this.selectPersonalPlanButton.click();
+        }); 
     }
 
     async switchMonthlyAnnyallyToggle() {
