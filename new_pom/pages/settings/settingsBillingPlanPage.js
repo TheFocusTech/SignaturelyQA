@@ -1,7 +1,6 @@
 import SideMenuSettingsComponent from "../../components/sideMenuSettingsComponent";
 import SideMenuComponent from "../../components/sideMenuComponent";
 import ToastComponent from "../../components/toastComponent";
-import UpgradeYourPlanModal from "../../modalWindows/upgradeYourPlanModal";
 import { step } from "allure-js-commons";
 
 export default class SettingsBillingPlanPage {
@@ -12,7 +11,6 @@ export default class SettingsBillingPlanPage {
         this.sideMenuSettings = new SideMenuSettingsComponent(this.page);
         this.sideMenu = new SideMenuComponent(this.page);
         this.toast = new ToastComponent(this.page);
-        this.upgradeYourPlanModal = new UpgradeYourPlanModal(this.page);
 
         this.billingTableColumnHeader = this.page.locator('.billing__table-column--header');
         this.billingHeader = this.page.locator('.billing__trial-header');
