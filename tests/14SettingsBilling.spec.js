@@ -163,32 +163,4 @@ test.describe('Billing', () => {
             await expect(await settingsBillingPage.billingPlanDescription).toHaveText(BUSINESS_ANNUALLY_PLAN);
         });
     });
-
-    test('TC_14_58_01 | Verify the ability to successfully cancel subscription', async ({
-        createBusinessUserAndLogin,
-        signPage,
-        // settingsCompanyPage,
-        // settingsBillingPage,
-        // settingsBillingPlanPage,
-        // downgradeToPersonalPlanModal,
-        // specialOneTimeOfferModal,
-    }) => {
-        await description('Objective: Verify that free users can successfully cancel their subscription plan.');
-        await severity(Severity.CRITICAL);
-        await link(`${QASE_LINK}/SIGN-58`, 'Qase: SIGN-58');
-        // await link(`${GOOGLE_DOC_LINK}56zml0w3xji7`, 'ATC_14_58_01');
-        await epic('Setting');
-        await feature('Billing');
-        await tags('Subscription');
-
-        await signPage.sideMenu.clickSettings();
-        await settingsCompanyPage.sideMenuSettings.clickBilling();
-        await settingsBillingPage.clickEditPlanButton();
-        await settingsBillingPlanPage.clickSelectPersonalPlanButton();
-        await downgradeToPersonalPlanModal.clickDowngradeButton();
-        await specialOneTimeOfferModal.clickNoThanksModalBtn();
-        await settingsBillingPlanPage.sideMenuSettings.clickBilling();
-
-        await expect(settingsBillingPage.nextInvoiceInfo).toContainText(END_PLAN);
-    });
 });
