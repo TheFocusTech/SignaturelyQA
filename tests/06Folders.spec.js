@@ -43,7 +43,7 @@ test.describe('Folders', () => {
 
         await signPage.sideMenu.clickDocuments();
         await documentsPage.table.clickFirstOptionsBtn();
-        await documentsPage.table.clickDeleteBtn();
+        await documentsPage.table.clickOptionsDeleteBtn();
         await confirmDeletionModal.clickYesDelete();
 
         await step('Verify the toaster notification with the "Folder deleted successfully" text appears after deleting a folder', async () => {
