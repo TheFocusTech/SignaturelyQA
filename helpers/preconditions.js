@@ -82,31 +82,32 @@ export const createForm = async (signPage, prepareForSignatureModal, createFormP
         await prepareForSignatureModal.clickDateOnFieldsMenu();
         await prepareForSignatureModal.clickDocumentBody();
         await prepareForSignatureModal.clickCreateBtn();
+        await prepareForSignatureModal.toast.waitForToastIsHiddenByText(TOAST_MESSAGE.success);
         await successModal.clickBackToFormsBtn();
         await formsPage.sideMenu.clickSign();
     })
 };
 
 export const uploadDocumentForDraft = async (signPage, prepareForSignatureModal) => {
-    await step('Precondition: Upload document for draft', async () => {    
+    await step('Precondition: Upload document for draft', async () => {
         await signPage.uploadFileTab.fileUploader.uploadFile(UPLOAD_FILE_PATH.xlsxDocument);
         await signPage.uploadFileTab.clickPrepareDocumentBtn();
-        await prepareForSignatureModal.clickCancelBtn();        
+        await prepareForSignatureModal.clickCancelBtn();
     });
 };
 
 export const createDocumentCompleted = async (signPage, prepareForSignatureModal, createSignatureOrInitialModal, finalStepPage, successModal, documentsPage) => {
     await step('Precondition: Document creation in progress with Completed status ', async () => {
-        await signPage.uploadFileTab.fileUploader.uploadFile('testDocuments/picture.jpg');   
-        await signPage.uploadFileTab.clickPrepareDocumentBtn();   
+        await signPage.uploadFileTab.fileUploader.uploadFile('testDocuments/picture.jpg');
+        await signPage.uploadFileTab.clickPrepareDocumentBtn();
 
         await prepareForSignatureModal.clickSignDocumentRadioBtn();
         await prepareForSignatureModal.clickContinueBtn();
-        await prepareForSignatureModal.clickGotItBtn(); 
+        await prepareForSignatureModal.clickGotItBtn();
         await prepareForSignatureModal.clickSignOnFieldsMenu();
         await prepareForSignatureModal.clickDocumentBody();
         await createSignatureOrInitialModal.clickCheckboxAgree();
-        await createSignatureOrInitialModal.clickSignNowBtn();     
+        await createSignatureOrInitialModal.clickSignNowBtn();
         await prepareForSignatureModal.clickSaveBtn();
         await finalStepPage.clickSignDocumentBtn();
         await successModal.clickBackToDocumentsBtn();
