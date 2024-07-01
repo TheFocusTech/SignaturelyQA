@@ -39,8 +39,10 @@ export default class PrepareForSignatureModal {
     }
 
     async clickSignDocumentRadioBtn() {
-        await this.signDocumentRadioBtn.waitFor({ state: 'visible' });
-        await this.signDocumentRadioBtn.click();
+        await step('Select "Sign Document" radio button', async () => {
+            await this.signDocumentRadioBtn.waitFor({ state: 'visible' });
+            await this.signDocumentRadioBtn.click();
+        });
     }
 
     async clickSignAndSendForSignatureRadioBtn() {
