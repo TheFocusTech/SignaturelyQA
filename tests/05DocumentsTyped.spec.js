@@ -13,7 +13,6 @@ import {
 } from '../testData.js';
 import { createFolder, createDocumentAwaiting, createDocumentCompleted, uploadDraftDocument } from '../helpers/preconditions.js';
 import { description, tag, severity, Severity, link, epic, step } from 'allure-js-commons';
-import { table } from 'console';
 
 test.describe('DocumentsType', () => {
     test('TC_05_21_01 | Verify that button Edit&Resend is active', async ({
@@ -117,7 +116,7 @@ test.describe('DocumentsType', () => {
         });
     });
 
-    test('TC_05_16_01 | Verify that the user receives an email reminder to sign the document', async ({
+    test('TC_05_16_01 | Verify the user receives an email reminder to sign the document', async ({
         createBusinessUserAndLogin,
         signPage,
         prepareForSignatureModal,
@@ -141,6 +140,7 @@ test.describe('DocumentsType', () => {
         await documentsPage.sideMenuDocuments.clickAwaitingSignature();
         await documentsAwaitingPage.table.clickFirstOptionsBtn();
         await documentsAwaitingPage.table.clickSendReminderBtn();
+        
         await sendReminderDocumentModal.clickSignerCheckbox();
         await sendReminderDocumentModal.clickSendReminderBtn();
 
