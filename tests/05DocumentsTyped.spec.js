@@ -127,8 +127,14 @@ test.describe('DocumentsType', () => {
         documentsAwaitingPage,
         sendReminderDocumentModal,
     }) => {
-        test.setTimeout(250 * 1000);
+        await description('Objective: To verify that the user can send a reminder through the user interface.');
+        await severity(Severity.CRITICAL);
+        await link(`${QASE_LINK}/SIGN-16`, 'Qase: SIGN-16');
+        await link(`${GOOGLE_DOC_LINK}pm2gfzvmp6ok`, 'ATC_05_16_01');
+        await epic('Documents (typed)');
+        await tag('Documents', 'Reminder');
 
+        test.setTimeout(250 * 1000);
         await createDocumentAwaiting(signPage, prepareForSignatureModal, documentsPage, successModal, finalStepPage);
 
         await signPage.sideMenu.clickDocuments();
@@ -139,7 +145,9 @@ test.describe('DocumentsType', () => {
         await sendReminderDocumentModal.clickSignerCheckbox();
         await sendReminderDocumentModal.clickSendReminderBtn();
 
-        await expect(await documentsAwaitingPage.toast.toastBody).toHaveText(TOAST_MESSAGE.sendReminder);
+        await step('Verify the toast message', async () => {
+            await expect(await documentsAwaitingPage.toast.toastBody).toHaveText(TOAST_MESSAGE.sendReminder);
+        });
     });
 
     test('TC_05_21_03 | Verify that document_status is  Draft', async ({
@@ -174,7 +182,16 @@ test.describe('DocumentsType', () => {
         });
     });
 
-    test('TC_05_17_01 | Share document', async ({createBusinessUserAndLogin, signPage, prepareForSignatureModal, createSignatureOrInitialModal, finalStepPage, successModal, documentsPage, shareThisDocumentModal}) => {   
+    test('TC_05_17_01 | Share document', async ({
+        createBusinessUserAndLogin,
+        signPage,
+        prepareForSignatureModal,
+        createSignatureOrInitialModal,
+        finalStepPage,
+        successModal,
+        documentsPage,
+        shareThisDocumentModal,
+    }) => {
         await description('Objective: To verify that the document can be Share.');
         await severity(Severity.CRITICAL);
         await link(`${QASE_LINK}/SIGN-17`, 'Qase: SIGN-17');
@@ -182,20 +199,27 @@ test.describe('DocumentsType', () => {
         await epic('Share document');
         await tag('Documents (typed)');
 
-        test.slow();   
-        await createDocumentCompleted(signPage, prepareForSignatureModal, createSignatureOrInitialModal, finalStepPage, successModal, documentsPage);
-        
+        test.slow();
+        await createDocumentCompleted(
+            signPage,
+            prepareForSignatureModal,
+            createSignatureOrInitialModal,
+            finalStepPage,
+            successModal,
+            documentsPage
+        );
+
         await signPage.sideMenu.clickDocuments();
         await documentsPage.sideMenuDocuments.clickCompleted();
         await documentsPage.table.clickFirstOptionsBtn();
         await documentsPage.table.clickShareBtn();
-           
+
         await shareThisDocumentModal.clickInputEmailField(SIGNERS_DATA.signerEmail1);
         await shareThisDocumentModal.clickShareDocumentBtn();
-              
+
         await step('Verify that the document sent to the email." ', async () => {
             await expect(documentsPage.toast.toastBody).toHaveText(TOAST_MESSAGE.documentSended);
-        });      
+        });
     });
 
     test('TC_05_19_01 | Verify that deleted document has been moved to the trash by using ACTIONS_options dropdown menu and then deleted permanently', async ({
