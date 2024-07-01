@@ -28,7 +28,7 @@ test.describe('Company', () => {
         await settingsCompanyPage.clickSaveBtn();
         
         await step('Verify that toas "Company information successfully saved" appears', async () =>{
-            await expect(settingsCompanyPage.toastPopup).toHaveText(TOAST_MESSAGE.companyInformationSave);
+            await expect(settingsCompanyPage.toast.toastBody).toHaveText(TOAST_MESSAGE.companyInformationSave);
         })
 
         const actualCompanyName = await settingsCompanyPage.companyName.inputValue();
