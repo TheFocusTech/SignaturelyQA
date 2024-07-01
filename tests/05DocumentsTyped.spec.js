@@ -11,8 +11,9 @@ import {
     SIGNERS_DATA,
     EMPTY_TABLE_HEADER,
 } from '../testData.js';
-import { createFolder, createDocumentAwaiting, createDocumentCompleted } from '../helpers/preconditions.js';
+import { createFolder, createDocumentAwaiting, createDocumentCompleted, uploadDraftDocument } from '../helpers/preconditions.js';
 import { description, tag, severity, Severity, link, epic, step } from 'allure-js-commons';
+import { table } from 'console';
 
 test.describe('DocumentsType', () => {
     test('TC_05_21_01 | Verify that button Edit&Resend is active', async ({
@@ -213,13 +214,14 @@ test.describe('DocumentsType', () => {
         await epic('Documents (typed)');
         await tag('Delete_documents');
 
-        await signPage.uploadFileTab.fileUploader.uploadFile(UPLOAD_FILE_PATH.pdfDocument);
+        await uploadDraftDocument();
 
         await signPage.sideMenu.clickDocuments();
         await documentsPage.table.clickFirstOptionsBtn();
         await documentsPage.table.clickOptionsDeleteBtn();
         await deleteModal.clickYesDeleteBtn();
         await documentsPage.toast.waitForToastCompleted();
+        await documentsPage.table.waitForTable(3000);
        
         await test.step('Verify that table is empty', async () => {
             await expect (documentsPage.table.emptyTableHeader).toHaveText(EMPTY_TABLE_HEADER.documents);
@@ -233,6 +235,7 @@ test.describe('DocumentsType', () => {
 
         await documentsTrashPage.clickEmptyTrashBtn();
         await confirmTrashEmptyingModal.clickEmptyTrashBtn();
+        await documentsTrashPage.table.waitForTable(3000);
 
         await test.step('Verify that trash is empty', async () => {
             await expect (documentsTrashPage.table.emptyTableHeader).toHaveText(EMPTY_TABLE_HEADER.trash);

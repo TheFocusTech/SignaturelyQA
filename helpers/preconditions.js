@@ -113,3 +113,9 @@ export const createDocumentCompleted = async (signPage, prepareForSignatureModal
         await documentsPage.sideMenu.clickSign();
     });
 };
+
+export const uploadDraftDocument = async (signPage) => {
+    await step('Precondition: Upload draft document', async () => {
+        await signPage.uploadFileTab.fileUploader.uploadFile(UPLOAD_FILE_PATH.pdfDocument);
+    });
+};
