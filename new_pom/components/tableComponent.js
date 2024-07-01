@@ -206,4 +206,40 @@ export default class TableComponent {
             await this.page.waitForTimeout(time);
         });
     }
+
+    async checkRandomDocuments() {
+        await step('Check two random documents and collect their titles', async () => {
+            await this.documentTitle.last().waitFor( {state: 'visible'} );
+            const documentsTitles = await this.documentTitle.allInnerTexts();
+
+            const index = getRandomIndex(documentsTitles);
+            await this.documentTitle.nth(index).waitFor( {state: 'visible'} );
+            const documentTitleToSave = await this.documentTitle.nth(index).innerText();
+            console.log('test', documentTitleToSave);
+            let documentsTitlesToDelete = '';
+         
+            const docsNameIndex = documentsTitles.map((name, index) => {
+                  return { docName: name, docIndex: index };
+                });
+
+            for (let i in docsNameIndex) {
+                if (docsNameIndex[i].docIndex !== index) {
+                    const inx = Number(docsNameIndex[i].docIndex);
+                    await this.documentsCheckboxes.nth(inx).click();
+                    await this.waitForDocuments(2500);
+                    documentsTitlesToDelete+=docsNameIndex[i].docName+' ';
+                }
+            }
+            this.documentsTitlesText = documentTitleToSave+' '+documentsTitlesToDelete;
+            console.log('documentsTitlesText', this.documentsTitlesText);
+        });
+    }
+   
+    async waitForDocuments(time) {
+        await step(`Wait for documents available in the table.`, async () => {
+            await this.page.waitForTimeout(time);
+            this.actualDocumentsTitles = await this.documentTitle.allInnerTexts();
+        });
+    }
+
 }

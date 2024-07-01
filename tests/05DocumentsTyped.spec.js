@@ -264,4 +264,82 @@ test.describe('DocumentsType', () => {
             await expect (documentsTrashPage.table.emptyTableHeader).toHaveText(EMPTY_TABLE_HEADER.trash);
         });      
     });
+
+    test('TC_05_19_02 | Verify that deleted documents have been moved to the trash by using checkboxes and Select_options dropdown menu and then deleted permanently', async ({
+        createBusinessUserAndLogin,
+        signPage,
+        documentsPage,
+        deleteModal,
+        confirmTrashEmptyingModal,
+        documentsTrashPage}) => {                
+        test.setTimeout(250 * 1000);
+
+        await description('To verify the process of moving the documents to the trash by checkboxes and then deleting documents permanently.');
+        await severity(Severity.CRITICAL);
+        await link(`${QASE_LINK}/SIGN-19`, 'Qase: SIGN-19');
+        await link(`${GOOGLE_DOC_LINK}ba4cs1qxues0`, 'ATC__05_19_02');
+        await epic('Documents (typed)');
+        await tag('Delete_documents');
+
+
+        await createThreeDocuments(signPage);
+
+
+        await signPage.sideMenu.clickDocuments();
+        await documentsPage.table.checkRandomDocuments();
+        let documentsNames = documentsPage.table.documentsTitlesText;
+        console.log(documentsNames);
+
+
+        await documentsPage.clickSelectOptionsBtn();
+        await documentsPage.clickSelectOptionsDeleteBtn();
+        await deleteModal.clickYesDeleteBtn();
+        await documentsPage.toast.waitForToastCompleted();
+   
+        let savedDocument = documentsNames.split(' ')[0];
+        console.log(savedDocument);
+
+
+        await test.step('Verify that undeleted document is visible', async () => {
+            await documentsTrashPage.table.waitForDocuments(5000);
+            await expect (documentsPage.table.documentTitle).toHaveCount(1);
+            await expect (documentsPage.table.documentTitle).toHaveText(savedDocument);
+        });
+
+
+        await documentsPage.sideMenuDocuments.clickTrash();
+       
+        await test.step('Verify deleted documents have correct titles', async () => {
+
+
+            let deletedDocumentsTitles = documentsNames.trim().split(' ');
+            deletedDocumentsTitles.shift();
+            console.log('array', deletedDocumentsTitles);
+            await documentsTrashPage.table.waitForDocuments(5000);
+            const actualDeletedDocumentsTitles = documentsTrashPage.table.actualDocumentsTitles;
+           
+            console.log(actualDeletedDocumentsTitles);
+   
+            expect (documentsTrashPage.table.actualDocumentsTitles).toEqual(deletedDocumentsTitles);
+
+
+        });  
+        // const deletedDocumentStatus = await documentsTrashPage.table.numberOfDocumentStatus.allInnerTexts();
+       
+        // await documentsPage.table.waitForDocumentTitleVisible(savedDocument);
+        // await test.step('Verify documents deleted status', async () => {
+        //     expect (deletedDocumentStatus).toEqual(DELETED_DOCUMENTS_STATUS);
+        // });
+       
+        // await documentsTrashPage.clickEmptyTrashBtn();
+        // await confirmTrashEmptyingModal.clickEmptyTrashBtn();
+        // await documentsTrashPage.toast.waitForToastCompleted();
+       
+        // // await documentsTrashPage.reloadDocumentsTrashPage();
+
+
+        // await test.step('Verify that trash is empty', async () => {
+        //     await expect (documentsTrashPage.table.emptyTableHeader).toHaveText(EMPTY_TABLE_HEADER.trash);
+        // });      
+    });
 });
