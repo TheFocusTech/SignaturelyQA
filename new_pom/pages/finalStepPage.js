@@ -1,6 +1,6 @@
 import ToastComponent from '../components/toastComponent';
 import { step } from 'allure-js-commons';
-import CalendarComponent from "../components/calendarComponent";
+import CalendarComponent from '../components/calendarComponent';
 
 export default class FinalStepPage {
     constructor(page) {
@@ -48,5 +48,11 @@ export default class FinalStepPage {
 
     async clickSignDocumentBtn() {
         await this.signDocumentBtn.click();
+    }
+
+    async clickSendForSignatureBtn() {
+        await step('Click the "Send for Signature" button.', async () => {
+            await this.sendForSignatureBtn.click();
+        });
     }
 }
