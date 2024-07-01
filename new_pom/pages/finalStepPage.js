@@ -37,7 +37,9 @@ export default class FinalStepPage {
     }
 
     async fillDocumentOptionalMessageField(message) {
-        await this.documentOptionalMessageField.fill(message);
+        await step('Fill in the document Optional Message.', async () => {
+            await this.documentOptionalMessageField.fill(message);
+        });
     }
 
     async clickSignDocumentBtn() {
