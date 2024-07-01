@@ -5,6 +5,7 @@ export default class DeleteModal {
         this.page = page;
         this.yesDeleteBtn = this.page.getByRole('button', {name: 'Yes, Delete'});
     }
+    
     async clickYesDeleteBtn() {
         await step('Click on the "Yes, Delete" button in the modal window of document deletion confirmation', async () => {
             await this.yesDeleteBtn.waitFor( {state: 'visible'});
