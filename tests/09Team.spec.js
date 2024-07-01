@@ -11,7 +11,7 @@ import { retrieveUserEmailConfirmationLink } from '../helpers/utils.js';
 import { description, tag, severity, Severity, link, epic, step } from 'allure-js-commons';
 
 test.describe('Team', () => {
-    test.only('TC_09_38_02 | Verify that Business User can add "Admin" team member', async ({
+    test('TC_09_38_02 | Verify that Business User can add "Admin" team member', async ({
         page,
         request,
         createBusinessUserAndLogin,
