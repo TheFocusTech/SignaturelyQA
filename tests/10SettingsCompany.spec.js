@@ -73,7 +73,7 @@ test.describe('Company', () => {
         await settingsCompanyPage.checkEnable3Checkbox();
         await settingsCompanyPage.clickSaveBtn();
         
-        await step('Verify that toas "Company information successfully saved" appears', async () =>{
+        await step('Verify that toast "Company information successfully saved" appears', async () =>{
             await expect(settingsCompanyPage.toast.toastBody).toHaveText(TOAST_MESSAGE.companyInformationSave);
         })
 
