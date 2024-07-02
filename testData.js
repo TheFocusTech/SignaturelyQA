@@ -24,23 +24,29 @@ export const TOAST_MESSAGE = {
     folderCreated: 'Folder created!',
     signatureCreated: 'Signature created successfully',
     success: 'Document successfully saved!',
+    companyInformationSave: 'Company information successfully saved',
     fileMovedToFolder: 'Files successfully moved!',
     profileUpdated: 'Profile information updated.',
-    deleteAccount:'Account Deleted.',
+    deleteAccount: 'Account Deleted.',
     checkYourEmail: 'Check your new email to confirm it',
     emailConfirmed: 'Email confirmed',
     sendReminder: 'Reminder(s) has been sent',
     documentSubmited: 'Document submitted.',
     duplicated: 'Form successfully duplicated!',
+    folderMovedToFolder: 'Files successfully moved!',
     apiPlanUpgraded: 'Api plan have been upgraded',
     templateSaved: 'Template saved',
     invitesSent: 'Invites sent successfully',
     inviteAccepted: 'Invite accepted.',
     upgradedToAdmin: 'Team member successfully upgraded to admin.',
     downgradeToUser: 'Team member successfully downgraded to user.',
+    templateDuplicate: 'Template successfully duplicated!',
     formDisabled: 'Form successfully disabled!',
     formEnabled: 'Form successfully enabled!',
+    formDeleted: 'Form deleted successfully.',
+    documentSended: 'Document successfully sended to specified email(s).',
 };
+
 export const API_KEY_NAME = 'Test Api Key';
 export const NO_API_KEY_MESSAGE = "You don't have any API keys yet.";
 export const DATA_SIGNER = {
@@ -70,7 +76,8 @@ export const DOCUMENT_STATUS = {
     completed: 'completed',
     live: 'live',
     processing: 'processing',
-    expired: 'expired'
+    expired: 'expired',
+    deleted: 'DELETED',
 };
 export const CI_USER_NAME = 'CI_user';
 export const BUSINESS_MONTHLY_PLAN = "Your plan (Billed Monthly)Business";
@@ -132,6 +139,13 @@ export const SELECTORS = {
     message: 'td p:has(a)',
 };
 
+export const COMPANY_INFO ={
+    companyName: 'companyName',
+    emailFrom:`${process.env.EMAIL_PREFIX}${'001'}`,
+    emailTo:`${process.env.EMAIL_PREFIX}${'002'}${process.env.EMAIL_DOMAIN}`,
+    redirectionPage: 'https://yourcompany.com/'
+}
+
 export const SIGNER_ME = 'Me (Now)';
 
 export const SIGNERS_DATA = {
@@ -147,16 +161,17 @@ export const UPLOAD_FILE_PATH = {
     jpgDocument: 'testDocuments/picture.jpg',
     xlsxDocument: 'testDocuments/todoList.xlsx',
     csvDocument: 'testDocuments/CSV.csv',
+    pdfDocument: 'testDocuments/openHouse.pdf',
 };
 export const UPLOAD_FILE_NAME = {
     jpgDocument: 'picture.jpg',
     csvDocument: 'CSV.csv',
 };
 export const NO_ATTACHED_CARD = 'Current Card:No attached card';
-
 export const SUBMIT_TITLE = 'Thanks for Submitting your Document';
 export const SERVICE_NAME = 'Signaturely';
 export const EMAIL_MESSAGE = ' sent you the following document to view';
+export const FOLDER_NAME_SECOND = 'Second Folder';
 export const API_PLANS = ['Gold', 'Platinum', 'Titanium'];
 export const currentPlan = 'Current plan';
 export const EDIT_TEMPLATE_DATA = {
@@ -168,6 +183,7 @@ export const EDIT_TEMPLATE_DATA = {
 export const TEAM_MEMBER_ROLES = {
     user: 'User',
     admin: 'Admin',
+
 };
 
 export const QASE_LINK = 'https://app.qase.io/case';
@@ -177,4 +193,14 @@ export const GOOGLE_DOC_LINK =
 export const FORM_STATUS = {
     live: 'live',
     disabled: 'disabled',
-}
+};
+
+export const CHECK_BOXES_STATUS = {
+    checked: 'uiCheckbox__inner uiCheckbox--checked',
+    unChecked: 'uiCheckbox__inner uiCheckbox--unChecked'
+};
+
+export const EMPTY_TABLE_HEADER ={
+    documents: "You don't have any documents yet.",
+    trash: "You don't have any deleted documents yet.",
+};
