@@ -31,11 +31,11 @@ test.describe('Forms', () => {
         await signPage.sideMenu.clickForms();
 
         await formsPage.clickCreateFormBtn();
-        await createFormPage.fillFormNameField(SIGNERS_DATA.signerName1);
-        await createFormPage.fillOptionalMessageField(SIGNERS_DATA.viewerEmail1);
+        await createFormPage.createUpdateForm.fillFormNameField(SIGNERS_DATA.signerName1);
+        await createFormPage.createUpdateForm.fillOptionalMessageField(SIGNERS_DATA.viewerEmail1);
 
         await createFormPage.fileUploader.uploadFile(UPLOAD_FILE_PATH.jpgDocument);
-        await createFormPage.clickFillTemplateBtn();
+        await createFormPage.createUpdateForm.clickFillTemplateBtn();
 
         await prepareForSignatureModal.clickNameOnFieldsMenu();
         await prepareForSignatureModal.clickDocumentBody();
@@ -75,7 +75,7 @@ test.describe('Forms', () => {
         await epic('Forms');
 
         test.setTimeout(120 * 1000);
-        await createForm(signPage, prepareForSignatureModal, createFormPage, formsPage, successModal);
+        await createForm(signPage,  formsPage,createFormPage, prepareForSignatureModal, successModal);
 
         await signPage.sideMenu.clickForms();
         await formsPage.table.clickFirstOptionsBtn();
@@ -94,9 +94,9 @@ test.describe('Forms', () => {
     test('TC_08_36_01 | Verify that user can disable and enable form', async ({
         createBusinessUserAndLogin,
         signPage,
-        prepareForSignatureModal,
-        createFormPage,
         formsPage,
+        createFormPage,
+        prepareForSignatureModal,       
         successModal,
     }) => {
         await description('Verify that user can duplicate form');
@@ -107,7 +107,7 @@ test.describe('Forms', () => {
         await epic('Forms');
 
         test.setTimeout(120 * 1000);
-        await createForm(signPage, prepareForSignatureModal, createFormPage, formsPage, successModal);
+        await createForm(signPage, formsPage, createFormPage, prepareForSignatureModal, successModal);
 
         await signPage.sideMenu.clickForms();
         await formsPage.table.clickFirstOptionsBtn();
@@ -150,7 +150,7 @@ test.describe('Forms', () => {
         await epic("Forms");
 
         test.setTimeout(120 * 1000);
-        await createForm(signPage, prepareForSignatureModal, createFormPage, formsPage, successModal);
+        await createForm(signPage, formsPage, createFormPage, prepareForSignatureModal, successModal);
 
         await signPage.sideMenu.clickForms();
         await formsPage.table.clickFirstOptionsBtn();
@@ -202,7 +202,7 @@ test.describe('Forms', () => {
         await prepareForSignatureModal.clickSaveBtn();
 
         await step('Verify that first toast message has text "Document successfully saved!"', async () => {
-            await expect(formsPage.toast.toastBody.nth(0)).toHaveText(TOAST_MESSAGE.success);
+            await expect(formsPage.toast.toastBody.first()).toHaveText(TOAST_MESSAGE.success);
         });
         await step('Verify that second toast message has text "Form saved!"', async () => {
             await expect(formsPage.toast.toastBody.nth(1)).toHaveText(TOAST_MESSAGE.editedFormSaved);
