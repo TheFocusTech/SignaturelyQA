@@ -71,7 +71,7 @@ test.describe('Settings: Edit signature', () => {
         })
 
         await step('Verify that Signature was deleted from the list', async () => {
-            await expect(settingsEditSignaturePage.settingsSignatureList).toHaveCount(1);
+            await expect(settingsEditSignaturePage.settingsSignatureItem).toHaveCount(0);
         })
     })
 })
