@@ -91,7 +91,7 @@ test.describe('Billing', () => {
         await link(`${GOOGLE_DOC_LINK}khucr6xuqdib`, 'ATC_14_54_01');
         await epic('Setting');
         await feature('Billing');
-        await tags('Payment Card', 'Billing Portal');
+        await tags('Subscription');
 
         test.setTimeout(100 * 1000);
         await signPage.sideMenu.clickSettings();
@@ -199,6 +199,40 @@ test.describe('Billing', () => {
 
         await step('Verify that the plan cancel message has appeared', async () => {
             await expect(settingsBillingPage.nextInvoiceInfo).toContainText(END_PLAN);
+        });
+    });
+
+PLANS.forEach(plan => {
+    test('TC_14_55_01 | Verify the ability to successfully subscription', async ({
+        createFreeUserAndLogin,
+        signPage,
+        settingsCompanyPage,
+        settingsBillingPage,
+        settingsBillingPlanPage,
+        upgradeYourPlanModal,
+        specialOneTimeOfferModal,
+    }) => {
+        await description('Objective: Verify that free users can successfully upgrade their subscription plan.\n');
+        await severity(Severity.CRITICAL);
+        await link(`${QASE_LINK}/SIGN-55`, 'Qase: SIGN-55');
+        await link(`${GOOGLE_DOC_LINK}xfly7b3oksv7`, 'ATC_14_55_01');
+        await epic('Setting');
+        await feature('Billing');
+        await tags('Subscription');
+
+        test.setTimeout(250 * 1000);
+
+        await signPage.sideMenu.clickSettings();
+        await settingsCompanyPage.horizontalMenu.clickBilling();
+        await settingsBillingPage.clickUpgradePlanButton();
+        await settingsBillingPlanPage.clickUpgradeButton(plan);
+        await upgradeYourPlanModal.cardDetails.fillData(CARD_DETAILS.VISA);
+        await upgradeYourPlanModal.clickSubscribeButton();
+        await settingsBillingPlanPage.toast.waitForToastText();
+
+        await step('Verify the toast message', async () => {
+            await expect(await settingsBillingPlanPage.toast.toastBody).toHaveText(TOAST_MESSAGE.planSuccessChange);
+        });
         });
     });
 });
