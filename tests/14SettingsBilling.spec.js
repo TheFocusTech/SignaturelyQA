@@ -201,4 +201,35 @@ test.describe('Billing', () => {
             await expect(settingsBillingPage.nextInvoiceInfo).toContainText(END_PLAN);
         });
     });
+
+    PLANS.forEach(plan => {
+        test(`TC_14_55_01 | Verify the ability to successfully subscription ${plan} plan`, async ({
+            createFreeUserAndLogin,
+            signPage,
+            settingsCompanyPage,
+            settingsBillingPage,
+            settingsBillingPlanPage,
+            upgradeYourPlanModal,
+        }) => {
+            await description('Objective: Verify that free users can successfully upgrade their subscription plan.');
+            await severity(Severity.CRITICAL);
+            await link(`${QASE_LINK}/SIGN-55`, 'Qase: SIGN-55');
+            await link(`${GOOGLE_DOC_LINK}xfly7b3oksv7`, 'ATC_14_55_01');
+            await epic('Setting');
+            await feature('Billing');
+            await tags('Subscription');
+    
+            await signPage.sideMenu.clickSettings();
+            await settingsCompanyPage.horizontalMenu.clickBilling();
+            await settingsBillingPage.clickUpgradePlanButton();
+            await settingsBillingPlanPage.clickUpgradeButton(plan);
+            await upgradeYourPlanModal.cardDetails.fillData(CARD_DETAILS.VISA);
+            await upgradeYourPlanModal.clickSubscribeButton();
+            await settingsBillingPlanPage.toast.waitForToastText();
+    
+            await step('Verify the toast message', async () => {
+                await expect(await settingsBillingPlanPage.toast.toastBody).toHaveText(TOAST_MESSAGE.planSuccessChange);
+            });
+        });
+    });
 });
