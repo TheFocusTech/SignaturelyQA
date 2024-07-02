@@ -51,6 +51,7 @@ import TeamsAcceptInvitePage from '../new_pom/pages/team/teamsAcceptInvitePage.j
 import ConfirmDeletionModal from '../new_pom/modalWindows/confirmDeletionModal.js';
 import ShareThisDocumentModal from '../new_pom/modalWindows/shareThisDocumentModal.js';
 import CancelSubscriptionModal from '../new_pom/modalWindows/cancelSubscriptionModal.js';
+import UpdateFormPage from '../new_pom/pages/forms/updateFormPage.js';
 
 export const test = base.extend({
     createFreeUserAndLogin: [
@@ -283,5 +284,9 @@ export const test = base.extend({
 
     cancelSubscriptionModal: async ({ page }, use) => {
         await use(new CancelSubscriptionModal(page));
+    },
+
+    updateFormPage: async ({ page }, use) => {
+        await use(new UpdateFormPage(page));
     }
 });
