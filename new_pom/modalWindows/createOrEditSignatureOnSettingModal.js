@@ -8,6 +8,7 @@ export default class CreateOrEditSignatureOnSettingModal {
         this.checkboxAgree = this.page.locator('div').getByText('I agree to sign electronically pursuant to the ');
         this.createSignatureBtn = this.page.getByRole('button', { name: 'Create Signature' });
         this.deleteBtn = this.page.getByRole('button', { name: 'Delete' });
+        this.updateBtn = this.page.getByRole('button', { name: 'Update signature' });
     }
 
     async fillFullNameField(name) {
@@ -37,6 +38,12 @@ export default class CreateOrEditSignatureOnSettingModal {
     async clickDeleteBtn() {
         await step('Click the "Delete" button', async () => {
             await this.deleteBtn.click();
+        })
+    }
+
+    async clickUpdateBtn() {
+        await step('Click the "Update signature" button', async () => {
+            await this.updateBtn.click();
         })
     }
 }

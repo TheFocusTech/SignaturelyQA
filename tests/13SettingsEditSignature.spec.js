@@ -1,7 +1,8 @@
 import { expect } from "@playwright/test";
 import { test, createBusinessUserAndLogin } from "../fixtures/base.js";
-import { DATA_SIGNER, TOAST_MESSAGE, QASE_LINK, GOOGLE_DOC_LINK } from "../testData.js";
+import { DATA_SIGNER, TOAST_MESSAGE, QASE_LINK, GOOGLE_DOC_LINK, SIGNERS_DATA } from "../testData.js";
 import { description, tag, severity, Severity, link, epic, step } from 'allure-js-commons';
+import { createSignature } from '../helpers/preconditions.js';
 
 test.describe('Settings: Edit signature', () => {
     test('TC_13_51_01 | Verify that user can create Signature', async ({
@@ -60,12 +61,14 @@ test.describe('Settings: Edit signature', () => {
         await settingsCompanyPage.sideMenuSettings.clickEditSignature();
 
         await settingsEditSignaturePage.clickDropDownMenu();
-        await settingsEditSignaturePage.clickEditSignatureDropDownItem();
-            
-        await createOrEditSignatureOnSettingModal.clickEditBtn();
+        await settingsEditSignaturePage.clickEditSignatureDropDownItem();   ;
+
+        await createOrEditSignatureOnSettingModal.fillInitialsField(SIGNERS_DATA.signerName2);
+        await createOrEditSignatureOnSettingModal.clickCheckboxAgree();
+        await createOrEditSignatureOnSettingModal.clickUpdateBtn();
 
         await step('Verify that Signature was edited', async () => {
-            await expect(settingsEditSignaturePage.toast.toastBody.first()).toHaveText(TOAST_MESSAGE.signatureEdited);
+            await expect(settingsEditSignaturePage.toast.toastBody.first()).toHaveText(TOAST_MESSAGE.updateSignature);
         })
 
         await step('Verify that Signature only one', async () => {

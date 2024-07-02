@@ -11,7 +11,7 @@ export default class SettingsEditSignaturePage {
         
         this.createSignatureBtn = this.page.getByRole('button', {name: 'Create Signature'});
         this.settingsSignatureList = this.page.locator('.settingsSignature__list');
-        this.dropDownMenu = this.page.page.getByRole('listitem').locator('div').nth(2);;
+        this.dropDownMenu = this.page.getByRole('listitem').locator('div').nth(2);;
         this.deleteSignatureDropDownItem = this.page.getByRole('listitem').locator('div').filter({hasText: 'Delete'}).nth(2);
         this.editSignatureDropDownItem = this.page.getByRole('listitem').locator('div').filter({hasText: 'Edit'}).nth(3);
     }
