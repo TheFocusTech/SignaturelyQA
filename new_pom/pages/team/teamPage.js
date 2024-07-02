@@ -15,6 +15,7 @@ export default class TeamPage {
         this.memberCheckbox = this.page.locator('.uiCheckbox__inner')
         this.deleteBtn = this.page.getByRole('button', { name: 'Delete' });
         this.deleteTeamMemberAnywayBtn = this.page.getByRole('button', { name: 'Delete team member anyway' });
+        this.exactTeamMember = (teamMemberEmail) => this.page.locator('.table__column--team-email').getByText(`${teamMemberEmail}`)
     }
 
     async clickAddTeamMemberButton() {

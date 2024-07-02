@@ -153,16 +153,10 @@ test.describe('Team', () => {
     }) => {
         await description('Objective: To verify that Business User can remove teammate from Team');
         await severity(Severity.CRITICAL);
-        await link(
-            "https://app.qase.io/case/SIGN-40",
-            "Qase: SIGN-40"
-            );
-        await link(
-            "",
-            "ATC_09_40_01"
-            );
+        await link(`${QASE_LINK}/SIGN-40`, 'Qase: SIGN-40');
+        await link(`${GOOGLE_DOC_LINK}piqlawxmqgos`, 'ATC_09_40_01');
         await epic('Team');
-        await tag('Team Member Roles');
+        await tag('Delete Team Member');
 
         test.setTimeout(90*1000);
 
@@ -192,5 +186,13 @@ test.describe('Team', () => {
         await teamPage.clickDeleteButton();
         await teamPage.clickDeleteTeamMemberAnywayButton();
 
+        await step('Verify that a toast message ‘Team member deleted successfully’ popped up', async () => {
+            await expect(teamPage.toast.toastBody).toHaveText(TOAST_MESSAGE.teamMemberDeleted);
+        });
 
-})
+        await step("Verify that a team member is not in the Team table", async () => {
+            expect(await teamPage.exactTeamMember(teamMemberEmail)).not.toBeVisible();
+        });
+    });
+
+

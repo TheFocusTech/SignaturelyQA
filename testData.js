@@ -44,6 +44,7 @@ export const TOAST_MESSAGE = {
     formEnabled: 'Form successfully enabled!',
     formDeleted: 'Form deleted successfully.',
     documentSended: 'Document successfully sended to specified email(s).',
+    teamMemberDeleted: 'Team member deleted successfully',
 };
 
 export const API_KEY_NAME = 'Test Api Key';
