@@ -196,3 +196,9 @@ export const EMPTY_TABLE_HEADER ={
     documents: "You don't have any documents yet.",
     trash: "You don't have any deleted documents yet.",
 };
+
+export const DELETED_DOCUMENTS_STATUS = [
+    'DELETED',
+    'DELETED'
+];
+

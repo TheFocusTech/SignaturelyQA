@@ -1,6 +1,7 @@
 import SideMenuComponent from '../../components/sideMenuComponent';
 import UploadFileOnSignPage from '../../pages/sign/uploadFileOnSignPage';
 import HeaderComponent from '../../components/headerComponent';
+import { step } from "allure-js-commons";
 
 export default class SignPage {
   constructor(page) {
@@ -10,4 +11,11 @@ export default class SignPage {
         this.sideMenu = new SideMenuComponent(this.page);
         this.header = new HeaderComponent(this.page);       
     }
+
+    async singPageReload() {
+      await step('Reload Sing Page', async() => {
+        await this.page.reload();
+        await this.page.waitForTimeout(1000);
+      });
+    };
 }

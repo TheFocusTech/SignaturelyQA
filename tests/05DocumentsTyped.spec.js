@@ -10,8 +10,9 @@ import {
     GOOGLE_DOC_LINK,
     SIGNERS_DATA,
     EMPTY_TABLE_HEADER,
+    DELETED_DOCUMENTS_STATUS,
 } from '../testData.js';
-import { createFolder, createDocumentAwaiting, createDocumentCompleted, uploadDraftDocument } from '../helpers/preconditions.js';
+import { createFolder, createDocumentAwaiting, createDocumentCompleted, uploadDraftDocument, createThreeDocuments } from '../helpers/preconditions.js';
 import { description, tag, severity, Severity, link, epic, step } from 'allure-js-commons';
 
 test.describe('DocumentsType', () => {
@@ -265,14 +266,15 @@ test.describe('DocumentsType', () => {
         });      
     });
 
-    test('TC_05_19_02 | Verify that deleted documents have been moved to the trash by using checkboxes and Select_options dropdown menu and then deleted permanently', async ({
+    test.only('TC_05_19_02 | Verify that deleted documents have been moved to the trash by using checkboxes and Select_options dropdown menu and then deleted permanently', async ({
         createBusinessUserAndLogin,
         signPage,
         documentsPage,
         deleteModal,
         confirmTrashEmptyingModal,
         documentsTrashPage}) => {                
-        test.setTimeout(250 * 1000);
+        // test.setTimeout(250 * 1000);
+        test.slow();
 
         await description('To verify the process of moving the documents to the trash by checkboxes and then deleting documents permanently.');
         await severity(Severity.CRITICAL);
@@ -281,65 +283,52 @@ test.describe('DocumentsType', () => {
         await epic('Documents (typed)');
         await tag('Delete_documents');
 
-
         await createThreeDocuments(signPage);
-
 
         await signPage.sideMenu.clickDocuments();
         await documentsPage.table.checkRandomDocuments();
-        let documentsNames = documentsPage.table.documentsTitlesText;
-        console.log(documentsNames);
 
+        const documentsToDelete = documentsPage.table.documentsTitlesToDelete;
+        const documentToSave = documentsPage.table.documentTitleToSave;
+
+        console.log("test documentsToDelete", documentsToDelete, "\n test documentToSave", documentToSave);
 
         await documentsPage.clickSelectOptionsBtn();
         await documentsPage.clickSelectOptionsDeleteBtn();
         await deleteModal.clickYesDeleteBtn();
+        await documentsPage.table.waitForTable(2000);
         await documentsPage.toast.waitForToastCompleted();
-   
-        let savedDocument = documentsNames.split(' ')[0];
-        console.log(savedDocument);
-
-
-        await test.step('Verify that undeleted document is visible', async () => {
-            await documentsTrashPage.table.waitForDocuments(5000);
-            await expect (documentsPage.table.documentTitle).toHaveCount(1);
-            await expect (documentsPage.table.documentTitle).toHaveText(savedDocument);
-        });
-
 
         await documentsPage.sideMenuDocuments.clickTrash();
+
+        const actualDeletedDocumentsTitles = await documentsTrashPage.table.getAllDocumentsTitles();
+
+        await test.step('Verify documents in trash have correct titles', async () => {
+            expect (actualDeletedDocumentsTitles).toEqual(documentsToDelete);
+        });
+
+        const deletedDocumentsStatuses = await documentsTrashPage.table.getAllDocumentsStatuses();
+
+        await test.step('Verify documents deleted status', async () => {
+            expect (deletedDocumentsStatuses).toEqual(DELETED_DOCUMENTS_STATUS);
+        });
        
-        await test.step('Verify deleted documents have correct titles', async () => {
+        await documentsTrashPage.clickEmptyTrashBtn();
+        await confirmTrashEmptyingModal.clickEmptyTrashBtn();
+        await documentsTrashPage.toast.waitForToastCompleted();
+        await documentsTrashPage.table.waitForTable(3000);
 
+        await test.step('Verify that trash is empty', async () => {
+            await expect (documentsTrashPage.table.emptyTableHeader).toHaveText(EMPTY_TABLE_HEADER.trash);
+        });
 
-            let deletedDocumentsTitles = documentsNames.trim().split(' ');
-            deletedDocumentsTitles.shift();
-            console.log('array', deletedDocumentsTitles);
-            await documentsTrashPage.table.waitForDocuments(5000);
-            const actualDeletedDocumentsTitles = documentsTrashPage.table.actualDocumentsTitles;
-           
-            console.log(actualDeletedDocumentsTitles);
-   
-            expect (documentsTrashPage.table.actualDocumentsTitles).toEqual(deletedDocumentsTitles);
+        await documentsTrashPage.sideMenuDocuments.clickDraft();
+        await documentsTrashPage.table.waitForTable(3000);
+        
+        await test.step('Verify that undeleted document is visible', async () => {
+            await expect (documentsPage.table.objectTitle).toHaveCount(1);
+            await expect (documentsPage.table.objectTitle).toHaveText(documentToSave);
+        });
 
-
-        });  
-        // const deletedDocumentStatus = await documentsTrashPage.table.numberOfDocumentStatus.allInnerTexts();
-       
-        // await documentsPage.table.waitForDocumentTitleVisible(savedDocument);
-        // await test.step('Verify documents deleted status', async () => {
-        //     expect (deletedDocumentStatus).toEqual(DELETED_DOCUMENTS_STATUS);
-        // });
-       
-        // await documentsTrashPage.clickEmptyTrashBtn();
-        // await confirmTrashEmptyingModal.clickEmptyTrashBtn();
-        // await documentsTrashPage.toast.waitForToastCompleted();
-       
-        // // await documentsTrashPage.reloadDocumentsTrashPage();
-
-
-        // await test.step('Verify that trash is empty', async () => {
-        //     await expect (documentsTrashPage.table.emptyTableHeader).toHaveText(EMPTY_TABLE_HEADER.trash);
-        // });      
     });
 });

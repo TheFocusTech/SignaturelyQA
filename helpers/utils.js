@@ -219,3 +219,7 @@ export async function editDocumentStatus(request, documentName, status) {
         }
     });
 }
+
+export function getRandomIndex(list) {
+        return Math.floor(Math.random() * list.length);
+}

@@ -120,3 +120,13 @@ export const uploadDraftDocument = async (signPage) => {
         await signPage.uploadFileTab.fileUploader.uploadFile(UPLOAD_FILE_PATH.pdfDocument);
     });
 };
+
+export const createThreeDocuments = async (signPage) => {
+    await step('Precondition: Create Three Documents', async () => {
+        await signPage.uploadFileTab.fileUploader.uploadFile(UPLOAD_FILE_PATH.pdfDocument);
+        await signPage.singPageReload();
+        await signPage.uploadFileTab.fileUploader.uploadFile(UPLOAD_FILE_PATH.xlsxDocument);
+        await signPage.singPageReload();
+        await signPage.uploadFileTab.fileUploader.uploadFile(UPLOAD_FILE_PATH.csvDocument);
+    });
+};
