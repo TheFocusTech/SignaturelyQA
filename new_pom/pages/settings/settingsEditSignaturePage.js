@@ -14,6 +14,7 @@ export default class SettingsEditSignaturePage {
         this.dropDownMenu = this.page.getByRole('listitem').locator('div').nth(2);;
         this.deleteSignatureDropDownItem = this.page.getByRole('listitem').locator('div').filter({hasText: 'Delete'}).nth(2);
         this.editSignatureDropDownItem = this.page.getByRole('listitem').locator('div').filter({hasText: 'Edit'}).nth(3);
+        this.signaturelyInner = this.page.locator('settingsSignature__item-inner');
     }
 
     async clickCreateSignatureBtn() {
