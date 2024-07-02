@@ -11,6 +11,7 @@ test.describe('Folders', () => {
         documentsPage, 
         createFolderModal, 
     }) => {
+        test.setTimeout(120 * 1000);
         await description('Objective: To verify the user can create the folder')
         await severity(Severity.CRITICAL);
         await link(`${QASE_LINK}/SIGN-22`, "QASE: SIGN-22");
@@ -24,6 +25,10 @@ test.describe('Folders', () => {
         await createFolderModal.clickCreateBtn();
         await step('Verify the toaster notification with the "Folder created successfully" text appears after creating a folder', async () => {
             await expect(await documentsPage.toast.toastBody).toHaveText(TOAST_MESSAGE.folderCreated);
+        });
+
+        await step('Verify that the new folder has been saved', async () => {
+            await expect(await documentsPage.table.objectTitle).toHaveText(FOLDER_NAME);
         });
     });
 
