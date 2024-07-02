@@ -166,4 +166,40 @@ test.describe('Templates', () => {
         });
     });
 
+
+    test('TC_07_29_01 | Verify that the user can delete the template', async ({
+        createBusinessUserAndLogin,
+        signPage,
+        prepareForSignatureModal,
+        templatesPage,
+        createNewTemplatePage,
+        confirmDeletionModal
+    }) => {
+        await description('Objective: Verify that the user can successfully delete a template.');
+        await severity(Severity.CRITICAL);
+        await link(`${QASE_LINK}/SIGN-29`, 'Qase: SIGN-29');
+        await link(`${GOOGLE_DOC_LINK}lduzx2ed3enn`, 'ATC_07_29_01');
+        await epic('Templates');
+        await tags('Delete');
+
+        test.setTimeout(250 * 1000);
+
+        await createTemplate(signPage,
+            prepareForSignatureModal,
+            templatesPage,
+            createNewTemplatePage,
+            );
+
+        await signPage.sideMenu.clickTemplates();
+        await templatesPage.table.clickFirstOptionsBtn()
+        await templatesPage.table.clickDeleteTemplateBtn();
+        await confirmDeletionModal.clickYesDelete();
+        await templatesPage.toast.waitForToastIsHiddenByText(TOAST_MESSAGE.templateDelete);
+
+        await step('Verify that the number of templates in the table is 0', async () => {
+            await expect(await templatesPage.table.objectTitle).toHaveCount(0);
+        });
+
+    });
+
 });
