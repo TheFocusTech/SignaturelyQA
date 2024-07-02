@@ -5,18 +5,26 @@ import { TOAST_MESSAGE, FILL_RENAME_FOLDER_NAME, QASE_LINK, GOOGLE_DOC_LINK, FOL
 import { description, tag, severity, Severity, link, epic, step } from "allure-js-commons";
 
 test.describe('Folders', () => {
-    test.skip('TC_06_22_01 | Verify the business user can create folder', async ({
-        page,
+    test('TC_06_22_01 | Verify the business user can create folder', async ({
         createBusinessUserAndLogin,
+        signPage, 
+        documentsPage, 
+        createFolderModal, 
     }) => {
-        const signPage = new SignPage(page);
+        await description('Objective: To verify the user can create the folder')
+        await severity(Severity.CRITICAL);
+        await link(`${QASE_LINK}/SIGN-22`, "QASE: SIGN-22");
+        await link(`${GOOGLE_DOC_LINK}sl5v8067tqvz`, "ATC_06_22_01");
+        await tag('Create a folder');
+        await epic('Folders');
 
-        const documentsPage = await signPage.clickDocumentsSidebarLinkAndGoDocumentsPage();
+        await signPage.sideMenu.clickDocuments();
         await documentsPage.clickCreateFolderBtn();
-        await documentsPage.locators.getNewFolderNameInputField().fill('New Folder');
-        await documentsPage.clickCreateBtn();
-
-        await expect(documentsPage.locators.getToast()).toHaveText(TOAST_MESSAGE.folderCreated);
+        await createFolderModal.fillNewFolderName(FOLDER_NAME);
+        await createFolderModal.clickCreateBtn();
+        await step('Verify the toaster notification with the "Folder created successfully" text appears after creating a folder', async () => {
+            await expect(await documentsPage.toast.toastBody).toHaveText(TOAST_MESSAGE.folderCreated);
+        });
     });
 
     test('TC_06_24_01 | Verify the business user can delete folder', async ({
