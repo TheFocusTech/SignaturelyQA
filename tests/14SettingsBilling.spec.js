@@ -177,7 +177,7 @@ test.describe('Billing', () => {
         });
     });
 
-    test('TC_14_58_01 | Verify the ability to successfully cancel subscription', async ({
+    test('TC_14_58_01 | Verify the ability to successfully cancel subscription  ${plan} plan', async ({
         createBusinessUserAndLogin,
         signPage,
         settingsCompanyPage,
