@@ -61,7 +61,7 @@ export default class SettingsCompanyPage {
     }
 
     async checkActivateCheckbox() {
-        await step('Check "Aktivate" checkbox', async () => {
+        await step('Check "Activate" checkbox', async () => {
             await this.checkboxActivate.click();
         });
     }
