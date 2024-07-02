@@ -10,7 +10,7 @@ export default class FormsPage {
         this.toast = new ToastComponent(this.page);
         this.sideMenu = new SideMenuComponent(this.page);
 
-        this.createFormBtn = this.page.locator('div').filter({ hasText: /^Create Form$/ }).getByRole('button');
+        this.createFormBtn = this.page.getByRole('button', { name: 'Create Form', exect: true }).first();
     }
 
     

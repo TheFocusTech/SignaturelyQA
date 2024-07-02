@@ -29,6 +29,9 @@ export default class TableComponent {
         this.enableFormBtn = this.page.getByRole('button', { name: 'Enable Form' });
         this.deleteForm = this.page.getByRole('button', { name: 'Delete Form' });
         this.shareBtn = this.page.getByRole('button', { name: 'Share' });
+        this.deleteBtn = this.page.getByRole('button', { name: 'Delete' });
+        this.firstFormTitle = this.page.getByText('Edited Form Name');
+
     }
 
     async clickFirstOptionsBtn() {
@@ -193,7 +196,6 @@ export default class TableComponent {
         });
     }
 
-
     async clickOptionsDeleteBtn() {
         await step('Click the "Option delete" button it the dropdown menu', async () => {
             await this.optionsDeleteBtn.waitFor( {state: 'visible'});
@@ -206,4 +208,11 @@ export default class TableComponent {
             await this.page.waitForTimeout(time);
         });
     }
+
+    async clickDeleteBtn() {
+        await step('Click on the "Delete" button', async () => {
+            await this.deleteBtn.click();
+        });
+    }
+
 }

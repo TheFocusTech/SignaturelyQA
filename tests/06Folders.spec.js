@@ -19,21 +19,36 @@ test.describe('Folders', () => {
         await expect(documentsPage.locators.getToast()).toHaveText(TOAST_MESSAGE.folderCreated);
     });
 
-
-    test.skip('TC_06_24_01 | Verify the business user can delete folder', async ({
-        page,
+    test('TC_06_24_01 | Verify the business user can delete folder', async ({
         createBusinessUserAndLogin,
+        signPage,
+        documentsPage,
+        createFolderModal,
+        confirmDeletionModal
     }) => {
-        const signPage = new SignPage(page);
 
-        const documentsPage = await signPage.clickDocumentsSidebarLinkAndGoDocumentsPage();
+        await description('Objective: To verify the user can delete the folder')
+        await severity(Severity.CRITICAL);
+        await link(`${QASE_LINK}/SIGN-24`, "QASE: SIGN-24");
+        await link(`${GOOGLE_DOC_LINK}h4z5uzr4m1hq`, "ATC_06_24_01");
+        await tag('Delete a folder');
+        await epic('Folders');
 
-        await documentsPage.clickOptionsBtn();
-        await documentsPage.clickDeleteBtn();
-        await documentsPage.clickYesDeleteBtn();
-        await documentsPage.locators.getToast().waitFor({ state: 'visible' });
+        await createFolder(
+            signPage,
+            documentsPage,
+            createFolderModal,
+            FOLDER_NAME
+        );
 
-        await expect(documentsPage.locators.getToast()).toHaveText(TOAST_MESSAGE.folderDeleted);
+        await signPage.sideMenu.clickDocuments();
+        await documentsPage.table.clickFirstOptionsBtn();
+        await documentsPage.table.clickOptionsDeleteBtn();
+        await confirmDeletionModal.clickYesDelete();
+
+        await step('Verify the toaster notification with the "Folder deleted successfully" text appears after deleting a folder', async () => {
+            await expect(await documentsPage.toast.toastBody).toHaveText(TOAST_MESSAGE.folderDeleted)
+        });
     });
 
     test('TC_06_23_01 | Rename folder', async ({
