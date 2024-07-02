@@ -214,7 +214,7 @@ test.describe('CreateDocument', () => {
         await description('Objective: Verify that user can sign a document themselves with Initial');
         await severity(Severity.CRITICAL);
         await link(`${QASE_LINK}/SIGN-7`, 'Qase: SIGN-7');
-        await link(`${GOOGLE_DOC_LINK}cd9kwkury3z7`, 'TC_03_07_05');
+        await link(`${GOOGLE_DOC_LINK}cd9kwkury3z7`, 'ATC_03_07_05');
         await epic('Create Document');
         await tag('Sign a document: me');
 
