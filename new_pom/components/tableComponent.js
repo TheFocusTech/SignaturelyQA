@@ -34,6 +34,7 @@ export default class TableComponent {
         this.shareBtn = this.page.getByRole('button', { name: 'Share' });
         this.objectCheckbox = this.page.locator('ul .uiCheckbox');
         this.documentsStatuses = this.page.locator('.documents__documentStatus');
+        this.firstFormTitle = this.page.getByText('Edited Form Name');
     }
 
     async clickFirstOptionsBtn() {
@@ -197,7 +198,6 @@ export default class TableComponent {
             await this.shareBtn.click();
         });
     }
-
 
     async clickOptionsDeleteBtn() {
         await step('Click the "Option delete" button it the dropdown menu', async () => {
