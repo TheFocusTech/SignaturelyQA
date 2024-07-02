@@ -192,7 +192,7 @@ test.describe('Templates', () => {
 
         await signPage.sideMenu.clickTemplates();
         await templatesPage.table.clickFirstOptionsBtn()
-        await templatesPage.table.clickDeleteTemplateBtn();
+        await templatesPage.table.clickDeleteBtn();
         await confirmDeletionModal.clickYesDelete();
         await templatesPage.toast.waitForToastIsHiddenByText(TOAST_MESSAGE.templateDelete);
 
