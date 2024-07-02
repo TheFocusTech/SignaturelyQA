@@ -1,0 +1,5 @@
+Free User has been successfully created: #240702141250525
+Email has been successfully confirmed
+Free User #240702141250525 has been successfully upgraded to Bussiness
+Generated new user Email: 240702141250525_new@gmail.com
+Waiting for email to arrive...
