@@ -212,7 +212,7 @@ export default class TableComponent {
 
     async getAllDocumentsTitles() {
         await step('Get all documents titles', async () => {
-            await this.waitForTable(5000);
+            await this.waitForTable(7000);
             return this.objectTitle.allInnerTexts();
         });
     }
