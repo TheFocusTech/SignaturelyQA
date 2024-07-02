@@ -45,7 +45,9 @@ export const TOAST_MESSAGE = {
     formEnabled: 'Form successfully enabled!',
     formDeleted: 'Form deleted successfully.',
     documentSended: 'Document successfully sended to specified email(s).',
-    templateDelete: 'Template deleted successfully.'
+    templateDelete: 'Template deleted successfully.',
+    editedFormSaved: 'Form saved'
+
 };
 
 export const API_KEY_NAME = 'Test Api Key';
@@ -205,3 +207,8 @@ export const EMPTY_TABLE_HEADER ={
     documents: "You don't have any documents yet.",
     trash: "You don't have any deleted documents yet.",
 };
+
+export const FORMS = {
+    formNameEdit: 'Edited Form Name',
+    optionalMessageFormEdit: 'Form edited'
+}
