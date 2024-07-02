@@ -1,2 +1,0 @@
-"Status","Start Time","Stop Time","Duration in ms","Parent Suite","Suite","Sub Suite","Test Class","Test Method","Name","Description"
-"passed","Mon Jul 01 14:51:24 GMT 2024","Mon Jul 01 14:53:13 GMT 2024","109556","chromium","","DocumentsType","","","TC_05_19_01 | Verify that deleted document has been moved to the trash by using ACTIONS_options dropdown menu and then deleted permanently","To verify the process of moving the document to the trash and then deleting document permanently."
