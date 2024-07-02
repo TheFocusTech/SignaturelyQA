@@ -48,6 +48,7 @@ export const TOAST_MESSAGE = {
     templateDelete: 'Template deleted successfully.',
     editedFormSaved: 'Form saved',
     teamMemberDeleted: 'Team member deleted successfully',
+    signatureDeleted: 'Signature deleted successfully',
 };
 
 export const API_KEY_NAME = 'Test Api Key';
