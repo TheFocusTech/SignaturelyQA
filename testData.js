@@ -45,6 +45,7 @@ export const TOAST_MESSAGE = {
     formEnabled: 'Form successfully enabled!',
     formDeleted: 'Form deleted successfully.',
     documentSended: 'Document successfully sended to specified email(s).',
+    editedFormSaved: 'Form saved',
     signatureDeleted: 'Signature deleted successfully',
 };
 
@@ -205,3 +206,8 @@ export const EMPTY_TABLE_HEADER ={
     documents: "You don't have any documents yet.",
     trash: "You don't have any deleted documents yet.",
 };
+
+export const FORMS = {
+    formNameEdit: 'Edited Form Name',
+    optionalMessageFormEdit: 'Form edited'
+}
