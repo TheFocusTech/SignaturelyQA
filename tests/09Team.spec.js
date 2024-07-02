@@ -20,7 +20,7 @@ test.describe('Team', () => {
         addTeamMemberModal,
         teamsAcceptInvitePage,
     }) => {
-        await description('Objective: To verify that Business User can add the team mate');
+        await description('Objective: To verify that Business User can add the teammate');
         await severity(Severity.CRITICAL);
         await link(`${QASE_LINK}/SIGN-38`, 'Qase: SIGN-38');
         await link(`${GOOGLE_DOC_LINK}5trza9yu39er`, 'ATC_09_38_01');
@@ -38,7 +38,10 @@ test.describe('Team', () => {
         await signPage.sideMenu.clickTeam();
         await teamPage.clickAddTeamMemberButton();
         await addTeamMemberModal.fillTeamMemberEmailInputField(teamMemberEmail);
-        await addTeamMemberModal.fillTeamMemberNameInputField(teamMemberName);        
+        await addTeamMemberModal.fillTeamMemberNameInputField(teamMemberName); 
+        (await addTeamMemberModal.isTeamMemberRoleSet(TEAM_MEMBER_ROLES.user))
+            ? null
+            : await addTeamMemberModal.changeTeamMemberRole(TEAM_MEMBER_ROLES.user);       
         await addTeamMemberModal.clickSendInvitesButton();
 
         await step('Verify that a toast message ‘Invites sent successfully’ popped up', async () => {
@@ -55,11 +58,11 @@ test.describe('Team', () => {
         await signPage.sideMenu.clickTeam();
 
         await step("Verify that a team member is displayed in the Team table", async () => {
-            expect(await teamPage.teamMemberRoleForExactTeamMemeber(teamMemberEmail)).toBeVisible();              
+            await expect(await teamPage.teamMemberRoleForExactTeamMemeber(teamMemberEmail)).toBeVisible();              
         });
 
         await step("Verify that a team member has role 'User' set in the Team table", async () => {
-            expect(await teamPage.teamMemberRoleForExactTeamMemeber(teamMemberEmail)).toHaveText(
+            await expect(await teamPage.teamMemberRoleForExactTeamMemeber(teamMemberEmail)).toHaveText(
                 TEAM_MEMBER_ROLES.user
             );
         });        
