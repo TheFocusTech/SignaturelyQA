@@ -211,6 +211,13 @@ test.describe('CreateDocument', () => {
     }) => {
         test.setTimeout(220 * 1000);
 
+        await description('Objective: Verify that user can sign a document themselves with Initial');
+        await severity(Severity.CRITICAL);
+        await link(`${QASE_LINK}/SIGN-7`, 'Qase: SIGN-7');
+        await link(`${GOOGLE_DOC_LINK}cd9kwkury3z7`, 'TC_03_07_05');
+        await epic('Create Document');
+        await tag('Sign a document: me');
+
         await createSignature(
             signPage,
             settingsCompanyPage,
@@ -218,7 +225,7 @@ test.describe('CreateDocument', () => {
             createOrEditSignatureOnSettingModal
         );
 
-        await signPage.uploadFileTab.fileUploader.uploadFile('testDocuments/picture.jpg');
+        await signPage.uploadFileTab.fileUploader.uploadFile(UPLOAD_FILE_PATH.xlsxDocument);
         await signPage.uploadFileTab.clickPrepareDocumentBtn();
         await prepareForSignatureModal.clickSignDocumentRadioBtn();
         await prepareForSignatureModal.clickContinueBtn();
@@ -233,6 +240,8 @@ test.describe('CreateDocument', () => {
         await finalStepPage.clickSignDocumentBtn();
         await successModal.clickBackToDocumentsBtn();
 
-        await expect(await documentsPage.table.documentStatus).toHaveText(DOCUMENT_STATUS.completed);
+        await step('Verify the created document is in the table with the label "COMPLETED".', async () => {
+            await expect(await documentsPage.table.documentStatus).toHaveText(DOCUMENT_STATUS.completed);
+        });
     });
 });
