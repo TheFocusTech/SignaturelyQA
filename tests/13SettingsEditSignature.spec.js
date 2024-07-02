@@ -40,36 +40,38 @@ test.describe('Settings: Edit signature', () => {
         createBusinessUserAndLogin, 
         signPage, settingsCompanyPage, 
         settingsEditSignaturePage, 
-        createOrEditSignatureOnSettingModal }) => {
-            await description('Verify that user can delete our Signature.');
-            await severity(Severity.CRITICAL);
-            await link(`${QASE_LINK}/SIGN-53`, 'Qase: SIGN-53');
-            await link(`${GOOGLE_DOC_LINK}9go15k207w7b`,'ATC_13_53_01');
-            await epic('Settings');
-            await tag('Delete Signature');
-            test.setTimeout(120 * 1000);
+        createOrEditSignatureOnSettingModal 
+    }) => {
+        await description('Verify that user can delete our Signature.');
+        await severity(Severity.CRITICAL);
+        await link(`${QASE_LINK}/SIGN-53`, 'Qase: SIGN-53');
+        await link(`${GOOGLE_DOC_LINK}9go15k207w7b`,'ATC_13_53_01');
+        await epic('Settings');
+        await tag('Delete Signature');
+        test.setTimeout(120 * 1000);
 
-            await createSignature(
+        await createSignature(
                 signPage, 
                 settingsCompanyPage, 
                 settingsEditSignaturePage, 
                 createOrEditSignatureOnSettingModal, 
                 );
 
-            await signPage.sideMenu.clickSettings();
-            await settingsCompanyPage.sideMenuSettings.clickEditSignature();
+        await signPage.sideMenu.clickSettings();
+        await settingsCompanyPage.sideMenuSettings.clickEditSignature();
 
-            await settingsEditSignaturePage.clickDropDownMenu();
-            await settingsEditSignaturePage.clickDeleteSignatureDropDownItem();
+        await settingsEditSignaturePage.clickDropDownMenu();
+        await settingsEditSignaturePage.clickDeleteSignatureDropDownItem();
             
-            await createOrEditSignatureOnSettingModal.clickDeleteBtn();
+        await createOrEditSignatureOnSettingModal.clickDeleteBtn();
 
-            await step('Verify that Signature was deleted', async () => {
-                await expect(settingsEditSignaturePage.toast.toastBody.first()).toHaveText(TOAST_MESSAGE.signatureDeleted);
-            })
+            
+        await step('Verify that Signature was deleted', async () => {
+            await expect(settingsEditSignaturePage.toast.toastBody.first()).toHaveText(TOAST_MESSAGE.signatureDeleted);
+        })
 
-            await step('Verify that Signature was deleted from the list', async () => {
-                await expect(settingsEditSignaturePage.settingsSignatureList).toHaveCount(1);
-            })
+        await step('Verify that Signature was deleted from the list', async () => {
+            await expect(settingsEditSignaturePage.settingsSignatureList).toHaveCount(1);
+        })
     })
 })
