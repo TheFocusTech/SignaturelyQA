@@ -9,6 +9,7 @@ import {
     GOOGLE_DOC_LINK,
     TOAST_MESSAGE,
     BUSINESS_ANNUALLY_PLAN,
+    RANDOM_MONTHLY_PLAN,
 } from '../testData.js';
 import { description, tags, severity, Severity, link, epic, feature, step } from 'allure-js-commons';
 
@@ -210,6 +211,7 @@ test.describe('Billing', () => {
             settingsBillingPage,
             settingsBillingPlanPage,
             upgradeYourPlanModal,
+            specialOneTimeOfferModal,
         }) => {
             await description('Objective: Verify that free users can successfully upgrade their subscription plan.');
             await severity(Severity.CRITICAL);
@@ -229,6 +231,11 @@ test.describe('Billing', () => {
     
             await step('Verify the toast message', async () => {
                 await expect(await settingsBillingPlanPage.toast.toastBody).toHaveText(TOAST_MESSAGE.planSuccessChange);
+            });
+
+            await specialOneTimeOfferModal.clickNoThanksModalBtn();
+            await step(`Verify that the billing plan is ${plan} Annually Plan`, async () => {
+                await expect(settingsBillingPlanPage.billingHeader).toContainText(RANDOM_MONTHLY_PLAN(plan));
             });
         });
     });
