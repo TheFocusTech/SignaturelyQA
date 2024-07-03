@@ -1,4 +1,4 @@
-import { DATA_SIGNER, TOAST_MESSAGE, CREATE_TEMPLATE, UPLOAD_FILE_PATH, SIGNERS_DATA } from "../testData";
+import { DATA_SIGNER, TOAST_MESSAGE, CREATE_TEMPLATE, UPLOAD_FILE_PATH, SIGNERS_DATA, EMPTY_DOCUMENTS_HEADER } from "../testData";
 import { step } from "allure-js-commons";
 
 export const createSignature = async (signPage, settingsCompanyPage, settingsEditSignaturePage, createOrEditSignatureOnSettingModal) => {
@@ -57,10 +57,9 @@ export const createTemplate = async (signPage, prepareForSignatureModal, templat
         await templatesPage.sideMenuTemplates.clickCreateTemplate();
         await createNewTemplatePage.fillTemplateNameField(CREATE_TEMPLATE.nameField);
         await createNewTemplatePage.fillCreateTemplateRolesField(CREATE_TEMPLATE.nameRole);
-        await createNewTemplatePage.fileUploader.uploadFile(UPLOAD_FILE_PATH.jpgDocument);
+        await createNewTemplatePage.fileUploader.uploadFile(UPLOAD_FILE_PATH.txtDocument);
         await createNewTemplatePage.clickFillTemplateBtn();
-        await prepareForSignatureModal.clickSignOnFieldsMenu();
-        await prepareForSignatureModal.clickDocumentBody();
+        await prepareForSignatureModal.setSignFieldOnDocument();
         await prepareForSignatureModal.clickCreateBtn();
         await prepareForSignatureModal.clickBackToTemplatesBtn();
         await templatesPage.sideMenu.clickSign();

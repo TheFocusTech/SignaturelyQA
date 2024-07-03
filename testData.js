@@ -48,6 +48,7 @@ export const TOAST_MESSAGE = {
     templateDelete: 'Template deleted successfully.',
     editedFormSaved: 'Form saved',
     teamMemberDeleted: 'Team member deleted successfully',
+    documentsSuccess: 'Documents successfully created',
 };
 
 export const API_KEY_NAME = 'Test Api Key';
@@ -165,6 +166,7 @@ export const UPLOAD_FILE_PATH = {
     xlsxDocument: 'testDocuments/todoList.xlsx',
     csvDocument: 'testDocuments/CSV.csv',
     pdfDocument: 'testDocuments/openHouse.pdf',
+    txtDocument: 'testDocuments/text.txt',
 };
 export const UPLOAD_FILE_NAME = {
     jpgDocument: 'picture.jpg',
@@ -211,4 +213,8 @@ export const EMPTY_TABLE_HEADER ={
 export const FORMS = {
     formNameEdit: 'Edited Form Name',
     optionalMessageFormEdit: 'Form edited'
+}
+
+export const BULK_DOCUMENTS = {
+    number: '20',
 }

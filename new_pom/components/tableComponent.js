@@ -31,7 +31,6 @@ export default class TableComponent {
         this.shareBtn = this.page.getByRole('button', { name: 'Share' });
         this.deleteBtn = this.page.getByRole('button', { name: 'Delete' });
         this.firstFormTitle = this.page.getByText('Edited Form Name');
-
     }
 
     async clickFirstOptionsBtn() {
@@ -204,9 +203,7 @@ export default class TableComponent {
     }
 
     async waitForTable(time) {
-        await step(`Wait for table data to be loaded.`, async () => {
-            await this.page.waitForTimeout(time);
-        });
+        await this.page.waitForTimeout(time);
     }
 
     async clickDeleteBtn() {
@@ -214,5 +211,4 @@ export default class TableComponent {
             await this.deleteBtn.click();
         });
     }
-
 }
