@@ -29,6 +29,20 @@ test.describe('API key', () => {
 
         const clipboardApiKeyValue = await createAPIKeyModal.APIKeyValue.innerText();
 
+        await step('Wait the toast appears indicating API key has been successfully copied to clipboard', async () => {
+            await settingsAPIPage.toast.toastBody.waitFor();
+        });
+        await step('Verify the toast message that API key has been successfully copied to clipboard', async () => {
+            await expect(settingsAPIPage.toast.toastBody).toHaveText(TOAST_MESSAGE.copyApiKey);
+        });
+
+        await step('Ensure the API key is not empty', async () => {
+            await expect(createAPIKeyModal.getAPIKeyValueText()).not.toBe('');
+        });
+        await step('Ensure the API key is not undefined', async () => {
+            await expect(createAPIKeyModal.getAPIKeyValueText()).not.toBe('undefined');
+        });
+
         await createAPIKeyModal.clickCloseAPIModalBtn();
         await settingsAPIPage.pasteIntoBillingDetailsField(clipboardApiKeyValue);
 
