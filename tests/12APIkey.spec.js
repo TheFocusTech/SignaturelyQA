@@ -2,6 +2,9 @@ import { expect } from '@playwright/test';
 import { test } from '../fixtures/base.js';
 import { API_KEY_NAME, API_PLANS, currentPlan, TOAST_MESSAGE, QASE_LINK, GOOGLE_DOC_LINK } from '../testData.js';
 import { description, epic, feature, link, Severity, severity, step, tags } from 'allure-js-commons';
+import exp from 'constants';
+import { userWithGoldAPISubscription } from '../helpers/preconditions.js';
+
 
 test.describe('API key', () => {
     test('TC_12_48_01 | Copy API key created by the "Create API" button on the right.', async ({
@@ -105,4 +108,55 @@ test.describe('API key', () => {
             });
         });
     });
-});
+
+    test('TC_12_50_01 | Verify that User can Upgrade/Downgrade API subscription', async ({
+        createBusinessUserAndLogin,
+        signPage,
+        settingsCompanyPage,
+        settingsAPIPage,
+        upgradeYourPlanAPIModal,
+    }) => {
+        await description('Objective: Verify that User can Upgrade/Downgrade API subscription');
+        await severity(Severity.CRITICAL);
+        await link(`${QASE_LINK}/SIGN-50`, 'Qase: SIGN-50');
+        await link(`${GOOGLE_DOC_LINK}mjg3zmg3rfxd`, 'TC_12_50_01');
+        await epic('Setting');
+        await feature('API');
+        await tags('Subscription');
+
+        test.setTimeout(60000);
+        await userWithGoldAPISubscription(createBusinessUserAndLogin,
+            signPage,
+            settingsCompanyPage,
+            settingsAPIPage,
+            upgradeYourPlanAPIModal)
+        await settingsCompanyPage.horizontalMenu.clickAPI();
+        
+        for (let i = 1; i <= API_PLANS.length - 1; i++) {
+            
+            await settingsAPIPage.clickUpgradeButton(API_PLANS[i]);
+            await upgradeYourPlanAPIModal.clickSubscribeButton();
+
+            await step('Verify that the toast with "Api plan have been upgraded" appears.', async () => {
+                await expect(settingsAPIPage.toast.toastBody.nth(0)).toHaveText(TOAST_MESSAGE.apiPlanUpgraded);
+            });
+            await step('Verify that the selected API plan is marked as Current plan.', async () => {
+                await expect(settingsAPIPage.apiPlansList.nth(i)).toContainText(currentPlan);
+            });
+            await step('Verify that the current plan is upgraded to higher one.', async () => {
+                await expect(settingsAPIPage.apiPlansList.nth(i)).toContainText(API_PLANS[i]);
+            });
+        }
+
+        for (let i = API_PLANS.length - 2; i >= 0 ; i--) {
+    
+            await settingsAPIPage.clickSelectButton(API_PLANS[i])
+            await upgradeYourPlanAPIModal.clickDowngradeBtn()
+
+            await step('Verify that the toast with "Api plan have been upgraded" appears.', async () => {
+                await expect(settingsAPIPage.toast.toastBody.nth(0)).toHaveText(TOAST_MESSAGE.apiPlanUpgraded);
+            });
+        }
+    });
+})
+

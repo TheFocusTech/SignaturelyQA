@@ -13,6 +13,7 @@ export default class SettingsAPIPage {
         this.billingDetailsField = this.page.getByPlaceholder('Enter billing details here');
         this.billingDetailsTextField = this.page.locator('.billing__details > form textarea');
         this.apiPlansList = this.page.locator('.api-plan');
+        this.selectBtn = this.page.getByRole('button', {name: 'Select'})
     }
 
     async clickCreateAPIKeyBtnAtRight() {
@@ -45,6 +46,15 @@ export default class SettingsAPIPage {
             await this.page.keyboard.down('Control');
             await this.page.keyboard.press('V');
             await this.page.keyboard.up('Control');
+        });
+    }
+    
+    async clickSelectButton(plan) {
+        await step(`Click Select button for ${plan} API plan to downgrade`, async () => {
+            await this.apiPlansList
+                .filter({ hasText: plan })
+                .getByRole('button', { name: "Select" })
+                .click();
         });
     }
 }

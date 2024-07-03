@@ -1,4 +1,4 @@
-import { DATA_SIGNER, TOAST_MESSAGE, CREATE_TEMPLATE, UPLOAD_FILE_PATH, SIGNERS_DATA } from "../testData";
+import { DATA_SIGNER, TOAST_MESSAGE, CREATE_TEMPLATE, UPLOAD_FILE_PATH, SIGNERS_DATA, API_PLANS } from "../testData";
 import { step } from "allure-js-commons";
 
 export const createSignature = async (signPage, settingsCompanyPage, settingsEditSignaturePage, createOrEditSignatureOnSettingModal) => {
@@ -120,3 +120,17 @@ export const uploadDraftDocument = async (signPage) => {
         await signPage.uploadFileTab.fileUploader.uploadFile(UPLOAD_FILE_PATH.pdfDocument);
     });
 };
+
+export const userWithGoldAPISubscription = async (
+    createBusinessUserAndLogin,
+    signPage,
+    settingsCompanyPage,
+    settingsAPIPage,
+    upgradeYourPlanAPIModal) => {
+    await step('Precondition: User with Gold API subscription', async () => {
+        await signPage.sideMenu.clickSettings();
+        await settingsCompanyPage.horizontalMenu.clickAPI();
+        await settingsAPIPage.clickUpgradeButton(API_PLANS[0]);
+        await upgradeYourPlanAPIModal.clickSubscribeButton();
+    });
+}
