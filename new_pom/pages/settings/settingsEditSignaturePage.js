@@ -14,6 +14,7 @@ export default class SettingsEditSignaturePage {
         this.settingsSignatureItem = this.page.locator('.settingsSignature__item');
         this.dropDownMenu = this.page.locator('.settingsSignature__dropDown-trigger');
         this.deleteSignatureDropDownItem = this.page.getByRole('listitem').locator('div').filter({hasText: 'Delete'}).nth(3);
+        this.editSignatureDropDownItem = this.page.getByRole('listitem').locator('div').filter({hasText: 'Edit'}).nth(3);
     }
 
     async clickCreateSignatureBtn() {
@@ -31,6 +32,12 @@ export default class SettingsEditSignaturePage {
     async clickDeleteSignatureDropDownItem() {
         await step('Click on the "Delete Signature" drop down item', async () => {
             await this.deleteSignatureDropDownItem.click();
+        })
+    }
+
+    async clickEditSignatureDropDownItem() {
+        await step('Click on the "Edit Signature" drop down item', async () => {
+            await this.editSignatureDropDownItem.click();
         })
     }
 }
