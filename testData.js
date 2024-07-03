@@ -49,6 +49,8 @@ export const TOAST_MESSAGE = {
     editedFormSaved: 'Form saved',
     teamMemberDeleted: 'Team member deleted successfully',
     documentsSuccess: 'Documents successfully created',
+    signatureDeleted: 'Signature deleted successfully',
+    updateSignature: 'Signature updated successfully',
 };
 
 export const API_KEY_NAME = 'Test Api Key';
@@ -218,3 +220,5 @@ export const FORMS = {
 export const BULK_DOCUMENTS = {
     number: '20',
 }
+
+export const RANDOM_MONTHLY_PLAN = (randomPlan) => `${randomPlan} Monthly Plan`;

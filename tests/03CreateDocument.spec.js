@@ -31,7 +31,7 @@ test.describe('CreateDocument', () => {
         await description('Objective: To verify the process of creating and signing a document');
         await severity(Severity.CRITICAL);
         await link(`${QASE_LINK}/SIGN-7`, 'Qase: SIGN-7');
-        await link(`${GOOGLE_DOC_LINK}yaxaf6jrhsdw`, 'TC_03_07_01');
+        await link(`${GOOGLE_DOC_LINK}yaxaf6jrhsdw`, 'ATC_03_07_01');
         await epic('Create Document');
         await tag('Sign a document: me');
 
@@ -53,7 +53,7 @@ test.describe('CreateDocument', () => {
         await successModal.clickBackToDocumentsBtn();
 
         await step('Verify the created document is in the table with the label "COMPLETED".', async () => {
-        await expect(await documentsPage.table.documentStatus).toHaveText(DOCUMENT_STATUS.completed);
+            await expect(await documentsPage.table.documentStatus).toHaveText(DOCUMENT_STATUS.completed);
         });
     });
 
@@ -301,6 +301,54 @@ test.describe('CreateDocument', () => {
 
         await step(`Verify that on page 2 the random document (nth-${randomIndex2}) has the title "${CREATE_TEMPLATE.nameField}".`, async () => {
             await expect(documentsPage.table.objectTitle.nth(randomIndex2)).toHaveText(CREATE_TEMPLATE.nameField);
+        });
+    });
+
+    test('TC_03_07_04 | Verify that user can sign a document themselves with existed signature', async ({
+        createBusinessUserAndLogin,
+        signPage,
+        prepareForSignatureModal,
+        settingsCompanyPage,
+        settingsEditSignaturePage,
+        createOrEditSignatureOnSettingModal,
+        chooseSignatureOrInitialModal,       
+        finalStepPage,
+        successModal,
+        documentsPage,
+    }) => {
+        test.setTimeout(220 * 1000);
+
+        await description('Objective: To verify the process of creating and signing a document with an existing signature');
+        await severity(Severity.CRITICAL);
+        await link(`${QASE_LINK}/SIGN-7`, 'Qase: SIGN-7');
+        await link(`${GOOGLE_DOC_LINK}dbkbk0latxud`, 'ATC_03_07_04');
+        await epic('Create Document');
+        await tag('Sign a document by myself');
+
+        await createSignature(
+            signPage,
+            settingsCompanyPage,
+            settingsEditSignaturePage,
+            createOrEditSignatureOnSettingModal
+        );
+
+        await signPage.uploadFileTab.fileUploader.uploadFile(UPLOAD_FILE_PATH.xlsxDocument);
+        await signPage.uploadFileTab.clickPrepareDocumentBtn();
+        await prepareForSignatureModal.clickSignDocumentRadioBtn();
+        await prepareForSignatureModal.clickContinueBtn();
+        await prepareForSignatureModal.clickGotItBtn();
+        await prepareForSignatureModal.clickSignOnFieldsMenu();
+        await prepareForSignatureModal.clickDocumentBody();
+        await chooseSignatureOrInitialModal.clickSignatureTyped();
+        await chooseSignatureOrInitialModal.clickSignNowBtn();        
+        await prepareForSignatureModal.clickSaveBtn();
+        await finalStepPage.fillDocumentTitleField(DOCUMENT_TITLE);
+        await finalStepPage.fillDocumentOptionalMessageField(MESSAGE);
+        await finalStepPage.clickSignDocumentBtn();
+        await successModal.clickBackToDocumentsBtn();
+
+        await step('Verify the created document is in the table with the label "COMPLETED".', async () => {
+            await expect(await documentsPage.table.documentStatus).toHaveText(DOCUMENT_STATUS.completed);
         });
     });
 });
