@@ -48,6 +48,8 @@ export const TOAST_MESSAGE = {
     templateDelete: 'Template deleted successfully.',
     editedFormSaved: 'Form saved',
     teamMemberDeleted: 'Team member deleted successfully',
+    signatureDeleted: 'Signature deleted successfully',
+    updateSignature: 'Signature updated successfully',
 };
 
 export const API_KEY_NAME = 'Test Api Key';
@@ -212,3 +214,5 @@ export const FORMS = {
     formNameEdit: 'Edited Form Name',
     optionalMessageFormEdit: 'Form edited'
 }
+
+export const RANDOM_MONTHLY_PLAN = (randomPlan) => `${randomPlan} Monthly Plan`;

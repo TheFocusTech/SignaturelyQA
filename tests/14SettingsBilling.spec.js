@@ -9,6 +9,7 @@ import {
     GOOGLE_DOC_LINK,
     TOAST_MESSAGE,
     BUSINESS_ANNUALLY_PLAN,
+    RANDOM_MONTHLY_PLAN,
 } from '../testData.js';
 import { description, tags, severity, Severity, link, epic, feature, step } from 'allure-js-commons';
 
@@ -199,6 +200,43 @@ test.describe('Billing', () => {
 
         await step('Verify that the plan cancel message has appeared', async () => {
             await expect(settingsBillingPage.nextInvoiceInfo).toContainText(END_PLAN);
+        });
+    });
+
+    PLANS.forEach(plan => {
+        test(`TC_14_55_01 | Verify the ability to successfully select a subscription ${plan} plan`, async ({
+            createFreeUserAndLogin,
+            signPage,
+            settingsCompanyPage,
+            settingsBillingPage,
+            settingsBillingPlanPage,
+            upgradeYourPlanModal,
+            specialOneTimeOfferModal,
+        }) => {
+            await description('Objective: Verify that free users can successfully upgrade their subscription plan.');
+            await severity(Severity.CRITICAL);
+            await link(`${QASE_LINK}/SIGN-55`, 'Qase: SIGN-55');
+            await link(`${GOOGLE_DOC_LINK}xfly7b3oksv7`, 'ATC_14_55_01');
+            await epic('Setting');
+            await feature('Billing');
+            await tags('Subscription');
+    
+            await signPage.sideMenu.clickSettings();
+            await settingsCompanyPage.horizontalMenu.clickBilling();
+            await settingsBillingPage.clickUpgradePlanButton();
+            await settingsBillingPlanPage.clickUpgradeButton(plan);
+            await upgradeYourPlanModal.cardDetails.fillData(CARD_DETAILS.VISA);
+            await upgradeYourPlanModal.clickSubscribeButton();
+            await settingsBillingPlanPage.toast.waitForToastText();
+    
+            await step('Verify the toast message', async () => {
+                await expect(await settingsBillingPlanPage.toast.toastBody).toHaveText(TOAST_MESSAGE.planSuccessChange);
+            });
+
+            await specialOneTimeOfferModal.clickNoThanksModalBtn();
+            await step(`Verify that the billing plan is ${plan} Monthly Plan`, async () => {
+                await expect(settingsBillingPlanPage.billingHeader).toContainText(RANDOM_MONTHLY_PLAN(plan));
+            });
         });
     });
 });
