@@ -247,7 +247,7 @@ test.describe('CreateDocument', () => {
         });
     });
 
-    test.only("TC_03_09_01 | Create Documents via Bulk Send", async ({
+    test("TC_03_09_01 | Create Documents via Bulk Send", async ({
          createBusinessUserAndLogin,
          signPage,
          documentsPage,
