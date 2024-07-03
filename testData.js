@@ -24,6 +24,7 @@ export const TOAST_MESSAGE = {
     folderCreated: 'Folder created!',
     signatureCreated: 'Signature created successfully',
     success: 'Document successfully saved!',
+    companyInformationSave: 'Company information successfully saved',
     fileMovedToFolder: 'Files successfully moved!',
     profileUpdated: 'Profile information updated.',
     deleteAccount: 'Account Deleted.',
@@ -44,6 +45,11 @@ export const TOAST_MESSAGE = {
     formEnabled: 'Form successfully enabled!',
     formDeleted: 'Form deleted successfully.',
     documentSended: 'Document successfully sended to specified email(s).',
+    templateDelete: 'Template deleted successfully.',
+    editedFormSaved: 'Form saved',
+    teamMemberDeleted: 'Team member deleted successfully',
+    signatureDeleted: 'Signature deleted successfully',
+    updateSignature: 'Signature updated successfully',
 };
 
 export const API_KEY_NAME = 'Test Api Key';
@@ -138,6 +144,13 @@ export const SELECTORS = {
     message: 'td p:has(a)',
 };
 
+export const COMPANY_INFO ={
+    companyName: 'companyName',
+    emailFrom:`${process.env.EMAIL_PREFIX}${'001'}`,
+    emailTo:`${process.env.EMAIL_PREFIX}${'002'}${process.env.EMAIL_DOMAIN}`,
+    redirectionPage: 'https://yourcompany.com/'
+}
+
 export const SIGNER_ME = 'Me (Now)';
 
 export const SIGNERS_DATA = {
@@ -160,7 +173,6 @@ export const UPLOAD_FILE_NAME = {
     csvDocument: 'CSV.csv',
 };
 export const NO_ATTACHED_CARD = 'Current Card:No attached card';
-
 export const SUBMIT_TITLE = 'Thanks for Submitting your Document';
 export const SERVICE_NAME = 'Signaturely';
 export const EMAIL_MESSAGE = ' sent you the following document to view';
@@ -176,6 +188,7 @@ export const EDIT_TEMPLATE_DATA = {
 export const TEAM_MEMBER_ROLES = {
     user: 'User',
     admin: 'Admin',
+
 };
 
 export const QASE_LINK = 'https://app.qase.io/case';
@@ -185,7 +198,7 @@ export const GOOGLE_DOC_LINK =
 export const FORM_STATUS = {
     live: 'live',
     disabled: 'disabled',
-}
+};
 
 export const CHECK_BOXES_STATUS = {
     checked: 'uiCheckbox__inner uiCheckbox--checked',
@@ -196,3 +209,8 @@ export const EMPTY_TABLE_HEADER ={
     documents: "You don't have any documents yet.",
     trash: "You don't have any deleted documents yet.",
 };
+
+export const FORMS = {
+    formNameEdit: 'Edited Form Name',
+    optionalMessageFormEdit: 'Form edited'
+}
