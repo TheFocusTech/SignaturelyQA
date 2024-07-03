@@ -56,5 +56,4 @@ export default class SelectNameAndEmailColumnsModal {
             await this.requestSignaturesBtn.click();
         });
     }
-
 }

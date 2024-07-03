@@ -71,5 +71,4 @@ export default class DocumentsPage {
             await this.table.waitForTable(3000);
         });
     }
-
 }

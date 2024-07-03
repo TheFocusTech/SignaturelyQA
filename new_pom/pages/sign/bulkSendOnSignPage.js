@@ -40,6 +40,4 @@ export default class BulkSendOnSignPage {
             await this.selectColumnsBtn.click();
         });
     }
-
-
 }

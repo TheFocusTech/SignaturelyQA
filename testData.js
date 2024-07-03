@@ -217,8 +217,8 @@ export const FORMS = {
     optionalMessageFormEdit: 'Form edited'
 }
 
+export const RANDOM_MONTHLY_PLAN = (randomPlan) => `${randomPlan} Monthly Plan`;
+
 export const BULK_DOCUMENTS = {
     number: '20',
 }
-
-export const RANDOM_MONTHLY_PLAN = (randomPlan) => `${randomPlan} Monthly Plan`;
