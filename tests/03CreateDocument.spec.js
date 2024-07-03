@@ -9,9 +9,9 @@ import {
     UPLOAD_FILE_PATH,
     QASE_LINK,
     GOOGLE_DOC_LINK,
-	TOAST_MESSAGE,
+    TOAST_MESSAGE,
 } from '../testData.js';
-import { createSignature } from '../helpers/preconditions.js';
+import { createSignature, createTemplate } from '../helpers/preconditions.js';
 import { description, tag, severity, Severity, link, epic, step } from 'allure-js-commons';
 
 test.describe('CreateDocument', () => {
@@ -51,7 +51,7 @@ test.describe('CreateDocument', () => {
         await successModal.clickBackToDocumentsBtn();
 
         await step('Verify the created document is in the table with the label "COMPLETED".', async () => {
-        await expect(await documentsPage.table.documentStatus).toHaveText(DOCUMENT_STATUS.completed);
+            await expect(await documentsPage.table.documentStatus).toHaveText(DOCUMENT_STATUS.completed);
         });
     });
 
@@ -99,30 +99,30 @@ test.describe('CreateDocument', () => {
             await expect(await documentsPage.table.documentStatus).toHaveText(DOCUMENT_STATUS.awaiting);
         });
     });
-	
-    test('TC_03_07_03 | Verify user can create document and send it for signature', async ({ 
-		createBusinessUserAndLogin, 
-		signPage, 
-		prepareForSignatureModal, 
-		finalStepPage, 
-		successModal, 
-		documentsPage
-	}) => {
+
+    test('TC_03_07_03 | Verify user can create document and send it for signature', async ({
+        createBusinessUserAndLogin,
+        signPage,
+        prepareForSignatureModal,
+        finalStepPage,
+        successModal,
+        documentsPage
+    }) => {
         test.setTimeout(220 * 1000);
 
-		await description('Objective: To verify the process of creating and sending a document for signature.');
-		await severity(Severity.CRITICAL);
-		await link(
+        await description('Objective: To verify the process of creating and sending a document for signature.');
+        await severity(Severity.CRITICAL);
+        await link(
             `${QASE_LINK}/SIGN-7`,
             "Qase: SIGN-7"
-            );
-		await link(
-			"Documentation",
-			`${GOOGLE_DOC_LINK}hvbgto58wwgb`,
-			"ATC_03_07_03"
-		);
-		await epic('Create Document');
-		await tag('Send Document');
+        );
+        await link(
+            "Documentation",
+            `${GOOGLE_DOC_LINK}hvbgto58wwgb`,
+            "ATC_03_07_03"
+        );
+        await epic('Create Document');
+        await tag('Send Document');
         await signPage.uploadFileTab.fileUploader.uploadFile(UPLOAD_FILE_PATH.xlsxDocument);
         await signPage.uploadFileTab.clickPrepareDocumentBtn();
         await prepareForSignatureModal.clickSendForSignatureRadioBtn();
@@ -243,5 +243,48 @@ test.describe('CreateDocument', () => {
         await step('Verify the created document is in the table with the label "COMPLETED".', async () => {
             await expect(await documentsPage.table.documentStatus).toHaveText(DOCUMENT_STATUS.completed);
         });
+    });
+
+    test('TC_03_08_03 | Verify that the "Edit template" button is active', async ({
+        createBusinessUserAndLogin,
+        signPage,
+        prepareForSignatureModal,
+        createNewTemplatePage,
+        templatesPage,
+        finalStepPage,
+        successModal,
+        documentsPage,
+    }) => {
+
+        test.setTimeout(300 * 1000);
+
+        await description('Objective: Verify that user can edit a document from template');
+        await severity(Severity.CRITICAL);
+        await link(`${QASE_LINK}/SIGN-7`, 'Qase: SIGN-7');
+        await link(`${GOOGLE_DOC_LINK}cd9kwkury3z7`, 'ATC_03_07_05');
+        await epic('Create Document');
+        await tag('Sign a document: me');
+
+        await createTemplate(signPage, prepareForSignatureModal, templatesPage, createNewTemplatePage);
+
+        await signPage.clickChooseTemplateField();
+        await signPage.clickTitleTemplate();
+
+        await signPage.fillSignerName(SIGNERS_DATA.signerName1, 0);
+        await signPage.fillSignerEmail(SIGNERS_DATA.signerEmail1, 0);
+        await signPage.clickEditTemplateBtn();
+
+        await prepareForSignatureModal.clickContinueBtn();
+        await prepareForSignatureModal.clickGotItBtn();
+        await prepareForSignatureModal.clickSignOnFieldsMenu();
+        await prepareForSignatureModal.clickDocumentBody();
+        await prepareForSignatureModal.clickSaveBtn();
+        await finalStepPage.waitAndClickSendForSignatureBtn(TOAST_MESSAGE.success);
+        await successModal.clickBackToDocumentsBtn();
+
+        expect(await documentsPage.table.getDocumentStatusText()).toBe(DOCUMENT_STATUS.awaiting);
+
+
+
     });
 });
