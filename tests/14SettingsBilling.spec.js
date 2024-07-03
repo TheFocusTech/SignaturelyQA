@@ -234,7 +234,7 @@ test.describe('Billing', () => {
             });
 
             await specialOneTimeOfferModal.clickNoThanksModalBtn();
-            await step(`Verify that the billing plan is ${plan} Annually Plan`, async () => {
+            await step(`Verify that the billing plan is ${plan} Monthly Plan`, async () => {
                 await expect(settingsBillingPlanPage.billingHeader).toContainText(RANDOM_MONTHLY_PLAN(plan));
             });
         });
