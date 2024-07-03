@@ -215,13 +215,13 @@ export default class TableComponent {
         });
     }
 
-    async clickOptionsButtonByDocumentTitle(text) {
+    async clickOptionsButtonByDocumentTitle(documentTitle) {
         await step(`Click "Options" button for exact document by document title`, async () => {
             await this.page.waitForSelector('.table__column--text--document p', { timeout: 5000 });
             const documentTitleElementsCount = await this.documentTitleList.count(); 
                 for (let i = 0; i < documentTitleElementsCount; i++) {
                     const elementText = await this.documentTitleList.nth(i).innerText();
-                    if (elementText.trim() === text) {
+                    if (elementText.trim() === documentTitle) {
                         await this.optionsBtn.nth(i).click();
                         return; 
                 }
