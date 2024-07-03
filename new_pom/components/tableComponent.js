@@ -29,6 +29,8 @@ export default class TableComponent {
         this.enableFormBtn = this.page.getByRole('button', { name: 'Enable Form' });
         this.deleteForm = this.page.getByRole('button', { name: 'Delete Form' });
         this.shareBtn = this.page.getByRole('button', { name: 'Share' });
+        this.documentTitleList = this.page.locator('.table__column--text--document p');
+        this.downloadBtn = this.page.getByText('Download');
     }
 
     async clickFirstOptionsBtn() {
@@ -204,6 +206,26 @@ export default class TableComponent {
     async waitForTable(time) {
         await step(`Wait for table data to be loaded.`, async () => {
             await this.page.waitForTimeout(time);
+        });
+    }
+
+    async clickOptionsButtonByDocumentTitle(text) {
+        await step(`Click "Options" button for exact document by document title`, async () => {
+            await this.page.waitForSelector('.table__column--text--document p', { timeout: 5000 });
+            const documentTitleElementsCount = await this.documentTitleList.count(); 
+                for (let i = 0; i < documentTitleElementsCount; i++) {
+                    const elementText = await this.documentTitleList.nth(i).innerText();
+                    if (elementText.trim() === text) {
+                        await this.optionsBtn.nth(i).click();
+                        return; 
+                }
+            }
+        });
+    }
+
+    async clickDownloadBtn() {
+        await step('Click on "Download" option', async () => {
+            await this.downloadBtn.click();
         });
     }
 }
