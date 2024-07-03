@@ -8,11 +8,11 @@ import {
     DOCUMENT_STATUS,
     QASE_LINK,
     GOOGLE_DOC_LINK,
-    SIGNERS_DATA,
     EMPTY_TABLE_HEADER, EMAIL_SUBJECTS, SELECTORS,
 } from '../testData.js';
 import { createFolder, createDocumentAwaiting, createDocumentCompleted, uploadDraftDocument } from '../helpers/preconditions.js';
 import { description, tag, severity, Severity, link, epic, step } from 'allure-js-commons';
+import { signInRequest, documentIdRequest } from '../helpers/apiCalls.js';
 import {retrieveEmailMessage} from "../helpers/utils";
 
 test.describe('DocumentsType', () => {
@@ -273,5 +273,49 @@ test.describe('DocumentsType', () => {
         await test.step('Verify that trash is empty', async () => {
             await expect (documentsTrashPage.table.emptyTableHeader).toHaveText(EMPTY_TABLE_HEADER.trash);
         });      
+    });
+
+    test('TC_05_20_01 | Verify that Business User can download a "Completed" document (API)', async ({
+        page,
+        request,
+        createBusinessUserAndLogin,
+        signPage,
+        prepareForSignatureModal,
+        createSignatureOrInitialModal,
+        finalStepPage,
+        successModal,
+        documentsPage,
+    }) => {
+        await description('Objective: Verify that Business User can download a "Completed" document (API)');
+        await severity(Severity.CRITICAL);
+        await link(`${QASE_LINK}/SIGN-20`, 'Qase: SIGN-20');
+        await link(`${GOOGLE_DOC_LINK}8wxawmz1dvq1`, 'TC_05_20_01');
+        await epic('Documents (typed)');
+        await tag('Download document');
+
+        test.setTimeout(120000)
+        await createDocumentCompleted(
+            signPage,
+            prepareForSignatureModal,
+            createSignatureOrInitialModal,
+            finalStepPage,
+            successModal,
+            documentsPage
+        );
+
+        const documentName = UPLOAD_FILE_NAME.jpgDocument;
+        await signPage.sideMenu.clickDocuments();
+        await documentsPage.sideMenuDocuments.clickCompleted();
+        await documentsPage.table.clickOptionsButtonByDocumentTitle(documentName);
+
+        await signInRequest(request);
+        const documentId = await documentIdRequest(request, documentName);
+        const responsePromise = page.waitForResponse(response => response.url().includes(documentId));
+        await documentsPage.table.clickDownloadBtn();
+        const response = await responsePromise;
+
+        await test.step('Verify that the response code after clicking "Download" option is successfull', async () => {
+            expect(response.status()).toBe(200);
+        });
     });
 });
