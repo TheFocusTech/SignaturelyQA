@@ -1,3 +1,5 @@
+import {step} from "allure-js-commons";
+
 export default class DowngradeToPersonalPlanModal {
     constructor(page) {
         this.page = page;
@@ -6,6 +8,8 @@ export default class DowngradeToPersonalPlanModal {
     }
 
     async clickDowngradeButton() {
-        await this.downgradeToPersonalPlanButton.click();
+        await step('Click on "Downgrade" To Personal Plan button', async () => {
+            await this.downgradeToPersonalPlanButton.click();
+        });
     }
 }

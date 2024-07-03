@@ -15,6 +15,7 @@ export default class SettingsBillingPlanPage {
         this.billingTableColumnHeader = this.page.locator('.billing__table-column--header');
         this.billingHeader = this.page.locator('.billing__trial-header');
         this.selectPersonalPlanButton = this.page.getByText('Select', { exact: true });
+        this.monthlyAnnyallyToggle = this.page.locator('.react-toggle-thumb');
     }
 
     async clickUpgradeButton(plan) {
@@ -27,7 +28,14 @@ export default class SettingsBillingPlanPage {
     }
 
     async clickSelectPersonalPlanButton() {
-        await this.selectPersonalPlanButton.click();
+        await step('Click on "Select" personal plan button', async () => {
+            await this.selectPersonalPlanButton.click();
+        }); 
     }
 
+    async switchMonthlyAnnyallyToggle() {
+        await step('Switch the Monthly/Annually toggle', async () => {
+            await this.monthlyAnnyallyToggle.click();
+        })
+    }
 }

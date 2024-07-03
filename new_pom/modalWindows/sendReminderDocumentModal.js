@@ -8,13 +8,13 @@ export default class SendReminderDocumentModal {
         this.sendReminderBtn = this.page.getByRole('button', { name: 'Send Reminder' });
     }
     async clickSignerCheckbox() {
-        await step('Click and choose signer', async () => {
+        await step(`Click the checkbox opposite the signer's details on the modal window`, async () => {
             await this.signerCheckbox.click();
         });
     }
 
     async clickSendReminderBtn() {
-        await step('Click the "Send reminder" button', async () => {
+        await step(`Click the "Send Reminder" button on the modal window`, async () => {
             await this.sendReminderBtn.click();
         });
     }
