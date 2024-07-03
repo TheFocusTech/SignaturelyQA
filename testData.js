@@ -214,3 +214,5 @@ export const FORMS = {
     formNameEdit: 'Edited Form Name',
     optionalMessageFormEdit: 'Form edited'
 }
+
+export const RANDOM_MONTHLY_PLAN = (randomPlan) => `${randomPlan} Monthly Plan`;
