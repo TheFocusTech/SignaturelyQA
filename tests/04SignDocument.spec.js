@@ -8,13 +8,14 @@ import {
     UPLOAD_FILE_PATH,
     EMAIL_SUBJECTS,
     SELECTORS,
-    SUBMIT_TITLE,
+    SUCCESS_TITLE,
     SERVICE_NAME,
     EMAIL_MESSAGE,
     DOCUMENT_TITLE,
     SIGNER_ME,
     QASE_LINK,
     GOOGLE_DOC_LINK,
+    ENDPOINT_FOR_DECLINE,
 } from '../testData.js';
 import { retrieveUserEmailConfirmationLink, retrieveEmailMessage, editDocumentStatus } from '../helpers/utils.js';
 import { createSignature, uploadDocumentForDraft } from '../helpers/preconditions.js';
@@ -125,7 +126,7 @@ test.describe('Sign Document', () => {
         await notRegisterSignerSignPage.clickSubmitBtn();
         await signerAlmostDoneModal.clickIAgreeBtn();
         await notRegisterSignerSignPage.toast.waitForToastIsHiddenByText(TOAST_MESSAGE.documentSubmited);
-        await documentSubmitProccessModal.waitForSubmitTitleByText(SUBMIT_TITLE);
+        await documentSubmitProccessModal.waitForSubmitTitleByText(SUCCESS_TITLE.submit);
 
         const message = await retrieveEmailMessage(
             request,
@@ -337,7 +338,8 @@ test.describe('Sign Document', () => {
         finalStepPage,
         documentsPage,
         successModal,
-        sendReminderDocumentModal,
+        declineModal,
+        notRegisterSignerSignPage,
         page,
         request,
     }) => {
@@ -389,11 +391,22 @@ test.describe('Sign Document', () => {
         );
 
         await step('Navigate to the signing document link to reject document', async () => {
-            await page.goto(signerLink + '&declineImmediately=true');
+            await page.goto(signerLink + ENDPOINT_FOR_DECLINE);
         });
 
-        // await step('Verify that Viewer has got email for viewing document', async () => {
-        //     expect(message).toEqual(`${process.env.NEW_USER_NAME} (${process.env.NEW_USER_EMAIL})${EMAIL_MESSAGE}`);
-        // });
+        declineModal.clickDeclineBtn();
+        await notRegisterSignerSignPage.toast.waitForToastIsHiddenByText(TOAST_MESSAGE.declineDocument);
+
+        await step('Verify that Success Modal has "Document Declined" title', async () => {
+            await expect(await successModal.title).toHaveText(SUCCESS_TITLE.declined);
+        });
+
+        successModal.clickReturnToDocumentsBtn();
+        documentsPage.sideMenuDocuments.clickVoided();
+
+        await step('Verify that the document has "DECLINED" status', async () => {
+            await documentsPage.table.documentStatus.waitFor();
+            await expect(await documentsPage.table.documentStatus).toHaveText(DOCUMENT_STATUS.declined);
+        });
     });
 });
