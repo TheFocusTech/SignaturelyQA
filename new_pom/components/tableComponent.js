@@ -31,7 +31,6 @@ export default class TableComponent {
         this.shareBtn = this.page.getByRole('button', { name: 'Share' });
         this.deleteBtn = this.page.getByRole('button', { name: 'Delete' });
         this.firstFormTitle = this.page.getByText('Edited Form Name');
-
         this.documentTitleList = this.page.locator('.table__column--text--document p');
         this.downloadBtn = this.page.getByText('Download');
     }
@@ -72,7 +71,6 @@ export default class TableComponent {
         await step(`Wait for the document title to be visible`, async () => {
             await this.objectTitle.filter({ hasText: name }).waitFor()
         });
-
     }
 
     async clickMoveToBtn() {
@@ -90,7 +88,7 @@ export default class TableComponent {
     async clickSendReminderBtn() {
         await step('Click the "Send Reminder" button', async () => {
             await this.sendReminderBtn.click();
-    });
+        });
     }
 
     async getDocumentStatusText() {
