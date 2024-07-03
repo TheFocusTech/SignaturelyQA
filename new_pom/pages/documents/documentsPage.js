@@ -62,8 +62,6 @@ export default class DocumentsPage {
             const max = Number(this.range[1]);
             this.randomIndex1 = await getRandomIndexInRange(min, max);
             this.randomIndex2 = await getRandomIndexInRange(min, max);
-            console.log(this.randomIndex1);
-            console.log(this.randomIndex2);
         });
     }
 
