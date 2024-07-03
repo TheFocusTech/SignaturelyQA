@@ -37,7 +37,7 @@ test.describe('API key', () => {
         });
     });
 
-    test('TC_12_48_01_02 | Verify User can copy API key created by the "Create API" button in Table.', async ({
+    test('TC_12_48_02 | Verify User can copy API key created by the "Create API" button in Table.', async ({
         createBusinessUserAndLogin,
         signPage,
         settingsCompanyPage,
