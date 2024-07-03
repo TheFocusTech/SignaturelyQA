@@ -203,7 +203,7 @@ test.describe('Billing', () => {
     });
 
     PLANS.forEach(plan => {
-        test(`TC_14_55_01 | Verify the ability to successfully subscription ${plan} plan`, async ({
+        test(`TC_14_55_01 | Verify the ability to successfully select a subscription ${plan} plan`, async ({
             createFreeUserAndLogin,
             signPage,
             settingsCompanyPage,
