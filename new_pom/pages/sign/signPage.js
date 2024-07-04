@@ -1,6 +1,7 @@
 import SideMenuComponent from '../../components/sideMenuComponent';
 import UploadFileOnSignPage from '../../pages/sign/uploadFileOnSignPage';
 import HeaderComponent from '../../components/headerComponent';
+import { step } from 'allure-js-commons'
 const delay = ms => new Promise(resolve => setTimeout(resolve, ms));
 export default class SignPage {
     constructor(page) {
@@ -14,35 +15,39 @@ export default class SignPage {
         this.titleTemplate = this.page.locator('p.uiSelect__select-row');
         this.inputName = this.page.getByPlaceholder('Name');
         this.inputEmail = this.page.getByPlaceholder('Email');
-        this.editTemplateBtn = this.page.getByRole('button', {name: 'Edit template'});
+        this.editTemplateBtn = this.page.getByRole('button', { name: 'Edit template' });
 
     }
 
     async clickChooseTemplateField() {
-        await this.chooseTemplateField.hover();
-        await delay(1000);
-        await this.chooseTemplateField.click();
-
+        await step('Click the "Choose a Template" field.', async () => {
+            await this.chooseTemplateField.hover();
+            await delay(1000);
+            await this.chooseTemplateField.click();
+        });
     };
 
     async clickTitleTemplate() {
-        await this.titleTemplate.click();
-
+        await step('Click the "title template" row.', async () => {
+            await this.titleTemplate.click();
+        });
     };
 
     async fillSignerName(name, i) {
-        await this.inputName.nth(i).fill(name);
-
+        await step("fill Signer's name in the field 'Name'", async () => {
+            await this.inputName.nth(i).fill(name);
+        });
     }
 
     async fillSignerEmail(email, i) {
-        await this.inputEmail.nth(i).fill(email);
-
+        await step("fill Signer's email in the field 'Email' ", async () => {
+            await this.inputEmail.nth(i).fill(email);
+        });
     }
 
     async clickEditTemplateBtn() {
-        await this.editTemplateBtn.click();
-
+        await step("Click the button 'Edit Template'", async () => {
+            await this.editTemplateBtn.click();
+        });
     };
-
 }
