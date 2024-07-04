@@ -52,7 +52,7 @@ export const createFolder = async (signPage, documentsPage, createFolderModal, f
     });
 };
 
-export const createTemplate = async (signPage, prepareForSignatureModal, templatesPage, createNewTemplatePage) => {
+export const createTemplate = async (signPage, prepareForSignatureModal, templatesPage, finalStepPage, createNewTemplatePage) => {
     await step('Precondition: Create Template', async () => {
         await signPage.sideMenu.clickTemplates();
         await templatesPage.sideMenuTemplates.clickCreateTemplate();
@@ -63,7 +63,7 @@ export const createTemplate = async (signPage, prepareForSignatureModal, templat
         await prepareForSignatureModal.clickSignOnFieldsMenu();
         await prepareForSignatureModal.clickDocumentBody();
         await prepareForSignatureModal.clickCreateBtn();
-        await prepareForSignatureModal.toast.waitForToastIsHiddenByText(TOAST_MESSAGE.success);
+        await finalStepPage.toast.waitForToastIsHiddenByText(TOAST_MESSAGE.success);
         await prepareForSignatureModal.clickBackToTemplatesBtn();
         await templatesPage.sideMenu.clickSign();
     });
