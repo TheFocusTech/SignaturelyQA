@@ -221,11 +221,6 @@ export async function editDocumentStatus(request, documentName, status) {
     });
 }
 
-export async function reloadPage(page, timeout) {
-    await page.reload();
-    await page.waitForTimeout(timeout);
-}
-
 export function getRandomIndexInRange(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
 }

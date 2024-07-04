@@ -96,7 +96,6 @@ export default class PrepareForSignatureModal {
     }
 
     async clickDocumentBody() {
-
         await step('Click randomly inside the document', async () => {
             await clickCanvas(this.page, this.canvas, this.excludedAreas);
         });
@@ -148,9 +147,9 @@ export default class PrepareForSignatureModal {
     async getPrepareForSigningTitleText() {
         let actualText;
         await step('Get title text', async () => {
-        actualText = await this.prepareForSigningTitle.textContent();
-    });
-        return actualText
+            actualText = await this.prepareForSigningTitle.textContent();
+        });
+        return actualText;
     }
 
     async clickNameOnFieldsMenu() {
@@ -183,26 +182,7 @@ export default class PrepareForSignatureModal {
         await step('Click on the "Date" in "Fields" menu', async () => {
             await this.dateOnFieldsMenu.waitFor({ state: 'visible' });
             await this.dateOnFieldsMenu.click();
-
         });
     }
 
-    async setSignFieldOnDocument() {
-        await step('Set "Sign" field on document.', async () => {
-            await this.page.waitForTimeout(5000);
-            let coordinates = 0;
-            let retries = 5;
-            while (retries !== 0) {
-                // await this.signOnFieldsMenu.waitFor({ state: 'visible' });
-                await this.signOnFieldsMenu.click();
-                coordinates = await clickCanvas(this.page, this.canvas, this.excludedAreas);
-                coordinates === 0 ? retries -- : retries = 0;
-            }
-            if(coordinates === 0) {
-                await step('Error: Test precondition fail.', async () => {
-                    console.error('Error: Test precondition fail.');
-                });
-            }
-        });
-    }
 }
