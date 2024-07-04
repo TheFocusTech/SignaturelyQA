@@ -47,7 +47,7 @@ test.describe('Company', () => {
     });
 
     test("TC_10_43_02 | Verify that the business user can fill company's form with checkboxes", async ({
-        createBusinessUserAndLogin, signPage, settingsCompanyPage }) => {
+        createBusinessUserAndLogin, signPage, settingsCompanyPage, page }) => {
        
         await description("To verify the process of filling company form with checkboxes.");
         await tags('Fill company form with checkboxes');
@@ -77,6 +77,8 @@ test.describe('Company', () => {
         await step('Verify that toast "Company information successfully saved" appears', async () =>{
             await expect(settingsCompanyPage.toast.toastBody).toHaveText(TOAST_MESSAGE.companyInformationSave);
         })
+
+        await settingsCompanyPage.reloadPage();
 
         const actualCompanyName = await settingsCompanyPage.companyName.inputValue();
         const actualEmailClosingSignature = await settingsCompanyPage.emailClosingSignature.inputValue();
