@@ -1,2 +1,0 @@
-"Status","Start Time","Stop Time","Duration in ms","Parent Suite","Suite","Sub Suite","Test Class","Test Method","Name","Description"
-"passed","Thu Jul 04 18:42:20 GMT 2024","Thu Jul 04 18:43:55 GMT 2024","94614","chromium","","DocumentsType","","","TC_05_19_02 | Verify that deleted documents have been moved to the trash by using checkboxes and Select_options dropdown menu and then deleted permanently","To verify the process of moving the documents to the trash by checkboxes and then deleting documents permanently."
