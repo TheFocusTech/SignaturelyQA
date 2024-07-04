@@ -1,6 +1,7 @@
 import ToastComponent from "../../components/toastComponent";
 import SideMenuComponent from "../../components/sideMenuComponent";
 import { step } from "allure-js-commons";
+import FileUploaderComponent from '../../components/fileUploaderComponent';
 
 export default class SettingsProfilePage {
     constructor(page) {
@@ -8,6 +9,7 @@ export default class SettingsProfilePage {
 
         this.toast = new ToastComponent(this.page);
         this.sideMenu = new SideMenuComponent(this.page);
+        this.imageUploader = new FileUploaderComponent(this.page)
 
         this.newPasswordInputField = this.page.getByPlaceholder('Password', { exact: true });
         this.repeatNewPasswordInputField = this.page.getByPlaceholder('Repeat Password');
@@ -15,8 +17,10 @@ export default class SettingsProfilePage {
         this.deleteMyAccountBtn = this.page.getByRole('button', { name: 'Delete my Account' });
         this.emailAddressInputField = this.page.getByPlaceholder('username@gmail.com');
         this.updateBtn = this.page.getByRole('button', { name: "Update Email" });
-        this.checkBoxesList = this.page.locator('.settings__form-checkbox .uiCheckbox')
-        this.checkBoxesFrameList = this.page.locator('.settings__form-checkbox .uiCheckbox__inner')
+        this.checkBoxesList = this.page.locator('.settings__form-checkbox .uiCheckbox');
+        this.checkBoxesFrameList = this.page.locator('.settings__form-checkbox .uiCheckbox__inner');
+        this.uploadedAvatarLocator = this.page.locator('.avatar--large>img');
+        this.deleteButton = this.page.getByRole('button', {name: 'Delete', exact: true })
     }
 
     async fillNewPasswordInputField(password) {
@@ -81,5 +85,11 @@ export default class SettingsProfilePage {
                 }
             }
         });
+    }
+
+    async clickDeleteButton() {
+        await step('Click the "Delete" button to delete an avatar', async () => {
+            await this.deleteButton.click()
+        })
     }
 }

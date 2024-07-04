@@ -1,8 +1,9 @@
 import { expect } from '@playwright/test';
 import { test } from '../fixtures/base.js';
 import { generateRandomPassword, generateNewUserEmail, retrieveUserEmailConfirmationLink } from '../helpers/utils.js';
-import { EMAIL_SUBJECTS, TOAST_MESSAGE, URL_END_POINTS, QASE_LINK, GOOGLE_DOC_LINK, CHECK_BOXES_STATUS } from '../testData.js';
+import { EMAIL_SUBJECTS, TOAST_MESSAGE, URL_END_POINTS, QASE_LINK, GOOGLE_DOC_LINK, CHECK_BOXES_STATUS, UPLOAD_FILE_PATH } from '../testData.js';
 import { description, tag, severity, Severity, link, epic, step } from 'allure-js-commons';
+
 
 test.describe('Profile', () => {
     test('TC_11_45_01 | Verify that User can change password', async ({
@@ -40,12 +41,12 @@ test.describe('Profile', () => {
         await loginPage.clickLogin();
         await step(`Verify that the User is logged in with a new password and is on the homepage ${URL_END_POINTS.signEndPoint} `, async () => {
             await expect(signPage.page).toHaveURL(process.env.URL + URL_END_POINTS.signEndPoint);
+        });
+
     });
-    
- });
 
     test('TC_11_47_01 | Verify that user can delete account', async ({
-        createBusinessUserAndLogin, 
+        createBusinessUserAndLogin,
         signPage,
         settingsCompanyPage,
         settingsProfilePage,
@@ -67,11 +68,11 @@ test.describe('Profile', () => {
         await step(`Verify that the User is deleted account and is on the loginpage ${URL_END_POINTS.loginEndPoint} `, async () => {
             await expect(loginPage.page).toHaveURL(process.env.URL + URL_END_POINTS.loginEndPoint);
         });
-      
+
         await step(`Verify that a toast message with the text "${TOAST_MESSAGE.deleteAccount}" popped up `, async () => {
             await expect(settingsProfilePage.toast.toastBody).toHaveText(TOAST_MESSAGE.deleteAccount);
         });
-      
+
     });
 
     test('TC_11_44_01 | Verify User can change email', async ({
@@ -179,5 +180,41 @@ test.describe('Profile', () => {
                 await expect(checkBoxes.nth(i)).toHaveClass(CHECK_BOXES_STATUS.checked);
             }
         });
-    })
+    });
+
+    test('TC_11_46_01 | Verify the user can upload and delete the profile picture', async ({
+        createBusinessUserAndLogin,
+        signPage,
+        settingsCompanyPage,
+        settingsProfilePage,
+        saveUploadImageModal
+    }) => {
+        await description('Objective: To verify the user can upload, delete the profile picture');
+        await severity(Severity.CRITICAL);
+        await link(`${QASE_LINK}/SIGN-46`, 'Qase: SIGN-46');
+        await link(`${GOOGLE_DOC_LINK}q5uk912hrnbl`, 'ATC_11_46_01');
+        await epic('Profile');
+        await tag('Update');
+
+        await signPage.sideMenu.clickSettings();
+        await settingsCompanyPage.sideMenuSettings.clickProfile();
+        await settingsProfilePage.imageUploader.uploadImage(UPLOAD_FILE_PATH.jpgDocument);
+        await saveUploadImageModal.clickSaveButton();
+
+        await step('Verify the "New picture has been uploaded" toaster appears', async () => {
+            await expect(settingsProfilePage.toast.toastBody).toHaveText(TOAST_MESSAGE.pictureUploaded)
+        });
+
+        const avatarImage = await settingsProfilePage.uploadedAvatarLocator;
+
+        await step('Verify the profile picture has been updated', async () => {
+            await expect(avatarImage).toHaveAttribute('alt', 'avatar');
+        });
+
+        await settingsProfilePage.clickDeleteButton();
+
+        await step('Verify the profile picture has been deleted', async () => {
+            await expect(avatarImage).toBeHidden()
+        });
+    });
 })

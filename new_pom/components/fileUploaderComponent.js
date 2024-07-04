@@ -24,4 +24,10 @@ export default class FileUploaderComponent {
             await this.deleteUploadedFileBtn.click({ force: true });
         })
     }
+
+    async uploadImage(image){
+        await step('Upload image', async () => {
+            await this.fileInput.setInputFiles(image);
+        })
+    }
 }
