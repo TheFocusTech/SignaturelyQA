@@ -267,7 +267,7 @@ test.describe('DocumentsType', () => {
         });      
     });
 
-    test.only('TC_05_19_02 | Verify that deleted documents have been moved to the trash by using checkboxes and Select_options dropdown menu and then deleted permanently', async ({
+    test('TC_05_19_02 | Verify that deleted documents have been moved to the trash by using checkboxes and Select_options dropdown menu and then deleted permanently', async ({
         createBusinessUserAndLogin,
         signPage,
         documentsPage,
