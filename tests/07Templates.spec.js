@@ -57,7 +57,7 @@ test.describe('Templates', () => {
         createNewTemplatePage,
     }) => {
 
-        test.setTimeout(350 * 1000);
+        test.setTimeout(200 * 1000);
 
         await description('Objective: To verify the process of add template to API.');
         await severity(Severity.CRITICAL);
@@ -140,7 +140,7 @@ test.describe('Templates', () => {
         successModal
     }) => {
 
-        test.setTimeout(350 * 1000);
+        test.setTimeout(200 * 1000);
 
         await description('Objective: To verify the process of duplicate template.');
         await severity(Severity.CRITICAL);

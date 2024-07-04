@@ -304,7 +304,7 @@ test.describe('CreateDocument', () => {
         documentsPage,
     }) => {
 
-        test.setTimeout(300 * 1000);
+        test.setTimeout(200 * 1000);
 
         await description('Objective: Verify that user can edit a document from template');
         await severity(Severity.CRITICAL);
