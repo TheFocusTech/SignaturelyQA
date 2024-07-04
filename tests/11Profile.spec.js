@@ -9,6 +9,7 @@ import {
     GOOGLE_DOC_LINK,
     CHECK_BOXES_STATUS,
     UPLOAD_FILE_PATH,
+    DATE_FORMAT,
 } from '../testData.js';
 import { description, tag, severity, Severity, link, epic, step } from 'allure-js-commons';
 
@@ -199,59 +200,71 @@ test.describe('Profile', () => {
             }
         });
     });
+    DATE_FORMAT.forEach(dateFormat => {
+        test(`TC_11_46_02 | Verify that user can change the date format to ${dateFormat}`, async ({
+            createBusinessUserAndLogin,
+            signPage,
+            settingsCompanyPage,
+            settingsProfilePage,
+            prepareForSignatureModal,
+        }) => {
+            await description(
+                'Objective: To verify that a user can update the date format in their profile settings and the updated date format is applied when signing a document'
+            );
+            await severity(Severity.CRITICAL);
+            await link(`${QASE_LINK}/SIGN-46`, 'Qase: SIGN-46');
+            await link(`${GOOGLE_DOC_LINK}3neug7we6zqz`, 'ATC_11_46_02');
+            await epic('Profile');
+            await tag('Date-format');
 
-    test('TC_11_46_02 | Verify that user can change the date format', async ({
-        createBusinessUserAndLogin,
-        signPage,
-        settingsCompanyPage,
-        settingsProfilePage,
-        prepareForSignatureModal,
-    }) => {
-        await description(
-            'Objective: To verify that a user can update the date format in their profile settings and the updated date format is applied when signing a document'
-        );
-        await severity(Severity.CRITICAL);
-        await link(`${QASE_LINK}/SIGN-46`, 'Qase: SIGN-46');
-        await link(`${GOOGLE_DOC_LINK}3neug7we6zqz`, 'ATC_11_46_02');
-        await epic('Profile');
-        await tag('Date-format');
+            test.slow();
+            function generateCurrentDate(dateFormat) {
+                let dt = new Date();
+                const year4digits = dt.getFullYear().toString();
+                const year2digits = dt.getFullYear().toString().slice(-2);
+                const month = (dt.getMonth() + 1).toString().padStart(2, '0');
+                const day = dt.getDate().toString().padStart(2, '0');
 
-        test.slow();
-        function generateCurrentDate() {
-            let dt = new Date();
-            const year = dt.getFullYear().toString();
-            const month = (dt.getMonth() + 1).toString().padStart(2, '0');
-            const day = dt.getDate().toString().padStart(2, '0');
-
-            return `${year}/${month}/${day}`;
-        }
-        const CURRENT_DATE = generateCurrentDate();
-
-        await signPage.sideMenu.clickSettings();
-        await settingsCompanyPage.sideMenuSettings.clickProfile();
-        await settingsProfilePage.clickDateFormatDropdown();
-        await settingsProfilePage.chooseDateFormat();
-        await settingsProfilePage.clickSaveButton();
-
-        await step(
-            `Verify that a toast message with the text "${TOAST_MESSAGE.profileUpdated}" popped up `,
-            async () => {
-                await expect(settingsProfilePage.toast.toastBody).toHaveText(TOAST_MESSAGE.profileUpdated);
+                if (dateFormat === 'DD / MM / YYYY') {
+                    return `${day}/${month}/${year4digits}`;
+                } else if (dateFormat === 'MM / DD / YYYY') {
+                    return `${month}/${day}/${year4digits}`;
+                } else if (dateFormat === 'MM / DD / YY') {
+                    return `${month}/${day}/${year2digits}`;
+                } else if (dateFormat === 'DD / MM / YY') {
+                    return `${day}/${month}/${year2digits}`;
+                } else if (dateFormat === 'YYYY / DD / MM') {
+                    return `${year4digits}/${day}/${month}`;
+                }
             }
-        );
+            const CURRENT_DATE = generateCurrentDate(dateFormat);
 
-        await settingsProfilePage.sideMenu.clickSign();
-        await signPage.uploadFileTab.fileUploader.uploadFile(UPLOAD_FILE_PATH.xlsxDocument);
-        await signPage.uploadFileTab.clickPrepareDocumentBtn();
-        await prepareForSignatureModal.clickSignDocumentRadioBtn();
-        await prepareForSignatureModal.clickContinueBtn();
-        await prepareForSignatureModal.clickGotItBtn();
-        await prepareForSignatureModal.clickDateOnFieldsMenu();
-        await prepareForSignatureModal.clickDocumentBody();
-        await prepareForSignatureModal.clickDateOnLeftMenu();
+            await signPage.sideMenu.clickSettings();
+            await settingsCompanyPage.sideMenuSettings.clickProfile();
+            await settingsProfilePage.clickDateFormatDropdown();
+            await settingsProfilePage.chooseDateFormat(dateFormat);
+            await settingsProfilePage.clickSaveButton();
 
-        await step(`Verify that the date on the document has correct format`, async () => {
-            await expect(prepareForSignatureModal.dateStampedOnDocument).toHaveValue(CURRENT_DATE);
+            await step(
+                `Verify that a toast message with the text "${TOAST_MESSAGE.profileUpdated}" popped up `,
+                async () => {
+                    await expect(settingsProfilePage.toast.toastBody).toHaveText(TOAST_MESSAGE.profileUpdated);
+                }
+            );
+
+            await settingsProfilePage.sideMenu.clickSign();
+            await signPage.uploadFileTab.fileUploader.uploadFile(UPLOAD_FILE_PATH.xlsxDocument);
+            await signPage.uploadFileTab.clickPrepareDocumentBtn();
+            await prepareForSignatureModal.clickSignDocumentRadioBtn();
+            await prepareForSignatureModal.clickContinueBtn();
+            await prepareForSignatureModal.clickGotItBtn();
+            await prepareForSignatureModal.clickDateOnFieldsMenu();
+            await prepareForSignatureModal.clickDocumentBody();
+            await prepareForSignatureModal.clickDateOnLeftMenu();
+
+            await step(`Verify that the date on the document has correct format ${dateFormat}`, async () => {
+                await expect(prepareForSignatureModal.dateStampedOnDocument).toHaveValue(CURRENT_DATE);
+            });
         });
     });
 });

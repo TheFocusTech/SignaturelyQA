@@ -18,7 +18,7 @@ export default class SettingsProfilePage {
         this.checkBoxesList = this.page.locator('.settings__form-checkbox .uiCheckbox');
         this.checkBoxesFrameList = this.page.locator('.settings__form-checkbox .uiCheckbox__inner');
         this.dateFormatDropdown = this.page.locator('.uiSelect__select').first();
-        this.dateFormat = this.page.getByText('YYYY / DD / MM', { exact: true });
+        this.dateFormat = this.page.locator('.uiSelect__select-row');
     }
 
     async fillNewPasswordInputField(password) {
@@ -91,9 +91,9 @@ export default class SettingsProfilePage {
         });
     }
 
-    async chooseDateFormat() {
+    async chooseDateFormat(format) {
         await step('Choose a date format', async () => {
-            await this.dateFormat.click();
+            await this.dateFormat.filter({ hasText: format }).click();
         });
     }
 }
