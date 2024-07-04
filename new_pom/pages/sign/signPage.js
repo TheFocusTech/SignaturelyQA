@@ -7,6 +7,7 @@ import { step } from 'allure-js-commons';
 export default class SignPage {
     constructor(page) {
         this.page = page;
+
         this.uploadFileTab = new UploadFileOnSignPage(this.page);
         this.sideMenu = new SideMenuComponent(this.page);
         this.header = new HeaderComponent(this.page);
