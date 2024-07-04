@@ -293,11 +293,7 @@ test.describe('CreateDocument', () => {
         });
     });
 
-  
-
-
-
-    test('TC_03_08_03 | Verify that the "Edit template" button is active', async ({
+    test('TC_03_08_02 | Verify that the "Edit template" button is active', async ({
         createBusinessUserAndLogin,
         signPage,
         prepareForSignatureModal,
@@ -312,8 +308,8 @@ test.describe('CreateDocument', () => {
 
         await description('Objective: Verify that user can edit a document from template');
         await severity(Severity.CRITICAL);
-        await link(`${QASE_LINK}/SIGN-7`, 'Qase: SIGN-7');
-        await link(`${GOOGLE_DOC_LINK}cd9kwkury3z7`, 'ATC_03_07_05');
+        await link(`${QASE_LINK}/SIGN-8`, 'Qase: SIGN-8');
+        await link(`${GOOGLE_DOC_LINK}cd9kwkury3z7`, 'ATC_03_08_02');
         await epic('Create Document');
         await tag('Sign a document: me');
 
