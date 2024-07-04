@@ -107,4 +107,11 @@ export default class SettingsCompanyPage {
             await this.enable3Checkbox.click();
         });
     }
+
+    async reloadPage() {
+        await step('Refresh the page', async () => {
+            await this.page.reload();
+            await this.page.waitForTimeout(1000);
+        });
+    }
 }
