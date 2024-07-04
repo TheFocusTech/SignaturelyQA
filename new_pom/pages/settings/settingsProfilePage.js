@@ -93,7 +93,7 @@ export default class SettingsProfilePage {
 
     async chooseDateFormat(format) {
         await step('Choose a date format', async () => {
-            await this.dateFormat.filter({ hasText: format }, { exact: true }).click();
+            await this.dateFormat.filter({ hasText: format, exact: true }).click();
         });
     }
 }
