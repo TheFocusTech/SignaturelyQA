@@ -8,6 +8,7 @@ export default class SideMenuDocumentsComponent {
         this.awaitingSignature = this.page.getByRole('link', { name: 'Awaiting Signature' });
         this.draft = this.page.getByRole('link', { name: 'Draft' });
         this.completed = this.page.getByRole('link', { name: 'Completed' });
+        this.voided = this.page.getByRole('link', { name: 'Voided' });
     }
 
     async clickTrash() {
@@ -29,6 +30,12 @@ export default class SideMenuDocumentsComponent {
     async clickCompleted() {
         await step('Click "Completed" submenu', async () => {
             await this.completed.click();
+        });
+    }
+
+    async clickVoided() {
+        await step('Click "Voided" submenu', async () => {
+            await this.voided.click();
         });
     }
 }

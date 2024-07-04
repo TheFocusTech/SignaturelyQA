@@ -9,7 +9,7 @@ export const URL_END_POINTS = {
     signUpTrialEndPoint: '/signup',
     confirmAccountEndPoint: '/confirm-account',
     signUpFree: '/signup/free',
-    loginEndPoint: '/login'
+    loginEndPoint: '/login',
 };
 export const ACTIVE_COLOR = 'rgb(0, 163, 250)';
 export const FILL_FOLDER_NAME = 'Folder 1';
@@ -50,6 +50,7 @@ export const TOAST_MESSAGE = {
     teamMemberDeleted: 'Team member deleted successfully',
     signatureDeleted: 'Signature deleted successfully',
     updateSignature: 'Signature updated successfully',
+    declineDocument: 'Signature request was declined.',
 };
 
 export const API_KEY_NAME = 'Test Api Key';
@@ -83,11 +84,12 @@ export const DOCUMENT_STATUS = {
     processing: 'processing',
     expired: 'expired',
     deleted: 'DELETED',
+    declined: 'declined',
 };
 export const CI_USER_NAME = 'CI_user';
-export const BUSINESS_MONTHLY_PLAN = "Your plan (Billed Monthly)Business";
-export const BUSINESS_ANNUALLY_PLAN = "Your plan (Billed Annually)Business";
-export const FREE_PLAN_DESCRIPTION = "Your plan (Billed Monthly)Free";
+export const BUSINESS_MONTHLY_PLAN = 'Your plan (Billed Monthly)Business';
+export const BUSINESS_ANNUALLY_PLAN = 'Your plan (Billed Annually)Business';
+export const FREE_PLAN_DESCRIPTION = 'Your plan (Billed Monthly)Free';
 
 export const CARD_DETAILS = {
     VISA: {
@@ -144,12 +146,12 @@ export const SELECTORS = {
     message: 'td p:has(a)',
 };
 
-export const COMPANY_INFO ={
+export const COMPANY_INFO = {
     companyName: 'companyName',
-    emailFrom:`${process.env.EMAIL_PREFIX}${'001'}`,
-    emailTo:`${process.env.EMAIL_PREFIX}${'002'}${process.env.EMAIL_DOMAIN}`,
-    redirectionPage: 'https://yourcompany.com/'
-}
+    emailFrom: `${process.env.EMAIL_PREFIX}${'001'}`,
+    emailTo: `${process.env.EMAIL_PREFIX}${'002'}${process.env.EMAIL_DOMAIN}`,
+    redirectionPage: 'https://yourcompany.com/',
+};
 
 export const SIGNER_ME = 'Me (Now)';
 
@@ -173,7 +175,11 @@ export const UPLOAD_FILE_NAME = {
     csvDocument: 'CSV.csv',
 };
 export const NO_ATTACHED_CARD = 'Current Card:No attached card';
-export const SUBMIT_TITLE = 'Thanks for Submitting your Document';
+export const SUCCESS_TITLE = {
+    send: 'Thanks for sending your document',
+    submit: 'Thanks for Submitting your Document',
+    declined: 'Document Declined',
+};
 export const SERVICE_NAME = 'Signaturely';
 export const EMAIL_MESSAGE = ' sent you the following document to view';
 export const FOLDER_NAME_SECOND = 'Second Folder';
@@ -188,7 +194,6 @@ export const EDIT_TEMPLATE_DATA = {
 export const TEAM_MEMBER_ROLES = {
     user: 'User',
     admin: 'Admin',
-
 };
 
 export const QASE_LINK = 'https://app.qase.io/case';
@@ -202,17 +207,18 @@ export const FORM_STATUS = {
 
 export const CHECK_BOXES_STATUS = {
     checked: 'uiCheckbox__inner uiCheckbox--checked',
-    unChecked: 'uiCheckbox__inner uiCheckbox--unChecked'
+    unChecked: 'uiCheckbox__inner uiCheckbox--unChecked',
 };
 
-export const EMPTY_TABLE_HEADER ={
+export const EMPTY_TABLE_HEADER = {
     documents: "You don't have any documents yet.",
     trash: "You don't have any deleted documents yet.",
 };
 
 export const FORMS = {
     formNameEdit: 'Edited Form Name',
-    optionalMessageFormEdit: 'Form edited'
-}
+    optionalMessageFormEdit: 'Form edited',
+};
 
 export const RANDOM_MONTHLY_PLAN = (randomPlan) => `${randomPlan} Monthly Plan`;
+export const ENDPOINT_FOR_DECLINE = '&declineImmediately=true';
