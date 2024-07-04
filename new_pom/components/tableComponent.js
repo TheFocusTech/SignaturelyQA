@@ -34,7 +34,10 @@ export default class TableComponent {
         this.shareBtn = this.page.getByRole('button', { name: 'Share' });
         this.objectCheckbox = this.page.locator('ul .uiCheckbox');
         this.documentsStatuses = this.page.locator('.documents__documentStatus');
+        this.deleteBtn = this.page.getByRole('button', { name: 'Delete' });
         this.firstFormTitle = this.page.getByText('Edited Form Name');
+        this.documentTitleList = this.page.locator('.table__column--text--document p');
+        this.downloadBtn = this.page.getByText('Download');
     }
 
     async clickFirstOptionsBtn() {
@@ -73,7 +76,6 @@ export default class TableComponent {
         await step(`Wait for the document title to be visible`, async () => {
             await this.objectTitle.filter({ hasText: name }).waitFor()
         });
-
     }
 
     async clickMoveToBtn() {
@@ -91,7 +93,7 @@ export default class TableComponent {
     async clickSendReminderBtn() {
         await step('Click the "Send Reminder" button', async () => {
             await this.sendReminderBtn.click();
-    });
+        });
     }
 
     async getDocumentStatusText() {
@@ -238,4 +240,30 @@ export default class TableComponent {
             }
         });
     }
-} 
+
+    async clickDeleteBtn() {
+        await step('Click on the "Delete" button', async () => {
+            await this.deleteBtn.click();
+        });
+    }
+
+    async clickOptionsButtonByDocumentTitle(documentTitle) {
+        await step(`Click "Options" button for exact document by document title`, async () => {
+            await this.page.waitForSelector('.table__column--text--document p', { timeout: 5000 });
+            const documentTitleElementsCount = await this.documentTitleList.count(); 
+                for (let i = 0; i < documentTitleElementsCount; i++) {
+                    const elementText = await this.documentTitleList.nth(i).innerText();
+                    if (elementText.trim() === documentTitle) {
+                        await this.optionsBtn.nth(i).click();
+                        return; 
+                }
+            }
+        });
+    }
+
+    async clickDownloadBtn() {
+        await step('Click on "Download" option', async () => {
+            await this.downloadBtn.click();
+        });
+    }
+}

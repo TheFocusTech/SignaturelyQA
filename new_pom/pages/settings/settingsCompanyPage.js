@@ -21,6 +21,13 @@ export default class SettingsCompanyPage {
         this.redirectionPage = this.page.getByPlaceholder('https://yourcompany.com');
         this.checkboxActivate = this.page.getByText('Activate custom redirection page');
         this.saveBtn = this.page.getByRole('button', {name: 'Save', exact: true});
+        this.documentsCheckbox = this.page.locator('p').filter({hasText:'Documents'});
+        this.templatesCheckbox = this.page.locator('p').filter({hasText: 'Templates'});
+        this.formsCheckbox = this.page.locator('p').filter({hasText: 'Forms'});
+        this.enable1Checkbox = this.page.getByText("Enable").nth(1);
+        this.enable2Checkbox = this.page.getByText("Enable").nth(2);
+        this.enable3Checkbox = this.page.getByText("Enable").nth(3);
+        
     }
 
     async logoUpLoadFile(file) {
@@ -54,7 +61,7 @@ export default class SettingsCompanyPage {
     }
 
     async checkActivateCheckbox() {
-        await step('Check "Aktivate" checkbox', async () => {
+        await step('Check "Activate" checkbox', async () => {
             await this.checkboxActivate.click();
         });
     }
@@ -62,6 +69,49 @@ export default class SettingsCompanyPage {
     async clickSaveBtn() {
         await step('Click on "Save" btn', async () => {
             await this.saveBtn.click();
+        });
+    }
+
+    async checkDocumentsCheckbox() {
+        await step('Check "Documents" checkbox', async () => {
+            await this.documentsCheckbox.click();
+        });
+    }
+
+    async checkTemplateCheckbox() {
+        await step('Check "Template" checkbox', async () => {
+            await this.templatesCheckbox.click();
+        });
+    }
+
+    async checkFormsCheckbox() {
+        await step('Check "Forms" checkbox', async () => {
+            await this.formsCheckbox.click();
+        });
+    }
+
+    async checkEnable1Checkbox() {
+        await step('Check "Enable1" checkbox', async () => {
+            await this.enable1Checkbox.click();
+        });
+    }
+
+    async checkEnable2Checkbox() {
+        await step('Check "Enable2" checkbox', async () => {
+            await this.enable2Checkbox.click();
+        });
+    }
+
+    async checkEnable3Checkbox() {
+        await step('Check "Enable3" checkbox', async () => {
+            await this.enable3Checkbox.click();
+        });
+    }
+
+    async reloadPage() {
+        await step('Refresh the page', async () => {
+            await this.page.reload();
+            await this.page.waitForTimeout(1000);
         });
     }
 }

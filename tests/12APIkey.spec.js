@@ -46,16 +46,25 @@ test.describe('API key', () => {
         await createAPIKeyModal.clickCloseAPIModalBtn();
         await settingsAPIPage.pasteIntoBillingDetailsField(clipboardApiKeyValue);
 
-        await expect(settingsAPIPage.billingDetailsTextField).toHaveText(clipboardApiKeyValue);
+        await step('Verify that pasted API key matches the one created with "Create API" button on the right.', async () => {
+            await expect(settingsAPIPage.billingDetailsTextField).toHaveText(clipboardApiKeyValue);
+        });
     });
 
-    test('TC_12_48_01_02 | Verify User can copy API key created by the "Create API" button in Table.', async ({
+    test('TC_12_48_02 | Verify User can copy API key created by the "Create API" button in Table.', async ({
         createBusinessUserAndLogin,
         signPage,
         settingsCompanyPage,
         settingsAPIPage,
         createAPIKeyModal,
     }) => {
+        await description('To verify that user can copy API key created by the "Create API" button in Table.');
+        await severity(Severity.BLOCKER);
+        await link(`${QASE_LINK}/SIGN-48`, 'Qase: SIGN-48');
+        await link(`${GOOGLE_DOC_LINK}4l55n4gzh7rc`, 'ATC_12_48_01');
+        await epic('API');
+        await tags('Settings, API key');
+
         await signPage.sideMenu.clickSettings();
         await settingsCompanyPage.horizontalMenu.clickAPI();
 
@@ -65,15 +74,28 @@ test.describe('API key', () => {
         await createAPIKeyModal.clickCreateAPIBtn();
         await createAPIKeyModal.clickCopyAPIBtn();
 
-        await settingsAPIPage.toast.toastBody.waitFor();
-
-        // const clipboardApiKeyValue = await createAPIKeyModal.getAPIKeyValueText();
         const clipboardApiKeyValue = await createAPIKeyModal.APIKeyValue.innerText();
+
+        await step('Wait the toast appears indicating API key has been successfully copied to clipboard.', async () => {
+            await settingsAPIPage.toast.toastBody.waitFor();
+        });
+        await step('Verify the toast message that API key has been successfully copied to clipboard.', async () => {
+            await expect(settingsAPIPage.toast.toastBody).toHaveText(TOAST_MESSAGE.copyApiKey);
+        });
+
+        await step('Ensure the API key is not empty.', async () => {
+            await expect(createAPIKeyModal.getAPIKeyValueText()).not.toBe('');
+        });
+        await step('Ensure the API key is not undefined.', async () => {
+            await expect(createAPIKeyModal.getAPIKeyValueText()).not.toBe('undefined');
+        });
 
         await createAPIKeyModal.clickCloseAPIModalBtn();
         await settingsAPIPage.fillBillingDetailsField(clipboardApiKeyValue);
 
-        await expect(settingsAPIPage.billingDetailsTextField).toHaveText(clipboardApiKeyValue);
+            await step('Verify that the pasted API key matches the one created with "Create API" button in Table.', async () => {
+            await expect(settingsAPIPage.billingDetailsTextField).toHaveText(clipboardApiKeyValue);
+        });
     });
 
     API_PLANS.forEach((apiPlan) => {
