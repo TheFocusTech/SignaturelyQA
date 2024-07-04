@@ -17,7 +17,7 @@ export default class DocumentsTrashPage {
     }
 
     async clickEmptyTrashBtn() {
-        await step('Click Empty Trash Button', async () => {
+        await step('Click "Empty Trash" Button', async () => {
             await this.emptyTrashBtn.waitFor();
             await this.emptyTrashBtn.click();
         });

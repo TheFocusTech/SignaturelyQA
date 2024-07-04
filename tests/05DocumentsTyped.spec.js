@@ -273,13 +273,13 @@ test.describe('DocumentsType', () => {
         deleteModal,
         confirmTrashEmptyingModal,
         documentsTrashPage}) => {                
-        // test.setTimeout(250 * 1000);
-        test.slow();
+
+        test.setTimeout(250 * 1000);
 
         await description('To verify the process of moving the documents to the trash by checkboxes and then deleting documents permanently.');
         await severity(Severity.CRITICAL);
         await link(`${QASE_LINK}/SIGN-19`, 'Qase: SIGN-19');
-        await link(`${GOOGLE_DOC_LINK}ba4cs1qxues0`, 'ATC__05_19_02');
+        await link(`${GOOGLE_DOC_LINK}ba4cs1qxues0`, 'ATC_05_19_02');
         await epic('Documents (typed)');
         await tag('Delete_documents');
 
@@ -291,44 +291,36 @@ test.describe('DocumentsType', () => {
         const documentsToDelete = documentsPage.table.documentsTitlesToDelete;
         const documentToSave = documentsPage.table.documentTitleToSave;
 
-        console.log("test documentsToDelete", documentsToDelete, "\n test documentToSave", documentToSave);
-
         await documentsPage.clickSelectOptionsBtn();
         await documentsPage.clickSelectOptionsDeleteBtn();
         await deleteModal.clickYesDeleteBtn();
-        await documentsPage.table.waitForTable(2000);
         await documentsPage.toast.waitForToastCompleted();
-
         await documentsPage.sideMenuDocuments.clickTrash();
 
-        const actualDeletedDocumentsTitles = await documentsTrashPage.table.getAllDocumentsTitles();
-
-        await test.step('Verify documents in trash have correct titles', async () => {
-            expect (actualDeletedDocumentsTitles).toEqual(documentsToDelete);
+        await step(`Verify documents in trash have correct titles "${documentsToDelete}"`, async () => {
+            await documentsTrashPage.table.waitForTable(5000);
+            await expect (documentsTrashPage.table.objectTitle).toHaveText(documentsToDelete);
         });
-
-        const deletedDocumentsStatuses = await documentsTrashPage.table.getAllDocumentsStatuses();
-
-        await test.step('Verify documents deleted status', async () => {
-            expect (deletedDocumentsStatuses).toEqual(DELETED_DOCUMENTS_STATUS);
+     
+        await step(`Verify documents deleted status "${DELETED_DOCUMENTS_STATUS}"`, async () => {
+            await expect (documentsTrashPage.table.documentsStatuses).toHaveText(DELETED_DOCUMENTS_STATUS);
         });
        
         await documentsTrashPage.clickEmptyTrashBtn();
         await confirmTrashEmptyingModal.clickEmptyTrashBtn();
         await documentsTrashPage.toast.waitForToastCompleted();
-        await documentsTrashPage.table.waitForTable(3000);
 
-        await test.step('Verify that trash is empty', async () => {
+        await step('Verify that trash is empty', async () => {
+            await documentsTrashPage.table.waitForTable(5000);
             await expect (documentsTrashPage.table.emptyTableHeader).toHaveText(EMPTY_TABLE_HEADER.trash);
         });
 
-        await documentsTrashPage.sideMenuDocuments.clickDraft();
-        await documentsTrashPage.table.waitForTable(3000);
+        await documentsTrashPage.sideMenu.clickDocuments();
         
-        await test.step('Verify that undeleted document is visible', async () => {
+        await step(`Verify that there is only one undeleted document with correct title "${documentToSave}"`, async () => {
+            await documentsTrashPage.table.waitForTable(3000);
             await expect (documentsPage.table.objectTitle).toHaveCount(1);
             await expect (documentsPage.table.objectTitle).toHaveText(documentToSave);
         });
-
     });
 });

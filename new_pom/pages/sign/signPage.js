@@ -12,10 +12,8 @@ export default class SignPage {
         this.header = new HeaderComponent(this.page);       
     }
 
-    async singPageReload() {
-      await step('Reload Sing Page', async() => {
+    async signPageReload() {
         await this.page.reload();
         await this.page.waitForTimeout(1000);
-      });
     };
 }

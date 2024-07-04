@@ -6,6 +6,7 @@ export default class TableComponent {
         this.page = page;
         this.documentTitleToSave = '';
         this.documentsTitlesToDelete = [];
+        this.documentsTitles = [];
 
         this.emptyTableHeader = this.page.locator('.empty-table__header');
         this.documentStatus = this.page.locator('.documents__documentStatus').first();
@@ -211,10 +212,8 @@ export default class TableComponent {
     }
 
     async getAllDocumentsTitles() {
-        await step('Get all documents titles', async () => {
             await this.waitForTable(5000);
-            return this.objectTitle.allInnerTexts();
-        });
+            this.documentsTitles = await this.objectTitle.allInnerTexts();
     }
    
     async getAllDocumentsStatuses() {
@@ -225,10 +224,10 @@ export default class TableComponent {
 
     async checkRandomDocuments() {
         await step('Check two random documents and collect their titles', async () => {
-            const documentsTitles = await this.getAllDocumentsTitles();
-            const randomIndex = getRandomIndex(documentsTitles);
+            await this.getAllDocumentsTitles();
+            const randomIndex = getRandomIndex(this.documentsTitles);
             this.documentTitleToSave = await this.objectTitle.nth(randomIndex).innerText();
-            for (let i = 0; i < documentsTitles.length; i++) {
+            for (let i = 0; i < this.documentsTitles.length; i++) {
                 if (i !== randomIndex) {
                     const titleToDelete = await this.objectTitle.nth(i).innerText()
                     this.documentsTitlesToDelete.push(titleToDelete);
