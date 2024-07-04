@@ -217,12 +217,6 @@ export default class TableComponent {
             await this.waitForTable(5000);
             this.documentsTitles = await this.objectTitle.allInnerTexts();
     }
-   
-    async getAllDocumentsStatuses() {
-        await step('Get all documents statuses', async () => {
-            return this.documentsStatuses.allInnerTexts();
-        });
-    }
 
     async checkRandomDocuments() {
         await step('Check two random documents and collect their titles', async () => {
