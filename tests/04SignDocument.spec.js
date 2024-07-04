@@ -331,7 +331,7 @@ test.describe('Sign Document', () => {
         });
     });
 
-    test('TC_04_12_01 | Verify that signer can reject the signature', async ({
+    test('TC_04_12_01 | Verify that signer can decline signature', async ({
         createBusinessUserAndLogin,
         signPage,
         prepareForSignatureModal,
@@ -345,12 +345,12 @@ test.describe('Sign Document', () => {
     }) => {
         test.setTimeout(250 * 1000);
 
-        await description('Objective: To verify that signer can reject the signature');
+        await description('Objective: To verify that signer can decline signature');
         await severity(Severity.CRITICAL);
-        await link(`${QASE_LINK}/SIGN-12`, 'Qase: SIGN-14');
+        await link(`${QASE_LINK}/SIGN-12`, 'Qase: SIGN-12');
         await link(`${GOOGLE_DOC_LINK}hlvzt2b5ake7`, 'ATC_04_12_01');
         await epic('Sign document');
-        await tag('Reject document');
+        await tag('Decline signature');
 
         const signerName = `${process.env.NEW_USER_NAME}${'001'}`;
         const signerEmail = `${process.env.EMAIL_PREFIX}${process.env.NEW_USER_NUMBER}${'001'}${
