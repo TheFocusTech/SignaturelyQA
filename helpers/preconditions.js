@@ -1,7 +1,21 @@
-import { DATA_SIGNER, FOLDER_NAME, TOAST_MESSAGE, CREATE_TEMPLATE, UPLOAD_FILE_PATH, SIGNERS_DATA, SIGNER_ME } from "../testData";
-import { step } from "allure-js-commons";
+import {
+    DATA_SIGNER,
+    TOAST_MESSAGE,
+    CREATE_TEMPLATE,
+    UPLOAD_FILE_PATH,
+    SIGNERS_DATA,
+    EMAIL_SUBJECTS,
+    SIGNER_ME,
+} from '../testData';
+import { step } from 'allure-js-commons';
+import { retrieveUserEmailConfirmationLink } from '../helpers/utils.js';
 
-export const createSignature = async (signPage, settingsCompanyPage, settingsEditSignaturePage, createOrEditSignatureOnSettingModal) => {
+export const createSignature = async (
+    signPage,
+    settingsCompanyPage,
+    settingsEditSignaturePage,
+    createOrEditSignatureOnSettingModal
+) => {
     await step('Precondition: Create signature ', async () => {
         await signPage.sideMenu.clickSettings();
         await settingsCompanyPage.sideMenuSettings.clickEditSignature();
@@ -11,7 +25,7 @@ export const createSignature = async (signPage, settingsCompanyPage, settingsEdi
         await createOrEditSignatureOnSettingModal.clickCheckboxAgree();
         await createOrEditSignatureOnSettingModal.clickCreateSignatureBtn();
         await settingsCompanyPage.sideMenu.clickSign();
-    })
+    });
 };
 
 export const createDocumentAwaiting = async (
@@ -40,11 +54,11 @@ export const createDocumentAwaiting = async (
     });
 };
 
-export const createFolder = async (signPage, documentsPage, createFolderModal) => {
+export const createFolder = async (signPage, documentsPage, createFolderModal, folderName) => {
     await step('Precondition: Create Folder', async () => {
         await signPage.sideMenu.clickDocuments();
         await documentsPage.clickCreateFolderBtn();
-        await createFolderModal.fillNewFolderName(FOLDER_NAME);
+        await createFolderModal.fillNewFolderName(folderName);
         await createFolderModal.clickCreateBtn();
         await documentsPage.toast.waitForToastIsHiddenByText(TOAST_MESSAGE.folderCreated);
         await documentsPage.sideMenu.clickSign();
@@ -67,14 +81,14 @@ export const createTemplate = async (signPage, prepareForSignatureModal, templat
     });
 };
 
-export const createForm = async (signPage, prepareForSignatureModal, createFormPage, formsPage, successModal) => {
+export const createForm = async (signPage, formsPage, createFormPage, prepareForSignatureModal, successModal) => {
     await step('Precondition: Create Form', async () => {
         await signPage.sideMenu.clickForms();
         await formsPage.clickCreateFormBtn();
-        await createFormPage.fillFormNameField(SIGNERS_DATA.signerName1);
-        await createFormPage.fillOptionalMessageField(SIGNERS_DATA.viewerEmail1);
+        await createFormPage.createUpdateForm.fillFormNameField(SIGNERS_DATA.signerName1);
+        await createFormPage.createUpdateForm.fillOptionalMessageField(SIGNERS_DATA.viewerEmail1);
         await createFormPage.fileUploader.uploadFile(UPLOAD_FILE_PATH.jpgDocument);
-        await createFormPage.clickFillTemplateBtn();
+        await createFormPage.createUpdateForm.clickFillTemplateBtn();
         await prepareForSignatureModal.clickNameOnFieldsMenu();
         await prepareForSignatureModal.clickDocumentBody();
         await prepareForSignatureModal.clickSignOnFieldsMenu();
@@ -82,20 +96,88 @@ export const createForm = async (signPage, prepareForSignatureModal, createFormP
         await prepareForSignatureModal.clickDateOnFieldsMenu();
         await prepareForSignatureModal.clickDocumentBody();
         await prepareForSignatureModal.clickCreateBtn();
+        await prepareForSignatureModal.toast.waitForToastIsHiddenByText(TOAST_MESSAGE.success);
         await successModal.clickBackToFormsBtn();
         await formsPage.sideMenu.clickSign();
     });
 };
 
 export const uploadDocumentForDraft = async (signPage, prepareForSignatureModal) => {
-    await step('Precondition: Upload document for draft', async () => {    
+    await step('Precondition: Upload document for draft', async () => {
         await signPage.uploadFileTab.fileUploader.uploadFile(UPLOAD_FILE_PATH.xlsxDocument);
         await signPage.uploadFileTab.clickPrepareDocumentBtn();
-        await prepareForSignatureModal.clickCancelBtn();        
+        await prepareForSignatureModal.clickCancelBtn();
     });
 };
 
-export const createTemplateForMeAndUser = async (signPage, prepareForSignatureModal, templatesPage, createNewTemplatePage, createSignatureOrInitialModal) => {
+export const createDocumentCompleted = async (
+    signPage,
+    prepareForSignatureModal,
+    createSignatureOrInitialModal,
+    finalStepPage,
+    successModal,
+    documentsPage
+) => {
+    await step('Precondition: Document creation in progress with Completed status ', async () => {
+        await signPage.uploadFileTab.fileUploader.uploadFile('testDocuments/picture.jpg');
+        await signPage.uploadFileTab.clickPrepareDocumentBtn();
+        await prepareForSignatureModal.clickSignDocumentRadioBtn();
+        await prepareForSignatureModal.clickContinueBtn();
+        await prepareForSignatureModal.clickGotItBtn();
+        await prepareForSignatureModal.clickSignOnFieldsMenu();
+        await prepareForSignatureModal.clickDocumentBody();
+        await createSignatureOrInitialModal.clickCheckboxAgree();
+        await createSignatureOrInitialModal.clickSignNowBtn();
+        await prepareForSignatureModal.clickSaveBtn();
+        await finalStepPage.clickSignDocumentBtn();
+        await successModal.clickBackToDocumentsBtn();
+        await documentsPage.sideMenu.clickSign();
+    });
+};
+
+export const uploadDraftDocument = async (signPage) => {
+    await step('Precondition: Upload draft document', async () => {
+        await signPage.uploadFileTab.fileUploader.uploadFile(UPLOAD_FILE_PATH.pdfDocument);
+    });
+};
+
+export const addTeamMember = async (
+    teamMemberRole,
+    teamMemberEmail,
+    teamMemberName,
+    page,
+    request,
+    signPage,
+    teamPage,
+    addTeamMemberModal,
+    teamsAcceptInvitePage
+) => {
+    await step(`Precondition: Add team member with "${teamMemberRole}" role set`, async () => {
+        await signPage.sideMenu.clickTeam();
+        await teamPage.clickAddTeamMemberButton();
+        await addTeamMemberModal.fillTeamMemberEmailInputField(teamMemberEmail);
+        await addTeamMemberModal.fillTeamMemberNameInputField(teamMemberName);
+        (await addTeamMemberModal.isTeamMemberRoleSet(teamMemberRole))
+            ? null
+            : await addTeamMemberModal.changeTeamMemberRole(teamMemberRole);
+        await addTeamMemberModal.clickSendInvitesButton();
+        const emailSubject = `${process.env.NEW_USER_NAME}${EMAIL_SUBJECTS.inviteToJoin}`;
+        const inviteLink = await retrieveUserEmailConfirmationLink(request, teamMemberEmail, emailSubject);
+        await step('Navigate to the invite link', async () => {
+            await page.goto(inviteLink);
+        });
+        await teamsAcceptInvitePage.clickBackToMainPageButton();
+        await teamsAcceptInvitePage.toast.waitForToastIsHiddenByText(TOAST_MESSAGE.inviteAccepted);
+    });
+};
+
+export const createTemplateForMeAndUser = async (
+    signPage,
+    prepareForSignatureModal,
+    templatesPage,
+    createNewTemplatePage,
+    createSignatureOrInitialModal
+) => {
     await step('Precondition: Create Template for user and another user', async () => {
         await signPage.sideMenu.clickTemplates();
         await templatesPage.sideMenuTemplates.clickCreateTemplate();

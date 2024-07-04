@@ -8,19 +8,20 @@ import {
     UPLOAD_FILE_PATH,
     EMAIL_SUBJECTS,
     SELECTORS,
-    SUBMIT_TITLE,
+    SUCCESS_TITLE,
     SERVICE_NAME,
     EMAIL_MESSAGE,
     DOCUMENT_TITLE,
     SIGNER_ME,
     QASE_LINK,
     GOOGLE_DOC_LINK,
+    ENDPOINT_FOR_DECLINE,
 } from '../testData.js';
 import { retrieveUserEmailConfirmationLink, retrieveEmailMessage, editDocumentStatus } from '../helpers/utils.js';
 import { createSignature, uploadDocumentForDraft } from '../helpers/preconditions.js';
 
 test.describe('Sign Document', () => {
-    test('TC_04_11_02 | Verify custom signing order', async ({
+    test('TC_04_11_01 | Verify custom signing order', async ({
         createBusinessUserAndLogin,
         signPage,
         prepareForSignatureModal,
@@ -28,7 +29,7 @@ test.describe('Sign Document', () => {
         await description('To verify custom signing order');
         await severity(Severity.CRITICAL);
         await link(`${QASE_LINK}/SIGN-11`, 'Qase: SIGN-11');
-        await link(`${GOOGLE_DOC_LINK}7y8njhymxgmj`, 'ATC_04_11_02');
+        await link(`${GOOGLE_DOC_LINK}7y8njhymxgmj`, 'ATC_04_11_01');
         await epic('Sign document');
         await tag('Signing order');
 
@@ -106,11 +107,7 @@ test.describe('Sign Document', () => {
         await prepareForSignatureModal.clickDocumentBody();
         await prepareForSignatureModal.clickSaveBtn();
 
-        await step('Verify that Success Toast Notification is shown', async () => {
-            await expect(await prepareForSignatureModal.toast.toastBody).toHaveText(TOAST_MESSAGE.success);
-        });
-
-        await finalStepPage.clickSendForSignatureBtn();
+        await finalStepPage.waitAndClickSendForSignatureBtn(TOAST_MESSAGE.success);
         await successModal.clickBackToDocumentsBtn();
         await documentsPage.table.waitForDocumentStatusVisible(DOCUMENT_STATUS.awaiting);
 
@@ -129,7 +126,7 @@ test.describe('Sign Document', () => {
         await notRegisterSignerSignPage.clickSubmitBtn();
         await signerAlmostDoneModal.clickIAgreeBtn();
         await notRegisterSignerSignPage.toast.waitForToastIsHiddenByText(TOAST_MESSAGE.documentSubmited);
-        await documentSubmitProccessModal.waitForSubmitTitleByText(SUBMIT_TITLE);
+        await documentSubmitProccessModal.waitForSubmitTitleByText(SUCCESS_TITLE.submit);
 
         const message = await retrieveEmailMessage(
             request,
@@ -237,25 +234,22 @@ test.describe('Sign Document', () => {
         });
     });
 
-    test('TC_04_13_01 | Verify the document\'s expiration date', async ({
+    test("TC_04_13_01 | Verify the document's expiration date", async ({
         createBusinessUserAndLogin,
-        page, request,
+        page,
+        request,
         signPage,
         prepareForSignatureModal,
         finalStepPage,
         documentsPage,
-        successModal
+        successModal,
     }) => {
-        await description('Objective: Verify that changing the document status to "expired"(database) updates the front-end display')
+        await description(
+            'Objective: Verify that changing the document status to "expired"(database) updates the front-end display'
+        );
         await severity(Severity.CRITICAL);
-        await link(
-            `${QASE_LINK}/SIGN-13`,
-            'Qase: SIGN-13'
-        );
-        await link(
-            `${GOOGLE_DOC_LINK}fm3jt5v1qq97`,
-            'ATC_04_13_01'
-        );
+        await link(`${QASE_LINK}/SIGN-13`, 'Qase: SIGN-13');
+        await link(`${GOOGLE_DOC_LINK}fm3jt5v1qq97`, 'ATC_04_13_01');
         await epic('Sign a document');
         await tag('Document status: expiring');
 
@@ -279,12 +273,140 @@ test.describe('Sign Document', () => {
         await successModal.clickBackToDocumentsBtn();
         await documentsPage.table.waitForDocumentStatus(page, DOCUMENT_STATUS.awaiting);
 
-        const documentName = UPLOAD_FILE_PATH.xlsxDocument.split("/").pop();
+        const documentName = UPLOAD_FILE_PATH.xlsxDocument.split('/').pop();
         await editDocumentStatus(request, documentName, DOCUMENT_STATUS.expired);
         await page.reload();
 
         await step('Verify that the document has "expired" status', async () => {
             await expect(await documentsPage.table.documentStatus).toHaveText(DOCUMENT_STATUS.expired);
+        });
+    });
+
+    test('TC_04_11_02 | Verify custom signing order between others customers', async ({
+        createBusinessUserAndLogin,
+        signPage,
+        prepareForSignatureModal,
+    }) => {
+        test.setTimeout(250 * 1000);
+
+        await description('To verify custom signing order between others customers');
+        await severity(Severity.CRITICAL);
+        await link(`${QASE_LINK}/SIGN-11`, 'Qase: SIGN-11');
+        await link(`${GOOGLE_DOC_LINK}jc3cfedpihif`, 'ATC_04_11_02');
+        await epic('Sign document');
+        await tag('Signing order');
+
+        await signPage.uploadFileTab.fileUploader.uploadFile(UPLOAD_FILE_PATH.xlsxDocument);
+        await signPage.uploadFileTab.clickPrepareDocumentBtn();
+        await prepareForSignatureModal.clickSendForSignatureRadioBtn();
+
+        for (let i = 0; i < 3; i++) {
+            const signerName = `${process.env.NEW_USER_NAME}${'00'}${i}`;
+            const signerEmail = `${process.env.EMAIL_PREFIX}${process.env.NEW_USER_NUMBER}${'00'}${i}${
+                process.env.EMAIL_DOMAIN
+            }`;
+
+            await prepareForSignatureModal.clickAddSignerBtn();
+            await prepareForSignatureModal.fillSignerNameField(signerName, i);
+            await prepareForSignatureModal.fillSignerEmailField(signerEmail, i);
+        }
+        await prepareForSignatureModal.clickCustomSigningOrderCheckbox();
+
+        await step('Verify that customers orders number visibility', async () => {
+            await expect(prepareForSignatureModal.customSigningOrderPositionNumberOne).toBeVisible();
+        });
+
+        await step('Verify that customers orders has been positioned', async () => {
+            await expect(prepareForSignatureModal.customSigningOrderPositionNumberOne).toHaveText('1.');
+        });
+
+        await prepareForSignatureModal.customSigningOrderPositionNumberOne.dragTo(
+            prepareForSignatureModal.customSigningOrderPositionNumberTwo
+        );
+
+        await step('Verify that customers orders has been changed', async () => {
+            expect(prepareForSignatureModal.signerNameField.nth(1)).toHaveValue(
+                `${process.env.NEW_USER_NAME}${'00'}${1}`
+            );
+        });
+    });
+
+    test('TC_04_12_01 | Verify that signer can decline signature', async ({
+        createBusinessUserAndLogin,
+        signPage,
+        prepareForSignatureModal,
+        finalStepPage,
+        documentsPage,
+        successModal,
+        declineModal,
+        notRegisterSignerSignPage,
+        page,
+        request,
+    }) => {
+        test.setTimeout(250 * 1000);
+
+        await description('Objective: To verify that signer can decline signature');
+        await severity(Severity.CRITICAL);
+        await link(`${QASE_LINK}/SIGN-12`, 'Qase: SIGN-12');
+        await link(`${GOOGLE_DOC_LINK}hlvzt2b5ake7`, 'ATC_04_12_01');
+        await epic('Sign document');
+        await tag('Decline signature');
+
+        const signerName = `${process.env.NEW_USER_NAME}${'001'}`;
+        const signerEmail = `${process.env.EMAIL_PREFIX}${process.env.NEW_USER_NUMBER}${'001'}${
+            process.env.EMAIL_DOMAIN
+        }`;
+
+        await signPage.uploadFileTab.fileUploader.uploadFile(UPLOAD_FILE_PATH.xlsxDocument);
+        await signPage.uploadFileTab.clickPrepareDocumentBtn();
+
+        await prepareForSignatureModal.clickSendForSignatureRadioBtn();
+        await prepareForSignatureModal.clickAddSignerBtn();
+        await prepareForSignatureModal.fillSignerNameField(signerName, 0);
+        await prepareForSignatureModal.fillSignerEmailField(signerEmail, 0);
+        await prepareForSignatureModal.clickContinueBtn();
+        await prepareForSignatureModal.clickGotItBtn();
+        await prepareForSignatureModal.clickSignOnFieldsMenu();
+        await prepareForSignatureModal.clickDocumentBody();
+        await prepareForSignatureModal.clickSaveBtn();
+
+        await step('Verify that Success Toast Notification is shown', async () => {
+            await expect(await prepareForSignatureModal.toast.toastBody).toHaveText(TOAST_MESSAGE.success);
+        });
+        await finalStepPage.clickSendForSignatureBtn();
+        await successModal.clickBackToDocumentsBtn();
+        await documentsPage.table.waitForDocumentStatusVisible(DOCUMENT_STATUS.awaiting);
+
+        // TODO permanently pass step with Send Reminder
+        // await documentsPage.table.clickOptionsBtn(0);
+        // await documentsPage.table.clickSendReminderBtn();
+        // await sendReminderDocumentModal.clickSignerCheckbox();
+        // await sendReminderDocumentModal.clickSendReminderBtn();
+        // await expect(await documentsPage.toast.toastBody).toHaveText(TOAST_MESSAGE.sendReminder);
+
+        const signerLink = await retrieveUserEmailConfirmationLink(
+            request,
+            signerEmail,
+            EMAIL_SUBJECTS.signatureRequest
+        );
+
+        await step('Navigate to the signing document link to reject document', async () => {
+            await page.goto(signerLink + ENDPOINT_FOR_DECLINE);
+        });
+
+        declineModal.clickDeclineBtn();
+        await notRegisterSignerSignPage.toast.waitForToastIsHiddenByText(TOAST_MESSAGE.declineDocument);
+
+        await step('Verify that Success Modal has "Document Declined" title', async () => {
+            await expect(await successModal.title).toHaveText(SUCCESS_TITLE.declined);
+        });
+
+        successModal.clickReturnToDocumentsBtn();
+        documentsPage.sideMenuDocuments.clickVoided();
+
+        await step('Verify that the document has "DECLINED" status', async () => {
+            await documentsPage.table.documentStatus.waitFor();
+            await expect(await documentsPage.table.documentStatus).toHaveText(DOCUMENT_STATUS.declined);
         });
     });
 });

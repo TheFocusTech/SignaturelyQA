@@ -36,7 +36,7 @@ jobs:
           retention-days: 30
 
       - name: Attach artifacts on failure
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         if: failure()
         with:
           name: Artifacts
@@ -51,6 +51,7 @@ jobs:
 
       - name: Allure Report action
         uses: simple-elf/allure-report-action@master
+        if: always()
         id: allure-report
         with:
           allure_results: allure-results
@@ -60,6 +61,7 @@ jobs:
 
       - name: Deploy report to Github Pages
         uses: peaceiris/actions-gh-pages@v4
+        if: always()
         with:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           PUBLISH_BRANCH: gh-pages

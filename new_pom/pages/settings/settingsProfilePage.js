@@ -12,9 +12,11 @@ export default class SettingsProfilePage {
         this.newPasswordInputField = this.page.getByPlaceholder('Password', { exact: true });
         this.repeatNewPasswordInputField = this.page.getByPlaceholder('Repeat Password');
         this.saveButton = this.page.getByRole('button', { name: 'Save' });
-        this.deleteMyAccountBtn = this.page.getByRole('button', {name: 'Delete my Account'});
+        this.deleteMyAccountBtn = this.page.getByRole('button', { name: 'Delete my Account' });
         this.emailAddressInputField = this.page.getByPlaceholder('username@gmail.com');
-        this.updateBtn = this.page.getByRole('button', {name: "Update Email"});
+        this.updateBtn = this.page.getByRole('button', { name: "Update Email" });
+        this.checkBoxesList = this.page.locator('.settings__form-checkbox .uiCheckbox')
+        this.checkBoxesFrameList = this.page.locator('.settings__form-checkbox .uiCheckbox__inner')
     }
 
     async fillNewPasswordInputField(password) {
@@ -40,7 +42,7 @@ export default class SettingsProfilePage {
             await this.deleteMyAccountBtn.click();
         });
     }
-    
+
     async deleteCurrentEmailFromEmailAddressInputField() {
         await step('Delete email in the "Email Address" field', async () => {
             await this.emailAddressInputField.clear();
@@ -56,6 +58,28 @@ export default class SettingsProfilePage {
     async clickUpdateBtn() {
         await step('Click "Update" button', async () => {
             await this.updateBtn.click();
+        });
+    }
+
+    async toggleCheckboxes(checkState) {
+        await step(`${checkState ? 'Check' : 'Uncheck'} checkboxes`, async () => {
+            const checkboxesCount = await this.checkBoxesList.count();
+            for (let i = 0; i < checkboxesCount; i++) {
+                const checkbox = this.checkBoxesList.nth(i);
+                let isChecked, isUnChecked;
+
+                if (checkState) {
+                    isChecked = await checkbox.locator('.uiCheckbox--checked').count() > 0;
+                    if (!isChecked) {
+                        await checkbox.click();
+                    }
+                } else {
+                    isUnChecked = await checkbox.locator('.uiCheckbox--unChecked').count() > 0;
+                    if (!isUnChecked) {
+                        await checkbox.click();
+                    }
+                }
+            }
         });
     }
 }

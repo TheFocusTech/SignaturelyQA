@@ -6,7 +6,7 @@ import {
     DOCUMENT_STATUS,
     UPLOAD_FILE_PATH,
     QASE_LINK,
-    GOOGLE_DOC_LINK, FORM_STATUS, TEMPLATES_STATUS,
+    GOOGLE_DOC_LINK, FORM_STATUS, TEMPLATES_STATUS, FORMS
 } from '../testData.js';
 import { createForm } from '../helpers/preconditions.js';
 import { description, tag, severity, Severity, link, epic, step } from 'allure-js-commons';
@@ -31,11 +31,11 @@ test.describe('Forms', () => {
         await signPage.sideMenu.clickForms();
 
         await formsPage.clickCreateFormBtn();
-        await createFormPage.fillFormNameField(SIGNERS_DATA.signerName1);
-        await createFormPage.fillOptionalMessageField(SIGNERS_DATA.viewerEmail1);
+        await createFormPage.createUpdateForm.fillFormNameField(SIGNERS_DATA.signerName1);
+        await createFormPage.createUpdateForm.fillOptionalMessageField(SIGNERS_DATA.viewerEmail1);
 
         await createFormPage.fileUploader.uploadFile(UPLOAD_FILE_PATH.jpgDocument);
-        await createFormPage.clickFillTemplateBtn();
+        await createFormPage.createUpdateForm.clickFillTemplateBtn();
 
         await prepareForSignatureModal.clickNameOnFieldsMenu();
         await prepareForSignatureModal.clickDocumentBody();
@@ -75,7 +75,7 @@ test.describe('Forms', () => {
         await epic('Forms');
 
         test.setTimeout(120 * 1000);
-        await createForm(signPage, prepareForSignatureModal, createFormPage, formsPage, successModal);
+        await createForm(signPage,  formsPage,createFormPage, prepareForSignatureModal, successModal);
 
         await signPage.sideMenu.clickForms();
         await formsPage.table.clickFirstOptionsBtn();
@@ -94,9 +94,9 @@ test.describe('Forms', () => {
     test('TC_08_36_01 | Verify that user can disable and enable form', async ({
         createBusinessUserAndLogin,
         signPage,
-        prepareForSignatureModal,
-        createFormPage,
         formsPage,
+        createFormPage,
+        prepareForSignatureModal,       
         successModal,
     }) => {
         await description('Verify that user can duplicate form');
@@ -107,7 +107,7 @@ test.describe('Forms', () => {
         await epic('Forms');
 
         test.setTimeout(120 * 1000);
-        await createForm(signPage, prepareForSignatureModal, createFormPage, formsPage, successModal);
+        await createForm(signPage, formsPage, createFormPage, prepareForSignatureModal, successModal);
 
         await signPage.sideMenu.clickForms();
         await formsPage.table.clickFirstOptionsBtn();
@@ -130,6 +130,85 @@ test.describe('Forms', () => {
 
         await step('Verify that the form status on the form page is "live"', async () => {
             await expect(await formsPage.table.documentStatus).toHaveText(FORM_STATUS.live);
+        });
+    });
+
+    test('TC_08_34_01 | Verify that user can delete form', async ({
+        createBusinessUserAndLogin,
+        signPage,
+        prepareForSignatureModal,
+        createFormPage,
+        formsPage,
+        successModal,
+        confirmDeletionModal,
+    }) => {
+        await description('Verify that user can delete form');
+        await tag('Delete Form');
+        await severity(Severity.CRITICAL);
+        await link(`${QASE_LINK}/SIGN-34`, 'Qase: SIGN-34');
+        await link(`${GOOGLE_DOC_LINK}1rswbzg5kt90`, 'ATC_08_34_01');
+        await epic("Forms");
+
+        test.setTimeout(120 * 1000);
+        await createForm(signPage, formsPage, createFormPage, prepareForSignatureModal, successModal);
+
+        await signPage.sideMenu.clickForms();
+        await formsPage.table.clickFirstOptionsBtn();
+        await formsPage.table.clickDeleteForm();
+        await confirmDeletionModal.clickYesDelete();
+        await formsPage.toast.waitForToastIsHiddenByText(TOAST_MESSAGE.formDeleted);
+
+        await step('Verify that the number of forms in the table is 0', async () => {
+            await expect(await formsPage.table.formsList).toHaveCount(0);
+        });
+    });
+    test('TC_08_33_01 | Verify that user can edit form', async ({
+        createBusinessUserAndLogin,
+        signPage,
+        formsPage,
+        createFormPage,
+        prepareForSignatureModal,
+        successModal,
+        updateFormPage,
+    }) => {
+        await severity(Severity.CRITICAL);
+        await link(`${QASE_LINK}/SIGN-33`, 'Qase: SIGN-33');
+        await link(`${GOOGLE_DOC_LINK}go4aj45aaddt`, 'ATC_08_33_01');
+        await epic('Forms');
+        await tag('Edit Form');
+
+        test.setTimeout(90000);
+
+        await createForm(signPage, formsPage, createFormPage, prepareForSignatureModal, successModal, updateFormPage);
+
+        await signPage.sideMenu.clickForms();
+        await formsPage.table.clickFirstOptionsBtn();
+        await formsPage.table.clickEditBtn();
+        await updateFormPage.createUpdateForm.fillFormNameField(FORMS.formNameEdit);
+        await updateFormPage.createUpdateForm.fillOptionalMessageField(FORMS.optionalMessageFormEdit);
+        await updateFormPage.clickDeleteDocumentBtn();
+        await updateFormPage.fileUploader.uploadFile(UPLOAD_FILE_PATH.xlsxDocument);
+        await updateFormPage.createUpdateForm.clickFillTemplateBtn();
+
+        await prepareForSignatureModal.clickSignOnFieldsMenu();
+        await prepareForSignatureModal.clickDocumentBody();
+
+        await prepareForSignatureModal.clickInitialOnFieldsMenu();
+        await prepareForSignatureModal.clickDocumentBody();
+
+        await prepareForSignatureModal.clickDateOnFieldsMenu();
+        await prepareForSignatureModal.clickDocumentBody();
+
+        await prepareForSignatureModal.clickSaveBtn();
+
+        await step('Verify that first toast message has text "Document successfully saved!"', async () => {
+            await expect(formsPage.toast.toastBody.first()).toHaveText(TOAST_MESSAGE.success);
+        });
+        await step('Verify that second toast message has text "Form saved!"', async () => {
+            await expect(formsPage.toast.toastBody.nth(1)).toHaveText(TOAST_MESSAGE.editedFormSaved);
+        });
+        await step('Verify that Edited Form has edited title "Form is Edited"', async () => {
+            await expect(formsPage.table.firstFormTitle).toHaveText(FORMS.formNameEdit);
         });
     });
 });

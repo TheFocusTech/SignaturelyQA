@@ -39,8 +39,10 @@ export default class PrepareForSignatureModal {
     }
 
     async clickSignDocumentRadioBtn() {
-        await this.signDocumentRadioBtn.waitFor({ state: 'visible' });
-        await this.signDocumentRadioBtn.click();
+        await step('Select "Sign Document" radio button', async () => {
+            await this.signDocumentRadioBtn.waitFor({ state: 'visible' });
+            await this.signDocumentRadioBtn.click();
+        });
     }
 
     async clickSignAndSendForSignatureRadioBtn() {
@@ -94,6 +96,7 @@ export default class PrepareForSignatureModal {
     }
 
     async clickDocumentBody() {
+
         await step('Click randomly inside the document', async () => {
             await clickCanvas(this.page, this.canvas, this.excludedAreas);
         });
@@ -181,6 +184,7 @@ export default class PrepareForSignatureModal {
         await step('Click on the "Date" in "Fields" menu', async () => {
             await this.dateOnFieldsMenu.waitFor({ state: 'visible' });
             await this.dateOnFieldsMenu.click();
+
         });
     }
 }

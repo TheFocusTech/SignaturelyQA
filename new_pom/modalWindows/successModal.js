@@ -8,24 +8,33 @@ export default class SuccessModal {
         this.backToDocumentsBtn = this.page.getByRole('button', { name: 'Back to Documents' });
         this.backToFormsBtn = this.page.getByRole('button', { name: 'Back to Forms' });
         this.okBtn = this.page.getByRole('button', { name: 'Ok' });
+        this.title = this.page.locator('.successSendModal__title');
+        this.returnToDocumentsBtn = this.page.getByRole('button', { name: 'Return to Documents' });
     }
 
     async clickBackToDocumentsBtn() {
         await step('Click on the "Back to Documents" button.', async () => {
-            await this.statusDocument.waitFor({state: 'visible'});
+            await this.statusDocument.waitFor({ state: 'visible' });
             await this.backToDocumentsBtn.click();
         });
     }
 
     async clickBackToFormsBtn() {
         await step('Click on the "Back to Forms" button.', async () => {
-        await this.backToFormsBtn.click();
+            await this.backToFormsBtn.click();
         });
     }
 
     async clickOkBtn() {
         await step('Click on the "Ok" button.', async () => {
-        await this.okBtn.click();
+            await this.okBtn.click();
+        });
+    }
+
+    async clickReturnToDocumentsBtn() {
+        await step('Click on the "Return to Documents" button', async () => {
+            await this.returnToDocumentsBtn.waitFor({ state: 'visible' });
+            await this.returnToDocumentsBtn.click();
         });
     }
 }

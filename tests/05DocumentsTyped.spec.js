@@ -8,9 +8,14 @@ import {
     DOCUMENT_STATUS,
     QASE_LINK,
     GOOGLE_DOC_LINK,
+    EMPTY_TABLE_HEADER,
+    EMAIL_SUBJECTS,
+    SELECTORS,
 } from '../testData.js';
-import { createFolder, createDocumentAwaiting } from '../helpers/preconditions.js';
+import { createFolder, createDocumentAwaiting, createDocumentCompleted, uploadDraftDocument } from '../helpers/preconditions.js';
 import { description, tag, severity, Severity, link, epic, step } from 'allure-js-commons';
+import { signInRequest, documentIdRequest } from '../helpers/apiCalls.js';
+import {retrieveEmailMessage} from "../helpers/utils";
 
 test.describe('DocumentsType', () => {
     test('TC_05_21_01 | Verify that button Edit&Resend is active', async ({
@@ -60,7 +65,6 @@ test.describe('DocumentsType', () => {
         await description('Objective: To verify that the document can be returned for editing.');
         await severity(Severity.CRITICAL);
         await link(`${QASE_LINK}/SIGN-21`, 'QASE: SIGN-21 ');
-
         await link(`${GOOGLE_DOC_LINK}r25l83kzqn09`, 'ATC_05_21_02');
         await tag('Edit & Resend, Documents');
         await epic('Documents (typed)');
@@ -96,7 +100,7 @@ test.describe('DocumentsType', () => {
         await epic('Documents (typed)');
         await tag('Move_to_folder');
 
-        await createFolder(signPage, documentsPage, createFolderModal);
+        await createFolder(signPage, documentsPage, createFolderModal, FOLDER_NAME);
         await signPage.uploadFileTab.fileUploader.uploadFile(UPLOAD_FILE_PATH.jpgDocument);
 
         await signPage.sideMenu.clickDocuments();
@@ -111,11 +115,11 @@ test.describe('DocumentsType', () => {
 
         await documentsPage.table.openFolder(FOLDER_NAME);
         await step('Verify the document is inside the folder', async () => {
-            await expect(await documentsPage.table.documentTitle).toHaveText(UPLOAD_FILE_NAME.jpgDocument);
+            await expect(await documentsPage.table.objectTitle).toHaveText(UPLOAD_FILE_NAME.jpgDocument);
         });
     });
 
-    test('TC_05_16_01 | Verify that the user receives an email reminder to sign the document', async ({
+    test('TC_05_16_01 | Verify the user receives an email reminder to sign the document', async ({
         createBusinessUserAndLogin,
         signPage,
         prepareForSignatureModal,
@@ -125,19 +129,27 @@ test.describe('DocumentsType', () => {
         documentsAwaitingPage,
         sendReminderDocumentModal,
     }) => {
-        test.setTimeout(250 * 1000);
+        await description('Objective: To verify that the user can send a reminder through the user interface.');
+        await severity(Severity.CRITICAL);
+        await link(`${QASE_LINK}/SIGN-16`, 'Qase: SIGN-16');
+        await link(`${GOOGLE_DOC_LINK}pm2gfzvmp6ok`, 'ATC_05_16_01');
+        await epic('Documents (typed)');
+        await tag('Documents', 'Reminder');
 
+        test.setTimeout(250 * 1000);
         await createDocumentAwaiting(signPage, prepareForSignatureModal, documentsPage, successModal, finalStepPage);
 
         await signPage.sideMenu.clickDocuments();
         await documentsPage.sideMenuDocuments.clickAwaitingSignature();
         await documentsAwaitingPage.table.clickFirstOptionsBtn();
         await documentsAwaitingPage.table.clickSendReminderBtn();
-
+        
         await sendReminderDocumentModal.clickSignerCheckbox();
         await sendReminderDocumentModal.clickSendReminderBtn();
 
-        await expect(await documentsAwaitingPage.toast.toastBody).toHaveText(TOAST_MESSAGE.sendReminder);
+        await step('Verify the toast message', async () => {
+            await expect(await documentsAwaitingPage.toast.toastBody).toHaveText(TOAST_MESSAGE.sendReminder);
+        });
     });
 
     test('TC_05_21_03 | Verify that document_status is  Draft', async ({
@@ -170,5 +182,141 @@ test.describe('DocumentsType', () => {
         await step('Verify the document has status "Draft" ', async () => {
             expect(await documentsPage.table.getDocumentStatusText()).toBe(DOCUMENT_STATUS.draft);
         });
+    });
+
+    test('TC_05_17_01 | Share document', async ({
+        createBusinessUserAndLogin,
+        signPage,
+        prepareForSignatureModal,
+        createSignatureOrInitialModal,
+        finalStepPage,
+        successModal,
+        documentsPage,
+        shareThisDocumentModal,
+        request
+    }) => {
+        await description('Objective: To verify that the document can be Share.');
+        await severity(Severity.CRITICAL);
+        await link(`${QASE_LINK}/SIGN-17`, 'Qase: SIGN-17');
+        await link(`${GOOGLE_DOC_LINK}sp7vb8tsrias`, 'TC_05_17_01');
+        await epic('Share document');
+        await tag('Documents (typed)');
+
+        test.slow();
+        const signerEmail = `${process.env.EMAIL_PREFIX}${process.env.NEW_USER_NUMBER}001${process.env.EMAIL_DOMAIN}`;
+        await createDocumentCompleted(
+            signPage,
+            prepareForSignatureModal,
+            createSignatureOrInitialModal,
+            finalStepPage,
+            successModal,
+            documentsPage
+        );
+
+        await signPage.sideMenu.clickDocuments();
+        await documentsPage.sideMenuDocuments.clickCompleted();
+        await documentsPage.table.clickFirstOptionsBtn();
+        await documentsPage.table.clickShareBtn();
+
+        await shareThisDocumentModal.clickInputEmailField(signerEmail);
+        await shareThisDocumentModal.clickShareDocumentBtn();
+
+        await step('Verify that the document sent to the email." ', async () => {
+            await expect(documentsPage.toast.toastBody).toHaveText(TOAST_MESSAGE.documentSended);
+        });
+        const documentName = UPLOAD_FILE_PATH.jpgDocument.split('/').pop();
+        const emailMessage = await retrieveEmailMessage(
+            request, process.env.NEW_USER_NAME, signerEmail, EMAIL_SUBJECTS.sharedDocument, SELECTORS.message);
+        await step('Verify that the user receive an email to view the document." ', async () => {
+            await expect(emailMessage).toEqual(`${process.env.NEW_USER_NAME} (${process.env.NEW_USER_EMAIL}) added you as a viewer on ${documentName}`);
+        });
+    });
+
+    test('TC_05_19_01 | Verify that deleted document has been moved to the trash by using ACTIONS_options dropdown menu and then deleted permanently', async ({
+        createBusinessUserAndLogin,
+        signPage,
+        documentsPage,
+        deleteModal,
+        confirmTrashEmptyingModal,
+        documentsTrashPage}) => {                
+        test.setTimeout(250 * 1000);
+
+        await description('To verify the process of moving the document to the trash and then deleting document permanently.');
+        await severity(Severity.CRITICAL);
+        await link(`${QASE_LINK}/SIGN-19`, 'Qase: SIGN-19');
+        await link(`${GOOGLE_DOC_LINK}bpzeytlzlbz`, 'ATC__05_19_01');
+        await epic('Documents (typed)');
+        await tag('Delete_documents');
+
+        await uploadDraftDocument(signPage);
+
+        await signPage.sideMenu.clickDocuments();
+        await documentsPage.table.clickFirstOptionsBtn();
+        await documentsPage.table.clickOptionsDeleteBtn();
+        await deleteModal.clickYesDeleteBtn();
+        await documentsPage.toast.waitForToastCompleted();
+        await documentsPage.table.waitForTable(3000);
+       
+        await test.step('Verify that table is empty', async () => {
+            await expect (documentsPage.table.emptyTableHeader).toHaveText(EMPTY_TABLE_HEADER.documents);
+        });
+       
+        await documentsPage.sideMenuDocuments.clickTrash();
+           
+        await test.step('Verify document deleted status', async () => {
+            expect(await documentsPage.table.getDocumentStatusText()).toBe(DOCUMENT_STATUS.deleted);
+        });
+
+        await documentsTrashPage.clickEmptyTrashBtn();
+        await confirmTrashEmptyingModal.clickEmptyTrashBtn();
+        await documentsTrashPage.table.waitForTable(3000);
+
+        await test.step('Verify that trash is empty', async () => {
+            await expect (documentsTrashPage.table.emptyTableHeader).toHaveText(EMPTY_TABLE_HEADER.trash);
+        });      
+    });
+
+    test('TC_05_20_01 | Verify that Business User can download a "Completed" document (API)', async ({
+        page,
+        request,
+        createBusinessUserAndLogin,
+        signPage,
+        prepareForSignatureModal,
+        createSignatureOrInitialModal,
+        finalStepPage,
+        successModal,
+        documentsPage,
+    }) => {
+        await description('Objective: Verify that Business User can download a "Completed" document (API)');
+        await severity(Severity.CRITICAL);
+        await link(`${QASE_LINK}/SIGN-20`, 'Qase: SIGN-20');
+        await link(`${GOOGLE_DOC_LINK}8wxawmz1dvq1`, 'TC_05_20_01');
+        await epic('Documents (typed)');
+        await tag('Download document');
+
+        test.setTimeout(120000)
+        await createDocumentCompleted(
+            signPage,
+            prepareForSignatureModal,
+            createSignatureOrInitialModal,
+            finalStepPage,
+            successModal,
+            documentsPage
+        );
+
+        const documentName = UPLOAD_FILE_NAME.jpgDocument;
+        await signPage.sideMenu.clickDocuments();
+        await documentsPage.sideMenuDocuments.clickCompleted();
+        await documentsPage.table.clickOptionsButtonByDocumentTitle(documentName);
+        
+        await signInRequest(request);
+        const documentId = await documentIdRequest(request, documentName);
+        const responsePromise = page.waitForResponse(response => response.url().includes(documentId));
+        await documentsPage.table.clickDownloadBtn();
+        const response = await responsePromise;
+
+        await test.step('Verify that the response code after clicking "Download" option is successfull', async () => {
+            expect(response.status()).toBe(200);    
+        });    
     });
 });
