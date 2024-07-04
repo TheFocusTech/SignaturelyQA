@@ -1,6 +1,6 @@
-import ToastComponent from "../../components/toastComponent";
-import SideMenuComponent from "../../components/sideMenuComponent";
-import { step } from "allure-js-commons";
+import ToastComponent from '../../components/toastComponent';
+import SideMenuComponent from '../../components/sideMenuComponent';
+import { step } from 'allure-js-commons';
 
 export default class SettingsProfilePage {
     constructor(page) {
@@ -14,9 +14,11 @@ export default class SettingsProfilePage {
         this.saveButton = this.page.getByRole('button', { name: 'Save' });
         this.deleteMyAccountBtn = this.page.getByRole('button', { name: 'Delete my Account' });
         this.emailAddressInputField = this.page.getByPlaceholder('username@gmail.com');
-        this.updateBtn = this.page.getByRole('button', { name: "Update Email" });
-        this.checkBoxesList = this.page.locator('.settings__form-checkbox .uiCheckbox')
-        this.checkBoxesFrameList = this.page.locator('.settings__form-checkbox .uiCheckbox__inner')
+        this.updateBtn = this.page.getByRole('button', { name: 'Update Email' });
+        this.checkBoxesList = this.page.locator('.settings__form-checkbox .uiCheckbox');
+        this.checkBoxesFrameList = this.page.locator('.settings__form-checkbox .uiCheckbox__inner');
+        this.dateFormatDropdown = this.page.locator('.uiSelect__select').first();
+        this.dateFormat = this.page.getByText('YYYY / DD / MM', { exact: true });
     }
 
     async fillNewPasswordInputField(password) {
@@ -69,17 +71,29 @@ export default class SettingsProfilePage {
                 let isChecked, isUnChecked;
 
                 if (checkState) {
-                    isChecked = await checkbox.locator('.uiCheckbox--checked').count() > 0;
+                    isChecked = (await checkbox.locator('.uiCheckbox--checked').count()) > 0;
                     if (!isChecked) {
                         await checkbox.click();
                     }
                 } else {
-                    isUnChecked = await checkbox.locator('.uiCheckbox--unChecked').count() > 0;
+                    isUnChecked = (await checkbox.locator('.uiCheckbox--unChecked').count()) > 0;
                     if (!isUnChecked) {
                         await checkbox.click();
                     }
                 }
             }
+        });
+    }
+
+    async clickDateFormatDropdown() {
+        await step('Click "Date Format" dropdown in the Preferences section', async () => {
+            await this.dateFormatDropdown.click();
+        });
+    }
+
+    async chooseDateFormat() {
+        await step('Choose a date format', async () => {
+            await this.dateFormat.click();
         });
     }
 }
