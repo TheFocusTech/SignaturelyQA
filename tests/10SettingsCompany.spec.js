@@ -77,7 +77,8 @@ test.describe('Company', () => {
             await expect(settingsCompanyPage.toast.toastBody).toHaveText(TOAST_MESSAGE.companyInformationSave);
         })
 
-        await page.reload();
+        await settingsCompanyPage.reloadPage();
+
         const actualCompanyName = await settingsCompanyPage.companyName.inputValue();
         const actualEmailClosingSignature = await settingsCompanyPage.emailClosingSignature.inputValue();
         const actualFromEmailName = await settingsCompanyPage.fromEmail.inputValue();
