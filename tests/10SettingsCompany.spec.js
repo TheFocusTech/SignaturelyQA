@@ -6,7 +6,7 @@ import { description, tags, severity, Severity, link, epic, step } from 'allure-
 test.describe('Company', () => {
     
     test("TC_10_43_01 | Verify that the business user can fill company's form", async ({
-        createBusinessUserAndLogin, signPage, settingsCompanyPage }) => {
+        createBusinessUserAndLogin, signPage, settingsCompanyPage, page }) => {
        
         await description("To verify the process of filling company form.");
         await tags('Fill company form');
@@ -31,6 +31,7 @@ test.describe('Company', () => {
             await expect(settingsCompanyPage.toast.toastBody).toHaveText(TOAST_MESSAGE.companyInformationSave);
         })
 
+        await page.reload();
         const actualCompanyName = await settingsCompanyPage.companyName.inputValue();
         const actualEmailClosingSignature = await settingsCompanyPage.emailClosingSignature.inputValue();
         const actualFromEmailName = await settingsCompanyPage.fromEmail.inputValue();
