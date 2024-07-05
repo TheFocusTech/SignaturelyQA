@@ -76,12 +76,19 @@ export const createForm = async (signPage, formsPage, createFormPage, prepareFor
         await createFormPage.createUpdateForm.fillOptionalMessageField(SIGNERS_DATA.viewerEmail1);
         await createFormPage.fileUploader.uploadFile(UPLOAD_FILE_PATH.jpgDocument);
         await createFormPage.createUpdateForm.clickFillTemplateBtn();
+
         await prepareForSignatureModal.clickNameOnFieldsMenu();
         await prepareForSignatureModal.clickDocumentBody();
+
         await prepareForSignatureModal.clickSignOnFieldsMenu();
         await prepareForSignatureModal.clickDocumentBody();
+
+        await prepareForSignatureModal.clickInitialOnFieldsMenu();
+        await prepareForSignatureModal.clickDocumentBody();
+
         await prepareForSignatureModal.clickDateOnFieldsMenu();
         await prepareForSignatureModal.clickDocumentBody();
+
         await prepareForSignatureModal.clickCreateBtn();
         await prepareForSignatureModal.toast.waitForToastIsHiddenByText(TOAST_MESSAGE.success);
         await successModal.clickBackToFormsBtn();
