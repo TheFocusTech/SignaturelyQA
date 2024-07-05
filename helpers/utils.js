@@ -162,7 +162,6 @@ export async function clickCanvas(page, canvasLocator, excludedAreas = []) {
         }
     } catch (error) {
         console.log('The new fieldDropDown element will not be found.');
-        return 0;
     }
 
     return clickPosition;
@@ -219,11 +218,6 @@ export async function editDocumentStatus(request, documentName, status) {
             console.error(`An error occurred: ${error.message}`);
         }
     });
-}
-
-export async function reloadPage(page, timeout) {
-    await page.reload();
-    await page.waitForTimeout(timeout);
 }
 
 export function getRandomIndexInRange(min, max) {
