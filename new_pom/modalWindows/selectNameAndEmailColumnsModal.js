@@ -45,7 +45,7 @@ export default class SelectNameAndEmailColumnsModal {
     }
 
     async selectColumnEmail() {
-        await step('Select "Email" for the Email column.\n', async() => {
+        await step('Select "Email" for the Email column.', async() => {
             await this.clickEmailDropdown();
             await this.selectEmailOption();
         });
