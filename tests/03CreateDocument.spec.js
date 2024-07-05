@@ -112,17 +112,11 @@ test.describe('CreateDocument', () => {
 
         await description('Objective: To verify the process of creating and sending a document for signature.');
         await severity(Severity.CRITICAL);
-        await link(
-            `${QASE_LINK}/SIGN-7`,
-            "Qase: SIGN-7"
-        );
-        await link(
-            "Documentation",
-            `${GOOGLE_DOC_LINK}hvbgto58wwgb`,
-            "ATC_03_07_03"
-        );
+        await link(`${QASE_LINK}/SIGN-7`, "Qase: SIGN-7");
+        await link(`${GOOGLE_DOC_LINK}hvbgto58wwgb`, "ATC_03_07_03");
         await epic('Create Document');
         await tag('Send Document');
+        
         await signPage.uploadFileTab.fileUploader.uploadFile(UPLOAD_FILE_PATH.xlsxDocument);
         await signPage.uploadFileTab.clickPrepareDocumentBtn();
         await prepareForSignatureModal.clickSendForSignatureRadioBtn();
