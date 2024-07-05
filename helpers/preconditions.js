@@ -1,4 +1,4 @@
-import { DATA_SIGNER, TOAST_MESSAGE, CREATE_TEMPLATE, UPLOAD_FILE_PATH, SIGNERS_DATA, EMPTY_DOCUMENTS_HEADER } from "../testData";
+import { DATA_SIGNER, TOAST_MESSAGE, CREATE_TEMPLATE, UPLOAD_FILE_PATH, SIGNERS_DATA, EMAIL_SUBJECTS } from "../testData";
 import { step } from "allure-js-commons";
 import { retrieveUserEmailConfirmationLink } from '../helpers/utils.js';
 
