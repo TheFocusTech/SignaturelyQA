@@ -52,7 +52,7 @@ export const createFolder = async (signPage, documentsPage, createFolderModal, f
     });
 };
 
-export const createTemplate = async (signPage, prepareForSignatureModal, templatesPage, finalStepPage, createNewTemplatePage) => {
+export const createTemplate = async (signPage, prepareForSignatureModal, templatesPage, createNewTemplatePage) => {
     await step('Precondition: Create Template', async () => {
         await signPage.sideMenu.clickTemplates();
         await templatesPage.sideMenuTemplates.clickCreateTemplate();
@@ -123,7 +123,7 @@ export const uploadDraftDocument = async (signPage) => {
     });
 };
 
-export const addTeamMember =  async ( teamMemberRole, teamMemberEmail,teamMemberName, page, request, signPage, teamPage, addTeamMemberModal, teamsAcceptInvitePage
+export const addTeamMember = async (teamMemberRole, teamMemberEmail, teamMemberName, page, request, signPage, teamPage, addTeamMemberModal, teamsAcceptInvitePage
 ) => {
     await step(`Precondition: Add team member with "${teamMemberRole}" role set`, async () => {
         await signPage.sideMenu.clickTeam();

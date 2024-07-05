@@ -313,7 +313,7 @@ test.describe('CreateDocument', () => {
         await epic('Create Document');
         await tag('Edit template');
 
-        await createTemplate(signPage, prepareForSignatureModal, templatesPage, finalStepPage, createNewTemplatePage);
+        await createTemplate(signPage, prepareForSignatureModal, templatesPage, createNewTemplatePage);
 
         await signPage.clickChooseTemplateField();
         await signPage.clickTitleTemplate();

@@ -66,7 +66,7 @@ test.describe('Templates', () => {
         await epic('Templates');
         await tags('User', 'API');
 
-        await createTemplate(signPage, prepareForSignatureModal, templatesPage, finalStepPage, createNewTemplatePage);
+        await createTemplate(signPage, prepareForSignatureModal, templatesPage, createNewTemplatePage);
         await signPage.sideMenu.clickTemplates();
         await templatesPage.table.clickFirstOptionsBtn();
         await templatesPage.table.clickAddToAPIBtn();
@@ -152,7 +152,6 @@ test.describe('Templates', () => {
         await createTemplate(signPage,
             prepareForSignatureModal,
             templatesPage,
-            finalStepPage, 
             createNewTemplatePage);
 
         await signPage.sideMenu.clickTemplates();
@@ -191,7 +190,6 @@ test.describe('Templates', () => {
         await createTemplate(signPage,
             prepareForSignatureModal,
             templatesPage,
-            finalStepPage, 
             createNewTemplatePage,
         );
 
