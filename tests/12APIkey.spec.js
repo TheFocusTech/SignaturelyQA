@@ -1,8 +1,7 @@
 import { expect } from '@playwright/test';
 import { test } from '../fixtures/base.js';
-import { API_KEY_NAME, API_PLANS, currentPlan, TOAST_MESSAGE, QASE_LINK, GOOGLE_DOC_LINK } from '../testData.js';
+import { API_KEY_NAME, API_PLANS, currentPlan, TOAST_MESSAGE, QASE_LINK, GOOGLE_DOC_LINK, TITLE_OF_DOWNGRADE_API_PLAN_MODAL } from '../testData.js';
 import { description, epic, feature, link, Severity, severity, step, tags } from 'allure-js-commons';
-import exp from 'constants';
 import { userWithGoldAPISubscription } from '../helpers/preconditions.js';
 
 
@@ -115,6 +114,7 @@ test.describe('API key', () => {
         settingsCompanyPage,
         settingsAPIPage,
         upgradeYourPlanAPIModal,
+        downGradeYourPlanAPIModal
     }) => {
         await description('Objective: Verify that User can Upgrade/Downgrade API subscription');
         await severity(Severity.CRITICAL);
@@ -129,10 +129,11 @@ test.describe('API key', () => {
             signPage,
             settingsCompanyPage,
             settingsAPIPage,
-            upgradeYourPlanAPIModal)
+            upgradeYourPlanAPIModal);
+        
         await settingsCompanyPage.horizontalMenu.clickAPI();
         
-        for (let i = 1; i <= API_PLANS.length - 1; i++) {
+        for (let i = 1; i < API_PLANS.length; i++) {
             
             await settingsAPIPage.clickUpgradeButton(API_PLANS[i]);
             await upgradeYourPlanAPIModal.clickSubscribeButton();
@@ -148,10 +149,15 @@ test.describe('API key', () => {
             });
         }
 
-        for (let i = API_PLANS.length - 2; i >= 0 ; i--) {
+        for (let i = API_PLANS.length - 2; i >= 0; i--) {
     
             await settingsAPIPage.clickSelectButton(API_PLANS[i])
-            await upgradeYourPlanAPIModal.clickDowngradeBtn()
+
+            await step('Verify that the Title of Downgrade Modal Window has the text "Downgrade to selected Plan"', async () => {
+                await expect(downGradeYourPlanAPIModal.titleOfDowngradeModalWindow).toContainText(TITLE_OF_DOWNGRADE_API_PLAN_MODAL[i]);
+            });
+
+            await downGradeYourPlanAPIModal.clickDowngradeBtn()
 
             await step('Verify that the toast with "Api plan have been upgraded" appears.', async () => {
                 await expect(settingsAPIPage.toast.toastBody.nth(0)).toHaveText(TOAST_MESSAGE.apiPlanUpgraded);
@@ -159,4 +165,3 @@ test.describe('API key', () => {
         }
     });
 })
-

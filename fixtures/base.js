@@ -52,6 +52,7 @@ import ConfirmDeletionModal from '../new_pom/modalWindows/confirmDeletionModal.j
 import ShareThisDocumentModal from '../new_pom/modalWindows/shareThisDocumentModal.js';
 import CancelSubscriptionModal from '../new_pom/modalWindows/cancelSubscriptionModal.js';
 import UpdateFormPage from '../new_pom/pages/forms/updateFormPage.js';
+import DownGradeYourPlanAPIModal from '../new_pom/modalWindows/downgradeYourPlanAPIModal.js';
 
 export const test = base.extend({
     createFreeUserAndLogin: [
@@ -288,5 +289,9 @@ export const test = base.extend({
 
     updateFormPage: async ({ page }, use) => {
         await use(new UpdateFormPage(page));
+    },
+    
+    downGradeYourPlanAPIModal: async ({ page }, use) => {
+        await use(new DownGradeYourPlanAPIModal(page))
     }
 });
