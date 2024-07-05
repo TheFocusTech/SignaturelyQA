@@ -223,3 +223,5 @@ export const FORMS = {
 
 export const RANDOM_MONTHLY_PLAN = (randomPlan) => `${randomPlan} Monthly Plan`;
 export const ENDPOINT_FOR_DECLINE = '&declineImmediately=true';
+
+export const DATE_FORMAT = ['DD / MM / YYYY', 'MM / DD / YY', 'DD / MM / YY'];

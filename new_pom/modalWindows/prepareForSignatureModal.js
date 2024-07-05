@@ -36,6 +36,10 @@ export default class PrepareForSignatureModal {
         this.recipientEmailField = this.page.getByPlaceholder('test@signaturely.com');
         this.prepareForSigningTitle = this.page.getByRole('heading', { name: 'Prepare for Signing' });
         this.cancelBtn = this.page.getByRole('button', { name: 'Cancel' });
+        this.dateStampedOnDocument = this.page.locator(
+            'input.fieldDropDown__trigger-date-input:not(fieldDropDown__trigger--disabled)'
+        );
+        this.dateOnLeftMenu = this.page.locator('.interactModal__fieldBar-selectField-item-label');
     }
 
     async clickSignDocumentRadioBtn() {
@@ -184,6 +188,13 @@ export default class PrepareForSignatureModal {
             await this.dateOnFieldsMenu.waitFor({ state: 'visible' });
             await this.dateOnFieldsMenu.click();
 
+        });
+    }
+
+    async clickDateOnLeftMenu() {
+        await step('Click on the "Date" in Left Menu', async () => {
+            await this.dateOnLeftMenu.waitFor({ state: 'visible' });
+            await this.dateOnLeftMenu.click();
         });
     }
 }
