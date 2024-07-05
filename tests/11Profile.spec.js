@@ -222,8 +222,6 @@ test.describe('Profile', () => {
                     return `${month}/${day}/${year2digits}`;
                 } else if (dateFormat === 'DD / MM / YY') {
                     return `${day}/${month}/${year2digits}`;
-                } else if (dateFormat === 'YYYY / DD / MM') {
-                    return `${year4digits}/${day}/${month}`;
                 }
             }
             const CURRENT_DATE = generateCurrentDate(dateFormat);
