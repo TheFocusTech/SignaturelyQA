@@ -140,6 +140,7 @@ export const EMAIL_SUBJECTS = {
     emailConfirmation: 'Signaturely Email Confirmation',
     sentToView: 'Sent you a document to view',
     inviteToJoin: ' invited you to join Signaturely',
+    sharedDocument: 'shared a document with you',
 };
 export const SELECTORS = {
     link: 'span',
