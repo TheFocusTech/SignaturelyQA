@@ -40,29 +40,26 @@ test.describe('Profile', () => {
             `Verify that a toast message with the text "${TOAST_MESSAGE.profileUpdated}" popped up `,
             async () => {
                 await expect(settingsProfilePage.toast.toastBody).toHaveText(TOAST_MESSAGE.profileUpdated);
-            }
-        );
+            });
 
         await settingsProfilePage.toast.waitForToastIsHiddenByText(TOAST_MESSAGE.profileUpdated);
         await settingsProfilePage.sideMenu.clickSign();
         await loginPage.fillEmailAddressInput(process.env.NEW_USER_EMAIL);
         await loginPage.fillPasswordInput(newPassword);
         await loginPage.clickLogin();
-        await step(
-            `Verify that the User is logged in with a new password and is on the homepage ${URL_END_POINTS.signEndPoint} `,
-            async () => {
-                await expect(signPage.page).toHaveURL(process.env.URL + URL_END_POINTS.signEndPoint);
-            }
-        );
+        await step(`Verify that the User is logged in with a new password and is on the homepage ${URL_END_POINTS.signEndPoint} `, async () => {
+            await expect(signPage.page).toHaveURL(process.env.URL + URL_END_POINTS.signEndPoint);
     });
+    
+ });
 
     test('TC_11_47_01 | Verify that user can delete account', async ({
-        createBusinessUserAndLogin,
+        createBusinessUserAndLogin, 
         signPage,
         settingsCompanyPage,
         settingsProfilePage,
         deleteMyAccountModal,
-        loginPage,
+        loginPage
     }) => {
         await description('Objective: To verify that the User can delete account');
         await severity(Severity.CRITICAL);
@@ -76,19 +73,14 @@ test.describe('Profile', () => {
         await settingsProfilePage.clickDeleteMyAccountBtn();
         await deleteMyAccountModal.clickDeleteMyAccountModalBtn();
 
-        await step(
-            `Verify that the User is deleted account and is on the loginpage ${URL_END_POINTS.loginEndPoint} `,
-            async () => {
-                await expect(loginPage.page).toHaveURL(process.env.URL + URL_END_POINTS.loginEndPoint);
-            }
-        );
-
-        await step(
-            `Verify that a toast message with the text "${TOAST_MESSAGE.deleteAccount}" popped up `,
-            async () => {
-                await expect(settingsProfilePage.toast.toastBody).toHaveText(TOAST_MESSAGE.deleteAccount);
-            }
-        );
+        await step(`Verify that the User is deleted account and is on the loginpage ${URL_END_POINTS.loginEndPoint} `, async () => {
+            await expect(loginPage.page).toHaveURL(process.env.URL + URL_END_POINTS.loginEndPoint);
+        });
+      
+        await step(`Verify that a toast message with the text "${TOAST_MESSAGE.deleteAccount}" popped up `, async () => {
+            await expect(settingsProfilePage.toast.toastBody).toHaveText(TOAST_MESSAGE.deleteAccount);
+        });
+      
     });
 
     test('TC_11_44_01 | Verify User can change email', async ({
@@ -119,8 +111,7 @@ test.describe('Profile', () => {
             `Verify that a toast message with the text "${TOAST_MESSAGE.checkYourEmail}" popped up `,
             async () => {
                 await expect(settingsProfilePage.toast.toastBody).toHaveText(TOAST_MESSAGE.checkYourEmail);
-            }
-        );
+            });
 
         const confirmationLink = await retrieveUserEmailConfirmationLink(
             request,
@@ -135,22 +126,22 @@ test.describe('Profile', () => {
             `Verify that a toast message with the text "${TOAST_MESSAGE.emailConfirmed}" popped up `,
             async () => {
                 await expect(settingsProfilePage.toast.toastBody).toHaveText(TOAST_MESSAGE.emailConfirmed);
-            }
-        );
+            });
 
         await signPage.sideMenu.clickSettings();
         await settingsCompanyPage.sideMenuSettings.clickProfile();
         await step('Verify that the email field is filled with the updated user email', async () => {
             await expect(settingsProfilePage.emailAddressInputField).toHaveValue(newEmail);
         });
-    });
+
+    })
 
     test('TC_11_46_03 | Verify user can enabling, disabling checkboxes', async ({
         createBusinessUserAndLogin,
         signPage,
         settingsCompanyPage,
         settingsProfilePage,
-        loginPage,
+        loginPage
     }) => {
         await description('Objective: To verify that the User can enabling, disabling checkboxes');
         await severity(Severity.CRITICAL);
@@ -161,15 +152,14 @@ test.describe('Profile', () => {
 
         await signPage.sideMenu.clickSettings();
         await settingsCompanyPage.sideMenuSettings.clickProfile();
-        await settingsProfilePage.toggleCheckboxes(false);
+        await settingsProfilePage.toggleCheckboxes(false)
         await settingsProfilePage.clickSaveButton();
 
         await step(
             `Verify that a toast message with the text "${TOAST_MESSAGE.profileUpdated}" popped up `,
             async () => {
                 await expect(settingsProfilePage.toast.toastBody).toHaveText(TOAST_MESSAGE.profileUpdated);
-            }
-        );
+            });
 
         await step('Verify that checkboxes are unchecked', async () => {
             const checkBoxes = await settingsProfilePage.checkBoxesFrameList;
@@ -181,15 +171,14 @@ test.describe('Profile', () => {
         });
 
         await settingsProfilePage.toast.waitForToastIsHiddenByText(TOAST_MESSAGE.profileUpdated);
-        await settingsProfilePage.toggleCheckboxes(true);
+        await settingsProfilePage.toggleCheckboxes(true)
         await settingsProfilePage.clickSaveButton();
 
         await step(
             `Verify that a toast message with the text "${TOAST_MESSAGE.profileUpdated}" popped up `,
             async () => {
                 await expect(settingsProfilePage.toast.toastBody).toHaveText(TOAST_MESSAGE.profileUpdated);
-            }
-        );
+            });
 
         await step('Verify that checkboxes are checked', async () => {
             const checkBoxes = await settingsProfilePage.checkBoxesFrameList;
@@ -199,7 +188,7 @@ test.describe('Profile', () => {
                 await expect(checkBoxes.nth(i)).toHaveClass(CHECK_BOXES_STATUS.checked);
             }
         });
-    });
+    })
     DATE_FORMAT.forEach(dateFormat => {
         test(`TC_11_46_02 | Verify that user can change the date format to ${dateFormat}`, async ({
             createBusinessUserAndLogin,
