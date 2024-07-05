@@ -297,10 +297,7 @@ test.describe('DocumentsType', () => {
         await createThreeDocuments(signPage);
 
         await signPage.sideMenu.clickDocuments();
-        await documentsPage.table.checkRandomDocuments();
-
-        const documentsToDelete = documentsPage.table.documentsTitlesToDelete;
-        const documentToSave = documentsPage.table.documentTitleToSave;
+        const { documentsToDelete, documentToSave } = await documentsPage.table.checkRandomDocuments();
 
         await documentsPage.clickSelectOptionsBtn();
         await documentsPage.clickSelectOptionsDeleteBtn();
