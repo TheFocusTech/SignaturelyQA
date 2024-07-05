@@ -12,7 +12,9 @@ export default class SideMenuDocumentsComponent {
     }
 
     async clickTrash() {
-        await this.trash.click();
+        await step('Click the "Trash" in the Documents SideMenu', async () => {
+            await this.trash.click();
+        });
     }
 
     async clickAwaitingSignature() {
