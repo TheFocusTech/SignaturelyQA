@@ -8,9 +8,6 @@ import { reloadPage, getRandomIndexInRange } from "../../../helpers/utils";
 export default class DocumentsPage {
     constructor(page) {
         this.page = page;
-        this.range = [];
-        this.randomIndex1 = 1;
-        this.randomIndex2 = 1;
 
         this.sideMenu = new SideMenuComponent(this.page);
         this.table = new TableComponent(this.page);
@@ -29,39 +26,24 @@ export default class DocumentsPage {
         });
     }
 
-    async waitForDocumentsUpload() {
-        await step('Wait for the upload of the created documents.', async () => {
-            await this.page.waitForTimeout(10000);
-
-            let number = "0";
-            while(number === "0") {
-                await reloadPage(this.page, 2000);
-                await this.numberOfDocuments.waitFor({ state: 'visible' });
-                number = await this.numberOfDocuments.innerText();
-            }
-        });
-    }
-
     async getRange() {
-        await step('Get the range of the number of displayed documents.', async() => {
+        return await step('Get the range of the number of displayed documents.', async () => {
             await this.documentsShown.waitFor();
             const text = await this.documentsShown.innerText();
-            const rangeText =
-                text
-                    .trim()
-                    .replace(/\xA0/g, ' ')
-                    .split(" ");
-            this.range = rangeText[0].split("-");
+            const rangeText = text.trim().replace(/\xA0/g, ' ').split(' ');
+            const range = rangeText[0].split('-');
+            return range;
         });
     }
 
     async getRandomIndexForShownDocuments() {
-        await step('Get a random index within the range.', async() => {
-            await this.getRange();
-            const min = Number(this.range[0]);
-            const max = Number(this.range[1]);
-            this.randomIndex1 = await getRandomIndexInRange(min, max);
-            this.randomIndex2 = await getRandomIndexInRange(min, max);
+        return await step('Get a random index within the range.', async () => {
+            const range = await this.getRange();
+            const min = Number(range[0]);
+            const max = Number(range[1]);
+            const randomIndex1 = await getRandomIndexInRange(min, max);
+            const randomIndex2 = await getRandomIndexInRange(min, max);
+            return [randomIndex1, randomIndex2];
         });
     }
 
