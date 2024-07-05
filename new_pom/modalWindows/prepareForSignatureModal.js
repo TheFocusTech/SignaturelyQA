@@ -36,6 +36,7 @@ export default class PrepareForSignatureModal {
         this.recipientEmailField = this.page.getByPlaceholder('test@signaturely.com');
         this.prepareForSigningTitle = this.page.getByRole('heading', { name: 'Prepare for Signing' });
         this.cancelBtn = this.page.getByRole('button', { name: 'Cancel' });
+        this.documentPage = this.page.locator('.documentPage__inner');
     }
 
     async clickSignDocumentRadioBtn() {
@@ -96,7 +97,6 @@ export default class PrepareForSignatureModal {
     }
 
     async clickDocumentBody() {
-
         await step('Click randomly inside the document', async () => {
             await clickCanvas(this.page, this.canvas, this.excludedAreas);
         });
@@ -148,8 +148,8 @@ export default class PrepareForSignatureModal {
     async getPrepareForSigningTitleText() {
         let actualText;
         await step('Get title text', async () => {
-        actualText = await this.prepareForSigningTitle.textContent();
-    });
+            actualText = await this.prepareForSigningTitle.textContent();
+        });
         return actualText
     }
 
@@ -184,6 +184,11 @@ export default class PrepareForSignatureModal {
             await this.dateOnFieldsMenu.waitFor({ state: 'visible' });
             await this.dateOnFieldsMenu.click();
 
+        });
+    }
+    async waitDocumentPage() {
+        await step("Wait that 'documet page' element is visible", async () => {
+            await this.documentPage.waitFor({ state: 'visible' });
         });
     }
 }
