@@ -63,7 +63,7 @@ test.describe('API key', () => {
         await description('To verify that user can copy API key created by the "Create API" button in Table.');
         await severity(Severity.BLOCKER);
         await link(`${QASE_LINK}/SIGN-48`, 'Qase: SIGN-48');
-        await link(`${GOOGLE_DOC_LINK}4l55n4gzh7rc`, 'ATC_12_48_01');
+        await link(`${GOOGLE_DOC_LINK}4l55n4gzh7rc`, 'ATC_12_48_02');
         await epic('API');
         await tags('Settings, API key');
 
