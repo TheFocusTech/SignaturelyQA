@@ -306,7 +306,6 @@ test.describe('DocumentsType', () => {
         await documentsPage.sideMenuDocuments.clickTrash();
 
         await step(`Verify documents in trash have correct titles "${documentsToDelete}"`, async () => {
-            await documentsTrashPage.table.waitForTable(5000);
             await expect (documentsTrashPage.table.objectTitle).toHaveText(documentsToDelete);
         });
      
@@ -319,14 +318,12 @@ test.describe('DocumentsType', () => {
         await documentsTrashPage.toast.waitForToastCompleted();
 
         await step('Verify that trash is empty', async () => {
-            await documentsTrashPage.table.waitForTable(5000);
             await expect (documentsTrashPage.table.emptyTableHeader).toHaveText(EMPTY_TABLE_HEADER.trash);
         });
 
         await documentsTrashPage.sideMenu.clickDocuments();
         
         await step(`Verify that there is only one undeleted document with correct title "${documentToSave}"`, async () => {
-            await documentsTrashPage.table.waitForTable(3000);
             await expect (documentsPage.table.objectTitle).toHaveCount(1);
             await expect (documentsPage.table.objectTitle).toHaveText(documentToSave);
         });
