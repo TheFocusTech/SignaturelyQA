@@ -116,7 +116,7 @@ test.describe('CreateDocument', () => {
         await link(`${GOOGLE_DOC_LINK}hvbgto58wwgb`, "ATC_03_07_03");
         await epic('Create Document');
         await tag('Send Document');
-        
+
         await signPage.uploadFileTab.fileUploader.uploadFile(UPLOAD_FILE_PATH.xlsxDocument);
         await signPage.uploadFileTab.clickPrepareDocumentBtn();
         await prepareForSignatureModal.clickSendForSignatureRadioBtn();
@@ -316,13 +316,15 @@ test.describe('CreateDocument', () => {
         await signPage.fillSignerEmail(SIGNERS_DATA.signerEmail1, 0);
         await signPage.clickEditTemplateBtn();
 
+        await prepareForSignatureModal.waitDocumentPage();
         await prepareForSignatureModal.clickContinueBtn();
         await prepareForSignatureModal.clickGotItBtn();
         await prepareForSignatureModal.clickSignOnFieldsMenu();
         await prepareForSignatureModal.clickDocumentBody();
         await prepareForSignatureModal.clickSaveBtn();
 
-        await finalStepPage.waitAndClickSendForSignatureBtn(TOAST_MESSAGE.success);
+        await prepareForSignatureModal.toast.clickToastFirstCloseBtn()
+        await finalStepPage.clickSendForSignatureBtn();
         await successModal.clickBackToDocumentsBtn();
 
         await step("Verify the created document is in the table with the label 'COMPLETED' ", async () => {

@@ -11,7 +11,7 @@ export default class SignPage {
         this.sideMenu = new SideMenuComponent(this.page);
         this.header = new HeaderComponent(this.page);
 
-        this.chooseTemplateField = this.page.locator("p.uiSelect__select-placeholder");
+        this.chooseTemplateField = this.page.locator("div.uiSelect__select-inner ");
         this.titleTemplate = this.page.locator('p.uiSelect__select-row');
         this.inputName = this.page.getByPlaceholder('Name');
         this.inputEmail = this.page.getByPlaceholder('Email');
@@ -21,6 +21,7 @@ export default class SignPage {
 
     async clickChooseTemplateField() {
         await step('Click the "Choose a Template" field.', async () => {
+            await this.chooseTemplateField.waitFor();
             await this.chooseTemplateField.hover();
             await delay(1000);
             await this.chooseTemplateField.click();
