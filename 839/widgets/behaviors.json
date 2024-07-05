@@ -1,0 +1,1 @@
+{"total":3,"items":[{"uid":"c0effe69527f658c5af968b745a6e0ad","name":"Registration","statistic":{"failed":2,"broken":2,"skipped":0,"passed":0,"unknown":0,"total":4}},{"uid":"247f290730831b7969ad224582050a32","name":"Authorization","statistic":{"failed":0,"broken":1,"skipped":0,"passed":0,"unknown":0,"total":1}}]}
