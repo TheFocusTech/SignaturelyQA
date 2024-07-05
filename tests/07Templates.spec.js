@@ -101,7 +101,7 @@ test.describe('Templates', () => {
         await epic('Templates');
         await tags('Edit-template');
 
-        await createTemplate(signPage, prepareForSignatureModal, templatesPage, finalStepPage, createNewTemplatePage);
+        await createTemplate(signPage, prepareForSignatureModal, templatesPage, createNewTemplatePage);
 
         await signPage.sideMenu.clickTemplates();
         await templatesPage.table.clickFirstOptionsBtn();
