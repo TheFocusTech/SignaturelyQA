@@ -63,7 +63,6 @@ export const createTemplate = async (signPage, prepareForSignatureModal, templat
         await prepareForSignatureModal.clickSignOnFieldsMenu();
         await prepareForSignatureModal.clickDocumentBody();
         await prepareForSignatureModal.clickCreateBtn();
-        //await prepareForSignatureModal.toast.waitForToastIsHiddenByText(TOAST_MESSAGE.success);
         await prepareForSignatureModal.clickBackToTemplatesBtn();
         await templatesPage.sideMenu.clickSign();
     });

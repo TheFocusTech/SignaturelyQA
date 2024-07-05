@@ -53,7 +53,6 @@ test.describe('Templates', () => {
         prepareForSignatureModal,
         templatesPage,
         apiTemplatesPage,
-        finalStepPage,
         createNewTemplatePage,
     }) => {
 
