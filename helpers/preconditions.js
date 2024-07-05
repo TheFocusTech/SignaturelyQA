@@ -1,5 +1,6 @@
-import { DATA_SIGNER, TOAST_MESSAGE, CREATE_TEMPLATE, UPLOAD_FILE_PATH, SIGNERS_DATA, API_PLANS } from "../testData";
+import { DATA_SIGNER, TOAST_MESSAGE, CREATE_TEMPLATE, UPLOAD_FILE_PATH, SIGNERS_DATA, EMAIL_SUBJECTS, API_PLANS } from "../testData";
 import { step } from "allure-js-commons";
+import { retrieveUserEmailConfirmationLink } from '../helpers/utils.js';
 
 export const createSignature = async (signPage, settingsCompanyPage, settingsEditSignaturePage, createOrEditSignatureOnSettingModal) => {
     await step('Precondition: Create signature ', async () => {
@@ -120,6 +121,27 @@ export const uploadDraftDocument = async (signPage) => {
         await signPage.uploadFileTab.fileUploader.uploadFile(UPLOAD_FILE_PATH.pdfDocument);
     });
 };
+
+export const addTeamMember =  async ( teamMemberRole, teamMemberEmail,teamMemberName, page, request, signPage, teamPage, addTeamMemberModal, teamsAcceptInvitePage
+) => {
+    await step(`Precondition: Add team member with "${teamMemberRole}" role set`, async () => {
+        await signPage.sideMenu.clickTeam();
+        await teamPage.clickAddTeamMemberButton();
+        await addTeamMemberModal.fillTeamMemberEmailInputField(teamMemberEmail);
+        await addTeamMemberModal.fillTeamMemberNameInputField(teamMemberName);
+        (await addTeamMemberModal.isTeamMemberRoleSet(teamMemberRole))
+            ? null
+            : await addTeamMemberModal.changeTeamMemberRole(teamMemberRole);
+        await addTeamMemberModal.clickSendInvitesButton();
+        const emailSubject = `${process.env.NEW_USER_NAME}${EMAIL_SUBJECTS.inviteToJoin}`;
+        const inviteLink = await retrieveUserEmailConfirmationLink(request, teamMemberEmail, emailSubject);
+        await step('Navigate to the invite link', async () => {
+            await page.goto(inviteLink);
+        });
+        await teamsAcceptInvitePage.clickBackToMainPageButton();
+        await teamsAcceptInvitePage.toast.waitForToastIsHiddenByText(TOAST_MESSAGE.inviteAccepted);
+    });
+}
 
 export const userWithGoldAPISubscription = async (
     createBusinessUserAndLogin,

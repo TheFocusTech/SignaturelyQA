@@ -52,6 +52,7 @@ import ConfirmDeletionModal from '../new_pom/modalWindows/confirmDeletionModal.j
 import ShareThisDocumentModal from '../new_pom/modalWindows/shareThisDocumentModal.js';
 import CancelSubscriptionModal from '../new_pom/modalWindows/cancelSubscriptionModal.js';
 import UpdateFormPage from '../new_pom/pages/forms/updateFormPage.js';
+import DeclineModal from '../new_pom/modalWindows/declineModal.js';
 import DownGradeYourPlanAPIModal from '../new_pom/modalWindows/downgradeYourPlanAPIModal.js';
 
 export const test = base.extend({
@@ -275,11 +276,11 @@ export const test = base.extend({
         await use(new ShareThisDocumentModal(page));
     },
 
-    deleteModal:  async ({ page }, use) => {
+    deleteModal: async ({ page }, use) => {
         await use(new DeleteModal(page));
     },
 
-    confirmTrashEmptyingModal:  async ({ page }, use) => {
+    confirmTrashEmptyingModal: async ({ page }, use) => {
         await use(new ConfirmTrashEmptyingModal(page));
     },
 
@@ -290,7 +291,11 @@ export const test = base.extend({
     updateFormPage: async ({ page }, use) => {
         await use(new UpdateFormPage(page));
     },
-    
+
+    declineModal: async ({ page }, use) => {
+        await use(new DeclineModal(page));
+    },
+        
     downGradeYourPlanAPIModal: async ({ page }, use) => {
         await use(new DownGradeYourPlanAPIModal(page))
     }
