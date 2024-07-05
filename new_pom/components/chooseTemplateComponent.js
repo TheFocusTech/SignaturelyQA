@@ -4,7 +4,7 @@ export default class ChooseTemplateComponent {
     constructor(page) {
         this.page = page;
 
-        this.chooseTemplateDropdown = this.page.locator('.uiSelect__select').filter({ hasText: /^Choose a Template$/ });
+        this.chooseTemplateDropdown = this.page.locator('.uiSelect__select').filter({ hasText: 'Choose a Template' });
         this.openChooseTemplateDropdown = this.page.locator('.uiSelect__select.uiSelect__select--open');
         this.templateItem = this.page.locator('.uiSelect__select-row');
         this.signerNameField = this.page.getByPlaceholder('Name');

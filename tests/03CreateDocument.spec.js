@@ -289,7 +289,7 @@ test.describe('CreateDocument', () => {
         });
     });
 
-    test('TC_03_08_01 | Verify that the user can send a template they have signed to another user for signature', async ({
+    test('TC_03_08_01 | Verify that the user can send a template for signature', async ({
         createBusinessUserAndLogin,
         signPage,
         prepareForSignatureModal,
@@ -301,7 +301,7 @@ test.describe('CreateDocument', () => {
     }) => {
         test.setTimeout(200 * 1000);
         await description(
-            'Objective: To verify the process of creating, signing, and sending a document to another signer.'
+            'Objective: To verify the process of creating, signing, and sending a document using template.'
         );
         await severity(Severity.CRITICAL);
         await link(`${QASE_LINK}/SIGN-8`, 'Qase: SIGN-8');
