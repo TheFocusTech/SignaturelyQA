@@ -198,7 +198,7 @@ test.describe('Profile', () => {
             prepareForSignatureModal,
         }) => {
             await description(
-                'Objective: To verify that a user can update the date format in their profile settings and the updated date format is applied when signing a document'
+                'Objective: To verify that a user can update the date format in their profile settings and the updated date format is applied when signing a document. The date format YYYY / DD / MM was not checked and included to test data because of the existed bug'
             );
             await severity(Severity.CRITICAL);
             await link(`${QASE_LINK}/SIGN-46`, 'Qase: SIGN-46');
