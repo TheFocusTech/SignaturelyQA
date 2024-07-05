@@ -8,13 +8,15 @@ import {
     DOCUMENT_STATUS,
     QASE_LINK,
     GOOGLE_DOC_LINK,
-    SIGNERS_DATA,
     EMPTY_TABLE_HEADER,
     DELETED_DOCUMENTS_STATUS,
+    EMAIL_SUBJECTS,
+    SELECTORS,
 } from '../testData.js';
 import { createFolder, createDocumentAwaiting, createDocumentCompleted, uploadDraftDocument, createThreeDocuments } from '../helpers/preconditions.js';
 import { description, tag, severity, Severity, link, epic, step } from 'allure-js-commons';
 import { signInRequest, documentIdRequest } from '../helpers/apiCalls.js';
+import {retrieveEmailMessage} from "../helpers/utils";
 
 test.describe('DocumentsType', () => {
     test('TC_05_21_01 | Verify that button Edit&Resend is active', async ({
@@ -192,6 +194,7 @@ test.describe('DocumentsType', () => {
         successModal,
         documentsPage,
         shareThisDocumentModal,
+        request
     }) => {
         await description('Objective: To verify that the document can be Share.');
         await severity(Severity.CRITICAL);
@@ -201,6 +204,7 @@ test.describe('DocumentsType', () => {
         await tag('Documents (typed)');
 
         test.slow();
+        const signerEmail = `${process.env.EMAIL_PREFIX}${process.env.NEW_USER_NUMBER}001${process.env.EMAIL_DOMAIN}`;
         await createDocumentCompleted(
             signPage,
             prepareForSignatureModal,
@@ -215,11 +219,17 @@ test.describe('DocumentsType', () => {
         await documentsPage.table.clickFirstOptionsBtn();
         await documentsPage.table.clickShareBtn();
 
-        await shareThisDocumentModal.clickInputEmailField(SIGNERS_DATA.signerEmail1);
+        await shareThisDocumentModal.clickInputEmailField(signerEmail);
         await shareThisDocumentModal.clickShareDocumentBtn();
 
         await step('Verify that the document sent to the email." ', async () => {
             await expect(documentsPage.toast.toastBody).toHaveText(TOAST_MESSAGE.documentSended);
+        });
+        const documentName = UPLOAD_FILE_PATH.jpgDocument.split('/').pop();
+        const emailMessage = await retrieveEmailMessage(
+            request, process.env.NEW_USER_NAME, signerEmail, EMAIL_SUBJECTS.sharedDocument, SELECTORS.message);
+        await step('Verify that the user receive an email to view the document." ', async () => {
+            await expect(emailMessage).toEqual(`${process.env.NEW_USER_NAME} (${process.env.NEW_USER_EMAIL}) added you as a viewer on ${documentName}`);
         });
     });
 
