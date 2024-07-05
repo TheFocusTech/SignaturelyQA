@@ -409,4 +409,44 @@ test.describe('Sign Document', () => {
             await expect(await documentsPage.table.documentStatus).toHaveText(DOCUMENT_STATUS.declined);
         });
     });
+
+    test('TC_04_10_03 | Verify that the user who uploaded the document can send it to signer', async ({
+        createBusinessUserAndLogin,
+        signPage,
+        settingsCompanyPage,
+        settingsEditSignaturePage,
+        createOrEditSignatureOnSettingModal,
+        prepareForSignatureModal,
+        chooseSignatureOrInitialModal,
+        finalStepPage,
+        successModal,
+        documentsPage,
+    }) => {
+        test.setTimeout(270 * 1000);
+
+        await description('Objective: To verify that the user who uploaded the document can send it for signer');
+        await severity(Severity.CRITICAL);
+        await link(`${QASE_LINK}/SIGN-10`, 'Qase: SIGN-10'); 
+        await link(`${GOOGLE_DOC_LINK}o1a44zgp2uji`, 'TC_04_10_03'); 
+        await epic('Sign a document');
+        await tag('others');
+
+        await signPage.uploadFileTab.fileUploader.uploadFile(UPLOAD_FILE_PATH.xlsxDocument);
+        await signPage.uploadFileTab.clickPrepareDocumentBtn();
+        await prepareForSignatureModal.clickSendForSignatureRadioBtn();
+        await prepareForSignatureModal.clickAddSignerBtn();
+        await prepareForSignatureModal.fillSignerNameField(SIGNERS_DATA.signerName2, 0);
+        await prepareForSignatureModal.fillSignerEmailField(SIGNERS_DATA.signerEmail2, 0);
+        await prepareForSignatureModal.clickContinueBtn();
+        await prepareForSignatureModal.clickGotItBtn();
+        await prepareForSignatureModal.clickSignOnFieldsMenu();
+        await prepareForSignatureModal.clickDocumentBody();
+        await prepareForSignatureModal.clickSaveBtn();
+        await finalStepPage.clickSendForSignatureBtn();
+        await successModal.clickBackToDocumentsBtn();
+
+        await step('Verify that document has awaiting status', async () => {
+            await expect(await documentsPage.table.documentStatus).toHaveText(DOCUMENT_STATUS.awaiting);
+        });
+    });
 });
