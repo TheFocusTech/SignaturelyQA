@@ -27,8 +27,7 @@ export default class PrepareForSignatureModal {
         this.itemDropDown = this.page.locator('.uiSelect__search-item');
         this.saveBtn = this.page.getByRole('button', { name: 'Save' });
         this.signatureElement = this.page.locator('.documentPage .react-pdf__Page__canvas').last();
-        this.createBtn = this.page.getByRole('button', { name: 'Create' });
-        this.backToTempatesBtn = this.page.getByRole('button', { name: 'Back to Templates' });
+        this.createBtn = this.page.getByRole('button', { name: 'Create' });        
         this.customSigningOrderCheckbox = this.page.locator('.uiCheckbox__inner');
         this.customSigningOrderPositionNumberOne = this.page.locator('span.signers__item-order-position').first();
         this.customSigningOrderPositionNumberTwo = this.page.locator('span.signers__item-order-position').last();
@@ -119,12 +118,6 @@ export default class PrepareForSignatureModal {
     async clickSaveBtn() {
         await step('Click the "Save" button.', async () => {
             await this.saveBtn.click();
-        });
-    }
-
-    async clickBackToTemplatesBtn() {
-        await step('In the modal window, click on the "Back to templates" button.', async () => {
-            await this.backToTempatesBtn.click();
         });
     }
 

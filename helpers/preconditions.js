@@ -1,12 +1,4 @@
-import {
-    DATA_SIGNER,
-    TOAST_MESSAGE,
-    CREATE_TEMPLATE,
-    UPLOAD_FILE_PATH,
-    SIGNERS_DATA,
-    EMAIL_SUBJECTS,
-    SIGNER_ME,
-} from '../testData';
+import { DATA_SIGNER, TOAST_MESSAGE, CREATE_TEMPLATE, UPLOAD_FILE_PATH, SIGNERS_DATA } from '../testData';
 import { step } from 'allure-js-commons';
 import { retrieveUserEmailConfirmationLink } from '../helpers/utils.js';
 
@@ -44,7 +36,6 @@ export const createDocumentAwaiting = async (
         await prepareForSignatureModal.fillSignerEmailField(SIGNERS_DATA.signerEmail1, 0);
         await prepareForSignatureModal.clickContinueBtn();
         await prepareForSignatureModal.clickGotItBtn();
-
         await prepareForSignatureModal.clickSignOnFieldsMenu();
         await prepareForSignatureModal.clickDocumentBody();
         await prepareForSignatureModal.clickSaveBtn();
@@ -65,7 +56,13 @@ export const createFolder = async (signPage, documentsPage, createFolderModal, f
     });
 };
 
-export const createTemplate = async (signPage, prepareForSignatureModal, templatesPage, createNewTemplatePage) => {
+export const createTemplate = async (
+    signPage,
+    prepareForSignatureModal,
+    templatesPage,
+    createNewTemplatePage,
+    successModal
+) => {
     await step('Precondition: Create Template', async () => {
         await signPage.sideMenu.clickTemplates();
         await templatesPage.sideMenuTemplates.clickCreateTemplate();
@@ -76,7 +73,7 @@ export const createTemplate = async (signPage, prepareForSignatureModal, templat
         await prepareForSignatureModal.clickSignOnFieldsMenu();
         await prepareForSignatureModal.clickDocumentBody();
         await prepareForSignatureModal.clickCreateBtn();
-        await prepareForSignatureModal.clickBackToTemplatesBtn();
+        await successModal.clickBackToTemplatesBtn();
         await templatesPage.sideMenu.clickSign();
     });
 };
@@ -168,33 +165,5 @@ export const addTeamMember = async (
         });
         await teamsAcceptInvitePage.clickBackToMainPageButton();
         await teamsAcceptInvitePage.toast.waitForToastIsHiddenByText(TOAST_MESSAGE.inviteAccepted);
-    });
-};
-
-export const createTemplateForMeAndUser = async (
-    signPage,
-    prepareForSignatureModal,
-    templatesPage,
-    createNewTemplatePage,
-    createSignatureOrInitialModal
-) => {
-    await step('Precondition: Create Template for user and another user', async () => {
-        await signPage.sideMenu.clickTemplates();
-        await templatesPage.sideMenuTemplates.clickCreateTemplate();
-        await createNewTemplatePage.fillTemplateNameField(CREATE_TEMPLATE.nameField);
-        await createNewTemplatePage.fillCreateTemplateRolesField(CREATE_TEMPLATE.nameRole);
-        await createNewTemplatePage.fileUploader.uploadFile(UPLOAD_FILE_PATH.xlsxDocument);
-        await createNewTemplatePage.clickFillTemplateBtn();
-        await prepareForSignatureModal.clickSignOnFieldsMenu();
-        await prepareForSignatureModal.clickDocumentBody();
-        await prepareForSignatureModal.clickDocumentBody();
-        await prepareForSignatureModal.clickAssignedToDropDown();
-        await prepareForSignatureModal.clickItemDropDown(SIGNER_ME);
-        await createSignatureOrInitialModal.clickCheckboxAgree();
-        await createSignatureOrInitialModal.clickSignNowBtn();
-        await prepareForSignatureModal.toast.clickToastFirstCloseBtn();
-        await prepareForSignatureModal.clickCreateBtn();
-        await prepareForSignatureModal.clickBackToTemplatesBtn();
-        await templatesPage.sideMenu.clickSign();
     });
 };

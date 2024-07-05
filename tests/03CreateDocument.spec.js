@@ -11,7 +11,7 @@ import {
     GOOGLE_DOC_LINK,
     CREATE_TEMPLATE,
 } from '../testData.js';
-import { createSignature, createTemplateForMeAndUser } from '../helpers/preconditions.js';
+import { createSignature, createTemplate } from '../helpers/preconditions.js';
 import { description, tag, severity, Severity, link, epic, step } from 'allure-js-commons';
 
 test.describe('CreateDocument', () => {
@@ -293,7 +293,6 @@ test.describe('CreateDocument', () => {
         createBusinessUserAndLogin,
         signPage,
         prepareForSignatureModal,
-        createSignatureOrInitialModal,
         finalStepPage,
         successModal,
         documentsPage,
@@ -310,13 +309,7 @@ test.describe('CreateDocument', () => {
         await epic('Create Document');
         await tag('Document');
 
-        await createTemplateForMeAndUser(
-            signPage,
-            prepareForSignatureModal,
-            templatesPage,
-            createNewTemplatePage,
-            createSignatureOrInitialModal
-        );
+        await createTemplate(signPage, prepareForSignatureModal, templatesPage, createNewTemplatePage, successModal);
 
         await signPage.uploadFileTab.chooseTemplate.clickChooseTemplateDropdown();
         await signPage.uploadFileTab.chooseTemplate.clickTemplateItem(CREATE_TEMPLATE.nameField);
