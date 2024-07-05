@@ -9,7 +9,7 @@ import {
     UPLOAD_FILE_PATH,
     QASE_LINK,
     GOOGLE_DOC_LINK,
-	TOAST_MESSAGE,
+    TOAST_MESSAGE,
     BULK_DOCUMENTS,
     CREATE_TEMPLATE,
 } from '../testData.js';
