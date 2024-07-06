@@ -1,0 +1,5 @@
+Free User has been successfully created: #240706042954226
+Email has been successfully confirmed
+Free User #240706042954226 has been successfully upgraded to Bussiness
+Waiting for email to arrive...
+Fetching emails sent to ...+240706042954226_teammember@gmail.com
