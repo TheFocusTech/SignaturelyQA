@@ -1,4 +1,4 @@
-import { DATA_SIGNER, TOAST_MESSAGE, CREATE_TEMPLATE, UPLOAD_FILE_PATH, SIGNERS_DATA, EMAIL_SUBJECTS } from "../testData";
+import { DATA_SIGNER, TOAST_MESSAGE, CREATE_TEMPLATE, UPLOAD_FILE_PATH, SIGNERS_DATA, EMAIL_SUBJECTS, API_PLANS } from "../testData";
 import { step } from "allure-js-commons";
 import { retrieveUserEmailConfirmationLink } from '../helpers/utils.js';
 
@@ -76,12 +76,19 @@ export const createForm = async (signPage, formsPage, createFormPage, prepareFor
         await createFormPage.createUpdateForm.fillOptionalMessageField(SIGNERS_DATA.viewerEmail1);
         await createFormPage.fileUploader.uploadFile(UPLOAD_FILE_PATH.jpgDocument);
         await createFormPage.createUpdateForm.clickFillTemplateBtn();
+
         await prepareForSignatureModal.clickNameOnFieldsMenu();
         await prepareForSignatureModal.clickDocumentBody();
+
         await prepareForSignatureModal.clickSignOnFieldsMenu();
         await prepareForSignatureModal.clickDocumentBody();
+
+        await prepareForSignatureModal.clickInitialOnFieldsMenu();
+        await prepareForSignatureModal.clickDocumentBody();
+
         await prepareForSignatureModal.clickDateOnFieldsMenu();
         await prepareForSignatureModal.clickDocumentBody();
+
         await prepareForSignatureModal.clickCreateBtn();
         await prepareForSignatureModal.toast.waitForToastIsHiddenByText(TOAST_MESSAGE.success);
         await successModal.clickBackToFormsBtn();
@@ -154,3 +161,20 @@ export const addTeamMember =  async ( teamMemberRole, teamMemberEmail,teamMember
         await teamsAcceptInvitePage.toast.waitForToastIsHiddenByText(TOAST_MESSAGE.inviteAccepted);
     });
 }
+<<<<<<< HEAD
+=======
+
+export const userWithGoldAPISubscription = async (
+    createBusinessUserAndLogin,
+    signPage,
+    settingsCompanyPage,
+    settingsAPIPage,
+    upgradeYourPlanAPIModal) => {
+    await step('Precondition: User with Gold API subscription', async () => {
+        await signPage.sideMenu.clickSettings();
+        await settingsCompanyPage.horizontalMenu.clickAPI();
+        await settingsAPIPage.clickUpgradeButton(API_PLANS[0]);
+        await upgradeYourPlanAPIModal.clickSubscribeButton();
+    });
+}
+>>>>>>> b36445800e9b19d5ed5ee4c7ee2464e977d542cd
