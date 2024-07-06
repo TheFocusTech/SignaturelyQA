@@ -205,6 +205,7 @@ export default class TableComponent {
 
     async waitForTable(time) {
         await this.page.waitForTimeout(time);
+        await this.page.reload();
     }
 
     async clickDeleteBtn() {

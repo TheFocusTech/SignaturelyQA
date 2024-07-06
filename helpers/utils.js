@@ -162,6 +162,7 @@ export async function clickCanvas(page, canvasLocator, excludedAreas = []) {
         }
     } catch (error) {
         console.log('The new fieldDropDown element will not be found.');
+        return 0;
     }
 
     return clickPosition;

@@ -13,7 +13,7 @@ import {
     BULK_DOCUMENTS,
     CREATE_TEMPLATE,
 } from '../testData.js';
-import { createSignature, createTemplate } from '../helpers/preconditions.js';
+import {createSignature, createTemplate, createTemplateForBulkSend} from '../helpers/preconditions.js';
 import { description, tag, severity, Severity, link, epic, step } from 'allure-js-commons';
 
 test.describe('CreateDocument', () => {
@@ -243,6 +243,7 @@ test.describe('CreateDocument', () => {
         await successModal.clickBackToDocumentsBtn();
 
         await step('Verify the created document is in the table with the label "COMPLETED".', async () => {
+            await documentsPage.table.waitForTable(10000);
             await expect(await documentsPage.table.documentStatus).toHaveText(DOCUMENT_STATUS.completed);
         });
     });
@@ -266,7 +267,7 @@ test.describe('CreateDocument', () => {
         await epic('Create Document');
         await tag('Bulk Send');
 
-        await createTemplate(signPage, prepareForSignatureModal, templatesPage, createNewTemplatePage);
+        await createTemplateForBulkSend(signPage, prepareForSignatureModal, templatesPage, createNewTemplatePage);
 
         await signPage.clickBulkSendTab();
 
@@ -279,9 +280,9 @@ test.describe('CreateDocument', () => {
         await selectNameAndEmailColumnsModal.clickRequestSignaturesBtn();
 
         await documentsPage.toast.waitForToastIsHiddenByText(TOAST_MESSAGE.documentsSuccess);
-        page.reload();
 
         await step(`Verify that the total number of created documents is ${BULK_DOCUMENTS.number}.`, async () => {
+            await documentsPage.table.waitForTable(10000);
             await documentsPage.numberOfDocuments.waitFor({ state: 'visible' });
             await expect(documentsPage.numberOfDocuments).toHaveText(BULK_DOCUMENTS.number);
         });
