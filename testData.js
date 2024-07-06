@@ -48,6 +48,7 @@ export const TOAST_MESSAGE = {
     templateDelete: 'Template deleted successfully.',
     editedFormSaved: 'Form saved',
     teamMemberDeleted: 'Team member deleted successfully',
+    documentsSuccess: 'Documents successfully created',
     signatureDeleted: 'Signature deleted successfully',
     updateSignature: 'Signature updated successfully',
     declineDocument: 'Signature request was declined.',
@@ -171,6 +172,7 @@ export const UPLOAD_FILE_PATH = {
     xlsxDocument: 'testDocuments/todoList.xlsx',
     csvDocument: 'testDocuments/CSV.csv',
     pdfDocument: 'testDocuments/openHouse.pdf',
+    txtDocument: 'testDocuments/text.txt',
 };
 export const UPLOAD_FILE_NAME = {
     jpgDocument: 'picture.jpg',
@@ -217,12 +219,23 @@ export const EMPTY_TABLE_HEADER = {
     trash: "You don't have any deleted documents yet.",
 };
 
+export const DELETED_DOCUMENTS_STATUS = [
+    'DELETED',
+    'DELETED'
+];
+
 export const FORMS = {
     formNameEdit: 'Edited Form Name',
     optionalMessageFormEdit: 'Form edited',
 };
 
 export const RANDOM_MONTHLY_PLAN = (randomPlan) => `${randomPlan} Monthly Plan`;
+
+export const BULK_DOCUMENTS = {
+    number: '20',
+}
+
 export const ENDPOINT_FOR_DECLINE = '&declineImmediately=true';
 
 export const TITLE_OF_DOWNGRADE_API_PLAN_MODAL = API_PLANS.map(plan => `Downgrade to ${plan} Plan`);
+export const DATE_FORMAT = ['DD / MM / YYYY', 'MM / DD / YY', 'DD / MM / YY'];

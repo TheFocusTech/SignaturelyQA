@@ -17,6 +17,8 @@ export default class SettingsProfilePage {
         this.updateBtn = this.page.getByRole('button', { name: "Update Email" });
         this.checkBoxesList = this.page.locator('.settings__form-checkbox .uiCheckbox')
         this.checkBoxesFrameList = this.page.locator('.settings__form-checkbox .uiCheckbox__inner')
+        this.dateFormatDropdown = this.page.locator('.uiSelect__select').first();
+        this.dateFormat = this.page.locator('.uiSelect__select-row');
         this.fileInput = this.page.locator('input[type = "file"]');
         this.avatarImage = this.page.locator('form').getByAltText('avatar');
     }
@@ -82,6 +84,18 @@ export default class SettingsProfilePage {
                     }
                 }
             }
+        });
+    }
+
+    async clickDateFormatDropdown() {
+        await step('Click "Date Format" dropdown in the Preferences section', async () => {
+            await this.dateFormatDropdown.click();
+        });
+    }
+    
+    async chooseDateFormat(format) {
+        await step('Choose a date format', async () => {
+            await this.dateFormat.getByText(format, { exact: true }).click();
         });
     }
 
