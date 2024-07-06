@@ -106,8 +106,6 @@ test.describe('API key', () => {
             settingsAPIPage,
             upgradeYourPlanAPIModal,
         }) => {
-            test.setTimeout(140 * 1000);
-
             await description('Objective: Verify that the user can successfully purchase an API plan');
             await severity(Severity.CRITICAL);
             await link(`${QASE_LINK}/SIGN-49`, 'Qase: SIGN-49');
