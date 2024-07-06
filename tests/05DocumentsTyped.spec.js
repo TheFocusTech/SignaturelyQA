@@ -296,7 +296,6 @@ test.describe('DocumentsType', () => {
         await createThreeDocuments(signPage);
 
         await signPage.sideMenu.clickDocuments();
-        // 
         const { documentsToDelete, documentToSave } = await documentsPage.table.checkRandomDocuments();
 
         await documentsPage.clickSelectOptionsBtn();
@@ -306,7 +305,6 @@ test.describe('DocumentsType', () => {
         await documentsPage.sideMenuDocuments.clickTrash();
 
         await step(`Verify documents in trash have correct titles "${documentsToDelete}"`, async () => {
-            // await documentsTrashPage.table.waitForTable (3000)
             await expect (documentsTrashPage.table.objectTitle).toHaveText(documentsToDelete);
         });
      
@@ -325,7 +323,6 @@ test.describe('DocumentsType', () => {
         await documentsTrashPage.sideMenu.clickDocuments();
         
         await step(`Verify that there is only one undeleted document with correct title "${documentToSave}"`, async () => {
-            // await documentsPage.table.waitForTable (3000)
             await expect (documentsPage.table.objectTitle).toHaveCount(1);
             await expect (documentsPage.table.objectTitle).toHaveText(documentToSave);
         });
