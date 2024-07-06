@@ -1,0 +1,9 @@
+Waiting for email to arrive...
+Fetching emails sent from ...LG_tester
+Extracted text: LG_tester sent you a reminder
+Waiting for email to arrive...
+Fetching emails sent from ...TestUser240620144455730
+Extracted text: TestUser240620144455730 has requested your signature
+Waiting for email to arrive...
+Fetching emails sent from ...Signaturely
+Extracted text: TestUser240626115809663 sent you the following document to view
