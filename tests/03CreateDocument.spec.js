@@ -10,6 +10,7 @@ import {
     QASE_LINK,
     GOOGLE_DOC_LINK,
     CREATE_TEMPLATE,
+    TOAST_MESSAGE,
 } from '../testData.js';
 import { createSignature, createTemplate } from '../helpers/preconditions.js';
 import { description, tag, severity, Severity, link, epic, step } from 'allure-js-commons';
