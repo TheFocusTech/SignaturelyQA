@@ -9,10 +9,11 @@ import {
     QASE_LINK,
     GOOGLE_DOC_LINK,
     EMPTY_TABLE_HEADER,
+    DELETED_DOCUMENTS_STATUS,
     EMAIL_SUBJECTS,
     SELECTORS,
 } from '../testData.js';
-import { createFolder, createDocumentAwaiting, createDocumentCompleted, uploadDraftDocument } from '../helpers/preconditions.js';
+import { createFolder, createDocumentAwaiting, createDocumentCompleted, uploadDraftDocument, createThreeDocuments } from '../helpers/preconditions.js';
 import { description, tag, severity, Severity, link, epic, step } from 'allure-js-commons';
 import { signInRequest, documentIdRequest } from '../helpers/apiCalls.js';
 import {retrieveEmailMessage} from "../helpers/utils";
@@ -275,6 +276,58 @@ test.describe('DocumentsType', () => {
         });      
     });
 
+    test('TC_05_19_02 | Verify that deleted documents have been moved to the trash by using checkboxes and Select_options dropdown menu and then deleted permanently', async ({
+        createBusinessUserAndLogin,
+        signPage,
+        documentsPage,
+        deleteModal,
+        confirmTrashEmptyingModal,
+        documentsTrashPage}) => {                
+
+        test.setTimeout(250 * 1000);
+
+        await description('To verify the process of moving the documents to the trash by checkboxes and then deleting documents permanently.');
+        await severity(Severity.CRITICAL);
+        await link(`${QASE_LINK}/SIGN-19`, 'Qase: SIGN-19');
+        await link(`${GOOGLE_DOC_LINK}ba4cs1qxues0`, 'ATC_05_19_02');
+        await epic('Documents (typed)');
+        await tag('Delete_documents');
+
+        await createThreeDocuments(signPage);
+
+        await signPage.sideMenu.clickDocuments();
+        const { documentsToDelete, documentToSave } = await documentsPage.table.checkRandomDocuments();
+
+        await documentsPage.clickSelectOptionsBtn();
+        await documentsPage.clickSelectOptionsDeleteBtn();
+        await deleteModal.clickYesDeleteBtn();
+        await documentsPage.toast.waitForToastCompleted();
+        await documentsPage.sideMenuDocuments.clickTrash();
+
+        await step(`Verify documents in trash have correct titles "${documentsToDelete}"`, async () => {
+            await expect (documentsTrashPage.table.objectTitle).toHaveText(documentsToDelete);
+        });
+     
+        await step(`Verify documents deleted status "${DELETED_DOCUMENTS_STATUS}"`, async () => {
+            await expect (documentsTrashPage.table.documentsStatuses).toHaveText(DELETED_DOCUMENTS_STATUS);
+        });
+       
+        await documentsTrashPage.clickEmptyTrashBtn();
+        await confirmTrashEmptyingModal.clickEmptyTrashBtn();
+        await documentsTrashPage.toast.waitForToastCompleted();
+
+        await step('Verify that trash is empty', async () => {
+            await expect (documentsTrashPage.table.emptyTableHeader).toHaveText(EMPTY_TABLE_HEADER.trash);
+        });
+
+        await documentsTrashPage.sideMenu.clickDocuments();
+        
+        await step(`Verify that there is only one undeleted document with correct title "${documentToSave}"`, async () => {
+            await expect (documentsPage.table.objectTitle).toHaveCount(1);
+            await expect (documentsPage.table.objectTitle).toHaveText(documentToSave);
+        });
+    });
+  
     test('TC_05_20_01 | Verify that Business User can download a "Completed" document (API)', async ({
         page,
         request,

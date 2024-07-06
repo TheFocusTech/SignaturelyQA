@@ -21,4 +21,9 @@ export default class SignPage {
             await this.bulkSendTabOnPanel.click();
         });
     }
+
+    async signPageReload() {
+        await this.page.reload();
+        await this.page.waitForTimeout(1000);
+    };
 }

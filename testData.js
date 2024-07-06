@@ -218,6 +218,11 @@ export const EMPTY_TABLE_HEADER = {
     trash: "You don't have any deleted documents yet.",
 };
 
+export const DELETED_DOCUMENTS_STATUS = [
+    'DELETED',
+    'DELETED'
+];
+
 export const FORMS = {
     formNameEdit: 'Edited Form Name',
     optionalMessageFormEdit: 'Form edited',

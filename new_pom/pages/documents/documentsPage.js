@@ -13,7 +13,9 @@ export default class DocumentsPage {
         this.table = new TableComponent(this.page);
         this.sideMenuDocuments = new SideMenuDocumentsComponent(this.page);
         this.toast = new ToastComponent(this.page);
-
+      
+        this.selectOptionsBtn = this.page.getByText('Select options', {exact: true});
+        this.selectOptionsDeleteBtn = this.page.getByText('Delete', {exact: true});   
         this.createFolderBtn = this.page.getByRole('button', { name: 'Create Folder' });
         this.numberOfDocuments = this.page.locator('p.tableControls__pagingCounter>span');
         this.documentsShown = this.page.locator('p.tableControls__pagingCounter');
@@ -23,6 +25,19 @@ export default class DocumentsPage {
     async clickCreateFolderBtn() {
         await step('Click the "Create Folder" button', async () => {
             await this.createFolderBtn.click();
+        });
+    }
+
+    async clickSelectOptionsBtn() {
+        await step('Click on the "Select options" button', async () => {
+            await this.selectOptionsBtn.click();
+        });
+    }
+
+    async clickSelectOptionsDeleteBtn() {
+        await step('Click on the "Delete" tab in the Select options dropdown menu', async () => {
+            await this.selectOptionsDeleteBtn.waitFor();
+            await this.selectOptionsDeleteBtn.click();
         });
     }
 
