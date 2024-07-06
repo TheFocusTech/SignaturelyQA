@@ -51,7 +51,7 @@ test.describe('Team', () => {
         });
     });
 
-    test.only('TC_09_39_01 | Verify that Business User can upgrade a "User" team member to "Admin"', async ({
+    test('TC_09_39_01 | Verify that Business User can upgrade a "User" team member to "Admin"', async ({
         page,
         request,
         createBusinessUserAndLogin,
