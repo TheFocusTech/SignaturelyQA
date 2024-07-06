@@ -1,7 +1,7 @@
 import { expect } from '@playwright/test';
 import { test } from '../fixtures/base.js';
-import { createFolder, createSecondFolder } from '../helpers/preconditions.js';
-import { TOAST_MESSAGE, FILL_RENAME_FOLDER_NAME, QASE_LINK, GOOGLE_DOC_LINK, FOLDER_NAME, FOLDER_NAME_SECOND } from '../testData.js';
+import { createFolder, addTeamMember } from '../helpers/preconditions.js';
+import { TOAST_MESSAGE, FILL_RENAME_FOLDER_NAME, QASE_LINK, GOOGLE_DOC_LINK, FOLDER_NAME, FOLDER_NAME_SECOND, TEAM_MEMBER_ROLES, CHECK_BOXES_STATUS } from '../testData.js';
 import { description, tag, severity, Severity, link, epic, step } from "allure-js-commons";
 
 test.describe('Folders', () => {
@@ -119,6 +119,84 @@ test.describe('Folders', () => {
         await step('Verify the toast message', async () => {
             await documentsPage.toast.toastBody.waitFor({ state: 'visible' });
             await expect(documentsPage.toast.toastBody).toHaveText(TOAST_MESSAGE.folderMovedToFolder);
+        });
+    });
+
+    const teamMemberRoles = Object.values(TEAM_MEMBER_ROLES);
+    teamMemberRoles.forEach(role => { 
+        test(`TC_06_26_01 | Verify that the user can assign folder permissions to the team member ${role}`, async ({
+            createBusinessUserAndLogin,
+            signPage,
+            documentsPage,
+            createFolderModal,
+            page,
+            request,
+            teamPage,
+            addTeamMemberModal,
+            teamsAcceptInvitePage,
+            folderPermissionsModal,
+        }) => {
+
+            await description(`Objective: Verify that the user can assign folder permissions to the team member with role ${role}`);
+            await severity(Severity.CRITICAL);
+            await link(`${QASE_LINK}/SIGN-26`, 'Qase: SIGN-26');
+            await link(`${GOOGLE_DOC_LINK}civcn01vf5q7`, 'ATC_06_26_01');
+
+            await epic('Folders');
+            await tag('Assign folder permissions');
+    
+            test.setTimeout(250 * 1000);
+    
+            await createFolder(
+                signPage,
+                documentsPage,
+                createFolderModal,
+                FOLDER_NAME
+            );
+            
+            const teamMemberEmail = `${process.env.EMAIL_PREFIX}${process.env.NEW_USER_NUMBER}${'_teammember'}${process.env.EMAIL_DOMAIN}`;
+            const teamMemberName = `${process.env.NEW_USER_NAME}${'_teammember'}`
+    
+            await addTeamMember( 
+                role, 
+                teamMemberEmail,
+                teamMemberName,
+                page, 
+                request, 
+                signPage, 
+                teamPage, 
+                addTeamMemberModal, 
+                teamsAcceptInvitePage
+            );
+    
+            await signPage.sideMenu.clickDocuments();
+            await documentsPage.table.clickFirstOptionsBtn();
+            await documentsPage.table.clickOptionsChangePermissionsBtn();
+            
+            await step('Verify the modal window "Folder permissions" is opened', async () => {
+                await expect(folderPermissionsModal.folderPermissionsWindow).toBeVisible();    
+            });
+            
+            await folderPermissionsModal.clickTeamMemberCheckbox();
+            await folderPermissionsModal.clickUpdatePermissionsBtn();
+            await documentsPage.toast.waitForToastText();
+
+            await step('Verify the toast notification about the successful change of access rights is displayed', 
+            async () => {
+                await expect(documentsPage.toast.toastBody).toHaveText(TOAST_MESSAGE.permissionsChanged);       
+            });
+            
+            await step('Reload page', async () => {
+                await page.reload();       
+            });
+            
+            await documentsPage.table.clickFirstOptionsBtn();
+            await documentsPage.table.clickOptionsChangePermissionsBtn();
+            
+            await step('Verify Checkbox of the selected team member is checked', 
+            async () => {
+                await expect(folderPermissionsModal.teamMemberCheckbox).toHaveClass(CHECK_BOXES_STATUS.checked);     
+            });
         });
     });
 });

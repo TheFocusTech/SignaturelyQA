@@ -55,6 +55,7 @@ import UpdateFormPage from '../new_pom/pages/forms/updateFormPage.js';
 import SelectNameAndEmailColumnsModal from '../new_pom/modalWindows/selectNameAndEmailColumnsModal.js';
 import DeclineModal from '../new_pom/modalWindows/declineModal.js';
 import DownGradeYourPlanAPIModal from '../new_pom/modalWindows/downgradeYourPlanAPIModal.js';
+import FolderPermissionsModal from '../new_pom/modalWindows/folderPermissionsModal.js';
 
 export const test = base.extend({
     createFreeUserAndLogin: [
@@ -303,5 +304,9 @@ export const test = base.extend({
         
     downGradeYourPlanAPIModal: async ({ page }, use) => {
         await use(new DownGradeYourPlanAPIModal(page))
-    }
+    },
+
+    folderPermissionsModal: async ({ page }, use) => {
+        await use(new FolderPermissionsModal(page));
+    },
 });
