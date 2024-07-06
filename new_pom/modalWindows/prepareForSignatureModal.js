@@ -183,7 +183,6 @@ export default class PrepareForSignatureModal {
         await step('Click on the "Date" in "Fields" menu', async () => {
             await this.dateOnFieldsMenu.waitFor({ state: 'visible' });
             await this.dateOnFieldsMenu.click();
-
         });
     }
     async waitDocumentPage() {
