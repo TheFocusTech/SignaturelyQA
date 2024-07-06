@@ -161,8 +161,6 @@ export const addTeamMember =  async ( teamMemberRole, teamMemberEmail,teamMember
         await teamsAcceptInvitePage.toast.waitForToastIsHiddenByText(TOAST_MESSAGE.inviteAccepted);
     });
 }
-<<<<<<< HEAD
-=======
 
 export const userWithGoldAPISubscription = async (
     createBusinessUserAndLogin,
@@ -177,4 +175,3 @@ export const userWithGoldAPISubscription = async (
         await upgradeYourPlanAPIModal.clickSubscribeButton();
     });
 }
->>>>>>> b36445800e9b19d5ed5ee4c7ee2464e977d542cd
