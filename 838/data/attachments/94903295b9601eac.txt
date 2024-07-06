@@ -1,9 +1,0 @@
-An error occurred while fetching document: apiRequestContext.get: Target page, context or browser has been closed
-Call log:
-  - → GET https://api-staging.signaturely.com/api/v1/documents/20a3beae-70f3-4c68-8289-20068b937773
-  -   user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0.6422.26 Safari/537.36
-  -   accept: */*
-  -   accept-encoding: gzip,deflate,br
-  -   cookie: signaturely.session=s%3AJCLsbLZuuv99MCf1ssoDELBwH-vogUC_.H7f%2FsU4EZM8mncP87I4Gq2%2BOc5DrVzx%2FSg7A7zW4OII
-
-Failed to edit status of the document
