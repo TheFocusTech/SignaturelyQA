@@ -17,6 +17,8 @@ export default class SettingsProfilePage {
         this.updateBtn = this.page.getByRole('button', { name: "Update Email" });
         this.checkBoxesList = this.page.locator('.settings__form-checkbox .uiCheckbox')
         this.checkBoxesFrameList = this.page.locator('.settings__form-checkbox .uiCheckbox__inner')
+        this.fileInput = this.page.locator('input[type = "file"]');
+        this.avatarImage = this.page.locator('form').getByAltText('avatar');
     }
 
     async fillNewPasswordInputField(password) {
@@ -82,4 +84,17 @@ export default class SettingsProfilePage {
             }
         });
     }
+
+  async uploadImage(image) {
+    await step('Upload avatar image', async () => {
+      await this.fileInput.setInputFiles(image);
+    });
+  }
+
+  async getProfileAvatarLink() {
+    return await step('Get profile avatar image link', async () => {
+      return await this.avatarImage.getAttribute('src');
+    });
+  }
 }
+
