@@ -188,7 +188,7 @@ export default class PrepareForSignatureModal {
     }
     async waitDocumentPage() {
         await step("Wait that 'documet page' element is visible", async () => {
-            await this.documentPage.waitFor({ state: 'visible' });
+            await this.documentPage.first().waitFor({ state: 'visible' });
         });
     }
 }
