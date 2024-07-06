@@ -204,9 +204,8 @@ export default class TableComponent {
     }
 
     async waitForTable(time) {
-        await step(`Wait for table data to be loaded.`, async () => {
-            await this.page.waitForTimeout(time);
-        });
+        await this.page.waitForTimeout(time);
+        await this.page.reload();
     }
 
     async clickDeleteBtn() {
