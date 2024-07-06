@@ -58,7 +58,7 @@ export const createTemplate = async (signPage, prepareForSignatureModal, templat
         await templatesPage.sideMenuTemplates.clickCreateTemplate();
         await createNewTemplatePage.fillTemplateNameField(CREATE_TEMPLATE.nameField);
         await createNewTemplatePage.fillCreateTemplateRolesField(CREATE_TEMPLATE.nameRole);
-        await createNewTemplatePage.fileUploader.uploadFile(UPLOAD_FILE_PATH.jpgDocument);
+        await createNewTemplatePage.fileUploader.uploadFile(UPLOAD_FILE_PATH.txtDocument);
         await createNewTemplatePage.clickFillTemplateBtn();
         await prepareForSignatureModal.clickSignOnFieldsMenu();
         await prepareForSignatureModal.clickDocumentBody();
@@ -129,6 +129,18 @@ export const uploadDraftDocument = async (signPage) => {
     });
 };
 
+export const createThreeDocuments = async (signPage) => {
+    await step(`Precondition: Create Documents "${UPLOAD_FILE_PATH.pdfDocument}", 
+        "${UPLOAD_FILE_PATH.xlsxDocument}", 
+        "${UPLOAD_FILE_PATH.csvDocument}"`, async () => {
+        await signPage.uploadFileTab.fileUploader.uploadFile(UPLOAD_FILE_PATH.pdfDocument);
+        await signPage.signPageReload();
+        await signPage.uploadFileTab.fileUploader.uploadFile(UPLOAD_FILE_PATH.xlsxDocument);
+        await signPage.signPageReload();
+        await signPage.uploadFileTab.fileUploader.uploadFile(UPLOAD_FILE_PATH.csvDocument);
+    });
+};
+
 export const addTeamMember =  async ( teamMemberRole, teamMemberEmail,teamMemberName, page, request, signPage, teamPage, addTeamMemberModal, teamsAcceptInvitePage
 ) => {
     await step(`Precondition: Add team member with "${teamMemberRole}" role set`, async () => {
@@ -163,3 +175,18 @@ export const userWithGoldAPISubscription = async (
         await upgradeYourPlanAPIModal.clickSubscribeButton();
     });
 }
+
+export const createTemplateForBulkSend = async (signPage, prepareForSignatureModal, templatesPage, createNewTemplatePage) => {
+    await step('Precondition: Create Template for Bulk Send', async () => {
+        await signPage.sideMenu.clickTemplates();
+        await templatesPage.sideMenuTemplates.clickCreateTemplate();
+        await createNewTemplatePage.fillTemplateNameField(CREATE_TEMPLATE.nameField);
+        await createNewTemplatePage.fillCreateTemplateRolesField(CREATE_TEMPLATE.nameRole);
+        await createNewTemplatePage.fileUploader.uploadFile(UPLOAD_FILE_PATH.txtDocument);
+        await createNewTemplatePage.clickFillTemplateBtn();
+        await prepareForSignatureModal.setSignFieldOnDocument();
+        await prepareForSignatureModal.clickCreateBtn();
+        await prepareForSignatureModal.clickBackToTemplatesBtn();
+        await templatesPage.sideMenu.clickSign();
+    });
+};
