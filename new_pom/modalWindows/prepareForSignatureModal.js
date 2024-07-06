@@ -27,7 +27,8 @@ export default class PrepareForSignatureModal {
         this.itemDropDown = this.page.locator('.uiSelect__search-item');
         this.saveBtn = this.page.getByRole('button', { name: 'Save' });
         this.signatureElement = this.page.locator('.documentPage .react-pdf__Page__canvas').last();
-        this.createBtn = this.page.getByRole('button', { name: 'Create' });        
+        this.createBtn = this.page.getByRole('button', { name: 'Create' });
+        this.backToTempatesBtn = this.page.getByRole('button', { name: 'Back to Templates' });
         this.customSigningOrderCheckbox = this.page.locator('.uiCheckbox__inner');
         this.customSigningOrderPositionNumberOne = this.page.locator('span.signers__item-order-position').first();
         this.customSigningOrderPositionNumberTwo = this.page.locator('span.signers__item-order-position').last();
@@ -124,6 +125,12 @@ export default class PrepareForSignatureModal {
         });
     }
 
+    async clickBackToTemplatesBtn() {
+        await step('In the modal window, click on the "Back to templates" button.', async () => {
+            await this.backToTempatesBtn.click();
+        });
+    }
+
     async clickCustomSigningOrderCheckbox() {
         await step('Click on the "Custom signing order" checkbox.', async () => {
             await this.customSigningOrderCheckbox.click();
@@ -145,9 +152,9 @@ export default class PrepareForSignatureModal {
     async getPrepareForSigningTitleText() {
         let actualText;
         await step('Get title text', async () => {
-        actualText = await this.prepareForSigningTitle.textContent();
-    });
-        return actualText
+            actualText = await this.prepareForSigningTitle.textContent();
+        });
+        return actualText;
     }
 
     async clickNameOnFieldsMenu() {
@@ -180,7 +187,6 @@ export default class PrepareForSignatureModal {
         await step('Click on the "Date" in "Fields" menu', async () => {
             await this.dateOnFieldsMenu.waitFor({ state: 'visible' });
             await this.dateOnFieldsMenu.click();
-
         });
     }
 
@@ -192,16 +198,15 @@ export default class PrepareForSignatureModal {
             while (retries !== 0) {
                 await this.signOnFieldsMenu.click();
                 coordinates = await clickCanvas(this.page, this.canvas, this.excludedAreas);
-                coordinates === 0 ? retries -- : retries = 0;
+                coordinates === 0 ? retries-- : (retries = 0);
             }
-            if(coordinates === 0) {
+            if (coordinates === 0) {
                 await step('Error: Test precondition fail.', async () => {
                     console.error('Error: Test precondition fail.');
                 });
             }
         });
     }
-
 
     async clickDateOnLeftMenu() {
         await step('Click on the "Date" in Left Menu', async () => {

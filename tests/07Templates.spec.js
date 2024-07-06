@@ -20,7 +20,6 @@ test.describe('Templates', () => {
         prepareForSignatureModal,
         templatesPage,
         createNewTemplatePage,
-        successModal,
     }) => {
         await description(
             'Objective: To verify that the user can create a new template in the system successfully. This includes ensuring that all required fields are completed correctly, the template is saved, and it is accessible for future use.'
@@ -41,7 +40,7 @@ test.describe('Templates', () => {
         await prepareForSignatureModal.clickSignOnFieldsMenu();
         await prepareForSignatureModal.clickDocumentBody();
         await prepareForSignatureModal.clickCreateBtn();
-        await successModal.clickBackToTemplatesBtn();
+        await prepareForSignatureModal.clickBackToTemplatesBtn();
 
         await step('Verify that the document status in the template page is "live"', async () => {
             await expect(await templatesPage.table.documentStatus).toHaveText(TEMPLATES_STATUS.live);
@@ -55,7 +54,6 @@ test.describe('Templates', () => {
         templatesPage,
         apiTemplatesPage,
         createNewTemplatePage,
-        successModal,
     }) => {
         await description('Objective: To verify the process of add template to API.');
         await severity(Severity.CRITICAL);
@@ -66,7 +64,7 @@ test.describe('Templates', () => {
 
         test.setTimeout(250 * 1000);
 
-        await createTemplate(signPage, prepareForSignatureModal, templatesPage, createNewTemplatePage, successModal);
+        await createTemplate(signPage, prepareForSignatureModal, templatesPage, createNewTemplatePage);
         await signPage.sideMenu.clickTemplates();
         await templatesPage.table.clickFirstOptionsBtn();
         await templatesPage.table.clickAddToAPIBtn();
@@ -89,7 +87,6 @@ test.describe('Templates', () => {
         editTemplatesPage,
         prepareForSignatureModal,
         createNewTemplatePage,
-        successModal,
     }) => {
         test.slow();
 
@@ -102,7 +99,7 @@ test.describe('Templates', () => {
         await epic('Templates');
         await tags('Edit-template');
 
-        await createTemplate(signPage, prepareForSignatureModal, templatesPage, createNewTemplatePage, successModal);
+        await createTemplate(signPage, prepareForSignatureModal, templatesPage, createNewTemplatePage);
 
         await signPage.sideMenu.clickTemplates();
         await templatesPage.table.clickFirstOptionsBtn();
@@ -148,7 +145,7 @@ test.describe('Templates', () => {
 
         test.setTimeout(250 * 1000);
 
-        await createTemplate(signPage, prepareForSignatureModal, templatesPage, createNewTemplatePage, successModal);
+        await createTemplate(signPage, prepareForSignatureModal, templatesPage, createNewTemplatePage);
 
         await signPage.sideMenu.clickTemplates();
         await templatesPage.table.clickFirstOptionsBtn();
@@ -172,7 +169,6 @@ test.describe('Templates', () => {
         templatesPage,
         createNewTemplatePage,
         confirmDeletionModal,
-        successModal,
     }) => {
         await description('Objective: Verify that the user can successfully delete a template.');
         await severity(Severity.CRITICAL);
@@ -183,7 +179,7 @@ test.describe('Templates', () => {
 
         test.setTimeout(250 * 1000);
 
-        await createTemplate(signPage, prepareForSignatureModal, templatesPage, createNewTemplatePage, successModal);
+        await createTemplate(signPage, prepareForSignatureModal, templatesPage, createNewTemplatePage);
 
         await signPage.sideMenu.clickTemplates();
         await templatesPage.table.clickFirstOptionsBtn();

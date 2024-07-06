@@ -44,6 +44,7 @@ export const createDocumentAwaiting = async (
         await prepareForSignatureModal.fillSignerEmailField(SIGNERS_DATA.signerEmail1, 0);
         await prepareForSignatureModal.clickContinueBtn();
         await prepareForSignatureModal.clickGotItBtn();
+
         await prepareForSignatureModal.clickSignOnFieldsMenu();
         await prepareForSignatureModal.clickDocumentBody();
         await prepareForSignatureModal.clickSaveBtn();
@@ -64,13 +65,7 @@ export const createFolder = async (signPage, documentsPage, createFolderModal, f
     });
 };
 
-export const createTemplate = async (
-    signPage,
-    prepareForSignatureModal,
-    templatesPage,
-    createNewTemplatePage,
-    successModal
-) => {
+export const createTemplate = async (signPage, prepareForSignatureModal, templatesPage, createNewTemplatePage) => {
     await step('Precondition: Create Template', async () => {
         await signPage.sideMenu.clickTemplates();
         await templatesPage.sideMenuTemplates.clickCreateTemplate();
@@ -81,7 +76,7 @@ export const createTemplate = async (
         await prepareForSignatureModal.clickSignOnFieldsMenu();
         await prepareForSignatureModal.clickDocumentBody();
         await prepareForSignatureModal.clickCreateBtn();
-        await successModal.clickBackToTemplatesBtn();
+        await prepareForSignatureModal.clickBackToTemplatesBtn();
         await templatesPage.sideMenu.clickSign();
     });
 };
@@ -133,6 +128,7 @@ export const createDocumentCompleted = async (
     await step('Precondition: Document creation in progress with Completed status ', async () => {
         await signPage.uploadFileTab.fileUploader.uploadFile('testDocuments/picture.jpg');
         await signPage.uploadFileTab.clickPrepareDocumentBtn();
+
         await prepareForSignatureModal.clickSignDocumentRadioBtn();
         await prepareForSignatureModal.clickContinueBtn();
         await prepareForSignatureModal.clickGotItBtn();
@@ -154,15 +150,18 @@ export const uploadDraftDocument = async (signPage) => {
 };
 
 export const createThreeDocuments = async (signPage) => {
-    await step(`Precondition: Create Documents "${UPLOAD_FILE_PATH.pdfDocument}", 
+    await step(
+        `Precondition: Create Documents "${UPLOAD_FILE_PATH.pdfDocument}", 
         "${UPLOAD_FILE_PATH.xlsxDocument}", 
-        "${UPLOAD_FILE_PATH.csvDocument}"`, async () => {
-        await signPage.uploadFileTab.fileUploader.uploadFile(UPLOAD_FILE_PATH.pdfDocument);
-        await signPage.signPageReload();
-        await signPage.uploadFileTab.fileUploader.uploadFile(UPLOAD_FILE_PATH.xlsxDocument);
-        await signPage.signPageReload();
-        await signPage.uploadFileTab.fileUploader.uploadFile(UPLOAD_FILE_PATH.csvDocument);
-    });
+        "${UPLOAD_FILE_PATH.csvDocument}"`,
+        async () => {
+            await signPage.uploadFileTab.fileUploader.uploadFile(UPLOAD_FILE_PATH.pdfDocument);
+            await signPage.signPageReload();
+            await signPage.uploadFileTab.fileUploader.uploadFile(UPLOAD_FILE_PATH.xlsxDocument);
+            await signPage.signPageReload();
+            await signPage.uploadFileTab.fileUploader.uploadFile(UPLOAD_FILE_PATH.csvDocument);
+        }
+    );
 };
 
 export const addTeamMember = async (
@@ -214,8 +213,7 @@ export const createTemplateForBulkSend = async (
     signPage,
     prepareForSignatureModal,
     templatesPage,
-    createNewTemplatePage,
-    successModal
+    createNewTemplatePage
 ) => {
     await step('Precondition: Create Template for Bulk Send', async () => {
         await signPage.sideMenu.clickTemplates();
@@ -226,7 +224,7 @@ export const createTemplateForBulkSend = async (
         await createNewTemplatePage.clickFillTemplateBtn();
         await prepareForSignatureModal.setSignFieldOnDocument();
         await prepareForSignatureModal.clickCreateBtn();
-        await successModal.clickBackToTemplatesBtn();
+        await prepareForSignatureModal.clickBackToTemplatesBtn();
         await templatesPage.sideMenu.clickSign();
     });
 };
