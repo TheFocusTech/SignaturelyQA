@@ -25,7 +25,6 @@ export default class TableComponent {
         this.listElements = this.page.locator('.documents__list-container');
         this.renameBtn = this.page.getByRole('button', { name: 'Rename' });
         this.inputNameField = this.page.locator('.form__input--hidden');
-        this.titleObjectField = this.page.locator('p.table__column')
         this.disableFormBtn = this.page.getByRole('button', { name: 'Disable Form' });
         this.enableFormBtn = this.page.getByRole('button', { name: 'Enable Form' });
         this.deleteForm = this.page.getByRole('button', { name: 'Delete Form' });

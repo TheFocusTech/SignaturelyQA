@@ -250,6 +250,7 @@ test.describe('CreateDocument', () => {
         createNewTemplatePage,
         prepareForSignatureModal,
         selectNameAndEmailColumnsModal,
+        successModal,
         page,
     }) => {
         test.setTimeout(160 * 1000);
@@ -261,7 +262,13 @@ test.describe('CreateDocument', () => {
         await epic('Create Document');
         await tag('Bulk Send');
 
-        await createTemplateForBulkSend(signPage, prepareForSignatureModal, templatesPage, createNewTemplatePage);
+        await createTemplateForBulkSend(
+            signPage,
+            prepareForSignatureModal,
+            templatesPage,
+            createNewTemplatePage,
+            successModal
+        );
 
         await signPage.clickBulkSendTab();
 
@@ -277,7 +284,7 @@ test.describe('CreateDocument', () => {
 
         await step(`Verify that the total number of created documents is ${BULK_DOCUMENTS.number}.`, async () => {
             await documentsPage.table.waitForTable(10000);
-            await documentsPage.numberOfDocuments.waitFor({ state: 'visible' });
+            await documentsPage.table.documentStatus.waitFor({ state: 'visible' });
             await expect(documentsPage.numberOfDocuments).toHaveText(BULK_DOCUMENTS.number);
         });
 

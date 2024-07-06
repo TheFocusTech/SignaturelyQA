@@ -210,7 +210,13 @@ export const userWithGoldAPISubscription = async (
     });
 };
 
-export const createTemplateForBulkSend = async (signPage, prepareForSignatureModal, templatesPage, createNewTemplatePage) => {
+export const createTemplateForBulkSend = async (
+    signPage,
+    prepareForSignatureModal,
+    templatesPage,
+    createNewTemplatePage,
+    successModal
+) => {
     await step('Precondition: Create Template for Bulk Send', async () => {
         await signPage.sideMenu.clickTemplates();
         await templatesPage.sideMenuTemplates.clickCreateTemplate();
@@ -220,7 +226,7 @@ export const createTemplateForBulkSend = async (signPage, prepareForSignatureMod
         await createNewTemplatePage.clickFillTemplateBtn();
         await prepareForSignatureModal.setSignFieldOnDocument();
         await prepareForSignatureModal.clickCreateBtn();
-        await prepareForSignatureModal.clickBackToTemplatesBtn();
+        await successModal.clickBackToTemplatesBtn();
         await templatesPage.sideMenu.clickSign();
     });
 };
