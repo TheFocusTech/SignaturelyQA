@@ -230,3 +230,5 @@ export const BULK_DOCUMENTS = {
 }
 
 export const ENDPOINT_FOR_DECLINE = '&declineImmediately=true';
+
+export const TITLE_OF_DOWNGRADE_API_PLAN_MODAL = API_PLANS.map(plan => `Downgrade to ${plan} Plan`);

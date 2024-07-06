@@ -4,7 +4,7 @@ export default class UpgradeYourPlanAPIModal {
     constructor(page) {
         this.page = page;
 
-        this.subscribeButton = this.page.getByRole('button', {name: "Subscribe"});
+        this.subscribeButton = this.page.getByRole('button', { name: "Subscribe" });
     }
 
     async clickSubscribeButton() {
