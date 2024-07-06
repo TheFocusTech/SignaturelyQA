@@ -1,0 +1,6 @@
+Free User has been successfully created: #240706140506745
+Email has been successfully confirmed
+Free User #240706140506745 has been successfully upgraded to Bussiness
+The new fieldDropDown element will not be found.
+User logged in successfully with id 2ed30180-4135-4ab0-9c6c-632745de1200
+Retrieved document id 8e6b8633-fbda-4570-91ed-032dda9f5ccf
