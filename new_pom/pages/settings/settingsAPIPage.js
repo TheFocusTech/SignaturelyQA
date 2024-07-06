@@ -47,4 +47,13 @@ export default class SettingsAPIPage {
             await this.page.keyboard.up('Control');
         });
     }
+    
+    async clickSelectButton(plan) {
+        await step(`Click Select button for ${plan} API plan to downgrade`, async () => {
+            await this.apiPlansList
+                .filter({ hasText: plan })
+                .getByRole('button', { name: "Select" })
+                .click();
+        });
+    }
 }

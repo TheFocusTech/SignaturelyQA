@@ -53,6 +53,7 @@ import ShareThisDocumentModal from '../new_pom/modalWindows/shareThisDocumentMod
 import CancelSubscriptionModal from '../new_pom/modalWindows/cancelSubscriptionModal.js';
 import UpdateFormPage from '../new_pom/pages/forms/updateFormPage.js';
 import DeclineModal from '../new_pom/modalWindows/declineModal.js';
+import DownGradeYourPlanAPIModal from '../new_pom/modalWindows/downgradeYourPlanAPIModal.js';
 import FolderPermissionsModal from '../new_pom/modalWindows/folderPermissionsModal.js';
 
 export const test = base.extend({
@@ -294,6 +295,10 @@ export const test = base.extend({
 
     declineModal: async ({ page }, use) => {
         await use(new DeclineModal(page));
+    },
+
+    downGradeYourPlanAPIModal: async ({ page }, use) => {
+        await use(new DownGradeYourPlanAPIModal(page));
     },
 
     folderPermissionsModal: async ({ page }, use) => {
