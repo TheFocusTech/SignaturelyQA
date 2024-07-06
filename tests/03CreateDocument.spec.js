@@ -9,10 +9,11 @@ import {
     UPLOAD_FILE_PATH,
     QASE_LINK,
     GOOGLE_DOC_LINK,
-    CREATE_TEMPLATE,
     TOAST_MESSAGE,
+    BULK_DOCUMENTS,
+    CREATE_TEMPLATE,
 } from '../testData.js';
-import { createSignature, createTemplate } from '../helpers/preconditions.js';
+import {createSignature, createTemplate, createTemplateForBulkSend} from '../helpers/preconditions.js';
 import { description, tag, severity, Severity, link, epic, step } from 'allure-js-commons';
 
 test.describe('CreateDocument', () => {
@@ -236,8 +237,69 @@ test.describe('CreateDocument', () => {
         await successModal.clickBackToDocumentsBtn();
 
         await step('Verify the created document is in the table with the label "COMPLETED".', async () => {
+            await documentsPage.table.waitForTable(10000);
             await expect(await documentsPage.table.documentStatus).toHaveText(DOCUMENT_STATUS.completed);
         });
+    });
+
+    test('TC_03_09_01 | Create Documents via Bulk Send', async ({
+        createBusinessUserAndLogin,
+        signPage,
+        documentsPage,
+        templatesPage,
+        createNewTemplatePage,
+        prepareForSignatureModal,
+        selectNameAndEmailColumnsModal,
+        page,
+    }) => {
+        test.setTimeout(160 * 1000);
+
+        await description('Objective: Enable document distribution via Bulk Send.');
+        await severity(Severity.CRITICAL);
+        await link(`${QASE_LINK}/SIGN-9`, 'Qase: SIGN-9');
+        await link(`${GOOGLE_DOC_LINK}887tkak398is`, 'ATC_03_09_01');
+        await epic('Create Document');
+        await tag('Bulk Send');
+
+        await createTemplateForBulkSend(signPage, prepareForSignatureModal, templatesPage, createNewTemplatePage);
+
+        await signPage.clickBulkSendTab();
+
+        await signPage.bulkSendTab.selectTemplate();
+        await signPage.bulkSendTab.fileUploader.uploadCsvFile(UPLOAD_FILE_PATH.csvDocument);
+        await signPage.bulkSendTab.clickSelectColumnsBtn();
+
+        await selectNameAndEmailColumnsModal.selectColumnName();
+        await selectNameAndEmailColumnsModal.selectColumnEmail();
+        await selectNameAndEmailColumnsModal.clickRequestSignaturesBtn();
+
+        await documentsPage.toast.waitForToastIsHiddenByText(TOAST_MESSAGE.documentsSuccess);
+
+        await step(`Verify that the total number of created documents is ${BULK_DOCUMENTS.number}.`, async () => {
+            await documentsPage.table.waitForTable(10000);
+            await documentsPage.numberOfDocuments.waitFor({ state: 'visible' });
+            await expect(documentsPage.numberOfDocuments).toHaveText(BULK_DOCUMENTS.number);
+        });
+
+        const randomIndex = await documentsPage.getRandomIndexForShownDocuments();
+        const randomIndex1 = randomIndex[0];
+        const randomIndex2 = randomIndex[1];
+
+        await step(
+            `Verify that on page 1 the random document (nth-${randomIndex1}) has the title "${CREATE_TEMPLATE.nameField}".`,
+            async () => {
+                await expect(documentsPage.table.objectTitle.nth(randomIndex1)).toHaveText(CREATE_TEMPLATE.nameField);
+            }
+        );
+
+        await documentsPage.clickPage2Btn();
+
+        await step(
+            `Verify that on page 2 the random document (nth-${randomIndex2}) has the title "${CREATE_TEMPLATE.nameField}".`,
+            async () => {
+                await expect(documentsPage.table.objectTitle.nth(randomIndex2)).toHaveText(CREATE_TEMPLATE.nameField);
+            }
+        );
     });
 
     test('TC_03_07_04 | Verify that user can sign a document themselves with existed signature', async ({
@@ -325,3 +387,4 @@ test.describe('CreateDocument', () => {
         });
     });
 });
+
