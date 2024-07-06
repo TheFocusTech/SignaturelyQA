@@ -130,7 +130,7 @@ test.describe('Folders', () => {
         });
     });
 
-    test.only('TC_06_26_02 | Verify that the user can assign folder permissions to multiple team members.', async ({
+    test('TC_06_26_02 | Verify that the user can assign folder permissions to multiple team members.', async ({
         page,
         request,
         createBusinessUserAndLogin,
