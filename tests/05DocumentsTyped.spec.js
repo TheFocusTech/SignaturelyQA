@@ -241,7 +241,7 @@ test.describe('DocumentsType', () => {
         documentsTrashPage}) => {                
         test.setTimeout(250 * 1000);
 
-        await description('To verify the process of moving the document to the trash and then deleting document permanently.');
+        await description('Objective: To verify the process of moving the document to the trash and then deleting document permanently.');
         await severity(Severity.CRITICAL);
         await link(`${QASE_LINK}/SIGN-19`, 'Qase: SIGN-19');
         await link(`${GOOGLE_DOC_LINK}bpzeytlzlbz`, 'ATC_05_19_01');
@@ -286,7 +286,7 @@ test.describe('DocumentsType', () => {
 
         test.setTimeout(250 * 1000);
 
-        await description('To verify the process of moving the documents to the trash by checkboxes and then deleting documents permanently.');
+        await description('Objective: To verify the process of moving the documents to the trash by checkboxes and then deleting documents permanently.');
         await severity(Severity.CRITICAL);
         await link(`${QASE_LINK}/SIGN-19`, 'Qase: SIGN-19');
         await link(`${GOOGLE_DOC_LINK}ba4cs1qxues0`, 'ATC_05_19_02');
@@ -296,6 +296,7 @@ test.describe('DocumentsType', () => {
         await createThreeDocuments(signPage);
 
         await signPage.sideMenu.clickDocuments();
+        // 
         const { documentsToDelete, documentToSave } = await documentsPage.table.checkRandomDocuments();
 
         await documentsPage.clickSelectOptionsBtn();
@@ -305,6 +306,7 @@ test.describe('DocumentsType', () => {
         await documentsPage.sideMenuDocuments.clickTrash();
 
         await step(`Verify documents in trash have correct titles "${documentsToDelete}"`, async () => {
+            // await documentsTrashPage.table.waitForTable (3000)
             await expect (documentsTrashPage.table.objectTitle).toHaveText(documentsToDelete);
         });
      
@@ -323,6 +325,7 @@ test.describe('DocumentsType', () => {
         await documentsTrashPage.sideMenu.clickDocuments();
         
         await step(`Verify that there is only one undeleted document with correct title "${documentToSave}"`, async () => {
+            // await documentsPage.table.waitForTable (3000)
             await expect (documentsPage.table.objectTitle).toHaveCount(1);
             await expect (documentsPage.table.objectTitle).toHaveText(documentToSave);
         });
