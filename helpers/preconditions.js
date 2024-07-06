@@ -4,8 +4,8 @@ import {
     CREATE_TEMPLATE,
     UPLOAD_FILE_PATH,
     SIGNERS_DATA,
-    API_PLANS,
     EMAIL_SUBJECTS,
+    API_PLANS,
 } from '../testData';
 import { step } from 'allure-js-commons';
 import { retrieveUserEmailConfirmationLink } from '../helpers/utils.js';

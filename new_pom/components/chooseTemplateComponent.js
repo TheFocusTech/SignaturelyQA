@@ -4,8 +4,7 @@ export default class ChooseTemplateComponent {
     constructor(page) {
         this.page = page;
 
-        this.chooseTemplateDropdown = this.page.locator('.uiSelect__select').filter({ hasText: 'Choose a Template' });
-        this.openChooseTemplateDropdown = this.page.locator('.uiSelect__select.uiSelect__select--open');
+        this.chooseTemplateDropdown = this.page.getByText('Choose a Template');       
         this.templateItem = this.page.locator('.uiSelect__select-row');
         this.signerNameField = this.page.getByPlaceholder('Name');
         this.signerEmailField = this.page.getByPlaceholder('Email');
@@ -14,15 +13,13 @@ export default class ChooseTemplateComponent {
 
     async clickChooseTemplateDropdown() {
         await step('Click on the "Choose Template" dropdown', async () => {
-            await this.chooseTemplateDropdown.waitFor({ state: 'visible' });
-            await this.chooseTemplateDropdown.hover();
+            await this.chooseTemplateDropdown.waitFor({ state: 'visible' });            
             await this.chooseTemplateDropdown.click({ force: true });
         });
     }
 
     async clickTemplateItem(title) {
         await step('Select the template from the dropdown', async () => {
-            await this.openChooseTemplateDropdown.waitFor();
             await this.templateItem.getByText(title).waitFor();
             await this.templateItem.getByText(title).click();
         });
