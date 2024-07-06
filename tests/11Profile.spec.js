@@ -182,7 +182,7 @@ test.describe('Profile', () => {
         });
     })
     
-    test('TC_11_46_01 | Verify that that the User can upload an avatar image', async ({
+    test('TC_11_46_01 | Verify that the User can upload an avatar image', async ({
         createBusinessUserAndLogin,
         signPage,
         settingsCompanyPage,
