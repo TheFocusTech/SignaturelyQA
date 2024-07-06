@@ -37,6 +37,10 @@ export default class PrepareForSignatureModal {
         this.prepareForSigningTitle = this.page.getByRole('heading', { name: 'Prepare for Signing' });
         this.cancelBtn = this.page.getByRole('button', { name: 'Cancel' });
         this.documentPage = this.page.locator('.documentPage__inner');
+        this.dateStampedOnDocument = this.page.locator(
+            'input.fieldDropDown__trigger-date-input:not(fieldDropDown__trigger--disabled)');
+        this.dateOnLeftMenu = this.page.locator('.interactModal__fieldBar-selectField-item-label');
+
     }
 
     async clickSignDocumentRadioBtn() {
@@ -188,6 +192,32 @@ export default class PrepareForSignatureModal {
     async waitDocumentPage() {
         await step("Wait that 'documet page' element is visible", async () => {
             await this.documentPage.first().waitFor({ state: 'visible' });
+        });
+    }
+
+    async setSignFieldOnDocument() {
+        await step('Set "Sign" field on document.', async () => {
+            await this.canvas.first().waitFor(5000);
+            let coordinates = 0;
+            let retries = 5;
+            while (retries !== 0) {
+                await this.signOnFieldsMenu.click();
+                coordinates = await clickCanvas(this.page, this.canvas, this.excludedAreas);
+                coordinates === 0 ? retries-- : retries = 0;
+            }
+            if (coordinates === 0) {
+                await step('Error: Test precondition fail.', async () => {
+                    console.error('Error: Test precondition fail.');
+                });
+            }
+        });
+    }
+
+
+    async clickDateOnLeftMenu() {
+        await step('Click on the "Date" in Left Menu', async () => {
+            await this.dateOnLeftMenu.waitFor({ state: 'visible' });
+            await this.dateOnLeftMenu.click();
         });
     }
 }

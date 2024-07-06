@@ -52,6 +52,7 @@ import ConfirmDeletionModal from '../new_pom/modalWindows/confirmDeletionModal.j
 import ShareThisDocumentModal from '../new_pom/modalWindows/shareThisDocumentModal.js';
 import CancelSubscriptionModal from '../new_pom/modalWindows/cancelSubscriptionModal.js';
 import UpdateFormPage from '../new_pom/pages/forms/updateFormPage.js';
+import SelectNameAndEmailColumnsModal from '../new_pom/modalWindows/selectNameAndEmailColumnsModal.js';
 import DeclineModal from '../new_pom/modalWindows/declineModal.js';
 import DownGradeYourPlanAPIModal from '../new_pom/modalWindows/downgradeYourPlanAPIModal.js';
 
@@ -292,6 +293,10 @@ export const test = base.extend({
         await use(new UpdateFormPage(page));
     },
 
+    selectNameAndEmailColumnsModal: async ({ page }, use) => {
+        await use(new SelectNameAndEmailColumnsModal(page));
+    },
+  
     declineModal: async ({ page }, use) => {
         await use(new DeclineModal(page));
     },

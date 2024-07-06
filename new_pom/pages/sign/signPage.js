@@ -1,6 +1,7 @@
 import SideMenuComponent from '../../components/sideMenuComponent';
 import UploadFileOnSignPage from '../../pages/sign/uploadFileOnSignPage';
 import HeaderComponent from '../../components/headerComponent';
+import BulkSendOnSignPage from './bulkSendOnSignPage';
 import { step } from 'allure-js-commons'
 const delay = ms => new Promise(resolve => setTimeout(resolve, ms));
 export default class SignPage {
@@ -10,12 +11,14 @@ export default class SignPage {
         this.uploadFileTab = new UploadFileOnSignPage(this.page);
         this.sideMenu = new SideMenuComponent(this.page);
         this.header = new HeaderComponent(this.page);
+        this.bulkSendTab = new BulkSendOnSignPage(this.page);
 
         this.chooseTemplateField = this.page.locator("div.uiSelect__select-inner ");
         this.titleTemplate = this.page.locator('p.uiSelect__select-row');
         this.inputName = this.page.getByPlaceholder('Name');
         this.inputEmail = this.page.getByPlaceholder('Email');
         this.editTemplateBtn = this.page.getByRole('button', { name: 'Edit template' });
+        this.bulkSendTabOnPanel = this.page.getByText('Bulk Send');
 
     }
 
@@ -50,5 +53,18 @@ export default class SignPage {
         await step("Click the button 'Edit Template'", async () => {
             await this.editTemplateBtn.click();
         });
-    };
-}
+    }
+
+    async clickBulkSendTab() {
+        await step('Open the "Bulk Send" tab.', async () => {
+            await this.bulkSendTabOnPanel.waitFor();
+            await this.bulkSendTabOnPanel.click();
+        });
+    }
+
+    async signPageReload() {
+        await this.page.reload();
+        await this.page.waitForTimeout(1000);
+
+    }
+};
