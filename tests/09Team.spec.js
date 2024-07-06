@@ -1,6 +1,6 @@
 import { expect } from '@playwright/test';
 import { test } from '../fixtures/base.js';
-import { TEAM_MEMBER_ROLES, TOAST_MESSAGE, QASE_LINK, GOOGLE_DOC_LINK, EMAIL_SUBJECTS } from '../testData.js';
+import { TEAM_MEMBER_ROLES, TOAST_MESSAGE, QASE_LINK, GOOGLE_DOC_LINK } from '../testData.js';
 import { description, tag, severity, Severity, link, epic, step } from 'allure-js-commons';
 import { addTeamMember } from '../helpers/preconditions.js';
 

@@ -1,4 +1,12 @@
-import { DATA_SIGNER, TOAST_MESSAGE, CREATE_TEMPLATE, UPLOAD_FILE_PATH, SIGNERS_DATA, API_PLANS } from '../testData';
+import {
+    DATA_SIGNER,
+    TOAST_MESSAGE,
+    CREATE_TEMPLATE,
+    UPLOAD_FILE_PATH,
+    SIGNERS_DATA,
+    API_PLANS,
+    EMAIL_SUBJECTS,
+} from '../testData';
 import { step } from 'allure-js-commons';
 import { retrieveUserEmailConfirmationLink } from '../helpers/utils.js';
 
@@ -173,18 +181,19 @@ export const addTeamMember = async (
         await teamsAcceptInvitePage.clickBackToMainPageButton();
         await teamsAcceptInvitePage.toast.waitForToastIsHiddenByText(TOAST_MESSAGE.inviteAccepted);
     });
-}
+};
 
 export const userWithGoldAPISubscription = async (
     createBusinessUserAndLogin,
     signPage,
     settingsCompanyPage,
     settingsAPIPage,
-    upgradeYourPlanAPIModal) => {
+    upgradeYourPlanAPIModal
+) => {
     await step('Precondition: User with Gold API subscription', async () => {
         await signPage.sideMenu.clickSettings();
         await settingsCompanyPage.horizontalMenu.clickAPI();
         await settingsAPIPage.clickUpgradeButton(API_PLANS[0]);
         await upgradeYourPlanAPIModal.clickSubscribeButton();
     });
-}
+};
