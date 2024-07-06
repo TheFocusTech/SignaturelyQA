@@ -237,14 +237,13 @@ test.describe('DocumentsType', () => {
         signPage,
         documentsPage,
         deleteModal,
-        confirmTrashEmptyingModal,
         documentsTrashPage}) => {                
         test.setTimeout(250 * 1000);
 
         await description('To verify the process of moving the document to the trash and then deleting document permanently.');
         await severity(Severity.CRITICAL);
         await link(`${QASE_LINK}/SIGN-19`, 'Qase: SIGN-19');
-        await link(`${GOOGLE_DOC_LINK}bpzeytlzlbz`, 'ATC__05_19_01');
+        await link(`${GOOGLE_DOC_LINK}bpzeytlzlbz`, 'ATC_05_19_01');
         await epic('Documents (typed)');
         await tag('Delete_documents');
 
@@ -255,23 +254,23 @@ test.describe('DocumentsType', () => {
         await documentsPage.table.clickOptionsDeleteBtn();
         await deleteModal.clickYesDeleteBtn();
         await documentsPage.toast.waitForToastCompleted();
-        await documentsPage.table.waitForTable(3000);
        
-        await test.step('Verify that table is empty', async () => {
+        await step('Verify that table is empty', async () => {
             await expect (documentsPage.table.emptyTableHeader).toHaveText(EMPTY_TABLE_HEADER.documents);
         });
        
         await documentsPage.sideMenuDocuments.clickTrash();
            
-        await test.step('Verify document deleted status', async () => {
+        await step('Verify document deleted status', async () => {
             expect(await documentsPage.table.getDocumentStatusText()).toBe(DOCUMENT_STATUS.deleted);
         });
 
-        await documentsTrashPage.clickEmptyTrashBtn();
-        await confirmTrashEmptyingModal.clickEmptyTrashBtn();
-        await documentsTrashPage.table.waitForTable(3000);
+        await documentsTrashPage.table.clickFirstOptionsBtn();
+        await documentsPage.table.clickOptionsDeleteBtn();
+        await deleteModal.clickYesDeleteBtn();
+        await documentsTrashPage.toast.waitForToastCompleted();
 
-        await test.step('Verify that trash is empty', async () => {
+        await step('Verify that trash is empty', async () => {
             await expect (documentsTrashPage.table.emptyTableHeader).toHaveText(EMPTY_TABLE_HEADER.trash);
         });      
     });
