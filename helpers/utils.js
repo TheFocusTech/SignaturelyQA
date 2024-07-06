@@ -162,6 +162,7 @@ export async function clickCanvas(page, canvasLocator, excludedAreas = []) {
         }
     } catch (error) {
         console.log('The new fieldDropDown element will not be found.');
+        return 0;
     }
 
     return clickPosition;
@@ -218,4 +219,8 @@ export async function editDocumentStatus(request, documentName, status) {
             console.error(`An error occurred: ${error.message}`);
         }
     });
+}
+
+export function getRandomIndexInRange(min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
 }
