@@ -41,8 +41,8 @@ import CreateNewTemplatePage from '../new_pom/pages/templates/createNewTemplateP
 import NotRegisterSignerSignPage from '../new_pom/pages/notRegisterSignerSignPage.js';
 import SignerAlmostDoneModal from '../new_pom/modalWindows/signerAlmostDoneModal.js';
 import DocumentSubmitProccessModal from '../new_pom/modalWindows/documentSubmitProccessModal.js';
-import DeleteModal from "../new_pom/modalWindows/deleteModal.js";
-import ConfirmTrashEmptyingModal from "../new_pom/modalWindows/confirmTrashEmptyingModal.js";
+import DeleteModal from '../new_pom/modalWindows/deleteModal.js';
+import ConfirmTrashEmptyingModal from '../new_pom/modalWindows/confirmTrashEmptyingModal.js';
 import UpgradeYourPlanAPIModal from '../new_pom/modalWindows/upgradeYourPlanAPIModal';
 import EditTemplatesPage from '../new_pom/pages/templates/editTemplatesPage.js';
 import TeamPage from '../new_pom/pages/team/teamPage.js';
@@ -53,6 +53,7 @@ import ShareThisDocumentModal from '../new_pom/modalWindows/shareThisDocumentMod
 import CancelSubscriptionModal from '../new_pom/modalWindows/cancelSubscriptionModal.js';
 import UpdateFormPage from '../new_pom/pages/forms/updateFormPage.js';
 import DeclineModal from '../new_pom/modalWindows/declineModal.js';
+import FolderPermissionsModal from '../new_pom/modalWindows/folderPermissionsModal.js';
 
 export const test = base.extend({
     createFreeUserAndLogin: [
@@ -293,5 +294,9 @@ export const test = base.extend({
 
     declineModal: async ({ page }, use) => {
         await use(new DeclineModal(page));
+    },
+
+    folderPermissionsModal: async ({ page }, use) => {
+        await use(new FolderPermissionsModal(page));
     },
 });
