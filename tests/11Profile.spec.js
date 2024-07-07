@@ -253,4 +253,44 @@ test.describe('Profile', () => {
             });
         });
     });
+    
+    test('TC_11_46_01 | Verify that the User can upload an avatar image', async ({
+        createBusinessUserAndLogin,
+        signPage,
+        settingsCompanyPage,
+        settingsProfilePage,
+        uploadAvatarImageModal,
+    }) => {
+        await description('Objective: To verify that the User can upload an avatar image');
+        await severity(Severity.CRITICAL);
+        await link(`${QASE_LINK}/SIGN-46`, 'Qase: SIGN-46');
+        await link(`${GOOGLE_DOC_LINK}suq7kpizwkjp`, 'ATC_11_46_01');
+        await epic('Profile');
+        await tag('Avatar');
+
+        await signPage.sideMenu.clickSettings();
+        await settingsCompanyPage.sideMenuSettings.clickProfile();
+
+        const defaultAvatarLink = await settingsProfilePage.getProfileAvatarLink();
+
+        await settingsProfilePage.uploadImage(UPLOAD_FILE_PATH.jpgDocument);
+        await uploadAvatarImageModal.clickSaveButton();
+
+        await step('Verify the "New picture has been uploaded" toaster popped up', async () => {
+            await expect(settingsProfilePage.toast.toastBody).toHaveText(TOAST_MESSAGE.pictureUploaded);
+        });
+
+        await settingsProfilePage.toast.waitForToastIsHiddenByText(TOAST_MESSAGE.pictureUploaded);
+
+        const newtAvatarLink = await settingsProfilePage.getProfileAvatarLink();
+
+        await step('Verify that a new avatar is defined and not empty', async () => {
+            expect(newtAvatarLink).toBeDefined();
+            expect(newtAvatarLink).not.toBeNull();
+        });
+         
+        await step('Verify that a new avatar image has been changed compared to the default avatar image link', async ()=> {
+            expect(newtAvatarLink).not.toBe(defaultAvatarLink);
+        });
+    });
 })

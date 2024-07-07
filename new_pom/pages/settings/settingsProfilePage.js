@@ -19,6 +19,8 @@ export default class SettingsProfilePage {
         this.checkBoxesFrameList = this.page.locator('.settings__form-checkbox .uiCheckbox__inner')
         this.dateFormatDropdown = this.page.locator('.uiSelect__select').first();
         this.dateFormat = this.page.locator('.uiSelect__select-row');
+        this.fileInput = this.page.locator('input[type = "file"]');
+        this.avatarImage = this.page.locator('form').getByAltText('avatar');
     }
 
     async fillNewPasswordInputField(password) {
@@ -96,4 +98,17 @@ export default class SettingsProfilePage {
             await this.dateFormat.getByText(format, { exact: true }).click();
         });
     }
+
+  async uploadImage(image) {
+    await step('Upload avatar image', async () => {
+      await this.fileInput.setInputFiles(image);
+    });
+  }
+
+  async getProfileAvatarLink() {
+    return await step('Get profile avatar image link', async () => {
+      return await this.avatarImage.getAttribute('src');
+    });
+  }
 }
+
