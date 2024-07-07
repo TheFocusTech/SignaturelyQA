@@ -5,13 +5,13 @@ export default class FolderPermissionsModal {
         this.page = page;
 
         this.folderPermissionsWindow = this.page.locator('.ReactModal__Content');
-        this.teamMemberCheckbox = this.page.locator('form .uiCheckbox__inner').last();
+        this.teamMemberCheckbox = this.page.locator('form .uiCheckbox__inner');
         this.updatePermissionsBtn = this.page.getByRole('button', { name: 'Update permissions' });
     }
 
-    async clickTeamMemberCheckbox() {
+    async clickTeamMemberCheckboxLast() {
         await step('Check the checkbox of a team member on the modal window "Folder permissions"', async () => {
-            await this.teamMemberCheckbox.click();
+            await this.teamMemberCheckbox.last().click();
         });
     };
 

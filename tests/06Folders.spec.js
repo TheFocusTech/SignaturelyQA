@@ -177,7 +177,7 @@ test.describe('Folders', () => {
                 await expect(folderPermissionsModal.folderPermissionsWindow).toBeVisible();    
             });
             
-            await folderPermissionsModal.clickTeamMemberCheckbox();
+            await folderPermissionsModal.clickTeamMemberCheckboxLast();
             await folderPermissionsModal.clickUpdatePermissionsBtn();
             await documentsPage.toast.waitForToastText();
 
@@ -195,7 +195,7 @@ test.describe('Folders', () => {
             
             await step('Verify Checkbox of the selected team member is checked', 
             async () => {
-                await expect(folderPermissionsModal.teamMemberCheckbox).toHaveClass(CHECK_BOXES_STATUS.checked);     
+                await expect(folderPermissionsModal.teamMemberCheckbox.last()).toHaveClass(CHECK_BOXES_STATUS.checked);     
             });
         });
     });
