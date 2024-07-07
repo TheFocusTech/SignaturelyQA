@@ -28,7 +28,7 @@ test.describe('DocumentsType', () => {
         finalStepPage,
         documentsPage,
     }) => {
-        test.setTimeout(250 * 1000);
+        test.setTimeout(200 * 1000);
 
         await description('Objective: To verify that the document can be returned for editing.');
         await severity(Severity.CRITICAL);
@@ -61,7 +61,7 @@ test.describe('DocumentsType', () => {
         finalStepPage,
         documentsPage,
     }) => {
-        test.setTimeout(250 * 1000);
+        test.setTimeout(200 * 1000);
 
         await description('Objective: To verify that the document can be returned for editing.');
         await severity(Severity.CRITICAL);
@@ -137,7 +137,7 @@ test.describe('DocumentsType', () => {
         await epic('Documents (typed)');
         await tag('Documents', 'Reminder');
 
-        test.setTimeout(250 * 1000);
+        test.setTimeout(200 * 1000);
         await createDocumentAwaiting(signPage, prepareForSignatureModal, documentsPage, successModal, finalStepPage);
 
         await signPage.sideMenu.clickDocuments();
@@ -162,7 +162,7 @@ test.describe('DocumentsType', () => {
         finalStepPage,
         documentsPage,
     }) => {
-        test.setTimeout(250 * 1000);
+        test.setTimeout(200 * 1000);
 
         await description('Objective: To verify that the document can be returned for editing.');
         await severity(Severity.CRITICAL);
