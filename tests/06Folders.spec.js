@@ -106,7 +106,7 @@ test.describe('Folders', () => {
         await severity(Severity.CRITICAL);
         await link(`${QASE_LINK}/SIGN-25`, 'Qase: SIGN-25');
         await link(`${GOOGLE_DOC_LINK}2d0wcpkoa0jo`, 'ATC_06_25_01');
-        await epic('Folder');
+        await epic('Folders');
 
         await createFolder(signPage, documentsPage, createFolderModal, FOLDER_NAME);
         await createFolder(signPage, documentsPage, createFolderModal, FOLDER_NAME_SECOND);

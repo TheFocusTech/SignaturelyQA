@@ -200,8 +200,8 @@ test.describe('DocumentsType', () => {
         await severity(Severity.CRITICAL);
         await link(`${QASE_LINK}/SIGN-17`, 'Qase: SIGN-17');
         await link(`${GOOGLE_DOC_LINK}sp7vb8tsrias`, 'TC_05_17_01');
-        await epic('Share document');
-        await tag('Documents (typed)');
+        await tag('Share document');
+        await epic('Documents (typed)');
 
         test.slow();
         const signerEmail = `${process.env.EMAIL_PREFIX}${process.env.NEW_USER_NUMBER}001${process.env.EMAIL_DOMAIN}`;

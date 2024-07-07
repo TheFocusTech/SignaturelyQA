@@ -195,7 +195,7 @@ test.describe('Sign Document', () => {
         await severity(Severity.CRITICAL);
         await link(`${QASE_LINK}/SIGN-10`, 'Qase: SIGN-10');
         await link(`${GOOGLE_DOC_LINK}s5pa7fnboi83`, 'TC_04_10_02');
-        await epic('Sign a document');
+        await epic('Sign document');
         await tag('me&others');
 
         await createSignature(
@@ -250,7 +250,7 @@ test.describe('Sign Document', () => {
         await severity(Severity.CRITICAL);
         await link(`${QASE_LINK}/SIGN-13`, 'Qase: SIGN-13');
         await link(`${GOOGLE_DOC_LINK}fm3jt5v1qq97`, 'ATC_04_13_01');
-        await epic('Sign a document');
+        await epic('Sign document');
         await tag('Document status: expiring');
 
         test.setTimeout(250 * 1000);
@@ -426,9 +426,9 @@ test.describe('Sign Document', () => {
 
         await description('Objective: To verify that the user who uploaded the document can send it for signer');
         await severity(Severity.CRITICAL);
-        await link(`${QASE_LINK}/SIGN-10`, 'Qase: SIGN-10'); 
-        await link(`${GOOGLE_DOC_LINK}o1a44zgp2uji`, 'TC_04_10_03'); 
-        await epic('Sign a document');
+        await link(`${QASE_LINK}/SIGN-10`, 'Qase: SIGN-10');
+        await link(`${GOOGLE_DOC_LINK}o1a44zgp2uji`, 'TC_04_10_03');
+        await epic('Sign document');
         await tag('others');
 
         await signPage.uploadFileTab.fileUploader.uploadFile(UPLOAD_FILE_PATH.xlsxDocument);
