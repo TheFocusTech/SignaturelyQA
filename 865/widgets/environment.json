@@ -1,1 +1,1 @@
-[]
+[{"values":["linux"],"name":"os_platform"},{"values":["6.5.0-1022-azure"],"name":"os_release"},{"values":["#23~22.04.1-Ubuntu SMP Thu May  9 17:59:24 UTC 2024"],"name":"os_version"},{"values":["v18.20.3"],"name":"node_version"}]
