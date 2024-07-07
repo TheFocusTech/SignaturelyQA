@@ -1,7 +1,0 @@
-Free User has been successfully created: #240706180305138
-Email has been successfully confirmed
-Free User #240706180305138 has been successfully upgraded to Bussiness
-User logged in successfully with id bc7cf39b-cf44-4c7c-a273-b4c733e80b72
-Retrieved document id cc8a5f0b-f930-4689-a53d-185bed67a579
-Status of the document with id cc8a5f0b-f930-4689-a53d-185bed67a579 is awaiting
-The status of document cc8a5f0b-f930-4689-a53d-185bed67a579 has been successfully changed to "expired".
