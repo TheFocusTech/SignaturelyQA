@@ -293,4 +293,30 @@ test.describe('Profile', () => {
             expect(newtAvatarLink).not.toBe(defaultAvatarLink);
         });
     });
+
+    test('TC_11_46_04 | Verify the user can delete the profile picture', async ({
+        createBusinessUserAndLogin,
+        signPage,
+        settingsCompanyPage,
+        settingsProfilePage,
+        uploadAvatarImageModal,
+    }) => {
+        await description('Objective: To verify that the User can upload an avatar image');
+        await severity(Severity.CRITICAL);
+        await link(`${QASE_LINK}/SIGN-46`, 'Qase: SIGN-46');
+        await link(`${GOOGLE_DOC_LINK}q5uk912hrnbl`, 'ATC_11_46_04');
+        await epic('Profile');
+        await tag('Avatar');
+
+        await signPage.sideMenu.clickSettings();
+        await settingsCompanyPage.sideMenuSettings.clickProfile();
+
+        await settingsProfilePage.uploadImage(UPLOAD_FILE_PATH.jpgDocument);
+        await uploadAvatarImageModal.clickSaveButton();
+        await settingsProfilePage.clickDeleteButton();
+
+        await step('Verify the profile picture has been deleted', async () => {
+            await expect(settingsProfilePage.avatarImage).toBeHidden()
+        });
+    });
 })

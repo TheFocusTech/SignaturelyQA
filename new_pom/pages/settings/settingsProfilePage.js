@@ -21,6 +21,7 @@ export default class SettingsProfilePage {
         this.dateFormat = this.page.locator('.uiSelect__select-row');
         this.fileInput = this.page.locator('input[type = "file"]');
         this.avatarImage = this.page.locator('form').getByAltText('avatar');
+        this.deleteButton = this.page.getByRole('button', { name: 'Delete', exact: true })
     }
 
     async fillNewPasswordInputField(password) {
@@ -92,23 +93,29 @@ export default class SettingsProfilePage {
             await this.dateFormatDropdown.click();
         });
     }
-    
+
     async chooseDateFormat(format) {
         await step('Choose a date format', async () => {
             await this.dateFormat.getByText(format, { exact: true }).click();
         });
     }
 
-  async uploadImage(image) {
-    await step('Upload avatar image', async () => {
-      await this.fileInput.setInputFiles(image);
-    });
-  }
+    async uploadImage(image) {
+        await step('Upload avatar image', async () => {
+            await this.fileInput.setInputFiles(image);
+        });
+    }
 
-  async getProfileAvatarLink() {
-    return await step('Get profile avatar image link', async () => {
-      return await this.avatarImage.getAttribute('src');
-    });
-  }
+    async getProfileAvatarLink() {
+        return await step('Get profile avatar image link', async () => {
+            return await this.avatarImage.getAttribute('src');
+        });
+    }
+
+    async clickDeleteButton() {
+        await step('Click the "Delete" button', async () => {
+            await this.deleteButton.click();
+        })
+    }
 }
 
