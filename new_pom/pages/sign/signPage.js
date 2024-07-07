@@ -2,6 +2,7 @@ import SideMenuComponent from '../../components/sideMenuComponent';
 import UploadFileOnSignPage from '../../pages/sign/uploadFileOnSignPage';
 import HeaderComponent from '../../components/headerComponent';
 import BulkSendOnSignPage from './bulkSendOnSignPage';
+import ChooseTemplateComponent from '../../components/chooseTemplateComponent';
 import { step } from 'allure-js-commons'
 const delay = ms => new Promise(resolve => setTimeout(resolve, ms));
 export default class SignPage {
@@ -12,6 +13,7 @@ export default class SignPage {
         this.sideMenu = new SideMenuComponent(this.page);
         this.header = new HeaderComponent(this.page);
         this.bulkSendTab = new BulkSendOnSignPage(this.page);
+        this.chooseTemplate = new ChooseTemplateComponent(this.page);
 
         this.chooseTemplateField = this.page.locator("div.uiSelect__select-inner ");
         this.titleTemplate = this.page.locator('p.uiSelect__select-row');

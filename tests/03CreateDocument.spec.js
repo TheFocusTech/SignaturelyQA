@@ -372,12 +372,12 @@ test.describe('CreateDocument', () => {
 
         await createTemplate(signPage, prepareForSignatureModal, templatesPage, createNewTemplatePage);
 
-        await signPage.clickChooseTemplateField();
-        await signPage.clickTitleTemplate();
+        await signPage.chooseTemplate.clickChooseTemplateField();
+        await signPage.chooseTemplate.clickTitleTemplate();
 
-        await signPage.fillSignerName(SIGNERS_DATA.signerName1, 0);
-        await signPage.fillSignerEmail(SIGNERS_DATA.signerEmail1, 0);
-        await signPage.clickEditTemplateBtn();
+        await signPage.chooseTemplate.fillSignerName(SIGNERS_DATA.signerName1, 0);
+        await signPage.chooseTemplate.fillSignerEmail(SIGNERS_DATA.signerEmail1, 0);
+        await signPage.chooseTemplate.clickEditTemplateBtn();
 
         await prepareForSignatureModal.waitDocumentPage();
         await prepareForSignatureModal.clickContinueBtn();
