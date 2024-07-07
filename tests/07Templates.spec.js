@@ -55,14 +55,15 @@ test.describe('Templates', () => {
         apiTemplatesPage,
         createNewTemplatePage,
     }) => {
+
+        test.setTimeout(200 * 1000);
+
         await description('Objective: To verify the process of add template to API.');
         await severity(Severity.CRITICAL);
         await link(`${QASE_LINK}/SIGN-31`, 'Qase: SIGN-31');
         await link(`${GOOGLE_DOC_LINK}z5onphks9v9p`, 'ATC_07_31_01');
         await epic('Templates');
         await tags('User', 'API');
-
-        test.setTimeout(250 * 1000);
 
         await createTemplate(signPage, prepareForSignatureModal, templatesPage, createNewTemplatePage);
         await signPage.sideMenu.clickTemplates();
@@ -136,6 +137,9 @@ test.describe('Templates', () => {
         createNewTemplatePage,
         successModal,
     }) => {
+
+        test.setTimeout(200 * 1000);
+
         await description('Objective: To verify the process of duplicate template.');
         await severity(Severity.CRITICAL);
         await link(`${QASE_LINK}/SIGN-30`, 'Qase: SIGN-30');
@@ -145,7 +149,10 @@ test.describe('Templates', () => {
 
         test.setTimeout(250 * 1000);
 
-        await createTemplate(signPage, prepareForSignatureModal, templatesPage, createNewTemplatePage);
+        await createTemplate(signPage,
+            prepareForSignatureModal,
+            templatesPage,
+            createNewTemplatePage);
 
         await signPage.sideMenu.clickTemplates();
         await templatesPage.table.clickFirstOptionsBtn();
@@ -179,7 +186,11 @@ test.describe('Templates', () => {
 
         test.setTimeout(250 * 1000);
 
-        await createTemplate(signPage, prepareForSignatureModal, templatesPage, createNewTemplatePage);
+        await createTemplate(signPage,
+            prepareForSignatureModal,
+            templatesPage,
+            createNewTemplatePage,
+        );        
 
         await signPage.sideMenu.clickTemplates();
         await templatesPage.table.clickFirstOptionsBtn();

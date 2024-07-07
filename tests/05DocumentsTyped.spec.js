@@ -28,7 +28,7 @@ test.describe('DocumentsType', () => {
         finalStepPage,
         documentsPage,
     }) => {
-        test.setTimeout(250 * 1000);
+        test.setTimeout(200 * 1000);
 
         await description('Objective: To verify that the document can be returned for editing.');
         await severity(Severity.CRITICAL);
@@ -61,7 +61,7 @@ test.describe('DocumentsType', () => {
         finalStepPage,
         documentsPage,
     }) => {
-        test.setTimeout(250 * 1000);
+        test.setTimeout(200 * 1000);
 
         await description('Objective: To verify that the document can be returned for editing.');
         await severity(Severity.CRITICAL);
@@ -137,7 +137,7 @@ test.describe('DocumentsType', () => {
         await epic('Documents (typed)');
         await tag('Documents', 'Reminder');
 
-        test.setTimeout(250 * 1000);
+        test.setTimeout(200 * 1000);
         await createDocumentAwaiting(signPage, prepareForSignatureModal, documentsPage, successModal, finalStepPage);
 
         await signPage.sideMenu.clickDocuments();
@@ -162,7 +162,7 @@ test.describe('DocumentsType', () => {
         finalStepPage,
         documentsPage,
     }) => {
-        test.setTimeout(250 * 1000);
+        test.setTimeout(200 * 1000);
 
         await description('Objective: To verify that the document can be returned for editing.');
         await severity(Severity.CRITICAL);
@@ -241,7 +241,7 @@ test.describe('DocumentsType', () => {
         documentsTrashPage}) => {                
         test.setTimeout(250 * 1000);
 
-        await description('To verify the process of moving the document to the trash and then deleting document permanently.');
+        await description('Objective: To verify the process of moving the document to the trash and then deleting document permanently.');
         await severity(Severity.CRITICAL);
         await link(`${QASE_LINK}/SIGN-19`, 'Qase: SIGN-19');
         await link(`${GOOGLE_DOC_LINK}bpzeytlzlbz`, 'ATC_05_19_01');
@@ -286,7 +286,7 @@ test.describe('DocumentsType', () => {
 
         test.setTimeout(250 * 1000);
 
-        await description('To verify the process of moving the documents to the trash by checkboxes and then deleting documents permanently.');
+        await description('Objective: To verify the process of moving the documents to the trash by checkboxes and then deleting documents permanently.');
         await severity(Severity.CRITICAL);
         await link(`${QASE_LINK}/SIGN-19`, 'Qase: SIGN-19');
         await link(`${GOOGLE_DOC_LINK}ba4cs1qxues0`, 'ATC_05_19_02');

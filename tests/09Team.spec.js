@@ -90,7 +90,7 @@ test.describe('Team', () => {
 
         await step("Verify that a team member has role 'User' set in the Team table", async () => {
             await expect(await teamPage.teamMemberRoleForExactTeamMember(teamMemberEmail)).toHaveText(
-              TEAM_MEMBER_ROLES.user
+                TEAM_MEMBER_ROLES.user
             );
         });
         await teamPage.clickOptionsForExactTeamMemberByEmail(teamMemberEmail);
@@ -102,7 +102,7 @@ test.describe('Team', () => {
 
         await step("Verify that a team member has role 'Admin' set in the Team table", async () => {
             await expect(await teamPage.teamMemberRoleForExactTeamMember(teamMemberEmail)).toHaveText(
-              TEAM_MEMBER_ROLES.admin
+                TEAM_MEMBER_ROLES.admin
             );
         });
     });
@@ -142,12 +142,12 @@ test.describe('Team', () => {
             addTeamMemberModal,
             teamsAcceptInvitePage
         );
-        
+
         await signPage.sideMenu.clickTeam();
 
         await step("Verify that a team member has role 'Admin' set in the Team table", async () => {
             await expect(await teamPage.teamMemberRoleForExactTeamMember(teamMemberEmail)).toHaveText(
-              TEAM_MEMBER_ROLES.admin
+                TEAM_MEMBER_ROLES.admin
             );
         });
         await teamPage.clickOptionsForExactTeamMemberByEmail(teamMemberEmail);
@@ -159,7 +159,7 @@ test.describe('Team', () => {
 
         await step("Verify that a team member has role 'User' set in the Team table", async () => {
             await expect(await teamPage.teamMemberRoleForExactTeamMember(teamMemberEmail)).toHaveText(
-              TEAM_MEMBER_ROLES.user
+                TEAM_MEMBER_ROLES.user
             );
         });
     });
@@ -171,7 +171,7 @@ test.describe('Team', () => {
         signPage,
         teamPage,
         addTeamMemberModal,
-        teamsAcceptInvitePage
+        teamsAcceptInvitePage,
     }) => {
         await description('Objective: To verify that Business User can remove "User" teammate from Team');
         await severity(Severity.CRITICAL);
@@ -180,10 +180,12 @@ test.describe('Team', () => {
         await epic('Team');
         await tag('Delete Team Member');
 
-        test.setTimeout(90*1000);
+        test.setTimeout(90 * 1000);
 
-        const teamMemberEmail = `${process.env.EMAIL_PREFIX}${process.env.NEW_USER_NUMBER}${'_teammember'}${process.env.EMAIL_DOMAIN}`;
-        const teamMemberName = `${process.env.NEW_USER_NAME}${'_teammember'}`
+        const teamMemberEmail = `${process.env.EMAIL_PREFIX}${process.env.NEW_USER_NUMBER}${'_teammember'}${
+            process.env.EMAIL_DOMAIN
+        }`;
+        const teamMemberName = `${process.env.NEW_USER_NAME}${'_teammember'}`;
 
         await addTeamMember(
             TEAM_MEMBER_ROLES.user,
@@ -205,10 +207,8 @@ test.describe('Team', () => {
             await expect(teamPage.toast.toastBody).toHaveText(TOAST_MESSAGE.teamMemberDeleted);
         });
 
-        await step("Verify that a team member is not in the Team table", async () => {
+        await step('Verify that a team member is not in the Team table', async () => {
             expect(await teamPage.exactTeamMember(teamMemberEmail)).not.toBeVisible();
         });
     });
-})
-
-
+});

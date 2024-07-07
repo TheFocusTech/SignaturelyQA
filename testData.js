@@ -52,7 +52,8 @@ export const TOAST_MESSAGE = {
     signatureDeleted: 'Signature deleted successfully',
     updateSignature: 'Signature updated successfully',
     declineDocument: 'Signature request was declined.',
-    pictureUploaded: 'New picture has been uploaded'
+    pictureUploaded: 'New picture has been uploaded',
+    permissionsChanged: 'Permissions successfully changed!',
 };
 
 export const API_KEY_NAME = 'Test Api Key';
@@ -75,7 +76,7 @@ export const CREATE_TEMPLATE = {
     nameRole: 'Boss',
 };
 export const PLANS = ['Personal', 'Business'];
-export const RANDOM_ANNUALLY_PLAN = (randomPlan) => `${randomPlan} Annually Plan`;
+export const RANDOM_ANNUALLY_PLAN = randomPlan => `${randomPlan} Annually Plan`;
 
 export const DOCUMENT_TITLE = 'Document';
 export const DOCUMENT_STATUS = {
@@ -135,7 +136,7 @@ export const TEMPLATES_STATUS = {
 export const SUBSCRIPTIONS = ['Monthly', 'Annually'];
 export const SUBSCRIBE_TO_PERSONAL_PLAN = 'Subscribe to personal Plan';
 export const PLEASE_ENTER_CONFIRMATION_CODE = 'Please enter confirmation code';
-export const PERSONAL_PLAN_DESCRIPTION = (billingPeriod) => `Your plan (Billed ${billingPeriod})Personal`;
+export const PERSONAL_PLAN_DESCRIPTION = billingPeriod => `Your plan (Billed ${billingPeriod})Personal`;
 export const EMAIL_SUBJECTS = {
     reminderToSign: 'Reminder, Please sign',
     signatureRequest: 'requested your signature',
@@ -229,11 +230,11 @@ export const FORMS = {
     optionalMessageFormEdit: 'Form edited',
 };
 
-export const RANDOM_MONTHLY_PLAN = (randomPlan) => `${randomPlan} Monthly Plan`;
+export const RANDOM_MONTHLY_PLAN = randomPlan => `${randomPlan} Monthly Plan`;
 
 export const BULK_DOCUMENTS = {
     number: '20',
-}
+};
 
 export const ENDPOINT_FOR_DECLINE = '&declineImmediately=true';
 
