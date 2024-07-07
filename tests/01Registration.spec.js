@@ -8,8 +8,10 @@ import {
     FREE_PLAN_DESCRIPTION,
     SUBSCRIPTIONS,
     SUBSCRIBE_TO_PERSONAL_PLAN,
+    SUBSCRIBE_TO_BUSINESS_PLAN,
     PLEASE_ENTER_CONFIRMATION_CODE,
     PERSONAL_PLAN_DESCRIPTION,
+    BUSINESS_PLAN_DESCRIPTION,
     NO_ATTACHED_CARD,
     EMAIL_SUBJECTS,
     QASE_LINK,
@@ -172,4 +174,63 @@ test.describe('Registration', () => {
             );
         });
     });
+
+    SUBSCRIPTIONS.forEach((subscription)=>{
+        test(`TC_01_59_01|Verify successful registration of Business User with ${subscription} subscription`, async({
+        request,
+        page,
+        signUpBusinessPage,
+        confirmCodeModal,
+        signPage,
+        settingsCompanyPage,
+        settingsBillingPage
+        })=>{
+            await description('To verify that a Business user can successfully register.');
+            await tag('Business User');
+            await severity(Severity.BLOCKER);
+            await link(
+                `${QASE_LINK}/SIGN-59`,
+                "Qase:Sign-59"
+            );
+            await link(
+                `${GOOGLE_DOC_LINK}bfiytgerhgx1`,
+                "ATC_01_59_01"
+            );
+            await epic('Registration');
+
+            const newUserData = await generateNewUserData();
+            await step('Navigate to the Business user registration page',async()=>{
+                await page.goto(URL_END_POINTS.signUpBusinessEndPoint);
+            });
+            await step('Verify the Business user registration page title',async()=>{
+                await expect(signUpBusinessPage.businessPageLabelTitle).toHaveText(SUBSCRIBE_TO_BUSINESS_PLAN);
+            });
+
+            await signUpBusinessPage.yourInformation.fillNameInputField(newUserData.name);
+            await signUpBusinessPage.yourInformation.fillEmailInputField(newUserData.email);
+            await signUpBusinessPage.yourInformation.fillPasswordInputField(newUserData.password);
+            await signUpBusinessPage.clickSubscriptionButton(subscription);
+            await signUpBusinessPage.cardDetails.fillData(CARD_DETAILS.VISA);
+            await signUpBusinessPage.clickPurchaseNowButton();
+            await step('Verify the Confirm modal title',async()=>{
+                await expect(confirmCodeModal.confirmCodeModalTitle).toHaveText(PLEASE_ENTER_CONFIRMATION_CODE);
+            });
+
+            const confirmCode=await retrieveUserEmailConfirmCode(request,newUserData.email);
+            await confirmCodeModal.fillConfirmCodeInputField(confirmCode);
+            await confirmCodeModal.clickSendButton();
+            await step('Verify that the user is on the Homepage',async()=>{
+                await expect(page).toHaveURL(`${process.env.URL}${URL_END_POINTS.signEndPoint}`);
+            });
+            await step('Verify that the users name appears in the header of the page',async()=>{
+                await expect(signPage.header.userName).toHaveText(newUserData.name);
+            });
+
+            await signPage.sideMenu.clickSettings();
+            await settingsCompanyPage.horizontalMenu.clickBilling();
+            await step(`Verify that the billing plan description is Business Personal ${subscription} Plan`,async()=>{
+                await expect(settingsBillingPage.billingPlanDescription).toHaveText(BUSINESS_PLAN_DESCRIPTION(subscription));
+            });
+        })
+    })
 });
