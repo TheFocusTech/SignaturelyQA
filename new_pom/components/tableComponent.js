@@ -1,4 +1,5 @@
 import { step } from 'allure-js-commons';
+import { getRandomIndex } from '../../helpers/utils.js';
 
 export default class TableComponent {
     constructor(page) {
@@ -29,6 +30,8 @@ export default class TableComponent {
         this.enableFormBtn = this.page.getByRole('button', { name: 'Enable Form' });
         this.deleteForm = this.page.getByRole('button', { name: 'Delete Form' });
         this.shareBtn = this.page.getByRole('button', { name: 'Share' });
+        this.objectCheckbox = this.page.locator('ul .uiCheckbox');
+        this.documentsStatuses = this.page.locator('.documents__documentStatus');
         this.deleteBtn = this.page.getByRole('button', { name: 'Delete' });
         this.firstFormTitle = this.page.getByText('Edited Form Name');
         this.documentTitleList = this.page.locator('.table__column--text--document p');
@@ -204,6 +207,32 @@ export default class TableComponent {
         });
     }
 
+    async getAllDocumentsTitles() {
+        await this.objectTitle.first().waitFor({ state: 'visible' });
+        const documentsTitles = await this.objectTitle.allInnerTexts();
+        return documentsTitles;
+    }
+
+    async checkRandomDocuments() {
+        return await step('Check two random documents and collect their titles', async () => {
+            const documentsTitles = await this.getAllDocumentsTitles();
+            const randomIndex = getRandomIndex(documentsTitles);            
+            let documentsTitlesToDelete = [];
+            const documentTitleToSave = await this.objectTitle.nth(randomIndex).innerText();
+            for (let i = 0; i < documentsTitles.length; i++) {
+                if (i !== randomIndex) {
+                    const titleToDelete = await this.objectTitle.nth(i).innerText();
+                    documentsTitlesToDelete.push(titleToDelete);
+                    await this.objectCheckbox.nth(i).click();                   
+                }
+            }
+            return {
+                documentsToDelete: documentsTitlesToDelete,
+                documentToSave: documentTitleToSave,
+            };
+        });
+    }
+  
     async waitForTable(time) {
         await this.page.waitForTimeout(time);
         await this.page.reload();

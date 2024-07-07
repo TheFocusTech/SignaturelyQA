@@ -129,6 +129,18 @@ export const uploadDraftDocument = async (signPage) => {
     });
 };
 
+export const createThreeDocuments = async (signPage) => {
+    await step(`Precondition: Create Documents "${UPLOAD_FILE_PATH.pdfDocument}", 
+        "${UPLOAD_FILE_PATH.xlsxDocument}", 
+        "${UPLOAD_FILE_PATH.csvDocument}"`, async () => {
+        await signPage.uploadFileTab.fileUploader.uploadFile(UPLOAD_FILE_PATH.pdfDocument);
+        await signPage.signPageReload();
+        await signPage.uploadFileTab.fileUploader.uploadFile(UPLOAD_FILE_PATH.xlsxDocument);
+        await signPage.signPageReload();
+        await signPage.uploadFileTab.fileUploader.uploadFile(UPLOAD_FILE_PATH.csvDocument);
+    });
+};
+
 export const addTeamMember =  async ( teamMemberRole, teamMemberEmail,teamMemberName, page, request, signPage, teamPage, addTeamMemberModal, teamsAcceptInvitePage
 ) => {
     await step(`Precondition: Add team member with "${teamMemberRole}" role set`, async () => {
