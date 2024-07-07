@@ -52,7 +52,8 @@ export const TOAST_MESSAGE = {
     signatureDeleted: 'Signature deleted successfully',
     updateSignature: 'Signature updated successfully',
     declineDocument: 'Signature request was declined.',
-    permissionsChanged: 'Permissions successfully changed!'
+    pictureUploaded: 'New picture has been uploaded',
+    permissionsChanged: 'Permissions successfully changed!',
 };
 
 export const API_KEY_NAME = 'Test Api Key';
@@ -238,3 +239,4 @@ export const BULK_DOCUMENTS = {
 export const ENDPOINT_FOR_DECLINE = '&declineImmediately=true';
 
 export const TITLE_OF_DOWNGRADE_API_PLAN_MODAL = API_PLANS.map(plan => `Downgrade to ${plan} Plan`);
+export const DATE_FORMAT = ['DD / MM / YYYY', 'MM / DD / YY', 'DD / MM / YY'];
