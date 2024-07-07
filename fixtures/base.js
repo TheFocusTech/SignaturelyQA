@@ -56,6 +56,7 @@ import SelectNameAndEmailColumnsModal from '../new_pom/modalWindows/selectNameAn
 import DeclineModal from '../new_pom/modalWindows/declineModal.js';
 import DownGradeYourPlanAPIModal from '../new_pom/modalWindows/downgradeYourPlanAPIModal.js';
 import UploadAvatarImageModal from '../new_pom/modalWindows/uploadAvatarImageModal.js';
+import FolderPermissionsModal from '../new_pom/modalWindows/folderPermissionsModal.js';
 
 export const test = base.extend({
     createFreeUserAndLogin: [
@@ -308,5 +309,9 @@ export const test = base.extend({
 
     uploadAvatarImageModal: async ({ page }, use) => {
         await use(new UploadAvatarImageModal(page))
-    }
+    },
+
+    folderPermissionsModal: async ({ page }, use) => {
+        await use(new FolderPermissionsModal(page));
+    },
 });
