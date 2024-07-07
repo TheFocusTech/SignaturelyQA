@@ -1,3 +1,0 @@
-"Status","Start Time","Stop Time","Duration in ms","Parent Suite","Suite","Sub Suite","Test Class","Test Method","Name","Description"
-"passed","Sun Jul 07 03:29:37 GMT 2024","Sun Jul 07 03:29:59 GMT 2024","22229","chromium","","Registration","","","TC_01_01_01 | Verify successful registration of Trial user","To verify that a Trial user can successfully register."
-"passed","Sun Jul 07 03:29:59 GMT 2024","Sun Jul 07 03:30:15 GMT 2024","16439","chromium","","Registration","","","TC_01_02_01 | Verify successful registration of Free user","To verify that a Free user can successfully register."
