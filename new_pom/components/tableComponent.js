@@ -265,8 +265,8 @@ export default class TableComponent {
     }
 
     async clickOptionsChangePermissionsBtn() {
-        await step('Click the "ChangePermissions" button it the "Options" dropdown menu', async () => {
-            await this.optionsChangePermissionsBtn.waitFor( {state: 'visible'});
+        await step('Click the "Change Permissions" button it the "Options" dropdown menu', async () => {
+            await this.optionsChangePermissionsBtn.waitFor( {state: 'visible'} );
             await this.optionsChangePermissionsBtn.click();
         });
     }
