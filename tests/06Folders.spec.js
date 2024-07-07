@@ -149,7 +149,9 @@ test.describe('Folders', () => {
         await epic('Folders');
         await tag('Assign folder permissions');
 
-        test.setTimeout(300 * 1000);
+        test.slow();
+
+        await createFolder(signPage, documentsPage, createFolderModal, FOLDER_NAME);
 
         const teamMembers = [
             {
@@ -178,11 +180,14 @@ test.describe('Folders', () => {
             );
         }
 
-        await createFolder(signPage, documentsPage, createFolderModal, FOLDER_NAME);
-
         await signPage.sideMenu.clickDocuments();
         await documentsPage.table.clickFirstOptionsBtn();
         await documentsPage.table.clickChangePermissionsBtn();
+
+        for (const member of teamMembers) {
+            await folderPermissionsModal.waitForMemberName(member.name);
+        }
+
         await folderPermissionsModal.checkCheckboxes();
         await folderPermissionsModal.clickUpdatePermissionsBtn();
         await documentsPage.toast.waitForToastIsHiddenByText(TOAST_MESSAGE.changePermissions);
@@ -193,6 +198,10 @@ test.describe('Folders', () => {
         await documentsPage.table.clickChangePermissionsBtn();
 
         await step('Verify that checkboxes are checked', async () => {
+            for (const member of teamMembers) {
+                await folderPermissionsModal.waitForMemberName(member.name);
+            }
+
             const checkBoxes = await folderPermissionsModal.checkBoxesList;
             const checkBoxCount = await checkBoxes.count();
 
