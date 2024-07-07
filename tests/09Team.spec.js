@@ -46,7 +46,7 @@ test.describe('Team', () => {
             await signPage.sideMenu.clickTeam();
 
             await step(`Verify that a team member has role ${role} set in the Team table`, async () => {
-                await expect(await teamPage.teamMemberRoleForExactTeamMemeber(teamMemberEmail)).toHaveText(role);
+                await expect(await teamPage.teamMemberRoleForExactTeamMember(teamMemberEmail)).toHaveText(role);
             });
         });
     });
@@ -89,8 +89,9 @@ test.describe('Team', () => {
         await signPage.sideMenu.clickTeam();
 
         await step("Verify that a team member has role 'User' set in the Team table", async () => {
-            await expect(await teamPage.teamMemberRoleForExactTeamMemeber(teamMemberEmail)).toHaveText(
-                TEAM_MEMBER_ROLES.user);
+            await expect(await teamPage.teamMemberRoleForExactTeamMember(teamMemberEmail)).toHaveText(
+              TEAM_MEMBER_ROLES.user
+            );
         });
         await teamPage.clickOptionsForExactTeamMemberByEmail(teamMemberEmail);
         await teamPage.clickUpgradeToAdminButton();
@@ -100,8 +101,9 @@ test.describe('Team', () => {
         });
 
         await step("Verify that a team member has role 'Admin' set in the Team table", async () => {
-            await expect(await teamPage.teamMemberRoleForExactTeamMemeber(teamMemberEmail)).toHaveText(
-                TEAM_MEMBER_ROLES.admin);
+            await expect(await teamPage.teamMemberRoleForExactTeamMember(teamMemberEmail)).toHaveText(
+              TEAM_MEMBER_ROLES.admin
+            );
         });
     });
 
@@ -144,8 +146,8 @@ test.describe('Team', () => {
         await signPage.sideMenu.clickTeam();
 
         await step("Verify that a team member has role 'Admin' set in the Team table", async () => {
-            await expect(await teamPage.teamMemberRoleForExactTeamMemeber(teamMemberEmail)).toHaveText(
-                TEAM_MEMBER_ROLES.admin
+            await expect(await teamPage.teamMemberRoleForExactTeamMember(teamMemberEmail)).toHaveText(
+              TEAM_MEMBER_ROLES.admin
             );
         });
         await teamPage.clickOptionsForExactTeamMemberByEmail(teamMemberEmail);
@@ -156,8 +158,9 @@ test.describe('Team', () => {
         });
 
         await step("Verify that a team member has role 'User' set in the Team table", async () => {
-            await expect(await teamPage.teamMemberRoleForExactTeamMemeber(teamMemberEmail)).toHaveText(
-                TEAM_MEMBER_ROLES.user);
+            await expect(await teamPage.teamMemberRoleForExactTeamMember(teamMemberEmail)).toHaveText(
+              TEAM_MEMBER_ROLES.user
+            );
         });
     });
 
