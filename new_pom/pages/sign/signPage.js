@@ -13,15 +13,13 @@ export default class SignPage {
         this.sideMenu = new SideMenuComponent(this.page);
         this.header = new HeaderComponent(this.page);
         this.bulkSendTab = new BulkSendOnSignPage(this.page);
-        this.chooseTemplate = new ChooseTemplateComponent(this.page);
 
-        this.chooseTemplateField = this.page.locator("div.uiSelect__select-inner ");
+        this.chooseTemplateField = this.page.locator('div.uiSelect__select-inner ');
         this.titleTemplate = this.page.locator('p.uiSelect__select-row');
         this.inputName = this.page.getByPlaceholder('Name');
         this.inputEmail = this.page.getByPlaceholder('Email');
         this.editTemplateBtn = this.page.getByRole('button', { name: 'Edit template' });
         this.bulkSendTabOnPanel = this.page.getByText('Bulk Send');
-
     }
 
     async clickChooseTemplateField() {

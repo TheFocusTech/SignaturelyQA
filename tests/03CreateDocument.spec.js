@@ -363,7 +363,6 @@ test.describe('CreateDocument', () => {
         successModal,
         documentsPage,
     }) => {
-
         test.setTimeout(200 * 1000);
 
         await description('Objective: Verify that user can edit a document from template');
@@ -375,12 +374,12 @@ test.describe('CreateDocument', () => {
 
         await createTemplate(signPage, prepareForSignatureModal, templatesPage, createNewTemplatePage);
 
-        await signPage.chooseTemplate.clickChooseTemplateField();
-        await signPage.chooseTemplate.clickTitleTemplate();
+        await signPage.uploadFileTab.chooseTemplate.clickChooseTemplateField();
+        await signPage.uploadFileTab.chooseTemplate.clickTitleTemplate();
 
-        await signPage.chooseTemplate.fillSignerName(SIGNERS_DATA.signerName1, 0);
-        await signPage.chooseTemplate.fillSignerEmail(SIGNERS_DATA.signerEmail1, 0);
-        await signPage.chooseTemplate.clickEditTemplateBtn();
+        await signPage.uploadFileTab.chooseTemplate.fillSignerName(SIGNERS_DATA.signerName1, 0);
+        await signPage.uploadFileTab.chooseTemplate.fillSignerEmail(SIGNERS_DATA.signerEmail1, 0);
+        await signPage.uploadFileTab.chooseTemplate.clickEditTemplateBtn();
 
         await prepareForSignatureModal.waitDocumentPage();
         await prepareForSignatureModal.clickContinueBtn();
@@ -389,7 +388,7 @@ test.describe('CreateDocument', () => {
         await prepareForSignatureModal.clickDocumentBody();
         await prepareForSignatureModal.clickSaveBtn();
 
-        await prepareForSignatureModal.toast.clickToastFirstCloseBtn()
+        await prepareForSignatureModal.toast.clickToastFirstCloseBtn();
         await finalStepPage.clickSendForSignatureBtn();
         await successModal.clickBackToDocumentsBtn();
 
@@ -418,12 +417,14 @@ test.describe('CreateDocument', () => {
         await epic('Create Document');
         await tag('Document');
 
-        await createTemplate(signPage, prepareForSignatureModal, templatesPage, createNewTemplatePage, successModal);
+        await createTemplate(signPage, prepareForSignatureModal, templatesPage, createNewTemplatePage);
 
-        await signPage.uploadFileTab.chooseTemplate.clickChooseTemplateDropdown();
-        await signPage.uploadFileTab.chooseTemplate.clickTemplateItem(CREATE_TEMPLATE.nameField);
-        await signPage.uploadFileTab.chooseTemplate.fillFirstSignerNameField(SIGNERS_DATA.signerName1);
-        await signPage.uploadFileTab.chooseTemplate.fillFirstSignerEmailField(SIGNERS_DATA.signerEmail1);
+        await signPage.uploadFileTab.chooseTemplate.clickChooseTemplateField();
+        await signPage.uploadFileTab.chooseTemplate.clickTitleTemplate();
+
+        await signPage.uploadFileTab.chooseTemplate.fillSignerName(SIGNERS_DATA.signerName1, 0);
+        await signPage.uploadFileTab.chooseTemplate.fillSignerEmail(SIGNERS_DATA.signerEmail1, 0);
+
         await signPage.uploadFileTab.chooseTemplate.clickSendTheDocumentBtn();
         await finalStepPage.clickSendForSignatureBtn();
         await successModal.clickBackToDocumentsBtn();
