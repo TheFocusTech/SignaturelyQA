@@ -8,3 +8,5 @@ node_modules/
 tests/.DS_Store
 .idea/
 /allure-results/
+/my-reportTest-Chrome/
+/my-reportTest-Firefox/
