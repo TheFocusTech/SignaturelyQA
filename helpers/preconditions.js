@@ -190,3 +190,12 @@ export const createTemplateForBulkSend = async (signPage, prepareForSignatureMod
         await templatesPage.sideMenu.clickSign();
     });
 };
+
+export const uploadAvatar = async (signPage, settingsCompanyPage, settingsProfilePage, uploadAvatarImageModal) => {
+    await step('Preconditions: Upload avatar image', async () => {
+        await signPage.sideMenu.clickSettings();
+        await settingsCompanyPage.sideMenuSettings.clickProfile();
+        await settingsProfilePage.uploadImage(UPLOAD_FILE_PATH.jpgDocument);
+        await uploadAvatarImageModal.clickSaveButton();
+    });
+};
