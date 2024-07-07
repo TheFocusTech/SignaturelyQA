@@ -81,10 +81,10 @@ test.describe('Settings: Edit signature', () => {
         settingsEditSignaturePage, 
         createOrEditSignatureOnSettingModal 
     }) => {
-        await description('Verify that user can delete our Signature.');
+        await description('Verify that user can edit our Signature.');
         await severity(Severity.CRITICAL);
-        await link(`${QASE_LINK}/SIGN-51`, 'Qase: SIGN-52');
-        await link(`${GOOGLE_DOC_LINK}5bzz9ln1m6ek`, 'ATC_13_52_01');
+        await link(`${QASE_LINK}/SIGN-52`, 'Qase: SIGN-52');
+        await link(`${GOOGLE_DOC_LINK}b94zmc9ufxyk`, 'ATC_13_52_01');
         await epic('Settings');
         await tag('Edit Signature');
         test.setTimeout(120 * 1000);
