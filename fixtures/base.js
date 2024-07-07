@@ -41,8 +41,8 @@ import CreateNewTemplatePage from '../new_pom/pages/templates/createNewTemplateP
 import NotRegisterSignerSignPage from '../new_pom/pages/notRegisterSignerSignPage.js';
 import SignerAlmostDoneModal from '../new_pom/modalWindows/signerAlmostDoneModal.js';
 import DocumentSubmitProccessModal from '../new_pom/modalWindows/documentSubmitProccessModal.js';
-import DeleteModal from "../new_pom/modalWindows/deleteModal.js";
-import ConfirmTrashEmptyingModal from "../new_pom/modalWindows/confirmTrashEmptyingModal.js";
+import DeleteModal from '../new_pom/modalWindows/deleteModal.js';
+import ConfirmTrashEmptyingModal from '../new_pom/modalWindows/confirmTrashEmptyingModal.js';
 import UpgradeYourPlanAPIModal from '../new_pom/modalWindows/upgradeYourPlanAPIModal';
 import EditTemplatesPage from '../new_pom/pages/templates/editTemplatesPage.js';
 import TeamPage from '../new_pom/pages/team/teamPage.js';
@@ -298,19 +298,18 @@ export const test = base.extend({
     selectNameAndEmailColumnsModal: async ({ page }, use) => {
         await use(new SelectNameAndEmailColumnsModal(page));
     },
-  
+
     declineModal: async ({ page }, use) => {
         await use(new DeclineModal(page));
     },
-        
+
     downGradeYourPlanAPIModal: async ({ page }, use) => {
-        await use(new DownGradeYourPlanAPIModal(page))
+        await use(new DownGradeYourPlanAPIModal(page));
     },
 
     uploadAvatarImageModal: async ({ page }, use) => {
-        await use(new UploadAvatarImageModal(page))
+        await use(new UploadAvatarImageModal(page));
     },
-
     folderPermissionsModal: async ({ page }, use) => {
         await use(new FolderPermissionsModal(page));
     },

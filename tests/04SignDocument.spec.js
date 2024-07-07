@@ -426,8 +426,8 @@ test.describe('Sign Document', () => {
 
         await description('Objective: To verify that the user who uploaded the document can send it for signer');
         await severity(Severity.CRITICAL);
-        await link(`${QASE_LINK}/SIGN-10`, 'Qase: SIGN-10'); 
-        await link(`${GOOGLE_DOC_LINK}o1a44zgp2uji`, 'TC_04_10_03'); 
+        await link(`${QASE_LINK}/SIGN-10`, 'Qase: SIGN-10');
+        await link(`${GOOGLE_DOC_LINK}o1a44zgp2uji`, 'TC_04_10_03');
         await epic('Sign a document');
         await tag('others');
 

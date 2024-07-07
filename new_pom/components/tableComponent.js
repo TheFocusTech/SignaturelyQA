@@ -25,7 +25,7 @@ export default class TableComponent {
         this.listElements = this.page.locator('.documents__list-container');
         this.renameBtn = this.page.getByRole('button', { name: 'Rename' });
         this.inputNameField = this.page.locator('.form__input--hidden');
-        this.titleObjectField = this.page.locator('p.table__column')
+        this.titleObjectField = this.page.locator('p.table__column');
         this.disableFormBtn = this.page.getByRole('button', { name: 'Disable Form' });
         this.enableFormBtn = this.page.getByRole('button', { name: 'Enable Form' });
         this.deleteForm = this.page.getByRole('button', { name: 'Delete Form' });
@@ -73,7 +73,7 @@ export default class TableComponent {
 
     async waitForDocumentTitleVisible(name) {
         await step(`Wait for the document title to be visible`, async () => {
-            await this.objectTitle.filter({ hasText: name }).waitFor()
+            await this.objectTitle.filter({ hasText: name }).waitFor();
         });
     }
 
@@ -90,13 +90,13 @@ export default class TableComponent {
     }
 
     async clickSendReminderBtn() {
-        await step('Click the "Send Reminder" button', async () => {
+        await step('Click the "Send Reminder" option', async () => {
             await this.sendReminderBtn.click();
         });
     }
 
     async getDocumentStatusText() {
-        await this.documentStatus.waitFor({state:'visible', timeout: 3000});
+        await this.documentStatus.waitFor({ state: 'visible', timeout: 3000 });
         const actualText = await this.documentStatus.textContent();
         return actualText;
     }
@@ -202,7 +202,7 @@ export default class TableComponent {
 
     async clickOptionsDeleteBtn() {
         await step('Click the "Option delete" button it the dropdown menu', async () => {
-            await this.optionsDeleteBtn.waitFor( {state: 'visible'});
+            await this.optionsDeleteBtn.waitFor({ state: 'visible' });
             await this.optionsDeleteBtn.click();
         });
     }
@@ -247,12 +247,12 @@ export default class TableComponent {
     async clickOptionsButtonByDocumentTitle(documentTitle) {
         await step(`Click "Options" button for exact document by document title`, async () => {
             await this.page.waitForSelector('.table__column--text--document p', { timeout: 5000 });
-            const documentTitleElementsCount = await this.documentTitleList.count(); 
-                for (let i = 0; i < documentTitleElementsCount; i++) {
-                    const elementText = await this.documentTitleList.nth(i).innerText();
-                    if (elementText.trim() === documentTitle) {
-                        await this.optionsBtn.nth(i).click();
-                        return; 
+            const documentTitleElementsCount = await this.documentTitleList.count();
+            for (let i = 0; i < documentTitleElementsCount; i++) {
+                const elementText = await this.documentTitleList.nth(i).innerText();
+                if (elementText.trim() === documentTitle) {
+                    await this.optionsBtn.nth(i).click();
+                    return;
                 }
             }
         });
