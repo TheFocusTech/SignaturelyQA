@@ -130,6 +130,83 @@ test.describe('Folders', () => {
         });
     });
 
+    const teamMemberRoles = Object.values(TEAM_MEMBER_ROLES);
+    teamMemberRoles.forEach(role => {
+        test(`TC_06_26_01 | Verify that the user can assign folder permissions to the team member ${role}`, async ({
+            createBusinessUserAndLogin,
+            signPage,
+            documentsPage,
+            createFolderModal,
+            page,
+            request,
+            teamPage,
+            addTeamMemberModal,
+            teamsAcceptInvitePage,
+            folderPermissionsModal,
+        }) => {
+            await description(
+                `Objective: Verify that the user can assign folder permissions to the team member with role ${role}`
+            );
+            await severity(Severity.CRITICAL);
+            await link(`${QASE_LINK}/SIGN-26`, 'Qase: SIGN-26');
+            await link(`${GOOGLE_DOC_LINK}civcn01vf5q7`, 'ATC_06_26_01');
+
+            await epic('Folders');
+            await tag('Assign folder permissions');
+
+            test.setTimeout(250 * 1000);
+
+            await createFolder(signPage, documentsPage, createFolderModal, FOLDER_NAME);
+
+            const teamMemberEmail = `${process.env.EMAIL_PREFIX}${process.env.NEW_USER_NUMBER}${'_teammember'}${
+                process.env.EMAIL_DOMAIN
+            }`;
+            const teamMemberName = `${process.env.NEW_USER_NAME}${'_teammember'}`;
+
+            await addTeamMember(
+                role,
+                teamMemberEmail,
+                teamMemberName,
+                page,
+                request,
+                signPage,
+                teamPage,
+                addTeamMemberModal,
+                teamsAcceptInvitePage
+            );
+
+            await signPage.sideMenu.clickDocuments();
+            await documentsPage.table.clickFirstOptionsBtn();
+            await documentsPage.table.clickOptionsChangePermissionsBtn();
+
+            await step('Verify the modal window "Folder permissions" is opened', async () => {
+                await expect(folderPermissionsModal.folderPermissionsWindow).toBeVisible();
+            });
+
+            await folderPermissionsModal.clickTeamMemberCheckboxLast();
+            await folderPermissionsModal.clickUpdatePermissionsBtn();
+            await documentsPage.toast.waitForToastText();
+
+            await step(
+                'Verify the toast notification about the successful change of access rights is displayed',
+                async () => {
+                    await expect(documentsPage.toast.toastBody).toHaveText(TOAST_MESSAGE.permissionsChanged);
+                }
+            );
+
+            await step('Reload page', async () => {
+                await page.reload();
+            });
+
+            await documentsPage.table.clickFirstOptionsBtn();
+            await documentsPage.table.clickOptionsChangePermissionsBtn();
+
+            await step('Verify Checkbox of the selected team member is checked', async () => {
+                await expect(folderPermissionsModal.teamMemberCheckbox.last()).toHaveClass(CHECK_BOXES_STATUS.checked);
+            });
+        });
+    });
+
     test('TC_06_26_02 | Verify that the user can assign folder permissions to multiple team members.', async ({
         page,
         request,
@@ -182,7 +259,7 @@ test.describe('Folders', () => {
 
         await signPage.sideMenu.clickDocuments();
         await documentsPage.table.clickFirstOptionsBtn();
-        await documentsPage.table.clickChangePermissionsBtn();
+        await documentsPage.table.clickOptionsChangePermissionsBtn();
 
         for (const member of teamMembers) {
             await folderPermissionsModal.waitForMemberName(member.name);
@@ -190,19 +267,19 @@ test.describe('Folders', () => {
 
         await folderPermissionsModal.checkCheckboxes();
         await folderPermissionsModal.clickUpdatePermissionsBtn();
-        await documentsPage.toast.waitForToastIsHiddenByText(TOAST_MESSAGE.changePermissions);
+        await documentsPage.toast.waitForToastIsHiddenByText(TOAST_MESSAGE.permissionsChanged);
 
         await documentsPage.reloadPage();
 
         await documentsPage.table.clickFirstOptionsBtn();
-        await documentsPage.table.clickChangePermissionsBtn();
+        await documentsPage.table.clickOptionsChangePermissionsBtn();
 
         await step('Verify that checkboxes are checked', async () => {
             for (const member of teamMembers) {
                 await folderPermissionsModal.waitForMemberName(member.name);
             }
 
-            const checkBoxes = await folderPermissionsModal.checkBoxesList;
+            const checkBoxes = await folderPermissionsModal.teamMemberCheckbox;
             const checkBoxCount = await checkBoxes.count();
 
             for (let i = 1; i < checkBoxCount; i++) {

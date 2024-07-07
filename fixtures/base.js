@@ -298,19 +298,18 @@ export const test = base.extend({
     selectNameAndEmailColumnsModal: async ({ page }, use) => {
         await use(new SelectNameAndEmailColumnsModal(page));
     },
-  
+
     declineModal: async ({ page }, use) => {
         await use(new DeclineModal(page));
     },
 
     downGradeYourPlanAPIModal: async ({ page }, use) => {
-        await use(new DownGradeYourPlanAPIModal(page))
+        await use(new DownGradeYourPlanAPIModal(page));
     },
 
     uploadAvatarImageModal: async ({ page }, use) => {
-        await use(new UploadAvatarImageModal(page))
+        await use(new UploadAvatarImageModal(page));
     },
-    
     folderPermissionsModal: async ({ page }, use) => {
         await use(new FolderPermissionsModal(page));
     },

@@ -53,7 +53,7 @@ export const TOAST_MESSAGE = {
     updateSignature: 'Signature updated successfully',
     declineDocument: 'Signature request was declined.',
     pictureUploaded: 'New picture has been uploaded',
-    changePermissions: 'Permissions successfully changed!',
+    permissionsChanged: 'Permissions successfully changed!',
 };
 
 export const API_KEY_NAME = 'Test Api Key';

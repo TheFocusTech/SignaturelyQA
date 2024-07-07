@@ -36,7 +36,7 @@ export default class TableComponent {
         this.firstFormTitle = this.page.getByText('Edited Form Name');
         this.documentTitleList = this.page.locator('.table__column--text--document p');
         this.downloadBtn = this.page.getByText('Download');
-        this.changePermissionsBtn = this.page.getByRole('button', { name: 'Change Permissions' });
+        this.optionsChangePermissionsBtn = this.page.getByRole('button', { name: 'Change Permissions' });
     }
 
     async clickFirstOptionsBtn() {
@@ -264,9 +264,10 @@ export default class TableComponent {
         });
     }
 
-    async clickChangePermissionsBtn() {
-        await step('Click on "Change Permissions" option', async () => {
-            await this.changePermissionsBtn.click();
+    async clickOptionsChangePermissionsBtn() {
+        await step('Click the "Change Permissions" button it the "Options" dropdown menu', async () => {
+            await this.optionsChangePermissionsBtn.waitFor( {state: 'visible'} );
+            await this.optionsChangePermissionsBtn.click();
         });
     }
 }
