@@ -45,7 +45,7 @@ jobs:
           CI_RUN: true
 
       - name: Run Playwright Safari tests
-        run: npm test:all:webkit
+        run: npm run test:all:webkit
         env:
           URL: ${{ secrets.URL}}
           USER_EMAIL: ${{ secrets.USER_EMAIL }}

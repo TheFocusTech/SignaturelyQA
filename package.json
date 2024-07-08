@@ -9,7 +9,8 @@
     "test:firefox": "npx playwright test --project firefox",
     "test:webkit": "npx playwright test --project webkit",
     "testUI:chrome": "npx playwright test --ui --project chromium",
-    "test:all:firefox": "npx playwright test -c playwright.config.firefox.js"
+    "test:all:firefox": "npx playwright test -c playwright.config.firefox.js",
+    "test:all:webkit": "npx playwright test -c playwright.config.webkit.js"
   },
   "keywords": [],
   "author": "",
