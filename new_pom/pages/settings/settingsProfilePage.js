@@ -21,7 +21,7 @@ export default class SettingsProfilePage {
         this.dateFormat = this.page.locator('.uiSelect__select-row');
         this.fileInput = this.page.locator('input[type = "file"]');
         this.avatarImage = this.page.locator('form').getByAltText('avatar');
-        this.deleteButton = this.page.getByRole('button', { name: 'Delete', exact: true })
+        this.deleteButton = this.page.locator('.avatar-field__content').getByRole('button', { name: 'Delete' })
     }
 
     async fillNewPasswordInputField(password) {

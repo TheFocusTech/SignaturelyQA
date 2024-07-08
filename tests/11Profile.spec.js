@@ -313,8 +313,7 @@ test.describe('Profile', () => {
             signPage,
             settingsCompanyPage,
             settingsProfilePage,
-            uploadAvatarImageModal,
-            UPLOAD_FILE_PATH
+            uploadAvatarImageModal
         );
 
         await signPage.sideMenu.clickSettings();

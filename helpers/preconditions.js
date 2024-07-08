@@ -1,6 +1,7 @@
 import { DATA_SIGNER, TOAST_MESSAGE, CREATE_TEMPLATE, UPLOAD_FILE_PATH, SIGNERS_DATA, EMAIL_SUBJECTS, API_PLANS } from "../testData";
 import { step } from "allure-js-commons";
 import { retrieveUserEmailConfirmationLink } from '../helpers/utils.js';
+import SettingsProfilePage from "../new_pom/pages/settings/settingsProfilePage.js";
 
 export const createSignature = async (signPage, settingsCompanyPage, settingsEditSignaturePage, createOrEditSignatureOnSettingModal) => {
     await step('Precondition: Create signature ', async () => {
@@ -197,5 +198,7 @@ export const uploadAvatar = async (signPage, settingsCompanyPage, settingsProfil
         await settingsCompanyPage.sideMenuSettings.clickProfile();
         await settingsProfilePage.uploadImage(UPLOAD_FILE_PATH.jpgDocument);
         await uploadAvatarImageModal.clickSaveButton();
+        await settingsProfilePage.toast.waitForToastIsHiddenByText(TOAST_MESSAGE.pictureUploaded);
+        await settingsProfilePage.sideMenu.clickSign();
     });
 };
