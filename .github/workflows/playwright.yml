@@ -4,7 +4,7 @@ on:
     branches: [ main ]
 jobs:
   test:
-    timeout-minutes: 90
+    timeout-minutes: 150
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -15,7 +15,8 @@ jobs:
         run: npm ci
       - name: Install Playwright Browsers
         run: npx playwright install --with-deps
-      - name: Run Playwright tests
+
+      - name: Run Playwright Chrome tests
         run: npm test
         env:
           URL: ${{ secrets.URL}}
@@ -28,6 +29,21 @@ jobs:
           EMAIL_PREFIX: ${{ secrets.EMAIL_PREFIX }}
           EMAIL_DOMAIN: ${{ secrets.EMAIL_DOMAIN }}
           CI_RUN: true
+
+      # - name: Run Playwright Firefox tests
+      #   run: npm run test:all:firefox
+      #   env:
+      #     URL: ${{ secrets.URL}}
+      #     USER_EMAIL: ${{ secrets.USER_EMAIL }}
+      #     USER_PASSWORD: ${{ secrets.USER_PASSWORD }}
+      #     API_URL: ${{ secrets.API_URL }}
+      #     ADMIN_EMAIL: ${{ secrets.ADMIN_EMAIL }}
+      #     ADMIN_PASSWORD: ${{ secrets.ADMIN_PASSWORD }}
+      #     DB_DATA: ${{ secrets.DB_DATA }}
+      #     EMAIL_PREFIX: ${{ secrets.EMAIL_PREFIX }}
+      #     EMAIL_DOMAIN: ${{ secrets.EMAIL_DOMAIN }}
+      #     CI_RUN: true
+
       - uses: actions/upload-artifact@v4
         if: always()
         with:

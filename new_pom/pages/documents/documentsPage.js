@@ -1,9 +1,9 @@
-import SideMenuComponent from "../../components/sideMenuComponent";
-import TableComponent from "../../components/tableComponent";
-import SideMenuDocumentsComponent from "../../components/sideMenuDocumentsComponent";
-import ToastComponent from "../../components/toastComponent";
-import { step } from "allure-js-commons";
-import { reloadPage, getRandomIndexInRange } from "../../../helpers/utils";
+import SideMenuComponent from '../../components/sideMenuComponent';
+import TableComponent from '../../components/tableComponent';
+import SideMenuDocumentsComponent from '../../components/sideMenuDocumentsComponent';
+import ToastComponent from '../../components/toastComponent';
+import { step } from 'allure-js-commons';
+import { reloadPage, getRandomIndexInRange } from '../../../helpers/utils';
 
 export default class DocumentsPage {
     constructor(page) {
@@ -63,9 +63,16 @@ export default class DocumentsPage {
     }
 
     async clickPage2Btn() {
-        await step('Open page 2.', async() => {
+        await step('Open page 2.', async () => {
             await this.page2Btn.click();
             await this.table.waitForTable(3000);
+        });
+    }
+
+    async reloadPage() {
+        await step('Refresh the page', async () => {
+            await this.page.reload();
+            await this.page.waitForTimeout(1000);
         });
     }
 }

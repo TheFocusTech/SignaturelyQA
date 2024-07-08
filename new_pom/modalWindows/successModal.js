@@ -10,6 +10,7 @@ export default class SuccessModal {
         this.okBtn = this.page.getByRole('button', { name: 'Ok' });
         this.title = this.page.locator('.successSendModal__title');
         this.returnToDocumentsBtn = this.page.getByRole('button', { name: 'Return to Documents' });
+        this.backToTempatesBtn = this.page.getByRole('button', { name: 'Back to Templates' });
     }
 
     async clickBackToDocumentsBtn() {
@@ -35,6 +36,12 @@ export default class SuccessModal {
         await step('Click on the "Return to Documents" button', async () => {
             await this.returnToDocumentsBtn.waitFor({ state: 'visible' });
             await this.returnToDocumentsBtn.click();
+        });
+    }
+
+    async clickBackToTemplatesBtn() {
+        await step('In the modal window, click on the "Back to templates" button.', async () => {
+            await this.backToTempatesBtn.click();
         });
     }
 }
