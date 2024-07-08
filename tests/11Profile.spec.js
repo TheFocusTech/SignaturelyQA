@@ -147,7 +147,7 @@ test.describe('Profile', () => {
         await description('Objective: To verify that the User can enabling, disabling checkboxes');
         await severity(Severity.CRITICAL);
         await link(`${QASE_LINK}/SIGN-46`, 'Qase: SIGN-46');
-        await link(`${GOOGLE_DOC_LINK}781u9ev2p6y5`, 'ATC_11_46_03');
+        await link(`${GOOGLE_DOC_LINK}ggir7ap77gj1`, 'ATC_11_46_03');
         await epic('Profile');
         await tag('Update');
 
