@@ -5,14 +5,11 @@ export default class ChooseTemplateComponent {
     constructor(page) {
         this.page = page;
 
-        this.chooseTemplateDropdown = this.page.locator('.uiSelect__select');
         this.signerNameField = this.page.getByPlaceholder('Name');
         this.signerEmailField = this.page.getByPlaceholder('Email');
         this.sendTheDocumentBtn = this.page.getByRole('button', { name: 'Send the Document' });
-
         this.chooseTemplateField = this.page.locator('div.uiSelect__select-inner ');
         this.titleTemplate = this.page.locator('p.uiSelect__select-row');
-
         this.editTemplateBtn = this.page.getByRole('button', { name: 'Edit template' });
     }
 
