@@ -9,6 +9,7 @@ import {
 } from '../testData';
 import { step } from 'allure-js-commons';
 import { retrieveUserEmailConfirmationLink } from '../helpers/utils.js';
+import SettingsProfilePage from "../new_pom/pages/settings/settingsProfilePage.js";
 
 export const createSignature = async (
     signPage,
@@ -228,5 +229,16 @@ export const createTemplateForBulkSend = async (
         await prepareForSignatureModal.clickCreateBtn();
         await prepareForSignatureModal.clickBackToTemplatesBtn();
         await templatesPage.sideMenu.clickSign();
+    });
+};
+
+export const uploadAvatar = async (signPage, settingsCompanyPage, settingsProfilePage, uploadAvatarImageModal) => {
+    await step('Preconditions: Upload avatar image', async () => {
+        await signPage.sideMenu.clickSettings();
+        await settingsCompanyPage.sideMenuSettings.clickProfile();
+        await settingsProfilePage.uploadImage(UPLOAD_FILE_PATH.jpgDocument);
+        await uploadAvatarImageModal.clickSaveButton();
+        await settingsProfilePage.toast.waitForToastIsHiddenByText(TOAST_MESSAGE.pictureUploaded);
+        await settingsProfilePage.sideMenu.clickSign();
     });
 };
