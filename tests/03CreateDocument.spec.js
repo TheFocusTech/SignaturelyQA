@@ -136,7 +136,7 @@ test.describe('CreateDocument', () => {
         await step('Verify the created document is in the table with the label "AWAITING".', async () => {
             await expect(await documentsPage.table.documentStatus).toHaveText(DOCUMENT_STATUS.awaiting);
         });
-    })
+    });
 
     test('TC_03_07_02 | Verify that the user who uploaded the document and Other Signer can sign it', async ({
         createBusinessUserAndLogin,
@@ -153,7 +153,8 @@ test.describe('CreateDocument', () => {
         test.setTimeout(160 * 1000);
 
         await description(
-            'Objective: To verify the process of creating, signing, and sending a document to another signer.');
+            'Objective: To verify the process of creating, signing, and sending a document to another signer.'
+        );
         await severity(Severity.CRITICAL);
         await link(`${QASE_LINK}/SIGN-7`, 'Qase: SIGN-7');
         await link(`${GOOGLE_DOC_LINK}rfos5y3gy8ag`, 'ATC_03_07_02');
@@ -316,7 +317,9 @@ test.describe('CreateDocument', () => {
     }) => {
         test.setTimeout(220 * 1000);
 
-        await description('Objective: To verify the process of creating and signing a document with an existing signature');
+        await description(
+            'Objective: To verify the process of creating and signing a document with an existing signature'
+        );
         await severity(Severity.CRITICAL);
         await link(`${QASE_LINK}/SIGN-7`, 'Qase: SIGN-7');
         await link(`${GOOGLE_DOC_LINK}dbkbk0latxud`, 'ATC_03_07_04');
@@ -360,7 +363,6 @@ test.describe('CreateDocument', () => {
         successModal,
         documentsPage,
     }) => {
-
         test.setTimeout(200 * 1000);
 
         await description('Objective: Verify that user can edit a document from template');
@@ -372,12 +374,12 @@ test.describe('CreateDocument', () => {
 
         await createTemplate(signPage, prepareForSignatureModal, templatesPage, createNewTemplatePage);
 
-        await signPage.chooseTemplate.clickChooseTemplateField();
-        await signPage.chooseTemplate.clickTitleTemplate();
+        await signPage.uploadFileTab.chooseTemplate.clickChooseTemplateField();
+        await signPage.uploadFileTab.chooseTemplate.clickTitleTemplate();
 
-        await signPage.chooseTemplate.fillSignerName(SIGNERS_DATA.signerName1, 0);
-        await signPage.chooseTemplate.fillSignerEmail(SIGNERS_DATA.signerEmail1, 0);
-        await signPage.chooseTemplate.clickEditTemplateBtn();
+        await signPage.uploadFileTab.chooseTemplate.fillSignerName(SIGNERS_DATA.signerName1, 0);
+        await signPage.uploadFileTab.chooseTemplate.fillSignerEmail(SIGNERS_DATA.signerEmail1, 0);
+        await signPage.uploadFileTab.chooseTemplate.clickEditTemplateBtn();
 
         await prepareForSignatureModal.waitDocumentPage();
         await prepareForSignatureModal.clickContinueBtn();
@@ -386,7 +388,7 @@ test.describe('CreateDocument', () => {
         await prepareForSignatureModal.clickDocumentBody();
         await prepareForSignatureModal.clickSaveBtn();
 
-        await prepareForSignatureModal.toast.clickToastFirstCloseBtn()
+        await prepareForSignatureModal.toast.clickToastFirstCloseBtn();
         await finalStepPage.clickSendForSignatureBtn();
         await successModal.clickBackToDocumentsBtn();
 
@@ -394,4 +396,42 @@ test.describe('CreateDocument', () => {
             expect(await documentsPage.table.getDocumentStatusText()).toBe(DOCUMENT_STATUS.awaiting);
         });
     });
+
+    test('TC_03_08_01 | Verify that the user can send a template for signature', async ({
+        createBusinessUserAndLogin,
+        signPage,
+        prepareForSignatureModal,
+        finalStepPage,
+        successModal,
+        documentsPage,
+        templatesPage,
+        createNewTemplatePage,
+    }) => {
+        test.setTimeout(200 * 1000);
+        await description(
+            'Objective: To verify the process of creating, signing, and sending a document using template.'
+        );
+        await severity(Severity.CRITICAL);
+        await link(`${QASE_LINK}/SIGN-8`, 'Qase: SIGN-8');
+        await link(`${GOOGLE_DOC_LINK}x1cfeq6s4p63`, 'ATC_03_08_01');
+        await epic('Create Document');
+        await tag('Document');
+
+        await createTemplate(signPage, prepareForSignatureModal, templatesPage, createNewTemplatePage);
+
+        await signPage.uploadFileTab.chooseTemplate.clickChooseTemplateField();
+        await signPage.uploadFileTab.chooseTemplate.clickTitleTemplate();
+
+        await signPage.uploadFileTab.chooseTemplate.fillSignerName(SIGNERS_DATA.signerName1, 0);
+        await signPage.uploadFileTab.chooseTemplate.fillSignerEmail(SIGNERS_DATA.signerEmail1, 0);
+
+        await signPage.uploadFileTab.chooseTemplate.clickSendTheDocumentBtn();
+        await finalStepPage.clickSendForSignatureBtn();
+        await successModal.clickBackToDocumentsBtn();
+
+        await step('Verify the created document is in the table with the label "AWAITING".', async () => {
+            await expect(await documentsPage.table.documentStatus).toHaveText(DOCUMENT_STATUS.awaiting);
+        });
+    });
 });
+

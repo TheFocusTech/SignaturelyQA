@@ -115,6 +115,7 @@ export default class PrepareForSignatureModal {
 
     async clickItemDropDown(signerName) {
         await step('Select a signer\'s name from the "Assigned To" dropdown.', async () => {
+            await this.itemDropDown.getByText(signerName).waitFor();
             await this.itemDropDown.getByText(signerName).click();
         });
     }
@@ -212,7 +213,6 @@ export default class PrepareForSignatureModal {
             }
         });
     }
-
 
     async clickDateOnLeftMenu() {
         await step('Click on the "Date" in Left Menu', async () => {
