@@ -1,0 +1,4 @@
+"Status","Start Time","Stop Time","Duration in ms","Parent Suite","Suite","Sub Suite","Test Class","Test Method","Name","Description"
+"passed","Mon Jul 08 17:16:03 GMT 2024","Mon Jul 08 17:16:11 GMT 2024","7704","webkit","","Authorization","","","TC_02_05_01 | Verify successful login and the user directed to the sign page","Objective: To verify the process of logging a user into their account."
+"passed","Mon Jul 08 17:15:48 GMT 2024","Mon Jul 08 17:15:52 GMT 2024","3702","chromium","","Authorization","","","TC_02_05_01 | Verify successful login and the user directed to the sign page","Objective: To verify the process of logging a user into their account."
+"passed","Mon Jul 08 17:15:55 GMT 2024","Mon Jul 08 17:15:59 GMT 2024","4036","firefox","","Authorization","","","TC_02_05_01 | Verify successful login and the user directed to the sign page","Objective: To verify the process of logging a user into their account."
