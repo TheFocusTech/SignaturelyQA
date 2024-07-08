@@ -27,7 +27,7 @@ module.exports = defineConfig({
     grep: testPlanFilter(),
     reporter: [
         ["list"],        
-        ['html', { outputFolder: 'my-reportTest-Chrome' }],
+        ['html', { outputFolder: 'my-reportTest-Safari' }],
         [
             "allure-playwright",
             {
@@ -60,47 +60,19 @@ module.exports = defineConfig({
 
         screenshot: 'only-on-failure',
         video: {
-            mode: 'retain-on-failure', 
+            mode: 'on', 
             size: process.env.CI ? {width: 800, height: 600} : {width: 1440, height: 900}
         },
     },
 
     /* Configure projects for major browsers */
-    projects: [
+    projects: [    
+
         {
-            name: 'chromium',
-            use: {...devices['Desktop Chrome']},
+          name: 'webkit',
+          use: { ...devices['Desktop Safari'] },
         },
 
-        // {
-        //   name: 'firefox',
-        //   use: { ...devices['Desktop Firefox'] },
-        // },
-
-        // {
-        //   name: 'webkit',
-        //   use: { ...devices['Desktop Safari'] },
-        // },
-
-        /* Test against mobile viewports. */
-        // {
-        //   name: 'Mobile Chrome',
-        //   use: { ...devices['Pixel 5'] },
-        // },
-        // {
-        //   name: 'Mobile Safari',
-        //   use: { ...devices['iPhone 12'] },
-        // },
-
-        /* Test against branded browsers. */
-        // {
-        //   name: 'Microsoft Edge',
-        //   use: { ...devices['Desktop Edge'], channel: 'msedge' },
-        // },
-        // {
-        //   name: 'Google Chrome',
-        //   use: { ...devices['Desktop Chrome'], channel: 'chrome' },
-        // },
     ],
 
     /* Run your local dev server before starting the tests */
@@ -110,4 +82,3 @@ module.exports = defineConfig({
     //   reuseExistingServer: !process.env.CI,
     // },
 });
-
