@@ -37,7 +37,7 @@ test.describe('Templates', () => {
         await createNewTemplatePage.fillTemplateNameField(CREATE_TEMPLATE.nameField);
         await createNewTemplatePage.fillOptionalMessageField(CREATE_TEMPLATE.optionalMessage);
         await createNewTemplatePage.fillCreateTemplateRolesField(CREATE_TEMPLATE.nameRole);
-        await createNewTemplatePage.fileUploader.uploadFile('testDocuments/CSV.csv');
+        await createNewTemplatePage.fileUploader.uploadFile(UPLOAD_FILE_PATH.csvDocument);
         await createNewTemplatePage.clickFillTemplateBtn();
         await prepareForSignatureModal.clickSignOnFieldsMenu();
         await prepareForSignatureModal.clickDocumentBody();
