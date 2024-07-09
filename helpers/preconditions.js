@@ -134,7 +134,7 @@ export const createDocumentCompleted = async (
     documentsPage
 ) => {
     await step('Precondition: Document creation in progress with Completed status ', async () => {
-        await signPage.uploadFileTab.fileUploader.uploadFile('testDocuments/picture.jpg');
+        await signPage.uploadFileTab.fileUploader.uploadFile(UPLOAD_FILE_PATH.jpgDocument);
         await signPage.uploadFileTab.clickPrepareDocumentBtn();
 
         await prepareForSignatureModal.clickSignDocumentRadioBtn();
