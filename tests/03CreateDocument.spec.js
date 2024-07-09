@@ -250,6 +250,7 @@ test.describe('CreateDocument', () => {
         templatesPage,
         createNewTemplatePage,
         prepareForSignatureModal,
+        successModal,
         selectNameAndEmailColumnsModal,
         page,
     }) => {
@@ -262,7 +263,7 @@ test.describe('CreateDocument', () => {
         await epic('Create Document');
         await tag('Bulk Send');
 
-        await createTemplateForBulkSend(signPage, prepareForSignatureModal, templatesPage, createNewTemplatePage);
+        await createTemplateForBulkSend(signPage, prepareForSignatureModal, templatesPage, createNewTemplatePage, successModal);
 
         await signPage.clickBulkSendTab();
 

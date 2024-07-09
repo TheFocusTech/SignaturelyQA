@@ -20,6 +20,7 @@ test.describe('Templates', () => {
         prepareForSignatureModal,
         templatesPage,
         createNewTemplatePage,
+        successModal,
     }) => {
         await description(
             'Objective: To verify that the user can create a new template in the system successfully. This includes ensuring that all required fields are completed correctly, the template is saved, and it is accessible for future use.'
