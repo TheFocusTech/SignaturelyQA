@@ -10,3 +10,8 @@ tests/.DS_Store
 /allure-results/
 /my-reportTest-Chrome/
 /my-reportTest-Firefox/
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/
+/my-reportTest-Safari/
