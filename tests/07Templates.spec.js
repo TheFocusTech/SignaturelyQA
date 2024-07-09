@@ -77,7 +77,7 @@ test.describe('Templates', () => {
         });
 
         await step('Template successfully added to API (appears in API Templates) - name checked.', async () => {
-            await expect(templatesPage.table.getTemplateTitle()).resolves.toEqual(CREATE_TEMPLATE.nameField);
+            await expect(templatesPage.table.objectTitle).toHaveText(CREATE_TEMPLATE.nameField);
         });
     });
 
