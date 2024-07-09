@@ -9,7 +9,6 @@ export default class SettingsCompanyPage {
         this.page = page;
 
         this.toast = new ToastComponent(this.page);
-
         this.horizontalMenu = new SettingsHorizontalMenuComponent(this.page);
         this.sideMenuSettings = new SideMenuSettingsComponent(this.page);
         this.sideMenu = new SideMenuComponent(this.page);

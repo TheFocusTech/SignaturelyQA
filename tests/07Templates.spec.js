@@ -40,7 +40,7 @@ test.describe('Templates', () => {
         await prepareForSignatureModal.clickSignOnFieldsMenu();
         await prepareForSignatureModal.clickDocumentBody();
         await prepareForSignatureModal.clickCreateBtn();
-        await prepareForSignatureModal.clickBackToTemplatesBtn();
+        await successModal.clickBackToTemplatesBtn();
 
         await step('Verify that the document status in the template page is "live"', async () => {
             await expect(await templatesPage.table.documentStatus).toHaveText(TEMPLATES_STATUS.live);
@@ -54,8 +54,8 @@ test.describe('Templates', () => {
         templatesPage,
         apiTemplatesPage,
         createNewTemplatePage,
+        successModal,
     }) => {
-
         test.setTimeout(200 * 1000);
 
         await description('Objective: To verify the process of add template to API.');
@@ -65,7 +65,7 @@ test.describe('Templates', () => {
         await epic('Templates');
         await tags('User', 'API');
 
-        await createTemplate(signPage, prepareForSignatureModal, templatesPage, createNewTemplatePage);
+        await createTemplate(signPage, prepareForSignatureModal, templatesPage, createNewTemplatePage, successModal);
         await signPage.sideMenu.clickTemplates();
         await templatesPage.table.clickFirstOptionsBtn();
         await templatesPage.table.clickAddToAPIBtn();
@@ -88,6 +88,7 @@ test.describe('Templates', () => {
         editTemplatesPage,
         prepareForSignatureModal,
         createNewTemplatePage,
+        successModal,
     }) => {
         test.slow();
 
@@ -100,7 +101,7 @@ test.describe('Templates', () => {
         await epic('Templates');
         await tags('Edit-template');
 
-        await createTemplate(signPage, prepareForSignatureModal, templatesPage, createNewTemplatePage);
+        await createTemplate(signPage, prepareForSignatureModal, templatesPage, createNewTemplatePage, successModal);
 
         await signPage.sideMenu.clickTemplates();
         await templatesPage.table.clickFirstOptionsBtn();
@@ -137,7 +138,6 @@ test.describe('Templates', () => {
         createNewTemplatePage,
         successModal,
     }) => {
-
         test.setTimeout(200 * 1000);
 
         await description('Objective: To verify the process of duplicate template.');
@@ -149,10 +149,7 @@ test.describe('Templates', () => {
 
         test.setTimeout(250 * 1000);
 
-        await createTemplate(signPage,
-            prepareForSignatureModal,
-            templatesPage,
-            createNewTemplatePage);
+        await createTemplate(signPage, prepareForSignatureModal, templatesPage, createNewTemplatePage, successModal);
 
         await signPage.sideMenu.clickTemplates();
         await templatesPage.table.clickFirstOptionsBtn();
@@ -176,6 +173,7 @@ test.describe('Templates', () => {
         templatesPage,
         createNewTemplatePage,
         confirmDeletionModal,
+        successModal,
     }) => {
         await description('Objective: Verify that the user can successfully delete a template.');
         await severity(Severity.CRITICAL);
@@ -186,11 +184,7 @@ test.describe('Templates', () => {
 
         test.setTimeout(250 * 1000);
 
-        await createTemplate(signPage,
-            prepareForSignatureModal,
-            templatesPage,
-            createNewTemplatePage,
-        );        
+        await createTemplate(signPage, prepareForSignatureModal, templatesPage, createNewTemplatePage, successModal);
 
         await signPage.sideMenu.clickTemplates();
         await templatesPage.table.clickFirstOptionsBtn();

@@ -372,7 +372,7 @@ test.describe('CreateDocument', () => {
         await epic('Create Document');
         await tag('Edit template');
 
-        await createTemplate(signPage, prepareForSignatureModal, templatesPage, createNewTemplatePage);
+        await createTemplate(signPage, prepareForSignatureModal, templatesPage, createNewTemplatePage, successModal);
 
         await signPage.uploadFileTab.chooseTemplate.clickChooseTemplateField();
         await signPage.uploadFileTab.chooseTemplate.clickTitleTemplate();
@@ -417,7 +417,7 @@ test.describe('CreateDocument', () => {
         await epic('Create Document');
         await tag('Document');
 
-        await createTemplate(signPage, prepareForSignatureModal, templatesPage, createNewTemplatePage);
+        await createTemplate(signPage, prepareForSignatureModal, templatesPage, createNewTemplatePage, successModal);
 
         await signPage.uploadFileTab.chooseTemplate.clickChooseTemplateField();
         await signPage.uploadFileTab.chooseTemplate.clickTitleTemplate();
