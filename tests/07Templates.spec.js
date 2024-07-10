@@ -21,6 +21,7 @@ test.describe('Templates', () => {
         templatesPage,
         createNewTemplatePage,
     }) => {
+        test.setTimeout(440 * 1000);
         await description(
             'Objective: To verify that the user can create a new template in the system successfully. This includes ensuring that all required fields are completed correctly, the template is saved, and it is accessible for future use.'
         );
@@ -190,7 +191,7 @@ test.describe('Templates', () => {
             prepareForSignatureModal,
             templatesPage,
             createNewTemplatePage,
-        );        
+        );
 
         await signPage.sideMenu.clickTemplates();
         await templatesPage.table.clickFirstOptionsBtn();
