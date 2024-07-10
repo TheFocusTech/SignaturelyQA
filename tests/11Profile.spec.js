@@ -12,7 +12,7 @@ import {
     DATE_FORMAT,
 } from '../testData.js';
 import { description, tag, severity, Severity, link, epic, step } from 'allure-js-commons';
-import { uploadAvatar } from '../helpers/preconditions.js'
+import { uploadAvatar } from '../helpers/preconditions.js';
 
 test.describe('Profile', () => {
     test('TC_11_45_01 | Verify that User can change password', async ({
@@ -26,7 +26,8 @@ test.describe('Profile', () => {
         await severity(Severity.CRITICAL);
         await link(`${QASE_LINK}/SIGN-45`, 'Qase: SIGN-45');
         await link(`${GOOGLE_DOC_LINK}ei34zdu9ql4d`, 'ATC_11_45_01');
-        await epic('Profile');
+        await epic('Settings');
+        await feature('Profile');
         await tag('Password');
 
         const newPassword = generateRandomPassword(15);
@@ -49,7 +50,7 @@ test.describe('Profile', () => {
         await loginPage.fillPasswordInput(newPassword);
         await loginPage.clickLogin();
         await step(`Verify that the User is logged in with a new password and is on the homepage ${URL_END_POINTS.signEndPoint} `, async () => {
-            await expect(signPage.page).toHaveURL(process.env.URL + URL_END_POINTS.signEndPoint);
+                await expect(signPage.page).toHaveURL(process.env.URL + URL_END_POINTS.signEndPoint);
         });
 
     });
@@ -66,7 +67,8 @@ test.describe('Profile', () => {
         await severity(Severity.CRITICAL);
         await link(`${QASE_LINK}/SIGN-47`, 'Qase: SIGN-47');
         await link(`${GOOGLE_DOC_LINK}tcq6ypzibzp5`, 'ATC_11_47_01');
-        await epic('Profile');
+        await epic('Settings');
+        await feature('Profile');
         await tag('Delete account');
 
         await signPage.sideMenu.clickSettings();
@@ -75,11 +77,11 @@ test.describe('Profile', () => {
         await deleteMyAccountModal.clickDeleteMyAccountModalBtn();
 
         await step(`Verify that the User is deleted account and is on the loginpage ${URL_END_POINTS.loginEndPoint} `, async () => {
-            await expect(loginPage.page).toHaveURL(process.env.URL + URL_END_POINTS.loginEndPoint);
+                await expect(loginPage.page).toHaveURL(process.env.URL + URL_END_POINTS.loginEndPoint);
         });
 
         await step(`Verify that a toast message with the text "${TOAST_MESSAGE.deleteAccount}" popped up `, async () => {
-            await expect(settingsProfilePage.toast.toastBody).toHaveText(TOAST_MESSAGE.deleteAccount);
+                await expect(settingsProfilePage.toast.toastBody).toHaveText(TOAST_MESSAGE.deleteAccount);
         });
 
     });
@@ -96,7 +98,8 @@ test.describe('Profile', () => {
         await severity(Severity.CRITICAL);
         await link(`${QASE_LINK}/SIGN-44`, 'Qase: SIGN-44');
         await link(`${GOOGLE_DOC_LINK}781u9ev2p6y5`, 'ATC_11_44_01');
-        await epic('Profile');
+        await epic('Settings');
+        await feature('Profile');
         await tag('Email');
 
         const newEmail = await generateNewUserEmail('_new');
@@ -148,12 +151,13 @@ test.describe('Profile', () => {
         await severity(Severity.CRITICAL);
         await link(`${QASE_LINK}/SIGN-46`, 'Qase: SIGN-46');
         await link(`${GOOGLE_DOC_LINK}ggir7ap77gj1`, 'ATC_11_46_03');
-        await epic('Profile');
+        await epic('Settings');
+        await feature('Profile');
         await tag('Update');
 
         await signPage.sideMenu.clickSettings();
         await settingsCompanyPage.sideMenuSettings.clickProfile();
-        await settingsProfilePage.toggleCheckboxes(false)
+        await settingsProfilePage.toggleCheckboxes(false);
         await settingsProfilePage.clickSaveButton();
 
         await step(
@@ -172,7 +176,7 @@ test.describe('Profile', () => {
         });
 
         await settingsProfilePage.toast.waitForToastIsHiddenByText(TOAST_MESSAGE.profileUpdated);
-        await settingsProfilePage.toggleCheckboxes(true)
+        await settingsProfilePage.toggleCheckboxes(true);
         await settingsProfilePage.clickSaveButton();
 
         await step(
@@ -205,7 +209,8 @@ test.describe('Profile', () => {
             await severity(Severity.CRITICAL);
             await link(`${QASE_LINK}/SIGN-46`, 'Qase: SIGN-46');
             await link(`${GOOGLE_DOC_LINK}3neug7we6zqz`, 'ATC_11_46_02');
-            await epic('Profile');
+            await epic('Settings');
+            await feature('Profile');
             await tag('Date-format');
 
             test.slow();
@@ -266,7 +271,8 @@ test.describe('Profile', () => {
         await severity(Severity.CRITICAL);
         await link(`${QASE_LINK}/SIGN-46`, 'Qase: SIGN-46');
         await link(`${GOOGLE_DOC_LINK}suq7kpizwkjp`, 'ATC_11_46_01');
-        await epic('Profile');
+        await epic('Settings');
+        await feature('Profile');
         await tag('Avatar');
 
         await signPage.sideMenu.clickSettings();
@@ -291,7 +297,7 @@ test.describe('Profile', () => {
         });
 
         await step('Verify that a new avatar image has been changed compared to the default avatar image link', async () => {
-            expect(newtAvatarLink).not.toBe(defaultAvatarLink);
+                expect(newtAvatarLink).not.toBe(defaultAvatarLink);
         });
     });
 
@@ -306,7 +312,8 @@ test.describe('Profile', () => {
         await severity(Severity.CRITICAL);
         await link(`${QASE_LINK}/SIGN-46`, 'Qase: SIGN-46');
         await link(`${GOOGLE_DOC_LINK}q5uk912hrnbl`, 'ATC_11_46_04');
-        await epic('Profile');
+        await epic('Settings');
+        await feature('Profile');
         await tag('Avatar');
 
         await uploadAvatar(

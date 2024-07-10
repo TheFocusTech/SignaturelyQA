@@ -16,7 +16,8 @@ test.describe('Settings: Edit signature', () => {
         await severity(Severity.CRITICAL);
         await link(`${QASE_LINK}/SIGN-51`, 'Qase: SIGN-51');
         await link(`${GOOGLE_DOC_LINK}5bzz9ln1m6ek`, 'ATC_13_51_01');
-        await epic('Settings: Edit signature');
+        await epic('Settings');
+        await feature('Edit signature');
         await tag('Create a signature');
         
         await signPage.sideMenu.clickSettings();
@@ -47,7 +48,9 @@ test.describe('Settings: Edit signature', () => {
         await link(`${QASE_LINK}/SIGN-53`, 'Qase: SIGN-53');
         await link(`${GOOGLE_DOC_LINK}9go15k207w7b`,'ATC_13_53_01');
         await epic('Settings');
+        await feature('Edit signature');
         await tag('Delete Signature');
+        
         test.setTimeout(120 * 1000);
 
         await createSignature(
@@ -86,7 +89,9 @@ test.describe('Settings: Edit signature', () => {
         await link(`${QASE_LINK}/SIGN-52`, 'Qase: SIGN-52');
         await link(`${GOOGLE_DOC_LINK}b94zmc9ufxyk`, 'ATC_13_52_01');
         await epic('Settings');
+        await feature('Edit signature');
         await tag('Edit Signature');
+
         test.setTimeout(120 * 1000);
 
         await createSignature(
