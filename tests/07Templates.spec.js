@@ -71,7 +71,7 @@ test.describe('Templates', () => {
         await signPage.sideMenu.clickTemplates();
         await templatesPage.table.clickFirstOptionsBtn();
         await templatesPage.table.clickAddToAPIBtn();
-        //await templatesPage.toast.waitForToastIsHiddenByText(TOAST_MESSAGE.success);
+        
         await templatesPage.sideMenuTemplates.clickApiTemplates();
 
         await step('Template successfully added to API (appears in API Templates).', async () => {
