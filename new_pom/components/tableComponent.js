@@ -65,7 +65,7 @@ export default class TableComponent {
     }
 
     async clickAddToAPIBtn() {
-        await step('Click the "Add to API" option', async () => {
+        await step('Select the "Add to API" option in the dropdown menu ', async () => {
             await this.addToAPIBtn.waitFor();
             await this.addToAPIBtn.click();
         });
@@ -100,13 +100,7 @@ export default class TableComponent {
         const actualText = await this.documentStatus.textContent();
         return actualText;
     }
-
-    async waitForDocumentStatusVisible(status) {
-        await step(`Wait for ${status} status of the created document in the table.`, async () => {
-            await this.documentStatus.getByText(status).waitFor({ state: 'visible' });
-        });
-    }
-
+ 
     async clickDuplicateBtn() {
         await step('Select the "Duplicate" option in the dropdown menu', async () => {
             await this.duplicateBtn.click();
@@ -164,14 +158,15 @@ export default class TableComponent {
     }
 
     async waitForDocumentStatus(page, expectedStatus) {
-        await step('Wait for status of the document to update', async () => {
+        await step(`Wait for ${expectedStatus} status of the created document in the table.`, async () => {
             await this.documentStatus.waitFor();
             let documentStatus = await this.documentStatus.textContent();
 
             while (documentStatus !== expectedStatus) {
-                console.log(`The status of the document after creation is ${documentStatus}`);
-                await page.reload();
-                documentStatus = await this.documentStatus.textContent();
+                await step('Refresh page', async () => {
+                    await page.reload();
+                    documentStatus = await this.documentStatus.textContent();
+                });
             }
         });
     }
@@ -265,8 +260,8 @@ export default class TableComponent {
     }
 
     async clickOptionsChangePermissionsBtn() {
-        await step('Click the "Change Permissions" button it the "Options" dropdown menu', async () => {
-            await this.optionsChangePermissionsBtn.waitFor( {state: 'visible'} );
+        await step('Select the "Change Permissions" option in the dropdown menu', async () => {
+            await this.optionsChangePermissionsBtn.waitFor({ state: 'visible' });
             await this.optionsChangePermissionsBtn.click();
         });
     }

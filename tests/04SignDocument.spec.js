@@ -21,12 +21,12 @@ import { retrieveUserEmailConfirmationLink, retrieveEmailMessage, editDocumentSt
 import { createSignature, uploadDocumentForDraft } from '../helpers/preconditions.js';
 
 test.describe('Sign Document', () => {
-    test('TC_04_11_01 | Verify the user can choose a custom signing order', async ({
+    test('TC_04_11_01 | Verify user can choose a custom signing order', async ({
         createBusinessUserAndLogin,
         signPage,
         prepareForSignatureModal,
     }) => {
-        await description('To verify the user can choose a custom signing order');
+        await description('To verify user can choose a custom signing order');
         await severity(Severity.CRITICAL);
         await link(`${QASE_LINK}/SIGN-11`, 'Qase: SIGN-11');
         await link(`${GOOGLE_DOC_LINK}7y8njhymxgmj`, 'ATC_04_11_01');
@@ -77,7 +77,9 @@ test.describe('Sign Document', () => {
     }) => {
         test.setTimeout(270 * 1000);
 
-        await description('To verify user can add viewers to view the document');
+        await description(
+            'To verify user can add viewers to view the document. \n Attention: Page can be reloaded if application state not synchronized'
+        );
         await severity(Severity.CRITICAL);
         await link(`${QASE_LINK}/SIGN-14`, 'Qase: SIGN-14');
         await link(`${GOOGLE_DOC_LINK}ojom1b8sk9ht`, 'ATC_04_14_01');
@@ -109,7 +111,7 @@ test.describe('Sign Document', () => {
 
         await finalStepPage.waitAndClickSendForSignatureBtn(TOAST_MESSAGE.success);
         await successModal.clickBackToDocumentsBtn();
-        await documentsPage.table.waitForDocumentStatusVisible(DOCUMENT_STATUS.awaiting);
+        await documentsPage.table.waitForDocumentStatus(page, DOCUMENT_STATUS.awaiting);
 
         const signerLink = await retrieveUserEmailConfirmationLink(
             request,
@@ -177,7 +179,7 @@ test.describe('Sign Document', () => {
         });
     });
 
-    test('TC_04_10_02 | Verify the user and the other signer can sign the document.', async ({
+    test('TC_04_10_02 | Verify user and the other signer can sign the document.', async ({
         createBusinessUserAndLogin,
         signPage,
         settingsCompanyPage,
@@ -191,7 +193,7 @@ test.describe('Sign Document', () => {
     }) => {
         test.setTimeout(270 * 1000);
 
-        await description('Objective: To verify the user and the other signer can sign the document.');
+        await description('Objective: To verify user and the other signer can sign the document.');
         await severity(Severity.CRITICAL);
         await link(`${QASE_LINK}/SIGN-10`, 'Qase: SIGN-10');
         await link(`${GOOGLE_DOC_LINK}s5pa7fnboi83`, 'TC_04_10_02');
@@ -245,7 +247,7 @@ test.describe('Sign Document', () => {
         successModal,
     }) => {
         await description(
-            'Objective: To verify that updating the document status to "expired" in the database reflects correctly on the front-end display. \n Attention: Refresh the page after changing the status in the database.'
+            'Objective: To verify that updating the document status to "expired" in the database reflects correctly on the front-end display. \n Attention: Refresh the page twice: \n - if application state not synchronized \n - after changing the status in the database.'
         );
         await severity(Severity.CRITICAL);
         await link(`${QASE_LINK}/SIGN-13`, 'Qase: SIGN-13');
@@ -333,7 +335,7 @@ test.describe('Sign Document', () => {
         });
     });
 
-    test('TC_04_12_01 | Verify the signer can decline to sign the document', async ({
+    test('TC_04_12_01 | Verify signer can decline to sign the document', async ({
         createBusinessUserAndLogin,
         signPage,
         prepareForSignatureModal,
@@ -348,7 +350,7 @@ test.describe('Sign Document', () => {
         test.setTimeout(250 * 1000);
 
         await description(
-            'Objective: To verify the signer can decline to sign the document. \n Attention: Script contains commented code due to delayed reminder'
+            'Objective: To verify signer can decline to sign the document. \n Attention: \n - Script contains commented code due to delayed reminder. \n - Page can be reloaded if application state not synchronized'
         );
         await severity(Severity.CRITICAL);
         await link(`${QASE_LINK}/SIGN-12`, 'Qase: SIGN-12');
@@ -376,7 +378,7 @@ test.describe('Sign Document', () => {
         await prepareForSignatureModal.toast.waitForToastIsHiddenByText(TOAST_MESSAGE.success);
         await finalStepPage.clickSendForSignatureBtn();
         await successModal.clickBackToDocumentsBtn();
-        await documentsPage.table.waitForDocumentStatusVisible(DOCUMENT_STATUS.awaiting);
+        await documentsPage.table.waitForDocumentStatus(page, DOCUMENT_STATUS.awaiting);
 
         // TODO permanently pass step with Send Reminder
         // await documentsPage.table.clickOptionsBtn(0);
@@ -411,7 +413,7 @@ test.describe('Sign Document', () => {
         });
     });
 
-    test('TC_04_10_03 | Verify the user can send the document to the signer', async ({
+    test('TC_04_10_03 | Verify user can send the document to the signer', async ({
         createBusinessUserAndLogin,
         signPage,
         settingsCompanyPage,
@@ -425,7 +427,7 @@ test.describe('Sign Document', () => {
     }) => {
         test.setTimeout(270 * 1000);
 
-        await description('Objective: To verify the user can send the document to the signer');
+        await description('Objective: To verify user can send the document to the signer');
         await severity(Severity.CRITICAL);
         await link(`${QASE_LINK}/SIGN-10`, 'Qase: SIGN-10');
         await link(`${GOOGLE_DOC_LINK}o1a44zgp2uji`, 'TC_04_10_03');
