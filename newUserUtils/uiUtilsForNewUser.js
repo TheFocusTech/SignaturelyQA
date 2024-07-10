@@ -4,6 +4,7 @@ import { step } from "allure-js-commons";
 export async function newFreeUserLogin({ page, loginPage }) {
     await step(`New User Setup: Free User Login`, async () => {
         await page.goto("/");
+        await page.waitForLoadState('load');
         await loginPage.fillEmailAddressInput(process.env.NEW_USER_EMAIL);
         await loginPage.fillPasswordInput(process.env.NEW_USER_PASSWORD);
         await loginPage.clickLogin();

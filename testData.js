@@ -172,11 +172,21 @@ export const SIGNERS_DATA = {
 
 export const FOLDER_NAME = 'Folder for documents';
 export const UPLOAD_FILE_PATH = {
-    jpgDocument: 'testDocuments/picture.jpg',
-    xlsxDocument: 'testDocuments/todoList.xlsx',
-    csvDocument: 'testDocuments/CSV.csv',
-    pdfDocument: 'testDocuments/openHouse.pdf',
-    txtDocument: 'testDocuments/text.txt',
+  jpgDocument: 'testDocuments/picture.jpg',
+  jpegDocument: 'testDocuments/JPEGpicture.jpeg',
+  xlsxDocument: 'testDocuments/todoList.xlsx',
+  xlsDocument: 'testDocuments/Budget.xls',
+  csvDocument: 'testDocuments/CSV.csv',
+  pdfDocument: 'testDocuments/openHouse.pdf',
+  txtDocument: 'testDocuments/text.txt',
+  docDocument: 'testDocuments/Ecology.doc',
+  docxDocument: 'testDocuments/environment.docx',
+  pptxDocument: 'testDocuments/BasicPresentation.pptx',
+  ppsxDocument: 'testDocuments/GalaxyPresentation.ppsx',
+  pptDocument: 'testDocuments/MinimPresentation.ppt',
+  pngDocument: 'testDocuments/imagePNG.png',
+  htmlDocument: 'testDocuments/index1.html',
+  gifDocument: 'testDocuments/like.gif',
 };
 export const UPLOAD_FILE_NAME = {
     jpgDocument: 'picture.jpg',
