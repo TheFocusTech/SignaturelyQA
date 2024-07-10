@@ -6,8 +6,8 @@ test.describe('Out of scope. Verify document formats to download.', () => {
     const documentsList = Object.values(UPLOAD_FILE_PATH);
     documentsList.forEach((document) => {
         let format = '.' + document.split('.').pop();
-        test.only(`Verify document formats to download ${format}`, async ({
-            createBusinessUserAndLogin,
+        test(`Verify document formats to download ${format}`, async ({
+          createBusinessUserAndLogin,
           signPage,
           documentsPage,
         }) => {
