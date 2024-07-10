@@ -10,3 +10,4 @@ tests/.DS_Store
 /allure-results/
 /my-reportTest-Chrome/
 /my-reportTest-Firefox/
+/my-reportTest-Safari/
