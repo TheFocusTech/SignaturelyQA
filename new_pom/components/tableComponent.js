@@ -144,14 +144,7 @@ export default class TableComponent {
         });
         return actualNameFolder.trim();
     }
-    async getTemplateTitle() {
-        let actualText;
-        await step('Get template title', async () => {
-            actualText = await this.objectTitle.first().textContent();
-        });
-        return actualText;
-    }
-
+   
     async compareTitles() {
         let actualText;
         let actualSecondText;
