@@ -49,7 +49,7 @@ test.describe('Templates', () => {
         });
     });
 
-    test.only('TC_07_31_01 | Verify that  the user can select Add to API', async ({
+    test('TC_07_31_01 | Verify that  the user can select Add to API', async ({
         createBusinessUserAndLogin,
         signPage,
         prepareForSignatureModal,
