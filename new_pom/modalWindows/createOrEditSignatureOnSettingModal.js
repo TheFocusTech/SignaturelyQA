@@ -1,4 +1,5 @@
 import { step } from "allure-js-commons";
+
 export default class CreateOrEditSignatureOnSettingModal {
     constructor(page) {
         this.page = page;

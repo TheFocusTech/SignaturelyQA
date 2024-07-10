@@ -12,7 +12,6 @@ export default class FormsPage {
 
         this.createFormBtn = this.page.getByRole('button', { name: 'Create Form', exect: true }).first();
     }
-
     
     async clickCreateFormBtn() {
         await step('Click the "Create Form" button', async () => {

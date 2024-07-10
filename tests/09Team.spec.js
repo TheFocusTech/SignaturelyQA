@@ -1,8 +1,9 @@
 import { expect } from '@playwright/test';
 import { test } from '../fixtures/base.js';
-import { TEAM_MEMBER_ROLES, TOAST_MESSAGE, QASE_LINK, GOOGLE_DOC_LINK } from '../testData.js';
+import { TEAM_MEMBER_ROLES, TOAST_MESSAGE, QASE_LINK, GOOGLE_DOC_LINK, EMAIL_SUBJECTS } from '../testData.js';
 import { description, tag, severity, Severity, link, epic, step } from 'allure-js-commons';
 import { addTeamMember } from '../helpers/preconditions.js';
+import { retrieveUserEmailConfirmationLink } from '../helpers/utils.js';
 
 test.describe('Team', () => {
     const teamMemberRoles = Object.values(TEAM_MEMBER_ROLES);
@@ -20,7 +21,6 @@ test.describe('Team', () => {
             await severity(Severity.CRITICAL);
             await link(`${QASE_LINK}/SIGN-38`, 'Qase: SIGN-38');
             await link(`${GOOGLE_DOC_LINK}70blkaheuq3a`, 'ATC_09_38_01');
-
             await epic('Team');
             await tag('Add team member');
 
@@ -31,18 +31,26 @@ test.describe('Team', () => {
             }`;
             const teamMemberName = `${process.env.NEW_USER_NAME}${'_teammember'}`;
 
-            await addTeamMember(
-                role,
-                teamMemberEmail,
-                teamMemberName,
-                page,
-                request,
-                signPage,
-                teamPage,
-                addTeamMemberModal,
-                teamsAcceptInvitePage
-            );
-
+            await signPage.sideMenu.clickTeam();
+            await teamPage.clickAddTeamMemberButton();
+            await addTeamMemberModal.fillTeamMemberEmailInputField(teamMemberEmail);
+            await addTeamMemberModal.fillTeamMemberNameInputField(teamMemberName);
+            (await addTeamMemberModal.isTeamMemberRoleSet(role))
+                ? null
+                : await addTeamMemberModal.changeTeamMemberRole(role);
+            await addTeamMemberModal.clickSendInvitesButton();
+            
+            await step(`Verify that a tosat message "successfully" popped up`, async () => {
+                await expect(teamPage.toast.toastBody).toHaveText(TOAST_MESSAGE.invitesSent);
+            });
+            
+            const emailSubject = `${process.env.NEW_USER_NAME}${EMAIL_SUBJECTS.inviteToJoin}`;
+            const inviteLink = await retrieveUserEmailConfirmationLink(request, teamMemberEmail, emailSubject);
+            await step('Navigate to the invite link', async () => {
+               await page.goto(inviteLink);
+            });
+            await teamsAcceptInvitePage.clickBackToMainPageButton();
+            await teamsAcceptInvitePage.toast.waitForToastIsHiddenByText(TOAST_MESSAGE.inviteAccepted);
             await signPage.sideMenu.clickTeam();
 
             await step(`Verify that a team member has role ${role} set in the Team table`, async () => {

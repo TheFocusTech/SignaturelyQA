@@ -3,7 +3,7 @@ import TableComponent from '../../components/tableComponent';
 import SideMenuDocumentsComponent from '../../components/sideMenuDocumentsComponent';
 import ToastComponent from '../../components/toastComponent';
 import { step } from 'allure-js-commons';
-import { reloadPage, getRandomIndexInRange } from '../../../helpers/utils';
+import { getRandomIndexInRange } from '../../../helpers/utils';
 
 export default class DocumentsPage {
     constructor(page) {
