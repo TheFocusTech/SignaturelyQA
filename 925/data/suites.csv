@@ -1,0 +1,2 @@
+"Status","Start Time","Stop Time","Duration in ms","Parent Suite","Suite","Sub Suite","Test Class","Test Method","Name","Description"
+"passed","Wed Jul 10 23:04:05 GMT 2024","Wed Jul 10 23:04:50 GMT 2024","44677","webkit","","Templates","","","TC_07_31_01 | Verify that  the user can select Add to API","Objective: To verify the process of add template to API."
