@@ -1,97 +1,97 @@
 name: Playwright Tests
 on:
-  pull_request:
-    branches: [ main ]
+    pull_request:
+        branches: [main]
 jobs:
-  test:
-    timeout-minutes: 150
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 18
-      - name: Install dependencies
-        run: npm ci
-      - name: Install Playwright Browsers
-        run: npx playwright install --with-deps
+    test:
+        timeout-minutes: 150
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v4
+            - uses: actions/setup-node@v4
+              with:
+                  node-version: 18
+            - name: Install dependencies
+              run: npm ci
+            - name: Install Playwright Browsers
+              run: npx playwright install --with-deps
 
-      - name: Run Playwright Chrome tests
-        run: npm test
-        env:
-          URL: ${{ secrets.URL}}
-          USER_EMAIL: ${{ secrets.USER_EMAIL }}
-          USER_PASSWORD: ${{ secrets.USER_PASSWORD }}
-          API_URL: ${{ secrets.API_URL }}
-          ADMIN_EMAIL: ${{ secrets.ADMIN_EMAIL }}
-          ADMIN_PASSWORD: ${{ secrets.ADMIN_PASSWORD }}
-          DB_DATA: ${{ secrets.DB_DATA }}
-          EMAIL_PREFIX: ${{ secrets.EMAIL_PREFIX }}
-          EMAIL_DOMAIN: ${{ secrets.EMAIL_DOMAIN }}
-          CI_RUN: true
+            # - name: Run Playwright Chrome tests
+            #   run: npm test
+            #   env:
+            #     URL: ${{ secrets.URL}}
+            #     USER_EMAIL: ${{ secrets.USER_EMAIL }}
+            #     USER_PASSWORD: ${{ secrets.USER_PASSWORD }}
+            #     API_URL: ${{ secrets.API_URL }}
+            #     ADMIN_EMAIL: ${{ secrets.ADMIN_EMAIL }}
+            #     ADMIN_PASSWORD: ${{ secrets.ADMIN_PASSWORD }}
+            #     DB_DATA: ${{ secrets.DB_DATA }}
+            #     EMAIL_PREFIX: ${{ secrets.EMAIL_PREFIX }}
+            #     EMAIL_DOMAIN: ${{ secrets.EMAIL_DOMAIN }}
+            #     CI_RUN: true
 
-      # - name: Run Playwright Firefox tests
-      #   run: npm run test:all:firefox
-      #   env:
-      #     URL: ${{ secrets.URL}}
-      #     USER_EMAIL: ${{ secrets.USER_EMAIL }}
-      #     USER_PASSWORD: ${{ secrets.USER_PASSWORD }}
-      #     API_URL: ${{ secrets.API_URL }}
-      #     ADMIN_EMAIL: ${{ secrets.ADMIN_EMAIL }}
-      #     ADMIN_PASSWORD: ${{ secrets.ADMIN_PASSWORD }}
-      #     DB_DATA: ${{ secrets.DB_DATA }}
-      #     EMAIL_PREFIX: ${{ secrets.EMAIL_PREFIX }}
-      #     EMAIL_DOMAIN: ${{ secrets.EMAIL_DOMAIN }}
-      #     CI_RUN: true
+            - name: Run Playwright Firefox tests
+              run: npm run test:all:firefox
+              env:
+                  URL: ${{ secrets.URL}}
+                  USER_EMAIL: ${{ secrets.USER_EMAIL }}
+                  USER_PASSWORD: ${{ secrets.USER_PASSWORD }}
+                  API_URL: ${{ secrets.API_URL }}
+                  ADMIN_EMAIL: ${{ secrets.ADMIN_EMAIL }}
+                  ADMIN_PASSWORD: ${{ secrets.ADMIN_PASSWORD }}
+                  DB_DATA: ${{ secrets.DB_DATA }}
+                  EMAIL_PREFIX: ${{ secrets.EMAIL_PREFIX }}
+                  EMAIL_DOMAIN: ${{ secrets.EMAIL_DOMAIN }}
+                  CI_RUN: true
 
-      # - name: Run Playwright Safari tests
-      #   run: npm run test:all:webkit
-      #   env:
-      #     URL: ${{ secrets.URL}}
-      #     USER_EMAIL: ${{ secrets.USER_EMAIL }}
-      #     USER_PASSWORD: ${{ secrets.USER_PASSWORD }}
-      #     API_URL: ${{ secrets.API_URL }}
-      #     ADMIN_EMAIL: ${{ secrets.ADMIN_EMAIL }}
-      #     ADMIN_PASSWORD: ${{ secrets.ADMIN_PASSWORD }}
-      #     DB_DATA: ${{ secrets.DB_DATA }}
-      #     EMAIL_PREFIX: ${{ secrets.EMAIL_PREFIX }}
-      #     EMAIL_DOMAIN: ${{ secrets.EMAIL_DOMAIN }}
-      #     CI_RUN: true
+            # - name: Run Playwright Safari tests
+            #   run: npm run test:all:webkit
+            #   env:
+            #     URL: ${{ secrets.URL}}
+            #     USER_EMAIL: ${{ secrets.USER_EMAIL }}
+            #     USER_PASSWORD: ${{ secrets.USER_PASSWORD }}
+            #     API_URL: ${{ secrets.API_URL }}
+            #     ADMIN_EMAIL: ${{ secrets.ADMIN_EMAIL }}
+            #     ADMIN_PASSWORD: ${{ secrets.ADMIN_PASSWORD }}
+            #     DB_DATA: ${{ secrets.DB_DATA }}
+            #     EMAIL_PREFIX: ${{ secrets.EMAIL_PREFIX }}
+            #     EMAIL_DOMAIN: ${{ secrets.EMAIL_DOMAIN }}
+            #     CI_RUN: true
 
-      - uses: actions/upload-artifact@v4
-        if: always()
-        with:
-          name: playwright-report
-          path: playwright-report/
-          retention-days: 30
+            - uses: actions/upload-artifact@v4
+              if: always()
+              with:
+                  name: playwright-report
+                  path: playwright-report/
+                  retention-days: 30
 
-      - name: Attach artifacts on failure
-        uses: actions/upload-artifact@v4
-        if: failure()
-        with:
-          name: Artifacts
-          path: test-results/
+            - name: Attach artifacts on failure
+              uses: actions/upload-artifact@v4
+              if: failure()
+              with:
+                  name: Artifacts
+                  path: test-results/
 
-      - name: Get Allure history
-        uses: actions/checkout@v4
-        if: always()
-        continue-on-error: true
-        with:
-          ref: gh-pages
-          path: gh-pages
+            - name: Get Allure history
+              uses: actions/checkout@v4
+              if: always()
+              continue-on-error: true
+              with:
+                  ref: gh-pages
+                  path: gh-pages
 
-      - name: Allure Report with history
-        uses: simple-elf/allure-report-action@v1.9
-        if: always()
-        with:
-          gh_pages: gh-pages
-          allure_history: allure-history
-          allure_results: allure-results
+            - name: Allure Report with history
+              uses: simple-elf/allure-report-action@v1.9
+              if: always()
+              with:
+                  gh_pages: gh-pages
+                  allure_history: allure-history
+                  allure_results: allure-results
 
-      - name: Deploy report to Github Pages
-        uses: peaceiris/actions-gh-pages@v4
-        if: always()
-        with:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          PUBLISH_BRANCH: gh-pages
-          PUBLISH_DIR: allure-history
+            - name: Deploy report to Github Pages
+              uses: peaceiris/actions-gh-pages@v4
+              if: always()
+              with:
+                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+                  PUBLISH_BRANCH: gh-pages
+                  PUBLISH_DIR: allure-history
