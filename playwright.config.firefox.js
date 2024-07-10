@@ -60,7 +60,7 @@ module.exports = defineConfig({
 
         screenshot: 'only-on-failure',
         video: {
-            mode: 'retain-on-failure',
+            mode: 'on',
             size: process.env.CI ? { width: 800, height: 600 } : { width: 1440, height: 900 },
         },
     },
