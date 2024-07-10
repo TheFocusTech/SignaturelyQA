@@ -9,7 +9,6 @@ import {
 } from '../testData';
 import { step } from 'allure-js-commons';
 import { retrieveUserEmailConfirmationLink } from '../helpers/utils.js';
-import SettingsProfilePage from "../new_pom/pages/settings/settingsProfilePage.js";
 
 export const createSignature = async (
     signPage,
