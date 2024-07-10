@@ -8,17 +8,18 @@ export default class UpdateFormPage {
     constructor(page) {
         this.page = page;
 
-        this.createUpdateForm = new CreateUpdateFormComponent(this.page)
+        this.createUpdateForm = new CreateUpdateFormComponent(this.page);
         this.fileUploader = new FileUploaderComponent(this.page);
         this.table = new TableComponent(this.page);
         this.toast = new ToastComponent(this.page);
-        
-        this.deleteDocumentBtn = this.page.getByRole('button').locator('.button.cancel')
+
+        this.deleteDocumentBtn = this.page.getByRole('button').locator('.button.cancel');
     }
+
     async clickDeleteDocumentBtn() {
         await step('Click the cross icon (X) next to the uploaded document to remove it.', async () => {
             await this.deleteDocumentBtn.click();
-        })
+        });
     }
 }
 

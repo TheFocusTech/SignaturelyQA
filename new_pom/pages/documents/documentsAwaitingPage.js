@@ -8,8 +8,5 @@ export default class DocumentsAwaitingPage {
 
       this.table = new TableComponent(this.page);
       this.toast = new ToastComponent(this.page);
-
-
   }
-
 }
