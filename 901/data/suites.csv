@@ -1,0 +1,2 @@
+"Status","Start Time","Stop Time","Duration in ms","Parent Suite","Suite","Sub Suite","Test Class","Test Method","Name","Description"
+"passed","Wed Jul 10 00:54:25 GMT 2024","Wed Jul 10 00:55:19 GMT 2024","53985","chromium","","Billing","","","TC_14_54_01 | Attach/delete payment card","Objective: To verify the functionality of attaching a payment card through the settings-billing section and deleting a payment card through the Billing Portal."
