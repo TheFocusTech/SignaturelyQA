@@ -159,7 +159,7 @@ test.describe('Templates', () => {
         await successModal.clickOkBtn();
         await templatesPage.toast.waitForToastIsHiddenByText(TOAST_MESSAGE.templateDuplicate);
 
-        await step('Verify the number of tamplates in the table is increased by 1', async () => {
+        await step('Verify the number of templates in the table is increased by 1', async () => {
             await expect(await templatesPage.table.objectTitle).toHaveCount(2);
         });
 

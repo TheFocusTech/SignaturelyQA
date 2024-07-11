@@ -4,7 +4,7 @@ import { CARD_DETAILS, EMAIL_SUBJECTS, SELECTORS } from '../testData';
 import { retrieveEmailMessage } from '../helpers/utils';
 
 // sample test to check how Gmail method - checkEmailMessageReceived() works
-test('Verify that Email message received', async ({ request }) => {
+test('Verify Email message received.', async ({ request }) => {
     const exampleUser = {
         user1: {
             from: 'LG_tester',

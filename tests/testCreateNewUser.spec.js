@@ -13,7 +13,7 @@ test.describe('Out of scope. Tests to maintain New User Creation.', () => {
         await expect(settingsCompanyPage.page).toHaveURL(process.env.URL + URL_END_POINTS.settingsCompanyEndPoint)
     });
 
-    test('Create Business User', async ({
+    test('Create Business User.', async ({
         createBusinessUserAndLogin,
         signPage,
         settingsCompanyPage,

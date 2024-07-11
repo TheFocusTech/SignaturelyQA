@@ -9,13 +9,13 @@ export default class ToastComponent {
     }
 
     async clickToastFirstCloseBtn() {
-        await step('Close the toast notification', async () => {
+        await step('Close toast notification', async () => {
             await this.toastFirstCloseBtn.click();
         });
     }
 
     async waitForToastCompleted() {
-        await step('Wait for the toast to be hidden', async () => {
+        await step('Wait for toast to be hidden', async () => {
             await this.toastFirstCloseBtn.waitFor({ state: 'visible' });
             await this.toastFirstCloseBtn.waitFor({ state: 'hidden' });
         });
@@ -29,7 +29,7 @@ export default class ToastComponent {
     }
 
     async waitForToastText() {
-        await step('Wait for the toast message to be visible', async () => {
+        await step('Wait for toast message to be visible', async () => {
             await this.toastBody.waitFor({state: 'visible'});
         });
     }

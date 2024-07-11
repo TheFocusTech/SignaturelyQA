@@ -17,7 +17,7 @@ import {createSignature, createTemplate, createTemplateForBulkSend} from '../hel
 import { description, tag, severity, Severity, link, epic, step } from 'allure-js-commons';
 
 test.describe('CreateDocument', () => {
-    test('TC_03_07_01 | Verify user can sign uploaded document', async ({
+    test('TC_03_07_01 | Verify user can sign uploaded document.', async ({
         createBusinessUserAndLogin,
         signPage,
         prepareForSignatureModal,
@@ -28,7 +28,7 @@ test.describe('CreateDocument', () => {
     }) => {
         test.setTimeout(220 * 1000);
 
-        await description('To verify the process of creating and signing the document');
+        await description('To verify the process of creating and signing the document.');
         await severity(Severity.CRITICAL);
         await link(`${QASE_LINK}/SIGN-7`, 'Qase: SIGN-7');
         await link(`${GOOGLE_DOC_LINK}yaxaf6jrhsdw`, 'ATC_03_07_01');
@@ -52,12 +52,12 @@ test.describe('CreateDocument', () => {
         await finalStepPage.clickSignDocumentBtn();
         await successModal.clickBackToDocumentsBtn();
 
-        await step('Verify the created document is in the table with the label "COMPLETED"', async () => {
+        await step('Verify created document is in the table with the label "COMPLETED".', async () => {
             await expect(await documentsPage.table.documentStatus).toHaveText(DOCUMENT_STATUS.completed);
         });
     });
 
-    test('TC_03_07_06 | Verify user can create, sign, and send the document to another signer', async ({
+    test('TC_03_07_06 | Verify user can create, sign, and send document to another signer.', async ({
         createBusinessUserAndLogin,
         signPage,
         prepareForSignatureModal,
@@ -97,12 +97,12 @@ test.describe('CreateDocument', () => {
         await finalStepPage.clickSignDocumentAndSendForSignatureBtn();
         await successModal.clickBackToDocumentsBtn();
 
-        await step('Verify the created document is in the table with the label "AWAITING".', async () => {
+        await step('Verify created document is in the table with the label "AWAITING".', async () => {
             await expect(await documentsPage.table.documentStatus).toHaveText(DOCUMENT_STATUS.awaiting);
         });
     });
 
-    test('TC_03_07_03 | Verify user can create document and send it for signature', async ({
+    test('TC_03_07_03 | Verify user can create document and send it for signature.', async ({
         createBusinessUserAndLogin,
         signPage,
         prepareForSignatureModal,
@@ -133,12 +133,12 @@ test.describe('CreateDocument', () => {
         await finalStepPage.toast.waitForToastIsHiddenByText(TOAST_MESSAGE.success);
         await finalStepPage.clickSendForSignatureBtn();
         await successModal.clickBackToDocumentsBtn();
-        await step('Verify the created document is in the table with the label "AWAITING".', async () => {
+        await step('Verify created document is in the table with the label "AWAITING".', async () => {
             await expect(await documentsPage.table.documentStatus).toHaveText(DOCUMENT_STATUS.awaiting);
         });
     });
 
-    test('TC_03_07_02 | Verify the user who uploaded the document and Other Signer can sign it', async ({
+    test('TC_03_07_02 | Verify user who uploaded document and Other Signer can sign it.', async ({
         createBusinessUserAndLogin,
         signPage,
         settingsCompanyPage,
@@ -153,7 +153,7 @@ test.describe('CreateDocument', () => {
         test.setTimeout(160 * 1000);
 
         await description(
-            'To verify the process of creating, signing, and sending a document to another signer'
+            'To verify the process of creating, signing, and sending a document to another signer.'
         );
         await severity(Severity.CRITICAL);
         await link(`${QASE_LINK}/SIGN-7`, 'Qase: SIGN-7');
@@ -189,12 +189,12 @@ test.describe('CreateDocument', () => {
         await finalStepPage.clickSignDocumentAndSendForSignatureBtn();
         await successModal.clickBackToDocumentsBtn();
 
-        await step('Verify the created document is in the table with the label "AWAITING".', async () => {
+        await step('Verify created document is in the table with the label "AWAITING".', async () => {
             await expect(await documentsPage.table.documentStatus).toHaveText(DOCUMENT_STATUS.awaiting);
         });
     });
 
-    test('TC_03_07_05 | Verify user can sign the document themselves with Initial', async ({
+    test('TC_03_07_05 | Verify user can sign document themselves with Initial.', async ({
         createBusinessUserAndLogin,
         signPage,
         prepareForSignatureModal,
@@ -208,7 +208,7 @@ test.describe('CreateDocument', () => {
     }) => {
         test.setTimeout(220 * 1000);
 
-        await description('Verify business user can sign the document themselves with Initial');
+        await description('To verify Business user can sign document themselves with Initial.');
         await severity(Severity.CRITICAL);
         await link(`${QASE_LINK}/SIGN-7`, 'Qase: SIGN-7');
         await link(`${GOOGLE_DOC_LINK}cd9kwkury3z7`, 'ATC_03_07_05');
@@ -237,13 +237,13 @@ test.describe('CreateDocument', () => {
         await finalStepPage.clickSignDocumentBtn();
         await successModal.clickBackToDocumentsBtn();
 
-        await step('Verify the created document is in the table with the label "COMPLETED".', async () => {
+        await step('Verify created document is in the table with the label "COMPLETED".', async () => {
             await documentsPage.table.waitForTable(10000);
             await expect(await documentsPage.table.documentStatus).toHaveText(DOCUMENT_STATUS.completed);
         });
     });
 
-    test('TC_03_09_01 | Verify user can create documents via Bulk Send', async ({
+    test('TC_03_09_01 | Verify user can create documents via Bulk Send.', async ({
         createBusinessUserAndLogin,
         signPage,
         documentsPage,
@@ -256,7 +256,7 @@ test.describe('CreateDocument', () => {
     }) => {
         test.setTimeout(160 * 1000);
 
-        await description('To verify the user can enable document distribution via Bulk Send');
+        await description('To verify user can enable document distribution via Bulk Send.');
         await severity(Severity.CRITICAL);
         await link(`${QASE_LINK}/SIGN-9`, 'Qase: SIGN-9');
         await link(`${GOOGLE_DOC_LINK}887tkak398is`, 'ATC_03_09_01');
@@ -277,7 +277,7 @@ test.describe('CreateDocument', () => {
 
         await documentsPage.toast.waitForToastIsHiddenByText(TOAST_MESSAGE.documentsSuccess);
 
-        await step(`Verify the total number of created documents is ${BULK_DOCUMENTS.number}.`, async () => {
+        await step(`Verify total number of created documents is ${BULK_DOCUMENTS.number}.`, async () => {
             await documentsPage.table.waitForTable(10000);
             await documentsPage.numberOfDocuments.waitFor({ state: 'visible' });
             await expect(documentsPage.numberOfDocuments).toHaveText(BULK_DOCUMENTS.number);
@@ -304,7 +304,7 @@ test.describe('CreateDocument', () => {
         );
     });
 
-    test('TC_03_07_04 | Verify user can sign the document themselves with existed signature', async ({
+    test('TC_03_07_04 | Verify user can sign the document themselves with existed signature.', async ({
         createBusinessUserAndLogin,
         signPage,
         prepareForSignatureModal,
@@ -319,7 +319,7 @@ test.describe('CreateDocument', () => {
         test.setTimeout(220 * 1000);
 
         await description(
-            'To verify the process of creating and signing a document with an existing signature'
+            'To verify the process of creating and signing a document with an existing signature.'
         );
         await severity(Severity.CRITICAL);
         await link(`${QASE_LINK}/SIGN-7`, 'Qase: SIGN-7');
@@ -349,12 +349,12 @@ test.describe('CreateDocument', () => {
         await finalStepPage.clickSignDocumentBtn();
         await successModal.clickBackToDocumentsBtn();
 
-        await step('Verify the created document is in the table with the label "COMPLETED".', async () => {
+        await step('Verify created document is in the table with the label "COMPLETED".', async () => {
             await expect(await documentsPage.table.documentStatus).toHaveText(DOCUMENT_STATUS.completed);
         });
     });
 
-    test('TC_03_08_02 | Verify the "Edit template" button is active', async ({
+    test('TC_03_08_02 | Verify "Edit template" button is active.', async ({
         createBusinessUserAndLogin,
         signPage,
         prepareForSignatureModal,
@@ -366,7 +366,7 @@ test.describe('CreateDocument', () => {
     }) => {
         test.setTimeout(200 * 1000);
 
-        await description('Verify user can edit the document from the template');
+        await description('To verify user can edit document from the template.');
         await severity(Severity.CRITICAL);
         await link(`${QASE_LINK}/SIGN-8`, 'Qase: SIGN-8');
         await link(`${GOOGLE_DOC_LINK}viu8uhihrxyq`, 'ATC_03_08_02');
@@ -393,12 +393,12 @@ test.describe('CreateDocument', () => {
         await finalStepPage.clickSendForSignatureBtn();
         await successModal.clickBackToDocumentsBtn();
 
-        await step("Verify the created document is in the table with the label 'COMPLETED' ", async () => {
+        await step("Verify created document is in the table with the label 'COMPLETED'.", async () => {
             expect(await documentsPage.table.getDocumentStatusText()).toBe(DOCUMENT_STATUS.awaiting);
         });
     });
 
-    test('TC_03_08_01 | Verify the user can send the template for signature', async ({
+    test('TC_03_08_01 | Verify user can send the template for signature.', async ({
         createBusinessUserAndLogin,
         signPage,
         prepareForSignatureModal,
@@ -410,7 +410,7 @@ test.describe('CreateDocument', () => {
     }) => {
         test.setTimeout(200 * 1000);
         await description(
-            'To verify the process of creating, signing, and sending a document using template'
+            'To verify the process of creating, signing, and sending a document using template.'
         );
         await severity(Severity.CRITICAL);
         await link(`${QASE_LINK}/SIGN-8`, 'Qase: SIGN-8');
@@ -430,7 +430,7 @@ test.describe('CreateDocument', () => {
         await finalStepPage.clickSendForSignatureBtn();
         await successModal.clickBackToDocumentsBtn();
 
-        await step('Verify the created document is in the table with the label "AWAITING".', async () => {
+        await step('Verify created document is in the table with the label "AWAITING".', async () => {
             await expect(await documentsPage.table.documentStatus).toHaveText(DOCUMENT_STATUS.awaiting);
         });
     });

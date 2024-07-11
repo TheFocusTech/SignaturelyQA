@@ -14,7 +14,7 @@ import {
 import { description, tags, severity, Severity, link, epic, feature, step } from 'allure-js-commons';
 
 test.describe('Billing', () => {
-    test('TC_14_57_02 | Verify the ability to successfully downgrade subscription', async ({
+    test('TC_14_57_02 | Verify ability to successfully downgrade subscription.', async ({
         createBusinessUserAndLogin,
         signPage,
         settingsCompanyPage,
@@ -41,13 +41,13 @@ test.describe('Billing', () => {
         await specialOneTimeOfferModal.clickNoThanksModalBtn();
         await settingsBillingPlanPage.sideMenuSettings.clickBilling();
 
-         await step('Verify the text "Your plan will end on" displayed on the Billing page', async () => {
+         await step('Verify text "Your plan will end on" displayed on Billing page.', async () => {
             await expect(settingsBillingPage.nextInvoiceInfo).toContainText(END_PLAN);
         }); 
     });
 
     PLANS.forEach(plan => {
-        test(`TC_14_56_01 | Verify successful upsell of users subscription ${plan} plan`, async ({
+        test(`TC_14_56_01 | Verify successful upsell of users subscription ${plan} plan.`, async ({
             createFreeUserAndLogin,
             signPage,
             settingsCompanyPage,
@@ -56,7 +56,7 @@ test.describe('Billing', () => {
             upgradeYourPlanModal,
             specialOneTimeOfferModal,
         }) => {
-            await description('To verify Free user can successfully upgrade subscription plan.\n');
+            await description('To verify Free user can upgrade subscription plan.');
             await severity(Severity.CRITICAL);
             await link(`${QASE_LINK}/SIGN-56`, 'Qase: SIGN-56');
             await link(`${GOOGLE_DOC_LINK}8e0ff2hol3sq`, 'ATC_14_56_01');
@@ -71,13 +71,13 @@ test.describe('Billing', () => {
             await upgradeYourPlanModal.cardDetails.fillData(CARD_DETAILS.VISA);
             await upgradeYourPlanModal.clickSubscribeButton();
             await specialOneTimeOfferModal.clickYesUpgradeMeBtn();
-            await step(`Verify the billing plan is ${plan} Annually Plan`, async () => {
+            await step(`Verify billing plan is ${plan} Annually Plan.`, async () => {
                 await expect(settingsBillingPlanPage.billingHeader).toContainText(RANDOM_ANNUALLY_PLAN(plan));
             });
         });
     });
 
-    test('TC_14_54_01 | Verify user can attach/delete payment card', async ({
+    test('TC_14_54_01 | Verify user can attach/delete payment card.', async ({
         createFreeUserAndLogin,
         signPage,
         settingsCompanyPage,
@@ -85,7 +85,7 @@ test.describe('Billing', () => {
     }) => {
         await description(
             'To verify the functionality of attaching a payment card ' +
-                'through the settings-billing section and deleting a payment card through the Billing Portal.\n Attention: Page can be reloaded if application state not synchronized'
+                'through the settings-billing section and deleting a payment card through the Billing Portal.\n Attention: Page can be reloaded if application state not synchronized.'
         );
         await severity(Severity.CRITICAL);
         await link(`${QASE_LINK}/SIGN-54`, 'Qase: SIGN-54');
@@ -101,7 +101,7 @@ test.describe('Billing', () => {
         await stripeEnterPaymentDetailsPage.attachCard(CARD_DETAILS.VISA_DEBIT);
         await settingsBillingPage.reloadPage();
 
-        await step('Verify the added payment card displayed on the Billing page', async () => {
+        await step('Verify added payment card displayed on Billing page.', async () => {
             await expect(settingsBillingPage.creditCardData).toHaveText(
                 CARD_DETAILS.VISA_DEBIT.displayingOnTheBillingPage
             );
@@ -111,7 +111,7 @@ test.describe('Billing', () => {
         await stripeEnterPaymentDetailsPage.attachCard(CARD_DETAILS.MASTERCARD);
         await settingsBillingPage.reloadPage();
 
-        await step('Verify the added payment card displayed on the Billing page', async () => {
+        await step('Verify added payment card displayed on Billing pag', async () => {
             await expect(settingsBillingPage.creditCardData).toHaveText(
                 CARD_DETAILS.MASTERCARD.displayingOnTheBillingPage
             );
@@ -119,7 +119,7 @@ test.describe('Billing', () => {
 
         let settingBillingPortalPage = await settingsBillingPage.clickOpenBillingPortalButton();
 
-        await step('Verify the payment card displayed on the Billing Portal page', async () => {
+        await step('Verify payment card displayed on Billing Portal page.', async () => {
             await expect(settingBillingPortalPage.paymentDefaultMethod).toHaveText(
                 CARD_DETAILS.MASTERCARD.displayingOnTheBillingPortalPage
             );
@@ -127,11 +127,11 @@ test.describe('Billing', () => {
 
         await settingBillingPortalPage.deleteAllNotDefaultCards();
 
-        await step('Verify there is only one payment card displayed on the Billing Portal page', async () => {
+        await step('Verify there is only one payment card displayed on Billing Portal page.', async () => {
             await expect(settingBillingPortalPage.paymentMethodsList).toHaveCount(1);
         });
         await step(
-            'Verify there is the last added payment card displayed on the Billing Portal page',
+            'Verify there is the last added payment card displayed on Billing Portal page.',
             async () => {
                 await expect(settingBillingPortalPage.paymentMethodsList).toHaveText(
                     CARD_DETAILS.MASTERCARD.displayingOnTheBillingPortalPage
@@ -140,7 +140,7 @@ test.describe('Billing', () => {
         );
     });
 
-    test('TC_14_57_01 | Verify user can upgrade subscription (from Monthly to Annually)', async ({
+    test('TC_14_57_01 | Verify user can upgrade subscription (from Monthly to Annually).', async ({
         createBusinessUserAndLogin,
         signPage,
         settingsCompanyPage,
@@ -149,7 +149,7 @@ test.describe('Billing', () => {
         upgradeYourPlanModal,
     }) => {
         await description(
-            'To verify user can successfully upgrade their subscription from a monthly plan to an annual plan'
+            'To verify user can successfully upgrade their subscription from monthly plan to annual plan.'
         );
         await severity(Severity.CRITICAL);
         await link(`${QASE_LINK}/SIGN-57`, 'Qase: SIGN-57');
@@ -167,18 +167,18 @@ test.describe('Billing', () => {
         await upgradeYourPlanModal.clickSubscribeButton();
         await settingsBillingPlanPage.toast.waitForToastText();
 
-        await step('Verify the toast message', async () => {
+        await step('Verify toast message.', async () => {
             await expect(await settingsBillingPlanPage.toast.toastBody).toHaveText(TOAST_MESSAGE.planSuccessChange);
         });
 
         await settingsBillingPlanPage.sideMenuSettings.clickBilling();
 
-        await step('Verify the billing plan description is Business', async () => {
+        await step('Verify Billing plan description is Business.', async () => {
             await expect(await settingsBillingPage.billingPlanDescription).toHaveText(BUSINESS_ANNUALLY_PLAN);
         });
     });
 
-    test('TC_14_58_01 | Verify the ability to successfully cancel subscription', async ({
+    test('TC_14_58_01 | Verify ability to successfully cancel subscription.', async ({
         createBusinessUserAndLogin,
         signPage,
         settingsCompanyPage,
@@ -198,13 +198,13 @@ test.describe('Billing', () => {
         await settingsBillingPage.clickCancelSubscriptionButton();
         await cancelSubscriptionModal.clickCancelSubscriptionButton();
 
-        await step('Verify the plan cancel message has appeared', async () => {
+        await step('Verify plan cancel message has appeared.', async () => {
             await expect(settingsBillingPage.nextInvoiceInfo).toContainText(END_PLAN);
         });
     });
 
     PLANS.forEach(plan => {
-        test(`TC_14_55_01 | Verify the ability to successfully select a subscription ${plan} plan`, async ({
+        test(`TC_14_55_01 | Verify ability to successfully select subscription ${plan} plan.`, async ({
             createFreeUserAndLogin,
             signPage,
             settingsCompanyPage,
@@ -229,12 +229,12 @@ test.describe('Billing', () => {
             await upgradeYourPlanModal.clickSubscribeButton();
             await settingsBillingPlanPage.toast.waitForToastText();
     
-            await step('Verify the toast message', async () => {
+            await step('Verify toast message.', async () => {
                 await expect(await settingsBillingPlanPage.toast.toastBody).toHaveText(TOAST_MESSAGE.planSuccessChange);
             });
 
             await specialOneTimeOfferModal.clickNoThanksModalBtn();
-            await step(`Verify the billing plan is ${plan} Monthly Plan`, async () => {
+            await step(`Verify Billing plan is ${plan} Monthly Plan.`, async () => {
                 await expect(settingsBillingPlanPage.billingHeader).toContainText(RANDOM_MONTHLY_PLAN(plan));
             });
         });
