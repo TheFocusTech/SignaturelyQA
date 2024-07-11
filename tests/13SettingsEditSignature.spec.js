@@ -1,7 +1,7 @@
 import { expect } from "@playwright/test";
 import { test, createBusinessUserAndLogin } from "../fixtures/base.js";
 import { DATA_SIGNER, TOAST_MESSAGE, QASE_LINK, GOOGLE_DOC_LINK, SIGNERS_DATA } from "../testData.js";
-import { description, tag, severity, Severity, link, epic, step } from 'allure-js-commons';
+import { description, tag, severity, Severity, link, epic, feature, step } from 'allure-js-commons';
 import { createSignature } from '../helpers/preconditions.js';
 
 test.describe('Settings: Edit signature', () => {
@@ -50,7 +50,7 @@ test.describe('Settings: Edit signature', () => {
         await epic('Settings');
         await feature('Edit signature');
         await tag('Delete Signature');
-        
+
         test.setTimeout(120 * 1000);
 
         await createSignature(

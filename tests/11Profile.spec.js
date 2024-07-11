@@ -11,7 +11,7 @@ import {
     UPLOAD_FILE_PATH,
     DATE_FORMAT,
 } from '../testData.js';
-import { description, tag, severity, Severity, link, epic, step } from 'allure-js-commons';
+import { description, tag, severity, Severity, link, epic, feature, step } from 'allure-js-commons';
 import { uploadAvatar } from '../helpers/preconditions.js';
 
 test.describe('Profile', () => {
