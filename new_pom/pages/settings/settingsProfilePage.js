@@ -25,25 +25,25 @@ export default class SettingsProfilePage {
     }
 
     async fillNewPasswordInputField(password) {
-        await step('Fill "New Password" input field', async () => {
+        await step('Fill in "New Password" input field', async () => {
             await this.newPasswordInputField.type(password);
         });
     }
 
     async fillRepeatNewPasswordInputField(password) {
-        await step('Fill "Repeate new Password" input field', async () => {
+        await step('Fill in "Repeate new Password" input field', async () => {
             await this.repeatNewPasswordInputField.type(password);
         });
     }
 
     async clickSaveButton() {
-        await step('Click "Save" button', async () => {
+        await step('Click on "Save" button', async () => {
             await this.saveButton.click();
         });
     }
 
     async clickDeleteMyAccountBtn() {
-        await step('Click "Delete My Account" button', async () => {
+        await step('Click on "Delete My Account" button', async () => {
             await this.deleteMyAccountBtn.click();
         });
     }
@@ -55,13 +55,13 @@ export default class SettingsProfilePage {
     }
 
     async fillNewEmailIntoEmailAddressInputField(email) {
-        await step('Fill "Email Address" field with new email', async () => {
+        await step('Fill in "Email Address" field with new email', async () => {
             await this.emailAddressInputField.fill(email);
         });
     }
 
     async clickUpdateBtn() {
-        await step('Click "Update" button', async () => {
+        await step('Click on "Update" button', async () => {
             await this.updateBtn.click();
         });
     }
@@ -89,7 +89,7 @@ export default class SettingsProfilePage {
     }
 
     async clickDateFormatDropdown() {
-        await step('Click "Date Format" dropdown in the Preferences section', async () => {
+        await step('Click on "Date Format" dropdown in the "Preferences" section', async () => {
             await this.dateFormatDropdown.click();
         });
     }
@@ -113,7 +113,7 @@ export default class SettingsProfilePage {
     }
 
     async clickDeleteButton() {
-        await step('Click the "Delete" button', async () => {
+        await step('Click on "Delete" button', async () => {
             await this.deleteButton.click();
         })
     }

@@ -11,7 +11,7 @@ export default class SignUpFreePage {
     }
 
     async clickCreateAccountBtn() {
-        await step('Click the "Create Account" button', async () => {
+        await step('Click on "Create Account" button', async () => {
             await this.createAccountBtn.click();
             await this.createAccountBtn.isHidden();
         });

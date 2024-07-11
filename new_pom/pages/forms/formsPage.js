@@ -14,8 +14,8 @@ export default class FormsPage {
     }
     
     async clickCreateFormBtn() {
-        await step('Click the "Create Form" button', async () => {
-        await this.createFormBtn.click();
+        await step('Click on "Create Form" button', async () => {
+            await this.createFormBtn.click();
         });
     }
 }

@@ -19,7 +19,7 @@ export default class NotRegisterSignerSignPage {
     }
 
     async clickSubmitBtn() {
-        await step('Click "Submit" button', async () => {
+        await step('Click on "Submit" button', async () => {
             this.submitBtn.click();
         });
     }

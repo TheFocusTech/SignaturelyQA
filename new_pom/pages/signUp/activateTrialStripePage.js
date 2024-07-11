@@ -14,7 +14,7 @@ export default class ActivateTrialStripePage {
     }
 
     async clickStartMy7DayFreeTrialBtn() {
-        await step("Click the 'Start My 7-Day Free Trial' button.", async () => {
+        await step("Click on 'Start My 7-Day Free Trial' button.", async () => {
             await this.startMy7DayFreeTrialBtn.click();
             await this.page.waitForURL(`${process.env.URL}${URL_END_POINTS.activateTrialEndPoint}`);
         });

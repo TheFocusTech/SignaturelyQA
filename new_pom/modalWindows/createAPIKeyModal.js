@@ -39,7 +39,7 @@ export default class CreateAPIKeyModal {
     }
 
     async clickCloseAPIModalBtn() {
-        await step('Click on "X" (close) button', async () => {
+        await step('Click on "X" (close) symbol', async () => {
             await this.closeAPIModalBtn.click();
         });
     }

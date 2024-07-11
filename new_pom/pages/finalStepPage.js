@@ -21,7 +21,7 @@ export default class FinalStepPage {
     }
 
     async fillDocumentTitleField(title) {
-        await step('Fill in the document title.', async () => {
+        await step('Fill in "Document title" input firld.', async () => {
             await this.documentTitleField.waitFor({ status: 'visible' });
             await this.documentTitleField.fill(title);
         });
@@ -34,14 +34,14 @@ export default class FinalStepPage {
     }
 
     async waitAndClickSendForSignatureBtn(text) {
-        await step('Click on the "Send for Signature" button.', async () => {
+        await step('Click on "Send for Signature" button.', async () => {
             await this.toast.waitForToastIsHiddenByText(text);
             await this.sendForSignatureBtn.click();
         });
     }
 
     async fillDocumentOptionalMessageField(message) {
-        await step('Fill in the document Optional Message.', async () => {
+        await step('Fill in "Optional Message" input field.', async () => {
             await this.documentOptionalMessageField.fill(message);
         });
     }
@@ -51,7 +51,7 @@ export default class FinalStepPage {
     }
 
     async clickSendForSignatureBtn() {
-        await step('Click the "Send for Signature" button.', async () => {
+        await step('Click on "Send for Signature" button.', async () => {
             await this.sendForSignatureBtn.click();
         });
     }

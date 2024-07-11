@@ -16,7 +16,7 @@ export default class SignUpPersonalPage {
     }
 
     async clickPurchaseNowButton() {
-        await step('Click "Purchase Now" button', async () => {
+        await step('Click on "Purchase Now" button', async () => {
             await this.purchaseNowBtn.click();
             await this.purchaseNowBtn.isHidden();
             await this.confirmCodeModal.waitFor();
@@ -24,7 +24,7 @@ export default class SignUpPersonalPage {
     }
 
     async clickSubscriptionButton(subscription) {
-        await step(`Click ${subscription} radio button`, async () => {
+        await step(`Click on "${subscription}" radio button`, async () => {
             await this.radioButtons
                 .filter({hasText: subscription})
                 .click();

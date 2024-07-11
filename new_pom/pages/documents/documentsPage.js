@@ -23,19 +23,19 @@ export default class DocumentsPage {
     }
 
     async clickCreateFolderBtn() {
-        await step('Click the "Create Folder" button', async () => {
+        await step('Click on "Create Folder" button', async () => {
             await this.createFolderBtn.click();
         });
     }
 
     async clickSelectOptionsBtn() {
-        await step('Click on the "Select options" button', async () => {
+        await step('Click on "Select options" button', async () => {
             await this.selectOptionsBtn.click();
         });
     }
 
     async clickSelectOptionsDeleteBtn() {
-        await step('Click on the "Delete" tab in the Select options dropdown menu', async () => {
+        await step('Click on "Delete" item in the "Select options" dropdown menu', async () => {
             await this.selectOptionsDeleteBtn.waitFor();
             await this.selectOptionsDeleteBtn.click();
         });
@@ -70,7 +70,7 @@ export default class DocumentsPage {
     }
 
     async reloadPage() {
-        await step('Refresh the page', async () => {
+        await step('Refresh page', async () => {
             await this.page.reload();
             await this.page.waitForTimeout(1000);
         });

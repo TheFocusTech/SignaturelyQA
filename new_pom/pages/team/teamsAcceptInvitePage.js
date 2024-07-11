@@ -1,5 +1,5 @@
-import {step} from "allure-js-commons";
-import ToastComponent from "../../components/toastComponent";
+import { step } from 'allure-js-commons';
+import ToastComponent from '../../components/toastComponent';
 
 export default class TeamsAcceptInvitePage {
     constructor(page) {
@@ -7,11 +7,11 @@ export default class TeamsAcceptInvitePage {
 
         this.toast = new ToastComponent(this.page);
 
-        this.backToMainPageBtn = this.page.getByRole('button', {name: 'Back to main page'});
+        this.backToMainPageBtn = this.page.getByRole('button', { name: 'Back to main page' });
     }
 
     async clickBackToMainPageButton() {
-        await step('Click on the "Back to main page" button', async () => {
+        await step('Click on "Back to main page" button', async () => {
             await this.backToMainPageBtn.click();
         });
     }

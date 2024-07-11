@@ -25,7 +25,9 @@ export default class SignPage {
     }
 
     async signPageReload() {
-        await this.page.reload();
-        await this.page.waitForTimeout(1000);
+        await step('Refresh page', async () => {
+            await this.page.reload();
+            await this.page.waitForTimeout(1000);
+        });       
     }
 };
