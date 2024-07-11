@@ -30,6 +30,7 @@ test.describe('Authorization', () => {
         await step('Verify Sign link on side menu has the active color', async () => {
             await expect(signPage.sideMenu.sign).toHaveCSS('color', ACTIVE_COLOR);
         });
+        
         await signPage.header.verifyUserNameForOldUserLogin();
     });
 });

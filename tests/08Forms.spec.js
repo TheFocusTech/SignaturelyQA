@@ -20,7 +20,7 @@ test.describe('Forms', () => {
         formsPage,
         successModal,
     }) => {
-        await description('To verify Business user can create form');
+        await description('To verify Business  user can create form');
         await tag('Create Form');
         await severity(Severity.CRITICAL);
         await link(`${QASE_LINK}/SIGN-32`, 'Qase: SIGN-32');

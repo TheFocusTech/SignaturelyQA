@@ -8,7 +8,7 @@ import { retrieveUserEmailConfirmationLink } from '../helpers/utils.js';
 test.describe('Team', () => {
     const teamMemberRoles = Object.values(TEAM_MEMBER_ROLES);
     teamMemberRoles.forEach(role => {
-        test(`TC_09_38_01 | Verify that Business User can add ${role} team member`, async ({
+        test(`TC_09_38_01 | Verify Business User can add ${role} team member`, async ({
             page,
             request,
             createBusinessUserAndLogin,
@@ -17,7 +17,7 @@ test.describe('Team', () => {
             addTeamMemberModal,
             teamsAcceptInvitePage,
         }) => {
-            await description(`Objective: Verify that Business User can add ${role} team member`);
+            await description(`To verify Business User can add ${role} team member`);
             await severity(Severity.CRITICAL);
             await link(`${QASE_LINK}/SIGN-38`, 'Qase: SIGN-38');
             await link(`${GOOGLE_DOC_LINK}70blkaheuq3a`, 'ATC_09_38_01');
@@ -40,7 +40,7 @@ test.describe('Team', () => {
                 : await addTeamMemberModal.changeTeamMemberRole(role);
             await addTeamMemberModal.clickSendInvitesButton();
             
-            await step(`Verify that a tosat message "successfully" popped up`, async () => {
+            await step(`Verify the toast message "successfully" popped up`, async () => {
                 await expect(teamPage.toast.toastBody).toHaveText(TOAST_MESSAGE.invitesSent);
             });
             
@@ -53,13 +53,13 @@ test.describe('Team', () => {
             await teamsAcceptInvitePage.toast.waitForToastIsHiddenByText(TOAST_MESSAGE.inviteAccepted);
             await signPage.sideMenu.clickTeam();
 
-            await step(`Verify that a team member has role ${role} set in the Team table`, async () => {
+            await step(`Verify the team member has role ${role} set in the Team table`, async () => {
                 await expect(await teamPage.teamMemberRoleForExactTeamMember(teamMemberEmail)).toHaveText(role);
             });
         });
     });
 
-    test('TC_09_39_01 | Verify that Business User can upgrade a "User" team member to "Admin"', async ({
+    test('TC_09_39_01 | Verify Business User can upgrade a "User" team member to "Admin"', async ({
         page,
         request,
         createBusinessUserAndLogin,
@@ -68,7 +68,7 @@ test.describe('Team', () => {
         addTeamMemberModal,
         teamsAcceptInvitePage,
     }) => {
-        await description('Objective: To verify that Business User can upgrade a "User" team member to "Admin"');
+        await description('To verify Business User can upgrade a "User" team member to "Admin"');
         await severity(Severity.CRITICAL);
         await link(`${QASE_LINK}/SIGN-39`, 'Qase: SIGN-39');
         await link(`${GOOGLE_DOC_LINK}oymxytq1zw7`, 'ATC_09_39_01');
@@ -96,7 +96,7 @@ test.describe('Team', () => {
 
         await signPage.sideMenu.clickTeam();
 
-        await step("Verify that a team member has role 'User' set in the Team table", async () => {
+        await step("Verify the team member has role 'User' set in the Team table", async () => {
             await expect(await teamPage.teamMemberRoleForExactTeamMember(teamMemberEmail)).toHaveText(
                 TEAM_MEMBER_ROLES.user
             );
@@ -104,7 +104,7 @@ test.describe('Team', () => {
         await teamPage.clickOptionsForExactTeamMemberByEmail(teamMemberEmail);
         await teamPage.clickUpgradeToAdminButton();
 
-        await step('Verify that a toast message ‘Team member successfully upgraded to admin.’ popped up', async () => {
+        await step('Verify the toast message ‘Team member successfully upgraded to admin.’ popped up', async () => {
             await expect(teamPage.toast.toastBody).toHaveText(TOAST_MESSAGE.upgradedToAdmin);
         });
 
@@ -115,7 +115,7 @@ test.describe('Team', () => {
         });
     });
 
-    test('TC_09_39_02 | Verify that Business User can downgrade an "Admin" team member to "User"', async ({
+    test('TC_09_39_02 | Verify Business User can downgrade an "Admin" team member to "User"', async ({
         page,
         request,
         createBusinessUserAndLogin,
@@ -124,7 +124,7 @@ test.describe('Team', () => {
         addTeamMemberModal,
         teamsAcceptInvitePage,
     }) => {
-        await description('Objective: To verify that Business User can downgrade an "Admin" team member to "User"');
+        await description('To verify Business User can downgrade an "Admin" team member to "User"');
         await severity(Severity.CRITICAL);
         await link(`${QASE_LINK}/SIGN-39`, 'Qase: SIGN-39');
         await link(`${GOOGLE_DOC_LINK}1lftblsigk2v`, 'ATC_09_39_02');
@@ -153,7 +153,7 @@ test.describe('Team', () => {
 
         await signPage.sideMenu.clickTeam();
 
-        await step("Verify that a team member has role 'Admin' set in the Team table", async () => {
+        await step("Verify the team member has role 'Admin' set in the Team table", async () => {
             await expect(await teamPage.teamMemberRoleForExactTeamMember(teamMemberEmail)).toHaveText(
                 TEAM_MEMBER_ROLES.admin
             );
@@ -161,18 +161,18 @@ test.describe('Team', () => {
         await teamPage.clickOptionsForExactTeamMemberByEmail(teamMemberEmail);
         await teamPage.clickDowngradeToUserButton();
 
-        await step('Verify that a toast message ‘Team member successfully upgraded to admin.’ popped up', async () => {
+        await step('Verify the toast message ‘Team member successfully upgraded to admin.’ popped up', async () => {
             await expect(teamPage.toast.toastBody).toHaveText(TOAST_MESSAGE.downgradeToUser);
         });
 
-        await step("Verify that a team member has role 'User' set in the Team table", async () => {
+        await step("Verify the team member has role 'User' set in the Team table", async () => {
             await expect(await teamPage.teamMemberRoleForExactTeamMember(teamMemberEmail)).toHaveText(
                 TEAM_MEMBER_ROLES.user
             );
         });
     });
 
-    test('TC_09_40_01 | Verify that Business User can remove "User" teammate from Team', async ({
+    test('TC_09_40_01 | Verify Business User can remove "User" teammate from Team', async ({
         page,
         request,
         createBusinessUserAndLogin,
@@ -181,7 +181,7 @@ test.describe('Team', () => {
         addTeamMemberModal,
         teamsAcceptInvitePage,
     }) => {
-        await description('Objective: To verify that Business User can remove "User" teammate from Team');
+        await description('To verify Business User can remove "User" teammate from Team');
         await severity(Severity.CRITICAL);
         await link(`${QASE_LINK}/SIGN-40`, 'Qase: SIGN-40');
         await link(`${GOOGLE_DOC_LINK}piqlawxmqgos`, 'ATC_09_40_01');
@@ -211,11 +211,11 @@ test.describe('Team', () => {
         await teamPage.clickDeleteButton();
         await teamPage.clickDeleteTeamMemberAnywayButton();
 
-        await step('Verify that a toast message ‘Team member deleted successfully’ popped up', async () => {
+        await step('Verify the toast message ‘Team member deleted successfully’ popped up', async () => {
             await expect(teamPage.toast.toastBody).toHaveText(TOAST_MESSAGE.teamMemberDeleted);
         });
 
-        await step('Verify that a team member is not in the Team table', async () => {
+        await step('Verify the team member is not in the Team table', async () => {
             expect(await teamPage.exactTeamMember(teamMemberEmail)).not.toBeVisible();
         });
     });
