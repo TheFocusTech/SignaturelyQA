@@ -38,7 +38,7 @@ test.describe('DocumentsType', () => {
 
         await description('To verify document can be returned for editing.');
         await description(
-            'To verify that the "Edit&Resend" functionality correctly allows users to edit and resend a prepared document'
+            'To verify "Edit&Resend" functionality correctly allows users to edit and resend a prepared document'
         );
         await severity(Severity.CRITICAL);
         await link(`${QASE_LINK}/SIGN-21`, 'QASE: SIGN-21 ');
@@ -52,7 +52,7 @@ test.describe('DocumentsType', () => {
         await documentsPage.table.clickFirstOptionsBtn();
         await documentsPage.table.clickEditAndResendBtn();
 
-        await step('Verify the modal window "Edit & Resend" document has opened', async () => {
+        await step('Verify modal window "Edit & Resend" document has opened', async () => {
             await expect(editAndResendDocumentModal.editAndResendTitle).toBeVisible();
         });
         await step('Verify title of the modal window is "Edit & Resend document"', async () => {
@@ -60,7 +60,7 @@ test.describe('DocumentsType', () => {
         });
     });
 
-    test('TC_05_21_02 | Verify the button "Revert to Draft" is active', async ({
+    test('TC_05_21_02 | Verify button "Revert to Draft" is active', async ({
         createBusinessUserAndLogin,
         page,
         signPage,
@@ -72,7 +72,7 @@ test.describe('DocumentsType', () => {
     }) => {
         test.setTimeout(200 * 1000);
 
-        await description('To verify the document can be returned for editing.');
+        await description('To verify document can be returned for editing.');
         await severity(Severity.CRITICAL);
         await link(`${QASE_LINK}/SIGN-21`, 'QASE: SIGN-21 ');
         await link(`${GOOGLE_DOC_LINK}r25l83kzqn09`, 'ATC_05_21_02');
@@ -85,7 +85,7 @@ test.describe('DocumentsType', () => {
         await documentsPage.table.clickEditAndResendBtn();
         await editAndResendDocumentModal.clickRevertToDraftBtn();
 
-        await step('Verify the "Prepare For Signing" modal window is open', async () => {
+        await step('Verify "Prepare For Signing" modal window is open', async () => {
             await expect(page).toHaveURL(/documents.*edit$/);
         });
 
@@ -103,7 +103,7 @@ test.describe('DocumentsType', () => {
     }) => {
         test.slow();
 
-        await description('To verify the business user can move a document to a folder');
+        await description('To verify Business user can move a document to a folder');
         await severity(Severity.CRITICAL);
         await link(`${QASE_LINK}/SIGN-18`, 'Qase: SIGN-18');
         await link(`${GOOGLE_DOC_LINK}ylpnl5bdm86k`, 'ATC_05_18_01');
@@ -139,7 +139,7 @@ test.describe('DocumentsType', () => {
         documentsAwaitingPage,
         sendReminderDocumentModal,
     }) => {
-        await description('To verify business user can send a reminder to sign the document.');
+        await description('To verify Business user can send a reminder to sign the document.');
         await severity(Severity.CRITICAL);
         await link(`${QASE_LINK}/SIGN-16`, 'Qase: SIGN-16');
         await link(`${GOOGLE_DOC_LINK}w17qlbkxlnc6`, 'ATC_05_16_01');
@@ -173,7 +173,7 @@ test.describe('DocumentsType', () => {
     }) => {
         test.setTimeout(200 * 1000);
 
-        await description('To verify business user can revert a document with "Awaiting" status to "Draft" status');
+        await description('To verify Business user can revert a document with "Awaiting" status to "Draft" status');
         await severity(Severity.CRITICAL);
         await link(`${QASE_LINK}/SIGN-21`, 'QASE: SIGN-21 ');
         await link(`${GOOGLE_DOC_LINK}cl44yvv352v8`, 'TC_05_21_03');
@@ -204,7 +204,7 @@ test.describe('DocumentsType', () => {
         shareThisDocumentModal,
         request,
     }) => {
-        await description('To verify business user can share a document with a status "Completed" via email');
+        await description('To verify Business user can share a document with a status "Completed" via email');
         await severity(Severity.CRITICAL);
         await link(`${QASE_LINK}/SIGN-17`, 'Qase: SIGN-17');
         await link(`${GOOGLE_DOC_LINK}sp7vb8tsrias`, 'TC_05_17_01');
@@ -231,7 +231,7 @@ test.describe('DocumentsType', () => {
         await shareThisDocumentModal.clickShareDocumentBtn();
 
         await step(
-            `Verify the toast notification with the 'Document successfully sended to specified email(s)' text appears`,
+            `Verify toast notification with the 'Document successfully sended to specified email(s)' text appears`,
             async () => {
                 await expect(documentsPage.toast.toastBody).toHaveText(TOAST_MESSAGE.documentSended);
             }
@@ -277,13 +277,13 @@ test.describe('DocumentsType', () => {
         await deleteModal.clickYesDeleteBtn();
         await documentsPage.toast.waitForToastCompleted();
 
-        await step('Verify the table is empty', async () => {
+        await step('Verify table is empty', async () => {
             await expect(documentsPage.table.emptyTableHeader).toHaveText(EMPTY_TABLE_HEADER.documents);
         });
 
         await documentsPage.sideMenuDocuments.clickTrash();
 
-        await step('Verify the document has a "Deleted" status', async () => {
+        await step('Verify document has a "Deleted" status', async () => {
             expect(await documentsPage.table.getDocumentStatusText()).toBe(DOCUMENT_STATUS.deleted);
         });
 
@@ -292,7 +292,7 @@ test.describe('DocumentsType', () => {
         await deleteModal.clickYesDeleteBtn();
         await documentsTrashPage.toast.waitForToastCompleted();
 
-        await step('Verify the trash is empty', async () => {
+        await step('Verify trash is empty', async () => {
             await expect(documentsTrashPage.table.emptyTableHeader).toHaveText(EMPTY_TABLE_HEADER.trash);
         });
     });
@@ -308,7 +308,7 @@ test.describe('DocumentsType', () => {
         test.setTimeout(250 * 1000);
 
         await description(
-            'To verify business user can move documents to the trash using checkboxes and "Select_options" dropdown menu and delete them permanently from the trash'
+            'To verify Business user can move documents to the trash using checkboxes and "Select_options" dropdown menu and delete them permanently from the trash'
         );
         await severity(Severity.CRITICAL);
         await link(`${QASE_LINK}/SIGN-19`, 'Qase: SIGN-19');
@@ -327,12 +327,12 @@ test.describe('DocumentsType', () => {
         await documentsPage.toast.waitForToastCompleted();
         await documentsPage.sideMenuDocuments.clickTrash();
 
-        await step(`Verify the documents in the trash have the correct titles "${documentsToDelete}"`, async () => {
+        await step(`Verify documents in the trash have the correct titles "${documentsToDelete}"`, async () => {
             await expect(documentsTrashPage.table.objectTitle).toHaveText(documentsToDelete);
         });
 
         await step(
-            `Verify the documents in the trash have a "Deleted" status: "${DELETED_DOCUMENTS_STATUS}"`,
+            `Verify documents in the trash have a "Deleted" status: "${DELETED_DOCUMENTS_STATUS}"`,
             async () => {
                 await expect(documentsTrashPage.table.documentsStatuses).toHaveText(DELETED_DOCUMENTS_STATUS);
             }
@@ -342,7 +342,7 @@ test.describe('DocumentsType', () => {
         await confirmTrashEmptyingModal.clickEmptyTrashBtn();
         await documentsTrashPage.toast.waitForToastCompleted();
 
-        await step('Verify the trash is empty', async () => {
+        await step('Verify trash is empty', async () => {
             await documentsTrashPage.table.emptyTableHeader.waitFor({ state: 'visible' });
             await expect(documentsTrashPage.table.emptyTableHeader).toHaveText(EMPTY_TABLE_HEADER.trash);
         });
@@ -370,7 +370,7 @@ test.describe('DocumentsType', () => {
         successModal,
         documentsPage,
     }) => {
-        await description('To verify business user can download a document with a status "Completed" (API)');
+        await description('To verify Business user can download a document with a status "Completed" (API)');
         await severity(Severity.CRITICAL);
         await link(`${QASE_LINK}/SIGN-20`, 'Qase: SIGN-20');
         await link(`${GOOGLE_DOC_LINK}8wxawmz1dvq1`, 'TC_05_20_01');
@@ -398,7 +398,7 @@ test.describe('DocumentsType', () => {
         await documentsPage.table.clickDownloadBtn();
         const response = await responsePromise;
 
-        await step('Verify the response code after clicking "Download" option is successfull', async () => {
+        await step('Verify response code after clicking "Download" option is successfull', async () => {
             expect(response.status()).toBe(200);
         });
     });

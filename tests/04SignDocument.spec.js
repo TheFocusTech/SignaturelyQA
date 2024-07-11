@@ -143,8 +143,7 @@ test.describe('Sign Document', () => {
         });
     });
 
-    test('TC_04_10_01 | Verify user can sign a document', async ({
-    test('TC_04_10_01 | Verify user can sign document as themselves.', async ({
+    test('TC_04_10_01 | Verify user can sign a document.', async ({
         createBusinessUserAndLogin,
         signPage,
         prepareForSignatureModal,
@@ -177,12 +176,11 @@ test.describe('Sign Document', () => {
         await successModal.clickBackToDocumentsBtn();
 
         await step('Verify the document has a "Completed" status', async () => {
-        await step('Verify document has a "completed" status.', async () => {
             await expect(await documentsPage.table.documentStatus).toHaveText(DOCUMENT_STATUS.completed);
         });
     });
 
-    test('TC_04_10_02 | Verify user and other signer can sign document.', async ({
+    test('TC_04_10_02 | Verify user and other signer can sign  document.', async ({
         createBusinessUserAndLogin,
         signPage,
         settingsCompanyPage,
@@ -235,7 +233,6 @@ test.describe('Sign Document', () => {
         await successModal.clickBackToDocumentsBtn();
 
         await step('Verify the document has "Awaiting" status', async () => {
-        await step('Verify document has "awaiting" status.', async () => {
             await expect(await documentsPage.table.documentStatus).toHaveText(DOCUMENT_STATUS.awaiting);
         });
     });
@@ -286,7 +283,6 @@ test.describe('Sign Document', () => {
         });
 
         await step('Verify the document has "Expired" status', async () => {
-        await step('Verify document has "expired" status.', async () => {
             await expect(await documentsPage.table.documentStatus).toHaveText(DOCUMENT_STATUS.expired);
         });
     });
@@ -413,7 +409,6 @@ test.describe('Sign Document', () => {
         documentsPage.sideMenuDocuments.clickVoided();
 
         await step('Verify the document has "Declined" status', async () => {
-        await step('Verify document has "declined" status.', async () => {
             await documentsPage.table.documentStatus.waitFor();
             await expect(await documentsPage.table.documentStatus).toHaveText(DOCUMENT_STATUS.declined);
         });
@@ -455,7 +450,6 @@ test.describe('Sign Document', () => {
         await successModal.clickBackToDocumentsBtn();
 
         await step('Verify the document has "Awaiting" status', async () => {
-        await step('Verify document has "awaiting" status.', async () => {
             await expect(await documentsPage.table.documentStatus).toHaveText(DOCUMENT_STATUS.awaiting);
         });
     });
