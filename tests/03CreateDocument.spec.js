@@ -17,7 +17,7 @@ import {createSignature, createTemplate, createTemplateForBulkSend} from '../hel
 import { description, tag, severity, Severity, link, epic, step } from 'allure-js-commons';
 
 test.describe('CreateDocument', () => {
-    test('TC_03_07_01 | Sign a document - verify that user can sign a document themselves', async ({
+    test('TC_03_07_01 | Verify user can sign uploaded document', async ({
         createBusinessUserAndLogin,
         signPage,
         prepareForSignatureModal,
@@ -28,7 +28,7 @@ test.describe('CreateDocument', () => {
     }) => {
         test.setTimeout(220 * 1000);
 
-        await description('Objective: To verify the process of creating and signing a document');
+        await description('To verify the process of creating and signing the document');
         await severity(Severity.CRITICAL);
         await link(`${QASE_LINK}/SIGN-7`, 'Qase: SIGN-7');
         await link(`${GOOGLE_DOC_LINK}yaxaf6jrhsdw`, 'ATC_03_07_01');
@@ -52,12 +52,12 @@ test.describe('CreateDocument', () => {
         await finalStepPage.clickSignDocumentBtn();
         await successModal.clickBackToDocumentsBtn();
 
-        await step('Verify the created document is in the table with the label "COMPLETED".', async () => {
+        await step('Verify the created document is in the table with the label "COMPLETED"', async () => {
             await expect(await documentsPage.table.documentStatus).toHaveText(DOCUMENT_STATUS.completed);
         });
     });
 
-    test('TC_03_07_06 | Verify user can create, sign, and send a document to another signer', async ({
+    test('TC_03_07_06 | Verify user can create, sign, and send the document to another signer', async ({
         createBusinessUserAndLogin,
         signPage,
         prepareForSignatureModal,
@@ -68,7 +68,7 @@ test.describe('CreateDocument', () => {
     }) => {
         test.setTimeout(120 * 1000);
         await description(
-            'Objective: To verify the process of creating, signing, and sending a document to another signer.'
+            'To verify the process of creating, signing and sending the document to another signer.'
         );
         await severity(Severity.CRITICAL);
         await link(`${QASE_LINK}/SIGN-7`, 'Qase: SIGN-7');
@@ -112,7 +112,7 @@ test.describe('CreateDocument', () => {
     }) => {
         test.setTimeout(220 * 1000);
 
-        await description('Objective: To verify the process of creating and sending a document for signature.');
+        await description('To verify the process of creating and sending a document for signature.');
         await severity(Severity.CRITICAL);
         await link(`${QASE_LINK}/SIGN-7`, "Qase: SIGN-7");
         await link(`${GOOGLE_DOC_LINK}hvbgto58wwgb`, "ATC_03_07_03");
@@ -138,7 +138,7 @@ test.describe('CreateDocument', () => {
         });
     });
 
-    test('TC_03_07_02 | Verify that the user who uploaded the document and Other Signer can sign it', async ({
+    test('TC_03_07_02 | Verify the user who uploaded the document and Other Signer can sign it', async ({
         createBusinessUserAndLogin,
         signPage,
         settingsCompanyPage,
@@ -153,7 +153,7 @@ test.describe('CreateDocument', () => {
         test.setTimeout(160 * 1000);
 
         await description(
-            'Objective: To verify the process of creating, signing, and sending a document to another signer.'
+            'To verify the process of creating, signing, and sending a document to another signer'
         );
         await severity(Severity.CRITICAL);
         await link(`${QASE_LINK}/SIGN-7`, 'Qase: SIGN-7');
@@ -194,7 +194,7 @@ test.describe('CreateDocument', () => {
         });
     });
 
-    test('TC_03_07_05 | Verify that user can sign a document themselves with Initial', async ({
+    test('TC_03_07_05 | Verify user can sign the document themselves with Initial', async ({
         createBusinessUserAndLogin,
         signPage,
         prepareForSignatureModal,
@@ -208,7 +208,7 @@ test.describe('CreateDocument', () => {
     }) => {
         test.setTimeout(220 * 1000);
 
-        await description('Objective: Verify that user can sign a document themselves with Initial');
+        await description('Verify business user can sign the document themselves with Initial');
         await severity(Severity.CRITICAL);
         await link(`${QASE_LINK}/SIGN-7`, 'Qase: SIGN-7');
         await link(`${GOOGLE_DOC_LINK}cd9kwkury3z7`, 'ATC_03_07_05');
@@ -243,7 +243,7 @@ test.describe('CreateDocument', () => {
         });
     });
 
-    test('TC_03_09_01 | Create Documents via Bulk Send', async ({
+    test('TC_03_09_01 | Verify user can create documents via Bulk Send', async ({
         createBusinessUserAndLogin,
         signPage,
         documentsPage,
@@ -256,7 +256,7 @@ test.describe('CreateDocument', () => {
     }) => {
         test.setTimeout(160 * 1000);
 
-        await description('Objective: Enable document distribution via Bulk Send.');
+        await description('To verify the user can enable document distribution via Bulk Send');
         await severity(Severity.CRITICAL);
         await link(`${QASE_LINK}/SIGN-9`, 'Qase: SIGN-9');
         await link(`${GOOGLE_DOC_LINK}887tkak398is`, 'ATC_03_09_01');
@@ -277,7 +277,7 @@ test.describe('CreateDocument', () => {
 
         await documentsPage.toast.waitForToastIsHiddenByText(TOAST_MESSAGE.documentsSuccess);
 
-        await step(`Verify that the total number of created documents is ${BULK_DOCUMENTS.number}.`, async () => {
+        await step(`Verify the total number of created documents is ${BULK_DOCUMENTS.number}.`, async () => {
             await documentsPage.table.waitForTable(10000);
             await documentsPage.numberOfDocuments.waitFor({ state: 'visible' });
             await expect(documentsPage.numberOfDocuments).toHaveText(BULK_DOCUMENTS.number);
@@ -288,7 +288,7 @@ test.describe('CreateDocument', () => {
         const randomIndex2 = randomIndex[1];
 
         await step(
-            `Verify that on page 1 the random document (nth-${randomIndex1}) has the title "${CREATE_TEMPLATE.nameField}".`,
+            `Verify on page 1 the random document (nth-${randomIndex1}) has the title "${CREATE_TEMPLATE.nameField}"`,
             async () => {
                 await expect(documentsPage.table.objectTitle.nth(randomIndex1)).toHaveText(CREATE_TEMPLATE.nameField);
             }
@@ -297,14 +297,14 @@ test.describe('CreateDocument', () => {
         await documentsPage.clickPage2Btn();
 
         await step(
-            `Verify that on page 2 the random document (nth-${randomIndex2}) has the title "${CREATE_TEMPLATE.nameField}".`,
+            `Verify on page 2 the random document (nth-${randomIndex2}) has the title "${CREATE_TEMPLATE.nameField}"`,
             async () => {
                 await expect(documentsPage.table.objectTitle.nth(randomIndex2)).toHaveText(CREATE_TEMPLATE.nameField);
             }
         );
     });
 
-    test('TC_03_07_04 | Verify that user can sign a document themselves with existed signature', async ({
+    test('TC_03_07_04 | Verify user can sign the document themselves with existed signature', async ({
         createBusinessUserAndLogin,
         signPage,
         prepareForSignatureModal,
@@ -319,7 +319,7 @@ test.describe('CreateDocument', () => {
         test.setTimeout(220 * 1000);
 
         await description(
-            'Objective: To verify the process of creating and signing a document with an existing signature'
+            'To verify the process of creating and signing a document with an existing signature'
         );
         await severity(Severity.CRITICAL);
         await link(`${QASE_LINK}/SIGN-7`, 'Qase: SIGN-7');
@@ -354,7 +354,7 @@ test.describe('CreateDocument', () => {
         });
     });
 
-    test('TC_03_08_02 | Verify that the "Edit template" button is active', async ({
+    test('TC_03_08_02 | Verify the "Edit template" button is active', async ({
         createBusinessUserAndLogin,
         signPage,
         prepareForSignatureModal,
@@ -366,7 +366,7 @@ test.describe('CreateDocument', () => {
     }) => {
         test.setTimeout(200 * 1000);
 
-        await description('Objective: Verify that user can edit a document from template');
+        await description('Verify user can edit the document from the template');
         await severity(Severity.CRITICAL);
         await link(`${QASE_LINK}/SIGN-8`, 'Qase: SIGN-8');
         await link(`${GOOGLE_DOC_LINK}viu8uhihrxyq`, 'ATC_03_08_02');
@@ -398,7 +398,7 @@ test.describe('CreateDocument', () => {
         });
     });
 
-    test('TC_03_08_01 | Verify that the user can send a template for signature', async ({
+    test('TC_03_08_01 | Verify the user can send the template for signature', async ({
         createBusinessUserAndLogin,
         signPage,
         prepareForSignatureModal,
@@ -410,7 +410,7 @@ test.describe('CreateDocument', () => {
     }) => {
         test.setTimeout(200 * 1000);
         await description(
-            'Objective: To verify the process of creating, signing, and sending a document using template.'
+            'To verify the process of creating, signing, and sending a document using template'
         );
         await severity(Severity.CRITICAL);
         await link(`${QASE_LINK}/SIGN-8`, 'Qase: SIGN-8');
