@@ -1,0 +1,2 @@
+"Status","Start Time","Stop Time","Duration in ms","Parent Suite","Suite","Sub Suite","Test Class","Test Method","Name","Description"
+"passed","Thu Jul 11 19:59:44 GMT 2024","Thu Jul 11 20:00:08 GMT 2024","24042","chromium","","Registration","","","TC_01_01_01 | Verify successful registration of Trial user","To verify that a Trial user can successfully register."
