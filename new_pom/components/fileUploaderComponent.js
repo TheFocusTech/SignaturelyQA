@@ -12,7 +12,7 @@ export default class FileUploaderComponent {
     }
 
     async uploadFile(file) {
-        await step('Upload file', async () => {
+        await step('Upload file.', async () => {
             await this.uploadFileBtn.hover();
             await this.fileInput.setInputFiles(file);
             await this.progressBar.waitFor({ state: 'visible' });
@@ -21,7 +21,7 @@ export default class FileUploaderComponent {
     }
 
     async deleteUploadedFile() {
-        await step('Delete uploaded file', async () => {
+        await step('Delete uploaded file.', async () => {
             await this.deleteUploadedFileBtn.waitFor();
             await this.deleteUploadedFileBtn.hover();
             await this.deleteUploadedFileBtn.click({ force: true });

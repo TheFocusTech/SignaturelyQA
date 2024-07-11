@@ -2,9 +2,14 @@ import { test } from '../fixtures/base';
 import { expect } from '@playwright/test';
 import { CARD_DETAILS, EMAIL_SUBJECTS, SELECTORS } from '../testData';
 import { retrieveEmailMessage } from '../helpers/utils';
+import { description, severity, Severity, epic } from 'allure-js-commons';
 
 // sample test to check how Gmail method - checkEmailMessageReceived() works
-test('Verify Email message received.', async ({ request }) => {
+test('Verify Email message is received', async ({ request }) => {
+    await description('To verify Email message is received.');
+    await severity(Severity.CRITICAL);
+    await epic('Verification of supporting tests');
+
     const exampleUser = {
         user1: {
             from: 'LG_tester',

@@ -10,14 +10,14 @@ export default class SpecialOneTimeOfferModal {
     }
 
     async clickYesUpgradeMeBtn() {
-        await step('Click on "Yes, Upgrade me" button', async () => {
+        await step('Click on "Yes, Upgrade me" button.', async () => {
             await this.upsellModal.waitFor({state: 'visible'});
             await this.upsellModalBtn.click();
         });
     }
 
     async clickNoThanksModalBtn() {
-        await step('Click on "No,thanks" button', async () => {
+        await step('Click on "No,thanks" button.', async () => {
             await this.upsellModal.waitFor({ state: 'visible' });
             await this.noThanksModalBtn.click();
             await this.upsellModal.waitFor({ state: 'hidden' });

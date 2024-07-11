@@ -11,13 +11,13 @@ export default class ConfirmCodeModal {
     }
 
     async fillConfirmCodeInputField(code) {
-        await step("Enter the confirmation code", async () => {
+        await step("Enter confirmation code.", async () => {
             await this.confirmCodeInputField.fill(code);
         });
     }
 
     async clickSendButton() {
-        await step('Click on "Send" button', async () => {
+        await step('Click on "Send" button.', async () => {
             await this.sendButton.click();
             await this.page.waitForURL(`${process.env.URL}${URL_END_POINTS.signEndPoint}`)
         });

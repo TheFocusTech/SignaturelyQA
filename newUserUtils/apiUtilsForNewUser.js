@@ -3,7 +3,7 @@ import { API_URL_END_POINTS } from '../apiData.js'
 import { step } from "allure-js-commons";
 
 export async function api_user_sign_up(request) {
-    await step(`New User Setup: Free User Sign up`, async () => {
+    await step(`Free User Sign up`, async () => {
 
         const newUserCredentials = await generateNewUserData(true, "a");
 

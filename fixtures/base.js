@@ -59,13 +59,17 @@ import UploadAvatarImageModal from '../new_pom/modalWindows/uploadAvatarImageMod
 import FolderPermissionsModal from '../new_pom/modalWindows/folderPermissionsModal.js';
 import SignUpBusinessPage from "../new_pom/pages/signUp/signUpBusinessPage";
 
+import { step } from 'allure-js-commons';
+
 export const test = base.extend({
     createFreeUserAndLogin: [
         async ({ request, page, loginPage }, use) => {
-            await api_user_sign_up(request);
-            await databaseConfirmNewUserEmail();
-            await newFreeUserLogin({ page, loginPage });
-
+            await step('New User Setup', async () => {
+                await api_user_sign_up(request);
+                await databaseConfirmNewUserEmail();
+                await newFreeUserLogin({ page, loginPage });
+            })
+                        
             await use('');
         },
         { scope: 'test' },

@@ -29,7 +29,7 @@ test.describe('Billing', () => {
         await severity(Severity.CRITICAL);
         await link(`${QASE_LINK}/SIGN-57`, 'Qase: SIGN-57');
         await link(`${GOOGLE_DOC_LINK}83e29wiaygvp`, 'ATC_14_57_02');
-        await epic('Setting');
+        await epic('Settings');
         await feature('Billing');
         await tags('Subscription');
 
@@ -60,7 +60,7 @@ test.describe('Billing', () => {
             await severity(Severity.CRITICAL);
             await link(`${QASE_LINK}/SIGN-56`, 'Qase: SIGN-56');
             await link(`${GOOGLE_DOC_LINK}8e0ff2hol3sq`, 'ATC_14_56_01');
-            await epic('Setting');
+            await epic('Settings');
             await feature('Billing');
             await tags('Upsell');
 
@@ -90,7 +90,7 @@ test.describe('Billing', () => {
         await severity(Severity.CRITICAL);
         await link(`${QASE_LINK}/SIGN-54`, 'Qase: SIGN-54');
         await link(`${GOOGLE_DOC_LINK}khucr6xuqdib`, 'ATC_14_54_01');
-        await epic('Setting');
+        await epic('Settings');
         await feature('Billing');
         await tags('Payment Card', 'Billing Portal');
 
@@ -154,7 +154,7 @@ test.describe('Billing', () => {
         await severity(Severity.CRITICAL);
         await link(`${QASE_LINK}/SIGN-57`, 'Qase: SIGN-57');
         await link(`${GOOGLE_DOC_LINK}56zml0w3xji7`, 'ATC_14_57_01');
-        await epic('Setting');
+        await epic('Settings');
         await feature('Billing');
         await tags('Subscription');
 
@@ -185,11 +185,11 @@ test.describe('Billing', () => {
         settingsBillingPage,
         cancelSubscriptionModal,
     }) => {
-        await description('To verify users can successfully cancel their subscription.');
+        await description('To verify users can cancel their subscription.');
         await severity(Severity.CRITICAL);
         await link(`${QASE_LINK}/SIGN-58`, 'Qase: SIGN-58');
         await link(`${GOOGLE_DOC_LINK}iqyp5s242v7c`, 'ATC_14_58_01');
-        await epic('Setting');
+        await epic('Settings');
         await feature('Billing');
         await tags('Subscription');
 
@@ -217,7 +217,7 @@ test.describe('Billing', () => {
             await severity(Severity.CRITICAL);
             await link(`${QASE_LINK}/SIGN-55`, 'Qase: SIGN-55');
             await link(`${GOOGLE_DOC_LINK}xfly7b3oksv7`, 'ATC_14_55_01');
-            await epic('Setting');
+            await epic('Settings');
             await feature('Billing');
             await tags('Subscription');
     

@@ -11,7 +11,7 @@ export default class TeamsAcceptInvitePage {
     }
 
     async clickBackToMainPageButton() {
-        await step('Click on "Back to main page" button', async () => {
+        await step('Click on "Back to main page" button.', async () => {
             await this.backToMainPageBtn.click();
         });
     }

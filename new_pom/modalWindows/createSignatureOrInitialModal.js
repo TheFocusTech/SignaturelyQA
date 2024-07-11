@@ -23,7 +23,7 @@ export default class CreateSignatureOrInitialModal {
     }
 
     async fillInputSignature(text) {
-        await step('Fill in "Signature" input field', async () => {
+        await step('Fill in "Signature" input field.', async () => {
             await this.inputSignature.fill(text);
         });
     }

@@ -12,17 +12,17 @@ export default class SettingsBillingPortalPage {
     }
 
     async deleteAllNotDefaultCards() {
-        await step('Delete all not default cards', async () => {
+        await step('Delete all not default cards.', async () => {
             await this.page.waitForTimeout(2000);
             let count = await this.moreOptionsButtonList.count();
             while (count > 0) {
-                await step('Click on "More Options" Button', async () => {
+                await step('Click on "More Options" button.', async () => {
                     await this.moreOptionsButtonList.nth(0).click();
                 });
-                await step('Click on "Delete"', async () => {
+                await step('Click on "Delete".', async () => {
                     await this.deleteOptions.click();
                 });
-                await step('Click on "Delete Payment Method" Button', async () => {
+                await step('Click on "Delete Payment Method" button.', async () => {
                     await this.deletePaymentMethodButtonOnDialog.click();
                 });
                 await this.page.waitForTimeout(1000)

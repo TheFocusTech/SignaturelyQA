@@ -16,27 +16,27 @@ export default class SettingsAPIPage {
     }
 
     async clickCreateAPIKeyBtnAtRight() {
-        await step('Click on "Create API key" button at the right', async () => {
+        await step('Click on "Create API key" button at the right.', async () => {
             await this.createAPIKeyBtnAtRight.waitFor();
             await this.createAPIKeyBtnAtRight.click();
         });
     }
 
     async fillBillingDetailsField(text) {
-        await step('Fill in the "Billing Details" input field', async () => {
+        await step('Fill in "Billing Details" input field.', async () => {
             await this.billingDetailsField.waitFor();
             await this.billingDetailsField.fill(text);
         });
     }
 
     async clickUpgradeButton(plan) {
-        await step(`Click on "Upgrade" button for ${plan} API plan`, async () => {
+        await step(`Click on "Upgrade" button for ${plan} API plan.`, async () => {
             await this.apiPlansList.filter({ hasText: plan }).getByRole('button', { name: 'Upgrade' }).click();
         });
     }
 
     async pasteIntoBillingDetailsField() {
-        await step('Paste into the "Billing Details" input field with "Ctrl+V" shortcuts', async () => {
+        await step('Paste into "Billing Details" input field with "Ctrl+V" shortcuts.', async () => {
             await this.billingDetailsTextField.click();
 
             await this.page.keyboard.down('Control');
@@ -46,7 +46,7 @@ export default class SettingsAPIPage {
     }
     
     async clickSelectButton(plan) {
-        await step(`Click on "Select" button for ${plan} API plan to downgrade`, async () => {
+        await step(`Click on "Select" button for ${plan} API plan to downgrade.`, async () => {
             await this.apiPlansList
                 .filter({ hasText: plan })
                 .getByRole('button', { name: "Select" })

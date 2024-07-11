@@ -65,7 +65,7 @@ export default class TeamPage {
     }
 
     async clickDeleteTeamMemberAnywayButton() {
-        await step('Click on "Delete Team Member Anyway" button', async () => {
+        await step('Click on "Delete Team Member Anyway" button.', async () => {
             await this.deleteTeamMemberAnywayBtn.click();
         });
     }

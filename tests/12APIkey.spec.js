@@ -114,7 +114,7 @@ test.describe('API key', () => {
             await severity(Severity.CRITICAL);
             await link(`${QASE_LINK}/SIGN-49`, 'Qase: SIGN-49');
             await link(`${GOOGLE_DOC_LINK}mme3zetebvpb`, 'TC_12_49_01');
-            await epic('Setting');
+            await epic('Settings');
             await feature('API');
             await tags('Subscription');
 
@@ -144,7 +144,7 @@ test.describe('API key', () => {
         await severity(Severity.CRITICAL);
         await link(`${QASE_LINK}/SIGN-50`, 'Qase: SIGN-50');
         await link(`${GOOGLE_DOC_LINK}mjg3zmg3rfxd`, 'TC_12_50_01');
-        await epic('Setting');
+        await epic('Settings');
         await feature('API');
         await tags('Subscription');
 
