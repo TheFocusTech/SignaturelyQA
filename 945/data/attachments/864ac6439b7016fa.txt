@@ -1,0 +1,7 @@
+Free User has been successfully created: #240711213638773
+Email has been successfully confirmed
+Free User #240711213638773 has been successfully upgraded to Bussiness
+The new fieldDropDown element will not be found.
+Waiting for email to arrive...
+Fetching emails sent from ...TestUser240711213638773
+Extracted text: TestUser240711213638773 added you as a viewer on picture.jpg
