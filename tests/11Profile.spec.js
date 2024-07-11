@@ -76,7 +76,7 @@ test.describe('Profile', () => {
         await settingsProfilePage.clickDeleteMyAccountBtn();
         await deleteMyAccountModal.clickDeleteMyAccountModalBtn();
 
-        await step(`Verify user is deleted account and is on the Login page ${URL_END_POINTS.loginEndPoint}`, async () => {
+        await step(`Verify the account is deleted and user is on the login page ${URL_END_POINTS.loginEndPoint}`, async () => {
                 await expect(loginPage.page).toHaveURL(process.env.URL + URL_END_POINTS.loginEndPoint);
         });
 
@@ -204,7 +204,7 @@ test.describe('Profile', () => {
             prepareForSignatureModal,
         }) => {
             await description(
-                'To verify Business user can update the date format in their profile settings and the updated date format is applied when signing a document. The date format YYYY / DD / MM was not checked and included to test data because of the existed bug'
+                'To verify Business user can update the date format in their profile settings and the updated date format is applied when signing a document. \n Attention: The date format YYYY / DD / MM was not checked and included to test data because of the existed bug'
             );
             await severity(Severity.CRITICAL);
             await link(`${QASE_LINK}/SIGN-46`, 'Qase: SIGN-46');
