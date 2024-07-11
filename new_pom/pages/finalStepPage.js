@@ -28,7 +28,7 @@ export default class FinalStepPage {
     }
 
     async clickSignDocumentAndSendForSignatureBtn() {
-        await step('Click on the "Sign Document and Send for Signature" button.', async () => {
+        await step('Click on "Sign Document and Send for Signature" button.', async () => {
             await this.signDocumentAndSendForSignatureBtn.click();
         });
     }

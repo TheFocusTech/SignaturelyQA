@@ -174,7 +174,7 @@ test.describe('Sign Document', () => {
         await finalStepPage.clickSignDocumentBtn();
         await successModal.clickBackToDocumentsBtn();
 
-        await step('Verify the document has a "completed" status', async () => {
+        await step('Verify the document has a "Completed" status', async () => {
             await expect(await documentsPage.table.documentStatus).toHaveText(DOCUMENT_STATUS.completed);
         });
     });
@@ -231,7 +231,7 @@ test.describe('Sign Document', () => {
         await finalStepPage.clickSignDocumentAndSendForSignatureBtn();
         await successModal.clickBackToDocumentsBtn();
 
-        await step('Verify the document has "awaiting" status', async () => {
+        await step('Verify the document has "Awaiting" status', async () => {
             await expect(await documentsPage.table.documentStatus).toHaveText(DOCUMENT_STATUS.awaiting);
         });
     });
@@ -281,7 +281,7 @@ test.describe('Sign Document', () => {
             await page.reload();
         });
 
-        await step('Verify the document has "expired" status', async () => {
+        await step('Verify the document has "Expired" status', async () => {
             await expect(await documentsPage.table.documentStatus).toHaveText(DOCUMENT_STATUS.expired);
         });
     });
@@ -407,7 +407,7 @@ test.describe('Sign Document', () => {
         successModal.clickReturnToDocumentsBtn();
         documentsPage.sideMenuDocuments.clickVoided();
 
-        await step('Verify the document has "declined" status', async () => {
+        await step('Verify the document has "Declined" status', async () => {
             await documentsPage.table.documentStatus.waitFor();
             await expect(await documentsPage.table.documentStatus).toHaveText(DOCUMENT_STATUS.declined);
         });
@@ -448,7 +448,7 @@ test.describe('Sign Document', () => {
         await finalStepPage.clickSendForSignatureBtn();
         await successModal.clickBackToDocumentsBtn();
 
-        await step('Verify the document has "awaiting" status', async () => {
+        await step('Verify the document has "Awaiting" status', async () => {
             await expect(await documentsPage.table.documentStatus).toHaveText(DOCUMENT_STATUS.awaiting);
         });
     });

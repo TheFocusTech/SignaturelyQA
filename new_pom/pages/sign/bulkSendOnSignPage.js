@@ -29,7 +29,7 @@ export default class BulkSendOnSignPage {
     }
 
     async selectTemplate() {
-        await step('Select the available template.', async () => {
+        await step('Select available template.', async () => {
             await this.clickChooseATemplateDropdown();
             await this.selectTemplateOption();
         });

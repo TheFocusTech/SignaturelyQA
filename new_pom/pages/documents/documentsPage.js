@@ -23,26 +23,26 @@ export default class DocumentsPage {
     }
 
     async clickCreateFolderBtn() {
-        await step('Click on "Create Folder" button', async () => {
+        await step('Click on "Create Folder" button.', async () => {
             await this.createFolderBtn.click();
         });
     }
 
     async clickSelectOptionsBtn() {
-        await step('Click on "Select options" button', async () => {
+        await step('Click on "Select options" button.', async () => {
             await this.selectOptionsBtn.click();
         });
     }
 
     async clickSelectOptionsDeleteBtn() {
-        await step('Click on "Delete" item in the "Select options" dropdown menu', async () => {
+        await step('Click on "Delete" item in "Select options" dropdown menu.', async () => {
             await this.selectOptionsDeleteBtn.waitFor();
             await this.selectOptionsDeleteBtn.click();
         });
     }
 
     async getRange() {
-        return await step('Get the range of the number of displayed documents.', async () => {
+        return await step('Get range of the number of displayed documents.', async () => {
             await this.documentsShown.waitFor();
             const text = await this.documentsShown.innerText();
             const rangeText = text.trim().replace(/\xA0/g, ' ').split(' ');
@@ -52,7 +52,7 @@ export default class DocumentsPage {
     }
 
     async getRandomIndexForShownDocuments() {
-        return await step('Get a random index within the range.', async () => {
+        return await step('Get random index within the range.', async () => {
             const range = await this.getRange();
             const min = Number(range[0]);
             const max = Number(range[1]);
@@ -70,7 +70,7 @@ export default class DocumentsPage {
     }
 
     async reloadPage() {
-        await step('Refresh page', async () => {
+        await step('Refresh page.', async () => {
             await this.page.reload();
             await this.page.waitForTimeout(1000);
         });
