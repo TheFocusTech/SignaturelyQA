@@ -9,13 +9,13 @@ export default class SettingsHorizontalMenuComponent {
     }
 
     async clickBilling() {
-        await step('Click "Billing" on horizontal menu', async () => {
+        await step('Click on "Billing" on horizontal Settings SubMenu', async () => {
             await this.billing.click();
         });
     }
 
     async clickAPI() {
-        await step('Click API on Horizontal Menu', async () => {
+        await step('Click on "API" on horizontal Settings SubMenu', async () => {
             await this.api.click();
         });
     }

@@ -9,7 +9,7 @@ test.describe('Authorization', () => {
         loginPage,
         signPage,
     }) => {
-        await description('To verify user can login into their account.');
+        await description('To verify user login process');
         await severity(Severity.BLOCKER);
         await link(`${QASE_LINK}/SIGN-5`, 'Qase: SIGN-5');
         await link(`${GOOGLE_DOC_LINK}by32e2y2do4w`, 'ATC_02_05_01');
@@ -26,9 +26,11 @@ test.describe('Authorization', () => {
         await step('Verify user is on the Sign page', async () => {
             await expect(signPage.page).toHaveURL(process.env.URL + URL_END_POINTS.signEndPoint);
         });
+
         await step('Verify Sign link on side menu has the active color', async () => {
             await expect(signPage.sideMenu.sign).toHaveCSS('color', ACTIVE_COLOR);
         });
+        
         await signPage.header.verifyUserNameForOldUserLogin();
     });
 });

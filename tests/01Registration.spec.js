@@ -21,7 +21,7 @@ import { generateNewUserData } from '../helpers/utils';
 import { description, tag, severity, Severity, link, epic, step } from 'allure-js-commons';
 
 test.describe('Registration', () => {
-    test('TC_01_01_01 | Verify successful registration of Trial user', async ({
+    test('TC_01_01_01 | Verify successful registration of the Trial user', async ({
         page,
         request,
         signUpTrialPage,
@@ -30,7 +30,7 @@ test.describe('Registration', () => {
         settingsCompanyPage,
         settingsBillingPage,
     }) => {
-        await description('To verify that a Trial user can successfully register.');
+        await description('To verify the Trial user can successfully register');
         await tag('Trial user');
         await severity(Severity.BLOCKER);
         await link(`${QASE_LINK}/SIGN-1`, 'Qase: SIGN-1');
@@ -45,7 +45,7 @@ test.describe('Registration', () => {
         await signUpTrialPage.yourInformation.fillEmailInputField(newUserData.email);
         await signUpTrialPage.yourInformation.fillPasswordInputField(newUserData.password);
         await signUpTrialPage.clickCreateAccountBtn();
-        await step('Verify that the user is on the Confirm account page', async () => {
+        await step('Verify the user is on the Confirm account page', async () => {
             await expect(page).toHaveURL(`${process.env.URL}${URL_END_POINTS.confirmAccountEndPoint}`);
         });
 
@@ -58,7 +58,7 @@ test.describe('Registration', () => {
             await page.goto(confirmationLink);
         });
         await page.waitForURL(`${process.env.URL}${URL_END_POINTS.activateTrialEndPoint}`);
-        await step("Verify that the user's name appears in the header of the page", async () => {
+        await step("Verify the user's name appears in the header of the page", async () => {
             await expect(activateTrialStripePage.header.userName).toHaveText(newUserData.name);
         });
 
@@ -66,12 +66,12 @@ test.describe('Registration', () => {
         await activateTrialStripePage.clickStartMy7DayFreeTrialBtn();
         await signPage.sideMenu.clickSettings();
         await settingsCompanyPage.sideMenuSettings.clickBilling();
-        await step('Verify that the billing plan description is Business Monthly Plan', async () => {
+        await step('Verify the billing plan description is Business Monthly Plan', async () => {
             await expect(settingsBillingPage.billingPlanDescription).toHaveText(BUSINESS_MONTHLY_PLAN);
         });
     });
 
-    test('TC_01_02_01 | Verify successful registration of Free user', async ({
+    test('TC_01_02_01 | Verify successful registration of the Free user', async ({
         page,
         request,
         signUpFreePage,
@@ -79,7 +79,7 @@ test.describe('Registration', () => {
         settingsCompanyPage,
         settingsBillingPage,
     }) => {
-        await description('To verify that a Free user can successfully register.');
+        await description('To verify the Free user can successfully register');
         await tag('Free user');
         await severity(Severity.BLOCKER);
         await link(`${QASE_LINK}SIGN-2`, 'Qase: SIGN-2');
@@ -94,7 +94,7 @@ test.describe('Registration', () => {
         await signUpFreePage.yourInformation.fillEmailInputField(newUserData.email);
         await signUpFreePage.yourInformation.fillPasswordInputField(newUserData.password);
         await signUpFreePage.clickCreateAccountBtn();
-        await step('Verify that the user is on the Confirm account page', async () => {
+        await step('Verify the user is on the Confirm account page', async () => {
             await expect(page).toHaveURL(`${process.env.URL}${URL_END_POINTS.confirmAccountEndPoint}`);
         });
 
@@ -103,16 +103,16 @@ test.describe('Registration', () => {
             newUserData.email,
             EMAIL_SUBJECTS.emailConfirmation
         );
-        await step('Navigate to the confirmation link', async () => {
+        await step('Navigate to the Confirmation link', async () => {
             await page.goto(confirmationLink);
         });
         await page.waitForURL(`${process.env.URL}${URL_END_POINTS.signEndPoint}`);
         await signPage.sideMenu.clickSettings();
         await settingsCompanyPage.horizontalMenu.clickBilling();
-        await step('Verify that no card attached', async () => {
+        await step('Verify no card is attached', async () => {
             await expect(settingsBillingPage.creditCardData).toHaveText(NO_ATTACHED_CARD);
         });
-        await step('Verify that the billing plan description is Free', async () => {
+        await step('Verify the billing plan description is Free', async () => {
             await expect(settingsBillingPage.billingPlanDescription).toHaveText(FREE_PLAN_DESCRIPTION);
         });
     });
@@ -127,7 +127,7 @@ test.describe('Registration', () => {
             settingsCompanyPage,
             settingsBillingPage,
         }) => {
-            await description('To verify that a Personal user can successfully register.');
+            await description('To verify the Personal user can successfully register.');
             await tag('Personal user');
             await severity(Severity.BLOCKER);
             await link(`${QASE_LINK}/SIGN-3`, 'Qase: SIGN-3');
@@ -155,10 +155,10 @@ test.describe('Registration', () => {
             const confirmCode = await retrieveUserEmailConfirmCode(request, newUserData.email);
             await confirmCodeModal.fillConfirmCodeInputField(confirmCode);
             await confirmCodeModal.clickSendButton();
-            await step('Verify that the user is on the Home page', async () => {
+            await step('Verify the user is on the Home page', async () => {
                 await expect(page).toHaveURL(`${process.env.URL}${URL_END_POINTS.signEndPoint}`);
             });
-            await step('Verify that the users name appears in the header of the page', async () => {
+            await step("Verify the user's name appears in the header of the page", async () => {
                 await expect(signPage.header.userName).toHaveText(newUserData.name);
             });
 
@@ -176,7 +176,7 @@ test.describe('Registration', () => {
     });
 
     SUBSCRIPTIONS.forEach((subscription)=>{
-        test(`TC_01_59_01|Verify successful registration of Business User with ${subscription} subscription`, async({
+        test(`TC_01_59_01| Verify successful registration of Business User with ${subscription} subscription`, async({
         request,
         page,
         signUpBusinessPage,
@@ -185,7 +185,7 @@ test.describe('Registration', () => {
         settingsCompanyPage,
         settingsBillingPage
         })=>{
-            await description('To verify that a Business user can successfully register.');
+            await description('To verify the Business user can successfully register');
             await tag('Business User');
             await severity(Severity.BLOCKER);
             await link(
@@ -219,16 +219,16 @@ test.describe('Registration', () => {
             const confirmCode=await retrieveUserEmailConfirmCode(request,newUserData.email);
             await confirmCodeModal.fillConfirmCodeInputField(confirmCode);
             await confirmCodeModal.clickSendButton();
-            await step('Verify that the user is on the Homepage',async()=>{
+            await step('Verify the user is on the Home page',async()=>{
                 await expect(page).toHaveURL(`${process.env.URL}${URL_END_POINTS.signEndPoint}`);
             });
-            await step('Verify that the users name appears in the header of the page',async()=>{
+            await step("Verify the user's name appears in the header of the page",async()=>{
                 await expect(signPage.header.userName).toHaveText(newUserData.name);
             });
 
             await signPage.sideMenu.clickSettings();
             await settingsCompanyPage.horizontalMenu.clickBilling();
-            await step(`Verify that the billing plan description is Business Personal ${subscription} Plan`,async()=>{
+            await step(`Verify the billing plan description is Business Personal ${subscription} Plan`,async()=>{
                 await expect(settingsBillingPage.billingPlanDescription).toHaveText(BUSINESS_PLAN_DESCRIPTION(subscription));
             });
         })
