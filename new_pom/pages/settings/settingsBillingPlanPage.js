@@ -19,7 +19,7 @@ export default class SettingsBillingPlanPage {
     }
 
     async clickUpgradeButton(plan) {
-        await step(`Click on "Upgrade" button for ${plan} option`, async () => {
+        await step(`Click on "Upgrade" button for ${plan} option.`, async () => {
             await this.billingTableColumnHeader
                 .filter({ hasText: plan })
                 .getByRole('button', { name: 'Upgrade' })
@@ -28,13 +28,13 @@ export default class SettingsBillingPlanPage {
     }
 
     async clickSelectPersonalPlanButton() {
-        await step('Click on "Select" personal plan button', async () => {
+        await step('Click on "Select" personal plan button.', async () => {
             await this.selectPersonalPlanButton.click();
         }); 
     }
 
     async switchMonthlyAnnyallyToggle() {
-        await step('Switch the "Monthly/Annually" toggle button', async () => {
+        await step('Switch the "Monthly/Annually" toggle button.', async () => {
             await this.monthlyAnnyallyToggle.click();
         })
     }

@@ -14,7 +14,7 @@ export default class ChooseTemplateComponent {
     }
 
     async clickSendTheDocumentBtn() {
-        await step('Click on "Send Document" button', async () => {
+        await step('Click on "Send Document" button.', async () => {
             await this.sendTheDocumentBtn.waitFor();
             await this.sendTheDocumentBtn.click();
         });
@@ -30,25 +30,25 @@ export default class ChooseTemplateComponent {
     }
 
     async clickTitleTemplate() {
-        await step('Select the desired template from the dropdown list.', async () => {
+        await step('Select desired template from the dropdown list.', async () => {
             await this.titleTemplate.click();
         });
     }
 
     async fillSignerName(name, i) {
-        await step("Fill in the signer's name in the 'Name' field", async () => {
+        await step("Fill in signer's name in the 'Name' field.", async () => {
             await this.signerNameField.nth(i).fill(name);
         });
     }
 
     async fillSignerEmail(email, i) {
-        await step("Fill in the signer's name in the 'Email' field", async () => {
+        await step("Fill in signer's name in the 'Email' field.", async () => {
             await this.signerEmailField.nth(i).fill(email);
         });
     }
 
     async clickEditTemplateBtn() {
-        await step('Click on "Edit Template" button', async () => {
+        await step('Click on "Edit Template" button.', async () => {
             await this.editTemplateBtn.click();
         });
     }

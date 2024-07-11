@@ -143,7 +143,7 @@ test.describe('Sign Document', () => {
         });
     });
 
-    test('TC_04_10_01 | Verify user can sign a document as themselves', async ({
+    test('TC_04_10_01 | Verify user can sign a document', async ({
         createBusinessUserAndLogin,
         signPage,
         prepareForSignatureModal,
@@ -154,12 +154,12 @@ test.describe('Sign Document', () => {
     }) => {
         test.setTimeout(250 * 1000);
 
-        await description('To verify user can sign a document as themselves');
+        await description('To verify user can sign a document');
         await severity(Severity.CRITICAL);
         await link(`${QASE_LINK}/SIGN-10`, 'Qase: SIGN-10');
         await link(`${GOOGLE_DOC_LINK}jl55qbudbe8i`, 'ATC_04_10_01');
         await epic('Sign document');
-        await tag('Sign themselves');
+        await tag('me');
 
         await signPage.uploadFileTab.fileUploader.uploadFile(UPLOAD_FILE_PATH.xlsxDocument);
         await signPage.uploadFileTab.clickPrepareDocumentBtn();
@@ -174,7 +174,7 @@ test.describe('Sign Document', () => {
         await finalStepPage.clickSignDocumentBtn();
         await successModal.clickBackToDocumentsBtn();
 
-        await step('Verify the document has a "completed" status', async () => {
+        await step('Verify the document has a "Completed" status', async () => {
             await expect(await documentsPage.table.documentStatus).toHaveText(DOCUMENT_STATUS.completed);
         });
     });
@@ -231,7 +231,7 @@ test.describe('Sign Document', () => {
         await finalStepPage.clickSignDocumentAndSendForSignatureBtn();
         await successModal.clickBackToDocumentsBtn();
 
-        await step('Verify the document has "awaiting" status', async () => {
+        await step('Verify the document has "Awaiting" status', async () => {
             await expect(await documentsPage.table.documentStatus).toHaveText(DOCUMENT_STATUS.awaiting);
         });
     });
@@ -281,7 +281,7 @@ test.describe('Sign Document', () => {
             await page.reload();
         });
 
-        await step('Verify the document has "expired" status', async () => {
+        await step('Verify the document has "Expired" status', async () => {
             await expect(await documentsPage.table.documentStatus).toHaveText(DOCUMENT_STATUS.expired);
         });
     });
@@ -407,7 +407,7 @@ test.describe('Sign Document', () => {
         successModal.clickReturnToDocumentsBtn();
         documentsPage.sideMenuDocuments.clickVoided();
 
-        await step('Verify the document has "declined" status', async () => {
+        await step('Verify the document has "Declined" status', async () => {
             await documentsPage.table.documentStatus.waitFor();
             await expect(await documentsPage.table.documentStatus).toHaveText(DOCUMENT_STATUS.declined);
         });
@@ -448,7 +448,7 @@ test.describe('Sign Document', () => {
         await finalStepPage.clickSendForSignatureBtn();
         await successModal.clickBackToDocumentsBtn();
 
-        await step('Verify the document has "awaiting" status', async () => {
+        await step('Verify the document has "Awaiting" status', async () => {
             await expect(await documentsPage.table.documentStatus).toHaveText(DOCUMENT_STATUS.awaiting);
         });
     });

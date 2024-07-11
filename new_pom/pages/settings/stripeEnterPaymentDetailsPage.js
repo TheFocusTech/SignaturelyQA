@@ -16,29 +16,29 @@ export default class StripeEnterPaymentDetailsPage {
     }
 
     async attachCard(cardDetails) {
-        await step('Attach the payment card throw the Stripe service', async () => {
-            await step('Fill in the "Card Number" input field', async () => {
+        await step('Attach the payment card throw the Stripe service.', async () => {
+            await step('Fill in the "Card Number" input field.', async () => {
                 await this.cardNumberFild.pressSequentially(cardDetails.cardNumber);
             });
-            await step('Fill in the "Expiration Date" input field', async () => {
+            await step('Fill in the "Expiration Date" input field.', async () => {
                 await this.expirationDateFild.pressSequentially(cardDetails.expirationDate);
             });
-            await step('Fill in the "CVC" input field', async () => {
+            await step('Fill in the "CVC" input field.', async () => {
                 await this.cvcFild.pressSequentially(cardDetails.cvc);
             });
-            await step('Fill in the "Full Name On Card" input field', async () => {
+            await step('Fill in the "Full Name On Card" input field.', async () => {
                 await this.fullNameOnCardFild.pressSequentially(cardDetails.fullNameOnCard);
             });
-            await step('Select the "Country or region" input field', async () => {
+            await step('Select the "Country or region" input field.', async () => {
                 await this.countryOrRegionOption.selectOption(cardDetails.countryOrRegion);
             });
-            await step('Fill in the "ZIP" input field', async () => {
+            await step('Fill in the "ZIP" input field.', async () => {
                 await this.zipFild.fill(cardDetails.zip);
             });
-            await step('Uncheck the "Save My Info" checkbox', async () => {
+            await step('Uncheck the "Save My Info" checkbox.', async () => {
                 await this.saveMyInfoCheckbox.uncheck();
             });
-            await step('Click on "Save Card" button  ', async () => {
+            await step('Click on "Save Card" button.', async () => {
                 await this.saveCardButton.click();
             });
             await this.successCheckmark.waitFor({timeout: 30000});

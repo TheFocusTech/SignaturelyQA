@@ -25,49 +25,49 @@ export default class SettingsProfilePage {
     }
 
     async fillNewPasswordInputField(password) {
-        await step('Fill in "New Password" input field', async () => {
+        await step('Fill in "New Password" input field.', async () => {
             await this.newPasswordInputField.type(password);
         });
     }
 
     async fillRepeatNewPasswordInputField(password) {
-        await step('Fill in "Repeate new Password" input field', async () => {
+        await step('Fill in "Repeate new Password" input field.', async () => {
             await this.repeatNewPasswordInputField.type(password);
         });
     }
 
     async clickSaveButton() {
-        await step('Click on "Save" button', async () => {
+        await step('Click on "Save" button.', async () => {
             await this.saveButton.click();
         });
     }
 
     async clickDeleteMyAccountBtn() {
-        await step('Click on "Delete My Account" button', async () => {
+        await step('Click on "Delete My Account" button.', async () => {
             await this.deleteMyAccountBtn.click();
         });
     }
 
     async deleteCurrentEmailFromEmailAddressInputField() {
-        await step('Delete email in the "Email Address" field', async () => {
+        await step('Delete email in the "Email Address" input field.', async () => {
             await this.emailAddressInputField.clear();
         });
     }
 
     async fillNewEmailIntoEmailAddressInputField(email) {
-        await step('Fill in "Email Address" field with new email', async () => {
+        await step('Fill in "Email Address" input field.', async () => {
             await this.emailAddressInputField.fill(email);
         });
     }
 
     async clickUpdateBtn() {
-        await step('Click on "Update" button', async () => {
+        await step('Click on "Update" button.', async () => {
             await this.updateBtn.click();
         });
     }
 
     async toggleCheckboxes(checkState) {
-        await step(`${checkState ? 'Check' : 'Uncheck'} checkboxes`, async () => {
+        await step(`${checkState ? 'Check' : 'Uncheck'} checkboxes.`, async () => {
             const checkboxesCount = await this.checkBoxesList.count();
             for (let i = 0; i < checkboxesCount; i++) {
                 const checkbox = this.checkBoxesList.nth(i);
@@ -89,31 +89,31 @@ export default class SettingsProfilePage {
     }
 
     async clickDateFormatDropdown() {
-        await step('Click on "Date Format" dropdown in the "Preferences" section', async () => {
+        await step('Click on "Date Format" dropdown in "Preferences" section.', async () => {
             await this.dateFormatDropdown.click();
         });
     }
 
     async chooseDateFormat(format) {
-        await step('Choose a date format', async () => {
+        await step('Choose date format.', async () => {
             await this.dateFormat.getByText(format, { exact: true }).click();
         });
     }
 
     async uploadImage(image) {
-        await step('Upload avatar image', async () => {
+        await step('Upload avatar image.', async () => {
             await this.fileInput.setInputFiles(image);
         });
     }
 
     async getProfileAvatarLink() {
-        return await step('Get profile avatar image link', async () => {
+        return await step('Get profile avatar image link.', async () => {
             return await this.avatarImage.getAttribute('src');
         });
     }
 
     async clickDeleteButton() {
-        await step('Click on "Delete" button', async () => {
+        await step('Click on "Delete" button.', async () => {
             await this.deleteButton.click();
         })
     }

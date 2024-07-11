@@ -8,7 +8,7 @@ export default class DowngradeToPersonalPlanModal {
     }
 
     async clickDowngradeButton() {
-        await step('Click on "Downgrade" To Personal Plan button', async () => {
+        await step('Click on "Downgrade" To Personal Plan button.', async () => {
             await this.downgradeToPersonalPlanButton.click();
         });
     }

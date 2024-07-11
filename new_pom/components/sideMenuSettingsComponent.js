@@ -11,19 +11,19 @@ export default class SideMenuSettingsComponent {
     }
 
     async clickBilling() {
-        await step('Click on "Billing" item in the Settings submenu', async () => {
+        await step('Click on "Billing" item in the Settings submenu.', async () => {
             await this.billing.click();
         });
     }
 
     async clickEditSignature() {
-        await step('Click on "Edit Signature" item in the Settings submenu', async () => {
+        await step('Click on "Edit Signature" item in the Settings submenu.', async () => {
             await this.editSignature.click();
         });
     }
 
     async clickProfile() {
-        await step('Click on "Profile" item in the Settings submenu', async () => {
+        await step('Click on "Profile" item in the Settings submenu.', async () => {
             await this.profile.click();
         });
     }

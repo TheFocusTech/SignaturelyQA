@@ -13,13 +13,13 @@ export default class NotRegisterSignerSignPage {
     }
 
     async clickSignInput() {
-        await step('Put a signature', async () => {
+        await step('Put a signature.', async () => {
             this.signInput.click();
         });
     }
 
     async clickSubmitBtn() {
-        await step('Click on "Submit" button', async () => {
+        await step('Click on "Submit" button.', async () => {
             this.submitBtn.click();
         });
     }

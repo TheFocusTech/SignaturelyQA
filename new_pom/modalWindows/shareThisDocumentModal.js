@@ -9,7 +9,7 @@ export default class ShareThisDocumentModal {
     }
     
     async clickInputEmailField(email) {
-        await step('Fill in email in the" Add Viewers" input field.', async () => {
+        await step('Fill in email in the "Add Viewers" input field.', async () => {
             await this.inputEmailField.fill(email);
         });
     }

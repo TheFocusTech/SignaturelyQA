@@ -35,7 +35,7 @@ export default class FolderPermissionsModal {
     }
 
     async clickUpdatePermissionsBtn() {
-        await step('Click on "Update permissions" button', async () => {
+        await step('Click on "Update permissions" button.', async () => {
             await this.updatePermissionsBtn.click();
         });
     };
