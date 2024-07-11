@@ -54,7 +54,7 @@ export default class TableComponent {
     }
 
     async clickEditAndResendBtn() {
-        await step('Click the "Edit & Resend" button', async () => {
+        await step('Select the "Edit & Resend" option in the dropdown menu', async () => {
             await this.editAndResendBtn.click();
         });
     }
@@ -65,7 +65,7 @@ export default class TableComponent {
     }
 
     async clickAddToAPIBtn() {
-        await step('Click the "Add to API" option', async () => {
+        await step('Select the "Add to API" option in the dropdown menu ', async () => {
             await this.addToAPIBtn.waitFor();
             await this.addToAPIBtn.click();
         });
@@ -78,7 +78,7 @@ export default class TableComponent {
     }
 
     async clickMoveToBtn() {
-        await step('Click the "Move to" button', async () => {
+        await step('Select the "Move to" option in the dropdown menu', async () => {
             await this.moveToBtn.click();
         });
     }
@@ -90,7 +90,7 @@ export default class TableComponent {
     }
 
     async clickSendReminderBtn() {
-        await step('Click the "Send Reminder" option', async () => {
+        await step('Select the "Send Reminder" option in the dropdown menu', async () => {
             await this.sendReminderBtn.click();
         });
     }
@@ -100,27 +100,21 @@ export default class TableComponent {
         const actualText = await this.documentStatus.textContent();
         return actualText;
     }
-
-    async waitForDocumentStatusVisible(status) {
-        await step(`Wait for ${status} status of the created document in the table.`, async () => {
-            await this.documentStatus.getByText(status).waitFor({ state: 'visible' });
-        });
-    }
-
+ 
     async clickDuplicateBtn() {
-        await step('Click the "Duplicate" button', async () => {
+        await step('Select the "Duplicate" option in the dropdown menu', async () => {
             await this.duplicateBtn.click();
         });
     }
 
     async clickEditBtn() {
-        await step('Click the "Edit" button', async () => {
+        await step('Select the "Edit" option in the dropdown menu', async () => {
             await this.editBtn.click();
         });
     }
 
     async clickRenameBtn() {
-        await step('Click the "Rename" button', async () => {
+        await step('Select the "Rename" option in the dropdown menu ', async () => {
             await this.renameBtn.click();
         });
     }
@@ -164,44 +158,45 @@ export default class TableComponent {
     }
 
     async waitForDocumentStatus(page, expectedStatus) {
-        await step('Wait for status of the document to update', async () => {
+        await step(`Wait for ${expectedStatus} status of the created document in the table.`, async () => {
             await this.documentStatus.waitFor();
             let documentStatus = await this.documentStatus.textContent();
 
             while (documentStatus !== expectedStatus) {
-                console.log(`The status of the document after creation is ${documentStatus}`);
-                await page.reload();
-                documentStatus = await this.documentStatus.textContent();
+                await step('Refresh page', async () => {
+                    await page.reload();
+                    documentStatus = await this.documentStatus.textContent();
+                });
             }
         });
     }
 
     async clickDisableFormBtn() {
-        await step('Click on "Disable Form" option', async () => {
+        await step('Select the "Disable Form" option in the dropdown menu', async () => {
             await this.disableFormBtn.click();
         });
     }
 
     async clickEnableFormBtn() {
-        await step('Click on "Enable Form" option', async () => {
+        await step('Select the "Enable Form" option in the dropdown menu', async () => {
             await this.enableFormBtn.click();
         });
     }
 
     async clickDeleteForm() {
-        await step('Click the "Delete Form" button', async () => {
+        await step('Select the "Delete Form" option in the dropdown menu', async () => {
             await this.deleteForm.click();
         });
     }
 
     async clickShareBtn() {
-        await step('Click the "Share" button', async () => {
+        await step('Select the "Share" option in the dropdown menu', async () => {
             await this.shareBtn.click();
         });
     }
 
     async clickOptionsDeleteBtn() {
-        await step('Click the "Option delete" button it the dropdown menu', async () => {
+        await step('Select the "Delete" option in the dropdown menu', async () => {
             await this.optionsDeleteBtn.waitFor({ state: 'visible' });
             await this.optionsDeleteBtn.click();
         });
@@ -239,7 +234,7 @@ export default class TableComponent {
     }
 
     async clickDeleteBtn() {
-        await step('Click on the "Delete" button', async () => {
+        await step('Select the "Delete" option in the dropdown menu', async () => {
             await this.deleteBtn.click();
         });
     }
@@ -259,14 +254,14 @@ export default class TableComponent {
     }
 
     async clickDownloadBtn() {
-        await step('Click on "Download" option', async () => {
+        await step('Select the "Download" option in the dropdown menu', async () => {
             await this.downloadBtn.click();
         });
     }
 
     async clickOptionsChangePermissionsBtn() {
-        await step('Click the "Change Permissions" button it the "Options" dropdown menu', async () => {
-            await this.optionsChangePermissionsBtn.waitFor( {state: 'visible'} );
+        await step('Select the "Change Permissions" option in the dropdown menu', async () => {
+            await this.optionsChangePermissionsBtn.waitFor({ state: 'visible' });
             await this.optionsChangePermissionsBtn.click();
         });
     }

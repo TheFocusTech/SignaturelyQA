@@ -6,7 +6,7 @@ import { userWithGoldAPISubscription } from '../helpers/preconditions.js';
 
 
 test.describe('API key', () => {
-    test('TC_12_48_01 | Copy API key created by the "Create API" button on the right.', async ({
+    test('TC_12_48_01 | Verify User can copy API key created by the "Create API" button on the right.', async ({
         createBusinessUserAndLogin,
         signPage,
         settingsCompanyPage,
@@ -17,7 +17,8 @@ test.describe('API key', () => {
         await severity(Severity.BLOCKER);
         await link(`${QASE_LINK}/SIGN-48`, 'Qase: SIGN-48');
         await link(`${GOOGLE_DOC_LINK}l0o8p7o1i4k`, 'ATC_12_48_01');
-        await epic('API');
+        await epic('Settings');
+        await feature('API');
         await tags('Settings, API key');
 
         await signPage.sideMenu.clickSettings();
@@ -64,7 +65,8 @@ test.describe('API key', () => {
         await severity(Severity.BLOCKER);
         await link(`${QASE_LINK}/SIGN-48`, 'Qase: SIGN-48');
         await link(`${GOOGLE_DOC_LINK}4l55n4gzh7rc`, 'ATC_12_48_02');
-        await epic('API');
+        await epic('Settings');
+        await feature('API');
         await tags('Settings, API key');
 
         await signPage.sideMenu.clickSettings();

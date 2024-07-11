@@ -98,6 +98,7 @@ test.describe('DocumentsType', () => {
         await severity(Severity.CRITICAL);
         await link(`${QASE_LINK}/SIGN-18`, 'Qase: SIGN-18');
         await link(`${GOOGLE_DOC_LINK}ylpnl5bdm86k`, 'ATC_05_18_01');
+        https://docs.google.com/document/d/1Qce7tKWOwVYtPxgQv_8ae-HUkbAgeOFph0lB_eziY_k/edit#heading=h.ylpnl5bdm86k
         await epic('Documents (typed)');
         await tag('Move_to_folder');
 
@@ -133,7 +134,7 @@ test.describe('DocumentsType', () => {
         await description('Objective: To verify that the user can send a reminder through the user interface.');
         await severity(Severity.CRITICAL);
         await link(`${QASE_LINK}/SIGN-16`, 'Qase: SIGN-16');
-        await link(`${GOOGLE_DOC_LINK}pm2gfzvmp6ok`, 'ATC_05_16_01');
+        await link(`${GOOGLE_DOC_LINK}w17qlbkxlnc6`, 'ATC_05_16_01');
         await epic('Documents (typed)');
         await tag('Documents', 'Reminder');
 

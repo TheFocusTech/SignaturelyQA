@@ -9,12 +9,12 @@ test.describe('Company', () => {
         createBusinessUserAndLogin, signPage, settingsCompanyPage, page }) => {
        
         await description("To verify the process of filling company form.");
-        await tags('Fill company form');
         await severity(Severity.CRITICAL);
         await link(`${QASE_LINK}/SIGN-43`, 'Qase: SIGN-43');
-        await link(`${GOOGLE_DOC_LINK}buu76mms6cci`, 'ATC_10_43_01');
-    
-        await epic("Settings: Company");
+        await link(`${GOOGLE_DOC_LINK}buu76mms6cci`, 'ATC_10_43_01');    
+        await epic('Settings');
+        await feature('Company');
+        await tags('Fill company form');
         await tags("Fill company's form");
 
         await signPage.sideMenu.clickSettings();
@@ -50,12 +50,12 @@ test.describe('Company', () => {
         createBusinessUserAndLogin, signPage, settingsCompanyPage, page }) => {
        
         await description("To verify the process of filling company form with checkboxes.");
-        await tags('Fill company form with checkboxes');
         await severity(Severity.CRITICAL);
         await link(`${QASE_LINK}/SIGN-43`, 'Qase: SIGN-43');
         await link(`${GOOGLE_DOC_LINK}ogb9whitbbe1`, 'ATC_10_43_02');
-    
-        await epic("Settings: Company with checkboxes");
+        await epic('Settings');
+        await feature('Company');
+        await tags('Fill company form with checkboxes');
         await tags("Fill company's form");
        
         await signPage.sideMenu.clickSettings();

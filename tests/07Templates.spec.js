@@ -28,7 +28,7 @@ test.describe('Templates', () => {
         );
         await severity(Severity.CRITICAL);
         await link(`${QASE_LINK}/SIGN-27`, 'Qase: SIGN-27');
-        await link(`${GOOGLE_DOC_LINK}p443twc6am8u`, 'ATC__07_27_01');
+        await link(`${GOOGLE_DOC_LINK}p443twc6am8u`, 'ATC_07_27_01');
         await epic('Templates');
         await tags('Create a template');
 
