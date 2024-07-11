@@ -102,7 +102,7 @@ test.describe('DocumentsType', () => {
         await tag('Move_to_folder');
 
         await createFolder(signPage, documentsPage, createFolderModal, FOLDER_NAME);
-        await signPage.uploadFileTab.fileUploader.uploadFile(UPLOAD_FILE_PATH.jpgDocument);
+        await signPage.uploadFileTab.fileUploader.uploadFile(UPLOAD_FILE_PATH.txtDocument);
 
         await signPage.sideMenu.clickDocuments();
         await documentsPage.table.clickSecondOptionsBtn();
@@ -116,7 +116,7 @@ test.describe('DocumentsType', () => {
 
         await documentsPage.table.openFolder(FOLDER_NAME);
         await step('Verify the document is inside the folder', async () => {
-            await expect(await documentsPage.table.objectTitle).toHaveText(UPLOAD_FILE_NAME.jpgDocument);
+            await expect(await documentsPage.table.objectTitle).toHaveText(UPLOAD_FILE_NAME.txtDocument);
         });
     });
 
@@ -225,7 +225,7 @@ test.describe('DocumentsType', () => {
         await step('Verify that the document sent to the email." ', async () => {
             await expect(documentsPage.toast.toastBody).toHaveText(TOAST_MESSAGE.documentSended);
         });
-        const documentName = UPLOAD_FILE_PATH.jpgDocument.split('/').pop();
+        const documentName = UPLOAD_FILE_NAME.txtDocument;
         const emailMessage = await retrieveEmailMessage(
             request, process.env.NEW_USER_NAME, signerEmail, EMAIL_SUBJECTS.sharedDocument, SELECTORS.message);
         await step('Verify that the user receive an email to view the document." ', async () => {
@@ -361,7 +361,7 @@ test.describe('DocumentsType', () => {
             documentsPage
         );
 
-        const documentName = UPLOAD_FILE_NAME.jpgDocument;
+        const documentName = UPLOAD_FILE_NAME.txtDocument;
         await signPage.sideMenu.clickDocuments();
         await documentsPage.sideMenuDocuments.clickCompleted();
         await documentsPage.table.clickOptionsButtonByDocumentTitle(documentName);

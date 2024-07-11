@@ -191,6 +191,7 @@ export const UPLOAD_FILE_PATH = {
 export const UPLOAD_FILE_NAME = {
     jpgDocument: 'picture.jpg',
     csvDocument: 'CSV.csv',
+    txtDocument: 'text.txt'
 };
 export const NO_ATTACHED_CARD = 'Current Card:No attached card';
 export const SUCCESS_TITLE = {
