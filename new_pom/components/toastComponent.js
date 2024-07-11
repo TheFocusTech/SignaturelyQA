@@ -9,27 +9,27 @@ export default class ToastComponent {
     }
 
     async clickToastFirstCloseBtn() {
-        await step('Close the toast notification.', async () => {
+        await step('Close the toast notification', async () => {
             await this.toastFirstCloseBtn.click();
         });
     }
 
     async waitForToastCompleted() {
-        await step('Wait for toast hidden.', async () => {
+        await step('Wait for the toast to be hidden', async () => {
             await this.toastFirstCloseBtn.waitFor({ state: 'visible' });
             await this.toastFirstCloseBtn.waitFor({ state: 'hidden' });
         });
     }
 
     async waitForToastIsHiddenByText(text) {
-        await step(`A toast message with the text "${text}" is visible and hidden then`, async () => {
+        await step(`The toast message with the text "${text}" is visible and then hidden`, async () => {
             await this.toastBody.getByText(text).waitFor({ state: "visible" });
             await this.toastBody.getByText(text).waitFor({ state: "hidden" });
         });
     }
 
     async waitForToastText() {
-        await step('Wait for a toast message to be visible', async () => {
+        await step('Wait for the toast message to be visible', async () => {
             await this.toastBody.waitFor({state: 'visible'});
         });
     }
