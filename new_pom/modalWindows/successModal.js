@@ -33,7 +33,7 @@ export default class SuccessModal {
     }
 
     async clickReturnToDocumentsBtn() {
-        await step('Click on "Return to Documents" button', async () => {
+        await step('Click on "Return to Documents" button.', async () => {
             await this.returnToDocumentsBtn.waitFor({ state: 'visible' });
             await this.returnToDocumentsBtn.click();
         });

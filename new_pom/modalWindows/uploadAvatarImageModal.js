@@ -8,7 +8,7 @@ export default class UploadAvatarImageModal {
   }
 
   async clickSaveButton() {
-    await step('Click on "Save" button', async () => {
+    await step('Click on "Save" button.', async () => {
         await this.saveBtn.click();
     });
   }

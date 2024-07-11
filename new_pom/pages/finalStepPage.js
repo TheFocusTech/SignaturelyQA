@@ -21,7 +21,7 @@ export default class FinalStepPage {
     }
 
     async fillDocumentTitleField(title) {
-        await step('Fill in "Document title" input firld.', async () => {
+        await step('Fill in "Document title" input field.', async () => {
             await this.documentTitleField.waitFor({ status: 'visible' });
             await this.documentTitleField.fill(title);
         });

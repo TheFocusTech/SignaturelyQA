@@ -10,13 +10,13 @@ export default class CreateFolderModal {
     }
 
     async fillNewFolderName(name) {
-        await step('Fill in the "New Folder Name" input field', async () => {
+        await step('Fill in "New Folder Name" input field.', async () => {
             await this.newFolderName.fill(name);
         });
     }
 
     async clickCreateBtn() {
-        await step('Click on "Create" button', async () => {
+        await step('Click on "Create" button.', async () => {
             await this.createBtn.click();
         });
     }

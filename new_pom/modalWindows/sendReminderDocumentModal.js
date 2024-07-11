@@ -9,13 +9,13 @@ export default class SendReminderDocumentModal {
     }
 
     async clickSignerCheckbox() {
-        await step("Click on the checkbox next to the signer's email", async () => {
+        await step("Click on checkbox next to the signer's email.", async () => {
             await this.signerCheckbox.click();
         });
     }
 
     async clickSendReminderBtn() {
-        await step(`Click on "Send Reminder" button`, async () => {
+        await step(`Click on "Send Reminder" button.`, async () => {
             await this.sendReminderBtn.click();
         });
     }

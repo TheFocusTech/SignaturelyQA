@@ -56,13 +56,13 @@ export default class SettingsBillingPage {
     }
 
     async clickEditPlanButton() {
-        await step('Click on “Edit plan” button', async () => {
+        await step('Click on "Edit plan" button', async () => {
             await this.editPlanButton.click();
         });
     }
 
     async clickCancelSubscriptionButton() {
-        await step('Click on “Cancel subscription” button', async () => {
+        await step('Click on "Cancel subscription" button', async () => {
             await this.cancelSubscriptionBtn.click();
         });
     }

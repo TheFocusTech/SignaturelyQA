@@ -143,7 +143,7 @@ test.describe('Sign Document', () => {
         });
     });
 
-    test('TC_04_10_01 | Verify user can sign a document as themselves', async ({
+    test('TC_04_10_01 | Verify user can sign a document', async ({
         createBusinessUserAndLogin,
         signPage,
         prepareForSignatureModal,
@@ -154,12 +154,12 @@ test.describe('Sign Document', () => {
     }) => {
         test.setTimeout(250 * 1000);
 
-        await description('To verify user can sign a document as themselves');
+        await description('To verify user can sign a document');
         await severity(Severity.CRITICAL);
         await link(`${QASE_LINK}/SIGN-10`, 'Qase: SIGN-10');
         await link(`${GOOGLE_DOC_LINK}jl55qbudbe8i`, 'ATC_04_10_01');
         await epic('Sign document');
-        await tag('Sign themselves');
+        await tag('me');
 
         await signPage.uploadFileTab.fileUploader.uploadFile(UPLOAD_FILE_PATH.xlsxDocument);
         await signPage.uploadFileTab.clickPrepareDocumentBtn();

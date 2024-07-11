@@ -12,44 +12,44 @@ export default class AddTeamMemberModal {
     }
 
     async fillTeamMemberEmailInputField(teamMemberEmail) {
-        await step("Fill in the  team member's 'Email' input field", async () => {
+        await step("Fill in team member's 'Email' input field.", async () => {
             await this.teamMemberEmail.type(teamMemberEmail);
         });
     }
 
     async fillTeamMemberNameInputField(teamMemberName) {
-        await step("Fill in the  team member's 'Name' input field", async () => {
+        await step("Fill in team member's 'Name' input field.", async () => {
             await this.teamMemberName.type(teamMemberName);
         });
     }
 
     async isTeamMemberRoleSet(role) {
-        return await step("Get the team member's role value", async () => {
+        return await step("Get team member's role value.", async () => {
             return (await this.teamMemberActualRole.innerText()) === role;
         });
     }
 
     async openTeamMemberRoleDropdown() {
-        await step('Open team member role dropdown', async () => {
+        await step('Open team member role dropdown.', async () => {
             await this.teamMembersRoleOptionsDropdown.click();
         });
     }
 
     async selectTeamMemberRoleFromDropdown(role) {
-        await step("Select the team member's role from the dropdown", async () => {
+        await step("Select team member's role from the dropdown.", async () => {
             await this.teamMemberRoleOption.getByText(role).click();
         });
     }
 
     async changeTeamMemberRole(expectedRole) {
-        await step(`Change team member role to ${expectedRole}`, async () => {
+        await step(`Change team member role to ${expectedRole}.`, async () => {
             await this.openTeamMemberRoleDropdown();
             await this.selectTeamMemberRoleFromDropdown(expectedRole);
         });
     }
 
     async clickSendInvitesButton() {
-        await step('Click on "Send Invites" button', async () => {
+        await step('Click on "Send Invites" button.', async () => {
             await this.sendInvitesBtn.click();
         });
     }
