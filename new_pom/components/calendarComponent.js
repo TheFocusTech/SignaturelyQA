@@ -12,7 +12,7 @@ export default class CalendarComponent {
     }
 
     async clickSelectDate() {
-        await step('Click "Select date" dropdown in the calendar', async () => {
+        await step('Click on "Select date" dropdown in the calendar', async () => {
             await this.selectDateContainer.click();
         });
     }
@@ -36,7 +36,7 @@ export default class CalendarComponent {
     }
 
     async clickSelectBtn() {
-        await step('Click "Select" button in the calendar', async () => {
+        await step('Click on "Select" button in the calendar', async () => {
             await this.selectBtn.click();
         });
     }
