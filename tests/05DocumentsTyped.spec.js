@@ -98,7 +98,6 @@ test.describe('DocumentsType', () => {
         await severity(Severity.CRITICAL);
         await link(`${QASE_LINK}/SIGN-18`, 'Qase: SIGN-18');
         await link(`${GOOGLE_DOC_LINK}ylpnl5bdm86k`, 'ATC_05_18_01');
-        https://docs.google.com/document/d/1Qce7tKWOwVYtPxgQv_8ae-HUkbAgeOFph0lB_eziY_k/edit#heading=h.ylpnl5bdm86k
         await epic('Documents (typed)');
         await tag('Move_to_folder');
 
