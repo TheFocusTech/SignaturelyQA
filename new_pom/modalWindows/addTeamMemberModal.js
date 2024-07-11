@@ -1,4 +1,4 @@
-import { step } from "allure-js-commons";
+import { step } from 'allure-js-commons';
 export default class AddTeamMemberModal {
     constructor(page) {
         this.page = page;
@@ -8,23 +8,23 @@ export default class AddTeamMemberModal {
         this.teamMemberActualRole = this.page.locator('.uiSelect__select-value');
         this.teamMembersRoleOptionsDropdown = this.page.locator('.teammates__role-wrapper');
         this.teamMemberRoleOption = this.page.locator('.uiSelect__select-row');
-        this.sendInvitesBtn = this.page.getByRole('button', {name: 'Send Invites'});
+        this.sendInvitesBtn = this.page.getByRole('button', { name: 'Send Invites' });
     }
 
     async fillTeamMemberEmailInputField(teamMemberEmail) {
-        await step('Fill in the team member email input field', async () => {
+        await step("Fill in the  team member's 'Email' input field", async () => {
             await this.teamMemberEmail.type(teamMemberEmail);
         });
     }
 
     async fillTeamMemberNameInputField(teamMemberName) {
-        await step('Fill in the team member name input field', async () => {
+        await step("Fill in the  team member's 'Name' input field", async () => {
             await this.teamMemberName.type(teamMemberName);
         });
     }
 
     async isTeamMemberRoleSet(role) {
-        return await step('Get team member role value', async () => {
+        return await step("Get the team member's role value", async () => {
             return (await this.teamMemberActualRole.innerText()) === role;
         });
     }
@@ -36,12 +36,12 @@ export default class AddTeamMemberModal {
     }
 
     async selectTeamMemberRoleFromDropdown(role) {
-        await step('Select team member role from dropdown', async () => {
+        await step("Select the team member's role from the dropdown", async () => {
             await this.teamMemberRoleOption.getByText(role).click();
         });
     }
 
-    async changeTeamMemberRole( expectedRole) {
+    async changeTeamMemberRole(expectedRole) {
         await step(`Change team member role to ${expectedRole}`, async () => {
             await this.openTeamMemberRoleDropdown();
             await this.selectTeamMemberRoleFromDropdown(expectedRole);
@@ -49,7 +49,7 @@ export default class AddTeamMemberModal {
     }
 
     async clickSendInvitesButton() {
-        await step('Click on the "Send Invites" button', async () => {
+        await step('Click on "Send Invites" button', async () => {
             await this.sendInvitesBtn.click();
         });
     }

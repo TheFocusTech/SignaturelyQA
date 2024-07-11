@@ -18,25 +18,25 @@ export default class SideMenuDocumentsComponent {
     }
 
     async clickAwaitingSignature() {
-        await step('Click on "Awaiting Signature" item in the Documents SubMenu', async () => {
+        await step('Click on "Awaiting Signature" item in the Documents submenu', async () => {
             await this.awaitingSignature.click();
         });
     }
 
     async clickDraft() {
-        await step('Click on "Draft" item in the Documents SubMenu', async () => {
+        await step('Click on "Draft" item in the Documents submenu', async () => {
             await this.draft.click();
         });
     }
 
     async clickCompleted() {
-        await step('Click on "Completed" item in the Documents SubMenu', async () => {
+        await step('Click on "Completed" item in the Documents submenu', async () => {
             await this.completed.click();
         });
     }
 
     async clickVoided() {
-        await step('Click on "Voided" item in the Documents SubMenu', async () => {
+        await step('Click on "Voided" item in the Documents submenu', async () => {
             await this.voided.click();
         });
     }

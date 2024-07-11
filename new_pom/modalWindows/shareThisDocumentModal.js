@@ -9,13 +9,13 @@ export default class ShareThisDocumentModal {
     }
     
     async clickInputEmailField(email) {
-        await step('Fill email in the Add Viewers field.', async () => {
+        await step('Fill in email in the" Add Viewers" input field.', async () => {
             await this.inputEmailField.fill(email);
         });
     }
 
     async clickShareDocumentBtn() {
-        await step('Click the "Share Document" button', async () => {
+        await step('Click on "Share Document" button', async () => {
             await this.shareDocumentBtn.click();
         });
     }

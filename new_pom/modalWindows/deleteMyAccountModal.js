@@ -8,7 +8,7 @@ export default class DeleteMyAccountModal {
     }
 
     async clickDeleteMyAccountModalBtn() {
-        await step('Click on the "Delete My Account" button.', async () => {
+        await step('Click on "Delete My Account" button.', async () => {
             await this.deleteMyAccountModalBtn.click();
         });
     }

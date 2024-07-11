@@ -12,26 +12,26 @@ export default class CreateAPIKeyModal {
     }
 
     async fillCreateAPIKeyNameField(keyName) {
-        await step('Fill in the "API key name" field', async () => {
+        await step('Fill in the "API key name" input field', async () => {
             await this.createAPIKeyNameField.waitFor();
             await this.createAPIKeyNameField.fill(keyName);
         });
     }
 
     async clickCreateAPIBtn() {
-        await step('Click "Create API" button', async () => {
+        await step('Click on "Create API" button', async () => {
             await this.createAPIBtn.click();
         });
     }
 
     async clickCopyAPIBtn() {
-        await step('Click "Copy API" button', async () => {
+        await step('Click on "Copy API" button', async () => {
             await this.copyAPIBtn.click();
         });
     }
 
     async getAPIKeyValueText() {
-        await step('Retrieve API key value', async () => {
+        await step('Get API key value', async () => {
             await this.APIKeyValue.waitFor();
 
             return await this.APIKeyValue.innerText();
@@ -39,7 +39,7 @@ export default class CreateAPIKeyModal {
     }
 
     async clickCloseAPIModalBtn() {
-        await step('Click close button at the API modal window', async () => {
+        await step('Click on "X" (close) button', async () => {
             await this.closeAPIModalBtn.click();
         });
     }

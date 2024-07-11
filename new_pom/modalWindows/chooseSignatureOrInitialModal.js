@@ -1,4 +1,4 @@
-import { step } from "allure-js-commons"; 
+import { step } from 'allure-js-commons';
 
 export default class ChooseSignatureOrInitialModal {
     constructor(page) {
@@ -9,14 +9,14 @@ export default class ChooseSignatureOrInitialModal {
     }
 
     async clickSignatureTyped() {
-        await step('Click "Signature" on the "Typed" tab', async () => {
+        await step('Select created "Signature" on the "Typed" tab', async () => {
             await this.signatureTyped.click();
-        })
+        });
     }
 
     async clickSignNowBtn() {
-        await step('Click "Sign Now" button', async () => {
+        await step('Click on "Sign Now" button', async () => {
             await this.signNowBtn.click();
-        })
+        });
     }
 }

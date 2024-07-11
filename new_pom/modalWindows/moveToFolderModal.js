@@ -9,13 +9,13 @@ export default class MoveToFolderModal {
     }
 
     async selectFolder(name) {
-        await step('Select the folder', async () => {
+        await step(`Select the folder with ${name} name`, async () => {
             await this.nameOfFolder.filter({ hasText: name }).click();
         });
     }
 
     async clickMoveToFolderBtn() {
-        await step('Click the "Move to folder" button', async () => {
+        await step('Click on "Move to folder" button', async () => {
             await this.moveToFolderBtn.click();
         });    
     }

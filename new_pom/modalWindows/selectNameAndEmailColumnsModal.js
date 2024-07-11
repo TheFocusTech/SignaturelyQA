@@ -12,26 +12,26 @@ export default class SelectNameAndEmailColumnsModal {
     }
 
     async clickNameDropdown() {
-        await step('Click "Name" dropdown.', async () => {
+        await step('Click on "Name" dropdown.', async () => {
             await this.nameDropdown.click();
         });
     }
 
     async clickEmailDropdown() {
-        await step('Click "Email" dropdown.', async () => {
+        await step('Click on "Email" dropdown.', async () => {
             await this.emailDropdown.click();
         });
     }
 
     async selectNameOption() {
-        await step('Select "Name" option.', async () => {
+        await step('Open "Name" dropdown.', async () => {
             await this.nameOption.waitFor({state: 'visible'});
             await this.nameOption.click();
         });
     }
 
     async selectEmailOption() {
-        await step('Select "Email" option.', async () => {
+        await step('Open "Email" dropdown.', async () => {
             await this.emailOption.waitFor({state: 'visible'});
             await this.emailOption.click();
         });
@@ -52,7 +52,7 @@ export default class SelectNameAndEmailColumnsModal {
     }
 
     async clickRequestSignaturesBtn() {
-        await step('Click the "Request Signatures" button.', async () => {
+        await step('Click on "Request Signatures" button.', async () => {
             await this.requestSignaturesBtn.click();
         });
     }

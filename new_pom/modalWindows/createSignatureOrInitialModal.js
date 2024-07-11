@@ -10,20 +10,20 @@ export default class CreateSignatureOrInitialModal {
     }
 
     async clickCheckboxAgree() {
-        await step('Click the "I agree" checkbox for electronic signing.', async () => {
+        await step('Check "I agree" checkbox.', async () => {
             await this.checkboxAgree.waitFor({ state: 'visible' });
             await this.checkboxAgree.click();
         });
     }
 
     async clickSignNowBtn() {
-        await step('Click on the "Sign Now" button.', async () => {
+        await step('Click on "Sign Now" button.', async () => {
             await this.signNowBtn.click();
         });
     }
 
     async fillInputSignature(text) {
-        await step('Fill "Signature" input field', async () => {
+        await step('Fill in "Signature" input field', async () => {
             await this.inputSignature.fill(text);
         });
     }
