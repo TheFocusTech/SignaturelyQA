@@ -1,2 +1,0 @@
-"Status","Start Time","Stop Time","Duration in ms","Parent Suite","Suite","Sub Suite","Test Class","Test Method","Name","Description"
-"passed","Wed Jul 10 10:24:39 GMT 2024","Wed Jul 10 10:25:12 GMT 2024","33316","firefox","","Billing","","","TC_14_58_01 | Verify the ability to successfully cancel subscription","Objective: Verify that users can successfully cancel their subscription."
