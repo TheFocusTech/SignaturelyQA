@@ -34,7 +34,7 @@ test.describe('Forms', () => {
         await createFormPage.createUpdateForm.fillFormNameField(SIGNERS_DATA.signerName1);
         await createFormPage.createUpdateForm.fillOptionalMessageField(SIGNERS_DATA.viewerEmail1);
 
-        await createFormPage.fileUploader.uploadFile(UPLOAD_FILE_PATH.jpgDocument);
+        await createFormPage.fileUploader.uploadFile(UPLOAD_FILE_PATH.txtDocument);
         await createFormPage.createUpdateForm.clickFillTemplateBtn();
 
         await prepareForSignatureModal.clickNameOnFieldsMenu();

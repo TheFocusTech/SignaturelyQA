@@ -36,7 +36,7 @@ export const createDocumentAwaiting = async (
     finalStepPage
 ) => {
     await step('Precondition: Document creation in progress with Awaiting status ', async () => {
-        await signPage.uploadFileTab.fileUploader.uploadFile(UPLOAD_FILE_PATH.jpgDocument);
+        await signPage.uploadFileTab.fileUploader.uploadFile(UPLOAD_FILE_PATH.txtDocument);
         await signPage.uploadFileTab.clickPrepareDocumentBtn();
         await prepareForSignatureModal.clickSendForSignatureRadioBtn();
         await prepareForSignatureModal.clickAddSignerBtn();
@@ -95,7 +95,7 @@ export const createForm = async (signPage, formsPage, createFormPage, prepareFor
         await formsPage.clickCreateFormBtn();
         await createFormPage.createUpdateForm.fillFormNameField(SIGNERS_DATA.signerName1);
         await createFormPage.createUpdateForm.fillOptionalMessageField(SIGNERS_DATA.viewerEmail1);
-        await createFormPage.fileUploader.uploadFile(UPLOAD_FILE_PATH.jpgDocument);
+        await createFormPage.fileUploader.uploadFile(UPLOAD_FILE_PATH.txtDocument);
         await createFormPage.createUpdateForm.clickFillTemplateBtn();
 
         await prepareForSignatureModal.clickNameOnFieldsMenu();
@@ -134,7 +134,7 @@ export const createDocumentCompleted = async (
     documentsPage
 ) => {
     await step('Precondition: Document creation in progress with Completed status ', async () => {
-        await signPage.uploadFileTab.fileUploader.uploadFile(UPLOAD_FILE_PATH.jpgDocument);
+        await signPage.uploadFileTab.fileUploader.uploadFile(UPLOAD_FILE_PATH.txtDocument);
         await signPage.uploadFileTab.clickPrepareDocumentBtn();
 
         await prepareForSignatureModal.clickSignDocumentRadioBtn();
