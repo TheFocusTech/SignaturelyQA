@@ -77,7 +77,7 @@ test.describe('Billing', () => {
         });
     });
 
-    test.only('TC_14_54_01 | Attach/delete payment card', async ({
+    test('TC_14_54_01 | Attach/delete payment card', async ({
         createFreeUserAndLogin,
         signPage,
         settingsCompanyPage,

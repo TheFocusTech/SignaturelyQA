@@ -9,7 +9,6 @@ import {
 } from '../testData';
 import { step } from 'allure-js-commons';
 import { retrieveUserEmailConfirmationLink } from '../helpers/utils.js';
-import SettingsProfilePage from "../new_pom/pages/settings/settingsProfilePage.js";
 
 export const createSignature = async (
     signPage,
@@ -66,7 +65,13 @@ export const createFolder = async (signPage, documentsPage, createFolderModal, f
     });
 };
 
-export const createTemplate = async (signPage, prepareForSignatureModal, templatesPage, createNewTemplatePage) => {
+export const createTemplate = async (
+    signPage,
+    prepareForSignatureModal,
+    templatesPage,
+    createNewTemplatePage,
+    successModal
+) => {
     await step('Precondition: Create Template', async () => {
         await signPage.sideMenu.clickTemplates();
         await templatesPage.sideMenuTemplates.clickCreateTemplate();
@@ -79,7 +84,7 @@ export const createTemplate = async (signPage, prepareForSignatureModal, templat
         await prepareForSignatureModal.clickDocumentBody();
         await prepareForSignatureModal.clickCreateBtn();
         await prepareForSignatureModal.toast.clickToastFirstCloseBtn();
-        await prepareForSignatureModal.clickBackToTemplatesBtn();
+        await successModal.clickBackToTemplatesBtn();
         await templatesPage.sideMenu.clickSign();
     });
 };
@@ -129,7 +134,7 @@ export const createDocumentCompleted = async (
     documentsPage
 ) => {
     await step('Precondition: Document creation in progress with Completed status ', async () => {
-        await signPage.uploadFileTab.fileUploader.uploadFile('testDocuments/picture.jpg');
+        await signPage.uploadFileTab.fileUploader.uploadFile(UPLOAD_FILE_PATH.jpgDocument);
         await signPage.uploadFileTab.clickPrepareDocumentBtn();
 
         await prepareForSignatureModal.clickSignDocumentRadioBtn();
@@ -216,7 +221,8 @@ export const createTemplateForBulkSend = async (
     signPage,
     prepareForSignatureModal,
     templatesPage,
-    createNewTemplatePage
+    createNewTemplatePage,
+    successModal
 ) => {
     await step('Precondition: Create Template for Bulk Send', async () => {
         await signPage.sideMenu.clickTemplates();
@@ -227,7 +233,7 @@ export const createTemplateForBulkSend = async (
         await createNewTemplatePage.clickFillTemplateBtn();
         await prepareForSignatureModal.setSignFieldOnDocument();
         await prepareForSignatureModal.clickCreateBtn();
-        await prepareForSignatureModal.clickBackToTemplatesBtn();
+        await successModal.clickBackToTemplatesBtn();
         await templatesPage.sideMenu.clickSign();
     });
 };
