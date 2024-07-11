@@ -1,4 +1,4 @@
-import {step} from "allure-js-commons";
+import { step } from 'allure-js-commons';
 
 export default class SideMenuSettingsComponent {
     constructor(page) {
@@ -11,19 +11,19 @@ export default class SideMenuSettingsComponent {
     }
 
     async clickBilling() {
-        await step("Click on the Billing option in the side menu", async () => {
+        await step('Click on "Billing" item in the Settings SubMenu', async () => {
             await this.billing.click();
         });
     }
 
     async clickEditSignature() {
-        await step("Click on the Edit Signature option in the submenu", async () => {
+        await step('Click on "Edit Signature" item in the Settings SubMenu', async () => {
             await this.editSignature.click();
         });
     }
 
     async clickProfile() {
-        await step('Click "Profile" submenu', async () => {
+        await step('Click on "Profile" item in the Settings SubMenu', async () => {
             await this.profile.click();
         });
     }

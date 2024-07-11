@@ -10,19 +10,19 @@ export default class CreateUpdateFormComponent {
     }
 
     async fillFormNameField(name) {
-        await step('Fill in Form Name', async () => {
+        await step('Fill in "Form Name" input field', async () => {
             await this.formNameField.fill(name);
         });
     }
 
     async fillOptionalMessageField(message) {
-        await step('Fill in Optional Message', async () => {
+        await step('Fill in "Optional Message" input field', async () => {
             await this.optionalMessageField.fill(message);
         });
     }
 
     async clickFillTemplateBtn() {
-        await step('Click on the "Fill Template" button', async () => {
+        await step('Click on "Fill Template" button', async () => {
             await this.fillTemplateBtn.waitFor();
             await this.fillTemplateBtn.click();
         });
