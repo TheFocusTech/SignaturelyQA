@@ -1,4 +1,4 @@
-import { step } from "allure-js-commons";
+import { step } from 'allure-js-commons';
 
 export default class EditAndResendDocumentModal {
     constructor(page) {
@@ -6,13 +6,11 @@ export default class EditAndResendDocumentModal {
 
         this.editAndResendTitle = this.page.getByText('Edit & Resend document');
         this.revertToDraftBtn = this.page.getByRole('button', { name: 'Revert to Draft' });
-
     }
 
     async getTitleText() {
         const actualText = await this.editAndResendTitle.textContent();
-        return actualText
-
+        return actualText;
     }
 
     async clickRevertToDraftBtn() {
@@ -21,6 +19,4 @@ export default class EditAndResendDocumentModal {
             await this.revertToDraftBtn.click();
         });
     }
-
 }
-

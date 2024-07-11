@@ -317,15 +317,20 @@ test.describe('DocumentsType', () => {
         await documentsTrashPage.toast.waitForToastCompleted();
 
         await step('Verify that trash is empty', async () => {
-            await expect (documentsTrashPage.table.emptyTableHeader).toHaveText(EMPTY_TABLE_HEADER.trash);
+            await documentsTrashPage.table.emptyTableHeader.waitFor({ state: 'visible' });
+            await expect(documentsTrashPage.table.emptyTableHeader).toHaveText(EMPTY_TABLE_HEADER.trash);
         });
 
         await documentsTrashPage.sideMenu.clickDocuments();
-        
-        await step(`Verify that there is only one undeleted document with correct title "${documentToSave}"`, async () => {
-            await expect (documentsPage.table.objectTitle).toHaveCount(1);
-            await expect (documentsPage.table.objectTitle).toHaveText(documentToSave);
-        });
+
+        await step(
+            `Verify that there is only one undeleted document with correct title "${documentToSave}"`,
+            async () => {
+                await documentsPage.table.objectTitle.first().waitFor({ state: 'visible' });
+                await expect(documentsPage.table.objectTitle).toHaveCount(1);
+                await expect(documentsPage.table.objectTitle).toHaveText(documentToSave);
+            }
+        );
     });
   
     test('TC_05_20_01 | Verify that Business User can download a "Completed" document (API)', async ({
