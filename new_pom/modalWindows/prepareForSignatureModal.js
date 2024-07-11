@@ -63,7 +63,7 @@ export default class PrepareForSignatureModal {
     }
 
     async clickContinueBtn() {
-        await step('Click the "Continue" button.', async () => {
+        await step('Click on the "Continue" button.', async () => {
             await this.continueBtn.click();
         });
     }
@@ -76,13 +76,13 @@ export default class PrepareForSignatureModal {
     }
 
     async clickGotItBtn() {
-        await step('Click the "Got it" button.', async () => {
+        await step('Click on the "Got it" button.', async () => {
             await this.gotItBtn.click();
         });
     }
 
     async clickAddSignerBtn() {
-        await step('Click the "Add signer" button.', async () => {
+        await step('Click on the "Add signer" button.', async () => {
             await this.addSignerBtn.click();
         });
     }
@@ -120,7 +120,7 @@ export default class PrepareForSignatureModal {
     }
 
     async clickSaveBtn() {
-        await step('Click the "Save" button.', async () => {
+        await step('Click on the "Save" button.', async () => {
             await this.saveBtn.click();
         });
     }
@@ -132,13 +132,13 @@ export default class PrepareForSignatureModal {
     }
 
     async clickAddRecipientsBtn() {
-        await step('Click the "Recipients" button.', async () => {
+        await step('Click on the "Recipients" button.', async () => {
             await this.addRecipientsBtn.click();
         });
     }
 
     async fillRecipientEmailField(email) {
-        await step('Fill the email address of the viewer into the input field.', async () => {
+        await step('Fill the email address of the viewer into the "Recipient" input field.', async () => {
             await this.recipientEmailField.fill(email);
         });
     }
@@ -159,7 +159,7 @@ export default class PrepareForSignatureModal {
     }
 
     async clickCreateBtn() {
-        await step('Click the "Create" button.', async () => {
+        await step('Click on the "Create" button.', async () => {
             await this.createBtn.click();
         });
     }
@@ -172,7 +172,7 @@ export default class PrepareForSignatureModal {
     }
 
     async clickCancelBtn() {
-        await step('Click the "Cancel" button.', async () => {
+        await step('Click on the "Cancel" button.', async () => {
             await this.cancelBtn.click();
         });
     }
@@ -184,7 +184,7 @@ export default class PrepareForSignatureModal {
         });
     }
     async waitDocumentPage() {
-        await step("Wait that 'documet page' element is visible", async () => {
+        await step('Wait for the "document section" element to loaded', async () => {
             await this.documentPage.first().waitFor({ state: 'visible' });
         });
     }
@@ -195,9 +195,11 @@ export default class PrepareForSignatureModal {
             let coordinates = 0;
             let retries = 5;
             while (retries !== 0) {
-                await this.signOnFieldsMenu.click();
-                coordinates = await clickCanvas(this.page, this.canvas, this.excludedAreas);
-                coordinates === 0 ? retries-- : retries = 0;
+                await step('Click randomly inside the document', async () => {
+                    await this.signOnFieldsMenu.click();
+                    coordinates = await clickCanvas(this.page, this.canvas, this.excludedAreas);
+                    coordinates === 0 ? retries-- : (retries = 0);
+                });                
             }
             if (coordinates === 0) {
                 await step('Error: Test precondition fail.', async () => {

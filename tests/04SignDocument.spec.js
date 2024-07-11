@@ -154,12 +154,12 @@ test.describe('Sign Document', () => {
     }) => {
         test.setTimeout(250 * 1000);
 
-        await description('Objective: To verify user can sign a document as themselves');
+        await description('To verify user can sign a document as themselves');
         await severity(Severity.CRITICAL);
         await link(`${QASE_LINK}/SIGN-10`, 'Qase: SIGN-10');
         await link(`${GOOGLE_DOC_LINK}jl55qbudbe8i`, 'ATC_04_10_01');
         await epic('Sign document');
-        await tag('Document');
+        await tag('Sign themselves');
 
         await signPage.uploadFileTab.fileUploader.uploadFile(UPLOAD_FILE_PATH.xlsxDocument);
         await signPage.uploadFileTab.clickPrepareDocumentBtn();
@@ -193,7 +193,7 @@ test.describe('Sign Document', () => {
     }) => {
         test.setTimeout(270 * 1000);
 
-        await description('Objective: To verify user and the other signer can sign the document.');
+        await description('To verify user and the other signer can sign the document.');
         await severity(Severity.CRITICAL);
         await link(`${QASE_LINK}/SIGN-10`, 'Qase: SIGN-10');
         await link(`${GOOGLE_DOC_LINK}s5pa7fnboi83`, 'TC_04_10_02');
@@ -247,7 +247,7 @@ test.describe('Sign Document', () => {
         successModal,
     }) => {
         await description(
-            'Objective: To verify that updating the document status to "expired" in the database reflects correctly on the front-end display. \n Attention: Refresh the page twice: \n - if application state not synchronized \n - after changing the status in the database.'
+            'To verify that updating the document status to "expired" in the database reflects correctly on the front-end display. \n Attention: Refresh the page twice: \n - if application state not synchronized \n - after changing the status in the database.'
         );
         await severity(Severity.CRITICAL);
         await link(`${QASE_LINK}/SIGN-13`, 'Qase: SIGN-13');
@@ -350,7 +350,7 @@ test.describe('Sign Document', () => {
         test.setTimeout(250 * 1000);
 
         await description(
-            'Objective: To verify signer can decline to sign the document. \n Attention: \n - Script contains commented code due to delayed reminder. \n - Page can be reloaded if application state not synchronized'
+            'To verify signer can decline to sign the document. \n Attention: \n - Script contains commented code due to delayed reminder. \n - Page can be reloaded if application state not synchronized'
         );
         await severity(Severity.CRITICAL);
         await link(`${QASE_LINK}/SIGN-12`, 'Qase: SIGN-12');
@@ -427,7 +427,7 @@ test.describe('Sign Document', () => {
     }) => {
         test.setTimeout(270 * 1000);
 
-        await description('Objective: To verify user can send the document to the signer');
+        await description('To verify user can send the document to the signer');
         await severity(Severity.CRITICAL);
         await link(`${QASE_LINK}/SIGN-10`, 'Qase: SIGN-10');
         await link(`${GOOGLE_DOC_LINK}o1a44zgp2uji`, 'TC_04_10_03');
