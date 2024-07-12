@@ -175,7 +175,7 @@ test.describe('Sign Document', () => {
         await finalStepPage.clickSignDocumentBtn();
         await successModal.clickBackToDocumentsBtn();
 
-        await step('Verify the document has a "Completed" status', async () => {
+        await step('Verify document has a "Completed" status', async () => {
             await expect(await documentsPage.table.documentStatus).toHaveText(DOCUMENT_STATUS.completed);
         });
     });
@@ -232,7 +232,7 @@ test.describe('Sign Document', () => {
         await finalStepPage.clickSignDocumentAndSendForSignatureBtn();
         await successModal.clickBackToDocumentsBtn();
 
-        await step('Verify the document has "Awaiting" status', async () => {
+        await step('Verify document has "Awaiting" status', async () => {
             await expect(await documentsPage.table.documentStatus).toHaveText(DOCUMENT_STATUS.awaiting);
         });
     });
@@ -248,7 +248,7 @@ test.describe('Sign Document', () => {
         successModal,
     }) => {
         await description(
-            'To verify updating document status to "expired" in the database reflects correctly on the front-end display. \n Attention: Refresh the page twice: \n - if application state not synchronized \n - after changing the status in the database.'
+            'To verify updating document status to "Expired" in the database reflects correctly on the front-end display. \n Attention: Refresh the page twice: \n - if application state not synchronized \n - after changing the status in the database.'
         );
         await severity(Severity.CRITICAL);
         await link(`${QASE_LINK}/SIGN-13`, 'Qase: SIGN-13');
@@ -278,11 +278,11 @@ test.describe('Sign Document', () => {
 
         const documentName = UPLOAD_FILE_PATH.xlsxDocument.split('/').pop();
         await editDocumentStatus(request, documentName, DOCUMENT_STATUS.expired);
-        await step('Refresh page', async () => {
+        await step('Refresh page.', async () => {
             await page.reload();
         });
 
-        await step('Verify the document has "Expired" status', async () => {
+        await step('Verify document has "Expired" status.', async () => {
             await expect(await documentsPage.table.documentStatus).toHaveText(DOCUMENT_STATUS.expired);
         });
     });
@@ -351,7 +351,7 @@ test.describe('Sign Document', () => {
         test.setTimeout(250 * 1000);
 
         await description(
-            'To verify signer can decline to sign the document. \n Attention: \n - Script contains commented code due to delayed reminder. \n - Page can be reloaded if application state not synchronized'
+            'To verify signer can decline to sign the document. \n Attention: \n - Script contains commented code due to delayed reminder. \n - Page can be reloaded if application state not synchronized.'
         );
         await severity(Severity.CRITICAL);
         await link(`${QASE_LINK}/SIGN-12`, 'Qase: SIGN-12');
@@ -408,7 +408,7 @@ test.describe('Sign Document', () => {
         successModal.clickReturnToDocumentsBtn();
         documentsPage.sideMenuDocuments.clickVoided();
 
-        await step('Verify the document has "Declined" status', async () => {
+        await step('Verify document has "Declined" status.', async () => {
             await documentsPage.table.documentStatus.waitFor();
             await expect(await documentsPage.table.documentStatus).toHaveText(DOCUMENT_STATUS.declined);
         });
@@ -449,7 +449,7 @@ test.describe('Sign Document', () => {
         await finalStepPage.clickSendForSignatureBtn();
         await successModal.clickBackToDocumentsBtn();
 
-        await step('Verify the document has "Awaiting" status', async () => {
+        await step('Verify the document has "Awaiting" status.', async () => {
             await expect(await documentsPage.table.documentStatus).toHaveText(DOCUMENT_STATUS.awaiting);
         });
     });

@@ -67,7 +67,7 @@ test.describe('API key', () => {
         await link(`${GOOGLE_DOC_LINK}4l55n4gzh7rc`, 'ATC_12_48_02');
         await epic('Settings');
         await feature('API');
-        await tags('Settings, API key');
+        await tags('API key');
 
         await signPage.sideMenu.clickSettings();
         await settingsCompanyPage.horizontalMenu.clickAPI();

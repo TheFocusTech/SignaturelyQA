@@ -3,7 +3,7 @@ import { test } from '../fixtures/base.js';
 import { UPLOAD_FILE_PATH, DOCUMENT_STATUS } from '../testData.js';
 import { description, severity, Severity, epic, feature } from 'allure-js-commons';
 
-test.describe('Out of scope. Verify document formats to download.', () => {
+test.describe('Verification of supporting tests.', () => {
     const documentsList = Object.values(UPLOAD_FILE_PATH);
     documentsList.forEach((document) => {
         let format = '.' + document.split('.').pop();

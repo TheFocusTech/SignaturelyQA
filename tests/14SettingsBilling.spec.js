@@ -14,7 +14,7 @@ import {
 import { description, tags, severity, Severity, link, epic, feature, step } from 'allure-js-commons';
 
 test.describe('Billing', () => {
-    test('TC_14_57_02 | Verify ability to successfully downgrade subscription.', async ({
+    test('TC_14_57_02 | Verify user can downgrade subscription.', async ({
         createBusinessUserAndLogin,
         signPage,
         settingsCompanyPage,
@@ -23,9 +23,7 @@ test.describe('Billing', () => {
         downgradeToPersonalPlanModal,
         specialOneTimeOfferModal,
     }) => {
-        await description(
-            'To verify the functionality of downgrade subscription.'
-        );
+        await description('To verify user can downgrade subscription.');
         await severity(Severity.CRITICAL);
         await link(`${QASE_LINK}/SIGN-57`, 'Qase: SIGN-57');
         await link(`${GOOGLE_DOC_LINK}83e29wiaygvp`, 'ATC_14_57_02');
@@ -41,13 +39,13 @@ test.describe('Billing', () => {
         await specialOneTimeOfferModal.clickNoThanksModalBtn();
         await settingsBillingPlanPage.sideMenuSettings.clickBilling();
 
-         await step('Verify text "Your plan will end on" displayed on Billing page.', async () => {
+        await step('Verify text "Your plan will end on" displayed on Billing page.', async () => {
             await expect(settingsBillingPage.nextInvoiceInfo).toContainText(END_PLAN);
-        }); 
+        });
     });
 
-    PLANS.forEach(plan => {
-        test(`TC_14_56_01 | Verify successful upsell of users subscription ${plan} plan.`, async ({
+    PLANS.forEach((plan) => {
+        test(`TC_14_56_01 | Verify user can upsell subscription ${plan} plan.`, async ({
             createFreeUserAndLogin,
             signPage,
             settingsCompanyPage,
@@ -84,8 +82,7 @@ test.describe('Billing', () => {
         settingsBillingPage,
     }) => {
         await description(
-            'To verify the functionality of attaching a payment card ' +
-                'through the settings-billing section and deleting a payment card through the Billing Portal.\n Attention: Page can be reloaded if application state not synchronized.'
+            'To verify the functionality of attaching a payment card through the settings-billing section and deleting a payment card through the Billing Portal. \n Attention: Refresh the page and extra wait 1 sec.'
         );
         await severity(Severity.CRITICAL);
         await link(`${QASE_LINK}/SIGN-54`, 'Qase: SIGN-54');
@@ -130,14 +127,11 @@ test.describe('Billing', () => {
         await step('Verify there is only one payment card displayed on Billing Portal page.', async () => {
             await expect(settingBillingPortalPage.paymentMethodsList).toHaveCount(1);
         });
-        await step(
-            'Verify there is the last added payment card displayed on Billing Portal page.',
-            async () => {
-                await expect(settingBillingPortalPage.paymentMethodsList).toHaveText(
-                    CARD_DETAILS.MASTERCARD.displayingOnTheBillingPortalPage
-                );
-            }
-        );
+        await step('Verify there is the last added payment card displayed on Billing Portal page.', async () => {
+            await expect(settingBillingPortalPage.paymentMethodsList).toHaveText(
+                CARD_DETAILS.MASTERCARD.displayingOnTheBillingPortalPage
+            );
+        });
     });
 
     test('TC_14_57_01 | Verify user can upgrade subscription (from Monthly to Annually).', async ({
@@ -203,7 +197,7 @@ test.describe('Billing', () => {
         });
     });
 
-    PLANS.forEach(plan => {
+    PLANS.forEach((plan) => {
         test(`TC_14_55_01 | Verify ability to successfully select subscription ${plan} plan.`, async ({
             createFreeUserAndLogin,
             signPage,
@@ -220,7 +214,7 @@ test.describe('Billing', () => {
             await epic('Settings');
             await feature('Billing');
             await tags('Subscription');
-    
+
             await signPage.sideMenu.clickSettings();
             await settingsCompanyPage.horizontalMenu.clickBilling();
             await settingsBillingPage.clickUpgradePlanButton();
@@ -228,7 +222,7 @@ test.describe('Billing', () => {
             await upgradeYourPlanModal.cardDetails.fillData(CARD_DETAILS.VISA);
             await upgradeYourPlanModal.clickSubscribeButton();
             await settingsBillingPlanPage.toast.waitForToastText();
-    
+
             await step('Verify toast message.', async () => {
                 await expect(await settingsBillingPlanPage.toast.toastBody).toHaveText(TOAST_MESSAGE.planSuccessChange);
             });

@@ -146,7 +146,7 @@ test.describe('Folders', () => {
         }) => {
             await description(
                 `To verify Business user can assign folder permissions to team member with role ${role}. \n
-                Attention: Page can be reloaded if application state not synchronized.`
+                Attention: Page reloaded due to application state not synchronized.`
             );
             await severity(Severity.CRITICAL);
             await link(`${QASE_LINK}/SIGN-26`, 'Qase: SIGN-26');
@@ -220,7 +220,7 @@ test.describe('Folders', () => {
         createFolderModal,
         folderPermissionsModal,
     }) => {
-        await description('To verify Business user can assign folder permissions to multiple team members.');
+        await description('To verify Business user can assign folder permissions to multiple team members. \n Attention: \n - Refresh the page and extra wait 1 sec.');
         await severity(Severity.CRITICAL);
         await link(`${QASE_LINK}/SIGN-26`, 'QASE: SIGN-26');
         await link(`${GOOGLE_DOC_LINK}u9qq452yxk4d`, 'ATC_06_26_02');

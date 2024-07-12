@@ -44,7 +44,7 @@ test.describe('Templates', () => {
         await prepareForSignatureModal.clickCreateBtn();
         await successModal.clickBackToTemplatesBtn();
 
-        await step('Verify the document status in the Template page is "live"', async () => {
+        await step('Verify created template has "Live" status.', async () => {
             await expect(await templatesPage.table.documentStatus).toHaveText(TEMPLATES_STATUS.live);
         });
     });
@@ -119,7 +119,7 @@ test.describe('Templates', () => {
         await prepareForSignatureModal.clickSaveBtn();
         await templatesPage.table.waitForDocumentTitleVisible(EDIT_TEMPLATE_DATA.nameField);
 
-        await step('Verify the new name of Template is visible in the table', async () => {
+        await step('Verify template with new name is visible in the table', async () => {
             await expect(await templatesPage.table.objectTitle).toHaveText(EDIT_TEMPLATE_DATA.nameField);
         });
 
@@ -147,7 +147,7 @@ test.describe('Templates', () => {
         await link(`${QASE_LINK}/SIGN-30`, 'Qase: SIGN-30');
         await link(`${GOOGLE_DOC_LINK}nz5pn2p8lvfz`, 'ATC_07_30_01');
         await epic('Templates');
-        await tags('User', 'Dublicat');
+        await tags('Duplicate template');
 
         test.setTimeout(250 * 1000);
 
@@ -177,12 +177,12 @@ test.describe('Templates', () => {
         confirmDeletionModal,
         successModal,
     }) => {
-        await description('To verify Business user can successfully delete the template.');
+        await description('To verify Business user can delete the template.');
         await severity(Severity.CRITICAL);
         await link(`${QASE_LINK}/SIGN-29`, 'Qase: SIGN-29');
         await link(`${GOOGLE_DOC_LINK}lduzx2ed3enn`, 'ATC_07_29_01');
         await epic('Templates');
-        await tags('Delete');
+        await tags('Delete template');
 
         test.setTimeout(250 * 1000);
 

@@ -164,45 +164,36 @@ test.describe('Registration', () => {
 
             await signPage.sideMenu.clickSettings();
             await settingsCompanyPage.horizontalMenu.clickBilling();
-            await step(
-                `Verify Billing plan description is Business Personal ${subscription} Plan.`,
-                async () => {
-                    await expect(settingsBillingPage.billingPlanDescription).toHaveText(
-                        PERSONAL_PLAN_DESCRIPTION(subscription)
-                    );
-                }
-            );
+            await step(`Verify Billing plan description is Business Personal ${subscription} Plan.`, async () => {
+                await expect(settingsBillingPage.billingPlanDescription).toHaveText(
+                    PERSONAL_PLAN_DESCRIPTION(subscription)
+                );
+            });
         });
     });
 
-    SUBSCRIPTIONS.forEach((subscription)=>{
-        test(`TC_01_59_01| Verify successful registration of Business User with ${subscription} subscription`, async({
-        request,
-        page,
-        signUpBusinessPage,
-        confirmCodeModal,
-        signPage,
-        settingsCompanyPage,
-        settingsBillingPage
-        })=>{
+    SUBSCRIPTIONS.forEach((subscription) => {
+        test(`TC_01_59_01| Verify successful registration of Business User with ${subscription} subscription`, async ({
+            request,
+            page,
+            signUpBusinessPage,
+            confirmCodeModal,
+            signPage,
+            settingsCompanyPage,
+            settingsBillingPage,
+        }) => {
             await description('To verify Business user can successfully register');
             await tag('Business User');
             await severity(Severity.BLOCKER);
-            await link(
-                `${QASE_LINK}/SIGN-59`,
-                "Qase:Sign-59"
-            );
-            await link(
-                `${GOOGLE_DOC_LINK}bfiytgerhgx1`,
-                "ATC_01_59_01"
-            );
+            await link(`${QASE_LINK}/SIGN-59`, 'Qase:Sign-59');
+            await link(`${GOOGLE_DOC_LINK}bfiytgerhgx1`, 'ATC_01_59_01');
             await epic('Registration');
 
             const newUserData = await generateNewUserData();
-            await step('Navigate to Business user registration page',async()=>{
+            await step('Navigate to Business user registration page', async () => {
                 await page.goto(URL_END_POINTS.signUpBusinessEndPoint);
             });
-            await step('Verify Business user registration page title',async()=>{
+            await step('Verify Business user registration page title', async () => {
                 await expect(signUpBusinessPage.businessPageLabelTitle).toHaveText(SUBSCRIBE_TO_BUSINESS_PLAN);
             });
 
@@ -212,25 +203,27 @@ test.describe('Registration', () => {
             await signUpBusinessPage.clickSubscriptionButton(subscription);
             await signUpBusinessPage.cardDetails.fillData(CARD_DETAILS.VISA);
             await signUpBusinessPage.clickPurchaseNowButton();
-            await step('Verify Confirm modal title',async()=>{
+            await step('Verify Confirm modal title', async () => {
                 await expect(confirmCodeModal.confirmCodeModalTitle).toHaveText(PLEASE_ENTER_CONFIRMATION_CODE);
             });
 
-            const confirmCode=await retrieveUserEmailConfirmCode(request,newUserData.email);
+            const confirmCode = await retrieveUserEmailConfirmCode(request, newUserData.email);
             await confirmCodeModal.fillConfirmCodeInputField(confirmCode);
             await confirmCodeModal.clickSendButton();
-            await step('Verify user is on Home page',async()=>{
+            await step('Verify user is on Home page', async () => {
                 await expect(page).toHaveURL(`${process.env.URL}${URL_END_POINTS.signEndPoint}`);
             });
-            await step("Verify user's name appears in the header of the page",async()=>{
+            await step("Verify user's name appears in the header of the page", async () => {
                 await expect(signPage.header.userName).toHaveText(newUserData.name);
             });
 
             await signPage.sideMenu.clickSettings();
             await settingsCompanyPage.horizontalMenu.clickBilling();
-            await step(`Verify Billing plan description is Business Personal ${subscription} Plan`,async()=>{
-                await expect(settingsBillingPage.billingPlanDescription).toHaveText(BUSINESS_PLAN_DESCRIPTION(subscription));
+            await step(`Verify Billing plan description is Business Personal ${subscription} Plan`, async () => {
+                await expect(settingsBillingPage.billingPlanDescription).toHaveText(
+                    BUSINESS_PLAN_DESCRIPTION(subscription)
+                );
             });
-        })
-    })
+        });
+    });
 });

@@ -6,7 +6,9 @@ import {
     DOCUMENT_STATUS,
     UPLOAD_FILE_PATH,
     QASE_LINK,
-    GOOGLE_DOC_LINK, FORM_STATUS, TEMPLATES_STATUS, FORMS
+    GOOGLE_DOC_LINK,
+    FORM_STATUS,
+    FORMS,
 } from '../testData.js';
 import { createForm } from '../helpers/preconditions.js';
 import { description, tag, severity, Severity, link, epic, step } from 'allure-js-commons';
@@ -54,7 +56,7 @@ test.describe('Forms', () => {
 
         await successModal.clickBackToFormsBtn();
 
-        await step('Verify "Live" status of created form in the table is "Live".', async () => {
+        await step('Verify created form has "Live" status.', async () => {
             await expect(await formsPage.table.documentStatus).toHaveText(DOCUMENT_STATUS.live);
         });
     });
@@ -75,7 +77,7 @@ test.describe('Forms', () => {
         await epic('Forms');
 
         test.setTimeout(120 * 1000);
-        await createForm(signPage,  formsPage,createFormPage, prepareForSignatureModal, successModal);
+        await createForm(signPage, formsPage, createFormPage, prepareForSignatureModal, successModal);
 
         await signPage.sideMenu.clickForms();
         await formsPage.table.clickFirstOptionsBtn();
@@ -96,11 +98,11 @@ test.describe('Forms', () => {
         signPage,
         formsPage,
         createFormPage,
-        prepareForSignatureModal,       
+        prepareForSignatureModal,
         successModal,
     }) => {
         await description('To verify Business user can duplicate form.');
-        await tag('Duplicate Form');
+        await tag('Disable and enable Form');
         await severity(Severity.CRITICAL);
         await link(`${QASE_LINK}/SIGN-36`, 'Qase: SIGN-36');
         await link(`${GOOGLE_DOC_LINK}mc6zaq1bjz9o`, 'ATC_08_36_01');
@@ -117,7 +119,7 @@ test.describe('Forms', () => {
             await expect(await formsPage.toast.toastBody.nth(0)).toHaveText(TOAST_MESSAGE.formDisabled);
         });
 
-        await step('Verify form status on Аorm page is "disabled".', async () => {
+        await step('Verify form has "Disabled" status.', async () => {
             await expect(await formsPage.table.documentStatus).toHaveText(FORM_STATUS.disabled);
         });
 
@@ -128,7 +130,7 @@ test.describe('Forms', () => {
             await expect(await formsPage.toast.toastBody.nth(0)).toHaveText(TOAST_MESSAGE.formEnabled);
         });
 
-        await step('Verify form status on Form page is "live".', async () => {
+        await step('Verify form has "Live" status.', async () => {
             await expect(await formsPage.table.documentStatus).toHaveText(FORM_STATUS.live);
         });
     });
@@ -147,7 +149,7 @@ test.describe('Forms', () => {
         await severity(Severity.CRITICAL);
         await link(`${QASE_LINK}/SIGN-34`, 'Qase: SIGN-34');
         await link(`${GOOGLE_DOC_LINK}1rswbzg5kt90`, 'ATC_08_34_01');
-        await epic("Forms");
+        await epic('Forms');
 
         test.setTimeout(120 * 1000);
         await createForm(signPage, formsPage, createFormPage, prepareForSignatureModal, successModal);
@@ -208,7 +210,7 @@ test.describe('Forms', () => {
         await step('Verify second toast message has text "Form saved!"', async () => {
             await expect(formsPage.toast.toastBody.nth(1)).toHaveText(TOAST_MESSAGE.editedFormSaved);
         });
-        await step('Verify Edited Form has edited title "Form is Edited". ', async () => {
+        await step(`Verify Edited Form has edited title "${FORMS.formNameEdit}".`, async () => {
             await expect(formsPage.table.firstFormTitle).toHaveText(FORMS.formNameEdit);
         });
     });

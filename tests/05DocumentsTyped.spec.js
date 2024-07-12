@@ -188,7 +188,7 @@ test.describe('DocumentsType', () => {
         await prepareForSignatureModal.clickCancelBtn();
         await signPage.sideMenu.clickDocuments();
 
-        await step('Verify document has status "Draft".', async () => {
+        await step('Verify document has "Draft" status.', async () => {
             expect(await documentsPage.table.getDocumentStatusText()).toBe(DOCUMENT_STATUS.draft);
         });
     });
@@ -308,7 +308,7 @@ test.describe('DocumentsType', () => {
         test.setTimeout(250 * 1000);
 
         await description(
-            'To verify Business user can move documents to the trash using checkboxes and "Select_options" dropdown menu and delete them permanently from the trash'
+            'To verify Business user can move documents to the trash using checkboxes and "Select_options" dropdown menu and delete them permanently from the trash. \n Attention: Refresh the page twice in precondition and extra wait 1 sec.'
         );
         await severity(Severity.CRITICAL);
         await link(`${QASE_LINK}/SIGN-19`, 'Qase: SIGN-19');
@@ -331,18 +331,15 @@ test.describe('DocumentsType', () => {
             await expect(documentsTrashPage.table.objectTitle).toHaveText(documentsToDelete);
         });
 
-        await step(
-            `Verify documents in the trash have a "Deleted" status: "${DELETED_DOCUMENTS_STATUS}"`,
-            async () => {
-                await expect(documentsTrashPage.table.documentsStatuses).toHaveText(DELETED_DOCUMENTS_STATUS);
-            }
-        );
+        await step(`Verify documents in the trash have a "Deleted" status.`, async () => {
+            await expect(documentsTrashPage.table.documentsStatuses).toHaveText(DELETED_DOCUMENTS_STATUS);
+        });
 
         await documentsTrashPage.clickEmptyTrashBtn();
         await confirmTrashEmptyingModal.clickEmptyTrashBtn();
         await documentsTrashPage.toast.waitForToastCompleted();
 
-        await step('Verify trash is empty', async () => {
+        await step('Verify trash is empty.', async () => {
             await documentsTrashPage.table.emptyTableHeader.waitFor({ state: 'visible' });
             await expect(documentsTrashPage.table.emptyTableHeader).toHaveText(EMPTY_TABLE_HEADER.trash);
         });
