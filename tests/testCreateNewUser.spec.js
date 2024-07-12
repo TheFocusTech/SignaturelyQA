@@ -5,7 +5,7 @@ import { description, severity, Severity, epic, feature } from 'allure-js-common
 
 test.describe('Verification of supporting tests.', () => {
     test('Create Free User', async ({ createFreeUserAndLogin, signPage, settingsCompanyPage }) => {
-        await description(`To verify ${format} document format can be downloaded.`);
+        await description('Tests to maintain New User Creation.');
         await severity(Severity.CRITICAL);
         await epic('Verification of supporting tests.');
         await feature('Tests to maintain New User Creation.');
