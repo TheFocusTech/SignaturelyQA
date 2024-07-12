@@ -103,7 +103,7 @@ test.describe('DocumentsType', () => {
     }) => {
         test.slow();
 
-        await description('To verify business user can move a document to a folder.');
+        await description('To verify Business user can move a document to a folder.');
         await severity(Severity.CRITICAL);
         await link(`${QASE_LINK}/SIGN-18`, 'Qase: SIGN-18');
         await link(`${GOOGLE_DOC_LINK}ylpnl5bdm86k`, 'ATC_05_18_01');
@@ -173,7 +173,7 @@ test.describe('DocumentsType', () => {
     }) => {
         test.setTimeout(200 * 1000);
 
-        await description('To verify business user can revert a document with "Awaiting" status to "Draft" status.');
+        await description('To verify Business user can revert a document with "Awaiting" status to "Draft" status.');
         await severity(Severity.CRITICAL);
         await link(`${QASE_LINK}/SIGN-21`, 'QASE: SIGN-21 ');
         await link(`${GOOGLE_DOC_LINK}cl44yvv352v8`, 'TC_05_21_03');
@@ -204,7 +204,7 @@ test.describe('DocumentsType', () => {
         shareThisDocumentModal,
         request,
     }) => {
-        await description('To verify business user can share a document with status "Completed" via email.');
+        await description('To verify Business user can share a document with status "Completed" via email.');
         await severity(Severity.CRITICAL);
         await link(`${QASE_LINK}/SIGN-17`, 'Qase: SIGN-17');
         await link(`${GOOGLE_DOC_LINK}sp7vb8tsrias`, 'TC_05_17_01');
@@ -261,7 +261,7 @@ test.describe('DocumentsType', () => {
         test.setTimeout(250 * 1000);
 
         await description(
-            'To verify business user can move a document to the trash using "Actions" options dropdown menu and delete it permanently from the trash.'
+            'To verify Business user can move a document to the trash using "Actions" options dropdown menu and delete it permanently from the trash.'
         );
         await severity(Severity.CRITICAL);
         await link(`${QASE_LINK}/SIGN-19`, 'Qase: SIGN-19');
@@ -367,7 +367,7 @@ test.describe('DocumentsType', () => {
         successModal,
         documentsPage,
     }) => {
-        await description('To verify business user can download a document with status "Completed" (API).');
+        await description('To verify Business user can download a document with status "Completed" (API).');
         await severity(Severity.CRITICAL);
         await link(`${QASE_LINK}/SIGN-20`, 'Qase: SIGN-20');
         await link(`${GOOGLE_DOC_LINK}8wxawmz1dvq1`, 'TC_05_20_01');
