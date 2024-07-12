@@ -36,8 +36,9 @@ test.describe('DocumentsType', () => {
     }) => {
         test.setTimeout(200 * 1000);
 
+        await description('To verify document can be returned for editing.');
         await description(
-            'To verify that the "Edit&Resend" functionality correctly allows users to edit and resend a prepared document'
+            'To verify "Edit&Resend" functionality correctly allows users to edit and resend a prepared document'
         );
         await severity(Severity.CRITICAL);
         await link(`${QASE_LINK}/SIGN-21`, 'QASE: SIGN-21 ');
@@ -51,15 +52,15 @@ test.describe('DocumentsType', () => {
         await documentsPage.table.clickFirstOptionsBtn();
         await documentsPage.table.clickEditAndResendBtn();
 
-        await step('Verify the modal window "Edit & Resend" document has opened', async () => {
+        await step('Verify modal window "Edit & Resend" document has opened', async () => {
             await expect(editAndResendDocumentModal.editAndResendTitle).toBeVisible();
         });
-        await step('Verify the title of the modal window is "Edit & Resend document"', async () => {
+        await step('Verify title of the modal window is "Edit & Resend document"', async () => {
             expect(await editAndResendDocumentModal.getTitleText()).toBe('Edit & Resend document');
         });
     });
 
-    test('TC_05_21_02 | Verify the button "Revert to Draft" is active', async ({
+    test('TC_05_21_02 | Verify button "Revert to Draft" is active', async ({
         createBusinessUserAndLogin,
         page,
         signPage,
@@ -71,7 +72,7 @@ test.describe('DocumentsType', () => {
     }) => {
         test.setTimeout(200 * 1000);
 
-        await description('To verify the document can be returned for editing.');
+        await description('To verify document can be returned for editing.');
         await severity(Severity.CRITICAL);
         await link(`${QASE_LINK}/SIGN-21`, 'QASE: SIGN-21 ');
         await link(`${GOOGLE_DOC_LINK}r25l83kzqn09`, 'ATC_05_21_02');
@@ -84,11 +85,11 @@ test.describe('DocumentsType', () => {
         await documentsPage.table.clickEditAndResendBtn();
         await editAndResendDocumentModal.clickRevertToDraftBtn();
 
-        await step('Verify the "Prepare For Signing" modal window is open', async () => {
+        await step('Verify "Prepare For Signing" modal window is open', async () => {
             await expect(page).toHaveURL(/documents.*edit$/);
         });
 
-        await step('Verify the title of the modal window is "Prepare for Signing"', async () => {
+        await step('Verify title of the modal window is "Prepare for Signing"', async () => {
             expect(await prepareForSignatureModal.getPrepareForSigningTitleText()).toBe('Prepare for Signing');
         });
     });
@@ -123,7 +124,7 @@ test.describe('DocumentsType', () => {
         });
 
         await documentsPage.table.openFolder(FOLDER_NAME);
-        await step('Verify document is inside the folder', async () => {
+        await step('Verify document is inside the folder.', async () => {
             await expect(await documentsPage.table.objectTitle).toHaveText(UPLOAD_FILE_NAME.jpgDocument);
         });
     });
@@ -138,7 +139,7 @@ test.describe('DocumentsType', () => {
         documentsAwaitingPage,
         sendReminderDocumentModal,
     }) => {
-        await description('To verify business user can send a reminder to sign the document.');
+        await description('To verify Business user can send a reminder to sign the document.');
         await severity(Severity.CRITICAL);
         await link(`${QASE_LINK}/SIGN-16`, 'Qase: SIGN-16');
         await link(`${GOOGLE_DOC_LINK}w17qlbkxlnc6`, 'ATC_05_16_01');
@@ -187,7 +188,7 @@ test.describe('DocumentsType', () => {
         await prepareForSignatureModal.clickCancelBtn();
         await signPage.sideMenu.clickDocuments();
 
-        await step('Verify the document has status "Draft" ', async () => {
+        await step('Verify document has "Draft" status.', async () => {
             expect(await documentsPage.table.getDocumentStatusText()).toBe(DOCUMENT_STATUS.draft);
         });
     });
@@ -276,13 +277,13 @@ test.describe('DocumentsType', () => {
         await deleteModal.clickYesDeleteBtn();
         await documentsPage.toast.waitForToastCompleted();
 
-        await step('Verify the table is empty', async () => {
+        await step('Verify table is empty', async () => {
             await expect(documentsPage.table.emptyTableHeader).toHaveText(EMPTY_TABLE_HEADER.documents);
         });
 
         await documentsPage.sideMenuDocuments.clickTrash();
 
-        await step('Verify the document has "Deleted" status', async () => {
+        await step('Verify document has a "Deleted" status', async () => {
             expect(await documentsPage.table.getDocumentStatusText()).toBe(DOCUMENT_STATUS.deleted);
         });
 
@@ -291,7 +292,7 @@ test.describe('DocumentsType', () => {
         await deleteModal.clickYesDeleteBtn();
         await documentsTrashPage.toast.waitForToastCompleted();
 
-        await step('Verify the trash is empty', async () => {
+        await step('Verify trash is empty', async () => {
             await expect(documentsTrashPage.table.emptyTableHeader).toHaveText(EMPTY_TABLE_HEADER.trash);
         });
     });
@@ -307,7 +308,7 @@ test.describe('DocumentsType', () => {
         test.setTimeout(250 * 1000);
 
         await description(
-            'To verify business user can move documents to the trash using checkboxes and "Select_options" dropdown menu and delete them permanently from the trash. \n Attention: Documents for deletion are selected randomly and may differ from those presented in the video ATC_05_19_02.webm.'
+            'To verify Business user can move documents to the trash using checkboxes and "Select_options" dropdown menu and delete them permanently from the trash. \n Attention: Refresh the page twice in precondition and extra wait 1 sec.\n Documents for deletion are selected randomly and may differ from those presented in the video ATC_05_19_02.webm.'
         );
         await severity(Severity.CRITICAL);
         await link(`${QASE_LINK}/SIGN-19`, 'Qase: SIGN-19');
@@ -326,22 +327,19 @@ test.describe('DocumentsType', () => {
         await documentsPage.toast.waitForToastCompleted();
         await documentsPage.sideMenuDocuments.clickTrash();
 
-        await step(`Verify the documents in the trash have the correct titles "${documentsToDelete}"`, async () => {
+        await step(`Verify documents in the trash have the correct titles "${documentsToDelete}"`, async () => {
             await expect(documentsTrashPage.table.objectTitle).toHaveText(documentsToDelete);
         });
 
-        await step(
-            `Verify the documents in the trash have "Deleted" status: "${DELETED_DOCUMENTS_STATUS}"`,
-            async () => {
-                await expect(documentsTrashPage.table.documentsStatuses).toHaveText(DELETED_DOCUMENTS_STATUS);
-            }
-        );
+        await step(`Verify documents in the trash have a "Deleted" status.`, async () => {
+            await expect(documentsTrashPage.table.documentsStatuses).toHaveText(DELETED_DOCUMENTS_STATUS);
+        });
 
         await documentsTrashPage.clickEmptyTrashBtn();
         await confirmTrashEmptyingModal.clickEmptyTrashBtn();
         await documentsTrashPage.toast.waitForToastCompleted();
 
-        await step('Verify the trash is empty', async () => {
+        await step('Verify trash is empty.', async () => {
             await documentsTrashPage.table.emptyTableHeader.waitFor({ state: 'visible' });
             await expect(documentsTrashPage.table.emptyTableHeader).toHaveText(EMPTY_TABLE_HEADER.trash);
         });

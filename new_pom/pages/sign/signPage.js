@@ -18,14 +18,14 @@ export default class SignPage {
     }
 
     async clickBulkSendTab() {
-        await step('Open the "Bulk Send" tab.', async () => {
+        await step('Open "Bulk Send" tab.', async () => {
             await this.bulkSendTabOnPanel.waitFor();
             await this.bulkSendTabOnPanel.click();
         });
     }
 
     async signPageReload() {
-        await step('Refresh page', async () => {
+        await step('Refresh page.', async () => {
             await this.page.reload();
             await this.page.waitForTimeout(1000);
         });       

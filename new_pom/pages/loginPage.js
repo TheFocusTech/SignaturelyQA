@@ -10,19 +10,19 @@ export default class LoginPage {
     }
 
     async fillEmailAddressInput(email){
-        await step('Fill in "Email Address" input field', async () => {
+        await step('Fill in "Email Address" input field.', async () => {
             await this.emailAddressInput.fill(email);
         });
     }
 
     async fillPasswordInput(password) {
-        await step('Fill in "Password" input field', async () => {
+        await step('Fill in "Password" input field.', async () => {
             await this.passwordInput.fill(password);
         });
     }
 
     async clickLogin() {
-        await step('Click on "Login" button', async () => {
+        await step('Click on "Login" button.', async () => {
             await this.loginBtn.click();
         });
     }

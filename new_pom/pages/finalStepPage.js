@@ -21,14 +21,14 @@ export default class FinalStepPage {
     }
 
     async fillDocumentTitleField(title) {
-        await step('Fill in "Document title" input firld.', async () => {
+        await step('Fill in "Document title" input field.', async () => {
             await this.documentTitleField.waitFor({ status: 'visible' });
             await this.documentTitleField.fill(title);
         });
     }
 
     async clickSignDocumentAndSendForSignatureBtn() {
-        await step('Click on the "Sign Document and Send for Signature" button.', async () => {
+        await step('Click on "Sign Document and Send for Signature" button.', async () => {
             await this.signDocumentAndSendForSignatureBtn.click();
         });
     }
@@ -47,7 +47,9 @@ export default class FinalStepPage {
     }
 
     async clickSignDocumentBtn() {
-        await this.signDocumentBtn.click();
+        await step('Click on "Sign document" button', async () => {
+            await this.signDocumentBtn.click();
+        });
     }
 
     async clickSendForSignatureBtn() {

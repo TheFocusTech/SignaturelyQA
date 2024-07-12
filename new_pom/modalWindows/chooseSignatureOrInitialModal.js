@@ -9,13 +9,13 @@ export default class ChooseSignatureOrInitialModal {
     }
 
     async clickSignatureTyped() {
-        await step('Select created "Signature" on the "Typed" tab', async () => {
+        await step('Select created "Signature" on the "Typed" tab.', async () => {
             await this.signatureTyped.click();
         });
     }
 
     async clickSignNowBtn() {
-        await step('Click on "Sign Now" button', async () => {
+        await step('Click on "Sign Now" button.', async () => {
             await this.signNowBtn.click();
         });
     }

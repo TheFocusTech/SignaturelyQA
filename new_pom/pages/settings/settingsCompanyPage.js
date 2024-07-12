@@ -31,85 +31,85 @@ export default class SettingsCompanyPage {
     }
 
     async logoUpLoadFile(file) {
-        await step('Upload File', async () => {
+        await step('Upload File.', async () => {
             await this.inputFile.setInputFiles(file);
         });
     }
 
     async fillCompanyName(name) {
-        await step('Fill in "Company Name" input field', async () => {
+        await step('Fill in "Company Name" input field.', async () => {
             await this.companyName.fill(name);
         });
     }
 
     async fillFromEmail(email) {
-        await step('Fill in "From Email Name" input field', async () => {
+        await step('Fill in "From Email Name" input field.', async () => {
             await this.fromEmail.fill(email);
         });
     }
 
     async fillEmailClosingSignature(email) {
-        await step('Fill in "Email Closing Signature" input field', async () => {
+        await step('Fill in "Email Closing Signature" input field.', async () => {
             await this.emailClosingSignature.fill(email);
         });
     }
 
     async fillRedirectionPage(url) {
-        await step('Fill in "Redirection Page" input field', async () => {
+        await step('Fill in "Redirection Page" input field.', async () => {
             await this.redirectionPage.fill(url);
         });
     }
 
     async checkActivateCheckbox() {
-        await step('Check "Activate" checkbox', async () => {
+        await step('Check "Activate" checkbox.', async () => {
             await this.checkboxActivate.click();
         });
     }
 
     async clickSaveBtn() {
-        await step('Click on "Save" button', async () => {
+        await step('Click on "Save" button.', async () => {
             await this.saveBtn.click();
         });
     }
 
     async checkDocumentsCheckbox() {
-        await step('Check "Documents" checkbox', async () => {
+        await step('Check "Documents" checkbox.', async () => {
             await this.documentsCheckbox.click();
         });
     }
 
     async checkTemplateCheckbox() {
-        await step('Check "Templates" checkbox', async () => {
+        await step('Check "Templates" checkbox.', async () => {
             await this.templatesCheckbox.click();
         });
     }
 
     async checkFormsCheckbox() {
-        await step('Check "Forms" checkbox', async () => {
+        await step('Check "Forms" checkbox.', async () => {
             await this.formsCheckbox.click();
         });
     }
 
     async checkEnable1Checkbox() {
-        await step('Check "Enable" checkbox in "Independent Audit Trail', async () => {
+        await step('Check "Enable" checkbox in "Independent Audit Trail".', async () => {
             await this.enable1Checkbox.click();
         });
     }
 
     async checkEnable2Checkbox() {
-        await step('Check "Enable" checkbox in "Allow signers to download original document', async () => {
+        await step('Check "Enable" checkbox in "Allow signers to download original document".', async () => {
             await this.enable2Checkbox.click();
         });
     }
 
     async checkEnable3Checkbox() {
-        await step('Check "Enable" checkbox in "Independent Requests', async () => {
+        await step('Check "Enable" checkbox in "Independent Requests".', async () => {
             await this.enable3Checkbox.click();
         });
     }
 
     async reloadPage() {
-        await step('Refresh page', async () => {
+        await step('Refresh page.', async () => {
             await this.page.reload();
             await this.page.waitForTimeout(1000);
         });

@@ -17,7 +17,7 @@ export default class UpdateFormPage {
     }
 
     async clickDeleteDocumentBtn() {
-        await step('Click on "X" (close) symbol next to the uploaded document to remove it.', async () => {
+        await step('Click on "X" (close) symbol next to the uploaded document.', async () => {
             await this.deleteDocumentBtn.click();
         });
     }

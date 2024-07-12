@@ -14,14 +14,14 @@ import {
 import { description, tag, severity, Severity, link, epic, step } from 'allure-js-commons';
 
 test.describe('Folders', () => {
-    test('TC_06_22_01 | Verify the business user can create folder', async ({
+    test('TC_06_22_01 | Verify Business user can create folder.', async ({
         createBusinessUserAndLogin,
         signPage,
         documentsPage,
         createFolderModal,
     }) => {
         test.setTimeout(120 * 1000);
-        await description('To verify the Business user can create the folder');
+        await description('To verify Business user can create folder.');
         await severity(Severity.CRITICAL);
         await link(`${QASE_LINK}/SIGN-22`, 'QASE: SIGN-22');
         await link(`${GOOGLE_DOC_LINK}sl5v8067tqvz`, 'ATC_06_22_01');
@@ -33,13 +33,13 @@ test.describe('Folders', () => {
         await createFolderModal.fillNewFolderName(FOLDER_NAME);
         await createFolderModal.clickCreateBtn();
         await step(
-            'Verify the toast notification with the "Folder created successfully" text appears after creating a folder',
+            'Verify toast notification with "Folder created successfully" text appears after creating a folder.',
             async () => {
                 await expect(await documentsPage.toast.toastBody).toHaveText(TOAST_MESSAGE.folderCreated);
             }
         );
 
-        await step('Verify the new folder has been saved', async () => {
+        await step('Verify new folder has been saved.', async () => {
             await expect(await documentsPage.table.objectTitle).toHaveText(FOLDER_NAME);
         });
     });
@@ -51,7 +51,7 @@ test.describe('Folders', () => {
         createFolderModal,
         confirmDeletionModal,
     }) => {
-        await description('To verify the Business user can delete the folder');
+        await description('To verify Business user can delete the folder.');
         await severity(Severity.CRITICAL);
         await link(`${QASE_LINK}/SIGN-24`, 'QASE: SIGN-24');
         await link(`${GOOGLE_DOC_LINK}h4z5uzr4m1hq`, 'ATC_06_24_01');
@@ -66,21 +66,21 @@ test.describe('Folders', () => {
         await confirmDeletionModal.clickYesDelete();
 
         await step(
-            'Verify the toast notification with the "Folder deleted successfully" text appears after deleting a folder',
+            'Verify toast notification with "Folder deleted successfully" text appears after deleting folder.',
             async () => {
                 await expect(await documentsPage.toast.toastBody).toHaveText(TOAST_MESSAGE.folderDeleted);
             }
         );
     });
 
-    test('TC_06_23_01 | Verify user can rename the folder', async ({
+    test('TC_06_23_01 | Verify user can rename the folder.', async ({
         createBusinessUserAndLogin,
         signPage,
         documentsPage,
         createFolderModal,
     }) => {
         test.setTimeout(150 * 1000);
-        await description('To verify the Business user can rename the folder');
+        await description('To verify Business user can rename folder.');
         await severity(Severity.CRITICAL);
         await link(`${QASE_LINK}/SIGN-23`, 'QASE: SIGN-23 ');
         await link(`${GOOGLE_DOC_LINK}i7nf7965pwpi`, 'ATC_06_23_01');
@@ -95,12 +95,12 @@ test.describe('Folders', () => {
         await documentsPage.table.pressEnterInputNameField();
         await documentsPage.toast.waitForToastIsHiddenByText(TOAST_MESSAGE.folderRename);
 
-        await step('Verify the new value has been saved', async () => {
+        await step('Verify new value has been saved.', async () => {
             expect(await documentsPage.table.getTitleFolder()).toBe(FILL_RENAME_FOLDER_NAME);
         });
     });
 
-    test('TC_06_25_01 | Verify user can move folder to folder', async ({
+    test('TC_06_25_01 | Verify user can move folder to folder.', async ({
         createBusinessUserAndLogin,
         signPage,
         documentsPage,
@@ -109,7 +109,7 @@ test.describe('Folders', () => {
     }) => {
         test.setTimeout(250 * 1000);
 
-        await description('To verify the Business user can move folder to folder');
+        await description('To verify Business user can move folder to folder.');
         await tag('Move folder to folder');
         await severity(Severity.CRITICAL);
         await link(`${QASE_LINK}/SIGN-25`, 'Qase: SIGN-25');
@@ -124,7 +124,7 @@ test.describe('Folders', () => {
         await moveToFolderModal.selectFolder(FOLDER_NAME);
         await moveToFolderModal.clickMoveToFolderBtn();
 
-        await step('Verify the toast notification about successful folder to folder move is displayed', async () => {
+        await step('Verify toast notification about successful folder to folder move is displayed.', async () => {
             await documentsPage.toast.toastBody.waitFor({ state: 'visible' });
             await expect(documentsPage.toast.toastBody).toHaveText(TOAST_MESSAGE.folderMovedToFolder);
         });
@@ -132,7 +132,7 @@ test.describe('Folders', () => {
 
     const teamMemberRoles = Object.values(TEAM_MEMBER_ROLES);
     teamMemberRoles.forEach(role => {
-        test(`TC_06_26_01 | Verify the user can assign folder permissions to the team member ${role}`, async ({
+        test(`TC_06_26_01 | Verify user can assign folder permissions to team member ${role}.`, async ({
             createBusinessUserAndLogin,
             signPage,
             documentsPage,
@@ -145,8 +145,8 @@ test.describe('Folders', () => {
             folderPermissionsModal,
         }) => {
             await description(
-                `To verify the Business user can assign folder permissions to the team member with role ${role}. \n
-                Attention: Page can be reloaded if application state not synchronized`
+                `To verify Business user can assign folder permissions to team member with role ${role}. \n
+                Attention: Page reloaded due to application state not synchronized.`
             );
             await severity(Severity.CRITICAL);
             await link(`${QASE_LINK}/SIGN-26`, 'Qase: SIGN-26');
@@ -180,7 +180,7 @@ test.describe('Folders', () => {
             await documentsPage.table.clickFirstOptionsBtn();
             await documentsPage.table.clickOptionsChangePermissionsBtn();
 
-            await step('Verify the modal window "Folder permissions" is opened', async () => {
+            await step('Verify modal window "Folder permissions" is opened.', async () => {
                 await expect(folderPermissionsModal.folderPermissionsWindow).toBeVisible();
             });
 
@@ -189,26 +189,26 @@ test.describe('Folders', () => {
             await documentsPage.toast.waitForToastText();
 
             await step(
-                'Verify the toast notification about the successful change of access rights is displayed',
+                'Verify toast notification about successful change of access rights is displayed.',
                 async () => {
                     await expect(documentsPage.toast.toastBody).toHaveText(TOAST_MESSAGE.permissionsChanged);
                 }
             );
 
-            await step('Reload page', async () => {
+            await step('Reload page.', async () => {
                 await page.reload();
             });
 
             await documentsPage.table.clickFirstOptionsBtn();
             await documentsPage.table.clickOptionsChangePermissionsBtn();
 
-            await step('Verify Checkbox of the selected team member is checked', async () => {
+            await step('Verify Checkbox of selected team member is checked.', async () => {
                 await expect(folderPermissionsModal.teamMemberCheckbox.last()).toHaveClass(CHECK_BOXES_STATUS.checked);
             });
         });
     });
 
-    test('TC_06_26_02 | Verify the user can assign folder permissions to multiple team members.', async ({
+    test('TC_06_26_02 | Verify user can assign folder permissions to multiple team members.', async ({
         page,
         request,
         createBusinessUserAndLogin,
@@ -220,7 +220,7 @@ test.describe('Folders', () => {
         createFolderModal,
         folderPermissionsModal,
     }) => {
-        await description('To verify the Business user can assign folder permissions to multiple team members.');
+        await description('To verify Business user can assign folder permissions to multiple team members. \n Attention: \n - Refresh the page and extra wait 1 sec.');
         await severity(Severity.CRITICAL);
         await link(`${QASE_LINK}/SIGN-26`, 'QASE: SIGN-26');
         await link(`${GOOGLE_DOC_LINK}u9qq452yxk4d`, 'ATC_06_26_02');
@@ -275,7 +275,7 @@ test.describe('Folders', () => {
         await documentsPage.table.clickFirstOptionsBtn();
         await documentsPage.table.clickOptionsChangePermissionsBtn();
 
-        await step('Verify checkboxes are checked', async () => {
+        await step('Verify checkboxes are checked.', async () => {
             for (const member of teamMembers) {
                 await folderPermissionsModal.waitForMemberName(member.name);
             }
