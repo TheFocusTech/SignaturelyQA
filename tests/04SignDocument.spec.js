@@ -18,7 +18,7 @@ import {
     ENDPOINT_FOR_DECLINE,
 } from '../testData.js';
 import { retrieveUserEmailConfirmationLink, retrieveEmailMessage, editDocumentStatus } from '../helpers/utils.js';
-import { createSignature, uploadDocumentForDraft } from '../helpers/preconditions.js';
+import { createSignature, uploadDraftDocument } from '../helpers/preconditions.js';
 
 test.describe('Sign Document', () => {
     test('TC_04_11_01 | Verify custom signing order', async ({
@@ -205,7 +205,7 @@ test.describe('Sign Document', () => {
             createOrEditSignatureOnSettingModal
         );
 
-        await uploadDocumentForDraft(signPage, prepareForSignatureModal);
+        await uploadDraftDocument(signPage, prepareForSignatureModal);
         await signPage.sideMenu.clickDocuments();
         await documentsPage.sideMenuDocuments.clickDraft();
         await documentsPage.table.clickFirstOptionsBtn();
