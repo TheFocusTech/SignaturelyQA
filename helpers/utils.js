@@ -2,7 +2,7 @@ import {documentIdRequest, documentStatusRequest, signInRequest, signUpRequest} 
 import { authorize, getLinkFromEmail, getConfirmCodeFromEmail, getMessageTextFromEmail } from "../index.js";
 import { step } from "allure-js-commons";
 import {DOCUMENT_STATUS} from "../testData";
-import {dbEditDocumentStatus} from "../newUserUtils/dbUtilsForNewUser";
+import { dbEditDocumentStatus } from "./dbUtils.js";
 
 export function generateNumberForNewUser() {
     let dt = new Date();

@@ -117,14 +117,6 @@ export const createForm = async (signPage, formsPage, createFormPage, prepareFor
     });
 };
 
-export const uploadDocumentForDraft = async (signPage, prepareForSignatureModal) => {
-    await step('Precondition: Upload document for draft', async () => {
-        await signPage.uploadFileTab.fileUploader.uploadFile(UPLOAD_FILE_PATH.xlsxDocument);
-        await signPage.uploadFileTab.clickPrepareDocumentBtn();
-        await prepareForSignatureModal.clickCancelBtn();
-    });
-};
-
 export const createDocumentCompleted = async (
     signPage,
     prepareForSignatureModal,
