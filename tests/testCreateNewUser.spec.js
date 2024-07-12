@@ -3,10 +3,10 @@ import { test } from "../fixtures/base.js";
 import { URL_END_POINTS } from '../testData.js';
 import { description, severity, Severity, epic, feature } from 'allure-js-commons';
 
-test.describe('Verification of supporting tests.', () => {
+test.describe('Verification of supporting tests', () => {
     test('Create Free User', async ({ createFreeUserAndLogin, signPage, settingsCompanyPage }) => {
         await description('Tests to maintain New User Creation.');
-        await severity(Severity.CRITICAL);
+        await severity(Severity.BLOCKER);
         await epic('Verification of supporting tests.');
         await feature('Tests to maintain New User Creation.');
 
@@ -21,8 +21,8 @@ test.describe('Verification of supporting tests.', () => {
         settingsBillingPlanPage,
         settingsBillingPage,
     }) => {
-        await severity(Severity.CRITICAL);
-        await epic('Verification of supporting tests.');
+        await severity(Severity.BLOCKER);
+        await epic('Verification of supporting tests');
         await feature('Tests to maintain New User Creation.');
 
         await signPage.sideMenu.clickSettings();
