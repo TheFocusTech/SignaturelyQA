@@ -20,14 +20,14 @@ export default class SettingsBillingPage {
     }
 
     async clickUpgradePlanButton() {
-        await step('Click "UpgradePlan" button', async () => {
+        await step('Click on "UpgradePlan" button', async () => {
             await this.upgradePlanBtn.click();
         });
     }
 
     async clickAttachCardButton() {
         let newPage;
-        await step('Click on the button Attach Card', async () => {
+        await step('Click on "Attach Card" button', async () => {
             await this.attachCardButton.waitFor();
             const newPagePromise = this.page.waitForEvent('popup');
             await this.attachCardButton.click();
@@ -38,7 +38,7 @@ export default class SettingsBillingPage {
     }
 
     async reloadPage() {
-        await step('Refresh the page', async () => {
+        await step('Refresh page', async () => {
             await this.page.reload();
             await this.page.waitForTimeout(1000);
         });
@@ -46,7 +46,7 @@ export default class SettingsBillingPage {
 
     async clickOpenBillingPortalButton() {
         let newPage;
-        await step('Click on the Open Billing Portal button', async () => {
+        await step('Click on "Open Billing Portal" button', async () => {
             await this.page.waitForTimeout(1000);
             const pagePromise = this.page.waitForEvent('popup', { timeout: 10 * 1000 });
             await this.openBillingPortalButton.click();
@@ -57,13 +57,13 @@ export default class SettingsBillingPage {
     }
 
     async clickEditPlanButton() {
-        await step('Click the “Edit plan” button', async () => {
+        await step('Click on "Edit plan" button.', async () => {
             await this.editPlanButton.click();
         });
     }
 
     async clickCancelSubscriptionButton() {
-        await step('Click the “Cancel subscription” button', async () => {
+        await step('Click on "Cancel subscription" button.', async () => {
             await this.cancelSubscriptionBtn.click();
         });
     }

@@ -40,21 +40,21 @@ export default class TableComponent {
     }
 
     async clickFirstOptionsBtn() {
-        await step('Click the first "Options" button', async () => {
+        await step('Click on the first "Options" button', async () => {
             await this.optionsBtn.first().waitFor();
             await this.optionsBtn.first().click();
         });
     }
 
     async clickSecondOptionsBtn() {
-        await step('Click the second "Options" button', async () => {
+        await step('Click on the second "Options" button', async () => {
             await this.optionsBtn.nth(1).waitFor();
             await this.optionsBtn.nth(1).click();
         });
     }
 
     async clickEditAndResendBtn() {
-        await step('Click the "Edit & Resend" button', async () => {
+        await step('Select "Edit & Resend" option in the dropdown menu', async () => {
             await this.editAndResendBtn.click();
         });
     }
@@ -65,7 +65,7 @@ export default class TableComponent {
     }
 
     async clickAddToAPIBtn() {
-        await step('Click the "Add to API" option', async () => {
+        await step('Select "Add to API" option in the dropdown menu ', async () => {
             await this.addToAPIBtn.waitFor();
             await this.addToAPIBtn.click();
         });
@@ -78,7 +78,7 @@ export default class TableComponent {
     }
 
     async clickMoveToBtn() {
-        await step('Click the "Move to" button', async () => {
+        await step('Select "Move to" option in the dropdown menu', async () => {
             await this.moveToBtn.click();
         });
     }
@@ -90,7 +90,7 @@ export default class TableComponent {
     }
 
     async clickSendReminderBtn() {
-        await step('Click the "Send Reminder" option', async () => {
+        await step('Select "Send Reminder" option in the dropdown menu', async () => {
             await this.sendReminderBtn.click();
         });
     }
@@ -100,39 +100,33 @@ export default class TableComponent {
         const actualText = await this.documentStatus.textContent();
         return actualText;
     }
-
-    async waitForDocumentStatusVisible(status) {
-        await step(`Wait for ${status} status of the created document in the table.`, async () => {
-            await this.documentStatus.getByText(status).waitFor({ state: 'visible' });
-        });
-    }
-
+ 
     async clickDuplicateBtn() {
-        await step('Click the "Duplicate" button', async () => {
+        await step('Select "Duplicate" option in the dropdown menu', async () => {
             await this.duplicateBtn.click();
         });
     }
 
     async clickEditBtn() {
-        await step('Click the "Edit" button', async () => {
+        await step('Select "Edit" option in the dropdown menu', async () => {
             await this.editBtn.click();
         });
     }
 
     async clickRenameBtn() {
-        await step('Click the "Rename" button', async () => {
+        await step('Select "Rename" option in the dropdown menu ', async () => {
             await this.renameBtn.click();
         });
     }
 
     async fillInputNameField(name) {
-        await step('Input new value', async () => {
+        await step('Fill in "Name" input field', async () => {
             await this.inputNameField.fill(name);
         });
     }
 
     async pressEnterInputNameField() {
-        await step('Input new value', async () => {
+        await step('Input new name', async () => {
             await this.inputNameField.press('Enter');
         });
     }
@@ -156,44 +150,51 @@ export default class TableComponent {
     }
 
     async waitForDocumentStatus(page, expectedStatus) {
-        await step('Wait for status of the document to update', async () => {
+        await step(`Wait for ${expectedStatus} status of the created document in the table.`, async () => {
             await this.documentStatus.waitFor();
             let documentStatus = await this.documentStatus.textContent();
 
             while (documentStatus !== expectedStatus) {
-                console.log(`The status of the document after creation is ${documentStatus}`);
-                await page.reload();
-                documentStatus = await this.documentStatus.textContent();
+                await step('Refresh page.', async () => {
+                    await page.reload();
+                    documentStatus = await this.documentStatus.textContent();
+                });
             }
         });
     }
 
+    async waitForDocumentStatusVisible(status) {
+        await step(`Wait for ${status} status of the created document in the table.`, async () => {
+            await this.documentStatus.getByText(status).waitFor({ state: 'visible' });
+        });
+    }
+
     async clickDisableFormBtn() {
-        await step('Click on "Disable Form" option', async () => {
+        await step('Select "Disable Form" option in the dropdown menu.', async () => {
             await this.disableFormBtn.click();
         });
     }
 
     async clickEnableFormBtn() {
-        await step('Click on "Enable Form" option', async () => {
+        await step('Select "Enable Form" option in the dropdown menu.', async () => {
             await this.enableFormBtn.click();
         });
     }
 
     async clickDeleteForm() {
-        await step('Click the "Delete Form" button', async () => {
+        await step('Select "Delete Form" option in the dropdown menu.', async () => {
             await this.deleteForm.click();
         });
     }
 
     async clickShareBtn() {
-        await step('Click the "Share" button', async () => {
+        await step('Select "Share" option in the dropdown menu.', async () => {
             await this.shareBtn.click();
         });
     }
 
     async clickOptionsDeleteBtn() {
-        await step('Click the "Option delete" button it the dropdown menu', async () => {
+        await step('Select "Delete" option in the dropdown menu.', async () => {
             await this.optionsDeleteBtn.waitFor({ state: 'visible' });
             await this.optionsDeleteBtn.click();
         });
@@ -206,7 +207,7 @@ export default class TableComponent {
     }
 
     async checkRandomDocuments() {
-        return await step('Check two random documents and collect their titles', async () => {
+        return await step('Check two random documents and collect their titles.', async () => {
             const documentsTitles = await this.getAllDocumentsTitles();
             const randomIndex = getRandomIndex(documentsTitles);            
             let documentsTitlesToDelete = [];
@@ -226,18 +227,22 @@ export default class TableComponent {
     }
   
     async waitForTable(time) {
-        await this.page.waitForTimeout(time);
-        await this.page.reload();
+        await step('Refresh page.', async () => {
+            await step(`SetTimeout ${time / 1000} sec.`, async () => {
+                await this.page.waitForTimeout(time);
+            });
+            await this.page.reload();
+        });        
     }
 
     async clickDeleteBtn() {
-        await step('Click on the "Delete" button', async () => {
+        await step('Select the "Delete" option in the dropdown menu.', async () => {
             await this.deleteBtn.click();
         });
     }
 
     async clickOptionsButtonByDocumentTitle(documentTitle) {
-        await step(`Click "Options" button for exact document by document title`, async () => {
+        await step(`Click "Options" button for exact document by document title.`, async () => {
             await this.page.waitForSelector('.table__column--text--document p', { timeout: 5000 });
             const documentTitleElementsCount = await this.documentTitleList.count();
             for (let i = 0; i < documentTitleElementsCount; i++) {
@@ -251,14 +256,14 @@ export default class TableComponent {
     }
 
     async clickDownloadBtn() {
-        await step('Click on "Download" option', async () => {
+        await step('Select "Download" option in the dropdown menu.', async () => {
             await this.downloadBtn.click();
         });
     }
 
     async clickOptionsChangePermissionsBtn() {
-        await step('Click the "Change Permissions" button it the "Options" dropdown menu', async () => {
-            await this.optionsChangePermissionsBtn.waitFor( {state: 'visible'} );
+        await step('Select "Change Permissions" option in the dropdown menu.', async () => {
+            await this.optionsChangePermissionsBtn.waitFor({ state: 'visible' });
             await this.optionsChangePermissionsBtn.click();
         });
     }

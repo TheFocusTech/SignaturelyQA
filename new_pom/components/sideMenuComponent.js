@@ -13,35 +13,37 @@ export default class SideMenuComponent {
     }
 
     async clickSign() {
-        await step('Click "Sign" sidemenu', async () => {
+        await step('Click on "Sign" item on the left SideMenu.', async () => {
             await this.sign.click();
         });
     }
 
     async clickDocuments() {
-        await step('Click the "Documents" item on the left SideMenu', async () => {
+        await step('Click on "Documents" item on the left SideMenu.', async () => {
             await this.documents.click();
         });
     }
 
     async clickTemplates() {
-        await step('Click the "Templates" item on the left SideMenu', async () => {
+        await step('Click on "Templates" item on the left SideMenu.', async () => {
             await this.templates.click();
         });
     }
 
     async clickSettings() {
-        await step('Click the Settings on the Side Menu', async () => {
+        await step('Click on "Settings" item on the left SideMenu.', async () => {
             await this.settings.click();
         })
     }
 
     async clickForms() {
-        await this.forms.click();
+        await step('Click on "Forms" item on the left SideMenu.', async () => {
+            await this.forms.click();
+        });        
     }
 
     async clickTeam() {
-        await step('Click "Team" on the Side Menu', async () => {
+        await step('Click on "Team" item on the left SideMenu.', async () => {
             await this.team.click();
         })
     }

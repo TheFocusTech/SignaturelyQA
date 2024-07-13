@@ -2,7 +2,7 @@ import { CARD_DETAILS, TOAST_MESSAGE } from '../testData.js';
 import { step } from "allure-js-commons";
 
 export async function newFreeUserLogin({ page, loginPage }) {
-    await step(`New User Setup: Free User Login`, async () => {
+    await step(`Free User Login`, async () => {
         await page.goto("/");
         await page.waitForLoadState('load');
         await loginPage.fillEmailAddressInput(process.env.NEW_USER_EMAIL);
@@ -17,7 +17,7 @@ export async function upgradeFreeUserToBusinessAndLogin({
     upgradeYourPlanModal,
     settingsBillingPlanPage,
     specialOneTimeOfferModal }) {
-    await step(`New User Setup: Upgrade Free User to Business`, async () => {
+    await step(`Upgrade Free User to Business`, async () => {
         await signPage.sideMenu.clickSettings();
         await settingsCompanyPage.sideMenuSettings.clickBilling();
         await settingsBillingPlanPage.clickUpgradeButton("Business");

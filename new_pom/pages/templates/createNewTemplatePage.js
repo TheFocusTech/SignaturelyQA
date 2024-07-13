@@ -1,11 +1,10 @@
-import SideMenuComponent from "../../components/sideMenuComponent";
-import SideMenuTemplatesComponent from "../../components/sideMenuTemplatesComponent";
-import FileUploaderComponent from "../../components/fileUploaderComponent";
-import CreateTemplateComponent from "../../components/createTemplateComponent";
-import { step } from "allure-js-commons";
+import SideMenuComponent from '../../components/sideMenuComponent';
+import SideMenuTemplatesComponent from '../../components/sideMenuTemplatesComponent';
+import FileUploaderComponent from '../../components/fileUploaderComponent';
+import CreateTemplateComponent from '../../components/createTemplateComponent';
+import { step } from 'allure-js-commons';
 
 export default class CreateNewTemplatePage {
-
     constructor(page) {
         this.page = page;
         this.sideMenu = new SideMenuComponent(this.page);
@@ -19,28 +18,27 @@ export default class CreateNewTemplatePage {
         this.fillTemplateBtn = this.page.getByRole('button', { name: 'Fill Template' });
     }
     async fillTemplateNameField(name) {
-        await step('Fill in the "Template Name" field', async () => {
+        await step('Fill in the "Template Name" input field', async () => {
             await this.templateNameField.fill(name);
         });
     }
 
     async fillOptionalMessageField(message) {
-        await step('Fill in the "Optional Message" field', async () => {
+        await step('Fill in the "Optional Message" input field', async () => {
             await this.optionalMessageField.fill(message);
         });
     }
 
     async fillCreateTemplateRolesField(role) {
-        await step('Fill in the "Role" field', async () => {
+        await step('Fill in the "Role" input field', async () => {
             await this.createTemplateRolesField.fill(role);
         });
     }
 
     async clickFillTemplateBtn() {
-        await step('Click on the "Fill template" button', async () => {
+        await step('Click on "Fill template" button', async () => {
             await this.fillTemplateBtn.waitFor();
             await this.fillTemplateBtn.click();
         });
     }
-
 }

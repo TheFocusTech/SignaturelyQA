@@ -1,5 +1,5 @@
 import { step } from 'allure-js-commons';
-const delay = ms => new Promise(resolve => setTimeout(resolve, ms));
+const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
 export default class ChooseTemplateComponent {
     constructor(page) {
@@ -14,14 +14,14 @@ export default class ChooseTemplateComponent {
     }
 
     async clickSendTheDocumentBtn() {
-        await step('Click the "Send Document" button', async () => {
+        await step('Click on "Send Document" button.', async () => {
             await this.sendTheDocumentBtn.waitFor();
             await this.sendTheDocumentBtn.click();
         });
     }
 
     async clickChooseTemplateField() {
-        await step('Click the "Choose a Template" field.', async () => {
+        await step('Click on "Choose a Template" field.', async () => {
             await this.chooseTemplateField.waitFor();
             await this.chooseTemplateField.hover();
             await delay(1000);
@@ -30,25 +30,25 @@ export default class ChooseTemplateComponent {
     }
 
     async clickTitleTemplate() {
-        await step('Click the "title template" row.', async () => {
+        await step('Select desired template from the dropdown list.', async () => {
             await this.titleTemplate.click();
         });
     }
 
     async fillSignerName(name, i) {
-        await step("fill Signer's name in the field 'Name'", async () => {
+        await step("Fill in signer's name in the 'Name' field.", async () => {
             await this.signerNameField.nth(i).fill(name);
         });
     }
 
     async fillSignerEmail(email, i) {
-        await step("fill Signer's email in the field 'Email' ", async () => {
+        await step("Fill in signer's name in the 'Email' field.", async () => {
             await this.signerEmailField.nth(i).fill(email);
         });
     }
 
     async clickEditTemplateBtn() {
-        await step("Click the button 'Edit Template'", async () => {
+        await step('Click on "Edit Template" button.', async () => {
             await this.editTemplateBtn.click();
         });
     }

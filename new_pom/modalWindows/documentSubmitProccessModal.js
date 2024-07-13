@@ -8,7 +8,7 @@ export default class DocumentSubmitProccessModal {
     }
 
     async waitForSubmitTitleByText(text) {
-        await step(`A Title with the text "${text}" is visible`, async () => {
+        await step(`Title with the text "${text}" is visible.`, async () => {
             await this.submitTitle.getByText(text).waitFor({ state: 'visible' });
         });
     }

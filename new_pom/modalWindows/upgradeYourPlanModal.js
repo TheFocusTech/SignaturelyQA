@@ -11,7 +11,7 @@ export default class UpgradeYourPlanModal {
     }
 
     async clickSubscribeButton() {
-        await step('Click "Subscribe" button', async () => {
+        await step('Click on "Subscribe" button.', async () => {
             await this.suscribeButton.click();
         });
     }

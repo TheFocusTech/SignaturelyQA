@@ -9,13 +9,13 @@ export default class DownGradeYourPlanAPIModal {
     }
 
     async clickDowngradeBtn() {
-        await step(`Click Downgrade button to downgrade the API plan`, async () => {
+        await step(`Click on "Downgrade" button to downgrade the API plan.`, async () => {
             await this.downgradeBtn.click();
         });
     }
 
     async getTitleOfDowngradeApiPlanModall(plan) {
-        await step(`Generate title for downgrade modal for ${plan} plan`, async () => {
+        await step(`Generate title for downgrade modal for ${plan} plan.`, async () => {
             return `Downgrade to ${plan} Plan`;
         });
     }

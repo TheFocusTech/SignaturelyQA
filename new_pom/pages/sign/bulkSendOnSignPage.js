@@ -15,10 +15,10 @@ export default class BulkSendOnSignPage {
     }
 
     async clickChooseATemplateDropdown() {
-        await step('Click the "Choose a Template" dropdown.', async () => {
+        await step('Click on "Choose a Template" dropdown.', async () => {
             await this.chooseATemplateDropdown.waitFor();
             await this.chooseATemplateDropdown.click();
-        })
+        });
     }
 
     async selectTemplateOption() {
@@ -29,14 +29,14 @@ export default class BulkSendOnSignPage {
     }
 
     async selectTemplate() {
-        await step('Select the available template.', async () => {
+        await step('Select available template.', async () => {
             await this.clickChooseATemplateDropdown();
             await this.selectTemplateOption();
         });
     }
 
     async clickSelectColumnsBtn() {
-        await step('Click the "Select Columns" button.', async () => {
+        await step('Click on "Select Columns" button.', async () => {
             await this.selectColumnsBtn.click();
         });
     }

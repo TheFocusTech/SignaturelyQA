@@ -21,12 +21,12 @@ import { retrieveUserEmailConfirmationLink, retrieveEmailMessage, editDocumentSt
 import { createSignature, uploadDraftDocument } from '../helpers/preconditions.js';
 
 test.describe('Sign Document', () => {
-    test('TC_04_11_01 | Verify custom signing order', async ({
+    test('TC_04_11_01 | Verify user can choose a custom signing order', async ({
         createBusinessUserAndLogin,
         signPage,
         prepareForSignatureModal,
     }) => {
-        await description('To verify custom signing order');
+        await description('To verify user can choose a custom signing order');
         await severity(Severity.CRITICAL);
         await link(`${QASE_LINK}/SIGN-11`, 'Qase: SIGN-11');
         await link(`${GOOGLE_DOC_LINK}7y8njhymxgmj`, 'ATC_04_11_01');
@@ -50,18 +50,18 @@ test.describe('Sign Document', () => {
 
         await prepareForSignatureModal.clickCustomSigningOrderCheckbox();
 
-        await step('Verify the custom signing order position number 1 is displayed', async () => {
+        await step('Verify custom signing order position number 1 is displayed', async () => {
             await expect(prepareForSignatureModal.customSigningOrderPositionNumberOne).toBeVisible();
             await expect(prepareForSignatureModal.customSigningOrderPositionNumberOne).toHaveText('1.');
         });
 
-        await step('Verify that the custom signing order position number 2 is displayed', async () => {
+        await step('Verify custom signing order position number 2 is displayed', async () => {
             await expect(prepareForSignatureModal.customSigningOrderPositionNumberTwo).toBeVisible();
             await expect(prepareForSignatureModal.customSigningOrderPositionNumberTwo).toHaveText('2.');
         });
     });
 
-    test('TC_04_14_01 | Verify adding users who can view the document', async ({
+    test('TC_04_14_01 | Verify user can add viewers to view the document ', async ({
         createBusinessUserAndLogin,
         signPage,
         prepareForSignatureModal,
@@ -77,7 +77,9 @@ test.describe('Sign Document', () => {
     }) => {
         test.setTimeout(270 * 1000);
 
-        await description('To verify the adding viewers / adding users who can view the document.');
+        await description(
+            'To verify user can add viewers to view the document. \n Attention: Page can be reloaded if application state not synchronized'
+        );
         await severity(Severity.CRITICAL);
         await link(`${QASE_LINK}/SIGN-14`, 'Qase: SIGN-14');
         await link(`${GOOGLE_DOC_LINK}ojom1b8sk9ht`, 'ATC_04_14_01');
@@ -109,14 +111,14 @@ test.describe('Sign Document', () => {
 
         await finalStepPage.waitAndClickSendForSignatureBtn(TOAST_MESSAGE.success);
         await successModal.clickBackToDocumentsBtn();
-        await documentsPage.table.waitForDocumentStatusVisible(DOCUMENT_STATUS.awaiting);
+        await documentsPage.table.waitForDocumentStatus(page, DOCUMENT_STATUS.awaiting);
 
         const signerLink = await retrieveUserEmailConfirmationLink(
             request,
             signerEmail,
             EMAIL_SUBJECTS.signatureRequest
         );
-        await step('Navigate to the signing document link', async () => {
+        await step('Navigate to Signing document link', async () => {
             await page.goto(signerLink);
         });
 
@@ -136,12 +138,12 @@ test.describe('Sign Document', () => {
             SELECTORS.message
         );
 
-        await step('Verify that Viewer has got email for viewing document', async () => {
+        await step('Verify viewer has received an email to view the document.', async () => {
             expect(message).toEqual(`${process.env.NEW_USER_NAME} (${process.env.NEW_USER_EMAIL})${EMAIL_MESSAGE}`);
         });
     });
 
-    test('TC_04_10_01 | Verify sign document as myself', async ({
+    test('TC_04_10_01 | Verify user can sign a document.', async ({
         createBusinessUserAndLogin,
         signPage,
         prepareForSignatureModal,
@@ -152,12 +154,12 @@ test.describe('Sign Document', () => {
     }) => {
         test.setTimeout(250 * 1000);
 
-        await description('Objective: To verify sign document as myself');
+        await description('To verify user can sign document as themselves.');
         await severity(Severity.CRITICAL);
         await link(`${QASE_LINK}/SIGN-10`, 'Qase: SIGN-10');
         await link(`${GOOGLE_DOC_LINK}jl55qbudbe8i`, 'ATC_04_10_01');
         await epic('Sign document');
-        await tag('Document');
+        await tag('me');
 
         await signPage.uploadFileTab.fileUploader.uploadFile(UPLOAD_FILE_PATH.xlsxDocument);
         await signPage.uploadFileTab.clickPrepareDocumentBtn();
@@ -172,12 +174,12 @@ test.describe('Sign Document', () => {
         await finalStepPage.clickSignDocumentBtn();
         await successModal.clickBackToDocumentsBtn();
 
-        await step('Verify that document has complited status', async () => {
+        await step('Verify document has a "Completed" status', async () => {
             await expect(await documentsPage.table.documentStatus).toHaveText(DOCUMENT_STATUS.completed);
         });
     });
 
-    test('TC_04_10_02 | Verify that the user who uploaded the document and other signer can sign it', async ({
+    test('TC_04_10_02 | Verify user and other signer can sign  document.', async ({
         createBusinessUserAndLogin,
         signPage,
         settingsCompanyPage,
@@ -191,7 +193,7 @@ test.describe('Sign Document', () => {
     }) => {
         test.setTimeout(270 * 1000);
 
-        await description('Objective: To verify that the user who uploaded the document and Other Signer can sign it');
+        await description('To verify user and other signer can sign document.');
         await severity(Severity.CRITICAL);
         await link(`${QASE_LINK}/SIGN-10`, 'Qase: SIGN-10');
         await link(`${GOOGLE_DOC_LINK}s5pa7fnboi83`, 'TC_04_10_02');
@@ -229,12 +231,12 @@ test.describe('Sign Document', () => {
         await finalStepPage.clickSignDocumentAndSendForSignatureBtn();
         await successModal.clickBackToDocumentsBtn();
 
-        await step('Verify that document has awaiting status', async () => {
+        await step('Verify document has "Awaiting" status', async () => {
             await expect(await documentsPage.table.documentStatus).toHaveText(DOCUMENT_STATUS.awaiting);
         });
     });
 
-    test("TC_04_13_01 | Verify the document's expiration date", async ({
+    test('TC_04_13_01 | Verify document expiration.', async ({
         createBusinessUserAndLogin,
         page,
         request,
@@ -245,13 +247,13 @@ test.describe('Sign Document', () => {
         successModal,
     }) => {
         await description(
-            'Objective: Verify that changing the document status to "expired"(database) updates the front-end display'
+            'To verify updating document status to "Expired" in the database reflects correctly on the front-end display. \n Attention: Refresh the page twice: \n - if application state not synchronized \n - after changing the status in the database.'
         );
         await severity(Severity.CRITICAL);
         await link(`${QASE_LINK}/SIGN-13`, 'Qase: SIGN-13');
         await link(`${GOOGLE_DOC_LINK}fm3jt5v1qq97`, 'ATC_04_13_01');
         await epic('Sign document');
-        await tag('Document status: expiring');
+        await tag('Expired status');
 
         test.setTimeout(250 * 1000);
         await signPage.uploadFileTab.fileUploader.uploadFile(UPLOAD_FILE_PATH.xlsxDocument);
@@ -275,21 +277,23 @@ test.describe('Sign Document', () => {
 
         const documentName = UPLOAD_FILE_PATH.xlsxDocument.split('/').pop();
         await editDocumentStatus(request, documentName, DOCUMENT_STATUS.expired);
-        await page.reload();
+        await step('Refresh page.', async () => {
+            await page.reload();
+        });
 
-        await step('Verify that the document has "expired" status', async () => {
+        await step('Verify document has "Expired" status.', async () => {
             await expect(await documentsPage.table.documentStatus).toHaveText(DOCUMENT_STATUS.expired);
         });
     });
 
-    test('TC_04_11_02 | Verify custom signing order between others customers', async ({
+    test('TC_04_11_02 | Verify user can set custom signing order between others signers.', async ({
         createBusinessUserAndLogin,
         signPage,
         prepareForSignatureModal,
     }) => {
         test.setTimeout(250 * 1000);
 
-        await description('To verify custom signing order between others customers');
+        await description('To verify user can set custom signing order between others signers.');
         await severity(Severity.CRITICAL);
         await link(`${QASE_LINK}/SIGN-11`, 'Qase: SIGN-11');
         await link(`${GOOGLE_DOC_LINK}jc3cfedpihif`, 'ATC_04_11_02');
@@ -312,11 +316,11 @@ test.describe('Sign Document', () => {
         }
         await prepareForSignatureModal.clickCustomSigningOrderCheckbox();
 
-        await step('Verify that customers orders number visibility', async () => {
+        await step('Verify customers orders number visibility.', async () => {
             await expect(prepareForSignatureModal.customSigningOrderPositionNumberOne).toBeVisible();
         });
 
-        await step('Verify that customers orders has been positioned', async () => {
+        await step('Verify customers orders has been positioned.', async () => {
             await expect(prepareForSignatureModal.customSigningOrderPositionNumberOne).toHaveText('1.');
         });
 
@@ -324,14 +328,14 @@ test.describe('Sign Document', () => {
             prepareForSignatureModal.customSigningOrderPositionNumberTwo
         );
 
-        await step('Verify that customers orders has been changed', async () => {
+        await step("Verify customers' orders have been changed.", async () => {
             expect(prepareForSignatureModal.signerNameField.nth(1)).toHaveValue(
                 `${process.env.NEW_USER_NAME}${'00'}${1}`
             );
         });
     });
 
-    test('TC_04_12_01 | Verify that signer can decline signature', async ({
+    test('TC_04_12_01 | Verify signer can decline to sign the document.', async ({
         createBusinessUserAndLogin,
         signPage,
         prepareForSignatureModal,
@@ -345,7 +349,9 @@ test.describe('Sign Document', () => {
     }) => {
         test.setTimeout(250 * 1000);
 
-        await description('Objective: To verify that signer can decline signature');
+        await description(
+            'To verify signer can decline to sign the document. \n Attention: \n - Script contains commented code due to delayed reminder. \n - Page can be reloaded if application state not synchronized.'
+        );
         await severity(Severity.CRITICAL);
         await link(`${QASE_LINK}/SIGN-12`, 'Qase: SIGN-12');
         await link(`${GOOGLE_DOC_LINK}hlvzt2b5ake7`, 'ATC_04_12_01');
@@ -369,13 +375,10 @@ test.describe('Sign Document', () => {
         await prepareForSignatureModal.clickSignOnFieldsMenu();
         await prepareForSignatureModal.clickDocumentBody();
         await prepareForSignatureModal.clickSaveBtn();
-
-        await step('Verify that Success Toast Notification is shown', async () => {
-            await expect(await prepareForSignatureModal.toast.toastBody).toHaveText(TOAST_MESSAGE.success);
-        });
+        await prepareForSignatureModal.toast.waitForToastIsHiddenByText(TOAST_MESSAGE.success);
         await finalStepPage.clickSendForSignatureBtn();
         await successModal.clickBackToDocumentsBtn();
-        await documentsPage.table.waitForDocumentStatusVisible(DOCUMENT_STATUS.awaiting);
+        await documentsPage.table.waitForDocumentStatus(page, DOCUMENT_STATUS.awaiting);
 
         // TODO permanently pass step with Send Reminder
         // await documentsPage.table.clickOptionsBtn(0);
@@ -390,27 +393,27 @@ test.describe('Sign Document', () => {
             EMAIL_SUBJECTS.signatureRequest
         );
 
-        await step('Navigate to the signing document link to reject document', async () => {
+        await step('Navigate to Signing document link to decline document.', async () => {
             await page.goto(signerLink + ENDPOINT_FOR_DECLINE);
         });
 
         declineModal.clickDeclineBtn();
         await notRegisterSignerSignPage.toast.waitForToastIsHiddenByText(TOAST_MESSAGE.declineDocument);
 
-        await step('Verify that Success Modal has "Document Declined" title', async () => {
+        await step('Verify Success Modal has "Document Declined" title.', async () => {
             await expect(await successModal.title).toHaveText(SUCCESS_TITLE.declined);
         });
 
         successModal.clickReturnToDocumentsBtn();
         documentsPage.sideMenuDocuments.clickVoided();
 
-        await step('Verify that the document has "DECLINED" status', async () => {
+        await step('Verify document has "Declined" status.', async () => {
             await documentsPage.table.documentStatus.waitFor();
             await expect(await documentsPage.table.documentStatus).toHaveText(DOCUMENT_STATUS.declined);
         });
     });
 
-    test('TC_04_10_03 | Verify that the user who uploaded the document can send it to signer', async ({
+    test('TC_04_10_03 | Verify user can send document to the signer.', async ({
         createBusinessUserAndLogin,
         signPage,
         settingsCompanyPage,
@@ -424,7 +427,7 @@ test.describe('Sign Document', () => {
     }) => {
         test.setTimeout(270 * 1000);
 
-        await description('Objective: To verify that the user who uploaded the document can send it for signer');
+        await description('To verify user can send document to the signer.');
         await severity(Severity.CRITICAL);
         await link(`${QASE_LINK}/SIGN-10`, 'Qase: SIGN-10');
         await link(`${GOOGLE_DOC_LINK}o1a44zgp2uji`, 'TC_04_10_03');
@@ -445,7 +448,7 @@ test.describe('Sign Document', () => {
         await finalStepPage.clickSendForSignatureBtn();
         await successModal.clickBackToDocumentsBtn();
 
-        await step('Verify that document has awaiting status', async () => {
+        await step('Verify the document has "Awaiting" status.', async () => {
             await expect(await documentsPage.table.documentStatus).toHaveText(DOCUMENT_STATUS.awaiting);
         });
     });

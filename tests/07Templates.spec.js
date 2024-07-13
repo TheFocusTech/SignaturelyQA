@@ -14,7 +14,7 @@ import { createTemplate } from '../helpers/preconditions.js';
 import { description, tags, severity, Severity, link, epic, step } from 'allure-js-commons';
 
 test.describe('Templates', () => {
-    test('TC_07_27_01 | Verify that user can create a template', async ({
+    test('TC_07_27_01 | Verify user can create the template', async ({
         createBusinessUserAndLogin,
         signPage,
         prepareForSignatureModal,
@@ -24,11 +24,11 @@ test.describe('Templates', () => {
     }) => {
         test.setTimeout(440 * 1000);
         await description(
-            'Objective: To verify that the user can create a new template in the system successfully. This includes ensuring that all required fields are completed correctly, the template is saved, and it is accessible for future use.'
+            'To verify user can create a new template in the system successfully. This includes ensuring that all required fields are completed correctly, the template is saved, and it is accessible for future use.'
         );
         await severity(Severity.CRITICAL);
         await link(`${QASE_LINK}/SIGN-27`, 'Qase: SIGN-27');
-        await link(`${GOOGLE_DOC_LINK}p443twc6am8u`, 'ATC__07_27_01');
+        await link(`${GOOGLE_DOC_LINK}p443twc6am8u`, 'ATC_07_27_01');
         await epic('Templates');
         await tags('Create a template');
 
@@ -44,12 +44,12 @@ test.describe('Templates', () => {
         await prepareForSignatureModal.clickCreateBtn();
         await successModal.clickBackToTemplatesBtn();
 
-        await step('Verify that the document status in the template page is "live"', async () => {
+        await step('Verify created template has "Live" status.', async () => {
             await expect(await templatesPage.table.documentStatus).toHaveText(TEMPLATES_STATUS.live);
         });
     });
 
-    test('TC_07_31_01 | Verify that  the user can select Add to API', async ({
+    test('TC_07_31_01 | Verify the user can select Add to API', async ({
         createBusinessUserAndLogin,
         signPage,
         prepareForSignatureModal,
@@ -60,7 +60,7 @@ test.describe('Templates', () => {
     }) => {
         test.setTimeout(200 * 1000);
 
-        await description('Objective: To verify the process of add template to API.');
+        await description('To verify the process of adding the template to the API');
         await severity(Severity.CRITICAL);
         await link(`${QASE_LINK}/SIGN-31`, 'Qase: SIGN-31');
         await link(`${GOOGLE_DOC_LINK}z5onphks9v9p`, 'ATC_07_31_01');
@@ -84,7 +84,7 @@ test.describe('Templates', () => {
         });
     });
 
-    test('TC_07_28_01 | Verify that user can edit template', async ({
+    test('TC_07_28_01 | Verify user can edit template', async ({
         createBusinessUserAndLogin,
         signPage,
         templatesPage,
@@ -96,7 +96,7 @@ test.describe('Templates', () => {
         test.slow();
 
         await description(
-            'Objective: To verify that a user can successfully edit an existing template by changing its name, message, role, and associated document, and ensure that the changes are reflected in the user interface and confirmed by appropriate toast messages.'
+            'To verify Business user can successfully edit an existing template by changing its name, message, role, and associated document, and ensure that the changes are reflected in the user interface and confirmed by appropriate toast messages.'
         );
         await severity(Severity.CRITICAL);
         await link(`${QASE_LINK}/SIGN-28`, 'Qase: SIGN-28');
@@ -120,7 +120,7 @@ test.describe('Templates', () => {
         await prepareForSignatureModal.clickSaveBtn();
         await templatesPage.table.waitForDocumentTitleVisible(EDIT_TEMPLATE_DATA.nameField);
 
-        await step('Verify the new name of Template is visible in the table', async () => {
+        await step('Verify template with new name is visible in the table', async () => {
             await expect(await templatesPage.table.objectTitle).toHaveText(EDIT_TEMPLATE_DATA.nameField);
         });
 
@@ -133,7 +133,7 @@ test.describe('Templates', () => {
         });
     });
 
-    test('TC_07_30_01 | Verify that user can duplicate template', async ({
+    test('TC_07_30_01 | Verify user can duplicate template', async ({
         createBusinessUserAndLogin,
         signPage,
         prepareForSignatureModal,
@@ -143,12 +143,12 @@ test.describe('Templates', () => {
     }) => {
         test.setTimeout(200 * 1000);
 
-        await description('Objective: To verify the process of duplicate template.');
+        await description('To verify the process of duplicate template');
         await severity(Severity.CRITICAL);
         await link(`${QASE_LINK}/SIGN-30`, 'Qase: SIGN-30');
         await link(`${GOOGLE_DOC_LINK}nz5pn2p8lvfz`, 'ATC_07_30_01');
         await epic('Templates');
-        await tags('User', 'Dublicat');
+        await tags('Duplicate template');
 
         test.setTimeout(250 * 1000);
 
@@ -160,16 +160,16 @@ test.describe('Templates', () => {
         await successModal.clickOkBtn();
         await templatesPage.toast.waitForToastIsHiddenByText(TOAST_MESSAGE.templateDuplicate);
 
-        await step('Verify that the number of tamplates in the table is increased by 1', async () => {
+        await step('Verify the number of templates in the table is increased by 1', async () => {
             await expect(await templatesPage.table.objectTitle).toHaveCount(2);
         });
 
-        await step("Verify that template1's title equals template2's title.", async () => {
+        await step("Verify template1's title equals template2's title", async () => {
             expect(await templatesPage.table.compareTitles()).toBe(true);
         });
     });
 
-    test('TC_07_29_01 | Verify that the user can delete the template', async ({
+    test('TC_07_29_01 | Verify user can delete the template', async ({
         createBusinessUserAndLogin,
         signPage,
         prepareForSignatureModal,
@@ -178,12 +178,12 @@ test.describe('Templates', () => {
         confirmDeletionModal,
         successModal,
     }) => {
-        await description('Objective: Verify that the user can successfully delete a template.');
+        await description('To verify Business user can delete the template.');
         await severity(Severity.CRITICAL);
         await link(`${QASE_LINK}/SIGN-29`, 'Qase: SIGN-29');
         await link(`${GOOGLE_DOC_LINK}lduzx2ed3enn`, 'ATC_07_29_01');
         await epic('Templates');
-        await tags('Delete');
+        await tags('Delete template');
 
         test.setTimeout(250 * 1000);
 
@@ -195,7 +195,7 @@ test.describe('Templates', () => {
         await confirmDeletionModal.clickYesDelete();
         await templatesPage.toast.waitForToastIsHiddenByText(TOAST_MESSAGE.templateDelete);
 
-        await step('Verify that the number of templates in the table is 0', async () => {
+        await step('Verify the number of templates in the table is 0', async () => {
             await expect(await templatesPage.table.objectTitle).toHaveCount(0);
         });
     });

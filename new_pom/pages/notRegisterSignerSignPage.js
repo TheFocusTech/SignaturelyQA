@@ -1,4 +1,3 @@
-import SignerAgreeModal from '../modalWindows/signerAlmostDoneModal';
 import ToastComponent from '../components/toastComponent';
 import { step } from 'allure-js-commons';
 
@@ -13,14 +12,14 @@ export default class NotRegisterSignerSignPage {
     }
 
     async clickSignInput() {
-        await step('Put a signature', async () => {
-            this.signInput.click();
+        await step('Put a signature.', async () => {
+            await this.signInput.click();
         });
     }
 
     async clickSubmitBtn() {
-        await step('Click "Submit" button', async () => {
-            this.submitBtn.click();
+        await step('Click on "Submit" button.', async () => {
+            await this.submitBtn.click();
         });
     }
 }

@@ -2,7 +2,7 @@ import { createNewClient } from '../dbClient.js';
 import { step } from "allure-js-commons";
 
 export async function databaseConfirmNewUserEmail() {
-    await step(`New User Setup: Free User Email Confirmation via Database`, async () => {
+    await step(`Free User Email Confirmation via Database`, async () => {
         const client = createNewClient();
         await client.connect();
         const query = `UPDATE public.users  

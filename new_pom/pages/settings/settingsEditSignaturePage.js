@@ -18,25 +18,25 @@ export default class SettingsEditSignaturePage {
     }
 
     async clickCreateSignatureBtn() {
-        await step('Click on the "Create Signature" button', async () => {
+        await step('Click on "Create Signature" button.', async () => {
             await this.createSignatureBtn.click();
         })
     }
 
     async clickDropDownMenu() {
-        await step('Click on the dropDown menu "Edit Delete Signature"', async () => {
+        await step("Open signature's kebab menu.", async () => {
             await this.dropDownMenu.click();
         })
     }
 
     async clickDeleteSignatureDropDownItem() {
-        await step('Click on the "Delete Signature" drop down item', async () => {
+        await step('Select "Delete" option in the kebab menu.', async () => {
             await this.deleteSignatureDropDownItem.click();
         })
     }
 
     async clickEditSignatureDropDownItem() {
-        await step('Click on the "Edit Signature" drop down item', async () => {
+        await step('Select "Edit" option in the kebab menu.', async () => {
             await this.editSignatureDropDownItem.click();
         })
     }

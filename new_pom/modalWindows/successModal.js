@@ -14,33 +14,33 @@ export default class SuccessModal {
     }
 
     async clickBackToDocumentsBtn() {
-        await step('Click on the "Back to Documents" button.', async () => {
+        await step('Click on "Back to Documents" button.', async () => {
             await this.statusDocument.waitFor({ state: 'visible' });
             await this.backToDocumentsBtn.click();
         });
     }
 
     async clickBackToFormsBtn() {
-        await step('Click on the "Back to Forms" button.', async () => {
+        await step('Click on "Back to Forms" button.', async () => {
             await this.backToFormsBtn.click();
         });
     }
 
     async clickOkBtn() {
-        await step('Click on the "Ok" button.', async () => {
+        await step('Click on "Ok" button.', async () => {
             await this.okBtn.click();
         });
     }
 
     async clickReturnToDocumentsBtn() {
-        await step('Click on the "Return to Documents" button', async () => {
+        await step('Click on "Return to Documents" button.', async () => {
             await this.returnToDocumentsBtn.waitFor({ state: 'visible' });
             await this.returnToDocumentsBtn.click();
         });
     }
 
     async clickBackToTemplatesBtn() {
-        await step('In the modal window, click on the "Back to templates" button.', async () => {
+        await step('Click on "Back to templates" button.', async () => {
             await this.backToTempatesBtn.click();
         });
     }

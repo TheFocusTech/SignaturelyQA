@@ -21,37 +21,39 @@ export default class FinalStepPage {
     }
 
     async fillDocumentTitleField(title) {
-        await step('Fill in the document title.', async () => {
+        await step('Fill in "Document title" input field.', async () => {
             await this.documentTitleField.waitFor({ status: 'visible' });
             await this.documentTitleField.fill(title);
         });
     }
 
     async clickSignDocumentAndSendForSignatureBtn() {
-        await step('Click on the "Sign Document and Send for Signature" button.', async () => {
+        await step('Click on "Sign Document and Send for Signature" button.', async () => {
             await this.signDocumentAndSendForSignatureBtn.click();
         });
     }
 
     async waitAndClickSendForSignatureBtn(text) {
-        await step('Click on the "Send for Signature" button.', async () => {
+        await step('Click on "Send for Signature" button.', async () => {
             await this.toast.waitForToastIsHiddenByText(text);
             await this.sendForSignatureBtn.click();
         });
     }
 
     async fillDocumentOptionalMessageField(message) {
-        await step('Fill in the document Optional Message.', async () => {
+        await step('Fill in "Optional Message" input field.', async () => {
             await this.documentOptionalMessageField.fill(message);
         });
     }
 
     async clickSignDocumentBtn() {
-        await this.signDocumentBtn.click();
+        await step('Click on "Sign document" button', async () => {
+            await this.signDocumentBtn.click();
+        });
     }
 
     async clickSendForSignatureBtn() {
-        await step('Click the "Send for Signature" button.', async () => {
+        await step('Click on "Send for Signature" button.', async () => {
             await this.sendForSignatureBtn.click();
         });
     }

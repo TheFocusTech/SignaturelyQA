@@ -13,37 +13,37 @@ export default class CreateOrEditSignatureOnSettingModal {
     }
 
     async fillFullNameField(name) {
-        await step('Fill "Full Name" field', async () => {
+        await step('Fill in "Full Name" input field.', async () => {
             await this.fullNameField.fill(name);
         })
     }
 
     async fillInitialsField(initial) {
-        await step('Fill "Initials" field', async () => {
+        await step('Fill in "Initials" input field.', async () => {
             await this.initialsField.fill(initial);
         })
     }
 
     async clickCheckboxAgree() {
-        await step('Click the "I agree" checkbox for electronic signing', async () => {
+        await step('Check "I agree" checkbox.', async () => {
             await this.checkboxAgree.click();
         })
     }
 
     async clickCreateSignatureBtn() {
-        await step('Click the "Create Signature" button', async () => {
+        await step('Click on "Create Signature" button.', async () => {
             await this.createSignatureBtn.click();
         })
     }
 
     async clickDeleteBtn() {
-        await step('Click the "Delete" button', async () => {
+        await step('Click on "Delete" button.', async () => {
             await this.deleteBtn.click();
         })
     }
 
     async clickUpdateBtn() {
-        await step('Click the "Update signature" button', async () => {
+        await step('Click on "Update signature" button.', async () => {
             await this.updateBtn.click();
         })
     }

@@ -8,7 +8,7 @@ export default class ConfirmDeletionModal {
     }
 
     async clickYesDelete() {
-        await step('Click the "Yes, Delete" button', async () => {
+        await step('Click on "Yes, Delete" button.', async () => {
             await this.yesDelete.waitFor();
             await this.yesDelete.click();
         });

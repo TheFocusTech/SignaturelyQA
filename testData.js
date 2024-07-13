@@ -45,7 +45,7 @@ export const TOAST_MESSAGE = {
     formDisabled: 'Form successfully disabled!',
     formEnabled: 'Form successfully enabled!',
     formDeleted: 'Form deleted successfully.',
-    documentSended: 'Document successfully sended to specified email(s).',
+    documentSent: 'Document successfully sended to specified email(s).',
     templateDelete: 'Template deleted successfully.',
     editedFormSaved: 'Form saved',
     teamMemberDeleted: 'Team member deleted successfully',

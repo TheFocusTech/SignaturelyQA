@@ -8,8 +8,8 @@ export default class SignerAlmostDoneModal {
     }
 
     async clickIAgreeBtn() {
-        await step('Click "I Agree" button', async () => {
-            this.iAgreeBtn.click();
+        await step('Click on "I Agree" button.', async () => {
+            await this.iAgreeBtn.click();
         });
     }
 }

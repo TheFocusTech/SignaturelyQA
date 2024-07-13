@@ -13,7 +13,7 @@ export default class UploadFileOnSignPage {
     }
 
     async clickPrepareDocumentBtn() {
-        await step('Click the "Prepare Document" button.', async () => {
+        await step('Click on "Prepare Document" button.', async () => {
             await this.prepareDocumentBtn.waitFor();
             await this.prepareDocumentBtn.click();
         });

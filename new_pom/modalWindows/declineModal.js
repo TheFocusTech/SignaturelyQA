@@ -7,7 +7,7 @@ export default class DeclineModal {
     }
 
     async clickDeclineBtn() {
-        await step('Click on the "Decline" button to decline the signing request', async () => {
+        await step('Click on "Decline" button.', async () => {
             await this.declineBtn.waitFor({ state: 'visible' });
             await this.declineBtn.click();
         });

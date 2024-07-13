@@ -8,7 +8,7 @@ export default class CancelSubscriptionModal {
     }
 
     async clickCancelSubscriptionButton() {
-        await step('Click the “Cancel subscription” button on the modal window', async () => {
+        await step('Click on "Cancel subscription" button in pop-up window.', async () => {
             await this.cancelSubscriptionBtn.click();
         });
     }

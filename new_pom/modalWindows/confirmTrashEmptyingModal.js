@@ -7,7 +7,7 @@ export default class ConfirmTrashEmptyingModal {
     }
 
     async clickEmptyTrashBtn() {
-        await step('Click "Empty trash" button on the confirmation window', async () => {
+        await step('Click on "Empty trash" button.', async () => {
             await this.emptyTrashBtn.waitFor();
             await this.emptyTrashBtn.click();
         });

@@ -16,14 +16,14 @@ export default class SignUpBusinessPage {
     }
 
     async clickPurchaseNowButton() {
-        await step('Click "Purchase Now" button', async () => {
+        await step('Click on "Purchase Now" button.', async () => {
             await this.purchaseNowBtn.click();
             await this.confirmCodeModal.waitFor();
         });
     }
 
     async clickSubscriptionButton(subscription) {
-        await step(`Click ${subscription} radio button`, async () => {
+        await step(`Click on "${subscription}" radio button.`, async () => {
             await this.radioButtons
                 .filter({hasText: subscription})
                 .click();

@@ -10,7 +10,7 @@ export default class HeaderComponent {
     }
 
     async verifyUserNameForOldUserLogin() {
-        await step('Verify that the User Name is as expected', async () => {
+        await step('Verify "User Name" is as expected.', async () => {
             if (process.env.USER_NAME === undefined) {
                 await expect(this.userName).toContainText(CI_USER_NAME);
             } else {
