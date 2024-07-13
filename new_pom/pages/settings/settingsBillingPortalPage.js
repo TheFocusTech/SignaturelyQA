@@ -19,7 +19,7 @@ export default class SettingsBillingPortalPage {
                 await step('Click on "More Options" button.', async () => {
                     await this.moreOptionsButtonList.nth(0).click();
                 });
-                await step('Click on "Delete".', async () => {
+                await step('Click on "Delete" button.', async () => {
                     await this.deleteOptions.click();
                 });
                 await step('Click on "Delete Payment Method" button.', async () => {

@@ -17,7 +17,7 @@ test.describe('Company', () => {
         await link(`${GOOGLE_DOC_LINK}buu76mms6cci`, 'ATC_10_43_01');
         await epic('Settings');
         await feature('Company');
-        await tags("Company's form");
+        await tags('Company form');
 
         await signPage.sideMenu.clickSettings();
         await settingsCompanyPage.logoUpLoadFile(UPLOAD_FILE_PATH.jpgDocument);

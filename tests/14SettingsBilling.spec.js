@@ -108,7 +108,7 @@ test.describe('Billing', () => {
         await stripeEnterPaymentDetailsPage.attachCard(CARD_DETAILS.MASTERCARD);
         await settingsBillingPage.reloadPage();
 
-        await step('Verify added payment card displayed on Billing pag', async () => {
+        await step('Verify added payment card displayed on Billing page', async () => {
             await expect(settingsBillingPage.creditCardData).toHaveText(
                 CARD_DETAILS.MASTERCARD.displayingOnTheBillingPage
             );
@@ -198,7 +198,7 @@ test.describe('Billing', () => {
     });
 
     PLANS.forEach((plan) => {
-        test(`TC_14_55_01 | Verify ability to successfully select subscription ${plan} plan.`, async ({
+        test(`TC_14_55_01 | Verify ability to select subscription ${plan} plan.`, async ({
             createFreeUserAndLogin,
             signPage,
             settingsCompanyPage,
@@ -207,7 +207,7 @@ test.describe('Billing', () => {
             upgradeYourPlanModal,
             specialOneTimeOfferModal,
         }) => {
-            await description('To verify Free users can successfully upgrade their subscription plan.');
+            await description('To verify Free users can upgrade their subscription plan.');
             await severity(Severity.CRITICAL);
             await link(`${QASE_LINK}/SIGN-55`, 'Qase: SIGN-55');
             await link(`${GOOGLE_DOC_LINK}xfly7b3oksv7`, 'ATC_14_55_01');
