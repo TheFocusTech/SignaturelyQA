@@ -6,7 +6,7 @@ import { userWithGoldAPISubscription } from '../helpers/preconditions.js';
 
 
 test.describe('API key', () => {
-    test.only('TC_12_48_01 | Copy API key created by the "Create API" button on the right.', async ({
+    test('TC_12_48_01 | Copy API key created by the "Create API" button on the right.', async ({
         createBusinessUserAndLogin,
         signPage,
         settingsCompanyPage,
