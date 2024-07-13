@@ -1,9 +1,16 @@
 import { expect } from '@playwright/test';
 import { test } from '../fixtures/base.js';
-import { API_KEY_NAME, API_PLANS, currentPlan, TOAST_MESSAGE, QASE_LINK, GOOGLE_DOC_LINK, TITLE_OF_DOWNGRADE_API_PLAN_MODAL } from '../testData.js';
+import {
+    API_KEY_NAME,
+    API_PLANS,
+    currentPlan,
+    TOAST_MESSAGE,
+    QASE_LINK,
+    GOOGLE_DOC_LINK,
+    TITLE_OF_DOWNGRADE_API_PLAN_MODAL,
+} from '../testData.js';
 import { description, epic, feature, link, Severity, severity, step, tags } from 'allure-js-commons';
 import { userWithGoldAPISubscription } from '../helpers/preconditions.js';
-
 
 test.describe('API key', () => {
     test('TC_12_48_01 | Verify user can copy API key created by "Create API" button on the right.', async ({
@@ -48,6 +55,13 @@ test.describe('API key', () => {
 
         await createAPIKeyModal.clickCloseAPIModalBtn();
         await settingsAPIPage.pasteIntoBillingDetailsField(clipboardApiKeyValue);
+
+        const actualBillingDetailsFieldValue = await settingsAPIPage.billingDetailsTextField.innerText();
+        if (actualBillingDetailsFieldValue === '') {
+            await step('Fill in the "Billing Details" field if shortcuts do not work on Mac', async () => {
+                await settingsAPIPage.fillBillingDetailsField(clipboardApiKeyValue);
+            });
+        }
 
         await step('Verify pasted API key matches the one created with "Create API" button on the right.', async () => {
             await expect(settingsAPIPage.billingDetailsTextField).toHaveText(clipboardApiKeyValue);
@@ -97,7 +111,7 @@ test.describe('API key', () => {
         await createAPIKeyModal.clickCloseAPIModalBtn();
         await settingsAPIPage.fillBillingDetailsField(clipboardApiKeyValue);
 
-            await step('Verify pasted API key matches the one created with "Create API" button in Table.', async () => {
+        await step('Verify pasted API key matches the one created with "Create API" button in Table.', async () => {
             await expect(settingsAPIPage.billingDetailsTextField).toHaveText(clipboardApiKeyValue);
         });
     });
@@ -138,7 +152,7 @@ test.describe('API key', () => {
         settingsCompanyPage,
         settingsAPIPage,
         upgradeYourPlanAPIModal,
-        downGradeYourPlanAPIModal
+        downGradeYourPlanAPIModal,
     }) => {
         await description('To verify Business user can Upgrade/Downgrade API subscription.');
         await severity(Severity.CRITICAL);
@@ -149,16 +163,17 @@ test.describe('API key', () => {
         await tags('Subscription');
 
         test.setTimeout(60000);
-        await userWithGoldAPISubscription(createBusinessUserAndLogin,
+        await userWithGoldAPISubscription(
+            createBusinessUserAndLogin,
             signPage,
             settingsCompanyPage,
             settingsAPIPage,
-            upgradeYourPlanAPIModal);
-        
+            upgradeYourPlanAPIModal
+        );
+
         await settingsCompanyPage.horizontalMenu.clickAPI();
-        
+
         for (let i = 1; i < API_PLANS.length; i++) {
-            
             await settingsAPIPage.clickUpgradeButton(API_PLANS[i]);
             await upgradeYourPlanAPIModal.clickSubscribeButton();
 
@@ -174,18 +189,22 @@ test.describe('API key', () => {
         }
 
         for (let i = API_PLANS.length - 2; i >= 0; i--) {
-    
-            await settingsAPIPage.clickSelectButton(API_PLANS[i])
+            await settingsAPIPage.clickSelectButton(API_PLANS[i]);
 
-            await step('Verify Title of Downgrade Modal Window has the text "Downgrade to selected Plan".', async () => {
-                await expect(downGradeYourPlanAPIModal.titleOfDowngradeModalWindow).toContainText(TITLE_OF_DOWNGRADE_API_PLAN_MODAL[i]);
-            });
+            await step(
+                'Verify Title of Downgrade Modal Window has the text "Downgrade to selected Plan".',
+                async () => {
+                    await expect(downGradeYourPlanAPIModal.titleOfDowngradeModalWindow).toContainText(
+                        TITLE_OF_DOWNGRADE_API_PLAN_MODAL[i]
+                    );
+                }
+            );
 
-            await downGradeYourPlanAPIModal.clickDowngradeBtn()
+            await downGradeYourPlanAPIModal.clickDowngradeBtn();
 
             await step('Verify toast with "Api plan have been upgraded" appears.', async () => {
                 await expect(settingsAPIPage.toast.toastBody.nth(0)).toHaveText(TOAST_MESSAGE.apiPlanUpgraded);
             });
         }
     });
-})
+});

@@ -71,15 +71,16 @@ test.describe('Templates', () => {
         await signPage.sideMenu.clickTemplates();
         await templatesPage.table.clickFirstOptionsBtn();
         await templatesPage.table.clickAddToAPIBtn();
-        await templatesPage.toast.waitForToastIsHiddenByText(TOAST_MESSAGE.success);
+       
         await templatesPage.sideMenuTemplates.clickApiTemplates();
+        await templatesPage.table.waitForDocumentStatusVisible(TEMPLATES_STATUS.api);
 
         await step('Template successfully added to API (appears in API Templates).', async () => {
             await expect(await apiTemplatesPage.table.documentStatus).toHaveText(TEMPLATES_STATUS.api);
         });
 
         await step('Template successfully added to API (appears in API Templates) - name checked.', async () => {
-            await expect(templatesPage.table.getTemplateTitle()).resolves.toEqual(CREATE_TEMPLATE.nameField);
+            await expect(templatesPage.table.objectTitle).toHaveText(CREATE_TEMPLATE.nameField);
         });
     });
 

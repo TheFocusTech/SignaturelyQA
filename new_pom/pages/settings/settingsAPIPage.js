@@ -39,9 +39,13 @@ export default class SettingsAPIPage {
         await step('Paste into "Billing Details" input field with "Ctrl+V" shortcuts.', async () => {
             await this.billingDetailsTextField.click();
 
-            await this.page.keyboard.down('Control');
+            const IS_MAC = process.platform === 'darwin';
+            const pasteKey = IS_MAC ? 'Meta' : 'Control';
+            console.log('pasteKey:', pasteKey)
+
+            await this.page.keyboard.down(pasteKey);
             await this.page.keyboard.press('V');
-            await this.page.keyboard.up('Control');
+            await this.page.keyboard.up(pasteKey);
         });
     }
     

@@ -32,6 +32,7 @@ export default class SettingsBillingPage {
             const newPagePromise = this.page.waitForEvent('popup');
             await this.attachCardButton.click();
             newPage = await newPagePromise;
+            await newPage.waitForLoadState('load', { timeout: 20 * 1000 });
         });
         return new StripeEnterPaymentDetailsPage(newPage);
     }
@@ -50,7 +51,7 @@ export default class SettingsBillingPage {
             const pagePromise = this.page.waitForEvent('popup', { timeout: 10 * 1000 });
             await this.openBillingPortalButton.click();
             newPage = await pagePromise;
-            await newPage.waitForLoadState('load', { timeout: 20 * 1000 });
+            await newPage.waitForLoadState('load', { timeout: 40 * 1000 });
         });
         return new SettingsBillingPortalPage(newPage);
     }

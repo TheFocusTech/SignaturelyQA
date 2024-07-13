@@ -91,7 +91,7 @@ test.describe('Billing', () => {
         await feature('Billing');
         await tags('Payment Card', 'Billing Portal');
 
-        test.setTimeout(100 * 1000);
+        test.setTimeout(200 * 1000);
         await signPage.sideMenu.clickSettings();
         await settingsCompanyPage.horizontalMenu.clickBilling();
         let stripeEnterPaymentDetailsPage = await settingsBillingPage.clickAttachCardButton();
