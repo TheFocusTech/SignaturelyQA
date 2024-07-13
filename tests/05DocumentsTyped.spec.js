@@ -233,7 +233,7 @@ test.describe('DocumentsType', () => {
         await step(
             `Verify toast notification with the 'Document successfully sended to specified email(s)' text appears`,
             async () => {
-                await expect(documentsPage.toast.toastBody).toHaveText(TOAST_MESSAGE.documentSended);
+                await expect(documentsPage.toast.toastBody).toHaveText(TOAST_MESSAGE.documentSent);
             }
         );
         const documentName = UPLOAD_FILE_PATH.jpgDocument.split('/').pop();

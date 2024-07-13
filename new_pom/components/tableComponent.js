@@ -163,6 +163,12 @@ export default class TableComponent {
         });
     }
 
+    async waitForDocumentStatusVisible(status) {
+        await step(`Wait for ${status} status of the created document in the table.`, async () => {
+            await this.documentStatus.getByText(status).waitFor({ state: 'visible' });
+        });
+    }
+
     async clickDisableFormBtn() {
         await step('Select "Disable Form" option in the dropdown menu.', async () => {
             await this.disableFormBtn.click();
