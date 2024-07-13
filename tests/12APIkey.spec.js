@@ -48,6 +48,13 @@ test.describe('API key', () => {
         await createAPIKeyModal.clickCloseAPIModalBtn();
         await settingsAPIPage.pasteIntoBillingDetailsField(clipboardApiKeyValue);
 
+        const actualBillingDetailsFieldValue = await settingsAPIPage.billingDetailsTextField.innerText()
+        if (actualBillingDetailsFieldValue === "") {
+            await step('Fill in the "Billing Details" field if shortcuts do not work on Mac', async () => {
+                await settingsAPIPage.fillBillingDetailsField(clipboardApiKeyValue);
+            });
+        }
+
         await step('Verify that pasted API key matches the one created with "Create API" button on the right.', async () => {
             await expect(settingsAPIPage.billingDetailsTextField).toHaveText(clipboardApiKeyValue);
         });
