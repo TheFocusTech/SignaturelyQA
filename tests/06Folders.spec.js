@@ -62,7 +62,7 @@ test.describe('Folders', () => {
 
         await signPage.sideMenu.clickDocuments();
         await documentsPage.table.clickFirstOptionsBtn();
-        await documentsPage.table.clickOptionsDeleteBtn();
+        await documentsPage.table.clickDeleteBtn();
         await confirmDeletionModal.clickYesDelete();
 
         await step(
@@ -92,7 +92,6 @@ test.describe('Folders', () => {
         await documentsPage.table.clickFirstOptionsBtn();
         await documentsPage.table.clickRenameBtn();
         await documentsPage.table.fillInputNameField(FILL_RENAME_FOLDER_NAME);
-        await documentsPage.table.pressEnterInputNameField();
         await documentsPage.toast.waitForToastIsHiddenByText(TOAST_MESSAGE.folderRename);
 
         await step('Verify new value has been saved.', async () => {

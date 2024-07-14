@@ -386,7 +386,7 @@ test.describe('CreateDocument', () => {
         await signPage.uploadFileTab.chooseTemplate.fillSignerEmail(SIGNERS_DATA.signerEmail1, 0);
         await signPage.uploadFileTab.chooseTemplate.clickEditTemplateBtn();
 
-        await prepareForSignatureModal.waitDocumentPage();
+        await prepareForSignatureModal.waitDocumentSection();
         await prepareForSignatureModal.clickContinueBtn();
         await prepareForSignatureModal.clickGotItBtn();
         await prepareForSignatureModal.clickSignOnFieldsMenu();
