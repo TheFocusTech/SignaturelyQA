@@ -16,8 +16,22 @@ jobs:
       - name: Install Playwright Browsers
         run: npx playwright install --with-deps
 
-      - name: Run Playwright Chrome tests
-        run: npm test
+      # - name: Run Playwright Chrome tests
+      #   run: npm test
+      #   env:
+      #     URL: ${{ secrets.URL}}
+      #     USER_EMAIL: ${{ secrets.USER_EMAIL }}
+      #     USER_PASSWORD: ${{ secrets.USER_PASSWORD }}
+      #     API_URL: ${{ secrets.API_URL }}
+      #     ADMIN_EMAIL: ${{ secrets.ADMIN_EMAIL }}
+      #     ADMIN_PASSWORD: ${{ secrets.ADMIN_PASSWORD }}
+      #     DB_DATA: ${{ secrets.DB_DATA }}
+      #     EMAIL_PREFIX: ${{ secrets.EMAIL_PREFIX }}
+      #     EMAIL_DOMAIN: ${{ secrets.EMAIL_DOMAIN }}
+      #     CI_RUN: true
+
+      - name: Run Playwright Firefox tests
+        run: npm run test:all:firefox
         env:
           URL: ${{ secrets.URL}}
           USER_EMAIL: ${{ secrets.USER_EMAIL }}
@@ -30,20 +44,6 @@ jobs:
           EMAIL_DOMAIN: ${{ secrets.EMAIL_DOMAIN }}
           CI_RUN: true
 
-#      - name: Run Playwright Firefox tests
-#        run: npm run test:all:firefox
-#        env:
-#          URL: ${{ secrets.URL}}
-#          USER_EMAIL: ${{ secrets.USER_EMAIL }}
-#          USER_PASSWORD: ${{ secrets.USER_PASSWORD }}
-#          API_URL: ${{ secrets.API_URL }}
-#          ADMIN_EMAIL: ${{ secrets.ADMIN_EMAIL }}
-#          ADMIN_PASSWORD: ${{ secrets.ADMIN_PASSWORD }}
-#          DB_DATA: ${{ secrets.DB_DATA }}
-#          EMAIL_PREFIX: ${{ secrets.EMAIL_PREFIX }}
-#          EMAIL_DOMAIN: ${{ secrets.EMAIL_DOMAIN }}
-#          CI_RUN: true
-# #
 #      - name: Run Playwright Safari tests
 #        run: npm run test:all:webkit
 #        env:
