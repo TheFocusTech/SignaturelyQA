@@ -107,8 +107,7 @@ test.describe('Profile', () => {
         await step('Verify email field is filled with correct user email.', async () => {
             await expect(settingsProfilePage.emailAddressInputField).toHaveValue(process.env.NEW_USER_EMAIL);
         });
-        await settingsProfilePage.deleteCurrentEmailFromEmailAddressInputField();
-        await settingsProfilePage.fillNewEmailIntoEmailAddressInputField(newEmail);
+        await settingsProfilePage.renewEmailAddressInputField(newEmail);
         await settingsProfilePage.clickUpdateBtn();
         await step(`Verify toast message with text "${TOAST_MESSAGE.checkYourEmail}" popped up.`, async () => {
             await expect(settingsProfilePage.toast.toastBody).toHaveText(TOAST_MESSAGE.checkYourEmail);

@@ -79,7 +79,7 @@ export const createTemplate = async (
         await createNewTemplatePage.fillCreateTemplateRolesField(CREATE_TEMPLATE.nameRole);
         await createNewTemplatePage.fileUploader.uploadFile(UPLOAD_FILE_PATH.txtDocument);
         await createNewTemplatePage.clickFillTemplateBtn();
-        await prepareForSignatureModal.waitDocumentPage();
+        await prepareForSignatureModal.waitDocumentSection();
         await prepareForSignatureModal.clickSignOnFieldsMenu();
         await prepareForSignatureModal.clickDocumentBody();
         await prepareForSignatureModal.clickCreateBtn();
