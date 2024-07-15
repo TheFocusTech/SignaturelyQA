@@ -211,7 +211,8 @@ test.describe('Forms', () => {
             await expect(formsPage.toast.toastBody.nth(1)).toHaveText(TOAST_MESSAGE.editedFormSaved);
         });
         await step(`Verify Edited Form has edited title "${FORMS.formNameEdit}".`, async () => {
-            await expect(formsPage.table.formTitlelist.first()).toHaveText(FORMS.formNameEdit);
+            await formsPage.table.formTitleList.first().waitFor();
+            await expect(formsPage.table.formTitleList.first()).toHaveText(FORMS.formNameEdit);
         });
     });
 });
