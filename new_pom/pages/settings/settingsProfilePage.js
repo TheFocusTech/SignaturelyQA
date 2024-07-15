@@ -14,14 +14,14 @@ export default class SettingsProfilePage {
         this.saveButton = this.page.getByRole('button', { name: 'Save' });
         this.deleteMyAccountBtn = this.page.getByRole('button', { name: 'Delete my Account' });
         this.emailAddressInputField = this.page.getByPlaceholder('username@gmail.com');
-        this.updateBtn = this.page.getByRole('button', { name: "Update Email" });
-        this.checkBoxesList = this.page.locator('.settings__form-checkbox .uiCheckbox')
-        this.checkBoxesFrameList = this.page.locator('.settings__form-checkbox .uiCheckbox__inner')
+        this.updateBtn = this.page.getByRole('button', { name: 'Update Email' });
+        this.checkBoxesList = this.page.locator('.settings__form-checkbox .uiCheckbox');
+        this.checkBoxesFrameList = this.page.locator('.settings__form-checkbox .uiCheckbox__inner');
         this.dateFormatDropdown = this.page.locator('.uiSelect__select').first();
         this.dateFormat = this.page.locator('.uiSelect__select-row');
         this.fileInput = this.page.locator('input[type = "file"]');
         this.avatarImage = this.page.locator('form').getByAltText('avatar');
-        this.deleteButton = this.page.locator('.avatar-field__content').getByRole('button', { name: 'Delete' })
+        this.deleteButton = this.page.locator('.avatar-field__content').getByRole('button', { name: 'Delete' });
     }
 
     async fillNewPasswordInputField(password) {
@@ -48,15 +48,10 @@ export default class SettingsProfilePage {
         });
     }
 
-    async deleteCurrentEmailFromEmailAddressInputField() {
-        await step('Delete email in the "Email Address" input field.', async () => {
+    async renewEmailAddressInputField(newEmail) {
+        await step('Clean and fill in "Email Address" input field.', async () => {
             await this.emailAddressInputField.clear();
-        });
-    }
-
-    async fillNewEmailIntoEmailAddressInputField(email) {
-        await step('Fill in "Email Address" input field.', async () => {
-            await this.emailAddressInputField.fill(email);
+            await this.emailAddressInputField.fill(newEmail);
         });
     }
 
@@ -74,12 +69,12 @@ export default class SettingsProfilePage {
                 let isChecked, isUnChecked;
 
                 if (checkState) {
-                    isChecked = await checkbox.locator('.uiCheckbox--checked').count() > 0;
+                    isChecked = (await checkbox.locator('.uiCheckbox--checked').count()) > 0;
                     if (!isChecked) {
                         await checkbox.click();
                     }
                 } else {
-                    isUnChecked = await checkbox.locator('.uiCheckbox--unChecked').count() > 0;
+                    isUnChecked = (await checkbox.locator('.uiCheckbox--unChecked').count()) > 0;
                     if (!isUnChecked) {
                         await checkbox.click();
                     }
@@ -115,7 +110,7 @@ export default class SettingsProfilePage {
     async clickDeleteButton() {
         await step('Click on "Delete" button.', async () => {
             await this.deleteButton.click();
-        })
+        });
     }
 }
 

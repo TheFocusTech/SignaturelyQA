@@ -27,7 +27,7 @@ export default class PrepareForSignatureModal {
         this.itemDropDown = this.page.locator('.uiSelect__search-item');
         this.saveBtn = this.page.getByRole('button', { name: 'Save' });
         this.signatureElement = this.page.locator('.documentPage .react-pdf__Page__canvas').last();
-        this.createBtn = this.page.getByRole('button', { name: 'Create' });      
+        this.createBtn = this.page.getByRole('button', { name: 'Create' });
         this.customSigningOrderCheckbox = this.page.locator('.uiCheckbox__inner');
         this.customSigningOrderPositionNumberOne = this.page.locator('span.signers__item-order-position').first();
         this.customSigningOrderPositionNumberTwo = this.page.locator('span.signers__item-order-position').last();
@@ -37,9 +37,9 @@ export default class PrepareForSignatureModal {
         this.cancelBtn = this.page.getByRole('button', { name: 'Cancel' });
         this.documentPage = this.page.locator('.documentPage__inner');
         this.dateStampedOnDocument = this.page.locator(
-            'input.fieldDropDown__trigger-date-input:not(fieldDropDown__trigger--disabled)');
+            'input.fieldDropDown__trigger-date-input:not(fieldDropDown__trigger--disabled)'
+        );
         this.dateOnLeftMenu = this.page.locator('.interactModal__fieldBar-selectField-item-label');
-
     }
 
     async clickSignDocumentRadioBtn() {
@@ -148,7 +148,7 @@ export default class PrepareForSignatureModal {
         await step('Get text title.', async () => {
             actualText = await this.prepareForSigningTitle.textContent();
         });
-        return actualText
+        return actualText;
     }
 
     async clickNameOnFieldsMenu() {
@@ -183,7 +183,7 @@ export default class PrepareForSignatureModal {
             await this.dateOnFieldsMenu.click();
         });
     }
-    async waitDocumentPage() {
+    async waitDocumentSection() {
         await step('Wait for the "document section" element to loaded.', async () => {
             await this.documentPage.first().waitFor({ state: 'visible' });
         });
@@ -199,7 +199,7 @@ export default class PrepareForSignatureModal {
                     await this.signOnFieldsMenu.click();
                     coordinates = await clickCanvas(this.page, this.canvas, this.excludedAreas);
                     coordinates === 0 ? retries-- : (retries = 0);
-                });                
+                });
             }
             if (coordinates === 0) {
                 await step('Error: Test precondition fail.', async () => {

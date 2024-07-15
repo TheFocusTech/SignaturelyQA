@@ -273,7 +273,7 @@ test.describe('DocumentsType', () => {
 
         await signPage.sideMenu.clickDocuments();
         await documentsPage.table.clickFirstOptionsBtn();
-        await documentsPage.table.clickOptionsDeleteBtn();
+        await documentsPage.table.clickDeleteBtn();
         await deleteModal.clickYesDeleteBtn();
         await documentsPage.toast.waitForToastCompleted();
 
@@ -288,7 +288,7 @@ test.describe('DocumentsType', () => {
         });
 
         await documentsTrashPage.table.clickFirstOptionsBtn();
-        await documentsPage.table.clickOptionsDeleteBtn();
+        await documentsPage.table.clickDeleteBtn();
         await deleteModal.clickYesDeleteBtn();
         await documentsTrashPage.toast.waitForToastCompleted();
 

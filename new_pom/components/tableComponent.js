@@ -21,19 +21,18 @@ export default class TableComponent {
         this.duplicateBtn = this.page.getByText('Duplicate');
         this.formsList = this.page.locator('div.table__dataRow');
         this.editBtn = this.page.getByRole('button', { name: 'Edit' });
-        this.optionsDeleteBtn = this.page.getByRole('button', { name: 'Delete' });
         this.listElements = this.page.locator('.documents__list-container');
         this.renameBtn = this.page.getByRole('button', { name: 'Rename' });
         this.inputNameField = this.page.locator('.form__input--hidden');
         this.titleObjectField = this.page.locator('p.table__column');
         this.disableFormBtn = this.page.getByRole('button', { name: 'Disable Form' });
         this.enableFormBtn = this.page.getByRole('button', { name: 'Enable Form' });
-        this.deleteForm = this.page.getByRole('button', { name: 'Delete Form' });
+        this.deleteFormBtn = this.page.getByRole('button', { name: 'Delete Form' });
         this.shareBtn = this.page.getByRole('button', { name: 'Share' });
         this.objectCheckbox = this.page.locator('ul .uiCheckbox');
         this.documentsStatuses = this.page.locator('.documents__documentStatus');
         this.deleteBtn = this.page.getByRole('button', { name: 'Delete' });
-        this.firstFormTitle = this.page.getByText('Edited Form Name');
+        this.formTitleList = this.page.locator('.table__dataRow .table__column--text');
         this.documentTitleList = this.page.locator('.table__column--text--document p');
         this.downloadBtn = this.page.getByText('Download');
         this.optionsChangePermissionsBtn = this.page.getByRole('button', { name: 'Change Permissions' });
@@ -122,11 +121,6 @@ export default class TableComponent {
     async fillInputNameField(name) {
         await step('Fill in "Name" input field', async () => {
             await this.inputNameField.fill(name);
-        });
-    }
-
-    async pressEnterInputNameField() {
-        await step('Input new name', async () => {
             await this.inputNameField.press('Enter');
         });
     }
@@ -183,20 +177,13 @@ export default class TableComponent {
 
     async clickDeleteForm() {
         await step('Select "Delete Form" option in the dropdown menu.', async () => {
-            await this.deleteForm.click();
+            await this.deleteFormBtn.click();
         });
     }
 
     async clickShareBtn() {
         await step('Select "Share" option in the dropdown menu.', async () => {
             await this.shareBtn.click();
-        });
-    }
-
-    async clickOptionsDeleteBtn() {
-        await step('Select "Delete" option in the dropdown menu.', async () => {
-            await this.optionsDeleteBtn.waitFor({ state: 'visible' });
-            await this.optionsDeleteBtn.click();
         });
     }
 
@@ -236,7 +223,8 @@ export default class TableComponent {
     }
 
     async clickDeleteBtn() {
-        await step('Select the "Delete" option in the dropdown menu.', async () => {
+        await step('Select "Delete" option in the dropdown menu.', async () => {
+            await this.deleteBtn.waitFor({ state: 'visible' });
             await this.deleteBtn.click();
         });
     }
