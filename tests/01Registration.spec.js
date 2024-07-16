@@ -173,7 +173,7 @@ test.describe('Registration', () => {
     });
 
     SUBSCRIPTIONS.forEach((subscription) => {
-        test(`TC_01_59_01| Verify successful registration of Business User with ${subscription} subscription`, async ({
+        test(`TC_01_59_01| Verify successful registration of Business User with ${subscription} subscription.`, async ({
             request,
             page,
             signUpBusinessPage,

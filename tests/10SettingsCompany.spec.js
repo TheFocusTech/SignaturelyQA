@@ -4,7 +4,7 @@ import { TOAST_MESSAGE, COMPANY_INFO, UPLOAD_FILE_PATH, QASE_LINK, GOOGLE_DOC_LI
 import { description, tags, severity, Severity, link, epic, feature, step } from 'allure-js-commons';
 
 test.describe('Company', () => {
-    test("TC_10_43_01 | Verify Business user can fill company's form", async ({
+    test("TC_10_43_01 | Verify Business user can fill company's form.", async ({
         createBusinessUserAndLogin,
         signPage,
         settingsCompanyPage,

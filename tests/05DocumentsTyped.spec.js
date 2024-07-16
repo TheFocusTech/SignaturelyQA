@@ -326,7 +326,7 @@ test.describe('DocumentsType', () => {
         await documentsPage.table.clickDownloadBtn();
         const response = await responsePromise;
 
-        await step('Verify response code after clicking "Download" option is successfull', async () => {
+        await step('Verify response code after clicking "Download" option is successful.', async () => {
             expect(response.status()).toBe(200);
         });
     });

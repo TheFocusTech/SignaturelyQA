@@ -1,10 +1,9 @@
-import SideMenuSettingsComponent from "../../components/sideMenuSettingsComponent";
-import SideMenuComponent from "../../components/sideMenuComponent";
-import ToastComponent from "../../components/toastComponent";
-import { step } from "allure-js-commons";
+import SideMenuSettingsComponent from '../../components/sideMenuSettingsComponent';
+import SideMenuComponent from '../../components/sideMenuComponent';
+import ToastComponent from '../../components/toastComponent';
+import { step } from 'allure-js-commons';
 
 export default class SettingsBillingPlanPage {
-
     constructor(page) {
         this.page = page;
 
@@ -30,12 +29,12 @@ export default class SettingsBillingPlanPage {
     async clickSelectPersonalPlanButton() {
         await step('Click on "Select" personal plan button.', async () => {
             await this.selectPersonalPlanButton.click();
-        }); 
+        });
     }
 
-    async switchMonthlyAnnyallyToggle() {
+    async switchMonthlyAnnuallyToggle() {
         await step('Switch the "Monthly/Annually" toggle button.', async () => {
             await this.monthlyAnnyallyToggle.click();
-        })
+        });
     }
 }
