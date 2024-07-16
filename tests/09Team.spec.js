@@ -59,7 +59,7 @@ test.describe('Team', () => {
         });
     });
 
-    test('TC_09_39_01 | Verify Business user can upgrade a "User" team member to "Admin"', async ({
+    test('TC_09_39_01 | Verify Business user can upgrade a "User" team member to "Admin".', async ({
         page,
         request,
         createBusinessUserAndLogin,
@@ -68,7 +68,7 @@ test.describe('Team', () => {
         addTeamMemberModal,
         teamsAcceptInvitePage,
     }) => {
-        await description('To verify Business user can upgrade "User" team member to "Admin"');
+        await description('To verify Business user can upgrade "User" team member to "Admin".');
         await severity(Severity.CRITICAL);
         await link(`${QASE_LINK}/SIGN-39`, 'Qase: SIGN-39');
         await link(`${GOOGLE_DOC_LINK}oymxytq1zw7`, 'ATC_09_39_01');
@@ -115,7 +115,7 @@ test.describe('Team', () => {
         });
     });
 
-    test('TC_09_39_02 | Verify Business user can downgrade "Admin" team member to "User"', async ({
+    test('TC_09_39_02 | Verify Business user can downgrade "Admin" team member to "User".', async ({
         page,
         request,
         createBusinessUserAndLogin,
@@ -172,7 +172,7 @@ test.describe('Team', () => {
         });
     });
 
-    test('TC_09_40_01 | Verify Business user can remove "User" teammate from Team', async ({
+    test('TC_09_40_01 | Verify Business user can remove "User" teammate from Team.', async ({
         page,
         request,
         createBusinessUserAndLogin,
@@ -181,7 +181,7 @@ test.describe('Team', () => {
         addTeamMemberModal,
         teamsAcceptInvitePage,
     }) => {
-        await description('To verify Business user can remove "User" teammate from Team');
+        await description('To verify Business user can remove "User" teammate from Team.');
         await severity(Severity.CRITICAL);
         await link(`${QASE_LINK}/SIGN-40`, 'Qase: SIGN-40');
         await link(`${GOOGLE_DOC_LINK}piqlawxmqgos`, 'ATC_09_40_01');

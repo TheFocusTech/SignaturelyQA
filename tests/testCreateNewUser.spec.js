@@ -7,7 +7,7 @@ test.describe('Verification of supporting tests', () => {
     test('Create Free User', async ({ createFreeUserAndLogin, signPage, settingsCompanyPage }) => {
         await description('Tests to maintain New User Creation.');
         await severity(Severity.BLOCKER);
-        await epic('Verification of supporting tests.');
+        await epic('Verification of supporting tests');
         await feature('Tests to maintain New User Creation.');
 
         await signPage.sideMenu.clickSettings();

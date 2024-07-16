@@ -44,7 +44,7 @@ test.describe('Folders', () => {
         });
     });
 
-    test('TC_06_24_01 | Verify the business user can delete folder', async ({
+    test('TC_06_24_01 | Verify the business user can delete folder.', async ({
         createBusinessUserAndLogin,
         signPage,
         documentsPage,

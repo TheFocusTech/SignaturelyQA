@@ -31,7 +31,7 @@ export default class SettingsProfilePage {
     }
 
     async fillRepeatNewPasswordInputField(password) {
-        await step('Fill in "Repeate new Password" input field.', async () => {
+        await step('Fill in "Repeat new Password" input field.', async () => {
             await this.repeatNewPasswordInputField.type(password);
         });
     }

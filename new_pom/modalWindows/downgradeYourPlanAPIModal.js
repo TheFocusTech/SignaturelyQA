@@ -14,7 +14,7 @@ export default class DownGradeYourPlanAPIModal {
         });
     }
 
-    async getTitleOfDowngradeApiPlanModall(plan) {
+    async getTitleOfDowngradeApiPlanModal(plan) {
         await step(`Generate title for downgrade modal for ${plan} plan.`, async () => {
             return `Downgrade to ${plan} Plan`;
         });
