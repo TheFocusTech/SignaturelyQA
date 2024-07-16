@@ -235,7 +235,7 @@ test.describe('CreateDocument', () => {
         await finalStepPage.clickSignDocumentBtn();
         await successModal.clickBackToDocumentsBtn();
 
-        await step('Verify created document has "Complited" status.', async () => {
+        await step('Verify created document has "Completed" status.', async () => {
             await documentsPage.table.waitForTable(10000);
             await expect(await documentsPage.table.documentStatus).toHaveText(DOCUMENT_STATUS.completed);
         });

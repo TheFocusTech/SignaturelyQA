@@ -25,7 +25,7 @@ export async function upgradeFreeUserToBusinessAndLogin({
         await upgradeYourPlanModal.clickSubscribeButton();
         await specialOneTimeOfferModal.clickNoThanksModalBtn();
         await settingsBillingPlanPage.toast.waitForToastIsHiddenByText(TOAST_MESSAGE.planSuccessChange);
-        console.log(`Free User #${process.env.NEW_USER_NUMBER} has been successfully upgraded to Bussiness`);
+        console.log(`Free User #${process.env.NEW_USER_NUMBER} has been successfully upgraded to Business`);
         await settingsBillingPlanPage.sideMenu.clickSign();
     });
 }

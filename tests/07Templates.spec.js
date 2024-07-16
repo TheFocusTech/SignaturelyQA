@@ -14,7 +14,7 @@ import { createTemplate } from '../helpers/preconditions.js';
 import { description, tags, severity, Severity, link, epic, step } from 'allure-js-commons';
 
 test.describe('Templates', () => {
-    test('TC_07_27_01 | Verify user can create the template', async ({
+    test('TC_07_27_01 | Verify user can create the template.', async ({
         createBusinessUserAndLogin,
         signPage,
         prepareForSignatureModal,
@@ -49,7 +49,7 @@ test.describe('Templates', () => {
         });
     });
 
-    test('TC_07_31_01 | Verify the user can select Add to API', async ({
+    test('TC_07_31_01 | Verify the user can select Add to API.', async ({
         createBusinessUserAndLogin,
         signPage,
         prepareForSignatureModal,
@@ -84,7 +84,7 @@ test.describe('Templates', () => {
         });
     });
 
-    test('TC_07_28_01 | Verify user can edit template', async ({
+    test('TC_07_28_01 | Verify user can edit template.', async ({
         createBusinessUserAndLogin,
         signPage,
         templatesPage,
@@ -133,7 +133,7 @@ test.describe('Templates', () => {
         });
     });
 
-    test('TC_07_30_01 | Verify user can duplicate template', async ({
+    test('TC_07_30_01 | Verify user can duplicate template.', async ({
         createBusinessUserAndLogin,
         signPage,
         prepareForSignatureModal,
@@ -169,7 +169,7 @@ test.describe('Templates', () => {
         });
     });
 
-    test('TC_07_29_01 | Verify user can delete the template', async ({
+    test('TC_07_29_01 | Verify user can delete the template.', async ({
         createBusinessUserAndLogin,
         signPage,
         prepareForSignatureModal,

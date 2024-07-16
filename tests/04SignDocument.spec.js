@@ -21,12 +21,12 @@ import { retrieveUserEmailConfirmationLink, retrieveEmailMessage, editDocumentSt
 import { createSignature, uploadDraftDocument } from '../helpers/preconditions.js';
 
 test.describe('Sign Document', () => {
-    test('TC_04_11_01 | Verify user can choose a custom signing order', async ({
+    test('TC_04_11_01 | Verify user can choose a custom signing order.', async ({
         createBusinessUserAndLogin,
         signPage,
         prepareForSignatureModal,
     }) => {
-        await description('To verify user can choose a custom signing order');
+        await description('To verify user can choose a custom signing order.');
         await severity(Severity.CRITICAL);
         await link(`${QASE_LINK}/SIGN-11`, 'Qase: SIGN-11');
         await link(`${GOOGLE_DOC_LINK}7y8njhymxgmj`, 'ATC_04_11_01');
@@ -61,7 +61,7 @@ test.describe('Sign Document', () => {
         });
     });
 
-    test('TC_04_14_01 | Verify user can add viewers to view the document ', async ({
+    test('TC_04_14_01 | Verify user can add viewers to view the document.', async ({
         createBusinessUserAndLogin,
         signPage,
         prepareForSignatureModal,
@@ -78,7 +78,7 @@ test.describe('Sign Document', () => {
         test.setTimeout(270 * 1000);
 
         await description(
-            'To verify user can add viewers to view the document. \n Attention: Page can be reloaded if application state not synchronized'
+            'To verify user can add viewers to view the document. \n Attention: Page can be reloaded if application state not synchronized.'
         );
         await severity(Severity.CRITICAL);
         await link(`${QASE_LINK}/SIGN-14`, 'Qase: SIGN-14');

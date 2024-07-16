@@ -25,7 +25,7 @@ import { signInRequest, documentIdRequest } from '../helpers/apiCalls.js';
 import { retrieveEmailMessage } from '../helpers/utils';
 
 test.describe('DocumentsType', () => {
-    test('TC_05_21_01 | Verify the option "Edit&Ressend" is active', async ({
+    test('TC_05_21_01 | Verify the option "Edit&Ressend" is active.', async ({
         createBusinessUserAndLogin,
         signPage,
         prepareForSignatureModal,
@@ -395,7 +395,7 @@ test.describe('DocumentsType', () => {
         await documentsPage.table.clickDownloadBtn();
         const response = await responsePromise;
 
-        await step('Verify response code after clicking "Download" option is successfull', async () => {
+        await step('Verify response code after clicking "Download" option is successful.', async () => {
             expect(response.status()).toBe(200);
         });
     });

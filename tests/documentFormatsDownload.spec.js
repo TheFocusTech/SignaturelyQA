@@ -7,7 +7,7 @@ test.describe('Verification of supporting tests.', () => {
     const documentsList = Object.values(UPLOAD_FILE_PATH);
     documentsList.forEach((document) => {
         let format = '.' + document.split('.').pop();
-        test(`Verify document formats to download. ${format}`, async ({
+        test(`Verify ${format} document format is download.`, async ({
           createBusinessUserAndLogin,
           signPage,
           documentsPage,

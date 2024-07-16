@@ -156,7 +156,7 @@ test.describe('Billing', () => {
         await signPage.sideMenu.clickSettings();
         await settingsCompanyPage.sideMenuSettings.clickBilling();
         await settingsBillingPage.clickEditPlanButton();
-        await settingsBillingPlanPage.switchMonthlyAnnyallyToggle();
+        await settingsBillingPlanPage.switchMonthlyAnnuallyToggle();
         await settingsBillingPlanPage.clickUpgradeButton(PLANS[1]);
         await upgradeYourPlanModal.clickSubscribeButton();
         await settingsBillingPlanPage.toast.waitForToastText();
