@@ -25,75 +25,6 @@ import { signInRequest, documentIdRequest } from '../helpers/apiCalls.js';
 import { retrieveEmailMessage } from '../helpers/utils';
 
 test.describe('DocumentsType', () => {
-    test('TC_05_21_01 | Verify the option "Edit&Ressend" is active', async ({
-        createBusinessUserAndLogin,
-        signPage,
-        prepareForSignatureModal,
-        editAndResendDocumentModal,
-        successModal,
-        finalStepPage,
-        documentsPage,
-    }) => {
-        test.setTimeout(200 * 1000);
-
-        await description('To verify document can be returned for editing.');
-        await description(
-            'To verify "Edit&Resend" functionality correctly allows users to edit and resend a prepared document'
-        );
-        await severity(Severity.CRITICAL);
-        await link(`${QASE_LINK}/SIGN-21`, 'QASE: SIGN-21 ');
-        await link(`${GOOGLE_DOC_LINK}a5x7xbzct5pl`, 'ATC_05_21_01');
-        await epic('Documents (typed)');
-        await tag('Edit & Resend');
-
-        await createDocumentAwaiting(signPage, prepareForSignatureModal, documentsPage, successModal, finalStepPage);
-
-        await signPage.sideMenu.clickDocuments();
-        await documentsPage.table.clickFirstOptionsBtn();
-        await documentsPage.table.clickEditAndResendBtn();
-
-        await step('Verify modal window "Edit & Resend" document has opened', async () => {
-            await expect(editAndResendDocumentModal.editAndResendTitle).toBeVisible();
-        });
-        await step('Verify title of the modal window is "Edit & Resend document"', async () => {
-            expect(await editAndResendDocumentModal.getTitleText()).toBe('Edit & Resend document');
-        });
-    });
-
-    test('TC_05_21_02 | Verify button "Revert to Draft" is active', async ({
-        createBusinessUserAndLogin,
-        page,
-        signPage,
-        prepareForSignatureModal,
-        successModal,
-        editAndResendDocumentModal,
-        finalStepPage,
-        documentsPage,
-    }) => {
-        test.setTimeout(200 * 1000);
-
-        await description('To verify document can be returned for editing.');
-        await severity(Severity.CRITICAL);
-        await link(`${QASE_LINK}/SIGN-21`, 'QASE: SIGN-21 ');
-        await link(`${GOOGLE_DOC_LINK}r25l83kzqn09`, 'ATC_05_21_02');
-        await epic('Documents (typed)');
-        await tag('Edit & Resend');
-
-        await createDocumentAwaiting(signPage, prepareForSignatureModal, documentsPage, successModal, finalStepPage);
-        await signPage.sideMenu.clickDocuments();
-        await documentsPage.table.clickFirstOptionsBtn();
-        await documentsPage.table.clickEditAndResendBtn();
-        await editAndResendDocumentModal.clickRevertToDraftBtn();
-
-        await step('Verify "Prepare For Signing" modal window is open', async () => {
-            await expect(page).toHaveURL(/documents.*edit$/);
-        });
-
-        await step('Verify title of the modal window is "Prepare for Signing"', async () => {
-            expect(await prepareForSignatureModal.getPrepareForSigningTitleText()).toBe('Prepare for Signing');
-        });
-    });
-
     test('TC_05_18_01 | Verify user can move a document to a folder.', async ({
         createBusinessUserAndLogin,
         signPage,
@@ -162,7 +93,7 @@ test.describe('DocumentsType', () => {
         });
     });
 
-    test('TC_05_21_03 | Verify user can revert a document with "Awaiting" status to "Draft" status.', async ({
+    test('TC_05_21_01 | Verify user can revert a document with "Awaiting" status to "Draft" status.', async ({
         createBusinessUserAndLogin,
         signPage,
         prepareForSignatureModal,
