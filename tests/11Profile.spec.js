@@ -196,7 +196,7 @@ test.describe('Profile', () => {
             );
             await severity(Severity.CRITICAL);
             await link(`${QASE_LINK}/SIGN-46`, 'Qase: SIGN-46');
-            await link(`${GOOGLE_DOC_LINK}3neug7we6zqz`, 'ATC_11_46_02');
+            await link(`${GOOGLE_DOC_LINK}q3bufxo4ii41`, 'ATC_11_46_02');
             await epic('Settings');
             await feature('Profile');
             await tag('Date-format');

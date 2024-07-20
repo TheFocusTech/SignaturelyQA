@@ -64,7 +64,7 @@ import { step } from 'allure-js-commons';
 export const test = base.extend({
     createFreeUserAndLogin: [
         async ({ request, page, loginPage }, use) => {
-            await step('New User Setup', async () => {
+            await step('Precondition: New Free User Setup', async () => {
                 await api_user_sign_up(request);
                 await databaseConfirmNewUserEmail();
                 await newFreeUserLogin({ page, loginPage });

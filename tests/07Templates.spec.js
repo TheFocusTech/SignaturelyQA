@@ -164,7 +164,7 @@ test.describe('Templates', () => {
             await expect(await templatesPage.table.objectTitle).toHaveCount(2);
         });
 
-        await step("Verify template1's title equals template2's title", async () => {
+        await step("Verify the title of the duplicated template matches the title of the original template", async () => {
             expect(await templatesPage.table.compareTitles()).toBe(true);
         });
     });

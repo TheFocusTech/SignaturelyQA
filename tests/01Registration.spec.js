@@ -118,7 +118,7 @@ test.describe('Registration', () => {
     });
 
     SUBSCRIPTIONS.forEach((subscription) => {
-        test(`TC_01_03_01 | Verify successful registration of Personal user with ${subscription} subscription.`, async ({
+        test(`TC_01_03_01 | Verify user can register as a Personal user with ${subscription} subscription.`, async ({
             request,
             page,
             signUpPersonalPage,
@@ -127,7 +127,7 @@ test.describe('Registration', () => {
             settingsCompanyPage,
             settingsBillingPage,
         }) => {
-            await description('To verify Personal user can successfully register.');
+            await description('To verify user can register as a Personal user.');
             await tag('Personal user');
             await severity(Severity.BLOCKER);
             await link(`${QASE_LINK}/SIGN-3`, 'Qase: SIGN-3');
@@ -164,7 +164,7 @@ test.describe('Registration', () => {
 
             await signPage.sideMenu.clickSettings();
             await settingsCompanyPage.horizontalMenu.clickBilling();
-            await step(`Verify Billing plan description is Business Personal ${subscription} Plan.`, async () => {
+            await step(`Verify Billing plan description is Personal ${subscription} Plan.`, async () => {
                 await expect(settingsBillingPage.billingPlanDescription).toHaveText(
                     PERSONAL_PLAN_DESCRIPTION(subscription)
                 );
@@ -173,7 +173,7 @@ test.describe('Registration', () => {
     });
 
     SUBSCRIPTIONS.forEach((subscription) => {
-        test(`TC_01_59_01| Verify successful registration of Business User with ${subscription} subscription.`, async ({
+        test(`TC_01_59_01| Verify user can register as a Business User with ${subscription} subscription.`, async ({
             request,
             page,
             signUpBusinessPage,

@@ -301,7 +301,7 @@ test.describe('DocumentsType', () => {
         await description('To verify Business user can download a document with status "Completed" (API).');
         await severity(Severity.CRITICAL);
         await link(`${QASE_LINK}/SIGN-20`, 'Qase: SIGN-20');
-        await link(`${GOOGLE_DOC_LINK}8wxawmz1dvq1`, 'TC_05_20_01');
+        await link(`${GOOGLE_DOC_LINK}v69946rp9jsl`, 'TC_05_20_01');
         await epic('Documents (typed)');
         await tag('Download document');
 

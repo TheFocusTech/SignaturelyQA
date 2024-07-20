@@ -78,7 +78,7 @@ test.describe('Sign Document', () => {
         test.setTimeout(270 * 1000);
 
         await description(
-            'To verify user can add viewers to view the document. \n Attention: Page can be reloaded if application state not synchronized.'
+            'To verify user can add viewers to view the document. \n Attention: \n Page can be reloaded if application state is not synchronized.'
         );
         await severity(Severity.CRITICAL);
         await link(`${QASE_LINK}/SIGN-14`, 'Qase: SIGN-14');
@@ -247,7 +247,7 @@ test.describe('Sign Document', () => {
         successModal,
     }) => {
         await description(
-            'To verify updating document status to "Expired" in the database reflects correctly on the front-end display. \n Attention: Refresh the page twice: \n - if application state not synchronized \n - after changing the status in the database.'
+            'To verify updating document status to "Expired" in the database reflects correctly on the front-end display. \n Attention: \n - Page can be reloaded if application state is not synchronized. \n - Page is reloaded after changing the status in the database.'
         );
         await severity(Severity.CRITICAL);
         await link(`${QASE_LINK}/SIGN-13`, 'Qase: SIGN-13');
@@ -350,7 +350,7 @@ test.describe('Sign Document', () => {
         test.setTimeout(250 * 1000);
 
         await description(
-            'To verify signer can decline to sign the document. \n Attention: \n - Script contains commented code due to delayed reminder. \n - Page can be reloaded if application state not synchronized.'
+            'To verify signer can decline to sign the document. \n Attention: \n - Script contains commented code due to delayed reminder. \n - Page can be reloaded if application state is not synchronized.'
         );
         await severity(Severity.CRITICAL);
         await link(`${QASE_LINK}/SIGN-12`, 'Qase: SIGN-12');
