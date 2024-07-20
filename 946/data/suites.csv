@@ -1,4 +1,0 @@
-"Status","Start Time","Stop Time","Duration in ms","Parent Suite","Suite","Sub Suite","Test Class","Test Method","Name","Description"
-"passed","Fri Jul 12 02:47:41 GMT 2024","Fri Jul 12 02:48:10 GMT 2024","29105","webkit","","API key","","","TC_12_48_01 | Copy API key created by the ""Create API"" button on the right.","To verify that user can copy API key created by the ""Create API"" button on the right."
-"passed","Fri Jul 12 02:46:40 GMT 2024","Fri Jul 12 02:47:11 GMT 2024","31031","chromium","","API key","","","TC_12_48_01 | Copy API key created by the ""Create API"" button on the right.","To verify that user can copy API key created by the ""Create API"" button on the right."
-"passed","Fri Jul 12 02:47:15 GMT 2024","Fri Jul 12 02:47:37 GMT 2024","21712","firefox","","API key","","","TC_12_48_01 | Copy API key created by the ""Create API"" button on the right.","To verify that user can copy API key created by the ""Create API"" button on the right."
