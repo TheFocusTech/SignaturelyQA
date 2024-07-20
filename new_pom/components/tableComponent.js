@@ -214,7 +214,7 @@ export default class TableComponent {
     }
   
     async waitForTable(time) {
-        await step('Refresh page.', async () => {
+        await step('Wait and reload page.', async () => {
             await step(`SetTimeout ${time / 1000} sec.`, async () => {
                 await this.page.waitForTimeout(time);
             });

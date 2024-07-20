@@ -17,7 +17,7 @@ export async function upgradeFreeUserToBusinessAndLogin({
     upgradeYourPlanModal,
     settingsBillingPlanPage,
     specialOneTimeOfferModal }) {
-    await step(`Upgrade Free User to Business`, async () => {
+    await step(`Precondition: Upgrade Free User to Business`, async () => {
         await signPage.sideMenu.clickSettings();
         await settingsCompanyPage.sideMenuSettings.clickBilling();
         await settingsBillingPlanPage.clickUpgradeButton("Business");
